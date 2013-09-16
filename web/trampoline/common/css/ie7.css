@@ -1,0 +1,27 @@
+
+#modules form select{
+	width: auto;
+}
+
+#searchbar {
+	padding-top: 5px;
+}
+
+#main form table td input#submit[type="submit"],
+#main form table td input#login[type="submit"]
+{
+    border: none;
+}
+#main form table td input#submit[type="submit"]:hover,
+#main form table td input#login[type="submit"]:hover
+{
+    border-bottom: 1px solid #000;
+    margin-left: 4px;
+    margin-right: 4px;
+    
+}
+
+#searchbar a#monumental {
+    bottom: 18px;
+}
+

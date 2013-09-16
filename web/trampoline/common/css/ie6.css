@@ -1,0 +1,21 @@
+#main {
+    height: 480px;
+/*    margin-left: 105px;*/
+}
+
+#main form table td textarea,
+#main form table td input
+{
+   width: auto;
+}
+
+#tabs {
+	padding-left: 196px;
+	overflow: hidden;
+}
+
+
+#modules {
+    height: 480px;
+    z-index: 10;
+}

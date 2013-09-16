@@ -1,0 +1,784 @@
+/************************************************************************************************
+body:
+    use this for the background applied to the whole document (the <body> tag)
+    this is mainly so that we can simulate columns until browsers support CSS3...
+    whenever that's gonna be.
+************************************************************************************************/            
+body {
+   background: none;
+}
+
+
+/************************************************************************************************
+#cb_content_container:
+
+************************************************************************************************/            
+
+#cb_content_container {
+   /* background: #fff; */
+}
+
+#cb_content_area{
+	width:728px;
+}
+#cb_content_container .white{
+/*  background: url(../images/main_white_BG.gif);   */
+}
+
+#cb_content_container .grey {
+/*  background: url(../images/main_grey_BG.gif);        */
+}
+
+
+/* resolves to <admin:title>*/
+#cb_content_container h1 {
+    margin-left: 0;
+	padding-top: 0;
+	padding-left: 0;
+	padding-bottom: 20px;
+	font-size: 20px;
+	font-weight: normal;
+	/*color: rgb(86,107,117);*/
+        /*color: rgb(215,182,133);*/
+        color: #000;
+        width: 750px;
+}
+
+/* resolves to <admin:subtitle>*/
+/* position relative to accept absolute position of toggle button */
+#cb_content_container h2 {
+	position:relative;
+    margin-left: 0;
+	padding-top: 0;
+	padding-left: 10px;
+	padding-bottom: 8px;
+	font-size: 13px;	
+	font-weight: normal;		
+	color: #000;
+}
+
+#cb_content_container h1 a, #cb_content_container h2 a{
+	/* color: rgb(161,65,118); PURPLE */
+	/*color: rgb(93,30,57);  NEW TRAMP DARK PURPLE */
+	/*color: rgb(0,104,179);  Biotronic Blue */
+	color:rgb(95, 103, 111);
+	text-decoration: none;
+}
+
+#cb_content_container p{
+/*    margin-left:0;*/
+    margin: 0;
+    padding-left: 10px;
+	padding-right: 20px;
+    padding-top: 0;
+    padding-bottom: 8px;
+    color: rgb(86,107,117);
+/*    border: 1px solid #f00;*/
+/*    padding-left: 35px;*/
+/*    padding-bottom: 10px;*/
+}
+
+#cb_content_container p a {;
+	/* color: rgb(161,65,118); PURPLE */
+	/*color: rgb(93,30,57);  NEW TRAMP DARK PURPLE */
+	/*color: rgb(0,104,179); Biotronic Blue */
+	color:rgb(95, 103, 111);
+	
+	text-decoration: none;
+}
+
+#cb_content_container a.submit{
+/*    @fix*/
+   margin-left: 8px;
+}
+
+/***************/
+
+/************************************************************************************************
+#cb_content_container "shaded" box style:
+
+************************************************************************************************/            
+
+#cb_content_container div.adminbox_container p{
+   margin: 0;
+}
+
+#cb_content_container div.adminbox_container, #cb_content_container div.adminbox_container_white{
+    position: relative;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 0;    
+    margin-bottom: 20px;    
+
+}
+#cb_content_container div.adminbox{
+    padding-top: 0px;
+    background: url(../images/form_bg.gif) repeat-y;    
+}
+/* This 'position:relative' is set for toggle_btn to be positioned based off this container's position*/
+#cb_content_container div.adminbox_container_white{
+	position:relative;
+}
+#cb_content_container div.adminbox_white{
+	position:relative;
+    padding-top: 0px;    
+}
+
+#cb_content_container div.adminbox_container img.adminbox_top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff url(../images/form_top.gif) bottom center no-repeat;
+	border:none;
+}
+
+#cb_content_container div.adminbox_container_white img.adminbox_top_white {
+    position: absolute;
+    top: 0;
+    left: 0;
+	border:none;
+    /*background: #fff;*/
+}
+
+#cb_content_container div.adminbox_container img.adminbox_bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+	border:none;
+    background: #fff url(../images/form_bottom.gif)  top center no-repeat;
+}
+
+#cb_content_container div.adminbox_container_white img.adminbox_bottom_white {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+	border:none;
+    background: #fff;
+}
+
+
+
+
+/***************/
+
+
+
+/************************************************************************************************
+#cb_content_container "indented" box style:
+    resolves to <admin:subbox>
+************************************************************************************************/            
+
+#cb_content_container div.indented{
+   margin-left: 24px;
+}
+
+/***************/
+
+
+
+
+
+/************************************************************************************************
+#cb_content_container search listings:
+
+************************************************************************************************/            
+#cb_content_container .listing {
+	position:relative;
+   /* margin-top: 24px; */
+    width: 705px;
+/*    margin-left: -4px;*/
+    color: rgb(95, 103, 111);
+    padding-bottom: 0px;
+    margin-left:10px;
+    border: 1px solid rgb(171, 179, 185);
+}
+
+#cb_content_container .listing td.smallform{
+    
+}
+
+#cb_content_container .listing td.smallform{
+    width: 23px;
+    padding-left: 1px;
+}
+
+#cb_content_container .listing h1 {
+    font-size: 22px;
+    border: none;
+    color: 
+}
+
+#cb_content_container .listing table {
+    /*@fix*/
+    margin-left: 0;    
+    /*width: 705px;*/
+    background: #fff;
+}
+
+#cb_content_container .listing td {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+/*    border-bottom: 1px solid rgb(95, 103, 111);*/
+    /*color: rgb(86,107,117);*/
+    color: #000;
+    font-size: 11px;
+
+}
+
+#cb_content_container .listing td img{
+    margin-top: -2px;
+}
+
+
+#cb_content_container .listing tr.even td{
+    background: rgb(250, 250, 250);
+}
+
+
+
+#cb_content_container .listing tr.listing_header td{
+    padding-bottom: 2px;
+    padding-top: 2px;
+    /*color: rgb(120, 139, 170);*/
+    color: rgb(95, 103, 111);    
+}
+
+#cb_content_container tr.listing_header {
+    border-bottom: 1px solid rgb(171, 179, 185);
+}
+
+#cb_content_container tr.listing_header td.regular {
+    background: url(../images/listing_header.gif) repeat-y;
+}
+
+#cb_content_container tr.listing_header td.regularOn {
+    background: url(../images/listing_header_on.gif) repeat-y;
+}
+
+#cb_content_container tr.listing_header td.first {
+    background: url(../images/listing_header_start.gif) repeat-y;
+}
+
+#cb_content_container tr.listing_header td.firstOn {
+    background: url(../images/listing_header_start_on.gif) repeat-y;
+}
+
+#cb_content_container .listing tr.listing_header td.right {
+    text-align: right;
+}
+
+#cb_content_container .listing tr.listing_header td strong {
+    font-size: 11px;
+    font-weight: bold;
+    /*color: rgb(86,107,117);*/
+    color: rgb(95, 103, 111);
+    text-transform: capitalize;
+}
+
+#cb_content_container .listing tr.listing_header td strong.sorting {
+    float: left;
+}
+
+#cb_content_container tr.listing_header td img {
+    margin-top: 3px;
+    float: right;    
+}
+
+#cb_content_container .listing form {
+   margin: 0;
+   padding: 0;
+/*   border: 1px solid #f00;*/
+}
+
+
+/************************************************************************************************
+#cb_content_container form styles:
+
+************************************************************************************************/            
+
+#cb_content_container{
+/*    border: 1px solid #f00;*/
+    padding-left: 25px;
+   padding-top: 20px;
+
+/* this is 20px less than the container...see structure.css*/
+   width: 776px; 
+   
+    
+}
+
+#cb_content_container form table{
+    /*@html editor -- html editor takes this on if you uncomment*/
+/*   width: 728px;*/
+}
+
+
+#cb_content_container form table td {
+/*    text-align: left;*/
+    padding-bottom: 10px;
+	padding-right: 8px;
+    
+}
+
+#cb_content_container form table td input
+{
+   width: 175px;
+} 
+#cb_content_container form table td textarea
+{
+   width: 350px;
+}
+
+
+/* the standard action button, also see the style for "#cb_content_container .listing td a, #cb_content_container a.submit"*/
+#cb_content_container form table td a.submitbutton,
+#cb_content_container form table td input[type="submit"],
+#cb_content_container .listing td input[type="submit"]
+{
+    background: none;
+    border: none;
+    text-transform: capitalize;
+    color: #336;
+    border-bottom: 1px solid #fff;
+    padding: 0;
+    text-decoration: none;
+}
+
+#cb_content_container form table td input[type="submit"]:hover, #cb_content_container .listing td input[type="submit"]:hover{
+    border-bottom: 1px solid #000;
+}
+
+
+
+/* exemptions */
+#cb_content_container form table td input[type="submit"],
+#cb_content_container form table td input[type="checkbox"],
+#cb_content_container form table td input[type="radio"],
+#cb_content_container form table td input[type="password"],
+#cb_content_container form table td input[id="password"],
+#cb_content_container form table td input[id="username"],
+#cb_content_container form table td input[type="file"]
+{
+    width: auto;
+}
+
+#cb_content_container form table td input.input_date_picker{
+	width:50px;
+}
+
+#cb_content_container form table td div.mceEditor{
+    display: block;
+/*    margin-left: 8px;
+    margin-bottom: 7px;
+*/}
+
+#cb_content_container form table td a {
+    /*color: rgb(74,176,224);*/
+    /* color: rgb(161,65,118); PURPLE */
+	/*color: rgb(93,30,57);  NEW TRAMP DARK PURPLE */
+	/*color: rgb(0,104,179);  Biotronic Blue */
+    color:rgb(95, 103, 111);
+	text-transform: capitalize;
+    font-size: 11px;
+    text-decoration: none;
+}
+
+#cb_content_container form table td a:hover {
+    color: #000;
+}
+
+#cb_content_container form table td input, 
+#cb_content_container form table td textarea,
+#cb_content_container form table td select,
+#cb_content_container form table td .selectholder,
+#cb_content_container form table td .checkboxholder,
+#cb_content_container form table td .radiobuttonholder,
+#cb_content_container form table td .info
+{
+    vertical-align: top;
+    font-size: 12px;
+    padding: auto;
+/*  margin-bottom: 7px;*/
+/*  margin-left: 8px;
+*/
+
+}
+
+#cb_content_container form table td a.submitbutton {
+    font-size: 12px;
+    padding: auto;
+}
+
+#cb_content_container form table td .selectholder select,
+#cb_content_container form table td .checkboxholder input,
+#cb_content_container form table td .radiobuttonholder input
+{
+	margin: 0;
+}
+
+
+#cb_content_container form table td .withborder,
+#cb_content_container form table td select
+{
+	border: 1px solid #999;
+}
+
+#cb_content_container form table td.labelcolumn{
+	text-align: right;
+	width: 135px;
+}
+#cb_content_container form table td label{
+	text-transform: capitalize;
+	/*color: rgb(82, 82, 82);*/
+            color: rgb(95, 103, 111);
+    font-size: 12px;	
+}
+
+/* the standard action button, also see the styles for "#cb_content_container form table td input[type="submit"], #cb_content_container .listing td input[type="submit"]{" */
+#cb_content_container .listing td a, #cb_content_container a.submit{
+    /*color: rgb(74,176,224);*/
+       /*color: rgb(215,182,133);*/
+    /* color: rgb(161,65,118); PURPLE */
+	/*color: rgb(93,30,57);  NEW TRAMP DARK PURPLE */
+	/*color: rgb(0,104,179);  Biotronic Blue */
+	color:rgb(95, 103, 111);
+	
+    text-decoration: none;
+    text-transform: capitalize;
+    font-size: 11px;
+}
+#cb_content_container .listing td a:hover, #cb_content_container a:hover.submit{
+    text-decoration: none;
+    color: #000;
+}
+
+
+
+/************************************************************************************************
+#cb_content_container notifier:
+    a.k.a. "the flash"
+************************************************************************************************/            
+#cb_content_container #flash {
+	margin: 0 33px;	
+	padding: 8px 2px;
+	width: auto;
+	font-weight: bolder;
+}
+
+
+/************************************************************************************************
+Toggle Styles
+************************************************************************************************/
+#toggle_btn a{
+	position:relative;
+}
+.toggle_img{
+	display:none;
+	position:absolute;
+	left:0;
+	top:0;
+}
+
+
+/************************************************************************************************
+Buttons
+************************************************************************************************/        
+
+a .waitingButton {
+    background: url(../images/waiting.gif) no-repeat;
+    width:16px;
+    height:16px;
+    margin-left:25px;
+    margin-right:26px;
+}
+
+a .saveButton {
+    background: url(../images/save.gif) no-repeat;
+    width:67px;
+    height:19px;
+    padding:0px;
+    margin:0px;
+    border: none;
+}
+
+a .submitButton {
+    background: url(../images/submit.gif) no-repeat;
+    width:67px;
+    height:19px;
+    padding:0px;
+    margin:0px;
+    border: none;
+}
+
+a .save_offButton {
+    background: url(../images/save_off.gif) no-repeat;
+    width:67px;
+    height:19px;
+    padding:0px;
+    margin:0px;
+    border: none;
+}
+
+/*
+a:hover .saveButton {
+    background: url(../images/cancelButton.gif) no-repeat;
+    width:67px;
+    height:18px;
+}
+*/
+a .cancelButton {
+    background: url(../images/cancel.gif) no-repeat;
+    width:67px;
+    height:19px;
+}
+
+a .cancel_offButton {
+    background: url(../images/cancel.gif) no-repeat;
+    width:67px;
+    height:19px;
+}
+/*
+a:hover .cancelButton {
+    background: url(../images/saveButton.gif) no-repeat;
+    width:67px;
+    height:18px;
+}
+*/
+a .deleteButton {
+    background: url(../images/delete.gif) no-repeat;
+    width:67px;
+    height:19px;
+}
+
+a .delete_offButton {
+    background: url(../images/delete.gif) no-repeat;
+    width:67px;
+    height:19px;
+}
+/*
+a:hover .deleteButton {
+    background: url(../images/saveButton.gif) no-repeat;
+    width:67px;
+    height:18px;
+}
+*/
+
+a .searchButton {
+    background: url(../images/search.gif) no-repeat;
+    width:67px;
+    height:19px;
+}
+
+a .search_offButton {
+    background: url(../images/search_off.gif) no-repeat;
+    width:67px;
+    height:19px;
+}
+/*
+a:hover .searchButton {
+    background: url(../images/saveButton.gif) no-repeat;
+    width:67px;
+    height:18px;
+}
+*/
+
+a .loginButton {
+    background: url(../images/login.gif) no-repeat;
+    width:67px;
+    height:19px;
+}
+
+a .login_offButton {
+    background: url(../images/login_off.gif) no-repeat;
+    width:67px;
+    height:19px;
+}
+/*
+a:hover .loginButton {
+    background: url(../images/saveButton.gif) no-repeat;
+    width:67px;
+    height:18px;
+}
+*/
+
+a .logoutButton {
+    background: url(../images/logout.gif) no-repeat;
+    width:67px;
+    height:19px;
+}
+
+a .logout_offButton {
+    background: url(../images/logout_off.gif) no-repeat;
+    width:67px;
+    height:19px;
+}
+/*
+a:hover .logoutButton {
+    background: url(../images/saveButton.gif) no-repeat;
+    width:67px;
+    height:18px;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+a .skipButton {
+    background: url(../images/skip_step.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a:hover .skipButton {
+    background: url(../images/skip_step_on.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a .applicationButton {
+    background: url(../images/create_application.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a:hover .applicationButton {
+    background: url(../images/create_application_on.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a .scenarioButton {
+    background: url(../images/create_scenario.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a:hover .scenarioButton {
+    background: url(../images/create_scenario_on.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a .screenButton {
+    background: url(../images/create_screen.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a:hover .screenButton {
+    background: url(../images/create_screen_on.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a .deviceButton {
+    background: url(../images/create_skin.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a:hover .deviceButton {
+    background: url(../images/create_skin_on.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a .graphicButton {
+    background: url(../images/create_graphic.gif) no-repeat;
+    width:205px;
+    height:31px;
+}
+
+a:hover .graphicButton {
+    background: url(../images/create_graphic_on.gif) no-repeat;
+    width:205px;
+    height:31px;
+}
+
+a .iconButton {
+    background: url(../images/create_icon.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a:hover .iconButton {
+    background: url(../images/create_icon_on.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a .tabButton {
+    background: url(../images/create_tab.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a:hover .tabButton {
+    background: url(../images/create_tab_on.gif) no-repeat;
+    width:179px;
+    height:31px;
+}
+
+a .carouselButton {
+    background: url(../images/create_carousel.gif) no-repeat;
+    width:205px;
+    height:31px;
+}
+
+a:hover .carouselButton {
+    background: url(../images/create_carousel_on.gif) no-repeat;
+    width:205px;
+    height:31px;
+}
+
+.listingIcon {
+    width:17px;
+    height:17px;
+}
+
+img.preview {
+    background: url(../images/preview.gif) no-repeat;
+    width: 89px;
+    height: 50px;
+    margin-right: 25px;
+}
+
+
+.arrow_right b {
+    background: url(../images/arrow_right.gif) no-repeat;
+    padding-left: 12px;
+    /*margin-top: 40px;
+    width: 89px;
+    height: 50px;
+    margin-right: 25px;*/
+}
+
+.arrow_down b {
+    background: url(../images/arrow_down.gif) no-repeat;
+    padding-left: 12px;
+    /*margin-top: 40px;
+    width: 89px;
+    height: 50px;
+    margin-right: 25px;*/
+}
+
+
+#nav_applications img.open{ background: url(../images/mod_applications_open.gif) no-repeat;}
+#nav_assets img.open{ background: url(../images/mod_assets_open.gif) no-repeat;}
+#nav_publish img.open{ background: url(../images/mod_client_open.gif) no-repeat;}
+
+#nav_applications img{ background: url(../images/mod_applications.gif) no-repeat;}
+#nav_assets img{ background: url(../images/mod_assets.gif) no-repeat;}
+#nav_publish img{ background: url(../images/mod_client.gif) no-repeat;}
+
+

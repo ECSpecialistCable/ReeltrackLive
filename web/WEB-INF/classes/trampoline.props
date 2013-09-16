@@ -1,0 +1,17 @@
+defaultConfiguration=live
+adminConfiguration=admin
+
+logDirectory=/var/log/tramp_logs/ecs/
+debugLogOn=false
+sqlLogOn=false
+
+live.database=jdbc/trampoline
+live.componentDirectory=/content
+live.uploadDirectory=/content/upload
+
+admin.database=jdbc/trampoline
+admin.componentDirectory=/content
+admin.uploadDirectory=/content/upload
+
+mailHost=localhost
+mailFrom=test@test.com
