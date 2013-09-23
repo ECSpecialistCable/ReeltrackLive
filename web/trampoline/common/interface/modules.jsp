@@ -1,12 +1,12 @@
 <%@ page language="java" %>
-<%@ page import="com.monumental.trampoline.security.*" %>
+<%@ page import="com.reeltrack.users.*" %>
 <%@ page import="com.monumental.trampoline.component.*" %>
 <%@ page import="com.monumental.trampoline.content.*" %>
 <%@ page import="com.monumental.trampoline.navigation.*" %>
 
-<jsp:useBean id="userLoginMgr" class="com.monumental.trampoline.security.UserLoginMgr" />
+<jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr"/>
 <% userLoginMgr.init(pageContext); %>
-<% User user = userLoginMgr.getUser(); %>
+<% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 
 <% 
 
@@ -33,7 +33,7 @@ The permissions are dealt with in the file itself.
 -->
 
 <% if(userLoginMgr.isLoggedIn()) { %>
-	<%--<% if(user.getGroup().hasPermission(new Group()) || user.getGroup().hasPermission(new User())) { %>--%>
-		<a class="module_bar_toggle" rel="common/interface/users">Permissions</a>
-	<%--<% } %>--%>
+	<% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
+		<a class="module_bar_toggle" rel="common/interface/ecs_internal">ECS Internal</a>
+	<% } %>
 <% } %>

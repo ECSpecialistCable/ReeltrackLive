@@ -1,5 +1,5 @@
 <%@ page language="java" %>		
-<%@ page import="com.monumental.trampoline.security.*" %>
+<%@ page import="com.reeltrack.users.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
@@ -8,10 +8,10 @@
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
 
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
-<jsp:useBean id="userLoginMgr" class="com.monumental.trampoline.security.UserLoginMgr"/>
+<jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr"/>
 <% userLoginMgr.init(pageContext, dbResources); %>
 <% dbResources.close(); %>
-<% User user = userLoginMgr.getUser(); %>
+<% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 
 <c:remove var="flash" />
 
@@ -87,11 +87,11 @@
 	                <form:begin_login name="login_form" action="common/includes/process_login.jsp" />
 		                <form:row_begin />
 			                <form:content_begin />
-				                <form:label_inline name="<%= User.USERNAME_COLUMN %>" label="Username:" />
-								<form:textfield_inline name="<%= User.USERNAME_COLUMN %>" pixelwidth="100" label="<%= User.USERNAME_COLUMN %>" />
+				                <form:label_inline name="<%= RTUser.USERNAME_COLUMN %>" label="Username:" />
+								<form:textfield_inline name="<%= RTUser.USERNAME_COLUMN %>" pixelwidth="100" label="<%= RTUser.USERNAME_COLUMN %>" />
 				                &nbsp;
-								<form:label_inline name="<%= User.PASSWORD_COLUMN %>" label="Password:" />
-				                <form:password_inline name="<%= User.PASSWORD_COLUMN %>" pixelwidth="100" label="<%= User.PASSWORD_COLUMN %>" />		
+								<form:label_inline name="<%= RTUser.PASSWORD_COLUMN %>" label="Password:" />
+				                <form:password_inline name="<%= RTUser.PASSWORD_COLUMN %>" pixelwidth="100" label="<%= RTUser.PASSWORD_COLUMN %>" />		
 				                &nbsp;
 			                <form:content_end />
 							<form:buttonset_begin align="right" padding="0" />

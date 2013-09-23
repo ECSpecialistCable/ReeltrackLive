@@ -1,12 +1,12 @@
 <%@ page language="java" %>
 <%@ page import="com.monumental.trampoline.component.*" %>
-<%@ page import="com.monumental.trampoline.security.*" %>
+<%@ page import="com.reeltrack.users.*" %>
 
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html"%>
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
 
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
-<jsp:useBean id="userLoginMgr" class="com.monumental.trampoline.security.UserLoginMgr" />
+<jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr"/>
 
 <% CompProperties props = new CompProperties(); %>
 
@@ -23,7 +23,7 @@ if(request.getParameter("submit_action") != null) {
 
 <%  if(action.equals("login" )) { %>
 <%  
-userLoginMgr.login(request.getParameter(User.USERNAME_COLUMN), request.getParameter(User.PASSWORD_COLUMN));
+userLoginMgr.login(request.getParameter(RTUser.USERNAME_COLUMN), request.getParameter(RTUser.PASSWORD_COLUMN));
 redirect = request.getContextPath() + "/trampoline/index.jsp";
 %>
 <% } %>

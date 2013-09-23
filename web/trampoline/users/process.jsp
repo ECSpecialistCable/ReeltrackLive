@@ -2,13 +2,13 @@
 <%@ include file="../common/includes/only_users.jsp" %>
 
 <%@ page import="com.monumental.trampoline.component.*" %>
-<%@ page import="com.monumental.trampoline.security.*" %>
+<%@ page import="com.reeltrack.users.*" %>
 
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
 
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
-<jsp:useBean id="securityMgr" class="com.monumental.trampoline.security.SecurityMgr" />
+<jsp:useBean id="securityMgr" class="com.reeltrack.users.RTUserMgr" scope="request"/>
 <% securityMgr.init(dbResources); %>
 <% CompProperties props = new CompProperties(); %>
 
@@ -22,69 +22,52 @@ if(request.getParameter("submit_action") != null) {
 }
 
 int contid = 0;
-if(request.getParameter(User.PARAM) != null) {
-    contid = Integer.parseInt(request.getParameter(User.PARAM));
+if(request.getParameter(RTUser.PARAM) != null) {
+    contid = Integer.parseInt(request.getParameter(RTUser.PARAM));
 }
 
 
 if(action.equals("create")) {
-    User content = new User();
-    content.setFname(request.getParameter(User.FIRSTNAME_COLUMN));
-    content.setLname(request.getParameter(User.LASTNAME_COLUMN));
-    content.setEmail(request.getParameter(User.EMAIL_COLUMN));
-    content.setUsername(request.getParameter(User.USERNAME_COLUMN));
-    content.setPassword(request.getParameter(User.PASSWORD_COLUMN));
-    content.setStatus(User.STATUS_INACTIVE);
+    RTUser content = new RTUser();
+    content.setUserType(request.getParameter(RTUser.USER_TYPE_COLUMN));
+    content.setFname(request.getParameter(RTUser.FIRSTNAME_COLUMN));
+    content.setLname(request.getParameter(RTUser.LASTNAME_COLUMN));
+    content.setEmail(request.getParameter(RTUser.EMAIL_COLUMN));
+    content.setUsername(request.getParameter(RTUser.USERNAME_COLUMN));
+    content.setPassword(request.getParameter(RTUser.PASSWORD_COLUMN));
+    content.setStatus(RTUser.STATUS_ACTIVE);
     
     contid = securityMgr.addUser(content);
-    if(contid != 0) {
-        //notifier = "The content has been created.";
-    }
-	
-System.out.println("param: " + request.getParameter(Group.PARAM));
-	content.setId(contid);
-
-	Group group = new Group();
-	group.setId(Integer.parseInt(request.getParameter(Group.PARAM)));
-	securityMgr.linkGroupToUser(content, group);
-    
-    redirect = request.getContextPath() + "/trampoline/" + "users/edit.jsp?" + User.PARAM + "=" + contid;
+    //redirect = request.getContextPath() + "/trampoline/" + "users/edit.jsp?" + RTUser.PARAM + "=" + contid;
+    redirect = request.getContextPath() + "/trampoline/" + "users/search.jsp";
 }
 
 
 if(action.equals("update")) {
-    User content = new User();
-    if(request.getParameter(User.PARAM) != null) {
-        contid = Integer.parseInt(request.getParameter(User.PARAM));
+    RTUser content = new RTUser();
+    if(request.getParameter(RTUser.PARAM) != null) {
+        contid = Integer.parseInt(request.getParameter(RTUser.PARAM));
         if(contid != 0) {
-            content.setFname(request.getParameter(User.FIRSTNAME_COLUMN));
-            content.setLname(request.getParameter(User.LASTNAME_COLUMN));
-            content.setEmail(request.getParameter(User.EMAIL_COLUMN));
-            content.setUsername(request.getParameter(User.USERNAME_COLUMN));
-            content.setPassword(request.getParameter(User.PASSWORD_COLUMN));
-            content.setStatus(request.getParameter(User.STATUS_COLUMN));
+            content.setUserType(request.getParameter(RTUser.USER_TYPE_COLUMN));
+            content.setFname(request.getParameter(RTUser.FIRSTNAME_COLUMN));
+            content.setLname(request.getParameter(RTUser.LASTNAME_COLUMN));
+            content.setEmail(request.getParameter(RTUser.EMAIL_COLUMN));
+            content.setUsername(request.getParameter(RTUser.USERNAME_COLUMN));
+            content.setPassword(request.getParameter(RTUser.PASSWORD_COLUMN));
+            content.setStatus(request.getParameter(RTUser.STATUS_COLUMN));
             content.setId(contid);
             
             securityMgr.updateUser(content);
-            
-            if(request.getParameter(Group.NAME_COLUMN) != null && !request.getParameter(Group.NAME_COLUMN).equals("0")) {
-                Group currentGroup = new Group();
-                currentGroup.setId(Integer.parseInt(request.getParameter(Group.NAME_COLUMN)));
-                securityMgr.linkGroupToUser(content, currentGroup);
-            }
-            
-            //notifier = "The content has been updated.";
         }
     }
-    redirect = request.getContextPath() + "/trampoline/" + "users/edit.jsp?" + User.PARAM + "=" + contid ;
+    redirect = request.getContextPath() + "/trampoline/" + "users/edit.jsp?" + RTUser.PARAM + "=" + contid ;
 }
 
 
 if(action.equals("delete")) {
-    User content = new User();
+    RTUser content = new RTUser();
     content.setId(contid);
     securityMgr.deleteUser(content, basePath);
-    //notifier = "The content has been deleted.";
     redirect = request.getContextPath() + "/trampoline/" + "users/search.jsp";
 } 
 
