@@ -3,13 +3,16 @@
 
 <%@ page import="com.monumental.trampoline.component.*" %>
 <%@ page import="com.reeltrack.users.*" %>
+<%@ page import="com.reeltrack.customers.*" %>
 
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
 
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="securityMgr" class="com.reeltrack.users.RTUserMgr" scope="request"/>
+<jsp:useBean id="customerMgr" class="com.reeltrack.customers.CustomerMgr" scope="request"/>
 <% securityMgr.init(dbResources); %>
+<% customerMgr.init(pageContext,dbResources); %>
 <% CompProperties props = new CompProperties(); %>
 
 <% 
@@ -64,6 +67,27 @@ if(action.equals("update")) {
     redirect = request.getContextPath() + "/trampoline/" + "users2/edit.jsp?" + RTUser.PARAM + "=" + contid ;
 }
 
+if(action.equals("assign_job")) {
+    RTUser content = new RTUser();
+    content.setId(Integer.parseInt(request.getParameter(RTUser.PARAM)));
+
+    CustomerJob job = new CustomerJob();
+    job.setId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));
+    
+    customerMgr.linkJobToUser(job,content);
+    redirect = request.getContextPath() + "/trampoline/" + "users2/edit.jsp?" + RTUser.PARAM + "=" + contid;
+}
+
+if(action.equals("unassign_job")) {
+    RTUser content = new RTUser();
+    content.setId(Integer.parseInt(request.getParameter(RTUser.PARAM)));
+
+    CustomerJob job = new CustomerJob();
+    job.setId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));
+    
+    customerMgr.unlinkJobToUser(job,content);
+    redirect = request.getContextPath() + "/trampoline/" + "users2/edit.jsp?" + RTUser.PARAM + "=" + contid;
+}
 
 if(action.equals("delete")) {
     RTUser content = new RTUser();
