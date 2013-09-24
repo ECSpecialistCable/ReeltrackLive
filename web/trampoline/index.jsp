@@ -83,6 +83,7 @@
 			</div>
             
             <% if(!userLoginMgr.isLoggedIn()) { %>
+                <%--
             	<div id="login">                
 	                <form:begin_login name="login_form" action="common/includes/process_login.jsp" />
 		                <form:row_begin />
@@ -99,7 +100,8 @@
 			                <form:buttonset_end />
 		                <form:row_end />
 	                <form:end />
-	            </div>    
+	            </div>
+                --%>    
             <% } else { %>
 				<% String welcomeStr = "Welcome, " + user.getUsername(); %>
            		<admin:welcome_tab text="<%= welcomeStr %>" action="common/includes/process_login.jsp?submit_action=logout"  valign="top" align="left" />                               
@@ -126,16 +128,8 @@
             
             <div id="main">
                 <!-- main content area is populated dynamically based on what moduleaction is clicked -->
+                <jsp:include page="common/includes/login.jsp" />
 
-				<%-- @note: not really used anymore. leaving here in case we want to use a welcome screen --%>
-                <c:choose>
-                    <c:when test="<%= userLoginMgr.isLoggedIn() %>">
-						<%-- <jsp:include page="dashboards/dashboard_main.jsp" />--%>
-                    </c:when>
-                    <c:otherwise>
-                        <div id="loginform_stub"></div>
-                    </c:otherwise>
-                </c:choose>
             </div>
             
         </div>	

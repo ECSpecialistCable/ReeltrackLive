@@ -755,7 +755,7 @@ a:hover .searchButton {
 */
 
 a .loginButton {
-    background: url(../images/login.gif) no-repeat;
+    background: url(../images/submit.gif) no-repeat;
     width:67px;
     height:19px;
 }

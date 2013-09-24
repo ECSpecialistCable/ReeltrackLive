@@ -11,6 +11,8 @@ public class RTUser extends User {
     public static final String USER_TYPE_MANAGEMENT = "management";
     public static final String USER_TYPE_STANDARD = "standard";
 
+    private int jobID = 0;
+
     public String getTableName() {
         return "users";
     }
@@ -34,4 +36,12 @@ public class RTUser extends User {
 	public String getCompEntityDirectory() {
 		return this.getComponentDirectory() + "/" + this.getId();
 	}
+
+    public int getJobId() {
+        return this.jobID;
+    }
+
+    public void setJobId(int jobID) {
+        this.jobID = jobID;
+    }
 }
