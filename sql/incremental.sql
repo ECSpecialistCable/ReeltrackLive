@@ -56,3 +56,7 @@ create table drivers (
 	PRIMARY KEY (id)
 );
 
+alter table foremans add column customer_id int default 0;
+alter table whlocations add column customer_id int default 0;
+alter table drivers add column customer_id int default 0;
+

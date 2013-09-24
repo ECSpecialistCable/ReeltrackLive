@@ -8,4 +8,7 @@
 
 <% if (user!=null) { %>
 		<admin:ajax_load url="users2/search.jsp" label="Users" />
+		<admin:ajax_load url="foremans/search.jsp" label="Foremen" />
+		<admin:ajax_load url="drivers/search.jsp" label="Drivers" />
+		<admin:ajax_load url="whlocations/search.jsp" label="Warehouse Locations" />
 <% } %>

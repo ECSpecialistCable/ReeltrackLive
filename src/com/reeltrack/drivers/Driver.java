@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 public class Driver extends CompCMEntity {
 	public static final String PARAM = "driver_param";
 	public static final String NAME_COLUMN = "name";
+	public static final String CUSTOMER_ID_COLUMN = "customer_id";
 
 	@Override
 	public String getTableName() {
@@ -35,4 +36,12 @@ public class Driver extends CompCMEntity {
 	public void setName(String name) {
 		this.getData().setString(NAME_COLUMN, name);
 	}
+
+	public int getCustomerId() {
+		return this.getData().getInteger(CUSTOMER_ID_COLUMN, new Integer(0));
+    }
+
+    public void setCustomerId(int id) {
+		this.getData().setInteger(CUSTOMER_ID_COLUMN, new Integer(id));
+    }
 }
