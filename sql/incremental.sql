@@ -29,3 +29,30 @@ create table customer_jobs_to_users (
 	PRIMARY KEY (id)
 );
 
+create table foremans (
+	id int(11) NOT NULL auto_increment,
+	created datetime,
+	updated datetime,
+	status varchar(25),
+	name varchar(255),
+	PRIMARY KEY (id)
+);
+
+create table whlocations (
+	id int(11) NOT NULL auto_increment,
+	created datetime,
+	updated datetime,
+	status varchar(25),
+	name varchar(255),
+	PRIMARY KEY (id)
+);
+
+create table drivers (
+	id int(11) NOT NULL auto_increment,
+	created datetime,
+	updated datetime,
+	status varchar(25),
+	name varchar(255),
+	PRIMARY KEY (id)
+);
+
