@@ -33,6 +33,9 @@ The permissions are dealt with in the file itself.
 -->
 
 <% if(userLoginMgr.isLoggedIn()) { %>
+	<% if(user.getCustomerId()!=0 && user.getJobId()!=0 && (user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT))) { %>
+		<a class="module_bar_toggle" rel="common/interface/configuration">Configuration</a>
+	<% } %>
 	<% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
 		<a class="module_bar_toggle" rel="common/interface/ecs_internal">ECS Internal</a>
 	<% } %>
