@@ -27,7 +27,7 @@ String tempUrl; //var for url expression
 <% if(!userLoginMgr.isLoggedIn()) { %>
 <admin:subtitle text="Please Log In" />
 <admin:box_begin />
-	<form:begin submit="true" name="create" action="common/includes/process_login.jsp" />
+	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />
 		<form:textfield name="<%= RTUser.USERNAME_COLUMN %>" label="<%= RTUser.USERNAME_COLUMN %>" />
 		<form:password name="<%= RTUser.PASSWORD_COLUMN %>" label="<%= RTUser.PASSWORD_COLUMN %>" />		
 		<form:row_begin />
@@ -43,7 +43,7 @@ String tempUrl; //var for url expression
 <% if(userLoginMgr.isLoggedIn() && user.getCustomerId()==0) { %>
 <admin:subtitle text="Please Select a Customer" />
 <admin:box_begin />
-	<form:begin submit="true" name="create" action="common/includes/process_login.jsp" />
+	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />
 		<form:row_begin />
 			<form:label name="" label="Customer:" />
 			<form:content_begin />
@@ -71,7 +71,7 @@ CompEntities custJobs = customerMgr.getCustomerJobs(custJob);
 %>
 <admin:subtitle text="Please Select a Job" />
 <admin:box_begin />
-	<form:begin submit="true" name="create" action="common/includes/process_login.jsp" />
+	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />
 		<form:row_begin />
 			<form:label name="" label="Job:" />
 			<form:content_begin />

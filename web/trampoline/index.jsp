@@ -101,7 +101,7 @@
 		                <form:row_end />
 	                <form:end />
 	            </div>
-                --%>    
+                 --%>  
             <% } else { %>
 				<% String welcomeStr = "Welcome, " + user.getUsername(); %>
            		<admin:welcome_tab text="<%= welcomeStr %>" action="common/includes/process_login.jsp?submit_action=logout"  valign="top" align="left" />                               
