@@ -60,3 +60,13 @@ alter table foremans add column customer_id int default 0;
 alter table whlocations add column customer_id int default 0;
 alter table drivers add column customer_id int default 0;
 
+create table settings (
+	id int(11) NOT NULL auto_increment,
+	created datetime,
+	updated datetime,
+	status varchar(25),
+	auto_print_reel_tags varchar(1) default 'n',
+	PRIMARY KEY (id)
+);
+alter table settings add column customer_id int default 0;
+

@@ -11,4 +11,5 @@
 		<admin:ajax_load url="foremans/search.jsp" label="Foremen" />
 		<admin:ajax_load url="drivers/search.jsp" label="Drivers" />
 		<admin:ajax_load url="whlocations/search.jsp" label="Warehouse Locations" />
+		<admin:ajax_load url="settings/search.jsp" label="Settings" />
 <% } %>
