@@ -47,8 +47,8 @@ String tempURL; //var for url expression
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
     		<form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
-    		<form:textfield label="Shipped Qty:" name="<%= Reel.ORDERED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
-    		<form:textfield label="Received Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
+    		<form:textfield label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
+    		<form:textfield label="Received Qty:" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
     		<form:info label="Bottom Foot #:" text="<%= new Integer(content.getBottomFoot()).toString() %>" />
     		<form:textfield label="Top Foot #:" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
     		<form:info label="Cable Used Qty:" text="<%= new Integer(content.getCableUsedQuantity()).toString() %>" />

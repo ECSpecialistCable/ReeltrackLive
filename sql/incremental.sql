@@ -115,9 +115,9 @@ create table reel_logs (
 );
 
 alter table reels drop column reel_type;
-alter table reels add reel_type varchar(15) default 'Bulk';
+alter table reels add reel_type varchar(15) default 'bulk';
 alter table reels drop column wharehouse_location_id;
-alter table reels add wharehouse_location varchar(15);
+alter table reels add wharehouse_location varchar(15) default 'none';
 alter table reels add receiving_disposition varchar(10);
 
 create table reel_circuits (

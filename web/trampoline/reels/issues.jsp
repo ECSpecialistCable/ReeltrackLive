@@ -63,6 +63,9 @@ String tempURL; //var for url expression
     <form:end />
 <admin:box_end />
 
+<% if(issuesNo.howMany()==0 && issuesYes.howMany()==0) { %>
+    <admin:subtitle text="There are no Issues" />
+<% } %>
 
 <% if(issuesNo.howMany() > 0) { %>
     <admin:subtitle text="Unresolved Issues" />

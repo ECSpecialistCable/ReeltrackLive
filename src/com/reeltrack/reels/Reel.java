@@ -54,8 +54,8 @@ public class Reel extends CompCMEntity {
 	public static final String MANUFACTURER_ONE = "Manufacturer One";
 	public static final String MANUFACTURER_TWO = "Manufacturer Two";
 
-	public static final String REEL_TYPE_BULK = "Bulk";
-	public static final String REEL_TYPE_CIRCUIT = "Circuits Assigned";
+	public static final String REEL_TYPE_BULK = "bulk";
+	public static final String REEL_TYPE_CIRCUIT = "circuits assigned";
 
 	public static final String RECEIVING_DISPOSITION_ACCEPTED = "accepted";
 	public static final String RECEIVING_DISPOSITION_REFUSED = "refused";

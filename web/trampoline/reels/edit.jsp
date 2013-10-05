@@ -68,7 +68,7 @@ String tempURL; //var for url expression
 	            <form:label name="" label="Wharehouse<br />Location:" />
 	            <form:content_begin />
 	            <form:select_begin name="<%= Reel.WHAREHOUSE_LOCATION_COLUMN %>" />
-	            	<form:option name="None" value="" match="<%= content.getWharehouseLocation() %>" />
+	            	<form:option name="None" value="<%= WhLocation.LOCATION_NONE %>" match="<%= content.getWharehouseLocation() %>" />
 	                <% for(int x=0; x<locations.howMany(); x++) { %>
 	                	<% location = (WhLocation)locations.get(x); %>
 	                    <form:option name="<%= location.getName() %>" value="<%= location.getName() %>" match="<%= content.getWharehouseLocation() %>" />

@@ -39,6 +39,8 @@ if(action.equals("create")) {
     content.setEcsPN(request.getParameter(Reel.ECS_PN_COLUMN));
     content.setManufacturer(request.getParameter(Reel.MANUFACTURER_COLUMN));
     content.setSteelReelSerial(request.getParameter(Reel.STEEL_REEL_SERIAL_COLUMN));
+    content.setOrderedQuantity(1000);
+    content.setBottomFoot(500);
     contid = reelMgr.addReel(content);
 
     redirect = request.getContextPath() + "/trampoline/" + "reels/search.jsp";
@@ -79,8 +81,8 @@ if(action.equals("update_receiving")) {
 if(action.equals("update_quantity")) {
     Reel content = new Reel();
     content.setId(contid);
-    content.setOrderedQuantity(Integer.parseInt(request.getParameter(Reel.ORDERED_QUANTITY_COLUMN)));
     content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
+    content.setReceivedQuantity(Integer.parseInt(request.getParameter(Reel.RECEIVED_QUANTITY_COLUMN)));
     content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     reelMgr.updateReelQuantity(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
