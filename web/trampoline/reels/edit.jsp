@@ -141,7 +141,7 @@ String tempURL; //var for url expression
         	<form:row_end />
         	<form:textarea name="<%= Reel.RECEIVING_NOTE_COLUMN %>" rows="5" label="Note:" value="<%= content.getReceivingNote() %>" />
         	<form:row_begin />
-	            <form:label name="" label="Issue:" />
+	            <form:label name="" label="Disposition:" />
 	            <form:content_begin />
 	            <form:select_begin name="<%= Reel.RECEIVING_DISPOSITION_COLUMN %>" />
 	            	<form:option name="None" value="" match="<%= content.getReceivingDisposition() %>" />

@@ -35,13 +35,8 @@ if(request.getParameter("skip") != null) {
 }
 
 Reel content = new Reel();
-if(session.getAttribute("reels_search")!=null) {
-    content = (Reel)session.getAttribute("reels_search");
-}
-
-if(request.getParameter(Reel.STATUS_COLUMN) != null) { 
-    content.setStatus(request.getParameter(Reel.STATUS_COLUMN));
-    content.setSearchOp(Reel.STATUS_COLUMN, Reel.EQ); 
+if(session.getAttribute("ordered_search")!=null) {
+    content = (Reel)session.getAttribute("ordered_search");
 }
 
 if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
@@ -69,12 +64,12 @@ if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
     content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ); 
 }
 
-session.setAttribute("reels_search",content);
+session.setAttribute("ordered_search",content);
 
 String column = Reel.REEL_TAG_COLUMN;
 boolean ascending = true;
-int count = reelMgr.searchReelsCount(content, column, ascending);
-CompEntities contents = reelMgr.searchReels(content, column, ascending, howMany, skip);
+int count = reelMgr.searchOrderedAndShippedReelsCount(content, column, ascending);
+CompEntities contents = reelMgr.searchOrderedAndShippedReels(content, column, ascending, howMany, skip);
 
 boolean dosearch = true;
 String tempURL = "";
@@ -82,23 +77,11 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Search Reels" />
+<admin:title text="All Ordered Reels" />
 
 <admin:subtitle text="Search" />
     <admin:box_begin />
-    <form:begin_selfsubmit name="search" action="reels/search.jsp" />
-        <form:row_begin />
-            <form:label name="" label="Status:" />
-            <form:content_begin />
-            <form:select_begin name="<%= Reel.STATUS_COLUMN %>" />
-                <form:option name="Any" value="" match="<%= content.getStatus() %>" />
-                <% String[] statusList  = content.getStatusList(); %>
-                <% for(int x=0; x<statusList.length; x++) { %>
-                    <form:option name="<%= statusList[x] %>" value="<%= statusList[x] %>" match="<%= content.getStatus() %>" />
-                <% } %>
-            <form:select_end />
-            <form:content_end />
-        <form:row_end />
+    <form:begin_selfsubmit name="search" action="ordered/search.jsp" />
         <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
         <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
         <form:textfield label="Customer PO:" name="<%= Reel.CUSTOMER_PO_COLUMN %>" value="<%= content.getCustomerPO() %>" />
@@ -126,7 +109,7 @@ String tempURL = "";
 
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
-        <admin:search_listing_pagination text="Reels Found" url="reels/search.jsp" 
+        <admin:search_listing_pagination text="Reels Found" url="ordered/search.jsp" 
                     pageIndex="<%= new Integer(pageNdx).toString() %>"
                     column="<%= column %>"
                     ascending="<%= new Boolean(ascending).toString() %>"
@@ -143,6 +126,7 @@ String tempURL = "";
             <listing:header_cell width="10" first="true" name="#" />
             <listing:header_cell name="Reel Tag" />
             <listing:header_cell name="Cable Description" />
+            <listing:header_cell width="100" name="Prj. Ship Date" />
             <listing:header_cell width="100" name="Status" />
             <listing:header_cell width="50" name=""  />
         <listing:header_end />
@@ -157,6 +141,9 @@ String tempURL = "";
             <listing:cell_end />
             <listing:cell_begin />
                 <%= content.getCableDescription() %>
+            <listing:cell_end />
+            <listing:cell_begin />
+                <%= content.getProjectedShippingDateString() %>
             <listing:cell_end />
             <listing:cell_begin />
                 <%= content.getStatus() %>
@@ -174,5 +161,5 @@ String tempURL = "";
     <% } %>
 <% } %>
 
-<admin:set_tabset url="reels/_tabset_default.jsp" thispage="search.jsp" />
+<admin:set_tabset url="ordered/_tabset_default.jsp" thispage="search.jsp" />
 <html:end />    

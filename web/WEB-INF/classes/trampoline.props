@@ -1,9 +1,9 @@
 defaultConfiguration=live
 adminConfiguration=admin
 
-logDirectory=/var/log/tramp_logs/ecs/
+logDirectory=/Users/tomkat/Desktop
 debugLogOn=false
-sqlLogOn=false
+sqlLogOn=true
 
 live.database=jdbc/trampoline
 live.componentDirectory=/content

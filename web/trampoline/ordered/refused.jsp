@@ -35,14 +35,11 @@ if(request.getParameter("skip") != null) {
 }
 
 Reel content = new Reel();
-if(session.getAttribute("reels_search")!=null) {
-    content = (Reel)session.getAttribute("reels_search");
+if(session.getAttribute("ordered_refused")!=null) {
+    content = (Reel)session.getAttribute("ordered_refused");
 }
 
-if(request.getParameter(Reel.STATUS_COLUMN) != null) { 
-    content.setStatus(request.getParameter(Reel.STATUS_COLUMN));
-    content.setSearchOp(Reel.STATUS_COLUMN, Reel.EQ); 
-}
+content.setStatus(Reel.STATUS_REFUSED);
 
 if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
     content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
@@ -69,7 +66,7 @@ if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
     content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ); 
 }
 
-session.setAttribute("reels_search",content);
+session.setAttribute("ordered_refused",content);
 
 String column = Reel.REEL_TAG_COLUMN;
 boolean ascending = true;
@@ -82,23 +79,11 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Search Reels" />
+<admin:title text="Refused Reels" />
 
 <admin:subtitle text="Search" />
     <admin:box_begin />
-    <form:begin_selfsubmit name="search" action="reels/search.jsp" />
-        <form:row_begin />
-            <form:label name="" label="Status:" />
-            <form:content_begin />
-            <form:select_begin name="<%= Reel.STATUS_COLUMN %>" />
-                <form:option name="Any" value="" match="<%= content.getStatus() %>" />
-                <% String[] statusList  = content.getStatusList(); %>
-                <% for(int x=0; x<statusList.length; x++) { %>
-                    <form:option name="<%= statusList[x] %>" value="<%= statusList[x] %>" match="<%= content.getStatus() %>" />
-                <% } %>
-            <form:select_end />
-            <form:content_end />
-        <form:row_end />
+    <form:begin_selfsubmit name="search" action="ordered/refused.jsp" />
         <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
         <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
         <form:textfield label="Customer PO:" name="<%= Reel.CUSTOMER_PO_COLUMN %>" value="<%= content.getCustomerPO() %>" />
@@ -126,7 +111,7 @@ String tempURL = "";
 
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
-        <admin:search_listing_pagination text="Reels Found" url="reels/search.jsp" 
+        <admin:search_listing_pagination text="Reels Found" url="ordered/refused.jsp" 
                     pageIndex="<%= new Integer(pageNdx).toString() %>"
                     column="<%= column %>"
                     ascending="<%= new Boolean(ascending).toString() %>"
@@ -174,5 +159,5 @@ String tempURL = "";
     <% } %>
 <% } %>
 
-<admin:set_tabset url="reels/_tabset_default.jsp" thispage="search.jsp" />
+<admin:set_tabset url="ordered/_tabset_default.jsp" thispage="refused.jsp" />
 <html:end />    

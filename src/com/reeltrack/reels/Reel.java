@@ -36,6 +36,7 @@ public class Reel extends CompCMEntity {
 
 	public static final String STATUS_ORDERED = "ordered";
 	public static final String STATUS_SHIPPED = "shipped";
+	public static final String STATUS_REFUSED = "refused";
 	public static final String STATUS_IN_WHAREHOUSE = "in_wharehouse";
 	public static final String STATUS_STAGED = "staged";
 	public static final String STATUS_CHECKED_OUT = "checked_out";
@@ -110,7 +111,7 @@ public class Reel extends CompCMEntity {
 	}
 
 	public String[] getStatusList() {
-		String[] statuses = {STATUS_ORDERED,STATUS_SHIPPED,STATUS_IN_WHAREHOUSE,STATUS_STAGED,STATUS_CHECKED_OUT,STATUS_COMPLETE,STATUS_SCRAPPED};
+		String[] statuses = {STATUS_ORDERED,STATUS_SHIPPED,STATUS_REFUSED,STATUS_IN_WHAREHOUSE,STATUS_STAGED,STATUS_CHECKED_OUT,STATUS_COMPLETE,STATUS_SCRAPPED};
 		return statuses;
 	}
 

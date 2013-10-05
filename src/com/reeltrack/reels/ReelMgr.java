@@ -147,6 +147,44 @@ public class ReelMgr extends CompWebManager {
 		return controller.pullCompEntitiesCount(puller);
 	}
 
+	public CompEntities searchOrderedAndShippedReels(Reel content, String sort_by, boolean asc, int howMany, int skip) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		content.setJobId(user.getJobId());
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+
+		Reel reel = new Reel();
+		reel.setStatus(Reel.STATUS_ORDERED);
+		puller.addInclusiveSearch(reel);
+		Reel reel2 = new Reel();
+		reel2.setStatus(Reel.STATUS_SHIPPED);
+		puller.addInclusiveSearch(reel2);
+
+		puller.setSortBy(content.getTableName(), sort_by, asc);
+		return controller.pullCompEntities(puller, howMany, skip);
+	}
+
+	public int searchOrderedAndShippedReelsCount(Reel content, String sort_by, boolean asc) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		content.setJobId(user.getJobId());
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+
+		Reel reel = new Reel();
+		reel.setStatus(Reel.STATUS_ORDERED);
+		puller.addInclusiveSearch(reel);
+		Reel reel2 = new Reel();
+		reel2.setStatus(Reel.STATUS_SHIPPED);
+		puller.addInclusiveSearch(reel2);
+
+		puller.setSortBy(content.getTableName(), sort_by, asc);
+		return controller.pullCompEntitiesCount(puller);
+	}
+
 	public void cleanReel(Reel content, String realRootContextPath) throws Exception {
 		CompEntities allLogs = this.getReelLogs(content);
 		for(int i=0; i < allLogs.howMany(); ++i) {
