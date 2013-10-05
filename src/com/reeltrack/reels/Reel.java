@@ -37,9 +37,9 @@ public class Reel extends CompCMEntity {
 	public static final String STATUS_ORDERED = "ordered";
 	public static final String STATUS_SHIPPED = "shipped";
 	public static final String STATUS_REFUSED = "refused";
-	public static final String STATUS_IN_WHAREHOUSE = "in_wharehouse";
+	public static final String STATUS_IN_WHAREHOUSE = "in wharehouse";
 	public static final String STATUS_STAGED = "staged";
-	public static final String STATUS_CHECKED_OUT = "checked_out";
+	public static final String STATUS_CHECKED_OUT = "checked out";
 	public static final String STATUS_COMPLETE = "complete";
 	public static final String STATUS_SCRAPPED = "scrapped";
 

@@ -185,6 +185,62 @@ public class ReelMgr extends CompWebManager {
 		return controller.pullCompEntitiesCount(puller);
 	}
 
+	public CompEntities searchAllReceivedReels(Reel content, String sort_by, boolean asc, int howMany, int skip) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		content.setJobId(user.getJobId());
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+
+		Reel reel = new Reel();
+		reel.setStatus(Reel.STATUS_IN_WHAREHOUSE);
+		puller.addInclusiveSearch(reel);
+		Reel reel2 = new Reel();
+		reel2.setStatus(Reel.STATUS_STAGED);
+		puller.addInclusiveSearch(reel2);
+		Reel reel3 = new Reel();
+		reel3.setStatus(Reel.STATUS_CHECKED_OUT);
+		puller.addInclusiveSearch(reel3);
+		Reel reel4 = new Reel();
+		reel4.setStatus(Reel.STATUS_COMPLETE);
+		puller.addInclusiveSearch(reel4);
+		Reel reel5 = new Reel();
+		reel5.setStatus(Reel.STATUS_SCRAPPED);
+		puller.addInclusiveSearch(reel5);
+
+		puller.setSortBy(content.getTableName(), sort_by, asc);
+		return controller.pullCompEntities(puller, howMany, skip);
+	}
+
+	public int searchAllReceivedReelsCount(Reel content, String sort_by, boolean asc) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		content.setJobId(user.getJobId());
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+
+		Reel reel = new Reel();
+		reel.setStatus(Reel.STATUS_IN_WHAREHOUSE);
+		puller.addInclusiveSearch(reel);
+		Reel reel2 = new Reel();
+		reel2.setStatus(Reel.STATUS_STAGED);
+		puller.addInclusiveSearch(reel2);
+		Reel reel3 = new Reel();
+		reel3.setStatus(Reel.STATUS_CHECKED_OUT);
+		puller.addInclusiveSearch(reel3);
+		Reel reel4 = new Reel();
+		reel4.setStatus(Reel.STATUS_COMPLETE);
+		puller.addInclusiveSearch(reel4);
+		Reel reel5 = new Reel();
+		reel5.setStatus(Reel.STATUS_SCRAPPED);
+		puller.addInclusiveSearch(reel5);
+
+		puller.setSortBy(content.getTableName(), sort_by, asc);
+		return controller.pullCompEntitiesCount(puller);
+	}
+
 	public void cleanReel(Reel content, String realRootContextPath) throws Exception {
 		CompEntities allLogs = this.getReelLogs(content);
 		for(int i=0; i < allLogs.howMany(); ++i) {
