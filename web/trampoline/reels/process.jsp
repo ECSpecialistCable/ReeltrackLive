@@ -123,36 +123,35 @@ if(action.equals("delete_circuit")) {
     redirect = request.getContextPath() + "/trampoline/" + "reels/circuits.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
-/*
-if(action.equals("assign_job")) {
-    RTUser content = new RTUser();
-    content.setId(Integer.parseInt(request.getParameter(RTUser.PARAM)));
-
-    CustomerJob job = new CustomerJob();
-    job.setId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));
-    
-    customerMgr.linkJobToUser(job,content);
-    redirect = request.getContextPath() + "/trampoline/" + "users2/edit.jsp?" + RTUser.PARAM + "=" + contid;
+if(action.equals("add_note")) {
+    ReelNote note = new ReelNote();
+    note.setReelId(contid);
+    note.setNote(request.getParameter(ReelNote.NOTE_COLUMN));
+    reelMgr.addReelNote(note);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/notes.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
-if(action.equals("unassign_job")) {
-    RTUser content = new RTUser();
-    content.setId(Integer.parseInt(request.getParameter(RTUser.PARAM)));
-
-    CustomerJob job = new CustomerJob();
-    job.setId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));
-    
-    customerMgr.unlinkJobToUser(job,content);
-    redirect = request.getContextPath() + "/trampoline/" + "users2/edit.jsp?" + RTUser.PARAM + "=" + contid;
+if(action.equals("add_issue")) {
+    ReelIssue issue = new ReelIssue();
+    issue.setReelId(contid);
+    issue.setDescription(request.getParameter(ReelIssue.DESCRIPTION_COLUMN));
+    issue.setIssueLog(request.getParameter(ReelIssue.ISSUE_LOG_COLUMN));
+    reelMgr.addReelIssue(issue);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/issues.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
-if(action.equals("delete")) {
-    RTUser content = new RTUser();
-    content.setId(contid);
-    securityMgr.deleteUser(content, basePath);
-    redirect = request.getContextPath() + "/trampoline/" + "users2/search.jsp";
-} 
-*/
+if(action.equals("update_issue")) {
+    ReelIssue issue = new ReelIssue();
+    issue.setId(Integer.parseInt(request.getParameter(ReelIssue.PARAM)));
+    if(request.getParameter(ReelIssue.IS_RESOLVED_COLUMN)!=null) {
+        issue.setIsResolved("y");
+    } else {
+        issue.setIsResolved("n");
+    }
+    issue.setIssueLog(request.getParameter(ReelIssue.ISSUE_LOG_COLUMN));
+    reelMgr.updateReelIssue(issue);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/issues.jsp?" + Reel.PARAM + "=" + contid ;
+}
 %>
 <% dbResources.close(); %>
 <notifier:set_message text="<%= notifier %>" />		

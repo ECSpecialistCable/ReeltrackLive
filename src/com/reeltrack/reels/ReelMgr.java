@@ -284,7 +284,7 @@ public class ReelMgr extends CompWebManager {
 	/****************************/
 
 	/*** Reel Notes ***/
-	public int addReelLog(ReelNote content) throws Exception {
+	public int addReelNote(ReelNote content) throws Exception {
 		content.setCreated(new Date());
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
@@ -318,6 +318,9 @@ public class ReelMgr extends CompWebManager {
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
 		content.setCreatedBy(user.getName());
+		if(!content.getIssueLog().equals("")) {
+			content.setIssueLog(content.getIssueLog() + "\n");
+		}
 		return controller.add(content);
 	}
 
@@ -331,12 +334,14 @@ public class ReelMgr extends CompWebManager {
 		content.setUpdated(new Date());
 
 		String issueLog = currIssue.getIssueLog();
-		issueLog = issueLog.concat("\n");
-		RTUserLoginMgr umgr = new RTUserLoginMgr();
-		umgr.init(this.getPageContext(), this.getDbResources());
-		RTUser user = (RTUser)umgr.getUser();
-		issueLog = issueLog.concat(user.getName() + " on " + content.getUpdatedDateText() + " at " + content.getUpdatedTime() + "\n");
-		issueLog = issueLog.concat(content.getIssueLog());
+		if(!content.getIssueLog().equals("")) {
+			issueLog = issueLog.concat("\n");
+			RTUserLoginMgr umgr = new RTUserLoginMgr();
+			umgr.init(this.getPageContext(), this.getDbResources());
+			RTUser user = (RTUser)umgr.getUser();
+			issueLog = issueLog.concat(user.getName() + " on " + content.getUpdatedDateText() + " at " + content.getUpdatedTime() + "\n");
+			issueLog = issueLog.concat(content.getIssueLog());
+		}
 
 		content.setIssueLog(issueLog);
 		controller.update(content);
