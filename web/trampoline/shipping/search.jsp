@@ -146,8 +146,59 @@ String tempURL = "";
 <admin:box_end />
 
 <% if(dosearch) { %>
+<% if(contents.howMany() > 0) { %>
+    <% for(int i=0; i<contents.howMany(); i++) { %>
+        <% content = (Reel)contents.get(i); %>
+        <% tempURL = content.getReelTag() + " (" + content.getCableDescription() + ")"; %>
+        <% String toggleTarget = "toggleReel" + content.getId(); %>
+        <% String toggleID = "reel" + content.getId(); %>
+        <% String toggleForm = "reelForm" + content.getId(); %>
+        <admin:subtitle text="<%= tempURL %>" id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
+        <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
+            <form:begin submit="true" name="<%= toggleForm %>" action="shipping/process.jsp" />
+                <form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
+                <form:info label="Cable Description:" text="<%= content.getCableDescription() %>" />
+                <form:info label="Customer P/N:" text="<%= content.getCustomerPN() %>" />
+                <form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
+                <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
+                <form:info label="Steel Reel Serial #:" text="<%= content.getSteelReelSerial() %>" />
+                <form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
+                <form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
+                <form:row_begin />
+                <form:label name="" label="Carrier:" />
+                <form:content_begin />
+                <form:select_begin name="<%= Reel.CARRIER_COLUMN %>" />
+                    <form:option name="None" value="" match="<%= content.getCarrier() %>" />
+                    <% String[] carrierList  = content.getCarrierList(); %>
+                    <% for(int x=0; x<carrierList.length; x++) { %>
+                        <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= content.getCarrier() %>" />
+                    <% } %>
+                <form:select_end />
+                <form:content_end />
+                <form:row_end />
+                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />        
+                <form:row_begin />
+                <form:label name="" label="" />
+                <form:buttonset_begin align="left" padding="0"/>
+                    <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
+                    <form:submit_inline waiting="true" name="Mark Shipped" action="mark_shipped" />
+                    &nbsp;&nbsp;
+                    <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
+                    <form:linkbutton url="<%= tempURL %>" name="EDIT REEL" />
+                <form:buttonset_end />
+                <form:row_end />
+            <form:end />
+        <admin:box_end />
+    <% } %>
+<% } else { %>
+    <admin:subtitle text="No Reels Found." />
+<% } %>
+<% } %>
+
+<%--
+<% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
-    <%--
+
         <admin:search_listing_pagination text="Reels Found" url="ordered/search.jsp" 
                     pageIndex="<%= new Integer(pageNdx).toString() %>"
                     column="<%= column %>"
@@ -157,7 +208,7 @@ String tempURL = "";
                     count="<%= new Integer(count).toString() %>"
                     search_params=""
                 />
-    --%>
+
     <admin:box_begin color="false" />
    
     <listing:begin />
@@ -220,6 +271,7 @@ String tempURL = "";
     <admin:subtitle text="No Reels Found." />
     <% } %>
 <% } %>
+--%>
 
 <admin:set_tabset url="shipping/_tabset_default.jsp" thispage="search.jsp" />
 <html:end />    

@@ -404,6 +404,11 @@ var BEHAVIORS = function(){
 				 // 				 };
 
 				 
+				if (/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)){
+					if(obj.get(0).tagName == "DIV"){
+					 toggle_trigger.children('img').css("top", "12px");
+					}
+				}
 				
 				var toggleTarget = $(obj.attr("rel"));
 				

@@ -5,9 +5,13 @@ body:
     whenever that's gonna be.
 ************************************************************************************************/            
 body {
-   /* background: url(../images/body_bg.gif) repeat-y;*/
+   background: url(../images/body_bg.gif) repeat-y;
 }
 
+a {
+    color: #0e6dc6; /*rgb(146,108,43);*/
+    text-decoration: none;
+}
 
 /************************************************************************************************
 branding:
@@ -15,8 +19,6 @@ branding:
 ************************************************************************************************/            
 #branding {
   background: url(../images/branding_BG.gif);
-  background-repeat:no-repeat;
-  background-position:center;
 }
 
 
@@ -177,11 +179,11 @@ modules:
 }
 
 #modules a {
-	/* background: rgb(255, 123, 0);*/
-	/* border-bottom: 1px solid rgb(192, 198, 202); */
-	text-decoration: none;
-	cursor: pointer;
-	color: #fff;
+    /* background: rgb(255, 123, 0);*/
+    /* border-bottom: 1px solid rgb(192, 198, 202); */
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
 }
 
 #modules div {
@@ -229,30 +231,31 @@ modules:
 /* resolves to <admin:title>*/
 #main h1 {
     margin-left: 0;
-	padding-top: 0;
-	padding-left: 0;
-	padding-bottom: 20px;
-	font-size: 20px;
-	font-weight: normal;
-	/*color: rgb(86,107,117);*/
+    padding-top: 0;
+    padding-left: 0;
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-weight: normal;
+    /*color: rgb(86,107,117);*/
         /*color: rgb(215,182,133);*/
         color: #000;
 }
 
 /* resolves to <admin:subtitle>*/
 #main h2 {
+    position:relative;
     margin-left: 0;
-	padding-top: 0;
-	padding-left: 10px;
-	padding-bottom: 8px;
-	font-size: 13px;	
-	font-weight: normal;
-	color: #000;
+    padding-top: 0;
+    padding-left: 10px;
+    padding-bottom: 8px;
+    font-size: 13px;    
+    font-weight: normal;
+    color: #000;
 }
 
 #main h1 a, #main h2 a{
-	color: rgb(146,108,43);
-	text-decoration: none;
+    color: #0e6dc6; /*rgb(146,108,43);*/
+    text-decoration: none;
 }
 
 #main p{
@@ -268,8 +271,8 @@ modules:
 }
 
 #main p a {;
-	color: rgb(146,108,43); 
-	text-decoration: none;
+    color: #0e6dc6;/*rgb(146,108,43);*/ 
+    text-decoration: none;
 }
 
 #main a.submit{
@@ -409,7 +412,11 @@ modules:
 
 
 #main .listing tr.even td{
-    background: rgb(250, 250, 250);
+    background: rgb(255, 255, 255);
+}
+
+#main .listing tr.color td{
+    background: rgb(230, 230, 230);
 }
 
 
@@ -494,7 +501,7 @@ modules:
 #main form table td {
 /*    text-align: left;*/
     padding-bottom: 10px;
-	padding-right: 8px;
+    padding-right: 8px;
     /*width: 560px;*/
 }
 
@@ -516,14 +523,16 @@ modules:
     background: none;
     border: none;
     text-transform: capitalize;
-    color: #336;
+    color: #0e6dc6;/*rgb(146,108,43);*/
     border-bottom: 1px solid #fff;
     padding: 0;
     text-decoration: none;
+    font-size: 11px;
 }
 
 #main form table td input[type="submit"]:hover, #main .listing td input[type="submit"]:hover{
-    border-bottom: 1px solid #000;
+    text-decoration: none;
+    color: #000;
 }
 
 
@@ -548,7 +557,7 @@ modules:
 
 #main form table td a {
     /*color: rgb(74,176,224);*/
-    color: #0e6dc6; /*gb(146,108,43);*/
+    color: #0e6dc6;/*rgb(146,108,43);*/
     text-transform: capitalize;
     font-size: 11px;
     text-decoration: none;
@@ -584,25 +593,25 @@ modules:
 #main form table td .checkboxholder input,
 #main form table td .radiobuttonholder input
 {
-	margin: 0;
+    margin: 0;
 }
 
 
 #main form table td .withborder,
 #main form table td select
 {
-	border: 1px solid #999;
+    border: 1px solid #999;
 }
 
 #main form table td.labelcolumn{
-	text-align: right;
-	width: 135px;
+    text-align: right;
+    width: 135px;
 }
 #main form table td label{
-	text-transform: capitalize;
-	/*color: rgb(82, 82, 82);*/
+    text-transform: capitalize;
+    /*color: rgb(82, 82, 82);*/
             color: rgb(95, 103, 111);
-    font-size: 12px;	
+    font-size: 12px;    
 }
 
 /* the standard action button, also see the styles for "#main form table td input[type="submit"], #main .listing td input[type="submit"]{" */
@@ -626,20 +635,22 @@ modules:
     a.k.a. "the flash"
 ************************************************************************************************/            
 #main #flash {
-	margin: 0 33px;	
-	padding: 8px 2px;
-	width: auto;
-	font-weight: bolder;
+    margin: 0 33px; 
+    padding: 8px 2px;
+    width: auto;
+    font-weight: bolder;
 }
 
 /************************************************************************************************
 Toggle Styles
 ************************************************************************************************/
 #toggle_btn a{
-	position:relative;
+    position:relative;
 }
 .toggle_img{
-	display:none;
+    display:none;
+    position:absolute;
+    left:0;
 }
 
 /************************************************************************************************
@@ -682,13 +693,13 @@ a .save_offButton {
 }
 
 a img.LogoutTabButton {
-	float:left;
-	background: url(../images/tab_close.gif) top right no-repeat;
-	width:14px;
-	height:14px;
-	padding:0px;
-	margin:0px 5px 0 0 ;
-	border: none;
+    float:left;
+    background: url(../images/tab_close.gif) top right no-repeat;
+    width:14px;
+    height:14px;
+    padding:0px;
+    margin:0px 5px 0 0 ;
+    border: none;
 }
 
 /*
@@ -755,7 +766,7 @@ a:hover .searchButton {
 */
 
 a .loginButton {
-    background: url(../images/submit.gif) no-repeat;
+    background: url(../images/login.gif) no-repeat;
     width:67px;
     height:19px;
 }
