@@ -149,11 +149,22 @@ String tempURL = "";
 <% if(contents.howMany() > 0) { %>
     <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
-        <% tempURL = content.getReelTag() + " (" + content.getCableDescription() + ")"; %>
+        <% tempURL = new Integer(i+1).toString() + ": " + content.getReelTag() + " (" + content.getCableDescription() + ")"; %>
         <% String toggleTarget = "toggleReel" + content.getId(); %>
         <% String toggleID = "reel" + content.getId(); %>
         <% String toggleForm = "reelForm" + content.getId(); %>
         <admin:subtitle text="<%= tempURL %>" id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
+        <%--
+        <admin:box_begin color="false" />
+        <listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="true"/>
+        <listing:row_begin row="<%= new Integer(1).toString() %>" />
+            <listing:cell_begin  width="10"/>
+                <%= new Integer(10).toString() %>
+            <listing:cell_end />
+        <listing:row_end />   
+        <listing:end />
+        <admin:box_end />
+        --%>
         <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
             <form:begin submit="true" name="<%= toggleForm %>" action="shipping/process.jsp" />
                 <form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
