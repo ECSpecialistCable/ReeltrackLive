@@ -58,6 +58,22 @@ public class ReelMgr extends CompWebManager {
 		controller.update(content);
 	}
 
+	public void markReelReceived(Reel content) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		if(content.getReceivingDisposition().equals(Reel.RECEIVING_DISPOSITION_ACCEPTED)) {
+			content.setStatus(Reel.STATUS_IN_WHAREHOUSE);
+			content.setReceivedOnDate(new Date());
+			this.addReelLog(content, "Reel was received by " + user.getName());
+		} else {
+			content.setStatus(Reel.STATUS_REFUSED);
+			this.addReelLog(content, "Reel was refused by " + user.getName());
+		}
+		content.setUpdated(new Date());
+		controller.update(content);
+	}
+
 	public void updateReelShippingInfo(Reel content) throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
