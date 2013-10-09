@@ -49,7 +49,7 @@ String tempURL; //var for url expression
 <admin:subtitle text="Add Circuit" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
-    		<form:textfield label="Length:" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="0" />
+    		<form:textfield label="Length:" pixelwidth="40" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="0" />
     		<form:textfield label="Name:" name="<%= ReelCircuit.NAME_COLUMN %>" value="" />
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 			<form:row_begin />

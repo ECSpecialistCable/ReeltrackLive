@@ -47,10 +47,10 @@ String tempURL; //var for url expression
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
     		<form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
-    		<form:textfield label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
-    		<form:textfield label="Received Qty:" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
+    		<form:textfield label="Shipped Qty:" pixelwidth="40" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
+    		<form:textfield label="Received Qty:" pixelwidth="40" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
     		<form:info label="Bottom Foot #:" text="<%= new Integer(content.getBottomFoot()).toString() %>" />
-    		<form:textfield label="Top Foot #:" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+    		<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
     		<form:info label="Cable Used Qty:" text="<%= new Integer(content.getCableUsedQuantity()).toString() %>" />
     		<form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
@@ -66,8 +66,8 @@ String tempURL; //var for url expression
 <admin:subtitle text="Record Pull" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
-    		<form:textfield label="Pulled Qty:" name="pulled_quantity" value="0" />
-    		<form:textfield label="Top Foot #:" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />
+    		<form:textfield label="Pulled Qty:" pixelwidth="40" name="pulled_quantity" value="0" />
+    		<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 			<form:row_begin />
 				<form:label name="" label="" />
