@@ -48,6 +48,16 @@ public class ReelMgr extends CompWebManager {
 		controller.update(content);
 	}
 
+	public void markReelShipped(Reel content) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		this.addReelLog(content, "Shipping info update to carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList() + " by " + user.getName());
+		content.setStatus(Reel.STATUS_SHIPPED);
+		content.setUpdated(new Date());
+		controller.update(content);
+	}
+
 	public void updateReelShippingInfo(Reel content) throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());

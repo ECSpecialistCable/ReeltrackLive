@@ -548,7 +548,7 @@ modules:
 
 #main form table td a {
     /*color: rgb(74,176,224);*/
-    color: rgb(146,108,43);
+    color: #0e6dc6; /*gb(146,108,43);*/
     text-transform: capitalize;
     font-size: 11px;
     text-decoration: none;

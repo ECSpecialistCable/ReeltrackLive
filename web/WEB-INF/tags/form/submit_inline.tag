@@ -42,6 +42,6 @@
 </a>	    
 		
 <% } else { %>
-	<input type="submit" value="[${fn:toUpperCase(name)}]" /> 
+	<input type="submit" style="color: #0e6dc6;text-decoration: none;" value="${fn:toUpperCase(name)}" /> 
     
 <% } %>
