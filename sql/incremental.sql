@@ -158,7 +158,18 @@ create table reel_issues (
 
 alter table reels add customer_po varchar(25);
 alter table reels add receiving_note text;
+alter table reels add pick_list_id int default 0;
 
-
+create table picklists (
+	id int(11) NOT NULL auto_increment,
+	created datetime,
+	updated datetime,
+	status varchar(25),
+	name varchar(255),
+	job_id int default 0,
+	foreman varchar(25),
+	driver varchar(25),
+	PRIMARY KEY (id)
+);
 
 

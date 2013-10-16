@@ -33,6 +33,7 @@ public class Reel extends CompCMEntity {
 	public static final String BOTTOM_FOOT_COLUMN = "bottom_foot";
 	public static final String TOP_FOOT_COLUMN = "top_foot";
 	public static final String CABLE_USED_QUANTITY_COLUMN = "cable_used_quantity";
+	public static final String PICK_LIST_ID_COLUMN = "pick_list_id";
 
 	public static final String STATUS_ORDERED = "ordered";
 	public static final String STATUS_SHIPPED = "shipped";
@@ -357,5 +358,13 @@ public class Reel extends CompCMEntity {
    		} else {
 			return this.getReceivedQuantity() - this.getCableUsedQuantity();
 		}
+    }
+
+	public int getPickListId() {
+		return this.getData().getInteger(PICK_LIST_ID_COLUMN, new Integer(0));
+    }
+
+    public void setPickListId(int id) {
+		this.getData().setInteger(PICK_LIST_ID_COLUMN, new Integer(id));
     }
 }
