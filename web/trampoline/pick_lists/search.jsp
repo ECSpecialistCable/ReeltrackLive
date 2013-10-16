@@ -189,7 +189,7 @@ String tempURL = "";
                 <%= content.getStatus() %>
             <listing:cell_end />
             <listing:cell_begin align="right"/>
-                <% tempURL = "pick_lists/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
+                <% tempURL = "pick_lists/edit.jsp?" +  PickList.PARAM + "=" + content.getId(); %>
                 <form:linkbutton url="<%= tempURL %>" name="EDIT" />
             <listing:cell_end />
         <listing:row_end />

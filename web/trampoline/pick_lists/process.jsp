@@ -38,16 +38,17 @@ if(action.equals("create")) {
     redirect = request.getContextPath() + "/trampoline/" + "pick_lists/search.jsp";
 }
 
-/*
+
 if(action.equals("update")) {
-    Reel content = new Reel();
+    PickList content = new PickList();
     content.setId(contid);
-    content.setStatus(request.getParameter(Reel.STATUS_COLUMN));
-    content.setWharehouseLocation(request.getParameter(Reel.WHAREHOUSE_LOCATION_COLUMN));
-    reelMgr.updateReel(content);
-    redirect = request.getContextPath() + "/trampoline/" + "reels/edit.jsp?" + Reel.PARAM + "=" + contid ;
+    content.setName(request.getParameter(PickList.NAME_COLUMN));
+    content.setForeman(request.getParameter(PickList.FOREMAN_COLUMN));
+    picklistMgr.updatePickList(content);
+    redirect = request.getContextPath() + "/trampoline/" + "pick_lists/edit.jsp?" + PickList.PARAM + "=" + contid ;
 }
 
+/*
 if(action.equals("update_shipping")) {
     Reel content = new Reel();
     content.setId(contid);
