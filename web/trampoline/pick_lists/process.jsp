@@ -4,6 +4,7 @@
 <%@ page import="com.monumental.trampoline.component.*" %>
 <%@ page import="com.reeltrack.users.*" %>
 <%@ page import="com.reeltrack.picklists.*" %>
+<%@ page import="com.reeltrack.reels.*" %>
 
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
@@ -45,6 +46,22 @@ if(action.equals("update")) {
     content.setName(request.getParameter(PickList.NAME_COLUMN));
     content.setForeman(request.getParameter(PickList.FOREMAN_COLUMN));
     picklistMgr.updatePickList(content);
+    redirect = request.getContextPath() + "/trampoline/" + "pick_lists/edit.jsp?" + PickList.PARAM + "=" + contid ;
+}
+
+if(action.equals("add_reel")) {
+    Reel content = new Reel();
+    content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+    content.setPickListId(contid);
+    picklistMgr.updateReelForPickList(content);
+    redirect = request.getContextPath() + "/trampoline/" + "pick_lists/edit.jsp?" + PickList.PARAM + "=" + contid ;
+}
+
+if(action.equals("delete_reel")) {
+    Reel content = new Reel();
+    content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+    content.setPickListId(0);
+    picklistMgr.updateReelForPickList(content);
     redirect = request.getContextPath() + "/trampoline/" + "pick_lists/edit.jsp?" + PickList.PARAM + "=" + contid ;
 }
 

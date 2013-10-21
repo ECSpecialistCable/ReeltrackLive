@@ -32,6 +32,11 @@ public class PickListMgr extends CompWebManager {
 		content.setUpdated(new Date());
 		controller.update(content);
 	}
+
+	public void updateReelForPickList(Reel content) throws Exception {
+		content.setUpdated(new Date());
+		controller.update(content);
+	}
 	
 	public PickList getPickList(PickList content) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(content);
@@ -84,6 +89,40 @@ public class PickListMgr extends CompWebManager {
 
 		puller.setDistinct(true);
 		puller.setSortBy(content.getTableName(), PickList.NAME_COLUMN, true);
+		return controller.pullCompEntities(puller, 0, 0);
+	}
+
+	public CompEntities searchReelsForPickList(Reel reel, ReelCircuit circuit) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		reel.setJobId(user.getJobId());
+		reel.setPickListId(0);
+
+		CompEntities toReturn = new CompEntities();
+
+		if(circuit.getId()!=0) {
+			CompEntityPuller puller = new CompEntityPuller(new Reel());
+			puller.addSearch(reel);
+			puller.addFKLink(reel, circuit, ReelCircuit.REEL_ID_COLUMN);
+			puller.addSearch(circuit);
+			puller.setSortBy(reel.getTableName(), Reel.ON_REEL_QUANTITY_COLUMN, false);
+			toReturn = controller.pullCompEntities(puller, 0, 0);
+		} else {
+			CompEntityPuller puller = new CompEntityPuller(new Reel());
+			puller.addSearch(reel);
+			puller.setSortBy(reel.getTableName(), Reel.ON_REEL_QUANTITY_COLUMN, false);
+			toReturn = controller.pullCompEntities(puller, 0, 0);
+		}
+
+		return toReturn;
+	}
+
+	public CompEntities getReelsOnPickList(PickList content) throws Exception {
+		Reel reel = new Reel();
+		reel.setPickListId(content.getId());
+		CompEntityPuller puller = new CompEntityPuller(new Reel());
+		puller.addSearch(reel);
 		return controller.pullCompEntities(puller, 0, 0);
 	}
 	

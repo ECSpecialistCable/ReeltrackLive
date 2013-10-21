@@ -128,9 +128,12 @@ String tempURL = "";
         <% String toggleTarget = "toggleReel" + content.getId(); %>
         <% String toggleID = "reel" + content.getId(); %>
         <% String toggleForm = "reelForm" + content.getId(); %>
-        <admin:subtitle text="<%= tempURL %>" id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
+        
         <%--
-        <admin:box_begin color="false" />
+        <admin:subtitle text="<%= tempURL %>" id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
+        --%> 
+               
+        <admin:box_begin color="true" />
         <listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="true"/>
         <listing:row_begin row="<%= new Integer(1).toString() %>" />
             <listing:cell_begin  width="10"/>
@@ -138,8 +141,17 @@ String tempURL = "";
             <listing:cell_end />
         <listing:row_end />   
         <listing:end />
-        <admin:box_end />
+        <%--
+        <listing:begin toggleRecipient="<%= toggleTarget %>" />
+                    <listing:header_begin />
+                        <listing:header_cell width="10" first="true" name="#" />
+                        <listing:header_cell width="150" name="Name" />
+                    <listing:header_end />
+        <listing:end />
         --%>
+        <admin:box_end />
+        
+        
         <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
             <form:begin submit="true" name="<%= toggleForm %>" action="receive/process.jsp" />
                 <form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
@@ -202,6 +214,7 @@ String tempURL = "";
                 <form:row_end />
             <form:end />
         <admin:box_end />
+        
     <% } %>
 <% } else { %>
     <admin:subtitle text="No Reels Found." />

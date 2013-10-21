@@ -172,4 +172,14 @@ create table picklists (
 	PRIMARY KEY (id)
 );
 
+alter table reels add on_reel_quantity int default 0;
+
+create table echo_to_rt_transactions (
+	id int(11) NOT NULL auto_increment,
+	created datetime default now(),
+	status varchar(25) default 'new',
+	ref_compentity_id int default 0,
+	PRIMARY KEY (id)
+);
+
 

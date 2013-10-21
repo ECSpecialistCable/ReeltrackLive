@@ -3,7 +3,7 @@ adminConfiguration=admin
 
 logDirectory=/Users/tomkat/Desktop
 debugLogOn=false
-sqlLogOn=true
+sqlLogOn=false
 
 live.database=jdbc/trampoline
 live.componentDirectory=/content
@@ -15,3 +15,13 @@ admin.uploadDirectory=/content/upload
 
 mailHost=localhost
 mailFrom=test@test.com
+
+databaseDriver=com.mysql.jdbc.Driver
+
+dbConnectionECHO=jdbc:mysql://127.0.0.1:3306/echo
+dbUserECHO=www
+dbPasswordECHO=sleep499
+
+dbConnectionRT=jdbc:mysql://209.20.80.230:3306/reeltrack
+dbUserRT=www
+dbPasswordRT=sleep499

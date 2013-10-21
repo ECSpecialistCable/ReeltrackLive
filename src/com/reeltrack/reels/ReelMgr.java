@@ -23,7 +23,22 @@ public class ReelMgr extends CompWebManager {
 		content.setCreated(new Date());
 		content.setStatus(Reel.STATUS_ORDERED);
 		int toReturn = controller.add(content);
+
+		content.setId(toReturn);
+		this.updateOnReelQuantity(content);
+
 		return toReturn;
+	}
+
+	public void updateOnReelQuantity(Reel content) throws Exception {
+		Reel reel = new Reel();
+		reel.setId(content.getId());
+		reel = this.getReel(reel);
+
+		Reel reel2 = new Reel();
+		reel2.setId(reel.getId());
+		reel2.setOnReelQuantity(reel.calcOnReelQuantity());
+		controller.update(reel2);
 	}
 
 	public void updateReel(Reel content) throws Exception {
@@ -46,6 +61,8 @@ public class ReelMgr extends CompWebManager {
 
 		content.setUpdated(new Date());
 		controller.update(content);
+
+		this.updateOnReelQuantity(content);
 	}
 
 	public void markReelShipped(Reel content) throws Exception {
@@ -56,6 +73,7 @@ public class ReelMgr extends CompWebManager {
 		content.setStatus(Reel.STATUS_SHIPPED);
 		content.setUpdated(new Date());
 		controller.update(content);
+		this.updateOnReelQuantity(content);
 	}
 
 	public void markReelReceived(Reel content) throws Exception {
@@ -72,6 +90,7 @@ public class ReelMgr extends CompWebManager {
 		}
 		content.setUpdated(new Date());
 		controller.update(content);
+		this.updateOnReelQuantity(content);
 	}
 
 	public void updateReelShippingInfo(Reel content) throws Exception {
@@ -82,6 +101,7 @@ public class ReelMgr extends CompWebManager {
 
 		content.setUpdated(new Date());
 		controller.update(content);
+		this.updateOnReelQuantity(content);
 	}
 
 	public void updateReelReceivingInfo(Reel content) throws Exception {
@@ -92,6 +112,7 @@ public class ReelMgr extends CompWebManager {
 
 		content.setUpdated(new Date());
 		controller.update(content);
+		this.updateOnReelQuantity(content);
 	}
 
 	public void updateReelQuantity(Reel content) throws Exception {
@@ -121,6 +142,7 @@ public class ReelMgr extends CompWebManager {
 
 		content.setUpdated(new Date());
 		controller.update(content);
+		this.updateOnReelQuantity(content);
 	}
 
 	public void updateReelPull(Reel content) throws Exception {
@@ -143,6 +165,7 @@ public class ReelMgr extends CompWebManager {
 			content.setUpdated(new Date());
 			controller.update(content);
 		}
+		this.updateOnReelQuantity(content);
 	}
 	
 	public Reel getReel(Reel content) throws Exception {

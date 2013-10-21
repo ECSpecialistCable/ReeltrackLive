@@ -144,7 +144,7 @@ String tempURL = "";
             <form:buttonset_end />
         <form:row_end />
     <form:end />
-    <admin:box_end />
+<admin:box_end />
 
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
