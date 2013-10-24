@@ -40,7 +40,8 @@ redirect = request.getContextPath() + "/trampoline/index.jsp";
 <%  if(action.equals("job" )) { %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%  
-user.setJobId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));
+//user.setJobId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));
+user.setJobCode(request.getParameter(CustomerJob.PARAM));
 redirect = request.getContextPath() + "/trampoline/index.jsp";
 %>
 <% } %>

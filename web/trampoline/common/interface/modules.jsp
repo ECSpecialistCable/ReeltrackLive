@@ -33,7 +33,7 @@ The permissions are dealt with in the file itself.
 -->
 
 <% if(userLoginMgr.isLoggedIn()) { %>
-	<% if(user.getCustomerId()!=0 && user.getJobId()!=0 && (user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT))) { %>
+	<% if(user.getCustomerId()!=0 && !user.getJobCode().equals("") && (user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT))) { %>
 		<a class="module_bar_toggle" rel="common/interface/reel_inventory">Reel Inventory</a>
 		<a class="module_bar_toggle" rel="common/interface/manage_reels">Manage Reels</a>
 		<a class="module_bar_toggle" rel="common/interface/configuration">Configuration</a>

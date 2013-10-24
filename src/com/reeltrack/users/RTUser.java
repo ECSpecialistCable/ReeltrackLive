@@ -12,6 +12,7 @@ public class RTUser extends User {
     public static final String USER_TYPE_STANDARD = "standard";
 
     private int jobID = 0;
+    private String jobCode = "";
 
     public String getTableName() {
         return "users";
@@ -43,5 +44,13 @@ public class RTUser extends User {
 
     public void setJobId(int jobID) {
         this.jobID = jobID;
+    }
+
+    public String getJobCode() {
+        return this.jobCode;
+    }
+
+    public void setJobCode(String jobCode) {
+        this.jobCode = jobCode;
     }
 }

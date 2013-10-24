@@ -19,7 +19,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		content.setJobId(user.getJobId());
+		content.setJobCode(user.getJobCode());
 		content.setCreated(new Date());
 		content.setStatus(Reel.STATUS_ORDERED);
 		int toReturn = controller.add(content);
@@ -178,7 +178,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		content.setJobId(user.getJobId());
+		content.setJobCode(user.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
 		puller.setSortBy(content.getTableName(), sort_by, asc);
@@ -189,7 +189,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		content.setJobId(user.getJobId());
+		content.setJobCode(user.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
 		puller.setSortBy(content.getTableName(), sort_by, asc);
@@ -200,7 +200,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		content.setJobId(user.getJobId());
+		content.setJobCode(user.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
 
@@ -219,7 +219,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		content.setJobId(user.getJobId());
+		content.setJobCode(user.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
 
@@ -238,7 +238,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		content.setJobId(user.getJobId());
+		content.setJobCode(user.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
 
@@ -266,7 +266,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		content.setJobId(user.getJobId());
+		content.setJobCode(user.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
 

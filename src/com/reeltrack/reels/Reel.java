@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 public class Reel extends CompCMEntity {
 	public static final String PARAM = "reel_param";
 	public static final String JOB_ID_COLUMN = "job_id";
+	public static final String JOB_CODE_COLUMN = "job_code";
 	public static final String WHAREHOUSE_LOCATION_COLUMN = "wharehouse_location";
 	public static final String REEL_TYPE_COLUMN = "reel_type";
 	public static final String REEL_TAG_COLUMN = "reel_tag";
@@ -35,6 +36,14 @@ public class Reel extends CompCMEntity {
 	public static final String CABLE_USED_QUANTITY_COLUMN = "cable_used_quantity";
 	public static final String PICK_LIST_ID_COLUMN = "pick_list_id";
 	public static final String ON_REEL_QUANTITY_COLUMN = "on_reel_quantity";
+	public static final String CTR_NUMBER_COLUMN = "ctr_number";
+	public static final String CTR_DATE_COLUMN = "ctr_date";
+	public static final String CTR_SENT_COLUMN = "ctr_sent";
+
+	public static final String ORDNO_COLUMN = "OrdNo";
+	public static final String POREVISION_COLUMN = "PORevision";
+	public static final String ABSOLUTEITEM_COLUMN = "AbsoluteItem";
+	public static final String REELSERIAL_COLUMN = "ReelSerial";
 
 	public static final String STATUS_ORDERED = "ordered";
 	public static final String STATUS_SHIPPED = "shipped";
@@ -84,6 +93,64 @@ public class Reel extends CompCMEntity {
 		return this.getReelTag();
 	}
 
+	public String getCTRNumber() {
+		return this.getData().getString(CTR_NUMBER_COLUMN, "");
+	}
+	
+	public void setCTRNumber(String name) {
+		this.getData().setString(CTR_NUMBER_COLUMN, name);
+	}
+
+	public Date getCTRDate() {
+        return (Date) this.getData().getValue(CTR_DATE_COLUMN, null);
+    }
+
+    public void setCTRDate(Date toSet) {
+        this.getData().setTimestamp(CTR_DATE_COLUMN, toSet);
+    }
+
+   	public Date getCTRSent() {
+        return (Date) this.getData().getValue(CTR_SENT_COLUMN, null);
+    }
+
+    public void setCTRSent(Date toSet) {
+        this.getData().setTimestamp(CTR_SENT_COLUMN, toSet);
+    }
+
+	public String getOrdNo() {
+		return this.getData().getString(ORDNO_COLUMN, "");
+	}
+	
+	public void setOrdNo(String name) {
+		this.getData().setString(ORDNO_COLUMN, name);
+	}
+
+	public int getPORevision() {
+		return this.getData().getInteger(POREVISION_COLUMN, new Integer(0));
+    }
+
+    public void setPORevision(int id) {
+		this.getData().setInteger(POREVISION_COLUMN, new Integer(id));
+    }
+
+	public int getAbsoluteItem() {
+		return this.getData().getInteger(ABSOLUTEITEM_COLUMN, new Integer(0));
+    }
+
+    public void setAbsoluteItem(int id) {
+		this.getData().setInteger(ABSOLUTEITEM_COLUMN, new Integer(id));
+    }
+
+	public int getReelSerial() {
+		return this.getData().getInteger(REELSERIAL_COLUMN, new Integer(0));
+    }
+
+    public void setReelSerial(int id) {
+		this.getData().setInteger(REELSERIAL_COLUMN, new Integer(id));
+    }
+
+
+
 	public void setTempPullAmount(int amount) {
 		this.temp_pull_amount = amount;	
 	}
@@ -124,6 +191,14 @@ public class Reel extends CompCMEntity {
     public void setJobId(int id) {
 		this.getData().setInteger(JOB_ID_COLUMN, new Integer(id));
     }
+
+	public String getJobCode() {
+		return this.getData().getString(JOB_CODE_COLUMN, "");
+	}
+	
+	public void setJobCode(String name) {
+		this.getData().setString(JOB_CODE_COLUMN, name);
+	}
 
 	public String getWharehouseLocation() {
 		return this.getData().getString(WHAREHOUSE_LOCATION_COLUMN, "");

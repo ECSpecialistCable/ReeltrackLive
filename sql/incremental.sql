@@ -82,7 +82,7 @@ create table reels (
 	cable_description text,
 	customer_pn varchar(25),
 	ecs_pn varchar(25),
-	manufacturer varchar(25),
+	manufacturer varchar(100),
 	steel_reel_serial varchar(25),
 	received_on datetime,
 	times_checked_out int default 0,
@@ -174,12 +174,49 @@ create table picklists (
 
 alter table reels add on_reel_quantity int default 0;
 
-create table echo_to_rt_transactions (
+create table reeltrack_transactions (
 	id int(11) NOT NULL auto_increment,
-	created datetime default now(),
-	status varchar(25) default 'new',
-	ref_compentity_id int default 0,
+	status varchar(25),
+	OrdNo varchar(50),
+	PORevision smallint(6),
+	AbsoluteItem smallint(6),
+	ReelSerial smallint(6),
 	PRIMARY KEY (id)
 );
+
+alter table reels add OrdNo varchar(50);
+alter table reels add PORevision int default 0;
+alter table reels add AbsoluteItem int default 0;
+alter table reels add ReelSerial int default 0;
+alter table reels add job_code varchar(50);
+
+alter table reels add ctr_number varchar(50);
+alter table reels add ctr_date date;
+alter table reels add ctr_sent date;
+
+create table cable_tech_data (
+	id int(11) NOT NULL auto_increment,
+	created datetime,
+	updated datetime,
+	status varchar(25),
+	reel_id int default 0,
+	Conductor_Area int default 0,
+	Conductor_GroundSize varchar(10),
+	Insulation_Thickness smallint default 0,
+	Insulation_Compound varchar(25),
+	Insulation_Colorcode varchar(25),
+	ShieldType varchar(25),
+	Jacket_Thickness smallint default 0,
+	Jacket_Compound varchar(25),
+	Cable_OD double default 0,
+	Cable_Weight int default 0,
+	Cable_Radius double default 0,
+	Cable_XSection double default 0,
+	Cable_PullTension int default 0,
+	ECSPartNo varchar(15),
+	PRIMARY KEY (id)
+);
+
+alter table picklists add job_code varchar(25);
 
 

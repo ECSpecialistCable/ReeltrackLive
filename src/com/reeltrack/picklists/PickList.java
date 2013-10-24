@@ -9,6 +9,7 @@ public class PickList extends CompCMEntity {
 	public static final String PARAM = "foreman_param";
 	public static final String NAME_COLUMN = "name";
 	public static final String JOB_ID_COLUMN = "job_id";
+	public static final String JOB_CODE_COLUMN = "job_code";
 	public static final String FOREMAN_COLUMN = "foreman";
 	public static final String DRIVER_COLUMN = "driver";
 
@@ -35,6 +36,14 @@ public class PickList extends CompCMEntity {
 	@Override
 	public String getTitle() {
 		return this.getName();
+	}
+
+	public String getJobCode() {
+		return this.getData().getString(JOB_CODE_COLUMN, "");
+	}
+	
+	public void setJobCode(String name) {
+		this.getData().setString(JOB_CODE_COLUMN, name);
 	}
 	
 	public String getName() {
