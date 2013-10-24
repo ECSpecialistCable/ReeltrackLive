@@ -182,6 +182,18 @@ public class ReelMgr extends CompWebManager {
 		}
 		this.updateOnReelQuantity(content);
 	}
+
+	public CableTechData getCableTechData(Reel content) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new CableTechData());
+		CableTechData techData = new CableTechData();
+		techData.setReelId(content.getId());
+		puller.addSearch(techData);
+		return (CableTechData)controller.pullCompEntity(puller);
+	}
+
+	public void updateCableTechData(CableTechData content) throws Exception {
+		controller.update(content);
+	}
 	
 	public Reel getReel(Reel content) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(content);

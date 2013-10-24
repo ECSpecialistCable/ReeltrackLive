@@ -72,6 +72,47 @@ if(action.equals("update_reel_data")) {
     redirect = request.getContextPath() + "/trampoline/" + "reels/reel_data.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
+if(action.equals("update_conductor")) {
+    CableTechData content = new CableTechData();
+    content.setId(Integer.parseInt(request.getParameter(CableTechData.PARAM)));
+    content.setConductorGroundSize(request.getParameter(CableTechData.CONDUCTOR_GROUND_SIZE_COLUMN));
+    content.setConductorArea(Integer.parseInt(request.getParameter(CableTechData.CONDUCTOR_AREA_COLUMN)));
+    reelMgr.updateCableTechData(content);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/cable_data.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("update_insulation")) {
+    CableTechData content = new CableTechData();
+    content.setId(Integer.parseInt(request.getParameter(CableTechData.PARAM)));
+    content.setInsulationThickness(Integer.parseInt(request.getParameter(CableTechData.INSULATION_THICKNESS_COLUMN)));
+    content.setInsulationCompound(request.getParameter(CableTechData.INSULATION_COMPOUND_COLUMN));
+    content.setInsulationColor(request.getParameter(CableTechData.INSULATION_COLOR_COLUMN));
+    reelMgr.updateCableTechData(content);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/cable_data.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("update_jacket")) {
+    CableTechData content = new CableTechData();
+    content.setId(Integer.parseInt(request.getParameter(CableTechData.PARAM)));
+    content.setJacketThickness(Integer.parseInt(request.getParameter(CableTechData.JACKET_THICKNESS_COLUMN)));
+    content.setJacketCompound(request.getParameter(CableTechData.JACKET_COMPOUND_COLUMN));
+    content.setShieldType(request.getParameter(CableTechData.SHIELD_TYPE_COLUMN));
+    reelMgr.updateCableTechData(content);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/cable_data.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("update_overall")) {
+    CableTechData content = new CableTechData();
+    content.setId(Integer.parseInt(request.getParameter(CableTechData.PARAM)));
+    content.setOD(Double.parseDouble(request.getParameter(CableTechData.OD_COLUMN)));
+    content.setWeight(Integer.parseInt(request.getParameter(CableTechData.WEIGHT_COLUMN)));
+    content.setRadius(Double.parseDouble(request.getParameter(CableTechData.RADIUS_COLUMN)));
+    content.setXSection(Double.parseDouble(request.getParameter(CableTechData.XSECTION_COLUMN)));
+    content.setPullTension(Integer.parseInt(request.getParameter(CableTechData.PULL_TENSION_COLUMN)));
+    reelMgr.updateCableTechData(content);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/cable_data.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
 if(action.equals("update")) {
     Reel content = new Reel();
     content.setId(contid);
