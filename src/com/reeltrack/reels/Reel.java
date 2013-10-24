@@ -39,6 +39,8 @@ public class Reel extends CompCMEntity {
 	public static final String CTR_NUMBER_COLUMN = "ctr_number";
 	public static final String CTR_DATE_COLUMN = "ctr_date";
 	public static final String CTR_SENT_COLUMN = "ctr_sent";
+	public static final String CTR_FILE_COLUMN = "ctr_file";
+	public static final String DATA_SHEET_FILE_COLUMN = "data_sheet_file";
 
 	public static final String ORDNO_COLUMN = "OrdNo";
 	public static final String POREVISION_COLUMN = "PORevision";
@@ -93,6 +95,22 @@ public class Reel extends CompCMEntity {
 		return this.getReelTag();
 	}
 
+	public String getCTRFile() {
+		return this.getData().getString(CTR_FILE_COLUMN, "");
+	}
+	
+	public void setCTRFile(String name) {
+		this.getData().setString(CTR_FILE_COLUMN, name);
+	}
+
+	public String getDataSheetFile() {
+		return this.getData().getString(DATA_SHEET_FILE_COLUMN, "");
+	}
+	
+	public void setDataSheetFile(String name) {
+		this.getData().setString(DATA_SHEET_FILE_COLUMN, name);
+	}
+
 	public String getCTRNumber() {
 		return this.getData().getString(CTR_NUMBER_COLUMN, "");
 	}
@@ -109,12 +127,30 @@ public class Reel extends CompCMEntity {
         this.getData().setTimestamp(CTR_DATE_COLUMN, toSet);
     }
 
+    public String getCTRDateString() {
+		if(this.getCTRDate() == null) {
+			return "";
+		} else {
+			SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        	return df.format(this.getCTRDate());
+		}
+    }
+
    	public Date getCTRSent() {
         return (Date) this.getData().getValue(CTR_SENT_COLUMN, null);
     }
 
     public void setCTRSent(Date toSet) {
         this.getData().setTimestamp(CTR_SENT_COLUMN, toSet);
+    }
+
+    public String getCTRSentString() {
+		if(this.getCTRSent() == null) {
+			return "";
+		} else {
+			SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        	return df.format(this.getCTRSent());
+		}
     }
 
 	public String getOrdNo() {

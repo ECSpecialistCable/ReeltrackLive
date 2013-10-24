@@ -219,4 +219,6 @@ create table cable_tech_data (
 
 alter table picklists add job_code varchar(25);
 
+alter table reels add ctr_file varchar(100);
+alter table reels add data_sheet_file varchar(100);
 

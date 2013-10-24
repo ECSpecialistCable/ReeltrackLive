@@ -3,16 +3,31 @@ package com.reeltrack.reels;
 import com.monumental.trampoline.component.*;
 import com.monumental.trampoline.datasources.*;
 import java.util.Date;
+import java.io.*;
 import java.util.GregorianCalendar;
 import javax.servlet.jsp.PageContext;
 import com.reeltrack.users.*;
+import com.reeltrack.utilities.MediaManager;
 
 public class ReelMgr extends CompWebManager {
 	CompDbController controller;
+	MediaManager mediaMgr;
 	
 	public void init(PageContext pageContext, DbResources resources) {
 		super.init(pageContext, resources);
 		this.controller = this.newCompController();
+		mediaMgr = new MediaManager();
+		mediaMgr.init(pageContext, resources);
+	}
+
+	public void updateReelData(Reel content, String basePath, File file, File file2) throws Exception {
+		if(file!=null) {
+			content.setCTRFile(mediaMgr.addMedia(file, content, basePath));	
+		}
+		if(file2!=null) {
+			content.setDataSheetFile(mediaMgr.addMedia(file2, content, basePath));	
+		}
+		controller.update(content);
 	}
 	
 	public int addReel(Reel content) throws Exception {

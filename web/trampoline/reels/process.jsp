@@ -2,8 +2,10 @@
 <%@ include file="../common/includes/only_users.jsp" %>
 
 <%@ page import="com.monumental.trampoline.component.*" %>
+<%@ page import="com.monumental.trampoline.utilities.forms.multipart.*" %>
 <%@ page import="com.reeltrack.users.*" %>
 <%@ page import="com.reeltrack.reels.*" %>
+<%@ page import="java.io.*" %>
 
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
@@ -15,7 +17,8 @@
 <% reelMgr.init(pageContext,dbResources); %>
 <% CompProperties props = new CompProperties(); %>
 
-<% 
+<%
+MultipartRequest multipart = null; 
 String basePath = pageContext.getServletContext().getRealPath("/");
 String notifier = "";
 String redirect = request.getHeader("referer");
@@ -24,11 +27,25 @@ if(request.getParameter("submit_action") != null) {
     action = request.getParameter("submit_action");
 }
 
+Reel contentUpload = new Reel();
+
 int contid = 0;
 if(request.getParameter(Reel.PARAM) != null) {
     contid = Integer.parseInt(request.getParameter(Reel.PARAM));
+} else {
+    String uploadDir = basePath + contentUpload.getComponentUploadDirectory()  + "/";
+    File createDir = new File(uploadDir);
+    if(!createDir.exists()) {
+        createDir.mkdirs();
+    }
+    multipart = new MultipartRequest(request,uploadDir,330240000);
+    if(multipart.getParameter("submit_action")!=null) {
+        action = multipart.getParameter("submit_action");
+    }
+    if(multipart.getParameter(Reel.PARAM)!=null) {
+        contid = Integer.parseInt(multipart.getParameter(Reel.PARAM));
+    }
 }
-
 
 if(action.equals("create")) {
     Reel content = new Reel();
@@ -44,6 +61,15 @@ if(action.equals("create")) {
     contid = reelMgr.addReel(content);
 
     redirect = request.getContextPath() + "/trampoline/" + "reels/search.jsp";
+}
+
+if(action.equals("update_reel_data")) {
+    Reel content = new Reel();
+    content.setId(contid);
+    File file = multipart.getFile(Reel.CTR_FILE_COLUMN);
+    File file2 = multipart.getFile(Reel.DATA_SHEET_FILE_COLUMN);
+    reelMgr.updateReelData(content, basePath, file, file2);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/reel_data.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
 if(action.equals("update")) {

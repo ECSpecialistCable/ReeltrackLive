@@ -16,5 +16,7 @@
 <admin:tab url="reels/notes.jsp" text="Notes" params="<%= paramstring %>"/>
 <admin:tab url="reels/issues.jsp" text="Issues" params="<%= paramstring %>"/>
 <admin:tab url="reels/log.jsp" text="Log" params="<%= paramstring %>"/>
+<admin:tab url="reels/reel_data.jsp" text="Reel Data" params="<%= paramstring %>"/>
+<admin:tab url="reels/cable_data.jsp" text="Cable Data" params="<%= paramstring %>"/>
 
 <admin:set_moduleactions url="reel_inventory/_moduleactions.jsp" />
