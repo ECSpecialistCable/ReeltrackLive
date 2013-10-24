@@ -108,6 +108,30 @@ public class ReelMgr extends CompWebManager {
 		this.updateOnReelQuantity(content);
 	}
 
+	public void markReelStaged(Reel content) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		content.setStatus(Reel.STATUS_STAGED);
+		content.setWharehouseLocation("Staged");
+		this.addReelLog(content, "Reel was staged by " + user.getName());
+		content.setUpdated(new Date());
+		controller.update(content);
+		this.updateOnReelQuantity(content);
+	}
+
+	public void markReelCheckedOut(Reel content) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		content.setStatus(Reel.STATUS_CHECKED_OUT);
+		content.setWharehouseLocation("");
+		this.addReelLog(content, "Reel was checked out by " + user.getName());
+		content.setUpdated(new Date());
+		controller.update(content);
+		this.updateOnReelQuantity(content);
+	}
+
 	public void updateReelShippingInfo(Reel content) throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
