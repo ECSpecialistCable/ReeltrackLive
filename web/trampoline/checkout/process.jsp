@@ -55,7 +55,7 @@ if(action.equals("mark_checkedout")) {
     content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
     content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     reelMgr.markReelCheckedOut(content);
-    redirect = request.getContextPath() + "/trampoline/" + "checkout/stage.jsp?" + PickList.PARAM + "=" + contid ;
+    redirect = request.getContextPath() + "/trampoline/" + "checkout/checkout.jsp?" + PickList.PARAM + "=" + contid ;
 }
 %>
 <% dbResources.close(); %>

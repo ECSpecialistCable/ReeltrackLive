@@ -45,7 +45,7 @@ CompEntities foremans = foremanMgr.searchForeman(foreman, Foreman.NAME_COLUMN, t
 
 CompEntities circuits = picklistMgr.getReelCircuits();
 
-int howMany = 25;
+int howMany = 15;
 int pageNdx = 1;
 if(request.getParameter("pageIdx") != null) {
     pageNdx = Integer.parseInt(request.getParameter("pageIdx"));

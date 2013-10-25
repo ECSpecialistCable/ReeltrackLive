@@ -26,7 +26,7 @@
 <% 
 RTUser user = (RTUser)userLoginMgr.getUser();
 
-int howMany = 100;
+int howMany = 25;
 int pageNdx = 1;
 if(request.getParameter("pageIdx") != null) {
     pageNdx = Integer.parseInt(request.getParameter("pageIdx"));
@@ -122,35 +122,46 @@ String tempURL = "";
 
 <% if(dosearch) { %>
 <% if(contents.howMany() > 0) { %>
+    <admin:search_listing_pagination text="Reels Found" url="receive/search.jsp" 
+                    pageIndex="<%= new Integer(pageNdx).toString() %>"
+                    column="<%= column %>"
+                    ascending="<%= new Boolean(ascending).toString() %>"
+                    howMany="<%= new Integer(howMany).toString() %>"
+                    skip="<%= new Integer(skip).toString() %>"      
+                    count="<%= new Integer(count).toString() %>"
+                    search_params=""
+                />
+
+    <listing:begin />
+        <listing:header_begin />
+            <listing:header_cell width="20" first="true" name="#" />
+            <listing:header_cell width="200" name="Reel Tag" />
+            <listing:header_cell name="Cable Description" />
+        <listing:header_end />
+    <listing:end />
+    <br />
     <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
         <% tempURL = new Integer(i+1).toString() + ". " + content.getReelTag() + " (" + content.getCableDescription() + ")"; %>
-        <% String toggleTarget = "toggleReel" + content.getId(); %>
-        <% String toggleID = "reel" + content.getId(); %>
-        <% String toggleForm = "reelForm" + content.getId(); %>
-        
-        <%--
-        <admin:subtitle text="<%= tempURL %>" id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
-        --%> 
+        <% String toggleTarget = "toggleReelrec" + content.getId(); %>
+        <% String toggleID = "reelrec" + content.getId(); %>
+        <% String toggleForm = "reelFormrec" + content.getId(); %>
                
-        <admin:box_begin color="true" />
-        <listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="true"/>
+        <admin:box_begin color="false" />
+        <listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
         <listing:row_begin row="<%= new Integer(1).toString() %>" />
-            <listing:cell_begin  width="10"/>
-                <%= new Integer(10).toString() %>
+            <listing:cell_begin  width="20"/>
+                <%= new Integer((pageNdx-1)*howMany + i+1).toString() %>.
+            <listing:cell_end />
+            <listing:cell_begin  width="200"/>
+                <%= content.getReelTag() %>
+            <listing:cell_end />
+            <listing:cell_begin />
+                <%= content.getCableDescription() %>
             <listing:cell_end />
         <listing:row_end />   
         <listing:end />
-        <%--
-        <listing:begin toggleRecipient="<%= toggleTarget %>" />
-                    <listing:header_begin />
-                        <listing:header_cell width="10" first="true" name="#" />
-                        <listing:header_cell width="150" name="Name" />
-                    <listing:header_end />
-        <listing:end />
-        --%>
-        <admin:box_end />
-        
+        <admin:box_end /> 
         
         <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
             <form:begin submit="true" name="<%= toggleForm %>" action="receive/process.jsp" />
@@ -203,10 +214,21 @@ String tempURL = "";
                 <form:content_end />
                 <form:row_end />
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />        
+                <%--
                 <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
                     <form:submit_inline waiting="true" name="Mark Received / Refused" action="mark_received" />
+                    &nbsp;&nbsp;
+                    <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
+                    <form:linkbutton url="<%= tempURL %>" name="EDIT REEL" />
+                <form:buttonset_end />
+                <form:row_end />
+                --%>
+                <form:row_begin />
+                <form:label name="" label="" />
+                <form:buttonset_begin align="left" padding="0"/>
+                    <form:submit_inline button="save" waiting="true" name="save" action="mark_received" />
                     &nbsp;&nbsp;
                     <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
                     <form:linkbutton url="<%= tempURL %>" name="EDIT REEL" />

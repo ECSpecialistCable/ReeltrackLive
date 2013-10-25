@@ -304,6 +304,10 @@ modules:
     background: url(../images/form_bg.png) repeat-y;    
 }
 
+#main div.adminbox_container_white{
+    position:relative;
+}
+
 #main div.adminbox_white{
     padding-top: 0px;    
 }

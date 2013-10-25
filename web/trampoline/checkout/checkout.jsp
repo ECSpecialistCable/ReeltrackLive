@@ -112,51 +112,50 @@ String tempURL; //var for url expression
 	<admin:subtitle text="Reels" />
 		<listing:begin />
 	    <listing:header_begin />
-	        <listing:header_cell first="true" name="Reel Tag" />
-	        <listing:header_cell width="150" name="Description" />
-	        <listing:header_cell width="100" name="Cust P/N" />
-	        <listing:header_cell width="100" name="Type" />
-	        <listing:header_cell width="40" name="Qty" />
-	        <listing:header_cell width="75" name="Location" />
+	        <listing:header_cell width="20" first="true" name="#" />
+	        <listing:header_cell width="200" name="Reel Tag" />
+	        <listing:header_cell name="Description" />
+	        <listing:header_cell width="100" name="Location" />
 	    <listing:header_end />
 	    <listing:end />
 	    <br />
 	    <% for(int i=0; i<pickReels.howMany(); i++) { %>
 	    <% Reel reel3 = (Reel)pickReels.get(i); %>
-	    <admin:box_begin color="true" />
-		<% String toggleTarget = "toggleReel" + reel3.getId(); %>
-	    <% String toggleID = "reel" + reel3.getId(); %>
-	    <% String toggleForm = "reelForm" + reel3.getId(); %>
-	    <% if(!reel3.getStatus().equals(Reel.STATUS_CHECKED_OUT)) { %>
-			<listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false" />
-		<% } else { %>
-			<listing:begin />
-		<% } %>
-	    <listing:row_begin />
-	        <listing:cell_begin />
+	    <admin:box_begin color="false" />
+		<% String toggleTarget = "toggleReelco" + reel3.getId(); %>
+	    <% String toggleID = "reelco" + reel3.getId(); %>
+	    <% String toggleForm = "reelFormco" + reel3.getId(); %>
+	    <% String row = "0"; %>
+	    <% if(reel3.getStatus().equals(Reel.STATUS_CHECKED_OUT)) {
+	    	row = "1";
+	    	}
+	    %>
+		<listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false" />
+	    <listing:row_begin row="<%= row %>"/>
+	    	<listing:cell_begin width="20" />
+	            <%= new Integer(i+1).toString() %>.
+	        <listing:cell_end />
+	        <listing:cell_begin width="200" />
 	            <%= reel3.getReelTag() %>
 	        <listing:cell_end />
-	        <listing:cell_begin width="150" />
+	        <listing:cell_begin />
 	            <%= reel3.getCableDescription() %>
 	        <listing:cell_end />
 	        <listing:cell_begin width="100" />
-	            <%= reel3.getCustomerPN() %>
-	        <listing:cell_end />
-	        <listing:cell_begin width="100" />
-	            <%= reel3.getReelType() %>
-	        <listing:cell_end />
-	        <listing:cell_begin width="40" />
-	            <%= reel3.getOnReelQuantity() %>
-	        <listing:cell_end />
-	        <listing:cell_begin width="75" />
 	            <%= reel3.getWharehouseLocation() %>
 	        <listing:cell_end />
 	    <listing:row_end />
 	    <listing:end />
         <admin:box_end />
-        <% if(!reel3.getStatus().equals(Reel.STATUS_CHECKED_OUT)) { %>
+
         <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
             <form:begin submit="true" name="<%= toggleForm %>" action="checkout/process.jsp" />
+            	<form:info label="Reel Tag:" text="<%= reel3.getReelTag() %>" />
+                <form:info label="Cable Description:" text="<%= reel3.getCableDescription() %>" />
+                <form:info label="Customer P/N:" text="<%= reel3.getCustomerPN() %>" />
+                <form:info label="Manufacturer:" text="<%= reel3.getManufacturer() %>" />
+                <form:info label="Reel Type:" text="<%= reel3.getReelType() %>" />
+                <form:info label="Quantity:" text="<%= new Integer(reel3.getOnReelQuantity()).toString() %>" />
                 <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(reel3.getTopFoot()).toString() %>" />
                 <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(contid).toString() %>" />
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(reel3.getId()).toString() %>" />
@@ -164,11 +163,13 @@ String tempURL; //var for url expression
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
 					<form:submit_inline button="save" waiting="true" name="save" action="mark_checkedout" />
+					&nbsp;&nbsp;
+                    <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + reel3.getId(); %>
+                    <form:linkbutton url="<%= tempURL %>" name="EDIT REEL" />
 				<form:buttonset_end />
-			<form:row_end />
+				<form:row_end />
             <form:end />
         <admin:box_end />
-        <% } %>
 	    <% } %>
 	<listing:end />
 	<admin:box_end />
