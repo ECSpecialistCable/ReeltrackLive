@@ -63,7 +63,7 @@ public class EchoSync extends CompManager {
 	}
 
 	public void addReel(Reel reel, CableTechData techData) throws Exception {
-		reel.setJobId(10);
+		//reel.setJobId(10);
 		reel.setCreated(new Date());
 		reel.setStatus(Reel.STATUS_ORDERED);
 		int toReturn = controllerRT.add(reel);

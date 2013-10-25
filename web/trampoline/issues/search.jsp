@@ -19,7 +19,7 @@
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <% 
 ReelIssue content = new ReelIssue();
-CompEntities contents = reelMgr.getUnresolvedReelIssues(user.getJobId());
+CompEntities contents = reelMgr.getUnresolvedReelIssues(user.getJobCode());
 String tempUrl;
 %>	
 

@@ -581,10 +581,10 @@ public class ReelMgr extends CompWebManager {
 		controller.update(content);
 	}
 
-	public CompEntities getUnresolvedReelIssues(int jobID) throws Exception {
+	public CompEntities getUnresolvedReelIssues(String jobCode) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(new ReelIssue());
 		Reel reel = new Reel();
-		reel.setJobId(jobID);
+		reel.setJobCode(jobCode);
 		puller.addSearch(reel);
 
 		ReelIssue issue = new ReelIssue();
