@@ -98,6 +98,7 @@ public class PickListMgr extends CompWebManager {
 		RTUser user = (RTUser)umgr.getUser();
 		reel.setJobCode(user.getJobCode());
 		reel.setPickListId(0);
+		reel.setStatus(Reel.STATUS_IN_WHAREHOUSE);
 
 		CompEntities toReturn = new CompEntities();
 

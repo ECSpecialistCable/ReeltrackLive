@@ -174,7 +174,7 @@ String tempURL = "";
         
         <admin:box_begin color="false" />
         <listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
-        <listing:row_begin row="<%= new Integer(1).toString() %>" />
+        <listing:row_begin />
             <listing:cell_begin  width="20"/>
                 <%= new Integer((pageNdx-1)*howMany + i+1).toString() %>.
             <listing:cell_end />
