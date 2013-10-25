@@ -9,6 +9,7 @@ import javax.servlet.jsp.PageContext;
 import com.reeltrack.users.*;
 import com.reeltrack.utilities.MediaManager;
 import com.reeltrack.whlocations.*;
+import com.reeltrack.picklists.*;
 
 public class ReelMgr extends CompWebManager {
 	CompDbController controller;
@@ -119,6 +120,25 @@ public class ReelMgr extends CompWebManager {
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateOnReelQuantity(content);
+
+		Reel reel2 = new Reel();
+		reel2.setId(content.getId());
+		reel2 = this.getReel(reel2);
+		PickListMgr pickMgr = new PickListMgr();
+		pickMgr.init(this.getPageContext(), this.getDbResources());
+		PickList pickList = new PickList();
+		pickList.setId(reel2.getPickListId());
+		CompEntities reels = pickMgr.getReelsOnPickList(pickList);
+		int staged = 0;
+		int checkedout = 0;
+		for(int y=0; y<reels.howMany();y++) {
+            Reel reelnum = (Reel)reels.get(y);
+            if(reelnum.getStatus().equals(Reel.STATUS_STAGED)) staged++;
+            if(reelnum.getStatus().equals(Reel.STATUS_CHECKED_OUT)) checkedout++;
+        }
+        if(checkedout==0 && staged>0) pickList.setStatus(PickList.STATUS_PARTIAL_STAGED);
+        if(checkedout==0 && staged==reels.howMany()) pickList.setStatus(PickList.STATUS_STAGED);
+        controller.update(pickList);
 	}
 
 	public void markReelCheckedOut(Reel content) throws Exception {
@@ -131,6 +151,25 @@ public class ReelMgr extends CompWebManager {
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateOnReelQuantity(content);
+
+		Reel reel2 = new Reel();
+		reel2.setId(content.getId());
+		reel2 = this.getReel(reel2);
+		PickListMgr pickMgr = new PickListMgr();
+		pickMgr.init(this.getPageContext(), this.getDbResources());
+		PickList pickList = new PickList();
+		pickList.setId(reel2.getPickListId());
+		CompEntities reels = pickMgr.getReelsOnPickList(pickList);
+		int staged = 0;
+		int checkedout = 0;
+		for(int y=0; y<reels.howMany();y++) {
+            Reel reelnum = (Reel)reels.get(y);
+            if(reelnum.getStatus().equals(Reel.STATUS_STAGED)) staged++;
+            if(reelnum.getStatus().equals(Reel.STATUS_CHECKED_OUT)) checkedout++;
+        }
+        if(checkedout>0) pickList.setStatus(PickList.STATUS_PARTIAL_PICKED_UP);
+        if(checkedout==reels.howMany()) pickList.setStatus(PickList.STATUS_PICKED_UP);
+        controller.update(pickList);
 	}
 
 	public void updateReelShippingInfo(Reel content) throws Exception {

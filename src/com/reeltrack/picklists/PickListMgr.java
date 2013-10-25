@@ -89,7 +89,9 @@ public class PickListMgr extends CompWebManager {
 
 		puller.setDistinct(true);
 		puller.setSortBy(content.getTableName(), PickList.NAME_COLUMN, true);
-		return controller.pullCompEntities(puller, 0, 0);
+		CompEntities picks = controller.pullCompEntities(puller, 0, 0);
+		this.fillPickListsWithReels(picks);
+		return picks;
 	}
 
 	public CompEntities searchReelsForPickList(Reel reel, ReelCircuit circuit) throws Exception {
@@ -117,6 +119,14 @@ public class PickListMgr extends CompWebManager {
 		}
 
 		return toReturn;
+	}
+
+	public void fillPickListsWithReels(CompEntities picks) throws Exception {
+		for(int x=0; x<picks.howMany(); x++) {
+			PickList pick = (PickList)picks.get(x);
+			CompEntities reels = this.getReelsOnPickList(pick);
+			pick.setCompEntities(Reel.PARAM,reels);
+		}
 	}
 
 	public CompEntities getReelsOnPickList(PickList content) throws Exception {

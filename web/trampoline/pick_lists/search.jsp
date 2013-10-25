@@ -166,7 +166,7 @@ String tempURL = "";
             <listing:header_cell width="75" first="true" name="Created" />
             <listing:header_cell name="Name" />
             <listing:header_cell width="150" name="Foreman" />
-            <listing:header_cell width="30" name="Reels" />
+            <listing:header_cell width="50" name="Reels" />
             <listing:header_cell width="100" name="Status" />
             <listing:header_cell width="50" name=""  />
         <listing:header_end />
@@ -183,7 +183,22 @@ String tempURL = "";
                 <%= content.getForeman() %>
             <listing:cell_end />
             <listing:cell_begin />
-                0/0
+                <%
+                CompEntities reels = content.getCompEntities(Reel.PARAM);
+                int total = 0;
+                int staged = 0;
+                int checkedout = 0;
+                if(reels!=null) {
+                    for(int y=0; y<reels.howMany();y++) {
+                        Reel reelnum = (Reel)reels.get(y);
+                        total++;
+                        if(reelnum.getStatus().equals(Reel.STATUS_STAGED)) staged++;
+                        if(reelnum.getStatus().equals(Reel.STATUS_CHECKED_OUT)) checkedout++;
+                    }
+                }
+                %>
+                <% tempURL = new Integer(staged).toString() + "/" + new Integer(checkedout).toString() + "/" + new Integer(total).toString(); %>
+                <%= tempURL %>
             <listing:cell_end />
             <listing:cell_begin />
                 <%= content.getStatus() %>

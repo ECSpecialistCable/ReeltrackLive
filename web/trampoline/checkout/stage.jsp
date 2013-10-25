@@ -116,6 +116,7 @@ String tempURL; //var for url expression
 	        <listing:header_cell width="200" name="Reel Tag" />
 	        <listing:header_cell name="Description" />
 	        <listing:header_cell width="100" name="Location" />
+	        <listing:header_cell width="75" name="Status" />
 	    <listing:header_end />
 	    <listing:end />
 	    <br />
@@ -143,6 +144,9 @@ String tempURL; //var for url expression
 	        <listing:cell_end />
 	        <listing:cell_begin width="100" />
 	            <%= reel3.getWharehouseLocation() %>
+	        <listing:cell_end />
+	        <listing:cell_begin width="75" />
+	            <%= reel3.getStatus() %>
 	        <listing:cell_end />
 	    <listing:row_end />
 	    <listing:end />
