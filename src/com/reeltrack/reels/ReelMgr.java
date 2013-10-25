@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 import javax.servlet.jsp.PageContext;
 import com.reeltrack.users.*;
 import com.reeltrack.utilities.MediaManager;
+import com.reeltrack.whlocations.*;
 
 public class ReelMgr extends CompWebManager {
 	CompDbController controller;
@@ -113,7 +114,7 @@ public class ReelMgr extends CompWebManager {
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
 		content.setStatus(Reel.STATUS_STAGED);
-		content.setWharehouseLocation("Staged");
+		content.setWharehouseLocation(WhLocation.LOCATION_STAGED);
 		this.addReelLog(content, "Reel was staged by " + user.getName());
 		content.setUpdated(new Date());
 		controller.update(content);
@@ -125,7 +126,7 @@ public class ReelMgr extends CompWebManager {
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
 		content.setStatus(Reel.STATUS_CHECKED_OUT);
-		content.setWharehouseLocation("");
+		content.setWharehouseLocation(WhLocation.LOCATION_NONE);
 		this.addReelLog(content, "Reel was checked out by " + user.getName());
 		content.setUpdated(new Date());
 		controller.update(content);

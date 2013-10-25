@@ -10,7 +10,8 @@ public class WhLocation extends CompCMEntity {
 	public static final String NAME_COLUMN = "name";
 	public static final String CUSTOMER_ID_COLUMN = "customer_id";
 
-	public static final String LOCATION_NONE = "none";
+	public static final String LOCATION_NONE = "N/A";
+	public static final String LOCATION_STAGED = "Staged";
 
 	@Override
 	public String getTableName() {
