@@ -8,6 +8,6 @@
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 
 <admin:tab url="reels/search.jsp" text="Search" />
-<admin:tab url="reels/create.jsp" text="Add Reel" />
+<%--<admin:tab url="reels/create.jsp" text="Add Reel" />--%>
 
 <admin:set_moduleactions url="reel_inventory/_moduleactions.jsp" />

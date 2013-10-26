@@ -130,14 +130,15 @@ String tempURL = "";
             <listing:header_cell width="10" first="true" name="#" />
             <listing:header_cell name="Reel Tag" />
             <listing:header_cell name="Cable Description" />
-            <listing:header_cell width="100" name="Status" />
-            <listing:header_cell width="50" name=""  />
+            <listing:header_cell width="75" name="Status" />
+            <listing:header_cell width="40" name="ID"  />
+            <listing:header_cell width="40" name=""  />
         <listing:header_end />
         <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
         <listing:row_begin row="<%= new Integer(i).toString() %>" />
             <listing:cell_begin />
-                <%= new Integer(i+1).toString() %>
+                <%= new Integer(i+1).toString() %>.
             <listing:cell_end />
             <listing:cell_begin />
                 <%= content.getReelTag() %>
@@ -147,6 +148,9 @@ String tempURL = "";
             <listing:cell_end />
             <listing:cell_begin />
                 <%= content.getStatus() %>
+            <listing:cell_end />
+            <listing:cell_begin />
+                <%= content.getId() %>
             <listing:cell_end />
             <listing:cell_begin align="right"/>
                 <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
