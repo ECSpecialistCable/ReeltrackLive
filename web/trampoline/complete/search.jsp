@@ -41,11 +41,11 @@ if(request.getParameter("skip") != null) {
 }
 
 Reel content = new Reel();
-if(session.getAttribute("checkin_search")!=null) {
-    content = (Reel)session.getAttribute("checkin_search");
+if(session.getAttribute("complete_search")!=null) {
+    content = (Reel)session.getAttribute("complete_search");
 }
 
-content.setStatus(Reel.STATUS_CHECKED_OUT);
+content.setStatus(Reel.STATUS_IN_WHAREHOUSE);
 
 if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
     content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
@@ -67,20 +67,12 @@ if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
     content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ); 
 }
 
-session.setAttribute("checkin_search",content);
+session.setAttribute("complete_search",content);
 
-String column = Reel.REEL_TAG_COLUMN;
+String column = Reel.ON_REEL_QUANTITY_COLUMN;
 boolean ascending = true;
 int count = reelMgr.searchReelsCount(content, column, ascending);
 CompEntities contents = reelMgr.searchReels(content, column, ascending, howMany, skip);
-
-WhLocation location = new WhLocation();
-location.setCustomerId(user.getCustomerId());
-CompEntities locations = locationMgr.searchWhLocation(location, WhLocation.NAME_COLUMN, true);
-
-Driver driver = new Driver();
-driver.setCustomerId(user.getCustomerId());
-CompEntities drivers = driverMgr.searchDriver(driver, Driver.NAME_COLUMN, true);
 
 boolean dosearch = true;
 String tempURL = "";
@@ -88,11 +80,11 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Check IN Reels" />
+<admin:title text="Mark Reels as Complete" />
 
 <admin:subtitle text="Filter Reels" />
 <admin:box_begin />
-<form:begin_selfsubmit name="search" action="checkin/search.jsp" />
+<form:begin_selfsubmit name="search" action="complete/search.jsp" />
     <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
     <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
     <form:textfield label="Customer P/N:" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= content.getCustomerPN() %>" />
@@ -119,7 +111,7 @@ String tempURL = "";
 
 <% if(dosearch) { %>
 <% if(contents.howMany() > 0) { %>
-    <admin:search_listing_pagination text="Reels Found" url="checkin/search.jsp" 
+    <admin:search_listing_pagination text="Reels Found" url="complete/search.jsp" 
                     pageIndex="<%= new Integer(pageNdx).toString() %>"
                     column="<%= column %>"
                     ascending="<%= new Boolean(ascending).toString() %>"
@@ -134,6 +126,7 @@ String tempURL = "";
             <listing:header_cell width="20" first="true" name="#" />
             <listing:header_cell width="200" name="Reel Tag" />
             <listing:header_cell name="Cable Description" />
+            <listing:header_cell width="40" name="Quantity" />
             <listing:header_cell width="40" name="ID" />
         <listing:header_end />
     <listing:end />
@@ -158,6 +151,9 @@ String tempURL = "";
                 <%= content.getCableDescription() %>
             <listing:cell_end />
             <listing:cell_begin  width="40"/>
+                <%= content.getOnReelQuantity() %>
+            <listing:cell_end />
+            <listing:cell_begin  width="40"/>
                 <%= content.getId() %>
             <listing:cell_end />
         <listing:row_end />   
@@ -165,43 +161,21 @@ String tempURL = "";
         <admin:box_end /> 
         
         <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
-            <form:begin submit="true" name="<%= toggleForm %>" action="checkin/process.jsp" />
+            <form:begin submit="true" name="<%= toggleForm %>" action="complete/process.jsp" />
                 <form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
                 <form:info label="Cable Description:" text="<%= content.getCableDescription() %>" />
                 <form:info label="Customer P/N:" text="<%= content.getCustomerPN() %>" />
                 <form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
                 <form:info label="Reel Type:" text="<%= content.getReelType() %>" />
-                <form:info label="Quantity:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
-                <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />   
-                <form:row_begin />
-                <form:label name="" label="Warehouse<br />Location:" />
-                <form:content_begin />
-                <form:select_begin name="<%= Reel.WHAREHOUSE_LOCATION_COLUMN %>" />
-                    <form:option name="None" value="<%= WhLocation.LOCATION_NONE %>" match="<%= content.getWharehouseLocation() %>" />
-                    <% for(int x=0; x<locations.howMany(); x++) { %>
-                        <% location = (WhLocation)locations.get(x); %>
-                        <form:option name="<%= location.getName() %>" value="<%= location.getName() %>" match="<%= content.getWharehouseLocation() %>" />
-                    <% } %>
-                <form:select_end />
-                <form:content_end />
-                <form:row_end />
-                <form:row_begin />
-                <form:label name="" label="Driver:" />
-                <form:content_begin />
-                <form:select_begin name="<%= Driver.PARAM %>" />
-                    <form:option name="None" value="None" />
-                    <% for(int x=0; x<locations.howMany(); x++) { %>
-                        <% driver = (Driver)drivers.get(x); %>
-                        <form:option name="<%= driver.getName() %>" value="<%= driver.getName() %>" />
-                    <% } %>
-                <form:select_end />
-                <form:content_end />
-                <form:row_end />
+                <form:info label="Received Qty:" text="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
+                <form:info label="Current Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
+                <form:info label="Copper Weight:" text="" />
+                <form:info label="Warehouse<br />Location:" text="<%= content.getWharehouseLocation() %>" />  
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />        
                 <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
-                    <form:submit_inline button="save" waiting="true" name="save" action="mark_checkedin" />
+                    <form:submit_inline button="save" waiting="true" name="save" action="mark_complete" />
                     &nbsp;&nbsp;
                     <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
                     <form:linkbutton url="<%= tempURL %>" name="EDIT REEL" />
@@ -216,5 +190,5 @@ String tempURL = "";
 <% } %>
 <% } %>
 
-<admin:set_tabset url="checkin/_tabset_default.jsp" thispage="search.jsp" />
+<admin:set_tabset url="complete/_tabset_default.jsp" thispage="search.jsp" />
 <html:end />    

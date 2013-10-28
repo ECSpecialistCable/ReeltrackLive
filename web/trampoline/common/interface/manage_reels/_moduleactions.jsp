@@ -13,4 +13,5 @@
         <admin:ajax_load url="pick_lists/search.jsp" label="Pick Lists" />
         <admin:ajax_load url="checkout/search.jsp" label="Check OUT" />
         <admin:ajax_load url="checkin/search.jsp" label="Check IN" />
+        <admin:ajax_load url="complete/search.jsp" label="Complete" />
 <% } %>

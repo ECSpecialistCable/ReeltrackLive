@@ -185,6 +185,18 @@ public class ReelMgr extends CompWebManager {
 		this.updateOnReelQuantity(content);
 	}
 
+	public void markReelComplete(Reel content) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		content.setStatus(Reel.STATUS_COMPLETE);
+		content.setPickListId(0);
+		this.addReelLog(content, "Reel was completed by " + user.getName());
+		content.setUpdated(new Date());
+		controller.update(content);
+		//this.updateOnReelQuantity(content);
+	}
+
 	public void updateReelShippingInfo(Reel content) throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
