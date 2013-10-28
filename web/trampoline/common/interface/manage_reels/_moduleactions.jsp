@@ -14,4 +14,5 @@
         <admin:ajax_load url="checkout/search.jsp" label="Check OUT" />
         <admin:ajax_load url="checkin/search.jsp" label="Check IN" />
         <admin:ajax_load url="complete/search.jsp" label="Complete" />
+        <admin:ajax_load url="scrapped/search.jsp" label="Scrapped" />
 <% } %>
