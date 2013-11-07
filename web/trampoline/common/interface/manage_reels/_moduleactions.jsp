@@ -8,6 +8,7 @@
 
 <% if (user!=null) { %>
         <admin:ajax_load url="issues/search.jsp" label="Issues" />
+        <admin:ajax_load url="reeltags/search.jsp" label="Reel Tags" />
         <admin:ajax_load url="shipping/search.jsp" label="Shipping" />
         <admin:ajax_load url="receive/search.jsp" label="Receive" />
         <admin:ajax_load url="pick_lists/search.jsp" label="Pick Lists" />
