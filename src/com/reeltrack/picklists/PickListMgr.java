@@ -8,6 +8,15 @@ import javax.servlet.jsp.PageContext;
 import com.reeltrack.users.*;
 import com.reeltrack.reels.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+ 
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
+
 public class PickListMgr extends CompWebManager {
 	CompDbController controller;
 	
@@ -161,4 +170,47 @@ public class PickListMgr extends CompWebManager {
 		this.cleanPickList(content, realRootContextPath);
 		controller.delete(realRootContextPath, content);
 	}
+	
+	public void generateQrCodesforPickList(PickList content) throws Exception {
+		CompEntities reels = this.getReelsOnPickList(content);
+		for(int x=0; x<reels.howMany(); x++) {
+			Reel reel = (Reel)reels.get(x);
+			this.generateQrCode(reel);
+		}	
+	}
+
+    public void generateQrCode(Reel reel) throws Exception {
+    	Reel theReel = new Reel();
+    	theReel.setId(reel.getId());
+    	CompEntityPuller puller = new CompEntityPuller(theReel);
+		puller.addSearch(theReel);
+		Reel pulledReel = (Reel)controller.pullCompEntity(puller);
+		
+		String qrcode = "PL:" + pulledReel.getCustomerPN() + ":" + pulledReel.getReelTag() + ":" + pulledReel.getReelSerial() + ":" + pulledReel.getCableDescription();
+		
+        ByteArrayOutputStream out = QRCode.from(qrcode).to(ImageType.PNG).withSize(500, 500).stream();
+        
+        String baseDir = this.pageContext.getServletContext().getRealPath("/") + pulledReel.getCompEntityDirectory();
+	    File createDir = new File(baseDir);
+	    if(!createDir.exists()) {
+	        createDir.mkdirs();
+	    }
+	    String fileName = "pl_qrcode_" + pulledReel.getId() + ".png";
+	    String filePath = baseDir + "/" + fileName;
+        //System.out.println(filePath);
+        
+        try {
+            FileOutputStream fout = new FileOutputStream(new File(filePath));
+            fout.write(out.toByteArray());
+            fout.flush();
+            fout.close();
+        } catch (FileNotFoundException e) {
+        	e.printStackTrace();
+        } catch (IOException e) {
+        	e.printStackTrace();
+        }
+		
+		theReel.setPlQrCodeFile(fileName);
+		controller.update(theReel);
+    }
 }

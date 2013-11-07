@@ -60,16 +60,6 @@ String tempURL; //var for url expression
                 <form:content_end />
             <form:row_end />
         <% } %>
-        <form:file name="<%= Reel.DATA_SHEET_FILE_COLUMN %>" label="Data Sheet File:" />
-        <% if(content.getDataSheetFile() != null && !content.getDataSheetFile().equals("")) { %>
-            <form:row_begin />
-            <form:label label="Download Data Sheet:"  />
-            <form:content_begin />
-                    <% tempURL = request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getDataSheetFile(); %>
-                    <admin:link external="true" text="[Download]" url="<%= tempURL %>" />      
-                <form:content_end />
-            <form:row_end />
-        <% } %>  
 		<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 		<form:row_begin />
 			<form:label name="" label="" />

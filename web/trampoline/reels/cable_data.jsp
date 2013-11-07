@@ -46,6 +46,30 @@ String tempURL; //var for url expression
 <admin:title text="<%= content.getTitle() %>" />
 <notifier:show_message />
 
+<admin:subtitle text="Data Sheet" />
+<admin:box_begin />
+    <form:begin_multipart submit="true" name="edit" action="reels/process.jsp" />
+        <form:file name="<%= CableTechData.DATA_SHEET_FILE_COLUMN %>" label="Data Sheet File:" />
+        <% if(techData.getDataSheetFile() != null && !techData.getDataSheetFile().equals("")) { %>
+            <form:row_begin />
+            <form:label label="Download Data Sheet:"  />
+            <form:content_begin />
+                    <% tempURL = request.getContextPath() + techData.getCompEntityDirectory() + "/" + techData.getDataSheetFile(); %>
+                    <admin:link external="true" text="[Download]" url="<%= tempURL %>" />      
+                <form:content_end />
+            <form:row_end />
+        <% } %>
+        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />  
+        <form:hidden name="<%= CableTechData.PARAM %>" value="<%= new Integer(techData.getId()).toString() %>" />           
+        <form:row_begin />
+            <form:label name="" label="" />
+            <form:buttonset_begin align="left" padding="0"/>
+                <form:submit_inline button="save" waiting="true" name="save" action="update_datasheet" />
+            <form:buttonset_end />
+        <form:row_end />
+    <form:end />
+<admin:box_end />
+
 <admin:subtitle text="Cable Summary" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />

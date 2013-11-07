@@ -222,3 +222,11 @@ alter table picklists add job_code varchar(25);
 alter table reels add ctr_file varchar(100);
 alter table reels add data_sheet_file varchar(100);
 
+alter table cable_tech_data add data_sheet_file varchar(100);
+
+alter table cable_tech_data add job_code varchar(50);
+alter table cable_tech_data add ecs_pn varchar(25);
+
+alter table reels add rt_qrcode_file varchar(50);
+alter table reels add pl_qrcode_file varchar(50);
+

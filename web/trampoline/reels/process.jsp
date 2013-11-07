@@ -67,9 +67,16 @@ if(action.equals("update_reel_data")) {
     Reel content = new Reel();
     content.setId(contid);
     File file = multipart.getFile(Reel.CTR_FILE_COLUMN);
-    File file2 = multipart.getFile(Reel.DATA_SHEET_FILE_COLUMN);
-    reelMgr.updateReelData(content, basePath, file, file2);
+    reelMgr.updateReelData(content, basePath, file);
     redirect = request.getContextPath() + "/trampoline/" + "reels/reel_data.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("update_datasheet")) {
+    CableTechData content = new CableTechData();
+    content.setId(Integer.parseInt(multipart.getParameter(CableTechData.PARAM)));
+    File file = multipart.getFile(CableTechData.DATA_SHEET_FILE_COLUMN);
+    reelMgr.updateCableTechData(content, basePath, file);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/cable_data.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
 if(action.equals("update_conductor")) {

@@ -22,12 +22,9 @@ public class ReelMgr extends CompWebManager {
 		mediaMgr.init(pageContext, resources);
 	}
 
-	public void updateReelData(Reel content, String basePath, File file, File file2) throws Exception {
+	public void updateReelData(Reel content, String basePath, File file) throws Exception {
 		if(file!=null) {
 			content.setCTRFile(mediaMgr.addMedia(file, content, basePath));	
-		}
-		if(file2!=null) {
-			content.setDataSheetFile(mediaMgr.addMedia(file2, content, basePath));	
 		}
 		controller.update(content);
 	}
@@ -286,13 +283,25 @@ public class ReelMgr extends CompWebManager {
 
 	public CableTechData getCableTechData(Reel content) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(new CableTechData());
+		Reel reel = new Reel();
+		reel.setId(content.getId());
+		this.getReel(reel);
+
 		CableTechData techData = new CableTechData();
-		techData.setReelId(content.getId());
+		techData.setJobCode(reel.getJobCode());
+		techData.setEcsPN(reel.getEcsPN());
 		puller.addSearch(techData);
 		return (CableTechData)controller.pullCompEntity(puller);
 	}
 
 	public void updateCableTechData(CableTechData content) throws Exception {
+		controller.update(content);
+	}
+
+	public void updateCableTechData(CableTechData content, String basePath, File file) throws Exception {
+		if(file!=null) {
+			content.setDataSheetFile(mediaMgr.addMedia(file, content, basePath));	
+		}
 		controller.update(content);
 	}
 	

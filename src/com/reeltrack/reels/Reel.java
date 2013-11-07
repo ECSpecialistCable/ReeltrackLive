@@ -40,7 +40,8 @@ public class Reel extends CompCMEntity {
 	public static final String CTR_DATE_COLUMN = "ctr_date";
 	public static final String CTR_SENT_COLUMN = "ctr_sent";
 	public static final String CTR_FILE_COLUMN = "ctr_file";
-	public static final String DATA_SHEET_FILE_COLUMN = "data_sheet_file";
+	public static final String RT_QRCODE_FILE_COLUMN = "rt_qrcode_file";
+	public static final String PL_QRCODE_FILE_COLUMN = "pl_qrcode_file";
 
 	public static final String ORDNO_COLUMN = "OrdNo";
 	public static final String POREVISION_COLUMN = "PORevision";
@@ -101,14 +102,6 @@ public class Reel extends CompCMEntity {
 	
 	public void setCTRFile(String name) {
 		this.getData().setString(CTR_FILE_COLUMN, name);
-	}
-
-	public String getDataSheetFile() {
-		return this.getData().getString(DATA_SHEET_FILE_COLUMN, "");
-	}
-	
-	public void setDataSheetFile(String name) {
-		this.getData().setString(DATA_SHEET_FILE_COLUMN, name);
 	}
 
 	public String getCTRNumber() {
@@ -487,4 +480,21 @@ public class Reel extends CompCMEntity {
     public void setPickListId(int id) {
 		this.getData().setInteger(PICK_LIST_ID_COLUMN, new Integer(id));
     }
+    
+	public String getRtQrCodeFile() {
+		return this.getData().getString(RT_QRCODE_FILE_COLUMN, "");
+	}
+	
+	public void setRtQrCodeFile(String name) {
+		this.getData().setString(RT_QRCODE_FILE_COLUMN, name);
+	}
+	
+	public String getPlQrCodeFile() {
+		return this.getData().getString(PL_QRCODE_FILE_COLUMN, "");
+	}
+	
+	public void setPlQrCodeFile(String name) {
+		this.getData().setString(PL_QRCODE_FILE_COLUMN, name);
+	}
+    
 }

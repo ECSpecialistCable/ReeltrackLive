@@ -67,8 +67,18 @@ public class EchoSync extends CompManager {
 		reel.setCreated(new Date());
 		reel.setStatus(Reel.STATUS_ORDERED);
 		int toReturn = controllerRT.add(reel);
-		techData.setReelId(toReturn);
-		toReturn = controllerRT.add(techData);
+
+		CableTechData techData2 = new CableTechData();
+		techData2.setJobCode(reel.getJobCode());
+		techData2.setEcsPN(reel.getEcsPN());
+		CompEntityPuller puller = new CompEntityPuller(new CableTechData());
+		puller.addSearch(techData2);
+		techData2 = (CableTechData)controllerRT.pullCompEntity(puller);
+
+		if(techData2==null || !techData2.hasData()) {
+			techData.setJobCode(reel.getJobCode());
+			toReturn = controllerRT.add(techData);
+		}
 	}
 
 	public boolean fillReelAllocation(Reel reel) throws Exception {

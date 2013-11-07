@@ -4,7 +4,6 @@ import com.monumental.trampoline.component.CompCMEntity;
 
 public class CableTechData extends CompCMEntity {
 	public static final String PARAM = "cable_tech_param";
-	public static final String REEL_ID_COLUMN = "reel_id";
 	public static final String CONDUCTOR_AREA_COLUMN = "Conductor_Area";
 	public static final String CONDUCTOR_GROUND_SIZE_COLUMN = "Conductor_GroundSize";
 	public static final String INSULATION_THICKNESS_COLUMN = "Insulation_Thickness";
@@ -19,7 +18,25 @@ public class CableTechData extends CompCMEntity {
 	public static final String XSECTION_COLUMN = "Cable_XSection";
 	public static final String PULL_TENSION_COLUMN = "Cable_PullTension";
 	public static final String ECS_PN_COLUMN = "ECSPartNo";
+	public static final String DATA_SHEET_FILE_COLUMN = "data_sheet_file";
+	public static final String JOB_CODE_COLUMN = "job_code";
 
+	public String getJobCode() {
+		return this.getData().getString(JOB_CODE_COLUMN, "");
+	}
+	
+	public void setJobCode(String name) {
+		this.getData().setString(JOB_CODE_COLUMN, name);
+	}
+
+	public String getDataSheetFile() {
+		return this.getData().getString(DATA_SHEET_FILE_COLUMN, "");
+	}
+	
+	public void setDataSheetFile(String name) {
+		this.getData().setString(DATA_SHEET_FILE_COLUMN, name);
+	}
+	
 	public String getEcsPN() {
 		return this.getData().getString(ECS_PN_COLUMN, "");
 	}
@@ -149,13 +166,5 @@ public class CableTechData extends CompCMEntity {
 	@Override
 	public String getTitle() {
 		return "";
-	}
-	
-	public int getReelId() {
-		return this.getData().getInteger(REEL_ID_COLUMN, 0);
-	}
-	
-	public void setReelId(int id) {
-		this.getData().setInteger(REEL_ID_COLUMN, id);
 	}
 }

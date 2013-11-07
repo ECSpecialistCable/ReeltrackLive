@@ -49,6 +49,13 @@ if(action.equals("update")) {
     redirect = request.getContextPath() + "/trampoline/" + "pick_lists/edit.jsp?" + PickList.PARAM + "=" + contid ;
 }
 
+if(action.equals("print")) {
+    PickList content = new PickList();
+    content.setId(contid);
+    picklistMgr.generateQrCodesforPickList(content);
+    redirect = request.getContextPath() + "/trampoline/" + "pick_lists/search.jsp";
+}
+
 if(action.equals("add_reel")) {
     Reel content = new Reel();
     content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
