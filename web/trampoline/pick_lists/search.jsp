@@ -207,8 +207,12 @@ String tempURL = "";
                 <% tempURL = "pick_lists/edit.jsp?" +  PickList.PARAM + "=" + content.getId(); %>
                 <form:linkbutton url="<%= tempURL %>" name="EDIT" />
                 &nbsp;&nbsp;
+                <%--
                 <% tempURL = "pick_lists/process.jsp?submit_action=print&" + PickList.PARAM + "=" + content.getId(); %>
                 <form:linkbutton url="<%= tempURL %>" process="true" name="PRINT" />
+                --%>
+                <% tempURL = "pick_lists/picklist.jsp?" + PickList.PARAM + "=" + content.getId(); %>
+                <a href="<%= tempURL %>" target="_new">PRINT</a>
             <listing:cell_end />
         <listing:row_end />
         <% } %>

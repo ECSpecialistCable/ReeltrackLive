@@ -543,6 +543,14 @@ public class ReelMgr extends CompWebManager {
 		controller.update(content);
 		this.updateReelType(content);
 	}
+	
+	public void fillReelCircuits(CompEntities reels) throws Exception {
+		for(int x=0; x<reels.howMany(); x++) {
+			Reel reel = (Reel)reels.get(x);
+			CompEntities circuits = this.getReelCircuits(reel);
+			reel.setCompEntities(ReelCircuit.PARAM,circuits);
+		}
+	}
 
 	public CompEntities getReelCircuits(Reel content) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(new ReelCircuit());
