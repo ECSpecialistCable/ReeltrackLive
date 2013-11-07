@@ -26,7 +26,7 @@ dbResources.close();
 <admin:subtitle text="Add Pick List" />
 <admin:box_begin />
     <form:begin submit="true" name="create" action="pick_lists/process.jsp" />
-			<form:textfield name="<%= PickList.NAME_COLUMN %>" label="Reel Tag:" />
+			<form:textfield name="<%= PickList.NAME_COLUMN %>" label="Name:" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>

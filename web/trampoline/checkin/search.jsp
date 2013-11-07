@@ -82,6 +82,8 @@ Driver driver = new Driver();
 driver.setCustomerId(user.getCustomerId());
 CompEntities drivers = driverMgr.searchDriver(driver, Driver.NAME_COLUMN, true);
 
+String[] manufacturers = reelMgr.getManufacturers();
+
 boolean dosearch = true;
 String tempURL = "";
 %>
@@ -101,9 +103,8 @@ String tempURL = "";
         <form:content_begin />
         <form:select_begin name="<%= Reel.MANUFACTURER_COLUMN %>" />
             <form:option name="Any" value="" match="<%= content.getManufacturer() %>" />
-            <% String[] manuList  = content.getManufacturerList(); %>
-            <% for(int x=0; x<manuList.length; x++) { %>
-                <form:option name="<%= manuList[x] %>" value="<%= manuList[x] %>" match="<%= content.getManufacturer() %>" />
+            <% for(int x=0; x<manufacturers.length; x++) { %>
+                <form:option name="<%= manufacturers[x] %>" value="<%= manufacturers[x] %>" match="<%= content.getManufacturer() %>" />
             <% } %>
         <form:select_end />
         <form:content_end />

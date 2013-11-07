@@ -38,6 +38,25 @@ public class ReelMgr extends CompWebManager {
 		controller.update(content);
 	}
 	
+	public String[] getManufacturers() throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		Reel content = new Reel();
+		content.setJobCode(user.getJobCode());
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+		puller.setGroupBy(content.getTableName(), Reel.MANUFACTURER_COLUMN, "manufacturers"); 
+		puller.setSortBy(content.getTableName(), Reel.MANUFACTURER_COLUMN, true);
+		CompEntities manufacturers = controller.pullCompEntities(puller, 0, 0);
+		String[] results = new String[manufacturers.howMany()];
+		for (int x=0; x< manufacturers.howMany(); x++) {
+			Reel reel = (Reel)manufacturers.get(x);
+			results[x] = reel.getManufacturer();
+		}
+		return results;		
+	}
+	
     public void generateQrCode(Reel reel) throws Exception {
     	Reel theReel = new Reel();
     	theReel.setId(reel.getId());

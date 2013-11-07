@@ -50,7 +50,7 @@ body {
 .value {
 	font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
 	font-size: 12px;
-	vertical-align:top;	
+	vertical-align: top;	
 }
 
 .header {
