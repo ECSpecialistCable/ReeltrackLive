@@ -1,0 +1,47 @@
+@page {
+    size: letter;
+    margin-top: 0.8in;
+    margin-bottom: 1.0in;
+    @top-center {content: element(centerHeader);}
+}
+
+#header {
+    position: running(centerHeader);
+}
+
+#date {
+    //border-bottom: #90aac5 1px solid;
+    text-align:right;
+}
+
+#logo{
+    float:left;
+}
+#jobName {
+   // border-left: #90aac5 solid 1px;
+    //margin-left: 6in;
+	text-align:right;
+}
+
+#footer {
+	position: running(footer);
+	text-align: center;
+}
+
+@page {
+	@bottom-center {
+	content: element(footer);
+}
+}
+
+#pagenumber:before {
+	content: counter(page);
+}
+
+#pagecount:before {
+	content: counter(pages);
+}
+
+#ph-no {
+	float:left;
+}

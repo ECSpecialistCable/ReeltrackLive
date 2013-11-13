@@ -1,0 +1,43 @@
+table {
+	border-collapse:collapse;
+}
+table,th, td{
+	border: 1px solid black;
+}
+
+table, th, td .center {
+	text-align: center;
+}
+/*
+div.header {
+	display: block;
+	text-align: center;
+	position: running(header);
+}
+
+div.footer {
+	display: block;
+	text-align: center;
+	position: running(footer);
+}
+
+div.content {
+	page-break-after: always;
+}*/
+
+/*@page {
+	@top-center {
+	content: element(header);
+}
+}
+@page {
+	@bottom-center {
+	content: element(footer);
+}
+}*/
+/*	@page {
+size: a4 landscape;
+  @bottom-right {
+    content: element(footer);
+  }
+}*/

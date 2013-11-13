@@ -37,6 +37,7 @@ The permissions are dealt with in the file itself.
 		<a class="module_bar_toggle" rel="common/interface/reel_inventory">Reel Inventory</a>
 		<a class="module_bar_toggle" rel="common/interface/manage_reels">Manage Reels</a>
 		<a class="module_bar_toggle" rel="common/interface/configuration">Configuration</a>
+		<a class="module_bar_toggle" rel="common/interface/reports">Reports</a>
 	<% } %>
 	<% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
 		<a class="module_bar_toggle" rel="common/interface/ecs_internal">ECS Internal</a>
