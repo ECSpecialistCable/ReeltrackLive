@@ -20,7 +20,7 @@ public class ReportMgr extends CompWebManager {
 		this.controller = this.newCompController();
 		mediaMgr = new MediaManager();
 		mediaMgr.init(pageContext, resources);
-	}
+	}	
 
 	public CompEntities getReelsForInventoryReport(Reel content) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(content);

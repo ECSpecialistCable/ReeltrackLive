@@ -56,6 +56,7 @@ public class Reel extends CompCMEntity {
 	public static final String STATUS_CHECKED_OUT = "checked out";
 	public static final String STATUS_COMPLETE = "complete";
 	public static final String STATUS_SCRAPPED = "scrapped";
+	public static final String STATUS_RECEIVED = "received";
 
 	public static final String CARRIER_UPS = "UPS";
 	public static final String CARRIER_DHL = "DHL";

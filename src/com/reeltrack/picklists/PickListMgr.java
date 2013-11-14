@@ -187,7 +187,7 @@ public class PickListMgr extends CompWebManager {
 		Reel pulledReel = (Reel)controller.pullCompEntity(puller);
 		
 		String qrcode = "PL:" + pulledReel.getCustomerPN() + ":" + pulledReel.getId() + ":" + pulledReel.getReelTag() + ":" + pulledReel.getReelSerial() + ":" + pulledReel.getCableDescription();
-		
+		System.out.println(qrcode);
         ByteArrayOutputStream out = QRCode.from(qrcode).to(ImageType.PNG).withSize(500, 500).stream();
         
         String baseDir = this.pageContext.getServletContext().getRealPath("/") + pulledReel.getCompEntityDirectory();

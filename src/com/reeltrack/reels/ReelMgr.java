@@ -146,7 +146,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		this.addReelLog(content, "Shipping info update to carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList() + " by " + user.getName());
+		this.addReelLog(Reel.STATUS_SHIPPED, content, "Shipping info update to carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList() + " by " + user.getName());
 		content.setStatus(Reel.STATUS_SHIPPED);
 		content.setUpdated(new Date());
 		controller.update(content);
@@ -160,10 +160,10 @@ public class ReelMgr extends CompWebManager {
 		if(content.getReceivingDisposition().equals(Reel.RECEIVING_DISPOSITION_ACCEPTED)) {
 			content.setStatus(Reel.STATUS_IN_WHAREHOUSE);
 			content.setReceivedOnDate(new Date());
-			this.addReelLog(content, "Reel was received by " + user.getName());
+			this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName());
 		} else {
 			content.setStatus(Reel.STATUS_REFUSED);
-			this.addReelLog(content, "Reel was refused by " + user.getName());
+			this.addReelLog(Reel.STATUS_REFUSED, content, "Reel was refused by " + user.getName());
 		}
 		content.setUpdated(new Date());
 		controller.update(content);
@@ -176,7 +176,7 @@ public class ReelMgr extends CompWebManager {
 		RTUser user = (RTUser)umgr.getUser();
 		content.setStatus(Reel.STATUS_STAGED);
 		content.setWharehouseLocation(WhLocation.LOCATION_STAGED);
-		this.addReelLog(content, "Reel was staged by " + user.getName());
+		this.addReelLog(Reel.STATUS_STAGED, content, "Reel was staged by " + user.getName());
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateOnReelQuantity(content);
@@ -207,7 +207,7 @@ public class ReelMgr extends CompWebManager {
 		RTUser user = (RTUser)umgr.getUser();
 		content.setStatus(Reel.STATUS_CHECKED_OUT);
 		content.setWharehouseLocation(WhLocation.LOCATION_NONE);
-		this.addReelLog(content, "Reel was checked out by " + user.getName());
+		this.addReelLog(Reel.STATUS_CHECKED_OUT, content, "Reel was checked out by " + user.getName());
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateOnReelQuantity(content);
@@ -239,7 +239,7 @@ public class ReelMgr extends CompWebManager {
 		RTUser user = (RTUser)umgr.getUser();
 		content.setStatus(Reel.STATUS_IN_WHAREHOUSE);
 		content.setPickListId(0);
-		this.addReelLog(content, "Reel was checked in by " + user.getName() + " from driver " + driverName + " with a new Top # of " + content.getTopFoot());
+		this.addReelLog(Reel.STATUS_IN_WHAREHOUSE, content, "Reel was checked in by " + user.getName() + " from driver " + driverName + " with a new Top # of " + content.getTopFoot());
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateOnReelQuantity(content);
@@ -251,7 +251,7 @@ public class ReelMgr extends CompWebManager {
 		RTUser user = (RTUser)umgr.getUser();
 		content.setStatus(Reel.STATUS_COMPLETE);
 		content.setPickListId(0);
-		this.addReelLog(content, "Reel was completed by " + user.getName());
+		this.addReelLog(Reel.STATUS_COMPLETE, content, "Reel was completed by " + user.getName());
 		content.setUpdated(new Date());
 		controller.update(content);
 		//this.updateOnReelQuantity(content);
@@ -263,7 +263,7 @@ public class ReelMgr extends CompWebManager {
 		RTUser user = (RTUser)umgr.getUser();
 		content.setStatus(Reel.STATUS_SCRAPPED);
 		content.setPickListId(0);
-		this.addReelLog(content, "Reel was scrapped by " + user.getName());
+		this.addReelLog(Reel.STATUS_SCRAPPED, content, "Reel was scrapped by " + user.getName());
 		content.setUpdated(new Date());
 		controller.update(content);
 		//this.updateOnReelQuantity(content);
@@ -527,6 +527,19 @@ public class ReelMgr extends CompWebManager {
 		log.setReelId(content.getId());
 		log.setNote(note);
 		log.setCreated(new Date());
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		log.setCreatedBy(user.getName());
+		return this.addReelLog(log);
+	}
+
+	public int addReelLog(String status, Reel content, String note) throws Exception {
+		ReelLog log = new ReelLog();
+		log.setReelId(content.getId());
+		log.setNote(note);
+		log.setCreated(new Date());
+		log.setStatus(status);
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
