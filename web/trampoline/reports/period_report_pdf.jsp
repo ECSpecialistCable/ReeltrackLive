@@ -126,7 +126,11 @@
 				</tr>
 				<% for(int i=0; i<issuesPending.howMany(); i++) { %>
 					<% ReelIssue current = (ReelIssue)issuesPending.get(i); %>
-					<tr style="background: #cccccc">
+					<% if (i % 2 != 0) {%>
+						<tr>
+					<% } else { %>
+						<tr style="background: #cccccc">
+					<% } %>
 						<td class="center"><%= current.getCreatedString() %></td>
 						<td class="center"><%= current.getDescription() %></td>
 						<td class="center"><%= current.getIssueLog() %></td>

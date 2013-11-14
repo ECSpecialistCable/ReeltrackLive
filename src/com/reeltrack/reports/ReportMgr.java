@@ -3,6 +3,7 @@ package com.reeltrack.reports;
 import com.reeltrack.reels.*;
 import com.monumental.trampoline.component.*;
 import com.monumental.trampoline.datasources.*;
+import com.reeltrack.picklists.PickList;
 import javax.servlet.jsp.PageContext;
 import com.reeltrack.utilities.MediaManager;
 
@@ -181,4 +182,90 @@ public class ReportMgr extends CompWebManager {
 		return toReturn;
 	}
 
+	public CompEntities getReelForDailyReport(Reel content, GregorianCalendar reportOn, String status) throws Exception {
+		CompEntities toReturn = new CompEntities();
+
+		CompEntityPuller puller = new CompEntityPuller(new Reel());
+		puller.addSearch(content);
+		puller.addFKLink(new Reel(), new ReelLog(), ReelLog.REEL_ID_COLUMN);
+		puller.setDistinct(true);
+
+		ReelLog log = new ReelLog();
+		log.setCreated(reportOn.getTime());
+		log.setSearchOp(ReelLog.CREATED_COLUMN, ReelLog.DAYMONTHYEAR);
+
+		log.setStatus(status);
+		log.setSearchOp(ReelLog.STATUS_COLUMN, ReelLog.EQ);
+		puller.addSearch(log);
+
+		toReturn = controller.pullCompEntities(puller, 0, 0);
+		return toReturn;
+	}
+
+	public ArrayList<Integer> getReelsForInvSummary(Reel content, GregorianCalendar startDate) throws Exception {
+		ArrayList<Integer> toReturn = new ArrayList<Integer>();
+
+		int delivered = getStatusCountReelTrackPeriod(content, startDate, Reel.STATUS_RECEIVED);
+		int inWareHouse = getStatusCountReelTrackPeriod(content, startDate, Reel.STATUS_IN_WHAREHOUSE);
+		int checkedOut = getStatusCountReelTrackPeriod(content, startDate, Reel.STATUS_CHECKED_OUT);
+		int steelReels = 0;
+		int completed = getStatusCountReelTrackPeriod(content, startDate,  Reel.STATUS_COMPLETE);
+		int scrapped = getStatusCountReelTrackPeriod(content, startDate,  Reel.STATUS_SCRAPPED);
+
+		toReturn.add(Integer.valueOf(delivered));
+		toReturn.add(Integer.valueOf(inWareHouse));
+		toReturn.add(Integer.valueOf(checkedOut));
+		toReturn.add(Integer.valueOf(steelReels));
+		toReturn.add(Integer.valueOf(completed));
+		toReturn.add(Integer.valueOf(scrapped));
+		return toReturn;
+	}
+
+	private int getStatusCountReelTrackPeriod(Reel content, GregorianCalendar startDate, String status) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addFKLink(new Reel(), new ReelLog(), ReelLog.REEL_ID_COLUMN);
+		puller.setDistinct(true);
+
+		ReelLog log = new ReelLog();
+		log.setCreated(startDate.getTime());
+		log.setSearchOp(ReelLog.CREATED_COLUMN, ReelLog.DAYMONTHYEAR);
+
+		log.setStatus(status);
+		log.setSearchOp(ReelLog.STATUS_COLUMN, ReelLog.EQ);
+		puller.addSearch(log);
+
+		return controller.pullCompEntitiesCount(puller);
+	}
+
+	public CompEntities fillReelWithPickLists(CompEntities reels) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new PickList());
+		if(reels.howMany()>0) {
+			puller.addSearchByIds(reels);
+			puller.addFKLink(new PickList(), new Reel(), Reel.PICK_LIST_ID_COLUMN);
+			puller.setDistinct(true);
+			puller.setLinkTo(new Reel());
+			CompEntities allPickLists = controller.pullCompEntities(puller,0,0);
+			controller.fillSingleWithPulled(reels, allPickLists, PickList.PARAM);
+		}
+		return reels;
+	}
+
+	public CompEntities fillReelWithReelIssue(CompEntities reels, GregorianCalendar reportOn) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new ReelIssue());
+		if(reels.howMany()>0) {
+			puller.addSearchByIds(reels);
+			puller.addFKLink(new Reel(), new ReelIssue(), ReelIssue.REEL_ID_COLUMN);
+
+			ReelIssue issue = new ReelIssue();
+			issue.setCreated(reportOn.getTime());
+			issue.setSearchOp(ReelIssue.CREATED_COLUMN, ReelIssue.DAYMONTHYEAR);
+			puller.addSearch(issue);
+			
+			puller.setDistinct(true);
+			puller.setLinkTo(new Reel());
+			CompEntities allIssues = controller.pullCompEntities(puller,0,0);
+			controller.fillWithPulled(reels, allIssues, ReelIssue.PARAM);
+		}
+		return reels;
+	}
 }
