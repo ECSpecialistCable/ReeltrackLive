@@ -10,7 +10,6 @@
 }
 
 #date {
-    //border-bottom: #90aac5 1px solid;
     text-align:right;
 }
 
@@ -18,8 +17,6 @@
     float:left;
 }
 #jobName {
-   // border-left: #90aac5 solid 1px;
-    //margin-left: 6in;
 	text-align:right;
 }
 
