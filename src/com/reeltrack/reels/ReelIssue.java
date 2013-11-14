@@ -1,6 +1,8 @@
 package com.reeltrack.reels;
 
 import com.monumental.trampoline.component.CompCMEntity;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ReelIssue extends CompCMEntity {
 	public static final String PARAM = "reel_log_param";
@@ -36,7 +38,16 @@ public class ReelIssue extends CompCMEntity {
 	public void setReelId(int id) {
 		this.getData().setInteger(REEL_ID_COLUMN, id);
 	}
-	
+
+	public String getCreatedString() {
+		Date created = this.getCreated();
+		if(created!=null) {
+			return new SimpleDateFormat("MM/dd/yyyy").format(created);
+		} else {
+			return "";
+		}
+	}
+
 	public String getCreatedBy() {
 		return this.getData().getString(CREATED_BY_COLUMN, "");
 	}
