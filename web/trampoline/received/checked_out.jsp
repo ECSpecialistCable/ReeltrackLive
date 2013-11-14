@@ -48,7 +48,7 @@ if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
 
 if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {  
     content.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));
-    content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.WHOLE); 
 }
 
 if(request.getParameter(Reel.CUSTOMER_PO_COLUMN) != null) {  
