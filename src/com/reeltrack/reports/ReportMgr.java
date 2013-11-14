@@ -7,7 +7,6 @@ import javax.servlet.jsp.PageContext;
 import com.reeltrack.utilities.MediaManager;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.LinkedHashMap;
  
 
@@ -46,6 +45,7 @@ public class ReportMgr extends CompWebManager {
 			// get all reels for this pn with jobcode
 			puller = new CompEntityPuller(content);
 			content.setCustomerPN(currentPN);
+			content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.EQ);
 			puller.addSearch(content);
 			puller.setSortBy(content.getTableName(), Reel.REEL_TAG_COLUMN, true);
 			CompEntities customerReels = controller.pullCompEntities(puller, 0, 0);
