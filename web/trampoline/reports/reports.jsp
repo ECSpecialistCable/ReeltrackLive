@@ -41,6 +41,7 @@
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="daily_report" />
+	<form:hidden name="job_code" value="<%= user.getJobCode() %>" />
 <form:end />
 <admin:box_end />
 
@@ -84,6 +85,7 @@
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="period_report" />
+	<form:hidden name="job_code" value="<%= user.getJobCode() %>" />
 <form:end />
 <admin:box_end />
 
@@ -99,6 +101,7 @@
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="steel_reel_report" />
+	<form:hidden name="job_code" value="<%= user.getJobCode() %>" />
 <form:end />
 <admin:box_end />
 

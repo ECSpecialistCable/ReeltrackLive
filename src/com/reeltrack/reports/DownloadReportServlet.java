@@ -23,7 +23,7 @@ public class DownloadReportServlet extends HttpServlet {
 		String reportType = request.getParameter("reportType");
 
 		if (reportType != null && reportType.equals("daily_report")) {
-			this.downloadDailyReport(request, response, request.getParameter("daily_report_day"));
+			this.downloadDailyReport(request, response, request.getParameter("daily_report_day"), request.getParameter("job_code"));
 
 		} else if (reportType != null && reportType.equals("inventory_summary")) {
 			this.downloadInventorySummary(request, response, request.getParameter("job_code"));
@@ -32,10 +32,10 @@ public class DownloadReportServlet extends HttpServlet {
 			this.downloadInventoryReport(request, response, request.getParameter("job_code"));
 
 		} else if (reportType != null && reportType.equals("period_report")) {
-			this.downloadPeriodReport(request, response, request.getParameter("period_report_start_date"), request.getParameter("period_report_end_date"));
+			this.downloadPeriodReport(request, response, request.getParameter("period_report_start_date"), request.getParameter("period_report_end_date"), request.getParameter("job_code"));
 
 		} else if (reportType != null && reportType.equals("steel_reel_report")) {
-			this.downloadSteelReelReport(request, response, request.getParameter("steel_reel_report_start_date"), request.getParameter("steel_reel_report_end_date"));
+			this.downloadSteelReelReport(request, response, request.getParameter("steel_reel_report_start_date"), request.getParameter("steel_reel_report_end_date"), request.getParameter("job_code"));
 			
 		}
 	}
@@ -44,14 +44,14 @@ public class DownloadReportServlet extends HttpServlet {
 		this.doPost(request, response);
 	}
 
-	private void downloadDailyReport(HttpServletRequest request, HttpServletResponse response, String reportOn) {
+	private void downloadDailyReport(HttpServletRequest request, HttpServletResponse response, String reportOn, String jobCode) {
 		DbResources dbResources = new DbResources();
 		JspFactory factory = JspFactory.getDefaultFactory();
 		PageContext pageContext = factory.getPageContext(this, request, response, null, true, 0, true);
 		HtmlToPdfWriter writer = new HtmlToPdfWriter(pageContext, dbResources);
 		try {
 			String basePath = this.getServletContext().getRealPath("/");
-			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/daily_report_pdf.jsp?" + "daily_report_day=" + reportOn;
+			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/daily_report_pdf.jsp?" + "daily_report_day=" + reportOn + "&job_code=" + jobCode;
 
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			output = writer.writePdf(basePath, url);
@@ -153,14 +153,14 @@ public class DownloadReportServlet extends HttpServlet {
 		}
 	}
 
-	private void downloadPeriodReport(HttpServletRequest request, HttpServletResponse response, String startDate, String endDate) {
+	private void downloadPeriodReport(HttpServletRequest request, HttpServletResponse response, String startDate, String endDate, String jobCode) {
 		DbResources dbResources = new DbResources();
 		JspFactory factory = JspFactory.getDefaultFactory();
 		PageContext pageContext = factory.getPageContext(this, request, response, null, true, 0, true);
 		HtmlToPdfWriter writer = new HtmlToPdfWriter(pageContext, dbResources);
 		try {
 			String basePath = this.getServletContext().getRealPath("/");
-			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/period_report_pdf.jsp?" + "period_report_start_date=" + startDate + "&period_report_end_date=" + endDate;
+			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/period_report_pdf.jsp?" + "period_report_start_date=" + startDate + "&period_report_end_date=" + endDate + "&job_code=" + jobCode;
 
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			output = writer.writePdf(basePath, url);
@@ -187,14 +187,14 @@ public class DownloadReportServlet extends HttpServlet {
 		}
 	}
 
-	private void downloadSteelReelReport(HttpServletRequest request, HttpServletResponse response, String startDate, String endDate) {
+	private void downloadSteelReelReport(HttpServletRequest request, HttpServletResponse response, String startDate, String endDate, String jobCode) {
 		DbResources dbResources = new DbResources();
 		JspFactory factory = JspFactory.getDefaultFactory();
 		PageContext pageContext = factory.getPageContext(this, request, response, null, true, 0, true);
 		HtmlToPdfWriter writer = new HtmlToPdfWriter(pageContext, dbResources);
 		try {
 			String basePath = this.getServletContext().getRealPath("/");
-			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/steel_reel_report_pdf.jsp?" + "steel_reel_report_start_date=" + startDate + "&steel_reel_report_end_date=" + endDate;
+			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/steel_reel_report_pdf.jsp?" + "steel_reel_report_start_date=" + startDate + "&steel_reel_report_end_date=" + endDate + "&job_code=" + jobCode;
 
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			output = writer.writePdf(basePath, url);

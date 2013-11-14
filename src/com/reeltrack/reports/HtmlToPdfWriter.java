@@ -62,11 +62,7 @@ public class HtmlToPdfWriter {
 		ITextRenderer renderer = new ITextRenderer();
 		renderer.setDocument(doc, null);
 
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-
-		
-        //renderer.setDocumentFromString(content);
-		
+		ByteArrayOutputStream os = new ByteArrayOutputStream();		
 		renderer.layout();
 		renderer.createPDF(os);
 
