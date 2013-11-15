@@ -1,5 +1,6 @@
 <%@ page language="java" %>		
 <%@ page import="com.reeltrack.users.*" %>
+<%@ page import="com.reeltrack.reels.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
@@ -12,6 +13,12 @@
 <% userLoginMgr.init(pageContext, dbResources); %>
 <% dbResources.close(); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
+<%
+int reelID = 0;
+if(request.getParameter("id")!=null) {
+    reelID = Integer.parseInt(request.getParameter("id"));
+}
+%>
 
 <c:remove var="flash" />
 
@@ -128,7 +135,14 @@
             
             <div id="main">
                 <!-- main content area is populated dynamically based on what moduleaction is clicked -->
+                <% if(reelID==0) { %>
                 <jsp:include page="common/includes/login.jsp" />
+                <% } else { %>
+                <% String tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + reelID; %>
+                <script language="javascript">
+                CORE.loadPage("<%= tempURL %>");
+                </script>
+                <% } %>
 
             </div>
             
