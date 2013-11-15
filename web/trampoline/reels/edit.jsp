@@ -161,11 +161,6 @@ String tempURL; //var for url expression
 			<form:row_end />
     <form:end />
 <admin:box_end />
-<script type="text/javascript" language="javascript">
-function refreshPage(){
-CORE.reloadPage();
-alert("hello");
-}
-</script>
+
 <admin:set_tabset url="reels/_tabset_manage.jsp" thispage="edit.jsp" content_id_for_tabset="<%= contid %>"/>
 <html:end />
