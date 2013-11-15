@@ -17,6 +17,8 @@ if(request.getParameter("action") != null) {
     action = request.getParameter("action");
 }
 
+String redirect = "http://reeltrack.monumental-i.com/trampoline/index.jsp";
+
 if(action.equals("mark_staged")) {
     Reel content = new Reel();
     content.setId(Integer.parseInt(request.getParameter("id")));
@@ -32,3 +34,4 @@ if(action.equals("mark_checkedout")) {
 }
 %>
 <% dbResources.close(); %>
+<% response.sendRedirect(redirect); %>

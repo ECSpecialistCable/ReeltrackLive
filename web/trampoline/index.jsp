@@ -136,12 +136,12 @@ if(request.getParameter("id")!=null) {
             <div id="main">
                 <!-- main content area is populated dynamically based on what moduleaction is clicked -->
                 <% if(reelID==0) { %>
-                <jsp:include page="common/includes/login.jsp" />
+                    <jsp:include page="common/includes/login.jsp" />
                 <% } else { %>
-                <% String tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + reelID; %>
-                <script language="javascript">
-                CORE.loadPage("<%= tempURL %>");
-                </script>
+                    <% String tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + reelID; %>
+                    <script language="javascript">
+                    CORE.loadPage("<%= tempURL %>");
+                    </script>
                 <% } %>
 
             </div>
