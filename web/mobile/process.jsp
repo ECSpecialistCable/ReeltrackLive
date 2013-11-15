@@ -1,4 +1,5 @@
 <%@ page language="java" %>
+<%@ include file="../trampoline/common/includes/only_users.jsp" %>
 
 <%@ page import="com.monumental.trampoline.component.*" %>
 <%@ page import="com.reeltrack.users.*" %>
