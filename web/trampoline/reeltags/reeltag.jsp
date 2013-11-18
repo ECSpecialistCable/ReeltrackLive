@@ -63,9 +63,10 @@ body {
 
 table {
 	width: 800px;
-	height: 400px;
+	/*height: 400px;*/
 	border: 1px solid;
 	margin-bottom: 5px;
+	background-color: gray;
 }
 
 td {
@@ -77,7 +78,8 @@ td {
 <body>
 
 	<% int rowspan = 9 + circuits.howMany(); %>
-	<table>
+	<table
+	rotation:180deg;>
 	<tr>
 		<td class="header">ReelTag / Description</td>
 		<td class="header">Customer P/N</td>

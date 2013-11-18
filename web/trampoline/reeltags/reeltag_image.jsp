@@ -64,14 +64,9 @@ td {
 </style>
 </head>
 <body>
-
-	<% int rowspan = 9 + circuits.howMany(); %>
-	<table>
-	<tr>		
-		<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/qr_img_generated.png" ; %>
-		<td rowspan="<%= rowspan %>" width="250" valign="top"><img width="800px" src="<%= tempURL %>" /></td>
-	</tr>	
-	</table>
+		
+<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/qr_img_generated.png" ; %>
+<img src="<%= tempURL %>" />
 
 </body>
 </html>
