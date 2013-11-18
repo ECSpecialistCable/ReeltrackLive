@@ -116,8 +116,7 @@ String tempURL; //var for url expression
 	        <listing:header_cell width="200" name="Reel Tag" />
 	        <listing:header_cell name="Description" />
 	        <listing:header_cell width="100" name="Location" />
-	        <listing:header_cell width="75" name="Status" />
-	        <listing:header_cell width="40" name="ID" />
+	        <listing:header_cell width="75" name="Status" />    
 	    <listing:header_end />
 	    <listing:end />
 	    <br />
@@ -135,7 +134,7 @@ String tempURL; //var for url expression
 		<listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false" />
 	    <listing:row_begin row="<%= row %>"/>
 	    	<listing:cell_begin width="20" />
-	            <%= new Integer(i+1).toString() %>.
+	            <%= reel3.getCrId() %>
 	        <listing:cell_end />
 	        <listing:cell_begin width="200" />
 	            <%= reel3.getReelTag() %>
@@ -148,9 +147,6 @@ String tempURL; //var for url expression
 	        <listing:cell_end />
 	        <listing:cell_begin width="75" />
 	            <%= reel3.getStatus() %>
-	        <listing:cell_end />
-	        <listing:cell_begin width="40" />
-	            <%= reel3.getId() %>
 	        <listing:cell_end />
 	    <listing:row_end />
 	    <listing:end />

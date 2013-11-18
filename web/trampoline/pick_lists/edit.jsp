@@ -135,17 +135,20 @@ String tempURL; //var for url expression
 	<admin:box_begin color="false" />
 	<listing:begin />
 	    <listing:header_begin />
-	        <listing:header_cell first="true" name="Reel Tag / Desc." />
+	    	<listing:header_cell first="true" width="40" name="ID"  />
+	        <listing:header_cell name="Reel Tag / Desc." />
 	        <listing:header_cell width="100" name="Cust P/N" />
 	        <listing:header_cell width="100" name="Type" />
 	        <listing:header_cell width="40" name="Qty" />
 	        <listing:header_cell width="75" name="Location" />
-	        <listing:header_cell width="40" name="ID"  />
 	        <listing:header_cell width="40" name=""  />
 	    <listing:header_end />
 	    <% for(int i=0; i<pickReels.howMany(); i++) { %>
 	    <% Reel reel3 = (Reel)pickReels.get(i); %>
 	    <listing:row_begin row="<%= new Integer(i).toString() %>" />
+	    	<listing:cell_begin />
+	            <%= reel3.getCrId() %>
+	        <listing:cell_end />
 	        <listing:cell_begin />
 	            <%= reel3.getReelTag() %><br />
 	            <%= reel3.getCableDescription() %>
@@ -161,9 +164,6 @@ String tempURL; //var for url expression
 	        <listing:cell_end />
 	        <listing:cell_begin />
 	            <%= reel3.getWharehouseLocation() %>
-	        <listing:cell_end />
-	        <listing:cell_begin />
-	            <%= reel3.getId() %>
 	        <listing:cell_end />
 	        <listing:cell_begin align="right"/>
 	            <% tempURL = "pick_lists/process.jsp?submit_action=delete_reel&" + PickList.PARAM + "=" + content.getId() + "&" + Reel.PARAM + "=" + reel3.getId(); %>
@@ -218,17 +218,20 @@ String tempURL; //var for url expression
 	<admin:box_begin color="false" />
 	<listing:begin />
 	    <listing:header_begin />
-	        <listing:header_cell first="true" name="Reel Tag / Desc." />
+	    	<listing:header_cell first="true" width="40" name="ID"  />
+	        <listing:header_cell name="Reel Tag / Desc." />
 	        <listing:header_cell width="100" name="Cust P/N" />
 	        <listing:header_cell width="100" name="Type" />
 	        <listing:header_cell width="40" name="Qty" />
 	        <listing:header_cell width="75" name="Location" />
-	        <listing:header_cell width="40" name="ID"  />
 	        <listing:header_cell width="40" name=""  />
 	    <listing:header_end />
 	    <% for(int i=0; i<reels.howMany(); i++) { %>
 	    <% Reel reel2 = (Reel)reels.get(i); %>
 	    <listing:row_begin row="<%= new Integer(i).toString() %>" />
+	    	<listing:cell_begin />
+	            <%= reel2.getCrId() %>
+	        <listing:cell_end />
 	        <listing:cell_begin />
 	            <%= reel2.getReelTag() %><br />
 	            <%= reel2.getCableDescription() %>
@@ -244,9 +247,6 @@ String tempURL; //var for url expression
 	        <listing:cell_end />
 	        <listing:cell_begin />
 	            <%= reel2.getWharehouseLocation() %>
-	        <listing:cell_end />
-	        <listing:cell_begin />
-	            <%= reel2.getId() %>
 	        <listing:cell_end />
 	        <listing:cell_begin align="right"/>
 	            <% tempURL = "pick_lists/process.jsp?submit_action=add_reel&" + PickList.PARAM + "=" + content.getId() + "&" + Reel.PARAM + "=" + reel2.getId(); %>

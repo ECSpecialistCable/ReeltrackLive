@@ -135,7 +135,6 @@ String tempURL = "";
             <listing:header_cell width="20" first="true" name="#" />
             <listing:header_cell width="200" name="Reel Tag" />
             <listing:header_cell name="Cable Description" />
-            <listing:header_cell width="40" name="ID" />
         <listing:header_end />
     <listing:end />
     <br />
@@ -150,16 +149,13 @@ String tempURL = "";
         <listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
         <listing:row_begin />
             <listing:cell_begin  width="20"/>
-                <%= new Integer((pageNdx-1)*howMany + i+1).toString() %>.
+                <%= content.getCrId() %>
             <listing:cell_end />
             <listing:cell_begin  width="200"/>
                 <%= content.getReelTag() %>
             <listing:cell_end />
             <listing:cell_begin />
                 <%= content.getCableDescription() %>
-            <listing:cell_end />
-            <listing:cell_begin  width="40"/>
-                <%= content.getId() %>
             <listing:cell_end />
         <listing:row_end />   
         <listing:end />
