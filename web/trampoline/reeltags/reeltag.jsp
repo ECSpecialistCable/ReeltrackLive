@@ -36,6 +36,7 @@ SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 String dateString = df.format(new Date());
 
 String tempURL; //var for url expression
+
 %>
 <% dbResources.close(); %>
 
@@ -83,7 +84,7 @@ td {
 		<td class="header">Serial #</td>
 		<td class="header">Type</td>
 		<td class="header">Quantity</td>
-		<% tempURL = content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
+		<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
 		<td rowspan="<%= rowspan %>" width="250" valign="top"><img src="<%= tempURL %>" width="250" height="250" /></td>
 	</tr>
 	<tr>

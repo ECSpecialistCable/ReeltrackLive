@@ -108,6 +108,7 @@ String tempURL = "";
             <listing:header_cell width="75" name="Status" />
             <listing:header_cell width="40" name="ID"  />
             <listing:header_cell width="40" name=""  />
+            <listing:header_cell width="40" name=""  />
         <listing:header_end />
         <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
@@ -129,7 +130,11 @@ String tempURL = "";
             <listing:cell_end />
             <listing:cell_begin align="right"/>
                 <% tempURL = "reeltags/reeltag.jsp?" + Reel.PARAM + "=" + content.getId(); %>
-                <a href="<%= tempURL %>" target="_new">PRINT</a>
+                <a href="<%= tempURL %>" target="_new">PRINT</a>				
+            <listing:cell_end />
+			<listing:cell_begin align="right"/>
+                <% tempURL = "reeltags/reeltag_image.jsp?" + Reel.PARAM + "=" + content.getId(); %>
+                <a href="<%= tempURL %>" target="_new">TEST</a>
             <listing:cell_end />
         <listing:row_end />
         <% } %>
