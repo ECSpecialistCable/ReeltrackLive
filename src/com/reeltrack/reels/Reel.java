@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 
 public class Reel extends CompCMEntity {
 	public static final String PARAM = "reel_param";
+	public static final String CR_ID_COLUMN = "cr_id";
 	public static final String JOB_ID_COLUMN = "job_id";
 	public static final String JOB_CODE_COLUMN = "job_code";
 	public static final String WHAREHOUSE_LOCATION_COLUMN = "wharehouse_location";
@@ -213,6 +214,14 @@ public class Reel extends CompCMEntity {
 		String[] statuses = {STATUS_ORDERED,STATUS_SHIPPED,STATUS_REFUSED,STATUS_IN_WHAREHOUSE,STATUS_STAGED,STATUS_CHECKED_OUT,STATUS_COMPLETE,STATUS_SCRAPPED};
 		return statuses;
 	}
+
+	public int getCrId() {
+		return this.getData().getInteger(CR_ID_COLUMN, new Integer(0));
+    }
+
+    public void setCrId(int id) {
+		this.getData().setInteger(CR_ID_COLUMN, new Integer(id));
+    }
 
 	public int getJobId() {
 		return this.getData().getInteger(JOB_ID_COLUMN, new Integer(0));

@@ -230,3 +230,5 @@ alter table cable_tech_data add ecs_pn varchar(25);
 alter table reels add rt_qrcode_file varchar(50);
 alter table reels add pl_qrcode_file varchar(50);
 
+alter table reels add cr_id int default 0;
+

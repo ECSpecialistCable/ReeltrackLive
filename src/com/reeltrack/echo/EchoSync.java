@@ -55,7 +55,9 @@ public class EchoSync extends CompManager {
 					this.fillCustomerOrderDtl(reel);
 					this.fillManufacturer(reel);
 					this.fillCableTrac(reel);
+					this.fillDescription(reel);
 					CableTechData techData = this.getCableTech(reel);
+					reel.setCrId(this.searchReelsCount(reel)+1);
 					this.addReel(reel,techData);
 				}
 			}
@@ -63,7 +65,6 @@ public class EchoSync extends CompManager {
 	}
 
 	public void addReel(Reel reel, CableTechData techData) throws Exception {
-		//reel.setJobId(10);
 		reel.setCreated(new Date());
 		reel.setStatus(Reel.STATUS_ORDERED);
 		int toReturn = controllerRT.add(reel);
@@ -79,6 +80,14 @@ public class EchoSync extends CompManager {
 			techData.setJobCode(reel.getJobCode());
 			toReturn = controllerRT.add(techData);
 		}
+	}
+
+	public int searchReelsCount(Reel content) throws Exception {
+		Reel reel = new Reel();
+		reel.setJobCode(content.getJobCode());
+		CompEntityPuller puller = new CompEntityPuller(reel);
+		puller.addSearch(reel);
+		return controllerRT.pullCompEntitiesCount(puller);
 	}
 
 	public boolean fillReelAllocation(Reel reel) throws Exception {
@@ -154,6 +163,20 @@ public class EchoSync extends CompManager {
 			reel.setCTRNumber(entity.getString("CTRNumber",""));
 			reel.setCTRDate(entity.getDate("CTRDate",null));
 			reel.setCTRSent(entity.getDate("CTRSentDate",null));
+			return true;
+		} else {
+			return false;
+		}	
+	}
+
+	public boolean fillDescription(Reel reel) throws Exception {
+		DbProcessor processor = new DbProcessor(conECHO);
+		String queryString = "select * from WireMaster where ECSPartNo='" + reel.getEcsPN() + "'";
+		EntityList datalist = processor.getRows(queryString);
+		if(datalist.hasNext()) {
+			System.out.println("I got description");
+			Entity entity = datalist.nextEntity();
+			reel.setCableDescription(entity.getString("ShortDescription",""));
 			return true;
 		} else {
 			return false;
