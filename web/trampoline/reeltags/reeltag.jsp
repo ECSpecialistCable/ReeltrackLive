@@ -61,7 +61,8 @@ body {
 }
 
 table {
-	width: 960px;
+	width: 800px;
+	height: 400px;
 	border: 1px solid;
 	margin-bottom: 5px;
 }
@@ -83,7 +84,7 @@ td {
 		<td class="header">Type</td>
 		<td class="header">Quantity</td>
 		<% tempURL = content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
-		<td rowspan="<%= rowspan %>" width="250"><img src="<%= tempURL %>" width="250" height="250" /></td>
+		<td rowspan="<%= rowspan %>" width="250" valign="top"><img src="<%= tempURL %>" width="250" height="250" /></td>
 	</tr>
 	<tr>
 		<td class="value"><%= content.getReelTag() %></td>
