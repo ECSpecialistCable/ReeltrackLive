@@ -76,7 +76,7 @@ String tempURL; //var for url expression
 		}
 
 		@page {
-			size: letter;
+			size: 8.5in 4in;
 			margin-top: 0.0in;
 			margin-bottom: 0.0in;
 			margin-left: 0.0in;
