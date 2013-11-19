@@ -39,62 +39,73 @@ String tempURL; //var for url expression
 
 %>
 <% dbResources.close(); %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
-<style type="text/css">
-body {
-    font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
-    font-size: 25px;
+	<title>Reel Tags</title>
+	<style type="text/css">
+		body {
+			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
+			font-size: 25px;
+		}
+
+		.value {
+			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
+			font-size: 12px;
+			vertical-align: top;
+		}
+
+		.header {
+			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
+			font-size: 12px;
+			background-color: #c4c4c4;
+			font-weight: bold;
+		}
+
+		table {
+			width: 800px;
+			/*height: 400px;*/
+			border: 1px solid;
+			margin-bottom: 5px;
+			background-color: gray;
+		}
+
+		td {
+			padding: 5px;
+		}
+
+		@page {
+			size: letter;
+			margin-top: 0.0in;
+			margin-bottom: 0.0in;
+			margin-left: 0.0in;
+			margin-right: 0.0in;
+			@top-center {content: element(centerHeader);
+		}
 }
 
-.value {
-	font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
-	font-size: 12px;
-	vertical-align: top;	
-}
-
-.header {
-	font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
-	font-size: 12px;
-	background-color: #c4c4c4;
-	font-weight: bold;	
-}
-
-table {
-	width: 800px;
-	/*height: 400px;*/
-	border: 1px solid;
-	margin-bottom: 5px;
-	background-color: gray;
-}
-
-td {
-	padding: 5px;
-}
-
-</style>
+	</style>
 </head>
 <body>
 
 	<% int rowspan = 9 + circuits.howMany(); %>
-	<table
-	rotation:180deg;>
+	<table>
 	<tr>
-		<td class="header">ReelTag / Description</td>
-		<td class="header">Customer P/N</td>
-		<td class="header">Serial #</td>
-		<td class="header">Type</td>
-		<td class="header">Quantity</td>
+		<td  class="header">ReelTag / Description</td>
+		<td  class="header">Customer P/N</td>
+		<td  class="header">Serial #</td>
+		<td  class="header">Type</td>
+		<td  class="header">Quantity</td>
 		<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
-		<td rowspan="<%= rowspan %>" width="250" valign="top"><img src="<%= tempURL %>" width="250" height="250" /></td>
+		<td  rowspan="<%= rowspan %>" valign="top"><img alt="barcode" src="<%= tempURL %>" width="250" height="250" /></td>
 	</tr>
 	<tr>
-		<td class="value"><%= content.getReelTag() %></td>
-		<td class="value"><%= content.getCustomerPN() %></td>
-		<td class="value"><%= content.getReelSerial() %></td>
-		<td class="value"><%= content.getReelType() %></td>
-		<td class="value"><%= content.getOnReelQuantity() %></td>
+		<td  class="value"><%= content.getReelTag() %></td>
+		<td  class="value"><%= content.getCustomerPN() %></td>
+		<td  class="value"><%= content.getReelSerial() %></td>
+		<td  class="value"><%= content.getReelType() %></td>
+		<td  class="value"><%= content.getOnReelQuantity() %></td>
 	</tr>
 	<tr>
 		<td class="header" colspan="3">&nbsp;</td>

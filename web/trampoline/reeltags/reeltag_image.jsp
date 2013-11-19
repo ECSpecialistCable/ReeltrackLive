@@ -6,6 +6,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="com.reeltrack.utilities.HtmlToImageWriter"%>
+<%@ page import="com.reeltrack.utilities.HTMLToPdfToImageWriter"%>
 
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
@@ -39,9 +40,11 @@ SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 String dateString = df.format(new Date());
 
 String tempURL; //var for url expression
-HtmlToImageWriter writer = new HtmlToImageWriter(pageContext, dbResources);
-writer.writeImage("http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId(), basePath, content.getCompEntityDirectory()+"/");
+//HtmlToImageWriter writer = new HtmlToImageWriter(pageContext, dbResources);
+//writer.writeImage("http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId(), basePath, content.getCompEntityDirectory()+"/");
 
+HTMLToPdfToImageWriter writer = new HTMLToPdfToImageWriter(pageContext, dbResources);
+writer.writeImage("http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId(),basePath, content.getCompEntityDirectory()+"/");
 
 %>
 <% dbResources.close(); %>
@@ -66,7 +69,7 @@ td {
 <body>
 		
 <% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/qr_img_generated.png" ; %>
-<img src="<%= tempURL %>" />
+<img alt="reeltag image" width="800px" src="<%= tempURL %>" />
 
 </body>
 </html>

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.*;
 
 import com.monumental.trampoline.datasources.*;
+import com.reeltrack.reels.Reel;
 import com.reeltrack.users.RTUser;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
