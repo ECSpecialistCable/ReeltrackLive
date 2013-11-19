@@ -18,6 +18,35 @@ int reelID = 0;
 if(request.getParameter("id")!=null) {
     reelID = Integer.parseInt(request.getParameter("id"));
 }
+
+	boolean isIpad = false;
+	String user_agent = request.getHeader("user-agent");
+	if(user_agent.contains("iPad")) {
+		isIpad = true;
+		//session.setAttribute("ipad_user_id", user);
+		int userId = 0;
+		if(user!=null) {
+			userId = user.getId();
+		}
+
+	   Cookie cookie = null;
+	   Cookie[] cookies = null;
+	   // Get an array of Cookies associated with this domain
+	   cookies = request.getCookies();
+	   if( cookies != null ){
+		  for (int i = 0; i < cookies.length; i++){
+			 cookie = cookies[i];
+			 if((cookie.getName( )).compareTo("user_id") == 0 ){
+				cookie.setMaxAge(0); // delete cookie if its already there
+				cookie.setValue(String.valueOf(userId));
+				response.addCookie(cookie); // re add it with new user id
+			 } else {
+				 Cookie iPadLoginUser = new Cookie("user_id", String.valueOf(userId));
+				response.addCookie(iPadLoginUser);
+			}
+		  }
+	  }		
+	}
 %>
 
 <c:remove var="flash" />
@@ -109,7 +138,7 @@ if(request.getParameter("id")!=null) {
 	                <form:end />
 	            </div>
                  --%>  
-            <% } else { %>
+            <% } else { %>				
 				<% String welcomeStr = "Welcome, " + user.getUsername(); %>
            		<admin:welcome_tab text="<%= welcomeStr %>" action="common/includes/process_login.jsp?submit_action=logout"  valign="top" align="left" />                               
             <% } %>
