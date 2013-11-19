@@ -69,6 +69,21 @@ if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
     content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ); 
 }
 
+if(request.getParameter(Reel.PN_VOLT_COLUMN) != null) {  
+    content.setPnVolt(request.getParameter(Reel.PN_VOLT_COLUMN));
+    content.setSearchOp(Reel.PN_VOLT_COLUMN, Reel.EQ); 
+}
+
+if(request.getParameter(Reel.PN_GAUGE_COLUMN) != null) {  
+    content.setPnGauge(request.getParameter(Reel.PN_GAUGE_COLUMN));
+    content.setSearchOp(Reel.PN_GAUGE_COLUMN, Reel.EQ); 
+}
+
+if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {  
+    content.setPnConductor(request.getParameter(Reel.PN_CONDUCTOR_COLUMN));
+    content.setSearchOp(Reel.PN_CONDUCTOR_COLUMN, Reel.EQ); 
+}
+
 session.setAttribute("reels_search",content);
 
 String column = Reel.REEL_TAG_COLUMN;
@@ -76,6 +91,9 @@ boolean ascending = true;
 int count = reelMgr.searchReelsCount(content, column, ascending);
 CompEntities contents = reelMgr.searchReels(content, column, ascending, howMany, skip);
 String[] manufacturers = reelMgr.getManufacturers();
+String[] volts = reelMgr.getPnVolts();
+String[] gauges = reelMgr.getPnGauges();
+String[] conductors = reelMgr.getPnConductors();
 
 boolean dosearch = true;
 String tempURL = "";
@@ -111,6 +129,41 @@ String tempURL = "";
                 <form:option name="Any" value="" match="<%= content.getManufacturer() %>" />
                 <% for(int x=0; x<manufacturers.length; x++) { %>
                     <form:option name="<%= manufacturers[x] %>" value="<%= manufacturers[x] %>" match="<%= content.getManufacturer() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+        <form:row_end />
+        <form:row_begin />
+            <form:label name="" label="Voltage:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Reel.PN_VOLT_COLUMN %>" />
+                <form:option name="Any" value="" match="<%= content.getPnVolt() %>" />
+                <% for(int x=0; x<volts.length; x++) { %>
+                    <% tempURL = volts[x] + " (" + Reel.convertPnVolt(volts[x]) + ")"; %>
+                    <form:option name="<%= tempURL %>" value="<%= volts[x] %>" match="<%= content.getPnVolt() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+        <form:row_end />
+        <form:row_begin />
+            <form:label name="" label="Gauge:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Reel.PN_GAUGE_COLUMN %>" />
+                <form:option name="Any" value="" match="<%= content.getPnGauge() %>" />
+                <% for(int x=0; x<gauges.length; x++) { %>
+                    <% tempURL = gauges[x] + " (" + Reel.convertPnGauge(gauges[x]) + ")"; %>
+                    <form:option name="<%= tempURL %>" value="<%= gauges[x] %>" match="<%= content.getPnGauge() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+        <form:row_end />
+        <form:row_begin />
+            <form:label name="" label="Conductor:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Reel.PN_CONDUCTOR_COLUMN %>" />
+                <form:option name="Any" value="" match="<%= content.getPnConductor() %>" />
+                <% for(int x=0; x<conductors.length; x++) { %>
+                    <form:option name="<%= conductors[x] %>" value="<%= conductors[x] %>" match="<%= content.getPnConductor() %>" />
                 <% } %>
             <form:select_end />
             <form:content_end />

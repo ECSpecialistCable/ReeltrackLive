@@ -4,6 +4,7 @@ import com.monumental.trampoline.component.CompCMEntity;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.*;
 
 public class Reel extends CompCMEntity {
 	public static final String PARAM = "reel_param";
@@ -43,6 +44,10 @@ public class Reel extends CompCMEntity {
 	public static final String CTR_FILE_COLUMN = "ctr_file";
 	public static final String RT_QRCODE_FILE_COLUMN = "rt_qrcode_file";
 	public static final String PL_QRCODE_FILE_COLUMN = "pl_qrcode_file";
+
+	public static final String PN_VOLT_COLUMN = "pn_volt";
+	public static final String PN_GAUGE_COLUMN = "pn_gauge";
+	public static final String PN_CONDUCTOR_COLUMN = "pn_conductor";
 
 	public static final String ORDNO_COLUMN = "OrdNo";
 	public static final String POREVISION_COLUMN = "PORevision";
@@ -96,6 +101,30 @@ public class Reel extends CompCMEntity {
 	@Override
 	public String getTitle() {
 		return this.getReelTag();
+	}
+
+	public String getPnVolt() {
+		return this.getData().getString(PN_VOLT_COLUMN, "");
+	}
+	
+	public void setPnVolt(String name) {
+		this.getData().setString(PN_VOLT_COLUMN, name);
+	}
+
+	public String getPnGauge() {
+		return this.getData().getString(PN_GAUGE_COLUMN, "");
+	}
+	
+	public void setPnGauge(String name) {
+		this.getData().setString(PN_GAUGE_COLUMN, name);
+	}
+
+	public String getPnConductor() {
+		return this.getData().getString(PN_CONDUCTOR_COLUMN, "");
+	}
+	
+	public void setPnConductor(String name) {
+		this.getData().setString(PN_CONDUCTOR_COLUMN, name);
 	}
 
 	public String getCTRFile() {
@@ -506,5 +535,82 @@ public class Reel extends CompCMEntity {
 	public void setPlQrCodeFile(String name) {
 		this.getData().setString(PL_QRCODE_FILE_COLUMN, name);
 	}
-    
+
+	public static String convertPnVolt(String volt) {
+		HashMap theMap = new HashMap();
+		theMap.put("16","161 KV Cable");
+		theMap.put("69","69KV Cable");
+		theMap.put("46","46KV Cable");
+		theMap.put("35","35KV Cable");
+		theMap.put("28","28KV Cable");
+		theMap.put("25","25KV Cable");
+		theMap.put("15","15KV Cable");
+		theMap.put("08","8KV Cable");
+		theMap.put("05","5KV Cable");
+		theMap.put("24","2.4KV Cable");
+		theMap.put("01","1KV Cable");
+		theMap.put("02","601V - 2KV Cable");
+		theMap.put("06","600V Cable");
+		theMap.put("03","300V Cable");
+		theMap.put("04","Communication Cable");
+		theMap.put("00","Bare Conductor");
+		theMap.put("80","Electronic");
+		theMap.put("90","Cable Specials");
+		theMap.put("94","Non-Cable Items");
+		theMap.put("CS","Cable Service");
+		theMap.put("C6","Composite 600V");
+		theMap.put("C1","Composite 1KV");
+		theMap.put("C2","Composite 2KV");
+		return (String)theMap.get(volt);
+	}
+
+	public static String convertPnGauge(String gauge) {
+		HashMap theMap = new HashMap();
+		theMap.put("200","2000 kcmil");
+		theMap.put("175","1750 kcmil");
+		theMap.put("155","1550 kcmil");
+		theMap.put("150","1500 kcmil");
+		theMap.put("125","1250/1252 kcmil");
+		theMap.put("100","1000 kcmil");
+		theMap.put("777","777 kcmil");
+		theMap.put("750","750 kcmil");
+		theMap.put("646=","DLO 646 kcmil");
+		theMap.put("600","600 kcmil");
+		theMap.put("535","DLO 535 kcmil");
+		theMap.put("500","500 kcmil");
+		theMap.put("400","400 kcmil");
+		theMap.put("444","DLO 444 kcmil");
+		theMap.put("350","350 kcmil");
+		theMap.put("300","300 kcmil");
+		theMap.put("250","250 kcmil");
+		theMap.put("4/0","4/0 Gauge");
+		theMap.put("3/0","3/0 Gauge");
+		theMap.put("2/0","2/0 Gauge");
+		theMap.put("1/0","1/0 Gauge");
+		theMap.put("001","1 Gauge");
+		theMap.put("002","2 Gauge");
+		theMap.put("003","3 Gauge");
+		theMap.put("004","4 Gauge");
+		theMap.put("006","6 Gauge");
+		theMap.put("008","8 Gauge");
+		theMap.put("010","10 Gauge");
+		theMap.put("012","12 Gauge");
+		theMap.put("014","14 Gauge");
+		theMap.put("016","16 Gauge");
+		theMap.put("018","18 Gauge");
+		theMap.put("019","19 Gauge");
+		theMap.put("020","20 Gauge");
+		theMap.put("022","22 Gauge");
+		theMap.put("024","24 Gauge");
+		theMap.put("MM","Multimode Fiber Optic");
+		theMap.put("SM","Single Mode Fiber Optic");
+		theMap.put("CP","Composite Fiber");
+		theMap.put("023","Cat 6");
+		String toReturn = (String)theMap.get(gauge);
+		if(toReturn != null) {
+			return toReturn;
+		} else {
+			return "";
+		}
+	}
 }

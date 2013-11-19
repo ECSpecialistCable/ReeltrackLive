@@ -232,3 +232,8 @@ alter table reels add pl_qrcode_file varchar(50);
 
 alter table reels add cr_id int default 0;
 
+alter table reels add pn_volt varchar(2);
+alter table reels add pn_gauge varchar(3);
+alter table reels add pn_conductor varchar(2);
+
+

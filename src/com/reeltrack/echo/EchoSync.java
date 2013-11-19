@@ -58,6 +58,9 @@ public class EchoSync extends CompManager {
 					this.fillDescription(reel);
 					CableTechData techData = this.getCableTech(reel);
 					reel.setCrId(this.searchReelsCount(reel)+1);
+					reel.setPnVolt(reel.getEcsPN().substring(0,2));
+					reel.setPnGauge(reel.getEcsPN().substring(4,7));
+					reel.setPnConductor(reel.getEcsPN().substring(7,9));
 					this.addReel(reel,techData);
 				}
 			}

@@ -37,6 +37,63 @@ public class ReelMgr extends CompWebManager {
 		}
 		controller.update(content);
 	}
+
+	public String[] getPnVolts() throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		Reel content = new Reel();
+		content.setJobCode(user.getJobCode());
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+		puller.setGroupBy(content.getTableName(), Reel.PN_VOLT_COLUMN, "volts"); 
+		puller.setSortBy(content.getTableName(), Reel.PN_VOLT_COLUMN, true);
+		CompEntities volts = controller.pullCompEntities(puller, 0, 0);
+		String[] results = new String[volts.howMany()];
+		for (int x=0; x< volts.howMany(); x++) {
+			Reel reel = (Reel)volts.get(x);
+			results[x] = reel.getPnVolt();
+		}
+		return results;		
+	}
+
+	public String[] getPnGauges() throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		Reel content = new Reel();
+		content.setJobCode(user.getJobCode());
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+		puller.setGroupBy(content.getTableName(), Reel.PN_GAUGE_COLUMN, "gauge"); 
+		puller.setSortBy(content.getTableName(), Reel.PN_GAUGE_COLUMN, true);
+		CompEntities volts = controller.pullCompEntities(puller, 0, 0);
+		String[] results = new String[volts.howMany()];
+		for (int x=0; x< volts.howMany(); x++) {
+			Reel reel = (Reel)volts.get(x);
+			results[x] = reel.getPnGauge();
+		}
+		return results;		
+	}
+
+	public String[] getPnConductors() throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		Reel content = new Reel();
+		content.setJobCode(user.getJobCode());
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+		puller.setGroupBy(content.getTableName(), Reel.PN_CONDUCTOR_COLUMN, "conductor"); 
+		puller.setSortBy(content.getTableName(), Reel.PN_CONDUCTOR_COLUMN, true);
+		CompEntities volts = controller.pullCompEntities(puller, 0, 0);
+		String[] results = new String[volts.howMany()];
+		for (int x=0; x< volts.howMany(); x++) {
+			Reel reel = (Reel)volts.get(x);
+			results[x] = reel.getPnConductor();
+		}
+		return results;		
+	}
 	
 	public String[] getManufacturers() throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
