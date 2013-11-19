@@ -64,7 +64,7 @@ String tempURL; //var for url expression
 		}
 
 		table {
-			width: 800px;
+			width: 750px;
 			/*height: 400px;*/
 			border: 1px solid;
 			margin-bottom: 5px;
@@ -76,13 +76,21 @@ String tempURL; //var for url expression
 		}
 
 		@page {
-			size: 8.5in 4in;
+			size: 8in 4in;
 			margin-top: 0.0in;
 			margin-bottom: 0.0in;
 			margin-left: 0.0in;
 			margin-right: 0.0in;
-			@top-center {content: element(centerHeader);
 		}
+
+		.rotate {
+			position: absolute;
+			top:250px;
+			transform:rotate(90deg);
+			-ms-transform:rotate(90deg); /* IE 9 */
+			-webkit-transform:rotate(90deg); /* Safari and Chrome */
+		}
+
 }
 
 	</style>

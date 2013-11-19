@@ -40,11 +40,13 @@ SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 String dateString = df.format(new Date());
 
 String tempURL; //var for url expression
-//HtmlToImageWriter writer = new HtmlToImageWriter(pageContext, dbResources);
-//writer.writeImage("http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId(), basePath, content.getCompEntityDirectory()+"/");
+String pageToGet = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId();
+boolean isRotate = false;
+HtmlToImageWriter writer = new HtmlToImageWriter(pageContext, dbResources);
+writer.writeImage(pageToGet, basePath, content.getCompEntityDirectory()+"/", isRotate);
 
-HTMLToPdfToImageWriter writer = new HTMLToPdfToImageWriter(pageContext, dbResources);
-writer.writeImage("http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId(),basePath, content.getCompEntityDirectory()+"/");
+//HTMLToPdfToImageWriter writer = new HTMLToPdfToImageWriter(pageContext, dbResources);
+//writer.writeImage("http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId(),basePath, content.getCompEntityDirectory()+"/");
 
 %>
 <% dbResources.close(); %>
@@ -52,16 +54,12 @@ writer.writeImage("http://" + request.getServerName() + ":" + request.getServerP
 <html>
 <head>
 <style type="text/css">
-
-table {
-	width: 800px;
-	height: 400px;
-	border: 1px solid;
-	margin-bottom: 5px;
-}
-
-td {
-	padding: 5px;
+.rotate {
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+	-moz-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	position:absolute;
+	top:200px;
 }
 
 </style>
@@ -69,7 +67,7 @@ td {
 <body>
 		
 <% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/qr_img_generated.png" ; %>
-<img alt="reeltag image" width="800px" src="<%= tempURL %>" />
+<img alt="reeltag image" src="<%= tempURL %>" />
 
 </body>
 </html>

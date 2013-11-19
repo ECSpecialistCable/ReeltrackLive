@@ -13,14 +13,28 @@ import javax.servlet.jsp.PageContext;
 import java.awt.Graphics2D;
 import javax.swing.JEditorPane;
 import gui.ava.html.image.generator.HtmlImageGenerator;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.OutputStream;
+import java.io.StringReader;
 import java.net.URLConnection;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.w3c.dom.Document;
+import java.io.StringBufferInputStream;
+
+import org.xhtmlrenderer.pdf.ITextRenderer;
+import org.xhtmlrenderer.resource.FSEntityResolver;
+import org.xhtmlrenderer.simple.Graphics2DRenderer;
+
 
 public class HtmlToImageWriter {
 
@@ -28,17 +42,99 @@ public class HtmlToImageWriter {
 		
 	}
 
-	public void writeImage(String pageToGet, String basePath, String contentUrl) throws Exception {
+	public void writeImage(String pageToGet, String basePath, String contentUrl, boolean isRotate) throws Exception {
 		URL urlToGet = new URL(pageToGet);
 		
-		HtmlImageGenerator imageGenerator = new HtmlImageGenerator();
-		imageGenerator.loadUrl(pageToGet);
+		InputStream is = null;
+		BufferedReader br;
+		String line;
 
-		File file = new File(basePath+contentUrl+"qr_img_generated.png");
-		imageGenerator.saveAsImage(file);
-		//imageGenerator.saveAsHtmlWithMap("hello-world.html", "hello-world.png");
+		StringBuilder buf = new StringBuilder();
+		try {
+			urlToGet = new URL(pageToGet);
+			is = urlToGet.openStream();  // throws an IOException
+			br = new BufferedReader(new InputStreamReader(is,"UTF8"));
 
+			while ((line = br.readLine()) != null) {
+				line = line.replace(" & ", " &amp; ");
+				buf.append(line);				
+				//System.out.println(line);
+			}
+			
+		} catch (MalformedURLException mue) {
+			 mue.printStackTrace();
+		} catch (IOException ioe) {
+			 ioe.printStackTrace();
+		} finally {
+			try {
+				if (is != null) is.close();
+			} catch (IOException ioe) {
+				// nothing to see here
+			}
+		}
+
+		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		builder.setEntityResolver(FSEntityResolver.instance());
+		Document doc = builder.parse(new StringBufferInputStream(buf.toString()));
+
+		Graphics2DRenderer renderer = new Graphics2DRenderer();
+		renderer.setDocument(doc,"");
+
+		int width= 768;
+		int height= 400;
+	   BufferedImage image = new BufferedImage(width,height,
+											   BufferedImage.TYPE_INT_RGB);
+	  if(isRotate) {
+		   image = createRotatedCopy(image);			
+	   }
+	   Graphics2D imageGraphics = (Graphics2D)image.getGraphics();
+	   imageGraphics.setColor(Color.white);
+	   if(isRotate) {
+			imageGraphics.translate(0.5*height, 0.5*width);
+			imageGraphics.rotate( Math.PI / 2);
+			imageGraphics.translate(-0.5*width, -0.5*height);
+	   }
+	   imageGraphics.fillRect(0, 0, width, height);
+	   renderer.layout(imageGraphics,new Dimension(width,height));
+	   renderer.render(imageGraphics);
+
+	   File fileToWrite = new File(basePath + contentUrl + "qr_img_generated.png");
+	   ImageIO.write(image, "png", fileToWrite);
 	}
+
+	private BufferedImage createRotatedCopy(BufferedImage img) {
+		int w = img.getWidth();
+		int h = img.getHeight();
+
+		BufferedImage rot = new BufferedImage(h, w, BufferedImage.TYPE_INT_RGB);
+
+		double theta = Math.PI / 2;
+		
+		AffineTransform xform = new AffineTransform();
+		xform.translate(0.5*h, 0.5*w);
+		xform.rotate(theta);
+		xform.translate(-0.5*w, -0.5*h);
+
+		Graphics2D g = (Graphics2D) rot.createGraphics();
+		g.drawImage(img, xform, null);
+		g.dispose();
+
+		return rot;
+	}
+
+//  Using HtmlImageGenerator
+//	public void writeImage(String pageToGet, String basePath, String contentUrl) throws Exception {
+//		URL urlToGet = new URL(pageToGet);
+//
+//		HtmlImageGenerator imageGenerator = new HtmlImageGenerator();
+//		imageGenerator.loadUrl(pageToGet);
+//
+//		File file = new File(basePath+contentUrl+"qr_img_generated.png");
+//		imageGenerator.saveAsImage(file);
+//		//imageGenerator.saveAsHtmlWithMap("hello-world.html", "hello-world.png");
+//		;
+//	}
+
 
 //	The other way of writing html to image
 //	public void writeImage(String pageToGet, String basePath, String contentUrl) throws Exception {
