@@ -5,7 +5,9 @@ body:
     whenever that's gonna be.
 ************************************************************************************************/            
 body {
-   background: url(../images/body_bg.gif) repeat-y;
+   /*background: url(../images/body_bg.gif) repeat-y;*/
+   
+   /*background-color: #1c7a68;*/
 }
 
 a {
@@ -18,7 +20,7 @@ branding:
 
 ************************************************************************************************/            
 #branding {
-  background: url(../images/branding_BG.gif);
+  /*background: url(../images/branding_BG.gif);*/
 }
 
 
@@ -31,7 +33,7 @@ now with even more rounded corners
 /* background: url(../images/tab_BG.gif);*/
 }
 #tabs_frame{
-background: url(../images/tab_BG.gif);
+/*background: url(../images/tab_BG.gif);*/
 }
 #tab_arrows{
 display:none;
@@ -52,7 +54,7 @@ text-transform: capitalize;
 font-size: 12px;
 display: block;
 /*color: rgb(86,107,117); */
-color: #fff;
+color: #2e405c;
 position:relative;
 z-index:1;
 cursor: pointer;
@@ -297,11 +299,15 @@ modules:
     padding-bottom: 10px;
     margin-left: 0;    
     margin-bottom: 20px;    
-
+    border: 1px solid gray;
+    border-radius: 10px;
+    width:728px;
+    background-color: #dcdfe2;
 }
 #main div.adminbox{
     padding-top: 0px;
-    background: url(../images/form_bg.png) repeat-y;    
+    /*background: url(../images/form_bg.png) repeat-y;*/ 
+    /*border: 1px solid red;*/   
 }
 
 #main div.adminbox_container_white{
@@ -316,7 +322,7 @@ modules:
     position: absolute;
     top: 0;
     left: 0;
-    background: #fff url(../images/form_top.gif) bottom center no-repeat;
+    /*background: #fff url(../images/form_top.gif) bottom center no-repeat;*/
 }
 
 #main div.adminbox_container_white img.adminbox_top_white {
@@ -330,7 +336,7 @@ modules:
     position: absolute;
     bottom: 0;
     left: 0;
-    background: #fff url(../images/form_bottom.gif)  top center no-repeat;
+    /*background: #fff url(../images/form_bottom.gif)  top center no-repeat;*/
 }
 
 #main div.adminbox_container_white img.adminbox_bottom_white {
@@ -771,13 +777,13 @@ a:hover .searchButton {
 
 a .loginButton {
     background: url(../images/login.gif) no-repeat;
-    width:67px;
+    width:66px;
     height:19px;
 }
 
 a .login_offButton {
     background: url(../images/login_off.gif) no-repeat;
-    width:67px;
+    width:66px;
     height:19px;
 }
 /*

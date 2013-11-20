@@ -101,6 +101,7 @@ if(request.getParameter("id")!=null) {
 
     </head>
     <body id="outer" class=" yui-skin-sam">
+    <div id="wayout">
         <div id="container">
             
             <div id="branding">
@@ -178,5 +179,7 @@ if(request.getParameter("id")!=null) {
         </div>	
 		<div id="invisible" style="display: none;">
 		</div>
+		<br /><br />
+	</div>
     </body>
 </html>

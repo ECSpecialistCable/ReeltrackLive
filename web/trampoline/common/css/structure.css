@@ -10,7 +10,7 @@ reset, fonts:
 
 /************************************************************************************************
 containers: holds it all together
-************************************************************************************************/            
+***********************************************************************************************/            
 body {
     font-family:"arial,Lucida Grande",Geneva,Arial,Verdana,sans-serif;
     font-size: 12px;
@@ -21,9 +21,31 @@ body#outer {
 /*  margin: 0 auto; */
 }
 
+div#wayout {
+    position: relative;
+    width: 1134px;
+    margin-left: auto;
+    margin-right: auto;
+   /*border: 1px solid red;*/
+   
+
+   background: url(../images/header.png);
+   background-repeat:no-repeat;
+    /*background-attachment:fixed;*/
+    background-position:center top;
+    background-color: #1c7a68;
+    
+    /* @centering */
+/*  margin: 0 auto;*/
+}
+
 div#container {
     position: relative;
-    width: 976px;
+    width: 1004px;
+    margin-left: auto;
+    margin-right: auto;
+   /*border: 1px solid red;*/
+
     
     /* @centering */
 /*  margin: 0 auto;*/
@@ -66,7 +88,7 @@ display:block;
 #tabs_frame {
 width: 776px;
 height: 30px;
-padding-left: 200px;
+padding-left: 202px;
 display:block;
 }
 #tabs_mask {
@@ -145,10 +167,12 @@ modules:
 ************************************************************************************************/            
 #modules {
     width: 200px;
-    min-height: 480px;
+    /*min-height: 480px;*/
     position: absolute;
     top: 108px;
     left: 0;
+    border-left:1px solid black;
+    /*border-bottom:1px solid black;*/
 }
 
 #modules a{
@@ -189,8 +213,36 @@ main:
 ************************************************************************************************/            
 #main {
     width: 775px;
-    min-height: 480px;
-    margin-left: 200px;
+    min-height: 900px;
+    margin-left: 201px;
+    /*background-color: #dcdfe2;*/
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+
+    border-bottom-right-radius:10px;
+border-bottom-left-radius:10px;
+    /* Safari 4-5, Chrome 1-9 */
+  /*background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#FFFFFF), to(#dcdfe2));*/
+
+  /* Safari 5.1, Chrome 10+ */
+  /*background: -webkit-linear-gradient(top, #FFFFFF, #dcdfe2);*/
+
+  /* Firefox 3.6+ */
+  /*background: -moz-linear-gradient(top, #FFFFFF, #dcdfe2);*/
+
+  /* IE 10 */
+  /*background: -ms-linear-gradient(top, #FFFFFF, #dcdfe2);*/
+
+  /* Webkit (Safari/Chrome 10) */ 
+/*background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #FFFFFF), color-stop(.1, #dcdfe2));*/
+background-image: -ms-linear-gradient(top, #FFFFFF 0%, #dcdfe2 30%);
+
+/* Webkit (Chrome 11+) */ 
+background-image: -webkit-linear-gradient(top, #FFFFFF 0%, #dcdfe2 30%);
+
+/* W3C Markup, IE10 Release Preview */ 
+background-image: linear-gradient(to bottom, #FFFFFF 0%, #dcdfe2 30%);
 
     /*  height: 480px;*/
     /*    overflow: auto;*/
@@ -200,6 +252,5 @@ main:
     
     /*  @vertical scrolling  */
     /*overflow-y: auto;*/
-*/
 }
 

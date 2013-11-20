@@ -187,7 +187,7 @@ String tempURL = "";
                 <form:content_begin />
                 <form:select_begin name="<%= Driver.PARAM %>" />
                     <form:option name="None" value="None" />
-                    <% for(int x=0; x<locations.howMany(); x++) { %>
+                    <% for(int x=0; x<drivers.howMany(); x++) { %>
                         <% driver = (Driver)drivers.get(x); %>
                         <form:option name="<%= driver.getName() %>" value="<%= driver.getName() %>" />
                     <% } %>
