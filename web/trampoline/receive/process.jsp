@@ -34,10 +34,12 @@ if(action.equals("mark_received")) {
     content.setId(contid);
     content.setTrackingPRO(request.getParameter(Reel.TRACKING_PRO_COLUMN));
     content.setPackingList(request.getParameter(Reel.PACKING_LIST_COLUMN));
+    try {
     content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
     content.setReceivedQuantity(Integer.parseInt(request.getParameter(Reel.RECEIVED_QUANTITY_COLUMN)));
     content.setBottomFoot(Integer.parseInt(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)));
     content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
     content.setWharehouseLocation(request.getParameter(Reel.WHAREHOUSE_LOCATION_COLUMN));
     content.setReceivingIssue(request.getParameter(Reel.RECEIVING_ISSUE_COLUMN));
     content.setReceivingNote(request.getParameter(Reel.RECEIVING_NOTE_COLUMN));
