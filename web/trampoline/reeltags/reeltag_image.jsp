@@ -67,7 +67,7 @@ writer.writeImage(pageToGet, basePath, content.getCompEntityDirectory()+"/", isR
 </style>
 </head>
 <body>
-		
+
 <% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/qr_img_generated.png" ; %>
 <img alt="reeltag image" src="<%= tempURL %>" />
 

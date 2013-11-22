@@ -65,11 +65,9 @@ String tempURL; //var for url expression
 
 		table {
 			width: 690px;
-			max-height: 380px;
-			/*height: 320px;
-			margin-top: 20px;*/
+			/*height: 400px;*/
 			border: 1px solid;
-			/*margin-bottom: 5px;*/
+			margin-bottom: 5px;
 			background-color: gray;
 		}
 
@@ -137,7 +135,7 @@ String tempURL; //var for url expression
 		<td class="value"><b>Total</b></td>
 		<td class="value"><%= total %></td>
 	</tr>
-	
+
 	<tr>
 		<td class="header">Maufacturer</td>
 		<td class="header">O.D. (inches)</td>
