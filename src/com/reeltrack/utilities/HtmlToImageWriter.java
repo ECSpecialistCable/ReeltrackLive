@@ -42,7 +42,7 @@ public class HtmlToImageWriter {
 		
 	}
 
-	public void writeImage(String pageToGet, String basePath, String contentUrl, boolean isRotate) throws Exception {
+	public void writeImage(String pageToGet, String basePath, String contentUrl, boolean isRotate, int width, int height) throws Exception {
 		URL urlToGet = new URL(pageToGet);
 		
 		InputStream is = null;
@@ -80,8 +80,7 @@ public class HtmlToImageWriter {
 		Graphics2DRenderer renderer = new Graphics2DRenderer();
 		renderer.setDocument(doc,"");
 
-		int width= 500;
-		int height= 400;
+		
 	   BufferedImage image = new BufferedImage(width,height,
 											   BufferedImage.TYPE_INT_RGB);
 	  if(isRotate) {
