@@ -67,7 +67,7 @@ String tempURL; //var for url expression
 			width: 690px;
 			height: 380px;
 			border: 1px solid;
-			margin-bottom: 5px;
+			/*margin-bottom: 5px;*/
 			background-color: gray;
 		}
 
