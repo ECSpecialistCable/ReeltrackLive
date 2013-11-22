@@ -42,7 +42,7 @@ String dateString = df.format(new Date());
 String tempURL; //var for url expression
 String pageToGet = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId();
 boolean isRotate = true;
-int width= 760;
+int width= 740;
 int height= 300;
 HtmlToImageWriter writer = new HtmlToImageWriter(pageContext, dbResources);
 writer.writeImage(pageToGet, basePath, content.getCompEntityDirectory()+"/", isRotate, width, height);
