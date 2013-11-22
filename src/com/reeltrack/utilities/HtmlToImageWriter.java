@@ -80,7 +80,7 @@ public class HtmlToImageWriter {
 		Graphics2DRenderer renderer = new Graphics2DRenderer();
 		renderer.setDocument(doc,"");
 
-		int width= 768;
+		int width= 500;
 		int height= 400;
 	   BufferedImage image = new BufferedImage(width,height,
 											   BufferedImage.TYPE_INT_RGB);
