@@ -65,7 +65,7 @@ String tempURL; //var for url expression
 
 		table {
 			width: 690px;
-			height: 400px;
+			height: 390px;
 			border: 1px solid;
 			margin-bottom: 5px;
 			background-color: gray;
