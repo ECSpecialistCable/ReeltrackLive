@@ -43,7 +43,7 @@ String tempURL; //var for url expression
 String pageToGet = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId();
 boolean isRotate = true;
 int width= 700;
-int height= 320;
+int height= 400;
 HtmlToImageWriter writer = new HtmlToImageWriter(pageContext, dbResources);
 writer.writeImage(pageToGet, basePath, content.getCompEntityDirectory()+"/", isRotate, width, height);
 
@@ -69,7 +69,7 @@ writer.writeImage(pageToGet, basePath, content.getCompEntityDirectory()+"/", isR
 <body>
 		
 <% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/qr_img_generated.png" ; %>
-<img style="position: absolute; left: 0px; padding-left:10px;width:320px;" alt="reeltag image" src="<%= tempURL %>" />
+<img alt="reeltag image" src="<%= tempURL %>" />
 
 </body>
 </html>
