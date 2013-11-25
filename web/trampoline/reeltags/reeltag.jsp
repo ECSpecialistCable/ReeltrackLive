@@ -36,7 +36,7 @@ SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 String dateString = df.format(new Date());
 
 String tempURL; //var for url expression
-
+String logoURL;
 %>
 <% dbResources.close(); %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -59,7 +59,8 @@ String tempURL; //var for url expression
 		.header {
 			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
 			font-size: 12px;
-			background-color: #c4c4c4;
+			/*background-color: #c4c4c4;*/
+			background-color: gray;
 			font-weight: bold;
 		}
 
@@ -68,7 +69,7 @@ String tempURL; //var for url expression
 			/*height: 400px;*/
 			border: 1px solid;
 			margin-bottom: 5px;
-			background-color: gray;
+			/*background-color: gray;*/
 		}
 
 		td {
@@ -91,50 +92,60 @@ String tempURL; //var for url expression
 			-webkit-transform:rotate(90deg); /* Safari and Chrome */
 		}
 
-}
+
 
 	</style>
 </head>
 <body>
 
-	<% int rowspan = 9 + circuits.howMany(); %>
+	<% int rowspan = 6 + (int)Math.round((double)circuits.howMany()/2) -1; %>
 	<table>
 	<tr>
-		<td  class="header">ReelTag / Description</td>
-		<td  class="header">Customer P/N</td>
-		<td  class="header">Serial #</td>
+		<td  class="header">ReelTag</td>
+		<td style="min-width: 90px" class="header">Customer P/N</td>
+		<td  class="header">CRID #</td>
 		<td  class="header">Type</td>
 		<td  class="header">Quantity</td>
 		<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
-		<td  rowspan="<%= rowspan %>" valign="top"><img alt="barcode" src="<%= tempURL %>" width="250" height="250" /></td>
+		<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo.png"; %>
+		<td style="padding: 0;width:160px" rowspan="<%= rowspan %>" align="center"><img alt="logo" src="<%= logoURL %>" width="130" height="40" /><img alt="barcode" src="<%= tempURL %>" width="150" height="150" /></td>
 	</tr>
 	<tr>
 		<td  class="value"><%= content.getReelTag() %></td>
 		<td  class="value"><%= content.getCustomerPN() %></td>
 		<td  class="value"><%= content.getReelSerial() %></td>
 		<td  class="value"><%= content.getReelType() %></td>
-		<td  class="value"><%= content.getOnReelQuantity() %></td>
+		<td class="value"><%= content.getOnReelQuantity() %></td>
 	</tr>
 	<tr>
-		<td class="header" colspan="3">&nbsp;</td>
-		<td class="header">Circuit Name</td>
+		<td  class="header">Description</td>
+		<td colspan="4"  class="value"><%= content.getCableDescription() %></td>
+	</tr>
+	<tr>
+		<td style="min-width: 80px" class="header">Circuit Name</td>
+		<td class="header">Length</td>
+		<td class="header">&nbsp;</td>
+		<td style="width:80px" class="header">Circuit Name</td>
 		<td class="header">Length</td>
 	</tr>
 	<% int total = 0; %>
 	<% for (int c=0; c<circuits.howMany(); c++ ) { %>
-	<% ReelCircuit circuit = (ReelCircuit)circuits.get(c); %>
-	<% total += circuit.getLength(); %>
-	<tr>
-		<td class="value" colspan="3">&nbsp;</td>
-		<td class="value"><%= circuit.getName() %></td>
-		<td class="value"><%= circuit.getLength() %></td>
-	</tr>
+		<% ReelCircuit circuit = (ReelCircuit)circuits.get(c); %>
+		<% total += circuit.getLength(); %>
+		<tr>
+			<td class="value"><%= circuit.getName() %></td>
+			<td class="value"><%= circuit.getLength() %></td>
+			<% c++; %>
+			<% if(c<circuits.howMany()) { %>
+				<% circuit = (ReelCircuit)circuits.get(c); %>
+				<% total += circuit.getLength(); %>
+				<td class="value">&nbsp;</td>
+				<td class="value"><%= circuit.getName() %></td>
+				<td class="value"><%= circuit.getLength() %></td>
+			<% } %>
+		</tr>
 	<% } %>
-	<tr>
-		<td class="value" colspan="3">&nbsp;</td>
-		<td class="value"><b>Total</b></td>
-		<td class="value"><%= total %></td>
-	</tr>
+	
 
 	<tr>
 		<td class="header">Maufacturer</td>
@@ -149,6 +160,7 @@ String tempURL; //var for url expression
 		<td class="value"><%= new Integer(techData.getWeight()).toString() %></td>
 		<td class="value"><%= Double.toString(techData.getXSection()) %></td>
 		<td class="value"><%= new Integer(techData.getPullTension()).toString() %></td>
+		<td class="value" style="padding-left: 25px"><b>Total:    </b><%= total %></td>
 	</tr>
 	</table>
 
