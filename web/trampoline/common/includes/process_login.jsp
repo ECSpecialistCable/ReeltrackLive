@@ -8,8 +8,10 @@
 
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr"/>
+<jsp:useBean id="customerMgr" class="com.reeltrack.customers.CustomerMgr"/>
 
 <% CompProperties props = new CompProperties(); %>
+<% customerMgr.init(pageContext,dbResources); %>
 
 <% 	 
 userLoginMgr.init(pageContext, dbResources);
@@ -39,9 +41,16 @@ redirect = request.getContextPath() + "/trampoline/index.jsp";
 
 <%  if(action.equals("job" )) { %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
-<%  
+<%
+int jobId = Integer.parseInt(request.getParameter(CustomerJob.PARAM));
+session.setAttribute("LoggedInJobId", jobId);
+
+CustomerJob job = new CustomerJob();
+job.setId(jobId);
+job = customerMgr.getCustomerJob(job);
+
 //user.setJobId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));
-user.setJobCode(request.getParameter(CustomerJob.PARAM));
+user.setJobCode(job.getCode());
 redirect = request.getContextPath() + "/trampoline/index.jsp";
 %>
 <% } %>

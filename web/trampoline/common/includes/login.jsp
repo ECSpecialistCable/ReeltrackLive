@@ -78,8 +78,8 @@ CompEntities custJobs = customerMgr.getCustomerJobs(custJob);
 				<form:select_begin name="<%= CustomerJob.PARAM %>" label="customer" />
 					<% for(int i=0; i<custJobs.howMany(); i++) { %>
             		<% custJob = (CustomerJob)custJobs.get(i); %>
-					<%--<form:option value="<%= new Integer(custJob.getId()).toString() %>" name="<%= custJob.getName() %>"/>--%>
-					<form:option value="<%= custJob.getCode() %>" name="<%= custJob.getName() %>"/>
+					<form:option value="<%= new Integer(custJob.getId()).toString() %>" name="<%= custJob.getName() %>"/>
+					<%--<form:option value="<%= custJob.getCode() %>" name="<%= custJob.getName() %>"/>--%>
 					<% } %>
 				<form:select_end />
 			<form:content_end />

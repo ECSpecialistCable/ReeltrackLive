@@ -238,4 +238,14 @@ alter table reels add pn_conductor varchar(2);
 
 alter table customer_jobs add auto_print_reel_tags varchar(1) default 'n';
 
-
+/* 12/02/2013 */
+create table glossary (
+	id int(11) NOT NULL auto_increment,
+	created datetime,
+	updated datetime,
+	status varchar(25),
+	name varchar(255),
+	job_id int default 0,
+	description text,
+	PRIMARY KEY (id)
+);
