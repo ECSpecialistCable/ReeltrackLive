@@ -62,6 +62,16 @@ if(action.equals("add_customer_job")) {
     redirect = request.getContextPath() + "/trampoline/" + "customers/jobs.jsp?" + Customer.PARAM + "=" + contid ;
 }
 
+if(action.equals("update_customer_job")) {
+    CustomerJob content = new CustomerJob();
+    content.setId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));
+    content.setName(request.getParameter(CustomerJob.NAME_COLUMN));
+    content.setCode(request.getParameter(CustomerJob.CODE_COLUMN));
+    content.setAutoPrintReelTags(request.getParameter(CustomerJob.AUTO_PRINT_REEL_TAG_COLUMN));
+    customerMgr.updateCustomerJob(content);
+    redirect = request.getContextPath() + "/trampoline/" + "customers/edit_job.jsp?" + CustomerJob.PARAM + "=" + content.getId();
+}
+
 if(action.equals("delete_customer_job")) {
     CustomerJob content = new CustomerJob();
     content.setId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));

@@ -43,7 +43,8 @@ String tempURL; //var for url expression
 <% dbResources.close(); %>
 
 <html:begin />
-<admin:title text="<%= content.getTitle() %>" />
+<% tempURL = content.getReelTag() + " : " + content.getCrId() + " : " + content.getCableDescription(); %>
+<admin:title text="<%= tempURL %>" />
 <notifier:show_message />
 
 <admin:subtitle text="Data Sheet" />
@@ -135,7 +136,7 @@ String tempURL; //var for url expression
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
         <form:textfield label="O.D. (inches):" pixelwidth="50" name="<%= CableTechData.OD_COLUMN %>" value="<%= Double.toString(techData.getOD()) %>" />
-        <form:textfield label="Weight:" pixelwidth="50" name="<%= CableTechData.WEIGHT_COLUMN %>" value="<%= new Integer(techData.getWeight()).toString() %>" />
+        <form:textfield label="Weight/kft:" pixelwidth="50" name="<%= CableTechData.WEIGHT_COLUMN %>" value="<%= new Integer(techData.getWeight()).toString() %>" />
         <form:textfield label="MBR (inches):" name="<%= CableTechData.RADIUS_COLUMN %>" value="<%= Double.toString(techData.getRadius()) %>" />
         <form:textfield label="X-Section<br />(sq inches):" name="<%= CableTechData.XSECTION_COLUMN %>" value="<%= Double.toString(techData.getXSection()) %>" />
         <form:textfield label="Pull Tension<br />Max (lbs):" name="<%= CableTechData.PULL_TENSION_COLUMN %>" value="<%= new Integer(techData.getPullTension()).toString() %>" />

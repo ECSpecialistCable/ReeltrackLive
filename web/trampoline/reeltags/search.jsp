@@ -69,7 +69,7 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Print Reel Tags" />
+<admin:title text="Generate Reel Tags" />
 
 <admin:subtitle text="Search" />
     <admin:box_begin />

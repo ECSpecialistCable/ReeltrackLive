@@ -84,6 +84,9 @@ String tempUrl; //var for url expression
                     <%= custJob.getCode() %>
                 <listing:cell_end />
                 <listing:cell_begin align="right"/>
+                <% tempUrl = "customers/edit_job.jsp?" +  CustomerJob.PARAM + "=" + custJob.getId();%>
+                <form:linkbutton url="<%= tempUrl %>" name="EDIT" />
+                &nbsp;
                 <% tempUrl = "customers/process.jsp?submit_action=delete_customer_job&" + Customer.PARAM + "=" + content.getId() + "&" + CustomerJob.PARAM + "=" + custJob.getId(); %>
                 <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />

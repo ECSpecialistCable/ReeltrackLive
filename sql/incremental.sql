@@ -236,4 +236,6 @@ alter table reels add pn_volt varchar(2);
 alter table reels add pn_gauge varchar(3);
 alter table reels add pn_conductor varchar(2);
 
+alter table customer_jobs add auto_print_reel_tags varchar(1) default 'n';
+
 

@@ -7,6 +7,7 @@ public class CustomerJob extends CompCMEntity {
 	public static final String NAME_COLUMN = "name";
 	public static final String CODE_COLUMN = "code";
 	public static final String CUSTOMER_ID_COLUMN = "customer_id";
+	public static final String AUTO_PRINT_REEL_TAG_COLUMN = "auto_print_reel_tags";
 
 	@Override
 	public String getTableName() {
@@ -49,5 +50,21 @@ public class CustomerJob extends CompCMEntity {
 	
 	public void setCode(String note) {
 		this.getData().setString(CODE_COLUMN, note);
+	}
+
+	public String getAutoPrintReelTags() {
+		return this.getData().getString(AUTO_PRINT_REEL_TAG_COLUMN, "");
+	}
+	
+	public void setAutoPrintReelTags(String name) {
+		this.getData().setString(AUTO_PRINT_REEL_TAG_COLUMN, name);
+	}
+
+	public boolean shouldAutoPrintReelTags() {
+		boolean toReturn = false;
+		if(this.getAutoPrintReelTags().equalsIgnoreCase("y")) {
+			toReturn = true;	
+		}
+		return toReturn;
 	}
 }
