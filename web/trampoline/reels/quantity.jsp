@@ -40,7 +40,7 @@ String tempURL; //var for url expression
 <% dbResources.close(); %>
 
 <html:begin />
-<% tempURL = content.getReelTag() + " : " + content.getCrId() + " : " + content.getCableDescription(); %>
+<% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
 <admin:title text="<%= tempURL %>" />
 <notifier:show_message />
 
