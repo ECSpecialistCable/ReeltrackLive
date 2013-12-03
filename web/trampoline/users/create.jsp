@@ -41,8 +41,7 @@ dbResources.close();
 			<form:textfield name="<%= RTUser.PASSWORD_COLUMN %>" label="password:" required="true" />
 			<form:row_begin />
 				<form:label name="" label="" />
-				<form:buttonset_begin align="right" padding="0"/>
-					<form:linkbutton button="cancel_off" name="Cancel" url="users/search.jsp" />
+				<form:buttonset_begin align="left" padding="0"/>
 						<form:submit_inline button="save" waiting="true" name="save" action="create" />
 				<form:buttonset_end />
 			<form:row_end />

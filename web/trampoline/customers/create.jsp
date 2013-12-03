@@ -29,8 +29,7 @@ dbResources.close();
 			<form:textfield name="<%= Customer.NAME_COLUMN %>" label="name:" />
 			<form:row_begin />
 				<form:label name="" label="" />
-				<form:buttonset_begin align="right" padding="0"/>
-					<form:linkbutton button="cancel_off" name="Cancel" url="customers/search.jsp" />
+				<form:buttonset_begin align="left" padding="0"/>
 						<form:submit_inline button="save" waiting="true" name="save" action="create" />
 				<form:buttonset_end />
 			<form:row_end />

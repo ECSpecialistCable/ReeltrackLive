@@ -57,8 +57,7 @@ content = (Customer)customerMgr.getCustomer(content);
 			<form:hidden name="<%= Customer.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 			<form:row_begin />
 				<form:label name="" label="" />
-				<form:buttonset_begin align="right" padding="0"/>
-					<form:linkbutton button="cancel_off" name="Cancel" url="customers/search.jsp" />
+				<form:buttonset_begin align="left" padding="0"/>
 					<form:submit_inline button="save" waiting="true" name="save" action="update" />
 				<form:buttonset_end />
 			<form:row_end />

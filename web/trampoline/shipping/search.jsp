@@ -216,7 +216,6 @@ String tempURL = "";
                 <form:buttonset_begin align="left" padding="0"/>
                     <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
                     <form:submit_inline button="save" waiting="true" name="Mark Shipped" action="mark_shipped" />
-                    &nbsp;&nbsp;
                     <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
                     <form:linkbutton url="<%= tempURL %>" name="EDIT REEL" />
                 <form:buttonset_end />

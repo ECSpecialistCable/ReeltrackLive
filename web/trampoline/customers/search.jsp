@@ -35,14 +35,13 @@ String tempUrl; //var for url expression
             <listing:header_begin />
                 <listing:header_cell first="true" name="Name" />
                 <listing:header_cell width="100" name="Status" />
-                <listing:header_cell width="100" name="" />
+                <listing:header_cell width="120" name="" />
             <listing:header_end />
             <% for(int i=0; i<contents.howMany(); i++) { %>
             <% content = (Customer)contents.get(i); %>
             <listing:row_begin row="<%= new Integer(i).toString() %>" />
                 <listing:cell_begin />
-                    <% tempUrl = "customers/edit.jsp?" +  Customer.PARAM + "=" + content.getId(); %>
-                    <form:linkbutton url="<%= tempUrl %>" name="<%= content.getName() %>" />
+                    <%= content.getName() %>
                 <listing:cell_end />
                 <listing:cell_begin />
                     <%= content.getStatus() %>
@@ -50,7 +49,6 @@ String tempUrl; //var for url expression
                 <listing:cell_begin align="right"/>
                 <% tempUrl = "customers/edit.jsp?" +  Customer.PARAM + "=" + content.getId(); %>
                 <form:linkbutton url="<%= tempUrl %>" name="EDIT" />
-                &nbsp;
                 <% tempUrl = "customers/process.jsp?submit_action=delete&" + Customer.PARAM + "=" + content.getId(); %>
                 <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />

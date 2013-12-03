@@ -12,6 +12,7 @@
 <%@ attribute name="waiting" required="false" %>
 <%@ attribute name="warning" required="false" %>
 <%@ attribute name="cb_content" required="false"%>
+<%@ attribute name="newtab" required="false"%>
 
 <a
 <% if(process!=null && process.equals("true")) { %>
@@ -25,19 +26,16 @@
 	<% } %>
     target="_submissionFrame"
     href="${url}">	    
+<% } else if(newtab!=null) { %>	
+	href="${url}" target="_new">
 <% } else { %>	
 	href="${url}" class="ajax_loadable">
 <% } %>
+
 <% if(button!=null) { %>
-    <img 
-<% if(cb_content == null){ %>
- src="common/images/blank.gif"
+<button type="button" class="btn btn-primary btn-xs" onclick="this.innerHTML='.....';">${name}</button>
+ </a>	    
 <% } else { %>
- src="../common/images/blank.gif"
-<% } %>	
- width="67" height="18" 
-	
- class="${button}Button" <% if(waiting!=null && waiting.equals("true")) { %>onclick="this.className='waitingButton'"<% } %> /></a>	    
-<% } else { %>
-    ${name}</a>
+<button type="button" class="btn btn-primary btn-xs" onclick="this.innerHTML='.....';">${name}</button>
+</a>
 <% } %>

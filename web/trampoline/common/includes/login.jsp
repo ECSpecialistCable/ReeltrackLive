@@ -34,6 +34,7 @@ String tempUrl; //var for url expression
 				<form:label name="" label="" />
 				<form:buttonset_begin align="right" padding="0"/>
 					<form:submit_inline button="login" waiting="true" name="login" action="login" />
+					<%--<button type="button" class="btn btn-primary btn-sm loginButton">Primary</button>--%>
 				<form:buttonset_end />
 			<form:row_end />
 	<form:end />

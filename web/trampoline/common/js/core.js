@@ -34,6 +34,7 @@ var CORE = function(){
 		BEHAVIORS.applyBehaviors(__MAIN_CONTENT__, "a");	
 		BEHAVIORS.applyBehaviors(__MAIN_CONTENT__, "table");
 		BEHAVIORS.applyBehaviors(__MAIN_CONTENT__, "img");
+        BEHAVIORS.applyBehaviors(__MAIN_CONTENT__, "button");
 		BEHAVIORS.applyBehaviors(__MAIN_CONTENT__, "h2");
 		BEHAVIORS.applyBehaviors(__MAIN_CONTENT__, "div");	
 		BEHAVIORS.applyBehaviors(__MAIN_CONTENT__, "td");	

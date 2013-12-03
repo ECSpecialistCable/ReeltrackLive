@@ -81,8 +81,7 @@ String tempUrl; //var for url expression
 			<form:hidden name="<%= RTUser.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 			<form:row_begin />
 				<form:label name="" label="" />
-				<form:buttonset_begin align="right" padding="0"/>
-					<form:linkbutton button="cancel_off" name="Cancel" url="users2/search.jsp" />
+				<form:buttonset_begin align="left" padding="0"/>
 					<form:submit_inline button="save" waiting="true" name="save" action="update" />
 				<form:buttonset_end />
 			<form:row_end />
@@ -108,7 +107,7 @@ String tempUrl; //var for url expression
 			<form:hidden name="<%= RTUser.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 			<form:row_begin />
 				<form:label name="" label="" />
-				<form:buttonset_begin align="right" padding="0"/>
+				<form:buttonset_begin align="left" padding="0"/>
 					<form:submit_inline button="save" waiting="true" name="save" action="assign_job" />
 				<form:buttonset_end />
 			<form:row_end />

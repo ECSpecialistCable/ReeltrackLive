@@ -69,7 +69,7 @@ String tempUrl;
             <form:hidden name="<%= Customer.PARAM %>" value="<%= content.getId() %>" />
             <form:row_begin />
                 <form:label name="" label="" />
-                <form:buttonset_begin align="right" padding="0"/>
+                <form:buttonset_begin align="left" padding="0"/>
                         <form:submit_inline button="save" waiting="true" name="save" action="add_user" />
                 <form:buttonset_end />
             <form:row_end />
@@ -84,14 +84,13 @@ String tempUrl;
                 <listing:header_cell first="true" name="Name" />
                 <listing:header_cell width="100" name="Type" />
                 <listing:header_cell width="100" name="Status" />
-                <listing:header_cell width="100" name="" />
+                <listing:header_cell width="110" name="" />
             <listing:header_end />
             <% for(int i=0; i<users.howMany(); i++) { %>
             <% custUser = (RTUser)users.get(i); %>
             <listing:row_begin row="<%= new Integer(i).toString() %>" />
                 <listing:cell_begin />
-                    <% tempUrl = "customers/edit_user.jsp?" +  RTUser.PARAM + "=" + custUser.getId(); %>
-                    <form:linkbutton url="<%= tempUrl %>" name="<%= custUser.getName() %>" />
+                    <%= custUser.getName() %>
                 <listing:cell_end />
                 <listing:cell_begin />
                     <%= custUser.getUserType() %>
@@ -102,7 +101,6 @@ String tempUrl;
                 <listing:cell_begin align="right"/>
                 <% tempUrl = "customers/edit_user.jsp?" +  RTUser.PARAM + "=" + custUser.getId();%>
                 <form:linkbutton url="<%= tempUrl %>" name="EDIT" />
-                &nbsp;
                 <% tempUrl = "customers/process.jsp?submit_action=delete_user&" + RTUser.PARAM + "=" + custUser.getId() + "&" + Customer.PARAM + "=" + content.getId(); %>
                 <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />

@@ -168,7 +168,7 @@ String tempURL = "";
             <listing:header_cell width="150" name="Foreman" />
             <listing:header_cell width="50" name="Reels" />
             <listing:header_cell width="100" name="Status" />
-            <listing:header_cell width="70" name=""  />
+            <listing:header_cell width="100" name=""  />
         <listing:header_end />
         <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (PickList)contents.get(i); %>
@@ -206,13 +206,13 @@ String tempURL = "";
             <listing:cell_begin align="right"/>
                 <% tempURL = "pick_lists/edit.jsp?" +  PickList.PARAM + "=" + content.getId(); %>
                 <form:linkbutton url="<%= tempURL %>" name="EDIT" />
-                &nbsp;&nbsp;
                 <%--
                 <% tempURL = "pick_lists/process.jsp?submit_action=print&" + PickList.PARAM + "=" + content.getId(); %>
                 <form:linkbutton url="<%= tempURL %>" process="true" name="PRINT" />
                 --%>
                 <% tempURL = "pick_lists/picklist.jsp?" + PickList.PARAM + "=" + content.getId(); %>
-                <a href="<%= tempURL %>" target="_new">PRINT</a>
+                <%--<a href="<%= tempURL %>" target="_new">PRINT</a>--%>
+                <form:linkbutton url="<%= tempURL %>" name="PRINT" newtab="true" />
             <listing:cell_end />
         <listing:row_end />
         <% } %>

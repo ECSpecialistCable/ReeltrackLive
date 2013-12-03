@@ -59,6 +59,7 @@ if(request.getParameter("id")!=null) {
         <title>
             <jsp:include page="common/includes/title.jsp" />
         </title>
+        <!--<link rel="stylesheet" href="common/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8" />-->
         <link rel="stylesheet" href="common/css/structure.css" type="text/css" media="screen" charset="utf-8" />
         <link rel="stylesheet" href="common/css/style.css" type="text/css" media="screen" charset="utf-8" />
 		<link rel="stylesheet" href="common/css/colorbox.css" type="text/css" media="screen" charset="utf-8" />
@@ -75,6 +76,8 @@ if(request.getParameter("id")!=null) {
 		<![endif]-->	
         
         <link rel="stylesheet" href="common/css/client.css" type="text/css" media="screen" charset="utf-8" />
+
+        
 
 
 <!-- jquery first -->
@@ -98,6 +101,8 @@ if(request.getParameter("id")!=null) {
 
 <!-- and finally, the admin.js -->
 <script src="common/js/admin.js?busted=<%= (new java.util.Date()).getTime() %>" type="text/javascript" charset="utf-8"></script>
+
+<!--<script src="common/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>-->
 
     </head>
     <body id="outer" class=" yui-skin-sam">

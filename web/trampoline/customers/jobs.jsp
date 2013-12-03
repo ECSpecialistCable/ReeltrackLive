@@ -58,7 +58,7 @@ String tempUrl; //var for url expression
 			<form:hidden name="<%= Customer.PARAM %>" value="<%= content.getId() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
-				<form:buttonset_begin align="right" padding="0"/>
+				<form:buttonset_begin align="left" padding="0"/>
 					<form:submit_inline button="save" waiting="true" name="save" action="add_customer_job" />
 				<form:buttonset_end />
 			<form:row_end />
@@ -72,7 +72,7 @@ String tempUrl; //var for url expression
             <listing:header_begin />
                 <listing:header_cell first="true" name="Name" />
                 <listing:header_cell width="100" name="Job Code" />
-                <listing:header_cell width="100" name="" />
+                <listing:header_cell width="110" name="" />
             <listing:header_end />
             <% for(int i=0; i<custJobs.howMany(); i++) { %>
             <% custJob = (CustomerJob)custJobs.get(i); %>
@@ -86,7 +86,6 @@ String tempUrl; //var for url expression
                 <listing:cell_begin align="right"/>
                 <% tempUrl = "customers/edit_job.jsp?" +  CustomerJob.PARAM + "=" + custJob.getId();%>
                 <form:linkbutton url="<%= tempUrl %>" name="EDIT" />
-                &nbsp;
                 <% tempUrl = "customers/process.jsp?submit_action=delete_customer_job&" + Customer.PARAM + "=" + content.getId() + "&" + CustomerJob.PARAM + "=" + custJob.getId(); %>
                 <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />

@@ -776,9 +776,11 @@ a:hover .searchButton {
 */
 
 a .loginButton {
+    /*
     background: url(../images/login.gif) no-repeat;
     width:66px;
     height:19px;
+    */
 }
 
 a .login_offButton {
