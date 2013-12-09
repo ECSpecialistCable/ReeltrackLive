@@ -44,6 +44,7 @@ public class Reel extends CompCMEntity {
 	public static final String CTR_FILE_COLUMN = "ctr_file";
 	public static final String RT_QRCODE_FILE_COLUMN = "rt_qrcode_file";
 	public static final String PL_QRCODE_FILE_COLUMN = "pl_qrcode_file";
+	public static final String REEL_TAG_FILE_COLUMN = "reel_tag_file";
 
 	public static final String PN_VOLT_COLUMN = "pn_volt";
 	public static final String PN_GAUGE_COLUMN = "pn_gauge";
@@ -101,6 +102,14 @@ public class Reel extends CompCMEntity {
 	@Override
 	public String getTitle() {
 		return this.getReelTag();
+	}
+
+	public String getReelTagDirectory() {
+		String directory = "";
+		directory = this.getCompProperties().getComponentDirectory(this.getConfiguration());
+		directory += "/reeltags/";
+		directory += this.getJobCode();
+		return directory;
 	}
 
 	public String getPnVolt() {
@@ -534,6 +543,22 @@ public class Reel extends CompCMEntity {
 	
 	public void setPlQrCodeFile(String name) {
 		this.getData().setString(PL_QRCODE_FILE_COLUMN, name);
+	}
+
+	public String getReelTagFile() {
+		return this.getData().getString(REEL_TAG_FILE_COLUMN, "");
+	}
+	
+	public void setReelTagFile(String name) {
+		this.getData().setString(REEL_TAG_FILE_COLUMN, name);
+	}
+
+	public boolean hasReelTagFile() {
+		if(this.getReelTagFile().equals("")) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public static String convertPnVolt(String volt) {

@@ -249,3 +249,7 @@ create table glossary (
 	description text,
 	PRIMARY KEY (id)
 );
+
+/* 12/10.2013 */
+alter table reels add reel_tag_file varchar(50);
+

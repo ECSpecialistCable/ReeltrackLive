@@ -44,8 +44,9 @@ String pageToGet = "http://" + request.getServerName() + ":" + request.getServer
 boolean isRotate = true;
 int width= 700;
 int height= 330;
-HtmlToImageWriter writer = new HtmlToImageWriter(pageContext, dbResources);
-writer.writeImage(pageToGet, basePath, content.getCompEntityDirectory()+"/", isRotate, width, height);
+HtmlToImageWriter writer = new HtmlToImageWriter();
+writer.init(pageContext, dbResources);
+String tagFileName = writer.writeImage(content, pageToGet, basePath, content.getReelTagDirectory() + "/", isRotate, width, height);
 
 //HTMLToPdfToImageWriter writer = new HTMLToPdfToImageWriter(pageContext, dbResources);
 //writer.writeImage("http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId(),basePath, content.getCompEntityDirectory()+"/");
@@ -54,21 +55,10 @@ writer.writeImage(pageToGet, basePath, content.getCompEntityDirectory()+"/", isR
 <% dbResources.close(); %>
 
 <html>
-<head>
-<style type="text/css">
-.rotate {
-	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
-	-moz-transform: rotate(90deg);
-	-webkit-transform: rotate(90deg);
-	position:absolute;
-	top:200px;
-}
-
-</style>
-</head>
+<head></head>
 <body>
 
-<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/qr_img_generated.png" ; %>
+<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getReelTagDirectory() + "/" + tagFileName; %>
 <img alt="reeltag image" src="<%= tempURL %>" />
 
 </body>

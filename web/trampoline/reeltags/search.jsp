@@ -107,7 +107,6 @@ String tempURL = "";
             <listing:header_cell name="Cable Description" />
             <listing:header_cell width="75" name="Status" />
             <listing:header_cell width="40" name=""  />
-            <listing:header_cell width="40" name=""  />
         <listing:header_end />
         <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
@@ -124,14 +123,19 @@ String tempURL = "";
             <listing:cell_begin />
                 <%= content.getStatus() %>
             <listing:cell_end />
+            <%--
             <listing:cell_begin align="right"/>
                 <% tempURL = "reeltags/reeltag.jsp?" + Reel.PARAM + "=" + content.getId(); %>
                 <a href="<%= tempURL %>" target="_new">PRINT</a>				
             <listing:cell_end />
+            --%>
 			<listing:cell_begin align="right"/>
-                <% tempURL = "reeltags/reeltag_image.jsp?" + Reel.PARAM + "=" + content.getId(); %>
-                <a href="<%= tempURL %>" target="_new">TEST</a>
+                <% if(!content.hasReelTagFile()) { %>
+                    <% tempURL = "reeltags/reeltag_image.jsp?" + Reel.PARAM + "=" + content.getId(); %>
+                    <form:linkbutton url="<%= tempURL %>" name="ADD to QUEUE" newtab="true" />
+                <% } %>
             <listing:cell_end />
+
         <listing:row_end />
         <% } %>
     <listing:end />

@@ -1,6 +1,9 @@
 package com.reeltrack.utilities;
 
+import com.monumental.trampoline.component.*;
 import com.monumental.trampoline.datasources.DbResources;
+import com.reeltrack.reels.*;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -36,13 +39,13 @@ import org.xhtmlrenderer.resource.FSEntityResolver;
 import org.xhtmlrenderer.simple.Graphics2DRenderer;
 
 
-public class HtmlToImageWriter {
+public class HtmlToImageWriter extends CompWebManager {
 
-	public HtmlToImageWriter(PageContext pageContext, DbResources resources) {
-		
+	public void init(PageContext pageContext, DbResources resources) {
+		super.init(pageContext, resources);
 	}
 
-	public void writeImage(String pageToGet, String basePath, String contentUrl, boolean isRotate, int width, int height) throws Exception {
+	public String writeImage(Reel theReel, String pageToGet, String basePath, String contentUrl, boolean isRotate, int width, int height) throws Exception {
 		URL urlToGet = new URL(pageToGet);
 		
 		InputStream is = null;
@@ -97,8 +100,22 @@ public class HtmlToImageWriter {
 	   renderer.layout(imageGraphics,new Dimension(width,height));
 	   renderer.render(imageGraphics);
 
-	   File fileToWrite = new File(basePath + contentUrl + "qr_img_generated.png");
-	   ImageIO.write(image, "png", fileToWrite);
+	   String tagFileName = theReel.getReelTag() + "_" + theReel.getCrId() + ".jpg";
+	   tagFileName = tagFileName.replace(" ","_");
+	   tagFileName = tagFileName.replace("#","-");
+	   tagFileName = tagFileName.replace("/","-");
+
+	   String uploadDir = basePath + contentUrl;
+	   File createDir = new File(uploadDir);
+	   if(!createDir.exists()) {
+	   	createDir.mkdirs();
+	   }
+
+	   File fileToWrite = new File(basePath + contentUrl + tagFileName);
+	   ImageIO.write(image, "jpg", fileToWrite);
+	   theReel.setReelTagFile(tagFileName);
+	   this.getCompController().update(theReel);
+	   return tagFileName;
 	}
 
 	private BufferedImage createRotatedCopy(BufferedImage img) {
