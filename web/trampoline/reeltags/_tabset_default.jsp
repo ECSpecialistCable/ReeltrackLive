@@ -9,5 +9,6 @@
 
 <admin:tab url="reeltags/search.jsp" text="Search" />
 <%--<admin:tab url="reels/create.jsp" text="Add Reel" />--%>
+<admin:tab url="reeltags/search_generated.jsp" text="Generated" />
 
 <admin:set_moduleactions url="manage_reels/_moduleactions.jsp" />

@@ -45,6 +45,7 @@ public class Reel extends CompCMEntity {
 	public static final String RT_QRCODE_FILE_COLUMN = "rt_qrcode_file";
 	public static final String PL_QRCODE_FILE_COLUMN = "pl_qrcode_file";
 	public static final String REEL_TAG_FILE_COLUMN = "reel_tag_file";
+	public static final String HAS_REEL_TAG_FILE_COLUMN = "has_reel_tag_file";
 
 	public static final String PN_VOLT_COLUMN = "pn_volt";
 	public static final String PN_GAUGE_COLUMN = "pn_gauge";
@@ -553,11 +554,19 @@ public class Reel extends CompCMEntity {
 		this.getData().setString(REEL_TAG_FILE_COLUMN, name);
 	}
 
+	public String getHasReelTagFile() {
+		return this.getData().getString(HAS_REEL_TAG_FILE_COLUMN, "");
+	}
+	
+	public void setHasReelTagFile(String name) {
+		this.getData().setString(HAS_REEL_TAG_FILE_COLUMN, name);
+	}
+
 	public boolean hasReelTagFile() {
-		if(this.getReelTagFile().equals("")) {
-			return false;
-		} else {
+		if(this.getHasReelTagFile().equals("y")) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 

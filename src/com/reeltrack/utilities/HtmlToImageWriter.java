@@ -114,6 +114,7 @@ public class HtmlToImageWriter extends CompWebManager {
 	   File fileToWrite = new File(basePath + contentUrl + tagFileName);
 	   ImageIO.write(image, "jpg", fileToWrite);
 	   theReel.setReelTagFile(tagFileName);
+	   theReel.setHasReelTagFile("y");
 	   this.getCompController().update(theReel);
 	   return tagFileName;
 	}

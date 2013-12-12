@@ -256,5 +256,6 @@ alter table reels add reel_tag_file varchar(50);
 /* 12/12/13*/
 alter table reel_logs add on_reel_quantity int default 0;
 alter table reel_logs add top_foot int default 0;
+alter table reels add has_reel_tag_file varchar(1) default 'n';
 
 
