@@ -20,6 +20,12 @@
 <% reelMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
+boolean canEdit = false;
+if(user.isUserType(RTUser.USER_TYPE_ECS)) {
+    canEdit = true;
+}
+%>
+<%
 // Get the id
 int contid = 0;
 if(request.getParameter(Reel.PARAM) != null) {
@@ -47,11 +53,13 @@ String tempURL; //var for url expression
 
 <admin:subtitle text="Reel Data" />
 <admin:box_begin />
-    <form:begin_multipart submit="true" name="edit" action="reels/process.jsp" />
+    <form:begin_multipart submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
         <form:info label="CTR #:" text="<%= content.getCTRNumber() %>" />
         <form:info label="CTR Date:" text="<%= content.getCTRDateString() %>" />
         <form:info label="CTR Sent:" text="<%= content.getCTRSentString() %>" />
+        <% if(canEdit) { %>
 		<form:file name="<%= Reel.CTR_FILE_COLUMN %>" label="CTR File:" />
+        <% } %>
         <% if(content.getCTRFile() != null && !content.getCTRFile().equals("")) { %>
             <form:row_begin />
             <form:label label="Download CTR:"  />
@@ -65,7 +73,9 @@ String tempURL; //var for url expression
 		<form:row_begin />
 			<form:label name="" label="" />
 			<form:buttonset_begin align="left" padding="0"/>
+                <% if(canEdit) { %>
 				<form:submit_inline button="save" waiting="true" name="save" action="update_reel_data" />
+                <% } %>
 			<form:buttonset_end />
 		<form:row_end />
     <form:end />

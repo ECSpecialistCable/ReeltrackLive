@@ -26,10 +26,16 @@ content.setJobId(0);
 CompEntities contents = glossaryMgr.searchGlossary(content, Glossary.NAME_COLUMN, true, 0, 0);
 dbResources.close();
 %>
+<%
+boolean canEdit = false;
+if(user.isUserType(RTUser.USER_TYPE_ECS)) {
+    canEdit = true;
+}
+%>
 
 <html:begin />
 <admin:title text="ReelTrack Glossary" />
-
+<% if(canEdit) { %>
 <admin:subtitle text="Add ReelTrack Glossary" />
 <admin:box_begin />
     <form:begin submit="true" name="create_reeltrack_glossary" action="glossary/process.jsp" />
@@ -44,15 +50,18 @@ dbResources.close();
 			<form:row_end />
     <form:end />
 <admin:box_end />
+<% } %>
 
 <% if(contents.howMany() > 0) { %>
     <admin:subtitle text="ReelTrack Glossary Found" />
     <admin:box_begin color="false" />
         <listing:begin />
             <listing:header_begin />
-                <listing:header_cell first="true" name="Name" />
-                <listing:header_cell width="100" name="Description" />
+                <listing:header_cell first="true" name="Name" width="150" />
+                <listing:header_cell name="Description" />
+                <% if(canEdit) { %>
                 <listing:header_cell width="100" name="" />
+                <% } %>
             <listing:header_end />
             <% for(int i=0; i<contents.howMany(); i++) { %>
             <% content = (Glossary)contents.get(i); %>
@@ -63,10 +72,12 @@ dbResources.close();
                 <listing:cell_begin />
                     <%= content.getDescription() %>
                 <listing:cell_end />
+                <% if(canEdit) { %>
                 <listing:cell_begin align="right"/>
                     <% String tempUrl = "glossary/edit.jsp?" +  Glossary.PARAM + "=" + content.getId(); %>
                     <form:linkbutton url="<%= tempUrl %>" name="EDIT" />
                 <listing:cell_end />
+                <% } %>
             <listing:row_end />
             <% } %>
         <listing:end />

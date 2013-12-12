@@ -33,11 +33,13 @@ The permissions are dealt with in the file itself.
 -->
 
 <% if(userLoginMgr.isLoggedIn()) { %>
-	<% if(user.getCustomerId()!=0 && !user.getJobCode().equals("") && (user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT))) { %>
+	<% if(user.getCustomerId()!=0 && !user.getJobCode().equals("") && (user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_STANDARD))) { %>
 		<a class="module_bar_toggle" rel="common/interface/manage_reels">On-Site Reel Mgt</a>
 		<a class="module_bar_toggle" rel="common/interface/reel_inventory">Inventory Data</a>
-		<a class="module_bar_toggle" rel="common/interface/configuration">Job Data</a>
-		<a class="module_bar_toggle" rel="common/interface/reports">Reports</a>
+		<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT)) { %>
+			<a class="module_bar_toggle" rel="common/interface/configuration">Job Data</a>
+			<a class="module_bar_toggle" rel="common/interface/reports">Reports</a>
+		<% } %>
 	<% } %>
 	<% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
 		<a class="module_bar_toggle" rel="common/interface/ecs_internal">ECS Internal</a>

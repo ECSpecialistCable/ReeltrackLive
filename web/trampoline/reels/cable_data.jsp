@@ -20,6 +20,12 @@
 <% reelMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
+boolean canEdit = false;
+if(user.isUserType(RTUser.USER_TYPE_ECS)) {
+    canEdit = true;
+}
+%>
+<%
 // Get the id
 int contid = 0;
 if(request.getParameter(Reel.PARAM) != null) {
@@ -49,8 +55,10 @@ String tempURL; //var for url expression
 
 <admin:subtitle text="Data Sheet" />
 <admin:box_begin />
-    <form:begin_multipart submit="true" name="edit" action="reels/process.jsp" />
+    <form:begin_multipart submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
+        <% if(canEdit) { %>
         <form:file name="<%= CableTechData.DATA_SHEET_FILE_COLUMN %>" label="Data Sheet File:" />
+        <% } %>
         <% if(techData.getDataSheetFile() != null && !techData.getDataSheetFile().equals("")) { %>
             <form:row_begin />
             <form:label label="Download Data Sheet:"  />
@@ -65,7 +73,9 @@ String tempURL; //var for url expression
         <form:row_begin />
             <form:label name="" label="" />
             <form:buttonset_begin align="left" padding="0"/>
+                <% if(canEdit) { %>
                 <form:submit_inline button="save" waiting="true" name="save" action="update_datasheet" />
+                <% } %>
             <form:buttonset_end />
         <form:row_end />
     <form:end />
@@ -73,7 +83,7 @@ String tempURL; //var for url expression
 
 <admin:subtitle text="Cable Summary" />
 <admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
         <form:info label="Total Ordered:" text="" />
         <form:info label="Total Received:" text="" />
         <form:info label="Total In Wharehouse:" text="" />
@@ -84,7 +94,7 @@ String tempURL; //var for url expression
 
 <admin:subtitle text="Conductor / Ground" />
 <admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
 		<form:textfield label="Area (cir mil):" pixelwidth="50" name="<%= CableTechData.CONDUCTOR_AREA_COLUMN %>" value="<%= new Integer(techData.getConductorArea()).toString() %>" />
 		<form:textfield label="Ground Size:" name="<%= CableTechData.CONDUCTOR_GROUND_SIZE_COLUMN %>" value="<%= techData.getConductorGroundSize() %>" />
         <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
@@ -92,7 +102,9 @@ String tempURL; //var for url expression
 		<form:row_begin />
 			<form:label name="" label="" />
 			<form:buttonset_begin align="left" padding="0"/>
+                <% if(canEdit) { %>
 				<form:submit_inline button="save" waiting="true" name="save" action="update_conductor" />
+                <% } %>
 			<form:buttonset_end />
 		<form:row_end />
     <form:end />
@@ -100,7 +112,7 @@ String tempURL; //var for url expression
 
 <admin:subtitle text="Insulation" />
 <admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
         <form:textfield label="Thick (mils):" pixelwidth="50" name="<%= CableTechData.INSULATION_THICKNESS_COLUMN %>" value="<%= new Integer(techData.getInsulationThickness()).toString() %>" />
         <form:textfield label="Compound:" name="<%= CableTechData.INSULATION_COMPOUND_COLUMN %>" value="<%= techData.getInsulationCompound() %>" />
         <form:textfield label="Color code:" name="<%= CableTechData.INSULATION_COLOR_COLUMN %>" value="<%= techData.getInsulationColor() %>" />
@@ -109,7 +121,9 @@ String tempURL; //var for url expression
         <form:row_begin />
             <form:label name="" label="" />
             <form:buttonset_begin align="left" padding="0"/>
+                <% if(canEdit) { %>
                 <form:submit_inline button="save" waiting="true" name="save" action="update_insulation" />
+                <% } %>
             <form:buttonset_end />
         <form:row_end />
     <form:end />
@@ -117,7 +131,7 @@ String tempURL; //var for url expression
 
 <admin:subtitle text="Jacket" />
 <admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
         <form:textfield label="Overall Shiled Type:" name="<%= CableTechData.SHIELD_TYPE_COLUMN %>" value="<%= techData.getShieldType() %>" />
         <form:textfield label="Thick (mils):" pixelwidth="50"  name="<%= CableTechData.JACKET_THICKNESS_COLUMN %>" value="<%= new Integer(techData.getJacketThickness()).toString() %>" />
         <form:textfield label="Compound:" name="<%= CableTechData.JACKET_COMPOUND_COLUMN %>" value="<%= techData.getJacketCompound() %>" />
@@ -126,7 +140,9 @@ String tempURL; //var for url expression
         <form:row_begin />
             <form:label name="" label="" />
             <form:buttonset_begin align="left" padding="0"/>
+                <% if(canEdit) { %>
                 <form:submit_inline button="save" waiting="true" name="save" action="update_jacket" />
+                <% } %>
             <form:buttonset_end />
         <form:row_end />
     <form:end />
@@ -134,7 +150,7 @@ String tempURL; //var for url expression
 
 <admin:subtitle text="Overall Cable" />
 <admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
         <form:textfield label="O.D. (inches):" pixelwidth="50" name="<%= CableTechData.OD_COLUMN %>" value="<%= Double.toString(techData.getOD()) %>" />
         <form:textfield label="Weight/kft:" pixelwidth="50" name="<%= CableTechData.WEIGHT_COLUMN %>" value="<%= new Integer(techData.getWeight()).toString() %>" />
         <form:textfield label="MBR (inches):" name="<%= CableTechData.RADIUS_COLUMN %>" value="<%= Double.toString(techData.getRadius()) %>" />
@@ -145,7 +161,9 @@ String tempURL; //var for url expression
         <form:row_begin />
             <form:label name="" label="" />
             <form:buttonset_begin align="left" padding="0"/>
+                <% if(canEdit) { %>
                 <form:submit_inline button="save" waiting="true" name="save" action="update_overall" />
+                <% } %>
             <form:buttonset_end />
         <form:row_end />
     <form:end />
