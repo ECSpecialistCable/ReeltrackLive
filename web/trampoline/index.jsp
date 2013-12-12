@@ -18,6 +18,29 @@ int reelID = 0;
 if(request.getParameter("id")!=null) {
     reelID = Integer.parseInt(request.getParameter("id"));
 }
+String tagType = "";
+if(request.getParameter("type")!=null) {
+    tagType = request.getParameter("type");
+}
+String jobCode = "";
+if(request.getParameter("job")!=null) {
+    jobCode = request.getParameter("job");
+}
+
+if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
+	if(tagType.equals("RT")) {
+		Reel rtReel = new Reel();
+		rtReel.setId(reelID);
+		rtReel.setJobCode(jobCode);
+		session.setAttribute("RT",rtReel);
+	}
+	if(tagType.equals("PL")) {
+		Reel plReel = new Reel();
+		plReel.setId(reelID);
+		plReel.setJobCode(jobCode);
+		session.setAttribute("PL",plReel);
+	}
+}
 
 	boolean isIpad = false;
 	String user_agent = request.getHeader("user-agent");

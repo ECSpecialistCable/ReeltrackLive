@@ -42,6 +42,15 @@ WhLocation location = new WhLocation();
 location.setCustomerId(user.getCustomerId());
 CompEntities locations = locationMgr.searchWhLocation(location, WhLocation.NAME_COLUMN, true);
 
+Reel rtReel = (Reel)session.getAttribute("RT");
+Reel plReel = (Reel)session.getAttribute("PL");
+boolean reelsMatch = false;
+if(rtReel!=null && plReel!=null) {
+	if(rtReel.getId() == plReel.getId() && rtReel.getId() == content.getId() && rtReel.getJobCode().equals(content.getJobCode())) {
+		reelsMatch = true;
+	}
+}
+
 String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
@@ -51,6 +60,34 @@ String tempURL; //var for url expression
 <admin:title text="<%= tempURL %>" />
 <notifier:show_message />
 
+<% if(reelsMatch) { %>
+<admin:subtitle text="Stage Reel" />
+<admin:box_begin />
+	<form:begin submit="true" name="stage" action="checkout/process.jsp" />
+        <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
+        <form:row_begin />
+		<form:label name="" label="" />
+		<form:buttonset_begin align="left" padding="0"/>
+			<form:submit_inline button="save" waiting="true" name="STAGE" action="mark_staged" />
+		<form:buttonset_end />
+		<form:row_end />
+    <form:end />
+<admin:box_end />
+<admin:subtitle text="Checkout Reel" />
+<admin:box_begin />
+	<form:begin submit="true" name="checkout" action="checkout/process.jsp" />
+        <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
+        <form:row_begin />
+		<form:label name="" label="" />
+		<form:buttonset_begin align="left" padding="0"/>
+			<form:submit_inline button="save" waiting="true" name="CHECKOUT" action="mark_checkedout" />
+		<form:buttonset_end />
+		<form:row_end />
+    <form:end />
+<admin:box_end />
+<% } %>
 <admin:subtitle text="General Info" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />

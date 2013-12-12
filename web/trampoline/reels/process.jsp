@@ -47,6 +47,26 @@ if(request.getParameter(Reel.PARAM) != null) {
     }
 }
 
+if(action.equals("mark_staged")) {
+    Reel content = new Reel();
+    content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    reelMgr.markReelStaged(content);
+    session.removeAttribute("RT");
+    session.removeAttribute("PL");
+    redirect = request.getContextPath() + "/trampoline/" + "reels/edit.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("mark_checkedout")) {
+    Reel content = new Reel();
+    content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    reelMgr.markReelCheckedOut(content);
+    session.removeAttribute("RT");
+    session.removeAttribute("PL");
+    redirect = request.getContextPath() + "/trampoline/" + "reels/edit.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
 if(action.equals("create")) {
     Reel content = new Reel();
     content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));

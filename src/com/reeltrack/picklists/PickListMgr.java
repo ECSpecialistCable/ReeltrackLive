@@ -186,7 +186,8 @@ public class PickListMgr extends CompWebManager {
 		puller.addSearch(theReel);
 		Reel pulledReel = (Reel)controller.pullCompEntity(puller);
 		
-		String qrcode = "PL:" + pulledReel.getCustomerPN() + ":" + pulledReel.getId() + ":" + pulledReel.getReelTag() + ":" + pulledReel.getReelSerial() + ":" + pulledReel.getCableDescription();
+		//String qrcode = "PL:" + pulledReel.getCustomerPN() + ":" + pulledReel.getId() + ":" + pulledReel.getReelTag() + ":" + pulledReel.getReelSerial() + ":" + pulledReel.getCableDescription();
+		String qrcode = "http://reeltrack.monumental-i.com/trampoline/index.jsp?type=PL&id=" + pulledReel.getId() + "&job=" + pulledReel.getJobCode();
 		System.out.println(qrcode);
         ByteArrayOutputStream out = QRCode.from(qrcode).to(ImageType.PNG).withSize(500, 500).stream();
         
