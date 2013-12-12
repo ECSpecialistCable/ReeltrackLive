@@ -63,7 +63,7 @@ String tempURL; //var for url expression
 <% if(reelsMatch) { %>
 <admin:subtitle text="Stage Reel" />
 <admin:box_begin />
-	<form:begin submit="true" name="stage" action="checkout/process.jsp" />
+	<form:begin submit="true" name="stage" action="reels/process.jsp" />
         <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
         <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
         <form:row_begin />
@@ -76,7 +76,7 @@ String tempURL; //var for url expression
 <admin:box_end />
 <admin:subtitle text="Checkout Reel" />
 <admin:box_begin />
-	<form:begin submit="true" name="checkout" action="checkout/process.jsp" />
+	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
         <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
         <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
         <form:row_begin />
