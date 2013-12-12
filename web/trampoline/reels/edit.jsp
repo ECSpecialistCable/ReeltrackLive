@@ -47,7 +47,9 @@ Reel plReel = (Reel)session.getAttribute("PL");
 boolean reelsMatch = false;
 if(rtReel!=null && plReel!=null) {
 	if(rtReel.getId() == plReel.getId() && rtReel.getId() == content.getId() && rtReel.getJobCode().equals(content.getJobCode())) {
-		reelsMatch = true;
+		if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) ) {
+			reelsMatch = true;
+		}
 	}
 }
 
