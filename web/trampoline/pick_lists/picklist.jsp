@@ -80,10 +80,14 @@ td {
 </style>
 </head>
 <body>
-
-<table>
+<% for(int i=0; i<pickReels.howMany(); i++) { %>
+	<% Reel reel = (Reel)pickReels.get(i); %>
+	<% CompEntities circuits = reel.getCompEntities(ReelCircuit.PARAM); %>
+	<% int rowspan = 7 + circuits.howMany(); %>
+	<h1 <% if(i>0) { %>style="page-break-before: always;"<% } %>>Pick List: <%= content.getName() %></h1>
+	<table>
 	<tr>
-		<td class="header">ID</td>
+		<td class="header">Pick List number</td>
 		<td class="header">Name</td>
 		<td class="header">Foreman</td>
 		<td class="header">Reels</td>
@@ -93,15 +97,11 @@ td {
 		<td class="value"><%= content.getId() %></td>
 		<td class="value"><%= content.getName() %></td>
 		<td class="value"><%= content.getForeman() %></td>
-		<td class="value"><%= pickReels.howMany() %></td>
+		<td class="value"><%= i+1 %> of <%= pickReels.howMany() %></td>
 		<td class="value"><%= dateString %></td>
 	</tr>
-</table>
-
-<% for(int i=0; i<pickReels.howMany(); i++) { %>
-	<% Reel reel = (Reel)pickReels.get(i); %>
-	<% CompEntities circuits = reel.getCompEntities(ReelCircuit.PARAM); %>
-	<% int rowspan = 7 + circuits.howMany(); %>
+	</table>
+	<br />
 	<table>
 	<tr>
 		<td class="header">ReelTag / Description</td>

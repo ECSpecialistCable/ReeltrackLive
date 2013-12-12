@@ -140,14 +140,12 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 				<th style="border-bottom: none" class="center">Description</th>
 				<th class="center">Top Ft. #</th>
 				<th style="border-bottom: none" class="center">Quantity</th>
-				<th style="border-bottom: none" class="center">Quantity<br/>Variance</th>
 
 				<tr>
 					<th style="border-top: none" class="center"></th>
 					<th style="border-top: none" class="center"></th>
 					<th style="border-top: none" class="center"></th>
 					<th class="center">New / Check Out</th>
-					<th style="border-top: none" class="center"></th>
 					<th style="border-top: none" class="center"></th>
 				</tr>
 				<% for(int i=0; i<checkedInOnDate.howMany(); i++) { %>
@@ -163,7 +161,6 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 						<td class="center"><%= current.getCableDescription() %></td>
 						<td class="center"></td>
 						<td class="center"><%= current.getOnReelQuantity() %></td>
-						<td class="center"></td>
 					</tr>
 					
 					<% String notes = "Notes: "; %>

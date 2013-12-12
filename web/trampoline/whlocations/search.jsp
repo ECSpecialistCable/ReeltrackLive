@@ -42,6 +42,16 @@ String tempUrl =""; //var for url expression
                 <form:buttonset_end />
             <form:row_end />
     <form:end />
+    <form:begin_multipart name="create" action="whlocations/process.jsp" />
+            <form:file name="location_file" label="File:" />
+            <form:hidden name="<%= WhLocation.CUSTOMER_ID_COLUMN %>" value="<%= new Integer(user.getCustomerId()).toString() %>" />
+            <form:row_begin />
+                <form:label name="" label="" />
+                <form:buttonset_begin align="left" padding="0"/>
+                        <form:submit_inline button="save" waiting="true" name="import" action="import" />
+                <form:buttonset_end />
+            <form:row_end />
+    <form:end />
 <admin:box_end />
 
 <% if(contents.howMany() > 0) { %>

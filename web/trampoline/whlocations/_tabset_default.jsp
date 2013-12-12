@@ -7,6 +7,6 @@
 <% userLoginMgr.init(pageContext); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 
-<admin:tab url="whlocations/search.jsp" text="Drivers" />
+<admin:tab url="whlocations/search.jsp" text="Warehouse Locations" />
 
 <admin:set_moduleactions url="whlocations/_moduleactions.jsp" />

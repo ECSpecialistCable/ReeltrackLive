@@ -33,7 +33,7 @@
 <admin:subtitle text="Daily Report" />
 <admin:box_begin />
 <form:begin name="daily_report" action="../DownloadReportServlet" />
-	<form:date_picker label="Report Day:" name="daily_report_day" required="true" value="<%= df.format(new Date()) %>" />
+	<form:date_picker label="Report Day:" name="daily_report_day" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
     <form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>

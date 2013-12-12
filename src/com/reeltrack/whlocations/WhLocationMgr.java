@@ -7,6 +7,8 @@ import java.util.GregorianCalendar;
 import javax.servlet.jsp.PageContext;
 import com.reeltrack.users.RTUser;
 
+import java.io.*;
+
 public class WhLocationMgr extends CompWebManager {
 	CompDbController controller;
 	
@@ -53,5 +55,22 @@ public class WhLocationMgr extends CompWebManager {
 	public void deleteWhLocation(WhLocation content, String realRootContextPath) throws Exception {
 		this.cleanWhLocation(content, realRootContextPath);
 		controller.delete(realRootContextPath, content);
+	}
+
+	public void importLocations(WhLocation content, File file) throws Exception {
+		FileReader fileReader = new FileReader(file);
+ 		BufferedReader br = new BufferedReader(fileReader);
+ 		String line = null;
+ 		while ((line = br.readLine()) != null) {
+ 			if(line.equals("")) continue;
+ 			WhLocation search = new WhLocation();
+ 			search.setCustomerId(content.getCustomerId());
+ 			search.setName(line);
+ 			WhLocation result = this.getWhLocation(search);
+ 			if(!result.hasData() || result.getId()==0) {
+ 				search.setStatus(WhLocation.STATUS_ACTIVE);
+ 				this.addWhLocation(search);
+ 			}
+ 		}
 	}
 }

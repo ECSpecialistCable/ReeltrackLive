@@ -610,6 +610,12 @@ public class ReelMgr extends CompWebManager {
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
 		content.setCreatedBy(user.getName());
+
+		Reel reel = new Reel();
+		reel.setId(content.getReelId());
+		reel = this.getReel(reel);
+		content.setOnReelQuantity(reel.getOnReelQuantity());
+		content.setTopFoot(reel.getTopFoot());
 		return controller.add(content);
 	}
 

@@ -7,6 +7,8 @@ public class ReelLog extends CompCMEntity {
 	public static final String REEL_ID_COLUMN = "reel_id";
 	public static final String CREATED_BY_COLUMN = "created_by";
 	public static final String NOTE_COLUMN = "note";
+	public static final String ON_REEL_QUANTITY_COLUMN = "on_reel_quantity";
+	public static final String TOP_FOOT_COLUMN = "top_foot";
 
 	@Override
 	public String getTableName() {
@@ -26,6 +28,22 @@ public class ReelLog extends CompCMEntity {
 	public String getTitle() {
 		return this.getNote();
 	}
+
+   	public int getOnReelQuantity() {
+		return this.getData().getInteger(ON_REEL_QUANTITY_COLUMN, new Integer(0));
+    }
+
+    public void setOnReelQuantity(int id) {
+		this.getData().setInteger(ON_REEL_QUANTITY_COLUMN, new Integer(id));
+    }
+
+   	public int getTopFoot() {
+		return this.getData().getInteger(TOP_FOOT_COLUMN, new Integer(0));
+    }
+
+    public void setTopFoot(int id) {
+		this.getData().setInteger(TOP_FOOT_COLUMN, new Integer(id));
+    }
 	
 	public int getReelId() {
 		return this.getData().getInteger(REEL_ID_COLUMN, 0);

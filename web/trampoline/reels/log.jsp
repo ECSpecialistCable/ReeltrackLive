@@ -55,6 +55,8 @@ String tempURL; //var for url expression
         <listing:header_begin />
             <listing:header_cell width="75" first="true" name="Created" />
             <listing:header_cell width="100" name="By User" />
+            <listing:header_cell width="75" name="Cur Qty" />
+            <listing:header_cell width="75" name="Top #" />
             <listing:header_cell name="Log Entry" />
         <listing:header_end />
         <% for(int i=0; i<logs.howMany(); i++) { %>
@@ -65,6 +67,12 @@ String tempURL; //var for url expression
             <listing:cell_end />
             <listing:cell_begin />
                 <%= log.getCreatedBy() %>
+            <listing:cell_end />
+            <listing:cell_begin />
+                <%= log.getOnReelQuantity() %>
+            <listing:cell_end />
+            <listing:cell_begin />
+                <%= log.getTopFoot() %>
             <listing:cell_end />
             <listing:cell_begin />
                 <%= TextParser.addBreakTags(log.getNote()) %>
