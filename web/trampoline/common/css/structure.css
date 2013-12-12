@@ -23,7 +23,7 @@ body#outer {
 
 div#wayout {
     position: relative;
-    width: 1134px;
+    /*width: 1134px;*/
     margin-left: auto;
     margin-right: auto;
    /*border: 1px solid red;*/
