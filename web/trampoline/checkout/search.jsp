@@ -168,7 +168,7 @@ String tempURL = "";
             <listing:header_cell width="150" name="Foreman" />
             <listing:header_cell width="50" name="Reels" />
             <listing:header_cell width="100" name="Status" />
-            <listing:header_cell width="140" name=""  />
+            <listing:header_cell width="150" name=""  />
         <listing:header_end />
         <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (PickList)contents.get(i); %>
