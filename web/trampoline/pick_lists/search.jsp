@@ -122,9 +122,6 @@ String tempURL = "";
                     <% ReelCircuit tmpCircuit = (ReelCircuit)circuits.get(c); %>
                     <form:option name="<%= tmpCircuit.getName() %>" value="<%= new Integer(tmpCircuit.getId()).toString() %>" match="<%= new Integer(circuit.getId()).toString() %>" />
                 <% } %>
-                <% for(int c=0; c<100; c++) { %>
-                    <form:option name="test" value="test" />
-                <% } %>
             <form:select_end />
             <form:content_end />
         <form:row_end />
