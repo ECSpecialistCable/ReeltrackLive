@@ -2,6 +2,8 @@ package com.reeltrack.reels;
 
 import com.monumental.trampoline.component.*;
 import com.monumental.trampoline.datasources.*;
+import com.reeltrack.customers.Customer;
+import com.reeltrack.customers.CustomerJob;
 import java.util.Date;
 import java.io.*;
 import java.util.GregorianCalendar;
@@ -545,6 +547,24 @@ public class ReelMgr extends CompWebManager {
 
 		puller.setSortBy(content.getTableName(), sort_by, asc);
 		return controller.pullCompEntitiesCount(puller);
+	}
+
+	public Customer getCustomerForReel(Reel content) throws Exception {
+		Customer toReturn = new Customer();
+		CompEntityPuller puller = new CompEntityPuller(new CustomerJob());
+
+		CustomerJob job = new CustomerJob();
+		job.setCode(content.getJobCode());
+		job.setSearchOp(CustomerJob.CODE_COLUMN, CustomerJob.EQ);
+		puller.addSearch(job);
+		job = (CustomerJob)controller.pullCompEntity(puller);
+
+		puller = new CompEntityPuller(new Customer());
+		Customer toGet = new Customer();
+		toGet.setId(job.getCustomerId());
+		toReturn = (Customer)controller.pullCompEntity(puller);
+		
+		return toReturn;
 	}
 
 	public void cleanReel(Reel content, String realRootContextPath) throws Exception {
