@@ -13,4 +13,5 @@
 		<admin:ajax_load url="whlocations/search.jsp" label="Manage Warehouse Locations" />
 		<%--<admin:ajax_load url="settings/search.jsp" label="Settings" />--%>
 		<admin:ajax_load url="glossary/reeltrack_glossary.jsp" label="View Glossary" />
+		<admin:ajax_load url="file_cabinets/search.jsp" label="File Cabinet" />
 <% } %>

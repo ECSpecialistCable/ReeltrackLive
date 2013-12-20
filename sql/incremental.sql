@@ -258,4 +258,14 @@ alter table reel_logs add on_reel_quantity int default 0;
 alter table reel_logs add top_foot int default 0;
 alter table reels add has_reel_tag_file varchar(1) default 'n';
 
-
+/* 12/20/2013 */
+create table file_cabinet (
+	id int(11) NOT NULL auto_increment,
+	created datetime,
+	updated datetime,
+	status varchar(25),
+	title varchar(255),
+	job_id int default 0,
+	file_name varchar(255),
+	PRIMARY KEY (id)
+);
