@@ -8,12 +8,12 @@
 
 <% if (user!=null) { %>
         <admin:ajax_load url="reeltags/search.jsp" label="Generate Reel Tags" />
-        <admin:ajax_load url="shipping/search.jsp" label="Shipping" />
-        <admin:ajax_load url="receive/search.jsp" label="Receive" />
-        <admin:ajax_load url="pick_lists/search.jsp" label="Pick Lists" />
-        <admin:ajax_load url="checkout/search.jsp" label="Check OUT" />
-        <admin:ajax_load url="checkin/search.jsp" label="Check IN" />
-        <admin:ajax_load url="complete/search.jsp" label="Complete" />
-        <admin:ajax_load url="scrapped/search.jsp" label="Scrapped" />
-        <admin:ajax_load url="issues/search.jsp" label="Issues" />
+        <admin:ajax_load url="shipping/search.jsp" label="Mark as Shipped" />
+        <admin:ajax_load url="receive/search.jsp" label="Receive Reels" />
+        <admin:ajax_load url="pick_lists/search.jsp" label="Manage Pick Lists" />
+        <admin:ajax_load url="checkout/search.jsp" label="Check OUT Reels" />
+        <admin:ajax_load url="checkin/search.jsp" label="Check IN Reels" />
+        <admin:ajax_load url="complete/search.jsp" label="Mark as Complete" />
+        <admin:ajax_load url="scrapped/search.jsp" label="Mark as Scrapped" />
+        <admin:ajax_load url="issues/search.jsp" label="Manage Issues" />
 <% } %>

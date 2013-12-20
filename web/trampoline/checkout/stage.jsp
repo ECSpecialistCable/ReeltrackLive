@@ -166,7 +166,7 @@ String tempURL; //var for url expression
                 <form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
-					<form:submit_inline button="save" waiting="true" name="save" action="mark_staged" />
+					<form:submit_inline button="save" waiting="true" name="Mark Staged" action="mark_staged" />
                     <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + reel3.getId(); %>
                     <form:linkbutton url="<%= tempURL %>" name="EDIT REEL" />
 				<form:buttonset_end />

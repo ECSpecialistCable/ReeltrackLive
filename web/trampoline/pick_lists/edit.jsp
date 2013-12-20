@@ -100,14 +100,15 @@ String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
 
+<% tempURL = "Picklist: " + content.getTitle(); %>
 <html:begin />
-<admin:title text="<%= content.getTitle() %>" />
+<admin:title text="<%= tempURL %>" />
 <notifier:show_message />
 
 <admin:subtitle text="General Info" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="pick_lists/process.jsp" />
-    		<form:textfield label="Name:" name="<%= PickList.NAME_COLUMN %>" value="<%= content.getName() %>" />
+    		<form:textfield label="Picklist Name:" name="<%= PickList.NAME_COLUMN %>" value="<%= content.getName() %>" />
     		<form:row_begin />
 	            <form:label name="" label="Checked OUT to:" />
 	            <form:content_begin />
@@ -131,7 +132,7 @@ String tempURL; //var for url expression
 <admin:box_end />
 
 <% if(pickReels.howMany() > 0) { %>
-	<admin:subtitle text="Reels" />
+	<admin:subtitle text="Reels on Picklist" />
 	<admin:box_begin color="false" />
 	<listing:begin />
 	    <listing:header_begin />
