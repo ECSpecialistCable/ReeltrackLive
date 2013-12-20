@@ -24,6 +24,14 @@
 	RTUser user = (RTUser)userLoginMgr.getUser();
 	SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
+	String invSumReportType = "Pdf";
+	if(request.getParameter("inv_summary_type")!=null) {
+		invSumReportType = request.getParameter("inv_summary_type");
+	}
+	String invReportType = "Pdf";
+	if(request.getParameter("inv_type")!=null) {
+		invReportType = request.getParameter("inv_type");
+	}
 %>
 
 <% dbResources.close(); %>
@@ -47,29 +55,54 @@
 
 <admin:subtitle text="Inventory Summary" />
 <admin:box_begin />
+<form:begin_selfsubmit name="inventory_summary_type" action="reports/reports.jsp" />
+	<form:row_begin />
+        <form:label name="" label="Generate:" />
+        <form:content_begin />
+        <form:select_begin onchange="test" name="inv_summary_type" />
+            <form:option name="Pdf" value="Pdf" match="<%= invSumReportType %>" />
+            <form:option name="Excel" value="Excel" match="<%= invSumReportType %>" />
+        <form:select_end />
+        <form:content_end />
+    <form:row_end />
+<form:end />
 <form:begin name="inventory_summary" action="../DownloadReportServlet" />
     <form:row_begin />
-        <form:label name="" label="Generate:" />
+        <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
             <form:submit_inline button="submit" waiting="false" name="search" action="test" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="inventory_summary" />
 	<form:hidden name="job_code" value="<%= user.getJobCode() %>" />
+	<form:hidden name="whichReport" value="<%= invSumReportType %>" />
 <form:end />
 <admin:box_end />
 
 <admin:subtitle text="Inventory Report" />
 <admin:box_begin />
+<form:begin_selfsubmit name="inventory_type" action="reports/reports.jsp" />
+	<form:row_begin />
+        <form:label name="" label="Generate:" />
+        <form:content_begin />
+        <form:select_begin onchange="test" name="inv_type" />
+            <form:option name="Pdf" value="Pdf" match="<%= invReportType %>" />
+            <form:option name="Excel" value="Excel" match="<%= invReportType %>" />
+        <form:select_end />
+        <form:content_end />
+    <form:row_end />
+<form:end />
+
 <form:begin name="inventory_report" action="../DownloadReportServlet" />
     <form:row_begin />
-        <form:label name="" label="Generate:" />
+        <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
             <form:submit_inline button="submit" waiting="false" name="search" action="test" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="inventory_report" />
 	<form:hidden name="job_code" value="<%= user.getJobCode() %>" />
+	<form:hidden name="whichReport" value="<%= invReportType %>" />
 <form:end />
 <admin:box_end />
 

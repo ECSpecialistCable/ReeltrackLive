@@ -6,14 +6,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.*;
 
 import com.monumental.trampoline.datasources.*;
-import com.reeltrack.reels.Reel;
-import com.reeltrack.users.RTUser;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspFactory;
 import javax.servlet.jsp.PageContext;
+import org.apache.poi.hssf.usermodel.*;
 
 public class DownloadReportServlet extends HttpServlet {
 
@@ -27,10 +25,18 @@ public class DownloadReportServlet extends HttpServlet {
 			this.downloadDailyReport(request, response, request.getParameter("daily_report_day"), request.getParameter("job_code"));
 
 		} else if (reportType != null && reportType.equals("inventory_summary")) {
-			this.downloadInventorySummary(request, response, request.getParameter("job_code"));
+			if(request.getParameter("whichReport").equalsIgnoreCase("Pdf")) {
+				this.downloadInventorySummary(request, response, request.getParameter("job_code"));
+			} else if(request.getParameter("whichReport").equalsIgnoreCase("Excel")) {
+				this.downloadInventorySummaryExcel(request, response, request.getParameter("job_code"));
+			}
 
 		} else if (reportType != null && reportType.equals("inventory_report")) {
-			this.downloadInventoryReport(request, response, request.getParameter("job_code"));
+			if(request.getParameter("whichReport").equalsIgnoreCase("Pdf")) {
+				this.downloadInventoryReport(request, response, request.getParameter("job_code"));
+			} else if(request.getParameter("whichReport").equalsIgnoreCase("Excel")) {
+				this.downloadInventoryReportExcel(request, response, request.getParameter("job_code"));
+			}
 
 		} else if (reportType != null && reportType.equals("period_report")) {
 			this.downloadPeriodReport(request, response, request.getParameter("period_report_start_date"), request.getParameter("period_report_end_date"), request.getParameter("job_code"));
@@ -117,6 +123,42 @@ public class DownloadReportServlet extends HttpServlet {
 		}
 	}
 
+	private void downloadInventorySummaryExcel(HttpServletRequest request, HttpServletResponse response, String jobCode) {
+		Date today = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("MMddyyyy");
+		DbResources dbResources = new DbResources();
+		JspFactory factory = JspFactory.getDefaultFactory();
+		PageContext pageContext = factory.getPageContext(this, request, response, null, true, 0, true);
+		InventorySummaryExcelReport writer = new InventorySummaryExcelReport(pageContext, dbResources);
+
+		try {
+			HSSFWorkbook wb = writer.writeUserExcel(jobCode, getServletContext().getRealPath("/"));
+
+	        ServletOutputStream op = response.getOutputStream();
+	        ServletContext context  = getServletConfig().getServletContext();
+	        //String mimetype = context.getMimeType(filename);
+
+			// Set the Respnse
+	        response.setContentType("application/octet-stream");
+			response.setHeader( "Content-Disposition", "attachment; filename=\"inventory_summary_report_" + df.format(today) +".xls\"" );
+
+	        // Stream
+			try {
+	        	wb.write(op);
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+	        	op.flush();
+	        	op.close();
+				wb = null;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbResources.close();
+		}		
+	}
+
 	private void downloadInventoryReport(HttpServletRequest request, HttpServletResponse response, String jobCode) {
 		Date today = new Date();
 		SimpleDateFormat df = new SimpleDateFormat("MMddyyyy");
@@ -152,6 +194,42 @@ public class DownloadReportServlet extends HttpServlet {
 		} finally {
 			dbResources.close();
 		}
+	}
+
+	private void downloadInventoryReportExcel(HttpServletRequest request, HttpServletResponse response, String jobCode) {
+		Date today = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("MMddyyyy");
+		DbResources dbResources = new DbResources();
+		JspFactory factory = JspFactory.getDefaultFactory();
+		PageContext pageContext = factory.getPageContext(this, request, response, null, true, 0, true);
+		InventoryExcelReport writer = new InventoryExcelReport(pageContext, dbResources);
+
+		try {
+			HSSFWorkbook wb = writer.writeUserExcel(jobCode, getServletContext().getRealPath("/"));
+
+	        ServletOutputStream op = response.getOutputStream();
+	        ServletContext context  = getServletConfig().getServletContext();
+	        //String mimetype = context.getMimeType(filename);
+
+			// Set the Respnse
+	        response.setContentType("application/octet-stream");
+			response.setHeader( "Content-Disposition", "attachment; filename=\"inventory_report_" + df.format(today) +".xls\"" );
+
+	        // Stream
+			try {
+	        	wb.write(op);
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+	        	op.flush();
+	        	op.close();
+				wb = null;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbResources.close();
+		}	
 	}
 
 	private void downloadPeriodReport(HttpServletRequest request, HttpServletResponse response, String startDate, String endDate, String jobCode) {
