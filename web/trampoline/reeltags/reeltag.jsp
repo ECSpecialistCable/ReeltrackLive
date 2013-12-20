@@ -47,9 +47,12 @@ String logoURL;
 <head>
 	<title>Reel Tags</title>
 	<style type="text/css">
+
 		body {
 			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
 			font-size: 25px;
+			background:white;
+			margin:0px;
 		}
 
 		.value {
@@ -80,7 +83,7 @@ String logoURL;
 		}
 		
 		@page {
-			size: 8in 4in;
+			size: 7in 3.3in;
 			margin-top: 0.0in;
 			margin-bottom: 0.0in;
 			margin-left: 0.0in;

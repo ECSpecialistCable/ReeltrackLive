@@ -4,6 +4,7 @@ import com.monumental.trampoline.component.*;
 import com.monumental.trampoline.datasources.DbResources;
 import com.reeltrack.reels.*;
 
+import java.io.*;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -34,10 +35,18 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import java.io.StringBufferInputStream;
 
+import java.awt.*;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.xhtmlrenderer.resource.FSEntityResolver;
 import org.xhtmlrenderer.simple.Graphics2DRenderer;
+import org.xhtmlrenderer.simple.ImageRenderer;
+import org.xhtmlrenderer.util.FSImageWriter;
+import org.xhtmlrenderer.util.ImageUtil;
+import org.xhtmlrenderer.util.ScalingOptions;
+import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 
 public class HtmlToImageWriter extends CompWebManager {
 
@@ -100,7 +109,7 @@ public class HtmlToImageWriter extends CompWebManager {
 	   renderer.layout(imageGraphics,new Dimension(width,height));
 	   renderer.render(imageGraphics);
 
-	   String tagFileName = theReel.getReelTag() + "_" + theReel.getCrId() + ".jpg";
+	   String tagFileName = theReel.getReelTag() + "_" + theReel.getCrId() + ".pdf";
 	   tagFileName = tagFileName.replace(" ","_");
 	   tagFileName = tagFileName.replace("#","-");
 	   tagFileName = tagFileName.replace("/","-");
@@ -111,8 +120,39 @@ public class HtmlToImageWriter extends CompWebManager {
 	   	createDir.mkdirs();
 	   }
 
-	   File fileToWrite = new File(basePath + contentUrl + tagFileName);
-	   ImageIO.write(image, "jpg", fileToWrite);
+	   /*
+	   BufferedImage buff = null;
+	   buff = ImageRenderer.renderToImage(pageToGet, basePath + contentUrl + tagFileName, width, height);
+		BufferedImage scaled = ImageUtil.getScaledInstance(buff,width*2,height*2);
+		FSImageWriter imageWriter = new FSImageWriter();
+		imageWriter.write(scaled, basePath + contentUrl + tagFileName);
+		*/
+
+        OutputStream os = new FileOutputStream(basePath + contentUrl + tagFileName);
+        ITextRenderer irenderer = new ITextRenderer();
+        irenderer.setDocument(pageToGet);
+        irenderer.layout();
+        irenderer.createPDF(os);
+        os.close();
+
+        PDDocument document = null;
+		try {
+			document = PDDocument.load(basePath + contentUrl + tagFileName);
+		} catch (IOException ex) {
+			System.out.println("" + ex);
+		}
+
+		tagFileName = tagFileName + ".jpg";
+		java.util.List<PDPage> pages = document.getDocumentCatalog().getAllPages();
+		PDPage page = (PDPage) pages.get(0);
+		BufferedImage image2 = page.convertToImage();
+		File file = new File(basePath + contentUrl + tagFileName);
+		ImageIO.write(image2, "jpg", file);
+		document.close();
+
+
+	   //File fileToWrite = new File(basePath + contentUrl + tagFileName);
+	   //ImageIO.write(image, "jpg", fileToWrite);
 	   theReel.setReelTagFile(tagFileName);
 	   theReel.setHasReelTagFile("y");
 	   this.getCompController().update(theReel);
