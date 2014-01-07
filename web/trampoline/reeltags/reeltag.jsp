@@ -49,22 +49,23 @@ String logoURL;
 	<style type="text/css">
 
 		body {
-			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
+			font-family:Verdana;
 			font-size: 25px;
 			background:white;
 			margin:0px;
 		}
 
 		.value {
-			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
+			font-family:Verdana;
 			font-size: 10px;
 			vertical-align: top;
 			font-weight: bold;
 		}
 
 		.header {
-			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
+			font-family:Verdana;
 			font-size: 10px;
+			text-align: right;
 			/*background-color: #c4c4c4;*/
 			/*background-color: gray;
 			font-weight: bold;*/
@@ -81,6 +82,10 @@ String logoURL;
 		td {
 			padding: 3px;
 		}
+		
+		tr{
+
+}
 		
 		@page {
 			size: 7in 3.3in;
@@ -103,57 +108,62 @@ String logoURL;
 	</style>
 </head>
 <body>
-	<table style="border: none;border-bottom: solid 1px black;margin: 0px">
+	<table style="border: none;margin: 0px; margin-bottom: 0px;">
 		<tr>
-			<td>
-				<table style="display:inline; width:50%;padding:0px;border: none;">
+			<td style="vertical-align: top">
+				<table style="display:inline; width:50%;padding:0px;border: none;vertical-align: top;">
 					<tr>
-						<td><b><%= content.getReelTag() %></b></td>
+						<td style="padding-top: 7px;" colspan="2"><%= reelCustomer.getName().toUpperCase() %></td>
 					</tr>
 					<tr>
-						<td><%= reelCustomer.getName() %></td>
-					</tr>
-					<tr>
-						<td class="header" style="width:50px">P/N</td>
+						<td class="header" style="width:35px">P/N</td>
 						<td class="value" style="width:90px"><b><%= content.getCustomerPN()  %></b></td>
 					</tr>
 					<tr>
-						<td class="header" style="width:50px">P/O #</td>
+						<td class="header" style="width:35px">P/O #</td>
 						<td class="value" style="width:90px"><b><%= content.getCustomerPO()  %></b></td>
 					</tr>
 					<tr>
-						<td class="header" style="width:50px">Mfg</td>
-						<td class="value" style="width:150px"><b><%= content.getManufacturer()  %></b></td>
+						<td class="header" style="width:35px">Rec'd QTY</td>
+						<td class="value" style="width:90px"><b><%= content.getOnReelQuantity()  %></b></td>
+					</tr>
+					<tr>
+						<td class="header" style="width:35px">Rec'd GWT</td>
+						<td class="value" style="width:90px"><b></b></td>
+					</tr>
+					<tr>
+						<td colspan="2" style="width:90px;border-top:solid 2px black;border-bottom: solid 2px black; text-align: left; padding-left: 0px;height: 30px !important"><b><%= content.getReelTag() %></b></td>
 					</tr>
 				</table>
 			</td>
-			<td>
-				<table style="display:inline; width:10%;padding:0px;border: none;">
+			<td style="vertical-align: top; margin-bottom: 0px; padding-bottom: 0px;padding-top: 2px;">
+				<table style="display:inline; width:10%;padding:0px;border: none;vertical-align: top;">
 					<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
-					<tr style="padding: 0;" align="center">
-						<img alt="barcode" src="<%= tempURL %>" width="125" height="125" />
+					<tr style="padding: 0px;">
+						<td style="padding: 0px;">
+							<img alt="barcode" src="<%= tempURL %>" width="180" height="180" />
+						</td>
 					</tr>
 
 				</table>
 			</td>
-			<td>
-				<table style="display:inline; width:40%;padding:0px; border: none;">
+			<td style="vertical-align: top;">
+				<table style="display:inline; width:40%;padding:0px; border: none;vertical-align: top;" >
 					<tr>
-						<td class="header" style="width:90px">CRID#</td>
-						<td class="header" style="width:90px">Rec'd Qty</td>
+						<td></td><td></td>
 					</tr>
 					<tr>
-						<td class="value" style="width:90px"><b><%= content.getReelSerial()  %></b></td>
-						<td class="value" style="width:90px"><b><%= content.getOnReelQuantity()  %></b></td>
+						<td class="header" style="width:90px;">Mfg</td>
+						<td class="value" style="width:90px"><b><%= content.getManufacturer()  %></b></td>
 					</tr>
 					<tr>
-						<td class="header" style="width:90px">Weight / kft</td>
-						<td class="value" style="width:90px"><b><%= new Integer(techData.getWeight()).toString() + "lbs"   %></b></td>
+						<td></td><td></td>
 					</tr>
 					<tr>
-						<td class="header" style="width:90px">Rec'd GWT</td>
-						<td class="value" style="width:90px"><b></b></td>
+						<td class="header" style="width:90px;padding-top: 7px">Weight / kft</td>
+						<td class="value" style="width:90px;padding-top: 7px"><b><%= new Integer(techData.getWeight()).toString() + "lbs"   %></b></td>
 					</tr>
+					
 					<tr>
 						<td class="header" style="width:90px">O.D. (in)</td>
 						<td class="value" style="width:90px"><b><%= Double.toString(techData.getOD())+"\""   %></b></td>
@@ -166,91 +176,66 @@ String logoURL;
 						<td class="header" style="width:90px">Max Pull</td>
 						<td class="value" style="width:90px"><b><%--<%= new Integer(techData.getPullTension()).toString()  %>--%></b></td>
 					</tr>
+					<tr>
+						<td style="width:90px;border-top:solid 2px black;border-bottom: solid 2px black; text-align: right; padding-left: 0px;">CRID#</td>
+						<td style="width:90px;border-top:solid 2px black;border-bottom: solid 2px black; text-align: left; padding-left: 0px;"><b><%= content.getReelSerial() %></b></td>
+					</tr>
 				</table>
 			</td>
 		</tr>
 	</table>
-	<table style="margin: 0px; width:692px; border: none">
+	<table style="margin: 0px; margin-top: -25px; padding-top: 0px; width:692px; border: none">
 		<tr>
-			<td class="header" style="text-align: center; width: 35%">Circuit</td>
-			<td class="header" style="text-align: center; width: 20%">Length</td>
+			<td class="header" style="text-align: left; width: 35%">CIRCUIT</td>
+			<td class="header" style="text-align: center; width: 20%">LENGTH</td>
 			<td class="header" style="text-align: center; width: 10%">BY</td>
 			<td class="header" style="text-align: center; width: 35%"><%= content.getCableDescription() %></td>
 		</tr>
 
 		<% int total = 0; %>
-		<% if(circuits.howMany()==0) { %>
-			<td class="value" style="width: 35%;border-top: solid 1px black"></td>
-				<td class="value" style="width: 20%;border-top: solid 1px black"></td>
-				<td class="value" style="width: 10%;border-top: solid 1px black"></td>
-				<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo.png"; %>
-				<td style="text-align: center; width: 35%; padding: 0;width:160px;border-top: solid 1px black" rowspan="<%= "3" %>" align="center">
-					<table style="display:inline;width: 35%; text-align: center;border: none">
-						<tr>
-							<td class="header">ECS Part #</td>
-							<td class="value"><%= content.getEcsPN() %></td>
-
-							<td class="header">ECS PO #</td>
-							<td class="value"><%= "" %></td>
-						</tr>
-						<tr>
-							<td colspan="2" style="text-align: center;width: 35%;"><img alt="logo" src="<%= logoURL %>" width="130" height="40" /></td>
-						</tr>
-						<tr>
-							<td class="header" colspan="2" style="text-align: center; width: 35%;">770.446.2222   www.ecscable.com</td>
-						</tr>
-						<tr>
-							<td class="header" colspan="2" style="text-align: center;width: 35%;">Printed <%= dateString %></td>
-						</tr>
-					</table>
-
-				</td>
-		<% } else { %>
-			<% for (int c=0; c<circuits.howMany(); c++ ) { %>
-				<% ReelCircuit circuit = (ReelCircuit)circuits.get(c); %>
+		
+		<% for (int c=0; c<circuits.howMany() || c<5; c++ ) { %>
+			<% ReelCircuit circuit = new ReelCircuit(); %>
+			<% if(c<circuits.howMany()) { %>
+				<%  circuit = (ReelCircuit)circuits.get(c); %>
 				<% total += circuit.getLength(); %>
-				<tr>
-					<% String borderStyle = ""; %>
-					<% if(c==0) { %>
-						<% borderStyle=";border-left: solid 1px black;border-right: solid 1px black;border-top: solid 1px black;"; %>
-					<% } %>
-					<% if(c==circuits.howMany()-1) { %>
-						<% if(c==0) { %>
-							<% borderStyle=";border-left: solid 1px black;border-right: solid 1px black;border-top: solid 1px black;border-bottom: solid 1px black;"; %>
-						<% } else { %>
-							<% borderStyle=";border-left: solid 1px black;border-right: solid 1px black;border-bottom: solid 1px black;"; %>
-						<% } %>
-					<% } %>
-
-					<td class="value" style="width: 35%<%=borderStyle%>"><%= circuit.getName() %></td>
-					<td class="value" style="width: 20%;<%=borderStyle%>"><%= circuit.getLength() %></td>
-					<td class="value" style="width: 10%;<%=borderStyle%>"></td>
-					<% if(c==0) { %>
-						<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo.png"; %>
-						<td style="text-align: center; width: 35%; padding: 0;width:160px;border-top: solid 1px black" rowspan="<%= "3" %>" align="center">
-							<table style="display:inline;width: 35%; text-align: center;border: none">
-								<tr>
-									<td class="header">ECS Part #</td>
-									<td class="value"><%= content.getEcsPN() %></td>
-
-									<td class="header">ECS PO #</td>
-									<td class="value"><%= "" %></td>
-								</tr>
-								<tr>
-									<td colspan="2" style="text-align: center;width: 35%;"><img alt="logo" src="<%= logoURL %>" width="130" height="40" /></td>
-								</tr>
-								<tr>
-									<td class="header" colspan="2" style="text-align: center; width: 35%;">770.446.2222   www.ecscable.com</td>
-								</tr>
-								<tr>
-									<td class="header" colspan="2" style="text-align: center;width: 35%;">Printed <%= dateString %></td>
-								</tr>
-							</table>
-						</td>
-					<% } %>
-				</tr>
 			<% } %>
+			<tr>
+				<% String borderStyle = "border-bottom: dotted 1px black"; %>
+					<td class="value" style="height:13px;width: 35%;<%=borderStyle%>;padding-bottom:0px"><%= circuit.getName() %></td>
+				<% if(c<circuits.howMany()) { %>
+					<td class="value" style="height:13px;width: 20%;<%=borderStyle%>"><%= circuit.getLength() %></td>
+				<% } else { %>
+					<td class="value" style="height:13px;width: 20%;<%=borderStyle%>"></td>
+				<% } %>
+				<td class="value" style="height:1px;width: 10%;<%=borderStyle%>"></td>
+				<% if(c==0) { %>
+					<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo.png"; %>
+					<td style="text-align: center; width: 35%; padding: 0;width:160px;" rowspan="<%= "5" %>" align="center">
+						<table style="display:inline;width: 35%; text-align: center;border: none">
+							<tr>
+								<td class="header" style="text-align: right">ECS PART #</td>
+								<td class="value" style="text-align: left"><%= content.getEcsPN() %></td>
+							</tr>
+							<tr>
+								<td class="header" style="text-align: right">ECS PO #</td>
+								<td class="value" style="text-align: left"><%= "" %></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align: center;width: 35%;padding-top: 0px;padding-bottom: 0px;margin-bottom: 0px"><img alt="logo" src="<%= logoURL %>" width="130" height="40" />
+								</td>
+							</tr>
+							<tr>
+								<td class="header" colspan="2" style="text-align: center; width: 35%;">770.446.2222   www.ecscable.com</td>
+							</tr>
+						</table>
+					</td>
+				<% } %>
+			</tr>
 		<% } %>
+		<tr>
+			<td class="header" colspan="5" style="text-align: center;">PRINTED <%= dateString %></td>
+		</tr>
 	</table>
 </body>
 </html>
