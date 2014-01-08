@@ -38,12 +38,13 @@ public class EchoSync extends CompManager {
 		System.out.println("Starting the reel push");
 		CompEntityPuller puller = new CompEntityPuller(new EchoTransaction());
 		EchoTransaction echoTrans = new EchoTransaction();
+		echoTrans.setReelId(0);
 		puller.addSearch(echoTrans);
 		puller.setSortBy(echoTrans.getTableName(), EchoTransaction.ID_COLUMN, true);
 		CompEntities echoTranses = controllerECHO.pullCompEntities(puller, 0, 0);
 		for(int x=0; x<echoTranses.howMany(); x++) {
 			echoTrans = (EchoTransaction)echoTranses.get(x);
-			if(echoTrans.getStatus().equalsIgnoreCase("add")) {
+			if(echoTrans.getAction().equalsIgnoreCase("add")) {
 				Reel reel = new Reel();
 				reel.setOrdNo(echoTrans.getOrdNo());
 				reel.setPORevision(echoTrans.getPORevision());
@@ -61,13 +62,99 @@ public class EchoSync extends CompManager {
 					reel.setPnVolt(reel.getEcsPN().substring(0,2));
 					reel.setPnGauge(reel.getEcsPN().substring(4,7));
 					reel.setPnConductor(reel.getEcsPN().substring(7,9));
-					this.addReel(reel,techData);
+					this.addReel(echoTrans,reel,techData);
+				}
+			} else if(echoTrans.getAction().equalsIgnoreCase("update")) {
+				Reel reel = new Reel();
+				reel.setOrdNo(echoTrans.getOrdNo());
+				reel.setPORevision(echoTrans.getPORevision());
+				reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
+				reel.setReelSerial(echoTrans.getReelSerial());
+				CompEntityPuller uPuller = new CompEntityPuller(reel);
+				uPuller.addSearch(reel);
+				reel = (Reel)controllerRT.pullCompEntity(uPuller);
+				if(reel.hasData() && reel.getId()!=0) {
+					boolean ok = this.fillReelAllocation(reel);
+					if(ok) {
+						this.fillCustomerOrderHdr(reel);
+						this.fillCustomerOrderDtl(reel);
+						this.fillManufacturer(reel);
+						this.fillCableTrac(reel);
+						this.fillDescription(reel);
+						reel.setPnVolt(reel.getEcsPN().substring(0,2));
+						reel.setPnGauge(reel.getEcsPN().substring(4,7));
+						reel.setPnConductor(reel.getEcsPN().substring(7,9));
+						this.updateReel(echoTrans,reel);
+					}
+				}
+			} else if(echoTrans.getAction().equalsIgnoreCase("delete")) {
+				Reel reel = new Reel();
+				reel.setOrdNo(echoTrans.getOrdNo());
+				reel.setPORevision(echoTrans.getPORevision());
+				reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
+				reel.setReelSerial(echoTrans.getReelSerial());
+				CompEntityPuller uPuller = new CompEntityPuller(reel);
+				uPuller.addSearch(reel);
+				reel = (Reel)controllerRT.pullCompEntity(uPuller);
+				if(reel.hasData() && reel.getId()!=0) {
+					this.deleteReel(echoTrans,reel);
 				}
 			}
 		}
 	}
 
-	public void addReel(Reel reel, CableTechData techData) throws Exception {
+	public void pullCircuits() throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new ReelCircuit());
+		ReelCircuit circuit = new ReelCircuit();
+		circuit.setIsSynced("n");
+		puller.addSearch(circuit);
+		CompEntities circuits = controllerRT.pullCompEntities(puller, 0, 0);
+		for(int x=0; x<circuits.howMany(); x++) {
+			circuit = (ReelCircuit)circuits.get(x);
+			//see if exists
+			boolean exists = false;
+			EchoCircuit eCircuit = new EchoCircuit();
+			eCircuit.setId(circuit.getId());
+			puller = new CompEntityPuller(eCircuit);
+			puller.addSearch(eCircuit);
+			eCircuit = (EchoCircuit)controllerECHO.pullCompEntity(puller);
+			if(eCircuit.hasData() && eCircuit.getId()!=0) {
+				exists = true;
+			}
+			//fill the eCircuit with circuit data.
+			eCircuit.setSyncedDate(new Date());
+			eCircuit.setId(circuit.getId());
+			eCircuit.setCreated(circuit.getCreated());
+			eCircuit.setUpdated(circuit.getUpdated());
+			eCircuit.setReelId(circuit.getReelId());
+			eCircuit.setLength(circuit.getLength());
+			eCircuit.setName(circuit.getName());
+			eCircuit.setIsPulled(circuit.getIsPulled());
+			//fill the eCurcuit reel info
+			Reel reel = new Reel();
+			reel.setId(circuit.getReelId());
+			puller = new CompEntityPuller(reel);
+			puller.addSearch(reel);
+			reel = (Reel)controllerRT.pullCompEntity(puller);
+			eCircuit.setOrdNo(reel.getOrdNo());
+			eCircuit.setPORevision(reel.getPORevision());
+			eCircuit.setAbsoluteItem(reel.getAbsoluteItem());
+			eCircuit.setReelSerial(reel.getReelSerial());
+			//add or update
+			if(exists) {
+				controllerECHO.update(eCircuit);
+			} else {
+				controllerECHO.add(eCircuit);
+			}
+
+			ReelCircuit circuit2 = new ReelCircuit();
+			circuit2.setId(circuit.getId());
+			circuit2.setIsSynced("y");
+			controllerRT.update(circuit2);
+		}
+	}
+
+	public void addReel(EchoTransaction echoTrans, Reel reel, CableTechData techData) throws Exception {
 		reel.setCreated(new Date());
 		reel.setStatus(Reel.STATUS_ORDERED);
 		int toReturn = controllerRT.add(reel);
@@ -81,8 +168,32 @@ public class EchoSync extends CompManager {
 
 		if(techData2==null || !techData2.hasData()) {
 			techData.setJobCode(reel.getJobCode());
-			toReturn = controllerRT.add(techData);
+			int toReturnTD = controllerRT.add(techData);
 		}
+
+		echoTrans.setSyncedDateDate(new Date());
+		echoTrans.setReelId(toReturn);
+		controllerECHO.update(echoTrans);
+	}
+
+	public void updateReel(EchoTransaction echoTrans, Reel reel) throws Exception {
+		reel.setUpdated(new Date());
+		//reel.setStatus(Reel.STATUS_ORDERED);
+		controllerRT.update(reel);
+
+		echoTrans.setSyncedDateDate(new Date());
+		echoTrans.setReelId(reel.getId());
+		controllerECHO.update(echoTrans);
+	}
+
+	public void deleteReel(EchoTransaction echoTrans, Reel reel) throws Exception {
+		Reel reel2 = new Reel();
+		reel2.setId(reel.getId());
+		controllerRT.delete(null,reel2);
+
+		echoTrans.setSyncedDateDate(new Date());
+		echoTrans.setReelId(reel.getId());
+		controllerECHO.update(echoTrans);
 	}
 
 	public int searchReelsCount(Reel content) throws Exception {
@@ -105,6 +216,12 @@ public class EchoSync extends CompManager {
 			reel.setShippedQuantity(entity.getInteger("ShipQuantity",new Integer("0")).intValue());
 			reel.setCarrier(entity.getString("Shipper",""));
 			reel.setTrackingPRO(entity.getString("ProNumber",""));
+			Boolean steel = (Boolean)entity.getValue("SteelReel",new Boolean(false));
+			if(steel) {
+				reel.setIsSteelReel("y");
+			} else {
+				reel.setIsSteelReel("n");
+			}
 			return true;
 		} else {
 			return false;
@@ -166,6 +283,8 @@ public class EchoSync extends CompManager {
 			reel.setCTRNumber(entity.getString("CTRNumber",""));
 			reel.setCTRDate(entity.getDate("CTRDate",null));
 			reel.setCTRSent(entity.getDate("CTRSentDate",null));
+			reel.setInvoiceNum(entity.getString("ECSInvoice",""));
+			reel.setInvoiceDate(entity.getDate("ECSInvoiceDate",null));
 			return true;
 		} else {
 			return false;
@@ -226,6 +345,7 @@ public class EchoSync extends CompManager {
 		//String directorToken = args[0];
 		try {
 			echoSync.pushReels();
+			echoSync.pullCircuits();
 			echoSync.closeConnections();
 		} catch(Exception e) {
 			e.printStackTrace();

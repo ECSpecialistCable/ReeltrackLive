@@ -6,6 +6,7 @@
 <%@ page import="com.reeltrack.users.*" %>
 <%@ page import="com.reeltrack.reels.*" %>
 <%@ page import="java.io.*" %>
+<%@ page import="com.reeltrack.drivers.*" %>
 
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
@@ -47,24 +48,113 @@ if(request.getParameter(Reel.PARAM) != null) {
     }
 }
 
+if(action.equals("mark_shipped")) {
+    Reel content = new Reel();
+    content.setId(contid);
+    content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
+    content.setCarrier(request.getParameter(Reel.CARRIER_COLUMN));
+    content.setTrackingPRO(request.getParameter("trackingNum"));
+    content.setPackingList(request.getParameter("packingNum"));
+    if(request.getParameter(Reel.PROJECTED_SHIPPING_DATE_COLUMN)!=null && !request.getParameter(Reel.PROJECTED_SHIPPING_DATE_COLUMN).equals("")) {
+        content.setProjectedShippingDateString(request.getParameter(Reel.PROJECTED_SHIPPING_DATE_COLUMN));
+    }
+    reelMgr.markReelShipped(content);
+    session.removeAttribute("RT");
+    session.removeAttribute("PL");
+    redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("mark_received")) {
+    Reel content = new Reel();
+    content.setId(contid);
+    content.setTrackingPRO(request.getParameter(Reel.TRACKING_PRO_COLUMN));
+    content.setPackingList(request.getParameter(Reel.PACKING_LIST_COLUMN));
+    try {
+    content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
+    } catch(Exception e) {}
+    try {
+    content.setReceivedQuantity(Integer.parseInt(request.getParameter(Reel.RECEIVED_QUANTITY_COLUMN)));
+    } catch(Exception e) {}
+    try {
+    content.setBottomFoot(Integer.parseInt(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
+    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
+    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
+    content.setReceivedWeight(Integer.parseInt(request.getParameter(Reel.RECEIVED_WEIGHT_COLUMN)));
+    } catch(Exception e) {}
+    
+    content.setWharehouseLocation(request.getParameter(Reel.WHAREHOUSE_LOCATION_COLUMN));
+    content.setReceivingIssue(request.getParameter(Reel.RECEIVING_ISSUE_COLUMN));
+    content.setReceivingNote(request.getParameter(Reel.RECEIVING_NOTE_COLUMN));
+    content.setReceivingDisposition(request.getParameter(Reel.RECEIVING_DISPOSITION_COLUMN));
+    reelMgr.markReelReceived(content);
+    session.removeAttribute("RT");
+    session.removeAttribute("PL");
+    redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
 if(action.equals("mark_staged")) {
     Reel content = new Reel();
     content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
     content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    try {
+    content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
+    } catch(Exception e) {}
     reelMgr.markReelStaged(content);
     session.removeAttribute("RT");
     session.removeAttribute("PL");
-    redirect = request.getContextPath() + "/trampoline/" + "reels/edit.jsp?" + Reel.PARAM + "=" + contid ;
+    redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
 if(action.equals("mark_checkedout")) {
     Reel content = new Reel();
     content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
     content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    try {
+    content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
+    } catch(Exception e) {}
     reelMgr.markReelCheckedOut(content);
     session.removeAttribute("RT");
     session.removeAttribute("PL");
-    redirect = request.getContextPath() + "/trampoline/" + "reels/edit.jsp?" + Reel.PARAM + "=" + contid ;
+    redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("mark_checkedin")) {
+    Reel content = new Reel();
+    content.setId(contid);
+    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    try {
+    content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
+    } catch(Exception e) {}
+    content.setWharehouseLocation(request.getParameter(Reel.WHAREHOUSE_LOCATION_COLUMN));
+    String driver = request.getParameter(Driver.PARAM);
+    reelMgr.markReelCheckedIn(content,driver);
+    session.removeAttribute("RT");
+    session.removeAttribute("PL");
+    redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("mark_complete")) {
+    Reel content = new Reel();
+    content.setId(contid);
+    reelMgr.markReelComplete(content);
+    session.removeAttribute("RT");
+    session.removeAttribute("PL");
+    redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("mark_scrapped")) {
+    Reel content = new Reel();
+    content.setId(contid);
+    reelMgr.markReelScrapped(content);
+    session.removeAttribute("RT");
+    session.removeAttribute("PL");
+    redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
 if(action.equals("create")) {
@@ -145,6 +235,10 @@ if(action.equals("update")) {
     content.setId(contid);
     content.setStatus(request.getParameter(Reel.STATUS_COLUMN));
     content.setWharehouseLocation(request.getParameter(Reel.WHAREHOUSE_LOCATION_COLUMN));
+    content.setHasReelMarkers(request.getParameter(Reel.HAS_REEL_MARKERS_COLUMN));
+    if(request.getParameter(Reel.CUSTOMER_PN_COLUMN)!=null) {
+        content.setCustomerPN(request.getParameter(Reel.CUSTOMER_PN_COLUMN));
+    }
     reelMgr.updateReel(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/edit.jsp?" + Reel.PARAM + "=" + contid ;
 }
@@ -175,9 +269,9 @@ if(action.equals("update_receiving")) {
 if(action.equals("update_quantity")) {
     Reel content = new Reel();
     content.setId(contid);
-    content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
+    //content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
     content.setReceivedQuantity(Integer.parseInt(request.getParameter(Reel.RECEIVED_QUANTITY_COLUMN)));
-    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    //content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     reelMgr.updateReelQuantity(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
 }
@@ -186,8 +280,23 @@ if(action.equals("record_pull")) {
     Reel content = new Reel();
     content.setId(contid);
     content.setTempPullAmount(Integer.parseInt(request.getParameter("pulled_quantity")));
-    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     reelMgr.updateReelPull(content);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("record_top_marker")) {
+    Reel content = new Reel();
+    content.setId(contid);
+    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    reelMgr.updateReelTop(content);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("record_weight")) {
+    Reel content = new Reel();
+    content.setId(contid);
+    content.setCurrentWeight(Integer.parseInt(request.getParameter("current_weight")));
+    reelMgr.updateReelWeight(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
 }
 

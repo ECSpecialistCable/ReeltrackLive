@@ -48,11 +48,17 @@ String tempURL; //var for url expression
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
     		<form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
-    		<form:textfield label="Shipped Qty:" pixelwidth="40" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
+    		<form:info label="Shipped Qty:" text="<%= new Integer(content.getShippedQuantity()).toString() %>" />
     		<form:textfield label="Received Qty:" pixelwidth="40" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
-    		<form:info label="Bottom Foot #:" text="<%= new Integer(content.getBottomFoot()).toString() %>" />
-    		<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
-    		<form:info label="Cable Used Qty:" text="<%= new Integer(content.getCableUsedQuantity()).toString() %>" />
+    		<% if(content.isCalcType(Reel.CALC_TYPE_MARKER)) { %>
+                <form:info label="Bottom Foot #:" text="<%= new Integer(content.getBottomFoot()).toString() %>" />
+                <form:info label="Top Foot #:" text="<%= new Integer(content.getTopFoot()).toString() %>" />
+    		<% } else if(content.isCalcType(Reel.CALC_TYPE_WEIGHT)) { %>
+                <form:info label="Received lbs:" text="<%= new Integer(content.getReceivedWeight()).toString() %>" />
+                <form:info label="Current lbs:" text="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+            <% } else if(content.isCalcType(Reel.CALC_TYPE_LENGTH)) { %>
+                <form:info label="Cable Used Qty:" text="<%= new Integer(content.getCableUsedQuantity()).toString() %>" />
+            <% } %>
     		<form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 			<form:row_begin />
@@ -64,11 +70,12 @@ String tempURL; //var for url expression
     <form:end />
 <admin:box_end />
 
-<admin:subtitle text="Record Pull" />
+<% if(content.isCalcType(Reel.CALC_TYPE_LENGTH)) { %>
+<admin:subtitle text="Record Cable Used Quantity (Cable Pulled)" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
     		<form:textfield label="Pulled Qty:" pixelwidth="40" name="pulled_quantity" value="0" />
-    		<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />
+    		<%--<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />--%>
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 			<form:row_begin />
 				<form:label name="" label="" />
@@ -78,6 +85,39 @@ String tempURL; //var for url expression
 			<form:row_end />
     <form:end />
 <admin:box_end />
+<% } %>
+
+<% if(content.isCalcType(Reel.CALC_TYPE_WEIGHT)) { %>
+<admin:subtitle text="Record Current Cable Weight" />
+<admin:box_begin />
+    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+            <form:textfield label="Current lbs:" pixelwidth="40" name="current_weight" value="0" />
+            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />          
+            <form:row_begin />
+                <form:label name="" label="" />
+                <form:buttonset_begin align="left" padding="0"/>
+                    <form:submit_inline button="save" waiting="true" name="save" action="record_weight" />
+                <form:buttonset_end />
+            <form:row_end />
+    <form:end />
+<admin:box_end />
+<% } %>
+
+<% if(content.isCalcType(Reel.CALC_TYPE_MARKER)) { %>
+<admin:subtitle text="Record Current Top Marker" />
+<admin:box_begin />
+    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+            <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />
+            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />          
+            <form:row_begin />
+                <form:label name="" label="" />
+                <form:buttonset_begin align="left" padding="0"/>
+                    <form:submit_inline button="save" waiting="true" name="save" action="record_top_marker" />
+                <form:buttonset_end />
+            <form:row_end />
+    <form:end />
+<admin:box_end />
+<% } %>
 
 <admin:set_tabset url="reels/_tabset_manage.jsp" thispage="quantity.jsp" content_id_for_tabset="<%= contid %>"/>
 <html:end />

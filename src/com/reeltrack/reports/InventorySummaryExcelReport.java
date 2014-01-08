@@ -147,7 +147,7 @@ public class InventorySummaryExcelReport {
 		//ep scheduled header
 		nextNum = 1;
 		cell = row.createCell((short) nextNum++);
-		cell.setCellValue("Purchased");
+		cell.setCellValue("Ordered");
 		cell.setCellStyle(styleHeader);
 
 		cell = row.createCell((short) nextNum++);

@@ -22,6 +22,12 @@
 <% locationMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
+boolean canEdit = false;
+if(user.isUserType(RTUser.USER_TYPE_ECS)) {
+    canEdit = true;
+}
+%>
+<%
 // Get the id
 int contid = 0;
 if(request.getParameter(Reel.PARAM) != null) {
@@ -42,17 +48,6 @@ WhLocation location = new WhLocation();
 location.setCustomerId(user.getCustomerId());
 CompEntities locations = locationMgr.searchWhLocation(location, WhLocation.NAME_COLUMN, true);
 
-Reel rtReel = (Reel)session.getAttribute("RT");
-Reel plReel = (Reel)session.getAttribute("PL");
-boolean reelsMatch = false;
-if(rtReel!=null && plReel!=null) {
-	if(rtReel.getId() == plReel.getId() && rtReel.getId() == content.getId() && rtReel.getJobCode().equals(content.getJobCode())) {
-		if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) ) {
-			reelsMatch = true;
-		}
-	}
-}
-
 String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
@@ -62,34 +57,6 @@ String tempURL; //var for url expression
 <admin:title text="<%= tempURL %>" />
 <notifier:show_message />
 
-<% if(reelsMatch) { %>
-<admin:subtitle text="Stage Reel" />
-<admin:box_begin />
-	<form:begin submit="true" name="stage" action="reels/process.jsp" />
-        <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
-        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
-        <form:row_begin />
-		<form:label name="" label="" />
-		<form:buttonset_begin align="left" padding="0"/>
-			<form:submit_inline button="save" waiting="true" name="STAGE" action="mark_staged" />
-		<form:buttonset_end />
-		<form:row_end />
-    <form:end />
-<admin:box_end />
-<admin:subtitle text="Checkout Reel" />
-<admin:box_begin />
-	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
-        <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
-        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
-        <form:row_begin />
-		<form:label name="" label="" />
-		<form:buttonset_begin align="left" padding="0"/>
-			<form:submit_inline button="save" waiting="true" name="CHECKOUT" action="mark_checkedout" />
-		<form:buttonset_end />
-		<form:row_end />
-    <form:end />
-<admin:box_end />
-<% } %>
 <admin:subtitle text="General Info" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
@@ -119,9 +86,22 @@ String tempURL; //var for url expression
 			<form:info label="Reel Type:" text="<%= content.getReelType() %>" />
 			<form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
 			<form:info label="Cable Description:" text="<%= content.getCableDescription() %>" />
-			<form:info label="Customer P/N:" text="<%= content.getCustomerPN() %>" />
+			<% if(canEdit) { %>
+				<form:textfield label="Customer P/N:" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= content.getCustomerPN() %>" />
+			<% } else { %>
+				<form:info label="Customer P/N:" text="<%= content.getCustomerPN() %>" />
+			<% } %>
 			<form:info label="ECS P/N:" text="<%= content.getEcsPN() %>" />
 			<form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
+			<form:row_begin />
+	            <form:label name="" label="Has Markers:" />
+	            <form:content_begin />
+	            <form:select_begin name="<%= Reel.HAS_REEL_MARKERS_COLUMN %>" />
+	            	<form:option name="No" value="n" match="<%= content.getHasReelMarkers() %>" />
+	            	<form:option name="Yes" value="y" match="<%= content.getHasReelMarkers() %>" />
+	            <form:select_end />
+	            <form:content_end />
+        	<form:row_end />
 			<form:info label="Steel Reel Serial #:" text="<%= content.getSteelReelSerial() %>" />
 			<form:info label="Received On:" text="<%= content.getReceivedOnDateString() %>" />
 			<form:info label="Times Checked OUT:" text="<%= new Integer(content.getTimesCheckedOut()).toString() %>" />

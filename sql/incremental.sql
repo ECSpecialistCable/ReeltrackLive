@@ -269,3 +269,31 @@ create table file_cabinet (
 	file_name varchar(255),
 	PRIMARY KEY (id)
 );
+
+alter table reels add has_reel_tag_file varchar(1) default 'n';
+alter table reels add has_reel_markers varchar(1) default 'n';
+alter table reels add received_weight int default 0;
+alter table reels add current_weight int default 0;
+
+create table reeltrack_circuits (
+	id int(11) NOT NULL auto_increment,
+	created datetime,
+	updated datetime,
+	reel_id int default 0,
+	OrdNo varchar(50),
+	PORevision smallint(6),
+	AbsoluteItem smallint(6),
+	ReelSerial smallint(6),
+	name varchar(30),
+	length int default 0,
+	is_pulled varchar(1) default 'n',
+	synced_date datetime,
+	PRIMARY KEY (id)
+);
+
+alter table reel_circuits add is_synced varchar(1) default 'n';
+
+alter table reels add ECSInvoice varchar(50);
+alter table reels add ECSInvoiceDate date;
+alter table reels add is_steel_reel varchar(1) default 'n';
+

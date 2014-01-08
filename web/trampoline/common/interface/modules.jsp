@@ -31,6 +31,13 @@ The rel attribute in each of the <a> tags refers to a folder containing a _modul
 The permissions are dealt with in the file itself.
 
 -->
+<%
+boolean isIpad = false;
+String user_agent = request.getHeader("user-agent");
+if(user_agent.contains("iPad")) {
+	isIpad = true;
+}
+%>
 
 <% if(userLoginMgr.isLoggedIn()) { %>
 	<% if(user.getCustomerId()!=0 && !user.getJobCode().equals("") && (user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_STANDARD))) { %>
@@ -38,7 +45,9 @@ The permissions are dealt with in the file itself.
 		<a class="module_bar_toggle" rel="common/interface/reel_inventory">Inventory Data</a>
 		<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT)) { %>
 			<a class="module_bar_toggle" rel="common/interface/configuration">Job Data</a>
-			<a class="module_bar_toggle" rel="common/interface/reports">Reports</a>
+			<% if(!isIpad) { %>
+				<a class="module_bar_toggle" rel="common/interface/reports">Reports</a>
+			<% } %>
 		<% } %>
 	<% } %>
 	<% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>

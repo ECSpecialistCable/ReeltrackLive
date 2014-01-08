@@ -77,7 +77,7 @@
 
 				<tr>
 					<th style="border-top: none" class="center"></th>
-					<th class="center">Purchased</th>
+					<th class="center">Ordered</th>
 					<th class="center">In<br/>Inventory</th>
 					<th class="center">Checked<br/>OUT</th>
 					<th class="center">On Complete<br/>Reels</th>

@@ -196,7 +196,7 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
                 <% if(reelID==0) { %>
                     <jsp:include page="common/includes/login.jsp" />
                 <% } else { %>
-                    <% String tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + reelID; %>
+                    <% String tempURL = "reels/status.jsp?" +  Reel.PARAM + "=" + reelID; %>
                     <script language="javascript">
                     CORE.loadPage("<%= tempURL %>");
                     </script>

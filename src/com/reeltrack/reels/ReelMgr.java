@@ -171,9 +171,12 @@ public class ReelMgr extends CompWebManager {
 		reel.setId(content.getId());
 		reel = this.getReel(reel);
 
+		CableTechData techData = this.getCableTechData(reel);
+		int weight = techData.getWeight();
+
 		Reel reel2 = new Reel();
 		reel2.setId(reel.getId());
-		reel2.setOnReelQuantity(reel.calcOnReelQuantity());
+		reel2.setOnReelQuantity(reel.calcOnReelQuantity(weight));
 		controller.update(reel2);
 	}
 
@@ -255,9 +258,15 @@ public class ReelMgr extends CompWebManager {
             if(reelnum.getStatus().equals(Reel.STATUS_STAGED)) staged++;
             if(reelnum.getStatus().equals(Reel.STATUS_CHECKED_OUT)) checkedout++;
         }
-        if(checkedout==0 && staged>0) pickList.setStatus(PickList.STATUS_PARTIAL_STAGED);
-        if(checkedout==0 && staged==reels.howMany()) pickList.setStatus(PickList.STATUS_STAGED);
-        controller.update(pickList);
+        if(checkedout==0 && staged>0) {
+        	pickList.setStatus(PickList.STATUS_PARTIAL_STAGED);
+        }
+        if(checkedout==0 && staged==reels.howMany()) {
+        	pickList.setStatus(PickList.STATUS_STAGED);
+        }
+        if(!pickList.getStatus().equals("")) {
+        	controller.update(pickList);
+        }
 	}
 
 	public void markReelCheckedOut(Reel content) throws Exception {
@@ -288,7 +297,9 @@ public class ReelMgr extends CompWebManager {
         }
         if(checkedout>0) pickList.setStatus(PickList.STATUS_PARTIAL_PICKED_UP);
         if(checkedout==reels.howMany()) pickList.setStatus(PickList.STATUS_PICKED_UP);
-        controller.update(pickList);
+        if(!pickList.getStatus().equals("")) {
+        	controller.update(pickList);
+        }
 	}
 
 
@@ -392,11 +403,34 @@ public class ReelMgr extends CompWebManager {
 			this.addReelLog(content, "" + content.getTempPullAmount() + " was pulled by " + user.getName());
 			content.setUpdated(new Date());
 			controller.update(content);
-		} else if(content.getTopFoot()!=0) {
+		}
+		this.updateOnReelQuantity(content);
+	}
+
+	public void updateReelTop(Reel content) throws Exception {
+		Reel currReel = new Reel();
+		currReel.setId(content.getId());
+		currReel = this.getReel(currReel);
+		if(content.getTopFoot()!=0) {
 			RTUserLoginMgr umgr = new RTUserLoginMgr();
 			umgr.init(this.getPageContext(), this.getDbResources());
 			RTUser user = (RTUser)umgr.getUser();
 			this.addReelLog(content, "Top # changed from " + currReel.getTopFoot() + " to " + content.getTopFoot() + " by " + user.getName());
+			content.setUpdated(new Date());
+			controller.update(content);
+		}
+		this.updateOnReelQuantity(content);
+	}
+
+	public void updateReelWeight(Reel content) throws Exception {
+		Reel currReel = new Reel();
+		currReel.setId(content.getId());
+		currReel = this.getReel(currReel);
+		if(content.getCurrentWeight()!=0) {
+			RTUserLoginMgr umgr = new RTUserLoginMgr();
+			umgr.init(this.getPageContext(), this.getDbResources());
+			RTUser user = (RTUser)umgr.getUser();
+			this.addReelLog(content, "Current weight changed from " + currReel.getCurrentWeight() + " to " + content.getCurrentWeight() + " by " + user.getName());
 			content.setUpdated(new Date());
 			controller.update(content);
 		}
@@ -683,6 +717,7 @@ public class ReelMgr extends CompWebManager {
 	}
 
 	public void updateReelCircuit(ReelCircuit content) throws Exception {
+		/*
 		ReelCircuit rc = new ReelCircuit();
 		rc.setId(content.getId());
 		CompEntityPuller puller = new CompEntityPuller(rc);
@@ -697,7 +732,7 @@ public class ReelMgr extends CompWebManager {
 			reel.setTempPullAmount(-rc.getLength());
 		}
 		this.updateReelPull(reel);
-
+		*/
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateReelType(content);

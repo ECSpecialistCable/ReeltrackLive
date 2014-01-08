@@ -51,6 +51,14 @@ String tempURL; //var for url expression
 <admin:title text="<%= tempURL %>" />
 <notifier:show_message />
 
+<admin:subtitle text="ECS Invoice" />
+<admin:box_begin />
+    <form:begin submit="<%= new Boolean(false).toString() %>" name="edit" action="reels/process.jsp" />
+        <form:info label="Invoice #:" text="<%= content.getInvoiceNum() %>" />
+        <form:info label="Invoice Date:" text="<%= content.getInvoiceDateString() %>" />
+    <form:end />
+<admin:box_end />
+
 <admin:subtitle text="Reel Data" />
 <admin:box_begin />
     <form:begin_multipart submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />

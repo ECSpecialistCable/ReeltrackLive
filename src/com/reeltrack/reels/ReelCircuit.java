@@ -8,6 +8,7 @@ public class ReelCircuit extends CompCMEntity {
 	public static final String LENGTH_COLUMN = "length";
 	public static final String NAME_COLUMN = "name";
 	public static final String IS_PULLED_COLUMN = "is_pulled";
+	public static final String IS_SYNCED_COLUMN = "is_synced";
 
 	@Override
 	public String getTableName() {
@@ -66,5 +67,13 @@ public class ReelCircuit extends CompCMEntity {
 		} else {
 			return false;
 		}
+	}
+
+	public String getIsSynced() {
+		return this.getData().getString(IS_SYNCED_COLUMN, "");
+	}
+	
+	public void setIsSynced(String note) {
+		this.getData().setString(IS_SYNCED_COLUMN, note);
 	}
 }

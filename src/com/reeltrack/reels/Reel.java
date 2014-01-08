@@ -46,6 +46,12 @@ public class Reel extends CompCMEntity {
 	public static final String PL_QRCODE_FILE_COLUMN = "pl_qrcode_file";
 	public static final String REEL_TAG_FILE_COLUMN = "reel_tag_file";
 	public static final String HAS_REEL_TAG_FILE_COLUMN = "has_reel_tag_file";
+	public static final String HAS_REEL_MARKERS_COLUMN = "has_reel_markers";
+	public static final String RECEIVED_WEIGHT_COLUMN = "received_weight";
+	public static final String CURRENT_WEIGHT_COLUMN = "current_weight";
+	public static final String INVOICE_NUM_COLUMN = "ECSInvoice";
+	public static final String INVOICE_DATE_COLUMN = "ECSInvoiceDate";
+	public static final String IS_STEEL_REEL_COLUMN = "is_steel_reel";
 
 	public static final String PN_VOLT_COLUMN = "pn_volt";
 	public static final String PN_GAUGE_COLUMN = "pn_gauge";
@@ -81,6 +87,10 @@ public class Reel extends CompCMEntity {
 	public static final String REEL_TYPE_BULK = "bulk";
 	public static final String REEL_TYPE_CIRCUIT = "circuits assigned";
 
+	public static final String CALC_TYPE_MARKER = "marker";
+	public static final String CALC_TYPE_WEIGHT = "weight";
+	public static final String CALC_TYPE_LENGTH = "length";
+
 	public static final String RECEIVING_DISPOSITION_ACCEPTED = "accepted";
 	public static final String RECEIVING_DISPOSITION_REFUSED = "refused";
 
@@ -105,6 +115,32 @@ public class Reel extends CompCMEntity {
 		return this.getReelTag();
 	}
 
+	public int getEstimatedOnReelQty() {
+		int quantity = 0;
+		if(this.getStatus().equals(STATUS_ORDERED)) {
+			quantity = this.getOrderedQuantity();	
+		} else if(this.getStatus().equals(STATUS_SHIPPED)) {
+			quantity = this.getShippedQuantity();
+		} else {
+			quantity = this.getOnReelQuantity();
+		}
+		return quantity;
+	}
+
+	public boolean isCalcType(String calcType) {
+		boolean matches = false;
+		String tmpType = CALC_TYPE_LENGTH;
+		if(this.hasReelMarkers()) {
+			tmpType = CALC_TYPE_MARKER;
+		} else if(this.getReceivedWeight()>0) {
+			tmpType = CALC_TYPE_WEIGHT;
+		}
+		if(calcType.equals(tmpType)) {
+			matches = true;
+		}
+		return matches;
+	}
+
 	public String getReelTagDirectory() {
 		String directory = "";
 		directory = this.getCompProperties().getComponentDirectory(this.getConfiguration());
@@ -112,6 +148,39 @@ public class Reel extends CompCMEntity {
 		directory += this.getJobCode();
 		return directory;
 	}
+
+	public String getIsSteelReel() {
+		return this.getData().getString(IS_STEEL_REEL_COLUMN, "");
+	}
+	
+	public void setIsSteelReel(String name) {
+		this.getData().setString(IS_STEEL_REEL_COLUMN, name);
+	}
+
+	public String getInvoiceNum() {
+		return this.getData().getString(INVOICE_NUM_COLUMN, "");
+	}
+	
+	public void setInvoiceNum(String name) {
+		this.getData().setString(INVOICE_NUM_COLUMN, name);
+	}
+
+	public Date getInvoiceDate() {
+        return (Date) this.getData().getValue(INVOICE_DATE_COLUMN, null);
+    }
+
+    public void setInvoiceDate(Date toSet) {
+        this.getData().setTimestamp(INVOICE_DATE_COLUMN, toSet);
+    }
+
+    public String getInvoiceDateString() {
+		if(this.getInvoiceDate() == null) {
+			return "";
+		} else {
+			SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        	return df.format(this.getInvoiceDate());
+		}
+    }
 
 	public String getPnVolt() {
 		return this.getData().getString(PN_VOLT_COLUMN, "");
@@ -482,6 +551,22 @@ public class Reel extends CompCMEntity {
 		this.getData().setInteger(RECEIVED_QUANTITY_COLUMN, new Integer(id));
     }
 
+   	public int getReceivedWeight() {
+		return this.getData().getInteger(RECEIVED_WEIGHT_COLUMN, new Integer(0));
+    }
+
+    public void setReceivedWeight(int id) {
+		this.getData().setInteger(RECEIVED_WEIGHT_COLUMN, new Integer(id));
+    }
+
+   	public int getCurrentWeight() {
+		return this.getData().getInteger(CURRENT_WEIGHT_COLUMN, new Integer(0));
+    }
+
+    public void setCurrentWeight(int id) {
+		this.getData().setInteger(CURRENT_WEIGHT_COLUMN, new Integer(id));
+    }
+
    	public int getBottomFoot() {
 		return this.getData().getInteger(BOTTOM_FOOT_COLUMN, new Integer(0));
     }
@@ -506,10 +591,19 @@ public class Reel extends CompCMEntity {
 		this.getData().setInteger(CABLE_USED_QUANTITY_COLUMN, new Integer(id));
     }
 
-   	public int calcOnReelQuantity() {
-   		if(this.getTopFoot()!=0) {
-   			return this.getTopFoot() - this.getBottomFoot();
-   		} else {
+   	public int calcOnReelQuantity(int weight) {
+   		if(this.hasReelMarkers()) {
+   			if(this.getTopFoot()==0) {
+   				return 0;
+   			} else if(this.getTopFoot() > this.getBottomFoot()) {
+   				return this.getTopFoot() - this.getBottomFoot();
+   			} else {
+   				return this.getBottomFoot() - this.getTopFoot();
+   			}
+   		} else if(this.getReceivedWeight()!=0) {
+   			if(weight==0) weight=1;
+			return (this.getReceivedWeight() - this.getCurrentWeight()) / weight;
+		} else {
 			return this.getReceivedQuantity() - this.getCableUsedQuantity();
 		}
     }
@@ -564,6 +658,22 @@ public class Reel extends CompCMEntity {
 
 	public boolean hasReelTagFile() {
 		if(this.getHasReelTagFile().equals("y")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public String getHasReelMarkers() {
+		return this.getData().getString(HAS_REEL_MARKERS_COLUMN, "");
+	}
+	
+	public void setHasReelMarkers(String name) {
+		this.getData().setString(HAS_REEL_MARKERS_COLUMN, name);
+	}
+
+	public boolean hasReelMarkers() {
+		if(this.getHasReelMarkers().equals("y")) {
 			return true;
 		} else {
 			return false;

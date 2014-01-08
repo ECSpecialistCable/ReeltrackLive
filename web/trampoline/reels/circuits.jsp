@@ -70,10 +70,24 @@ for(int i=0; i<circuits.howMany(); i++) {
         circuitLengthsTotal += circuit.getLength();
     }
 }
-int remainingQty = content.getOnReelQuantity() - circuitLengthsTotal;
+int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
 %>
 <% if(circuits.howMany() > 0) { %>
-    <% tempURL = "All Circuits (" + content.getOnReelQuantity() + " On Reel - " + circuitLengthsTotal + " Circuits = " + remainingQty + " Remaining)"; %>
+    <%
+    if(content.getStatus().equals(Reel.STATUS_ORDERED)) {
+        tempURL = "Ordered Qty = " + content.getEstimatedOnReelQty() + "': Circuits assigned = " + circuitLengthsTotal + "'; Unassigned cable = " + remainingQty + "'";
+    } else if(content.getStatus().equals(Reel.STATUS_SHIPPED)) {
+        tempURL = "Shipped Qty = " + content.getEstimatedOnReelQty() + "': Circuits assigned = " + circuitLengthsTotal + "';  Unassigned cable = " + remainingQty + "'";
+    } else if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) || content.getStatus().equals(Reel.STATUS_STAGED)) {
+        tempURL = "Qty remaining on reel = " + content.getEstimatedOnReelQty() + "' : Un-pulled circuits = " + circuitLengthsTotal + "'; Unassigned cable = " + remainingQty + "'";
+    } else if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) {
+        tempURL = "Reel is Checked out.  Qty on reel may not be current.  Un-pulled circuits  = " + circuitLengthsTotal + "'; Unassigned cable = " + remainingQty + "'";
+    } else if(content.getStatus().equals(Reel.STATUS_COMPLETE)) {
+        tempURL = "There are " + remainingQty + "' remaining on this reel and available for additional pulls or scrap.";
+    } else if(content.getStatus().equals(Reel.STATUS_SCRAPPED)) {
+        tempURL = "There was " + remainingQty + "' remaining on this reel before it was marked as scrapped.";
+    }
+    %>
     <admin:subtitle text="<%= tempURL %>" />
     <admin:box_begin color="false" />
         <listing:begin />

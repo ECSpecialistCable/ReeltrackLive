@@ -10,6 +10,7 @@
 %>
 
 <admin:tab url="reels/search.jsp" text="< < <" />
+<admin:tab url="reels/status.jsp" text="status" params="<%= paramstring %>"/>
 <admin:tab url="reels/edit.jsp" text="edit" params="<%= paramstring %>"/>
 <admin:tab url="reels/quantity.jsp" text="quantity" params="<%= paramstring %>"/>
 <admin:tab url="reels/circuits.jsp" text="circuits" params="<%= paramstring %>"/>
