@@ -35,6 +35,10 @@ redirect = request.getContextPath() + "/trampoline/index.jsp";
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%  
 user.setCustomerId(Integer.parseInt(request.getParameter(Customer.PARAM)));
+Customer customer = new Customer();
+customer.setId(user.getCustomerId());
+customer = customerMgr.getCustomer(customer);
+user.setCustomerName(customer.getName());
 redirect = request.getContextPath() + "/trampoline/index.jsp";
 %>
 <% } %>

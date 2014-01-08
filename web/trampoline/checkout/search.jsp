@@ -112,7 +112,8 @@ String tempURL = "";
         <form:textfield pixelwidth="40" label="ID:" name="<%= PickList.ID_COLUMN %>" value="<%= tempURL %>" />
         <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= reel.getReelTag() %>" />
         <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= reel.getCableDescription() %>" />
-        <form:textfield label="Customer P/N:" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= reel.getCustomerPN() %>" />
+        <% tempURL = user.getCustomerName() + " P/N:"; %>
+        <form:textfield label="<%= tempURL %>" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= reel.getCustomerPN() %>" />
         <form:row_begin />
             <form:label name="" label="Circuit:" />
             <form:content_begin />

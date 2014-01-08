@@ -76,7 +76,8 @@ String tempURL = "";
     <form:begin_selfsubmit name="search" action="reeltags/search.jsp" />
         <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
         <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
-        <form:textfield label="Customer P/N:" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= content.getCustomerPN() %>" />
+        <% tempURL = user.getCustomerName() + " P/N:"; %>
+        <form:textfield label="<%= tempURL %>" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= content.getCustomerPN() %>" />
         <form:row_begin />
             <form:label name="" label="" />
             <form:buttonset_begin align="left" padding="0"/>
