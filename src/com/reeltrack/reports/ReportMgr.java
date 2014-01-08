@@ -237,6 +237,39 @@ public class ReportMgr extends CompWebManager {
 		return controller.pullCompEntitiesCount(puller);
 	}
 
+	public CompEntities getReelLogsForActionLogReport(Reel content, GregorianCalendar startDate, GregorianCalendar endDate) throws Exception {
+		CompEntities toReturn = new CompEntities();
+
+		CompEntityPuller puller = new CompEntityPuller(new ReelLog());
+		puller.addSearch(content);
+		puller.addFKLink(new Reel(), new ReelLog(), ReelLog.REEL_ID_COLUMN);
+		puller.setDistinct(true);
+
+		ReelLog log = new ReelLog();
+		log.setCreated(startDate.getTime());
+		log.setSearchOp(ReelLog.CREATED_COLUMN, ReelLog.GTEQ);
+		puller.addSearch(log);
+
+		log = new ReelLog();
+		log.setCreated(endDate.getTime());
+		log.setSearchOp(ReelLog.CREATED_COLUMN, ReelLog.LTEQ);
+		puller.addSearch(log);
+
+		puller.setSortBy(new ReelLog().getTableName(), ReelLog.CREATED_COLUMN, false);
+		toReturn = controller.pullCompEntities(puller, 0, 0);
+
+		// fill logs with reels
+		if(toReturn.howMany()>0) {
+			puller = new CompEntityPuller(new Reel());
+			puller.addSearchByIds(toReturn);
+			puller.addFKLink(new Reel(), new ReelLog(), ReelLog.REEL_ID_COLUMN);
+			puller.setDistinct(true);
+			puller.setLinkTo(new ReelLog());
+			controller.fillSingleWithPulled(toReturn, controller.pullCompEntities(puller, 0, 0), Reel.PARAM);
+		}
+		return toReturn;
+	}
+
 	public CompEntities fillReelWithPickLists(CompEntities reels) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(new PickList());
 		if(reels.howMany()>0) {

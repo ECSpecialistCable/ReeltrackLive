@@ -44,6 +44,9 @@ public class DownloadReportServlet extends HttpServlet {
 		} else if (reportType != null && reportType.equals("steel_reel_report")) {
 			this.downloadSteelReelReport(request, response, request.getParameter("steel_reel_report_start_date"), request.getParameter("steel_reel_report_end_date"), request.getParameter("job_code"));
 			
+		} else if (reportType != null && reportType.equals("action_log_report")) {
+			this.downloadActionLogReportExcel(request, response, request.getParameter("action_log_report_start_date"), request.getParameter("action_log_report_end_date"), request.getParameter("job_code"));
+
 		}
 	}
 
@@ -294,6 +297,42 @@ public class DownloadReportServlet extends HttpServlet {
 				os.close();
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbResources.close();
+		}
+	}
+
+	private void downloadActionLogReportExcel(HttpServletRequest request, HttpServletResponse response, String startDate, String endDate, String jobCode) {
+		Date today = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("MMddyyyy");
+		DbResources dbResources = new DbResources();
+		JspFactory factory = JspFactory.getDefaultFactory();
+		PageContext pageContext = factory.getPageContext(this, request, response, null, true, 0, true);
+		ActionLogExcelReport writer = new ActionLogExcelReport(pageContext, dbResources);
+
+		try {
+			HSSFWorkbook wb = writer.writeUserExcel(jobCode, startDate, endDate, getServletContext().getRealPath("/"));
+
+	        ServletOutputStream op = response.getOutputStream();
+	        ServletContext context  = getServletConfig().getServletContext();
+	        //String mimetype = context.getMimeType(filename);
+
+			// Set the Respnse
+	        response.setContentType("application/octet-stream");
+			response.setHeader( "Content-Disposition", "attachment; filename=\"action_log_report_" + df.format(today) +".xls\"" );
+
+	        // Stream
+			try {
+	        	wb.write(op);
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+	        	op.flush();
+	        	op.close();
+				wb = null;
+			}
+		} catch(Exception e) {
 			e.printStackTrace();
 		} finally {
 			dbResources.close();

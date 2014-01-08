@@ -138,5 +138,21 @@
 <form:end />
 <admin:box_end />
 
+<admin:subtitle text="Action Log" />
+<admin:box_begin />
+<form:begin name="action_log_report" action="../DownloadReportServlet" />
+	<form:date_picker label="Start Date:" name="action_log_report_start_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
+	<form:date_picker label="End Date:" name="action_log_report_end_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
+    <form:row_begin />
+        <form:label name="" label="" />
+        <form:buttonset_begin align="left" padding="0"/>
+            <form:submit_inline button="submit" waiting="false" name="search" action="test" />
+        <form:buttonset_end />
+    <form:row_end />
+	<form:hidden name="reportType" value="action_log_report" />
+	<form:hidden name="job_code" value="<%= user.getJobCode() %>" />
+<form:end />
+<admin:box_end />
+
 <admin:set_tabset url="reports/_tabset_default.jsp" thispage="reports.jsp" />
 <html:end />    
