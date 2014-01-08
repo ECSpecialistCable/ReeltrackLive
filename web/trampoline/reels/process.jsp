@@ -7,6 +7,8 @@
 <%@ page import="com.reeltrack.reels.*" %>
 <%@ page import="java.io.*" %>
 <%@ page import="com.reeltrack.drivers.*" %>
+<%@ page import="java.util.Hashtable"%>
+<%@ page import="com.reeltrack.utilities.CircuitReader"%>
 
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
@@ -298,6 +300,18 @@ if(action.equals("record_weight")) {
     content.setCurrentWeight(Integer.parseInt(request.getParameter("current_weight")));
     reelMgr.updateReelWeight(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("import_circuits")) {
+	File file = multipart.getFile("ctr_imported_file");
+	if(file!=null) {
+		try {
+			CircuitReader reader = new CircuitReader();
+			Hashtable contents = reader.getContents(file);
+			reelMgr.addReelCircuits(contents, contid);
+		} catch(Exception e) {e.printStackTrace();}
+	}
+    redirect = request.getContextPath() + "/trampoline/" + "reels/circuits.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
 if(action.equals("add_circuit")) {

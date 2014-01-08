@@ -62,6 +62,20 @@ String tempURL; //var for url expression
     <form:end />
 <admin:box_end />
 
+<admin:subtitle text="Import Circuits" />
+<admin:box_begin />
+    <form:begin_multipart submit="true" name="import_circuits" action="reels/process.jsp" />
+    		<form:file name="ctr_imported_file" label="File:" />
+			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
+			<form:row_begin />
+				<form:label name="" label="" />
+				<form:buttonset_begin align="left" padding="0"/>
+					<form:submit_inline button="save" waiting="true" name="save" action="import_circuits" />
+				<form:buttonset_end />
+			<form:row_end />
+    <form:end />
+<admin:box_end />
+
 <% 
 int circuitLengthsTotal = 0;
 for(int i=0; i<circuits.howMany(); i++) {

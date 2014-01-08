@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Hashtable;
  
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
@@ -697,6 +699,21 @@ public class ReelMgr extends CompWebManager {
 		int toReturn = controller.add(content);
 		this.updateReelType(content);
 		return toReturn;
+	}
+
+	public void addReelCircuits(Hashtable contents, int reelId) throws Exception {
+		Enumeration keys = contents.keys();
+		while(keys.hasMoreElements()) {
+			String key = keys.nextElement().toString();
+			Integer value = (Integer)contents.get(key);
+			ReelCircuit content = new ReelCircuit();
+			content.setCreated(new Date());
+			content.setReelId(reelId);
+			content.setLength(value);
+			content.setName(key);
+			controller.add(content);
+			this.updateReelType(content);
+		}
 	}
 
 	public void updateReelType(ReelCircuit content) throws Exception {
