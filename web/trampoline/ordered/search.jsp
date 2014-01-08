@@ -39,6 +39,15 @@ if(session.getAttribute("ordered_search")!=null) {
     content = (Reel)session.getAttribute("ordered_search");
 }
 
+if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
+    if(request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
+        content.getData().removeValue(Reel.CR_ID_COLUMN);
+    } else {  
+        content.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
+        content.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
+    } 
+}
+
 if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
     content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
     content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL); 
@@ -83,6 +92,11 @@ String tempURL = "";
 <admin:subtitle text="Search" />
     <admin:box_begin />
     <form:begin_selfsubmit name="search" action="ordered/search.jsp" />
+        <%
+        tempURL = "";
+        if(content.getCrId()!=0) tempURL = new Integer(content.getCrId()).toString();
+        %>
+        <form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= tempURL %>" />
         <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
         <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
         <form:textfield label="Customer PO:" name="<%= Reel.CUSTOMER_PO_COLUMN %>" value="<%= content.getCustomerPO() %>" />
@@ -123,7 +137,7 @@ String tempURL = "";
    
     <listing:begin />
         <listing:header_begin />
-            <listing:header_cell width="10" first="true" name="#" />
+            <listing:header_cell width="45" first="true" name="CRID #" />
             <listing:header_cell name="Reel Tag" />
             <listing:header_cell name="Cable Description" />
             <listing:header_cell width="100" name="Prj. Ship Date" />

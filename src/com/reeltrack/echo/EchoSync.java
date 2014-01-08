@@ -42,9 +42,11 @@ public class EchoSync extends CompManager {
 		puller.addSearch(echoTrans);
 		puller.setSortBy(echoTrans.getTableName(), EchoTransaction.ID_COLUMN, true);
 		CompEntities echoTranses = controllerECHO.pullCompEntities(puller, 0, 0);
+		System.out.println("Should add:" + echoTranses.howMany());
 		for(int x=0; x<echoTranses.howMany(); x++) {
 			echoTrans = (EchoTransaction)echoTranses.get(x);
 			if(echoTrans.getAction().equalsIgnoreCase("add")) {
+				System.out.println("trying to add...");
 				Reel reel = new Reel();
 				reel.setOrdNo(echoTrans.getOrdNo());
 				reel.setPORevision(echoTrans.getPORevision());

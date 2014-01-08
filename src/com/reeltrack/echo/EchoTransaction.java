@@ -17,16 +17,16 @@ public class EchoTransaction extends CompCMEntity {
 
 	@Override
 	public String getTableName() {
-		return "reeltrack_transactions";
+		return "echo_reel_transactions";
 	}
 
 	@Override
 	public String getTypeName() {
-		return "reeltrack_transactions";
+		return "echo_reel_transactions";
 	}
 
 	public String getSeqTableName() {
-		return "reeltrack_transactions_seq";
+		return "echo_reel_transactions_seq";
 	}
 	
 	@Override
