@@ -178,7 +178,7 @@ String logoURL;
 					</tr>
 					<tr>
 						<td style="width:90px;border-top:solid 2px black;border-bottom: solid 2px black; text-align: right; padding-left: 0px;">CRID#</td>
-						<td style="width:90px;border-top:solid 2px black;border-bottom: solid 2px black; text-align: left; padding-left: 0px;"><b><%= content.getReelSerial() %></b></td>
+						<td style="width:90px;border-top:solid 2px black;border-bottom: solid 2px black; text-align: left; padding-left: 0px;"><b><%= content.getCrId() %></b></td>
 					</tr>
 				</table>
 			</td>
