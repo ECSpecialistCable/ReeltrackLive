@@ -56,7 +56,7 @@ public class HtmlToImageWriter extends CompWebManager {
 
 	public String writeImage(Reel theReel, String pageToGet, String basePath, String contentUrl, boolean isRotate, int width, int height) throws Exception {
 		URL urlToGet = new URL(pageToGet);
-		
+
 		InputStream is = null;
 		BufferedReader br;
 		String line;
@@ -65,21 +65,23 @@ public class HtmlToImageWriter extends CompWebManager {
 		try {
 			urlToGet = new URL(pageToGet);
 			is = urlToGet.openStream();  // throws an IOException
-			br = new BufferedReader(new InputStreamReader(is,"UTF8"));
+			br = new BufferedReader(new InputStreamReader(is, "UTF8"));
 
 			while ((line = br.readLine()) != null) {
 				line = line.replace(" & ", " &amp; ");
-				buf.append(line);				
+				buf.append(line);
 				//System.out.println(line);
 			}
-			
+
 		} catch (MalformedURLException mue) {
-			 mue.printStackTrace();
+			mue.printStackTrace();
 		} catch (IOException ioe) {
-			 ioe.printStackTrace();
+			ioe.printStackTrace();
 		} finally {
 			try {
-				if (is != null) is.close();
+				if (is != null) {
+					is.close();
+				}
 			} catch (IOException ioe) {
 				// nothing to see here
 			}
@@ -90,52 +92,52 @@ public class HtmlToImageWriter extends CompWebManager {
 		Document doc = builder.parse(new StringBufferInputStream(buf.toString()));
 
 		Graphics2DRenderer renderer = new Graphics2DRenderer();
-		renderer.setDocument(doc,"");
+		renderer.setDocument(doc, "");
 
-		
-	   BufferedImage image = new BufferedImage(width,height,
-											   BufferedImage.TYPE_INT_RGB);
-	  if(isRotate) {
-		   image = createRotatedCopy(image);			
-	   }
-	   Graphics2D imageGraphics = (Graphics2D)image.getGraphics();
-	   imageGraphics.setColor(Color.white);
-	   if(isRotate) {
-			imageGraphics.translate(0.5*height, 0.5*width);
-			imageGraphics.rotate( Math.PI / 2);
-			imageGraphics.translate(-0.5*width, -0.5*height);
-	   }
-	   imageGraphics.fillRect(0, 0, width, height);
-	   renderer.layout(imageGraphics,new Dimension(width,height));
-	   renderer.render(imageGraphics);
 
-	   String tagFileName = theReel.getReelTag() + "_" + theReel.getCrId() + ".pdf";
-	   tagFileName = tagFileName.replace(" ","_");
-	   tagFileName = tagFileName.replace("#","-");
-	   tagFileName = tagFileName.replace("/","-");
+		BufferedImage image = new BufferedImage(width, height,
+				BufferedImage.TYPE_INT_RGB);
+		if (isRotate) {
+			image = createRotatedCopy(image);
+		}
+		Graphics2D imageGraphics = (Graphics2D) image.getGraphics();
+		imageGraphics.setColor(Color.white);
+		if (isRotate) {
+			imageGraphics.translate(0.5 * height, 0.5 * width);
+			imageGraphics.rotate(Math.PI / 2);
+			imageGraphics.translate(-0.5 * width, -0.5 * height);
+		}
+		imageGraphics.fillRect(0, 0, width, height);
+		renderer.layout(imageGraphics, new Dimension(width, height));
+		renderer.render(imageGraphics);
 
-	   String uploadDir = basePath + contentUrl;
-	   File createDir = new File(uploadDir);
-	   if(!createDir.exists()) {
-	   	createDir.mkdirs();
-	   }
+		String tagFileName = theReel.getReelTag() + "_" + theReel.getCrId() + ".pdf";
+		tagFileName = tagFileName.replace(" ", "_");
+		tagFileName = tagFileName.replace("#", "-");
+		tagFileName = tagFileName.replace("/", "-");
 
-	   /*
-	   BufferedImage buff = null;
-	   buff = ImageRenderer.renderToImage(pageToGet, basePath + contentUrl + tagFileName, width, height);
+		String uploadDir = basePath + contentUrl;
+		File createDir = new File(uploadDir);
+		if (!createDir.exists()) {
+			createDir.mkdirs();
+		}
+
+		/*
+		BufferedImage buff = null;
+		buff = ImageRenderer.renderToImage(pageToGet, basePath + contentUrl + tagFileName, width, height);
 		BufferedImage scaled = ImageUtil.getScaledInstance(buff,width*2,height*2);
 		FSImageWriter imageWriter = new FSImageWriter();
 		imageWriter.write(scaled, basePath + contentUrl + tagFileName);
-		*/
+		 */
 
-        OutputStream os = new FileOutputStream(basePath + contentUrl + tagFileName);
-        ITextRenderer irenderer = new ITextRenderer();
-        irenderer.setDocument(pageToGet);
-        irenderer.layout();
-        irenderer.createPDF(os);
-        os.close();
+		OutputStream os = new FileOutputStream(basePath + contentUrl + tagFileName);
+		ITextRenderer irenderer = new ITextRenderer();
+		irenderer.setDocument(pageToGet);
+		irenderer.layout();
+		irenderer.createPDF(os);
+		os.close();
 
-        PDDocument document = null;
+		PDDocument document = null;
 		try {
 			document = PDDocument.load(basePath + contentUrl + tagFileName);
 		} catch (IOException ex) {
@@ -146,17 +148,20 @@ public class HtmlToImageWriter extends CompWebManager {
 		java.util.List<PDPage> pages = document.getDocumentCatalog().getAllPages();
 		PDPage page = (PDPage) pages.get(0);
 		BufferedImage image2 = page.convertToImage();
+		if(isRotate) {
+			image2 = this.createRotatedCopy(image2);
+		}
 		File file = new File(basePath + contentUrl + tagFileName);
 		ImageIO.write(image2, "jpg", file);
 		document.close();
 
 
-	   //File fileToWrite = new File(basePath + contentUrl + tagFileName);
-	   //ImageIO.write(image, "jpg", fileToWrite);
-	   theReel.setReelTagFile(tagFileName);
-	   theReel.setHasReelTagFile("y");
-	   this.getCompController().update(theReel);
-	   return tagFileName;
+		//File fileToWrite = new File(basePath + contentUrl + tagFileName);
+		//ImageIO.write(image, "jpg", fileToWrite);
+		theReel.setReelTagFile(tagFileName);
+		theReel.setHasReelTagFile("y");
+		this.getCompController().update(theReel);
+		return tagFileName;
 	}
 
 	private BufferedImage createRotatedCopy(BufferedImage img) {
@@ -166,11 +171,11 @@ public class HtmlToImageWriter extends CompWebManager {
 		BufferedImage rot = new BufferedImage(h, w, BufferedImage.TYPE_INT_RGB);
 
 		double theta = Math.PI / 2;
-		
+
 		AffineTransform xform = new AffineTransform();
-		xform.translate(0.5*h, 0.5*w);
+		xform.translate(0.5 * h, 0.5 * w);
 		xform.rotate(theta);
-		xform.translate(-0.5*w, -0.5*h);
+		xform.translate(-0.5 * w, -0.5 * h);
 
 		Graphics2D g = (Graphics2D) rot.createGraphics();
 		g.drawImage(img, xform, null);
@@ -178,7 +183,6 @@ public class HtmlToImageWriter extends CompWebManager {
 
 		return rot;
 	}
-
 //  Using HtmlImageGenerator
 //	public void writeImage(String pageToGet, String basePath, String contentUrl) throws Exception {
 //		URL urlToGet = new URL(pageToGet);
@@ -191,8 +195,6 @@ public class HtmlToImageWriter extends CompWebManager {
 //		//imageGenerator.saveAsHtmlWithMap("hello-world.html", "hello-world.png");
 //		;
 //	}
-
-
 //	The other way of writing html to image
 //	public void writeImage(String pageToGet, String basePath, String contentUrl) throws Exception {
 //		String htmlcode="";
@@ -237,5 +239,4 @@ public class HtmlToImageWriter extends CompWebManager {
 //		g.dispose();
 //
 //	}
-	
 }
