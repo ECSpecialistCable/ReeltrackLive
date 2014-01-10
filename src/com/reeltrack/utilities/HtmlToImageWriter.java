@@ -111,7 +111,7 @@ public class HtmlToImageWriter extends CompWebManager {
 		renderer.layout(imageGraphics, new Dimension(width, height));
 		renderer.render(imageGraphics);
 
-		String tagFileName = theReel.getReelTag() + "_" + theReel.getCrId() + ".jpg";
+		String tagFileName = theReel.getReelTag() + "_" + theReel.getCrId() + ".pdf";
 		tagFileName = tagFileName.replace(" ", "_");
 		tagFileName = tagFileName.replace("#", "-");
 		tagFileName = tagFileName.replace("/", "-");
@@ -128,7 +128,7 @@ public class HtmlToImageWriter extends CompWebManager {
 		BufferedImage scaled = ImageUtil.getScaledInstance(buff,width*2,height*2);
 		FSImageWriter imageWriter = new FSImageWriter();
 		imageWriter.write(scaled, basePath + contentUrl + tagFileName);
-		*/
+		 */
 
 		OutputStream os = new FileOutputStream(basePath + contentUrl + tagFileName);
 		ITextRenderer irenderer = new ITextRenderer();
@@ -153,17 +153,13 @@ public class HtmlToImageWriter extends CompWebManager {
 		if(isRotate) {
 			image2 = this.createRotatedCopy(image2);
 		}
-		BufferedImage scaled = ImageUtil.getScaledInstance(image2,height*2,width*2);
-		FSImageWriter imageWriter = new FSImageWriter();
-		imageWriter.write(scaled, basePath + contentUrl + tagFileName);
-
-
-		BufferedImage newShrinked = ImageUtil.getScaledInstance(image2,height/2,width/2);
 		File file = new File(basePath + contentUrl + tagFileName);
-		ImageIO.write(newShrinked, "jpg", file);
+		ImageIO.write(image2, "jpg", file);
 		document.close();
 
 
+		//File fileToWrite = new File(basePath + contentUrl + tagFileName);
+		//ImageIO.write(image, "jpg", fileToWrite);
 		theReel.setReelTagFile(tagFileName);
 		theReel.setHasReelTagFile("y");
 		this.getCompController().update(theReel);
