@@ -169,7 +169,7 @@ String logoURL;
 	</table>
 	<table style="margin: 0px; margin-top: -25px; padding-top: 20px; width:692px; border: none">
 		<tr>
-			<td class="header" style="text-align: left; width: 30%">CIRCUIT</td>
+			<td class="header" style="text-align: left; width: 20%">CIRCUIT</td>
 			<td class="header" style="text-align: center; width: 20%">LENGTH</td>
 			<td class="header" style="text-align: center; width: 10%">BY</td>
 			<td class="header" style="text-align: center; width: 30%"><%= content.getCableDescription() %></td>
@@ -194,8 +194,8 @@ String logoURL;
 				<td class="value" style="height:1px;width: 10%;<%=borderStyle%>"></td>
 				<% if(c==0) { %>
 					<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo_reeltag.jpg"; %>
-					<td style="text-align: center; width: 50%; padding: 0;width:160px;" rowspan="<%= "6" %>" align="center">
-						<table style="display:inline;width: 50%; text-align: center;border: none">
+					<td style="text-align: center; width: 75%; padding: 0;width:160px;" rowspan="<%= "6" %>" align="center">
+						<table style="display:inline;width: 75%; text-align: center;border: none">
 							<tr>
 								<td class="header" style="text-align: right;width: 25%">ECS PART #</td>
 								<td class="value" style="text-align: left"><%= content.getEcsPN() %></td>
@@ -205,11 +205,11 @@ String logoURL;
 								<td class="value" style="text-align: left"><%= "" %></td>
 							</tr>
 							<tr>
-								<td colspan="2" style="text-align: center;width: 50%;padding-top: 0px;padding-bottom: 0px;margin-bottom: 0px"><img alt="logo" src="<%= logoURL %>" width="130" height="40" />
+								<td colspan="2" style="text-align: center;width: 75%;padding-top: 0px;padding-bottom: 0px;margin-bottom: 0px"><img alt="logo" src="<%= logoURL %>" width="130" height="40" />
 								</td>
 							</tr>
 							<tr>
-								<td class="header" colspan="2" style="text-align: left; width: 50%;padding: 0px;padding-left: 7px;">770.446.2222 www.ecscable.com</td>
+								<td class="header" colspan="2" style="text-align: left; width: 75%;padding: 0px;padding-left: 7px;">770.446.2222 www.ecscable.com</td>
 							</tr>
 						</table>
 					</td>
