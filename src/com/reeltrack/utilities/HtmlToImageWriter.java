@@ -147,7 +147,9 @@ public class HtmlToImageWriter extends CompWebManager {
 		tagFileName = tagFileName + ".jpg";
 		java.util.List<PDPage> pages = document.getDocumentCatalog().getAllPages();
 		PDPage page = (PDPage) pages.get(0);
-		BufferedImage image2 = page.convertToImage();
+		BufferedImage image2 = new BufferedImage(width, height,
+				BufferedImage.TYPE_INT_RGB);
+		image2 = page.convertToImage();
 		if(isRotate) {
 			image2 = this.createRotatedCopy(image2);
 		}
