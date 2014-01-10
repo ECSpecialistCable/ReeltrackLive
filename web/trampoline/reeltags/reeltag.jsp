@@ -57,14 +57,14 @@ String logoURL;
 
 		.value {
 			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
-			font-size: 12px;
+			font-size: 10px;
 			vertical-align: top;
 			font-weight: bold;
 		}
 
 		.header {
 			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
-			font-size: 12px;
+			font-size: 10px;
 			text-align: right;
 			/*background-color: #c4c4c4;*/
 			/*background-color: gray;
