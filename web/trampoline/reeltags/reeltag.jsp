@@ -184,7 +184,7 @@ String logoURL;
 			</td>
 		</tr>
 	</table>
-	<table style="margin: 0px; margin-top: -25px; padding-top: 0px; width:692px; border: none">
+	<table style="margin: 0px; margin-top: -25px; padding-top: 20px; width:692px; border: none">
 		<tr>
 			<td class="header" style="text-align: left; width: 35%">CIRCUIT</td>
 			<td class="header" style="text-align: center; width: 20%">LENGTH</td>

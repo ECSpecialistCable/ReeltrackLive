@@ -111,7 +111,7 @@ public class HtmlToImageWriter extends CompWebManager {
 		renderer.layout(imageGraphics, new Dimension(width, height));
 		renderer.render(imageGraphics);
 
-		String tagFileName = theReel.getReelTag() + "_" + theReel.getCrId() + ".pdf";
+		String tagFileName = theReel.getReelTag() + "_" + theReel.getCrId() + ".jpg";
 		tagFileName = tagFileName.replace(" ", "_");
 		tagFileName = tagFileName.replace("#", "-");
 		tagFileName = tagFileName.replace("/", "-");
@@ -130,7 +130,7 @@ public class HtmlToImageWriter extends CompWebManager {
 		imageWriter.write(scaled, basePath + contentUrl + tagFileName);
 		 */
 
-		OutputStream os = new FileOutputStream(basePath + contentUrl + tagFileName);
+	/*	OutputStream os = new FileOutputStream(basePath + contentUrl + tagFileName);
 		ITextRenderer irenderer = new ITextRenderer();
 		irenderer.setDocument(pageToGet);
 		irenderer.layout();
@@ -147,19 +147,17 @@ public class HtmlToImageWriter extends CompWebManager {
 		tagFileName = tagFileName + ".jpg";
 		java.util.List<PDPage> pages = document.getDocumentCatalog().getAllPages();
 		PDPage page = (PDPage) pages.get(0);
-		BufferedImage image2 = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_RGB);
-		image2 = page.convertToImage();
+		BufferedImage image2 = page.convertToImage();
 		if(isRotate) {
 			image2 = this.createRotatedCopy(image2);
 		}
 		File file = new File(basePath + contentUrl + tagFileName);
 		ImageIO.write(image2, "jpg", file);
 		document.close();
+*/
 
-
-		//File fileToWrite = new File(basePath + contentUrl + tagFileName);
-		//ImageIO.write(image, "jpg", fileToWrite);
+		File fileToWrite = new File(basePath + contentUrl + tagFileName);
+		ImageIO.write(image, "jpg", fileToWrite);
 		theReel.setReelTagFile(tagFileName);
 		theReel.setHasReelTagFile("y");
 		this.getCompController().update(theReel);
