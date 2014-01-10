@@ -144,10 +144,10 @@ public class HtmlToImageWriter extends CompWebManager {
 			System.out.println("" + ex);
 		}
 
-		tagFileName = tagFileName + ".jpg";
+		tagFileName = tagFileName + ".png";
 		java.util.List<PDPage> pages = document.getDocumentCatalog().getAllPages();
 		PDPage page = (PDPage) pages.get(0);
-		BufferedImage image2 = new BufferedImage(width, height,
+		BufferedImage image2 = new BufferedImage(width*2, height*2,
 				BufferedImage.TYPE_INT_RGB);
 		image2 = page.convertToImage();
 		if(isRotate) {
@@ -155,20 +155,10 @@ public class HtmlToImageWriter extends CompWebManager {
 		}
 		File file = new File(basePath + contentUrl + tagFileName);
 		//ImageIO.write(image2, "jpg", file);
+		FSImageWriter imageWriter = new FSImageWriter();
+		imageWriter.write(image2, basePath + contentUrl + tagFileName);
 		document.close();
-
-		if(isRotate) {
-			BufferedImage scaled = ImageUtil.getScaledInstance(image2,height*2,width*2);
-			FSImageWriter imageWriter = new FSImageWriter();
-			imageWriter.write(scaled, basePath + contentUrl + tagFileName);
-			//ImageIO.write(scaled, "jpg", file);
-		} else {
-			BufferedImage scaled = ImageUtil.getScaledInstance(image2,width*2,height*2);
-			FSImageWriter imageWriter = new FSImageWriter();
-			imageWriter.write(scaled, basePath + contentUrl + tagFileName);
-			//ImageIO.write(scaled, "jpg", file);
-		}
-
+		
 		//File fileToWrite = new File(basePath + contentUrl + tagFileName);
 		//ImageIO.write(image, "jpg", fileToWrite);
 		theReel.setReelTagFile(tagFileName);

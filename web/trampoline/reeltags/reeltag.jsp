@@ -108,6 +108,112 @@ String logoURL;
 	</style>
 </head>
 <body>
+	
+	<table style="border: none;margin: 0px; margin-bottom: 0px;padding: 0px">
+		<tr>
+			<td colspan="2" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 10px;"><%= reelCustomer.getName().toUpperCase() %></td>
+			<td rowspan="7" style="width:100px;vertical-align: top; margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px; text-align: center">
+					<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
+					<img alt="barcode" src="<%= tempURL %>" width="140" height="140" />
+			</td>
+			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 15px;">Mfg</td>
+			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 15px;"><b><%= content.getManufacturer()  %></b></td>
+		</tr>
+		<tr>
+			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/N</td>
+			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPN()  %></b></td>
+
+			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Weight / kft</td>
+			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= new Integer(techData.getWeight()).toString() + "lbs"   %></b></td>
+		</tr>
+		<tr>
+			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/O #</td>
+			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPO()  %></b></td>
+
+			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">O.D. (in)</td>
+			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= Double.toString(techData.getOD())+"\""   %></b></td>
+		</tr>
+		<tr>
+			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Rec'd QTY</td>
+			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getOnReelQuantity()  %></b></td>
+
+			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">M.B.R.</td>
+			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= Double.toString(techData.getRadius())+"\""   %></b></td>
+		</tr>
+		<tr>
+			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Rec'd GWT</td>
+			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+
+			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Max Pull</td>
+			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+		</tr>
+		<tr>
+			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
+			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+
+			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
+			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="border-top:solid 2px black;border-bottom: solid 2px black;width:90px;vertical-align: center;padding-bottom: 0px;padding-top: 0px;text-align: left;"><b><%= content.getReelTag() %></b></td>
+			<td style="width:90px;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;">CRID#</td>
+			<td  style="width:110px;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;"><b><%= content.getCrId() %></b></td>
+		</tr>		
+	</table>
+	<table style="margin: 0px; margin-top: -25px; padding-top: 20px; width:692px; border: none">
+		<tr>
+			<td class="header" style="text-align: left; width: 30%">CIRCUIT</td>
+			<td class="header" style="text-align: center; width: 20%">LENGTH</td>
+			<td class="header" style="text-align: center; width: 10%">BY</td>
+			<td class="header" style="text-align: center; width: 30%"><%= content.getCableDescription() %></td>
+		</tr>
+
+		<% int total = 0; %>
+
+		<% for (int c=0; c<circuits.howMany() || c<5; c++ ) { %>
+			<% ReelCircuit circuit = new ReelCircuit(); %>
+			<% if(c<circuits.howMany()) { %>
+				<%  circuit = (ReelCircuit)circuits.get(c); %>
+				<% total += circuit.getLength(); %>
+			<% } %>
+			<tr>
+				<% String borderStyle = "border-bottom: dotted 1px black"; %>
+					<td class="value" style="height:20px;width: 35%;<%=borderStyle%>;padding-bottom:0px"><%= circuit.getName() %></td>
+				<% if(c<circuits.howMany()) { %>
+					<td class="value" style="height:20px;width: 20%;<%=borderStyle%>"><%= circuit.getLength() %></td>
+				<% } else { %>
+					<td class="value" style="height:20px;width: 20%;<%=borderStyle%>"></td>
+				<% } %>
+				<td class="value" style="height:1px;width: 10%;<%=borderStyle%>"></td>
+				<% if(c==0) { %>
+					<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo_reeltag.png"; %>
+					<td style="text-align: center; width: 40%; padding: 0;width:160px;" rowspan="<%= "5" %>" align="center">
+						<table style="display:inline;width: 40%; text-align: center;border: none">
+							<tr>
+								<td class="header" style="text-align: right;width: 50%">ECS PART #</td>
+								<td class="value" style="text-align: left"><%= content.getEcsPN() %></td>
+							</tr>
+							<tr>
+								<td class="header" style="text-align: right;width: 50%">ECS PO #</td>
+								<td class="value" style="text-align: left"><%= "" %></td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align: center;width: 40%;padding-top: 0px;padding-bottom: 0px;margin-bottom: 0px"><img alt="logo" src="<%= logoURL %>" width="130" height="40" />
+								</td>
+							</tr>
+							<tr>
+								<td class="header" colspan="2" style="text-align: center; width: 40%;">770.446.2222 www.ecscable.com</td>
+							</tr>
+						</table>
+					</td>
+				<% } %>
+			</tr>
+		<% } %>
+		<tr>
+			<td class="header" colspan="5" style="text-align: center;">PRINTED <%= dateString %></td>
+		</tr>
+	</table>
+	<%-- changed the code to above to tighten up the new design
 	<table style="border: none;margin: 0px; margin-bottom: 0px;">
 		<tr>
 			<td style="vertical-align: top">
@@ -174,7 +280,7 @@ String logoURL;
 					</tr>
 					<tr>
 						<td class="header" style="width:90px">Max Pull</td>
-						<td class="value" style="width:90px"><b><%--<%= new Integer(techData.getPullTension()).toString()  %>--%></b></td>
+						<td class="value" style="width:90px"><b></b></td>
 					</tr>
 					<tr>
 						<td style="width:90px;border-top:solid 2px black;border-bottom: solid 2px black; text-align: right; padding-left: 0px;">CRID#</td>
@@ -237,5 +343,6 @@ String logoURL;
 			<td class="header" colspan="5" style="text-align: center;">PRINTED <%= dateString %></td>
 		</tr>
 	</table>
+	--%>
 </body>
 </html>
