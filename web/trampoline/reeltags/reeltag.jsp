@@ -167,7 +167,7 @@ String logoURL;
 			<td  style="width:110px;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;"><b><%= content.getCrId() %></b></td>
 		</tr>		
 	</table>
-	<table style="margin: 0px; margin-top: -25px; padding-top: 20px; width:692px; border: none">
+	<table style="margin: 0px; margin-top: -25px; padding-top: 20px; width:630px; border: none">
 		<tr>
 			<td class="header" style="text-align: left; width: 20%">CIRCUIT</td>
 			<td class="header" style="text-align: center; width: 20%">LENGTH</td>
@@ -197,7 +197,7 @@ String logoURL;
 					<td style="text-align: center; width: 75%; padding: 0;width:160px;" rowspan="<%= "6" %>" align="center">
 						<table style="display:inline;width: 75%; text-align: center;border: none">
 							<tr>
-								<td class="header" style="text-align: right;width: 25%">ECS PART #</td>
+								<td class="header" style="text-align: right;width: 35%">ECS PART #</td>
 								<td class="value" style="text-align: left"><%= content.getEcsPN() %></td>
 							</tr>
 							<tr>
