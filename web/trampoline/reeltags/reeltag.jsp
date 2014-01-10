@@ -72,7 +72,7 @@ String logoURL;
 		}
 
 		table {
-			width: 690px;
+			width: 640px;
 			/*height: 400px;*/
 			border: 1px solid;
 			margin-bottom: 5px;
@@ -111,13 +111,13 @@ String logoURL;
 	
 	<table style="border: none;margin: 0px; margin-bottom: 0px;padding: 0px">
 		<tr>
-			<td colspan="2" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 10px;"><%= reelCustomer.getName().toUpperCase() %></td>
-			<td rowspan="7" style="width:100px;vertical-align: top; margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px; text-align: center">
+			<td colspan="2" style="width:200px;vertical-align: top;padding-bottom: 0px;padding-top: 10px;"><%= reelCustomer.getName().toUpperCase() %></td>
+			<td rowspan="8" style="width:100px;vertical-align: top; margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px; text-align: center">
 					<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
-					<img alt="barcode" src="<%= tempURL %>" width="140" height="140" />
+					<img alt="barcode" src="<%= tempURL %>" width="170" height="170" />
 			</td>
 			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 15px;">Mfg</td>
-			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 15px;"><b><%= content.getManufacturer()  %></b></td>
+			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 15px;"><b><%= "ABC"  %></b></td>
 		</tr>
 		<tr>
 			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/N</td>
@@ -155,7 +155,14 @@ String logoURL;
 			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
 		</tr>
 		<tr>
-			<td colspan="2" style="border-top:solid 2px black;border-bottom: solid 2px black;width:90px;vertical-align: center;padding-bottom: 0px;padding-top: 0px;text-align: left;"><b><%= content.getReelTag() %></b></td>
+			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
+			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+
+			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
+			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+		</tr>
+		<tr>
+			<td colspan="2" style="border-top:solid 2px black;border-bottom: solid 2px black;width:50px;vertical-align: center;padding-bottom: 0px;padding-top: 0px;text-align: left;"><b><%= content.getReelTag() %></b></td>
 			<td style="width:90px;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;">CRID#</td>
 			<td  style="width:110px;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;"><b><%= content.getCrId() %></b></td>
 		</tr>		
@@ -178,31 +185,31 @@ String logoURL;
 			<% } %>
 			<tr>
 				<% String borderStyle = "border-bottom: dotted 1px black"; %>
-					<td class="value" style="height:20px;width: 35%;<%=borderStyle%>;padding-bottom:0px"><%= circuit.getName() %></td>
+					<td class="value" style="height:14px;width: 25%;<%=borderStyle%>;padding-bottom:0px"><%= circuit.getName() %></td>
 				<% if(c<circuits.howMany()) { %>
-					<td class="value" style="height:20px;width: 20%;<%=borderStyle%>"><%= circuit.getLength() %></td>
+					<td class="value" style="height:14px;width: 20%;<%=borderStyle%>"><%= circuit.getLength() %></td>
 				<% } else { %>
-					<td class="value" style="height:20px;width: 20%;<%=borderStyle%>"></td>
+					<td class="value" style="height:14px;width: 20%;<%=borderStyle%>"></td>
 				<% } %>
 				<td class="value" style="height:1px;width: 10%;<%=borderStyle%>"></td>
 				<% if(c==0) { %>
-					<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo_reeltag.png"; %>
-					<td style="text-align: center; width: 40%; padding: 0;width:160px;" rowspan="<%= "5" %>" align="center">
-						<table style="display:inline;width: 40%; text-align: center;border: none">
+					<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo_reeltag.jpg"; %>
+					<td style="text-align: center; width: 50%; padding: 0;width:160px;" rowspan="<%= "6" %>" align="center">
+						<table style="display:inline;width: 50%; text-align: center;border: none">
 							<tr>
-								<td class="header" style="text-align: right;width: 50%">ECS PART #</td>
+								<td class="header" style="text-align: right;width: 25%">ECS PART #</td>
 								<td class="value" style="text-align: left"><%= content.getEcsPN() %></td>
 							</tr>
 							<tr>
-								<td class="header" style="text-align: right;width: 50%">ECS PO #</td>
+								<td class="header" style="text-align: right;width: 25%">ECS PO #</td>
 								<td class="value" style="text-align: left"><%= "" %></td>
 							</tr>
 							<tr>
-								<td colspan="2" style="text-align: center;width: 40%;padding-top: 0px;padding-bottom: 0px;margin-bottom: 0px"><img alt="logo" src="<%= logoURL %>" width="130" height="40" />
+								<td colspan="2" style="text-align: center;width: 50%;padding-top: 0px;padding-bottom: 0px;margin-bottom: 0px"><img alt="logo" src="<%= logoURL %>" width="130" height="40" />
 								</td>
 							</tr>
 							<tr>
-								<td class="header" colspan="2" style="text-align: center; width: 40%;">770.446.2222 www.ecscable.com</td>
+								<td class="header" colspan="2" style="text-align: left; width: 50%;padding: 0px;padding-left: 7px;">770.446.2222 www.ecscable.com</td>
 							</tr>
 						</table>
 					</td>
@@ -210,7 +217,7 @@ String logoURL;
 			</tr>
 		<% } %>
 		<tr>
-			<td class="header" colspan="5" style="text-align: center;">PRINTED <%= dateString %></td>
+			<td class="header" colspan="3" style="text-align: center;">PRINTED <%= dateString %></td>
 		</tr>
 	</table>
 	<%-- changed the code to above to tighten up the new design
