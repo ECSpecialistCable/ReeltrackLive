@@ -57,14 +57,14 @@ String logoURL;
 
 		.value {
 			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
-			font-size: 10px;
+			font-size: 12px;
 			vertical-align: top;
 			font-weight: bold;
 		}
 
 		.header {
 			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
-			font-size: 10px;
+			font-size: 12px;
 			text-align: right;
 			/*background-color: #c4c4c4;*/
 			/*background-color: gray;
@@ -210,7 +210,7 @@ String logoURL;
 				<% } %>
 				<td class="value" style="height:1px;width: 10%;<%=borderStyle%>"></td>
 				<% if(c==0) { %>
-					<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo.png"; %>
+					<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo_big.png"; %>
 					<td style="text-align: center; width: 35%; padding: 0;width:160px;" rowspan="<%= "5" %>" align="center">
 						<table style="display:inline;width: 35%; text-align: center;border: none">
 							<tr>
@@ -226,7 +226,7 @@ String logoURL;
 								</td>
 							</tr>
 							<tr>
-								<td class="header" colspan="2" style="text-align: center; width: 35%;">770.446.2222   www.ecscable.com</td>
+								<td class="header" colspan="2" style="text-align: center; width: 35%;">770.446.2222 www.ecscable.com</td>
 							</tr>
 						</table>
 					</td>

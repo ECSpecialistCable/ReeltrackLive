@@ -154,9 +154,20 @@ public class HtmlToImageWriter extends CompWebManager {
 			image2 = this.createRotatedCopy(image2);
 		}
 		File file = new File(basePath + contentUrl + tagFileName);
-		ImageIO.write(image2, "jpg", file);
+		//ImageIO.write(image2, "jpg", file);
 		document.close();
 
+		if(isRotate) {
+			BufferedImage scaled = ImageUtil.getScaledInstance(image2,height*2,width*2);
+			FSImageWriter imageWriter = new FSImageWriter();
+			imageWriter.write(scaled, basePath + contentUrl + tagFileName);
+			//ImageIO.write(scaled, "jpg", file);
+		} else {
+			BufferedImage scaled = ImageUtil.getScaledInstance(image2,width*2,height*2);
+			FSImageWriter imageWriter = new FSImageWriter();
+			imageWriter.write(scaled, basePath + contentUrl + tagFileName);
+			//ImageIO.write(scaled, "jpg", file);
+		}
 
 		//File fileToWrite = new File(basePath + contentUrl + tagFileName);
 		//ImageIO.write(image, "jpg", fileToWrite);
