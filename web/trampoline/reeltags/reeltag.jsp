@@ -49,22 +49,22 @@ String logoURL;
 	<style type="text/css">
 
 		body {
-			font-family:Verdana;
+			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
 			font-size: 25px;
 			background:white;
 			margin:0px;
 		}
 
 		.value {
-			font-family:Verdana;
-			font-size: 10px;
+			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
+			font-size: 12px;
 			vertical-align: top;
 			font-weight: bold;
 		}
 
 		.header {
-			font-family:Verdana;
-			font-size: 10px;
+			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
+			font-size: 12px;
 			text-align: right;
 			/*background-color: #c4c4c4;*/
 			/*background-color: gray;
@@ -184,7 +184,7 @@ String logoURL;
 			</td>
 		</tr>
 	</table>
-	<table style="margin: 0px; margin-top: -25px; padding-top: 20px; width:692px; border: none">
+	<table style="margin: 0px; margin-top: -25px; padding-top: 0px; width:692px; border: none">
 		<tr>
 			<td class="header" style="text-align: left; width: 35%">CIRCUIT</td>
 			<td class="header" style="text-align: center; width: 20%">LENGTH</td>
