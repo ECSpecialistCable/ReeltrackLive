@@ -8,7 +8,6 @@
 <%@ page import="java.io.*" %>
 <%@ page import="com.reeltrack.drivers.*" %>
 <%@ page import="java.util.Hashtable"%>
-<%@ page import="com.reeltrack.utilities.CircuitReader"%>
 
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
