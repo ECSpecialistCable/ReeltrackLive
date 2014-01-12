@@ -40,10 +40,12 @@ if(user_agent.contains("iPad")) {
 %>
 
 <% if(userLoginMgr.isLoggedIn()) { %>
-	<% if(user.getCustomerId()!=0 && !user.getJobCode().equals("") && (user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_STANDARD))) { %>
-		<a class="module_bar_toggle" rel="common/interface/manage_reels">On-Site Reel Mgt</a>
+	<% if(user.getCustomerId()!=0 && !user.getJobCode().equals("") && (user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_STANDARD) || user.isUserType(RTUser.USER_TYPE_INVENTORY))) { %>
+		<% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY)) { %>
+			<a class="module_bar_toggle" rel="common/interface/manage_reels">On-Site Reel Mgt</a>
+		<% } %>
 		<a class="module_bar_toggle" rel="common/interface/reel_inventory">Inventory Data</a>
-		<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT)) { %>
+		<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_INVENTORY)) { %>
 			<a class="module_bar_toggle" rel="common/interface/configuration">Job Data</a>
 			<% if(!isIpad) { %>
 				<a class="module_bar_toggle" rel="common/interface/reports">Reports</a>

@@ -7,11 +7,13 @@
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 
 <% if (user!=null) { %>
+	<% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY)) { %>
 		<admin:ajax_load url="users2/search.jsp" label="Manage Users" />
 		<admin:ajax_load url="foremans/search.jsp" label="Manage Foremen" />
 		<admin:ajax_load url="drivers/search.jsp" label="Manage Drivers" />
 		<admin:ajax_load url="whlocations/search.jsp" label="Manage Warehouse Locations" />
 		<%--<admin:ajax_load url="settings/search.jsp" label="Settings" />--%>
+	<% } %>
 		<admin:ajax_load url="glossary/reeltrack_glossary.jsp" label="View Glossary" />
 		<admin:ajax_load url="file_cabinets/search.jsp" label="File Cabinet" />
 <% } %>
