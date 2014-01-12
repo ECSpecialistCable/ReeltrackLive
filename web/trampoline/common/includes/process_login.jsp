@@ -2,6 +2,7 @@
 <%@ page import="com.monumental.trampoline.component.*" %>
 <%@ page import="com.reeltrack.users.*" %>
 <%@ page import="com.reeltrack.customers.*" %>
+<%@ page import="com.reeltrack.reels.*" %>
 
 <%@ taglib prefix="html" tagdir="/WEB-INF/tags/html"%>
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
@@ -55,13 +56,30 @@ job = customerMgr.getCustomerJob(job);
 
 //user.setJobId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));
 user.setJobCode(job.getCode());
-redirect = request.getContextPath() + "/trampoline/index.jsp";
+
+Reel rtReel = (Reel)session.getAttribute("RT");
+Reel plReel = (Reel)session.getAttribute("PL");
+boolean fowardToReelStatus = false;
+int reelID = 0;
+if(rtReel!=null && rtReel.getJobCode().equals(job.getCode())) {
+	fowardToReelStatus = true;
+	reelID = rtReel.getId();
+	redirect = request.getContextPath() + "/trampoline/index.jsp?type=RT&id=" + rtReel.getId() + "&job=" + rtReel.getJobCode();
+} else if(plReel!=null && plReel.getJobCode().equals(job.getCode())) {
+	fowardToReelStatus = true;
+	reelID = plReel.getId();
+	redirect = request.getContextPath() + "/trampoline/index.jsp?type=PL&id=" + plReel.getId() + "&job=" + plReel.getJobCode();
+} else {
+	redirect = request.getContextPath() + "/trampoline/index.jsp";
+}
 %>
 <% } %>
 
 
 <% if(action.equals("logout")) { %>
-<%  
+<%
+session.removeAttribute("RT");
+session.removeAttribute("PL");  
 userLoginMgr.logout();
 redirect = request.getContextPath() + "/trampoline/index.jsp";			
 %>

@@ -10,8 +10,10 @@
 
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr"/>
+<jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 <% userLoginMgr.init(pageContext, dbResources); %>
-<% dbResources.close(); %>
+<% reelMgr.init(pageContext,dbResources); %>
+
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
 int reelID = 0;
@@ -28,17 +30,24 @@ if(request.getParameter("job")!=null) {
 }
 
 if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
-	if(tagType.equals("RT")) {
-		Reel rtReel = new Reel();
-		rtReel.setId(reelID);
-		rtReel.setJobCode(jobCode);
-		session.setAttribute("RT",rtReel);
-	}
-	if(tagType.equals("PL")) {
-		Reel plReel = new Reel();
-		plReel.setId(reelID);
-		plReel.setJobCode(jobCode);
-		session.setAttribute("PL",plReel);
+	Reel content = new Reel();
+	content.setId(reelID);
+	content = (Reel)reelMgr.getReel(content);
+	if(jobCode.equals(content.getJobCode())) {
+		if(tagType.equals("RT")) {
+			Reel rtReel = new Reel();
+			rtReel.setId(reelID);
+			rtReel.setJobCode(jobCode);
+			session.setAttribute("RT",content);
+		}
+		if(tagType.equals("PL")) {
+			Reel plReel = new Reel();
+			plReel.setId(reelID);
+			plReel.setJobCode(jobCode);
+			session.setAttribute("PL",content);
+		}
+	} else {
+		reelID=0;
 	}
 }
 
@@ -71,6 +80,7 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 	  }		
 	}
 %>
+<% dbResources.close(); %>
 
 <c:remove var="flash" />
 

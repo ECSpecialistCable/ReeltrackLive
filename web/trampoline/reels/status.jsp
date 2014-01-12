@@ -54,9 +54,9 @@ Reel plReel = (Reel)session.getAttribute("PL");
 boolean reelsMatch = false;
 if(rtReel!=null && plReel!=null) {
 	if(rtReel.getId() == plReel.getId() && rtReel.getId() == content.getId() && rtReel.getJobCode().equals(content.getJobCode())) {
-		if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) ) {
+		//if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) ) {
 			reelsMatch = true;
-		}
+		//}
 	}
 }
 
@@ -69,14 +69,17 @@ String tempURL; //var for url expression
 <admin:title text="<%= tempURL %>" />
 <notifier:show_message />
 
-<% if(rtReel!=null && plReel!=null) { %>
+<% if(rtReel!=null || plReel!=null) { %>
 <admin:subtitle text="Scanned Reel" />
+<admin:box_begin />
+    <form:begin submit="false" name="nothing" action="#" />
 <% if(rtReel!=null) { %>
 	<form:info label="Reel Tag:" text="<%= rtReel.getReelTag() %>" />
 <% } %>
 <% if(plReel!=null) { %>
 	<form:info label="Pick List:" text="<%= plReel.getReelTag() %>" />
 <% } %>
+<form:end />
 <admin:box_end />
 <% } %>
 
