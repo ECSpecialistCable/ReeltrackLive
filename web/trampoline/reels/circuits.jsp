@@ -42,10 +42,25 @@ String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
 
+<% 
+int circuitLengthsTotal = 0;
+for(int i=0; i<circuits.howMany(); i++) {
+    circuit = (ReelCircuit)circuits.get(i);
+    if(!circuit.isPulled()) {
+        circuitLengthsTotal += circuit.getLength();
+    }
+}
+int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
+%>
+
 <html:begin />
 <% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
 <admin:title text="<%= tempURL %>" />
 <notifier:show_message />
+
+<% if(remainingQty<0) { %>
+    <h2 style="color:red;">ALERT: REEL SHOWS NEGATIVE QUANTITY</h2>
+<% } %>
 
 <admin:subtitle text="Add Circuit" />
 <admin:box_begin />
@@ -76,16 +91,6 @@ String tempURL; //var for url expression
     <form:end />
 <admin:box_end />
 
-<% 
-int circuitLengthsTotal = 0;
-for(int i=0; i<circuits.howMany(); i++) {
-    circuit = (ReelCircuit)circuits.get(i);
-    if(!circuit.isPulled()) {
-        circuitLengthsTotal += circuit.getLength();
-    }
-}
-int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
-%>
 <% if(circuits.howMany() > 0) { %>
     <%
     if(content.getStatus().equals(Reel.STATUS_ORDERED)) {

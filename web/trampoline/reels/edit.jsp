@@ -85,7 +85,11 @@ String tempURL; //var for url expression
         	<form:row_end />
 			<form:info label="Reel Type:" text="<%= content.getReelType() %>" />
 			<form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
-			<form:info label="Cable Description:" text="<%= content.getCableDescription() %>" />
+			<% if(canEdit) { %>
+				<form:textfield label="Cable Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
+			<% } else { %>
+				<form:info label="Cable Description:" text="<%= content.getCableDescription() %>" />
+			<% } %>
 			<% if(canEdit) { %>
 				<form:textfield label="Customer P/N:" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= content.getCustomerPN() %>" />
 			<% } else { %>

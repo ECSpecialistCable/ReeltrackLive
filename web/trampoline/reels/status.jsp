@@ -290,7 +290,17 @@ String tempURL; //var for url expression
 			<form:info label="Received On:" text="<%= content.getReceivedOnDateString() %>" />
 			<form:info label="Times Checked OUT:" text="<%= new Integer(content.getTimesCheckedOut()).toString() %>" />
 			<form:info label="Times Checked IN:" text="<%= new Integer(content.getTimesCheckedIn()).toString() %>" />
-			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
+            <form:row_begin />
+                <form:label name="" label="" />
+                <form:buttonset_begin align="left" padding="0"/>
+                    <% tempURL = "reeltags/reeltag_image.jsp?" + Reel.PARAM + "=" + content.getId(); %>
+                    <form:linkbutton url="<%= tempURL %>" name="GENERATE REEL TAG" newtab="true" />
+                <form:buttonset_end />
+            <form:row_end />
+            <%-- if(!content.hasReelTagFile()) { --%>
+                
+            <%-- } --%>			
     <form:end />
 <admin:box_end />
 

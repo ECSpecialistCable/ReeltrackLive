@@ -237,6 +237,9 @@ if(action.equals("update")) {
     content.setStatus(request.getParameter(Reel.STATUS_COLUMN));
     content.setWharehouseLocation(request.getParameter(Reel.WHAREHOUSE_LOCATION_COLUMN));
     content.setHasReelMarkers(request.getParameter(Reel.HAS_REEL_MARKERS_COLUMN));
+    if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN)!=null) {
+        content.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));
+    }
     if(request.getParameter(Reel.CUSTOMER_PN_COLUMN)!=null) {
         content.setCustomerPN(request.getParameter(Reel.CUSTOMER_PN_COLUMN));
     }
