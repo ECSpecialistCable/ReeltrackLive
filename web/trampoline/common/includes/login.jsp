@@ -94,12 +94,12 @@ CompEntities custJobs = customerMgr.getCustomerJobs(custJob);
 	<form:end />
 <admin:box_end />
 <% } else if(userLoginMgr.isLoggedIn()) { %>
-<%--
-<div style="top:-100px;width:800px;height:1000px;background-color: #1c7a68;">
-<img src="common/images/welcome_image.png" width="740">
+<div style="text-align:center; position:absolute; top:108px; left:202px; width:801px;height:900px;background-color: #1c7a68;">
+<%--<h1 style="padding-top:20px; color:white; font-size:36px;font-weight:bold;">Welcome to ReelTrack</h1>--%>
+<img src="common/images/home-image.png" width="700">
 </div>
---%>
-<admin:title text="Welcome to ReelTrack" />
+
+
 <% } %>
 
 <html:end />
