@@ -45,6 +45,8 @@ content = (Customer)customerMgr.getCustomer(content);
     <form:begin submit="true" name="edit" action="customers/process.jsp" />
 
 			<form:textfield name="<%= Customer.NAME_COLUMN %>" label="Name:" value="<%= content.getName() %>" />
+			<form:textfield name="<%= Customer.ISSUE_CONTACT_EMAIL_COLUMN %>" label="Issue Contact Email:" value="<%= content.getIssueContactEmail() %>" />
+
 			<form:row_begin />
 				<form:label name="" label="Status:" />
 				<form:content_begin />

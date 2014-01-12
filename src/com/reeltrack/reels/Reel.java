@@ -173,6 +173,16 @@ public class Reel extends CompCMEntity {
         this.getData().setTimestamp(INVOICE_DATE_COLUMN, toSet);
     }
 
+	public void setInvoiceDateString(String toSet) {
+		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date date = df.parse(toSet);
+			this.setInvoiceDate(date);
+       	} catch (Exception e) {
+       		System.out.print(e.toString());
+       	}
+    }
+
     public String getInvoiceDateString() {
 		if(this.getInvoiceDate() == null) {
 			return "";

@@ -54,8 +54,22 @@ String tempURL; //var for url expression
 <admin:subtitle text="ECS Invoice" />
 <admin:box_begin />
     <form:begin submit="<%= new Boolean(false).toString() %>" name="edit" action="reels/process.jsp" />
-        <form:info label="Invoice #:" text="<%= content.getInvoiceNum() %>" />
-        <form:info label="Invoice Date:" text="<%= content.getInvoiceDateString() %>" />
+        <% if(!canEdit) { %>
+            <form:info label="Invoice #:" text="<%= content.getInvoiceNum() %>" />
+            <form:info label="Invoice Date:" text="<%= content.getInvoiceDateString() %>" />
+        <% } else { %>
+            <form:textfield label="Invoice #:" name="<%= Reel.INVOICE_NUM_COLUMN %>" value="<%= content.getInvoiceNum() %>" />
+            <form:date_picker start="01/01/2014" name="<%= Reel.INVOICE_DATE_COLUMN %>" value="<%= content.getInvoiceDateString() %>" label="Invoice Date:" />
+            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
+            <form:row_begin />
+                <form:label name="" label="" />
+                <form:buttonset_begin align="left" padding="0"/>
+                    <% if(canEdit) { %>
+                    <form:submit_inline button="save" waiting="true" name="save" action="update_reel_invoice" />
+                    <% } %>
+                <form:buttonset_end />
+            <form:row_end />
+        <% } %>
     <form:end />
 <admin:box_end />
 

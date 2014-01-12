@@ -12,6 +12,8 @@ import com.reeltrack.users.*;
 import com.reeltrack.utilities.MediaManager;
 import com.reeltrack.whlocations.*;
 import com.reeltrack.picklists.*;
+import com.monumental.trampoline.utilities.emails.EmailSender;
+import com.monumental.trampoline.component.CompProperties;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -20,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.ArrayList;
  
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
@@ -820,6 +823,36 @@ public class ReelMgr extends CompWebManager {
 		if(!content.getIssueLog().equals("")) {
 			content.setIssueLog(content.getIssueLog() + "\n");
 		}
+
+		CompEntityPuller puller = new CompEntityPuller(new Customer());
+		Customer customer = new Customer();
+		customer.setId(user.getCustomerId());
+		puller.addSearch(customer);
+		customer = (Customer)controller.pullCompEntity(puller);
+
+		if(!customer.getIssueContactEmail().equals("")) {
+			puller = new CompEntityPuller(new Reel());
+			Reel reel = new Reel();
+			reel.setId(content.getReelId());
+			puller.addSearch(reel);
+			reel = (Reel)controller.pullCompEntity(puller);
+
+			CompProperties props = new CompProperties();
+			String mailHost = props.getProperty("mailHost");
+		    String mailFrom = customer.getIssueContactEmail();//props.getProperty("mailFrom");
+			
+			ArrayList emails = new ArrayList();
+			emails.add(customer.getIssueContactEmail());
+	        EmailSender emailer = new EmailSender();
+			try {
+				String subject = "Issue reported by " + customer.getName() + " for reel CRID#:" + reel.getCrId();
+				String message = content.getDescription();
+				emailer.sendEmail(mailHost, emails, mailFrom, mailFrom, subject, message, null,null);
+	        } catch(Exception e) {
+				System.out.println("Issue sending issue email." + e);
+			}
+		}
+
 		return controller.add(content);
 	}
 

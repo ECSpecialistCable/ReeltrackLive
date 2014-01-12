@@ -247,6 +247,17 @@ if(action.equals("update")) {
     redirect = request.getContextPath() + "/trampoline/" + "reels/edit.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
+if(action.equals("update_reel_invoice")) {
+    Reel content = new Reel();
+    content.setId(contid);
+    content.setInvoiceNum(request.getParameter(Reel.INVOICE_NUM_COLUMN));
+    if(request.getParameter(Reel.INVOICE_DATE_COLUMN)!=null && !request.getParameter(Reel.INVOICE_DATE_COLUMN).equals("")) {
+        content.setInvoiceDateString(request.getParameter(Reel.INVOICE_DATE_COLUMN));
+    }
+    reelMgr.updateReel(content);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/reel_data.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
 if(action.equals("update_shipping")) {
     Reel content = new Reel();
     content.setId(contid);

@@ -297,3 +297,5 @@ alter table reels add ECSInvoice varchar(50);
 alter table reels add ECSInvoiceDate date;
 alter table reels add is_steel_reel varchar(1) default 'n';
 
+alter table customers add issue_contact_email varchar(255);
+

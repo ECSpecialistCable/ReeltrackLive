@@ -8,6 +8,7 @@ import java.util.GregorianCalendar;
 public class Customer extends CompCMEntity {
 	public static final String PARAM = "customer_param";
 	public static final String NAME_COLUMN = "name";
+	public static final String ISSUE_CONTACT_EMAIL_COLUMN = "issue_contact_email";
 
 	@Override
 	public String getTableName() {
@@ -34,5 +35,13 @@ public class Customer extends CompCMEntity {
 	
 	public void setName(String name) {
 		this.getData().setString(NAME_COLUMN, name);
+	}
+
+	public String getIssueContactEmail() {
+		return this.getData().getString(ISSUE_CONTACT_EMAIL_COLUMN, "");
+	}
+	
+	public void setIssueContactEmail(String name) {
+		this.getData().setString(ISSUE_CONTACT_EMAIL_COLUMN, name);
 	}
 }
