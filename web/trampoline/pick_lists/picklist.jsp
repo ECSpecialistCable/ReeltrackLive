@@ -104,7 +104,7 @@ td {
 	<br />
 	<table>
 	<tr>
-		<td class="header">ReelTag / Description</td>
+		<td class="header">CRID: ReelTag / Description</td>
 		<td class="header">Customer P/N</td>
 		<td class="header">Serial #</td>
 		<td class="header">Location</td>
@@ -113,7 +113,7 @@ td {
 		<td rowspan="<%= rowspan %>" width="250"><img src="<%= tempURL %>" width="250" height="250" /></td>
 	</tr>
 	<tr>
-		<td class="value"><%= reel.getReelTag() %></td>
+		<td class="value"><b><%= reel.getCrId() %>:</b> <%= reel.getReelTag() %><br /><%= reel.getCableDescription() %></td>
 		<td class="value"><%= reel.getCustomerPN() %></td>
 		<td class="value"><%= reel.getReelSerial() %></td>
 		<td class="value"><%= reel.getWharehouseLocation() %></td>

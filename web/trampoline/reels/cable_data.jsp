@@ -132,7 +132,7 @@ String tempURL; //var for url expression
 <admin:subtitle text="Jacket" />
 <admin:box_begin />
     <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
-        <form:textfield label="Overall Shiled Type:" name="<%= CableTechData.SHIELD_TYPE_COLUMN %>" value="<%= techData.getShieldType() %>" />
+        <form:textfield label="Overall Shld Type:" name="<%= CableTechData.SHIELD_TYPE_COLUMN %>" value="<%= techData.getShieldType() %>" />
         <form:textfield label="Thick (mils):" pixelwidth="50"  name="<%= CableTechData.JACKET_THICKNESS_COLUMN %>" value="<%= new Integer(techData.getJacketThickness()).toString() %>" />
         <form:textfield label="Compound:" name="<%= CableTechData.JACKET_COMPOUND_COLUMN %>" value="<%= techData.getJacketCompound() %>" />
         <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />

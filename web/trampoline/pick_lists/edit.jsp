@@ -136,7 +136,7 @@ String tempURL; //var for url expression
 	<admin:box_begin color="false" />
 	<listing:begin />
 	    <listing:header_begin />
-	    	<listing:header_cell first="true" width="40" name="ID"  />
+	    	<listing:header_cell first="true" width="45" name="CRID #"  />
 	        <listing:header_cell name="Reel Tag / Desc." />
 	        <listing:header_cell width="100" name="Cust P/N" />
 	        <listing:header_cell width="100" name="Type" />
@@ -219,7 +219,7 @@ String tempURL; //var for url expression
 	<admin:box_begin color="false" />
 	<listing:begin />
 	    <listing:header_begin />
-	    	<listing:header_cell first="true" width="40" name="ID"  />
+	    	<listing:header_cell first="true" width="45" name="CRID #"  />
 	        <listing:header_cell name="Reel Tag / Desc." />
 	        <listing:header_cell width="100" name="Cust P/N" />
 	        <listing:header_cell width="100" name="Type" />
