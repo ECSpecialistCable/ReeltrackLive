@@ -44,6 +44,11 @@ content = (Reel)reelMgr.getReel(content);
 
 CableTechData techData = reelMgr.getCableTechData(content);
 
+int ordered = reelMgr.getCablesByStatus(content, Reel.STATUS_ORDERED);
+int recieved = reelMgr.getCablesByStatus(content, Reel.STATUS_RECEIVED);
+int inWH = reelMgr.getCablesByStatus(content, Reel.STATUS_IN_WHAREHOUSE);
+int checkedOut = reelMgr.getCablesByStatus(content, Reel.STATUS_CHECKED_OUT);
+int remaining = content.getOnReelQuantity();
 String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
@@ -84,11 +89,11 @@ String tempURL; //var for url expression
 <admin:subtitle text="Cable Summary" />
 <admin:box_begin />
     <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
-        <form:info label="Total Ordered:" text="" />
-        <form:info label="Total Received:" text="" />
-        <form:info label="Total In Wharehouse:" text="" />
-        <form:info label="Total Checked Out:" text="" />
-        <form:info label="Est. Remaining:" text="" />
+        <form:info label="Total Ordered:" text="<%= ordered + "" %>" />
+        <form:info label="Total Received:" text="<%= recieved + "" %>" />
+        <form:info label="Total In Wharehouse:" text="<%= inWH + "" %>" />
+        <form:info label="Total Checked Out:" text="<%= checkedOut + "" %>" />
+        <form:info label="Est. Remaining On Site:" text="<%= remaining + "" %>" />
     <form:end />
 <admin:box_end />
 

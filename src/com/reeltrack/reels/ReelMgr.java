@@ -637,6 +637,18 @@ public class ReelMgr extends CompWebManager {
 		controller.delete(realRootContextPath, content);
 	}
 
+	public int getCablesByStatus(Reel content, String status) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new Reel());
+		Reel toSearch = new Reel();
+		if(!status.equals("")) {
+			toSearch.setStatus(status);
+			toSearch.setSearchOp(Reel.STATUS_COLUMN, Reel.EQ);
+		}
+		toSearch.setEcsPN(content.getEcsPN());
+		toSearch.setSearchOp(Reel.ECS_PN_COLUMN, Reel.EQ);
+		puller.addSearch(toSearch);
+		return controller.pullCompEntitiesCount(puller);
+	}
 	/*** Reel Logs ***/
 	public int addReelLog(Reel content, String note) throws Exception {
 		ReelLog log = new ReelLog();
