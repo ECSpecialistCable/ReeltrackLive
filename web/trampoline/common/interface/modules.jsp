@@ -47,9 +47,9 @@ if(user_agent.contains("iPad")) {
 		<a class="module_bar_toggle" rel="common/interface/reel_inventory">Inventory Data</a>
 		<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_INVENTORY)) { %>
 			<a class="module_bar_toggle" rel="common/interface/configuration">Job Data</a>
-			<% //if(!isIpad) { %>
+			<% if(!isIpad) { %>
 				<a class="module_bar_toggle" rel="common/interface/reports">Reports</a>
-			<% //} %>
+			<% } %>
 		<% } %>
 	<% } %>
 	<% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
