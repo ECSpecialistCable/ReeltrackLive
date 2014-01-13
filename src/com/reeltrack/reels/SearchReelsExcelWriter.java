@@ -69,7 +69,7 @@ public class SearchReelsExcelWriter {
 		int nextNum = 0;
 
 		row = sheet.createRow((short) rowNum);
-		sheet.setColumnWidth(nextNum, 3000);
+		sheet.setColumnWidth(nextNum, 4000);
 		cell = row.createCell((short) nextNum++);
 		cell.setCellValue("Customer P/N");
 		cell.setCellStyle(styleHeader);
