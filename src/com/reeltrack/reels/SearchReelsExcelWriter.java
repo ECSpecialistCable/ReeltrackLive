@@ -71,12 +71,7 @@ public class SearchReelsExcelWriter {
 		row = sheet.createRow((short) rowNum);
 		sheet.setColumnWidth(nextNum, 3000);
 		cell = row.createCell((short) nextNum++);
-		cell.setCellValue("CRID#");
-		cell.setCellStyle(styleHeader);
-
-		sheet.setColumnWidth(nextNum, 5000);
-		cell = row.createCell((short) nextNum++);
-		cell.setCellValue("Reel Tag");
+		cell.setCellValue("Customer P/N");
 		cell.setCellStyle(styleHeader);
 
 		sheet.setColumnWidth(nextNum, 5000);
@@ -86,18 +81,24 @@ public class SearchReelsExcelWriter {
 
 		sheet.setColumnWidth(nextNum, 3000);
 		cell = row.createCell((short) nextNum++);
-		cell.setCellValue("Status");
+		cell.setCellValue("CRID#");
 		cell.setCellStyle(styleHeader);
 
+		sheet.setColumnWidth(nextNum, 5000);
+		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("Reel Tag");
+		cell.setCellStyle(styleHeader);
+
+		
 		rowNum++;
 		for (int i = 0; i < contents.howMany(); i++) {
 			Reel current = (Reel) contents.get(i);
 			row = sheet.createRow((short) rowNum++);
 			nextNum=0;
+			row.createCell((short)nextNum++).setCellValue(current.getCustomerPN());
+			row.createCell((short)nextNum++).setCellValue(current.getCableDescription());
 			row.createCell((short)nextNum++).setCellValue(current.getCrId()+"");
 			row.createCell((short)nextNum++).setCellValue(current.getReelTag());
-			row.createCell((short)nextNum++).setCellValue(current.getCableDescription());
-			row.createCell((short)nextNum++).setCellValue(current.getStatus());
 
 		}		
 
