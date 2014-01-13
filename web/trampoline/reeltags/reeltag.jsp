@@ -72,7 +72,7 @@ String logoURL;
 		}
 
 		table {
-			width: 640px;
+			width: 650px;
 			/*height: 400px;*/
 			border: 1px solid;
 			margin-bottom: 5px;
@@ -88,7 +88,7 @@ String logoURL;
 }
 		
 		@page {
-			size: 7in 3.3in;
+			size: 6.7in 3.3in;
 			margin-top: 0.0in;
 			margin-bottom: 0.0in;
 			margin-left: 0.0in;
@@ -107,67 +107,67 @@ String logoURL;
 
 	</style>
 </head>
-<body>
+<body style="border:none; width: 650px !important;">
 	
-	<table style="border: none;margin: 0px; margin-bottom: 0px;padding: 0px">
+	<table style="border:none;margin: 0px; margin-bottom: 0px;padding: 0px;">
 		<tr>
-			<td colspan="2" style="width:200px;vertical-align: top;padding-bottom: 0px;padding-top: 10px;"><%= reelCustomer.getName().toUpperCase() %></td>
-			<td rowspan="8" style="width:100px;vertical-align: top; margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px; text-align: center">
+			<td colspan="2" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 10px;"><%= reelCustomer.getName().toUpperCase() %></td>
+			<td rowspan="8" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top; margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px; text-align: center">
 					<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
 					<img alt="barcode" src="<%= tempURL %>" width="170" height="170" />
 			</td>
-			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 15px;">Mfg</td>
-			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 15px;"><b><%= "ABC"  %></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 15px;">Mfg</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 15px;"><b><%= "ABC"  %></b></td>
 		</tr>
 		<tr>
-			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/N</td>
-			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPN()  %></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/N</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPN()  %></b></td>
 
-			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Weight / kft</td>
-			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= new Integer(techData.getWeight()).toString() + "lbs"   %></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Weight / kft</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= new Integer(techData.getWeight()).toString() + "lbs"   %></b></td>
 		</tr>
 		<tr>
-			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/O #</td>
-			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPO()  %></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/O #</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPO()  %></b></td>
 
-			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">O.D. (in)</td>
-			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= Double.toString(techData.getOD())+"\""   %></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">O.D. (in)</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= Double.toString(techData.getOD())+"\""   %></b></td>
 		</tr>
 		<tr>
-			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Rec'd QTY</td>
-			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getOnReelQuantity()  %></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Rec'd QTY</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getOnReelQuantity()  %></b></td>
 
-			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">M.B.R.</td>
-			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= Double.toString(techData.getRadius())+"\""   %></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">M.B.R.</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= Double.toString(techData.getRadius())+"\""   %></b></td>
 		</tr>
 		<tr>
-			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Rec'd GWT</td>
-			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Rec'd GWT</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
 
-			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Max Pull</td>
-			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Max Pull</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
 		</tr>
-		<tr>
-			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
-			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+		<tr >
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
 
-			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
-			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
 		</tr>
 		<tr>
-			<td class="header" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
-			<td class="value" style="width:100px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
 
-			<td class="header" style="width:90px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
-			<td class="value" style="width:110px;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"></td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
 		</tr>
 		<tr>
-			<td colspan="2" style="border-top:solid 2px black;border-bottom: solid 2px black;width:50px;vertical-align: center;padding-bottom: 0px;padding-top: 0px;text-align: left;"><b><%= content.getReelTag() %></b></td>
-			<td style="width:90px;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;">CRID#</td>
-			<td  style="width:110px;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;"><b><%= content.getCrId() %></b></td>
+			<td colspan="2" style="/*border:solid #003DB8 1px;*/border-top:solid 2px black;border-bottom: solid 2px black;width:20%;vertical-align: center;padding-bottom: 0px;padding-top: 0px;text-align: left;"><b><%= content.getReelTag() %></b></td>
+			<td style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;">CRID#</td>
+			<td  style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;"><b><%= content.getCrId() %></b></td>
 		</tr>		
 	</table>
-	<table style="margin: 0px; margin-top: -25px; padding-top: 20px; width:630px; border: none">
+	<table style="margin: 0px; margin-top: -25px; padding-top: 20px; width:650px;margin-right: 10px; /*border: solid green 2px*/border:none">
 		<tr>
 			<td class="header" style="text-align: left; width: 20%">CIRCUIT</td>
 			<td class="header" style="text-align: center; width: 20%">LENGTH</td>
@@ -197,19 +197,19 @@ String logoURL;
 					<td style="text-align: center; width: 75%; padding: 0;width:160px;" rowspan="<%= "6" %>" align="center">
 						<table style="display:inline;width: 75%; text-align: center;border: none">
 							<tr>
-								<td class="header" style="text-align: right;width: 35%">ECS PART #</td>
-								<td class="value" style="text-align: left"><%= content.getEcsPN() %></td>
+								<td class="header" style="text-align: right;width: 40%">ECS PART #</td>
+								<td class="value" style="/*border:solid #003DB8 1px;*/text-align: left;width: 35%"><%= content.getEcsPN() %></td>
 							</tr>
 							<tr>
-								<td class="header" style="text-align: right;width: 25%">ECS PO #</td>
-								<td class="value" style="text-align: left"><%= "" %></td>
+								<td class="header" style="text-align: right;width: 40%">ECS PO #</td>
+								<td class="value" style="/*border:solid #003DB8 1px;*/text-align: left"><%= "" %></td>
 							</tr>
 							<tr>
-								<td colspan="2" style="text-align: center;width: 75%;padding-top: 0px;padding-bottom: 0px;margin-bottom: 0px"><img alt="logo" src="<%= logoURL %>" width="130" height="40" />
+								<td colspan="2" style="/*border:solid #003DB8 1px;*/text-align: center;width: 75%;padding-top: 0px;padding-bottom: 0px;margin-bottom: 0px"><img alt="logo" src="<%= logoURL %>" width="130" height="40" />
 								</td>
 							</tr>
 							<tr>
-								<td class="header" colspan="2" style="text-align: left; width: 75%;padding: 0px;padding-left: 7px;">770.446.2222 www.ecscable.com</td>
+								<td class="header" colspan="2" style="/*border:solid #003DB8 1px;*/text-align: left; width: 75%;padding: 0px;padding-left: 7px;">770.446.2222 www.ecscable.com</td>
 							</tr>
 						</table>
 					</td>
