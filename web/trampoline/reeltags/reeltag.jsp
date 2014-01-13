@@ -163,7 +163,7 @@ String logoURL;
 		</tr>
 		<tr>
 			<td colspan="2" style="/*border:solid #003DB8 1px;*/border-top:solid 2px black;border-bottom: solid 2px black;width:20%;vertical-align: center;padding-bottom: 0px;padding-top: 0px;text-align: left;"><b><%= content.getReelTag() %></b></td>
-			<td style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;">CRID#</td>
+			<td style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;text-align: right;">CRID#</td>
 			<td  style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;"><b><%= content.getCrId() %></b></td>
 		</tr>		
 	</table>
