@@ -94,7 +94,7 @@ public class SearchReelsExcelWriter {
 			Reel current = (Reel) contents.get(i);
 			row = sheet.createRow((short) rowNum++);
 			nextNum=0;
-			row.createCell((short)nextNum++).setCellValue(current.getCrId());
+			row.createCell((short)nextNum++).setCellValue(current.getCrId()+"");
 			row.createCell((short)nextNum++).setCellValue(current.getReelTag());
 			row.createCell((short)nextNum++).setCellValue(current.getCableDescription());
 			row.createCell((short)nextNum++).setCellValue(current.getStatus());
