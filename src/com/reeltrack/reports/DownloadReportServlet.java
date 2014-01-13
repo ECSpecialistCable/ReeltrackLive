@@ -6,9 +6,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.*;
 
 import com.monumental.trampoline.datasources.*;
+import com.reeltrack.reels.Reel;
+import com.reeltrack.reels.SearchReelsExcelWriter;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.JspFactory;
 import javax.servlet.jsp.PageContext;
 import org.apache.poi.hssf.usermodel.*;
@@ -46,6 +49,9 @@ public class DownloadReportServlet extends HttpServlet {
 			
 		} else if (reportType != null && reportType.equals("action_log_report")) {
 			this.downloadActionLogReportExcel(request, response, request.getParameter("action_log_report_start_date"), request.getParameter("action_log_report_end_date"), request.getParameter("job_code"));
+
+		} else if (reportType != null && reportType.equals("export_search_reels")) {
+			this.downloadSearchReelsExcel(request, response, request.getParameter("job_code"));
 
 		}
 	}
@@ -321,6 +327,49 @@ public class DownloadReportServlet extends HttpServlet {
 			// Set the Respnse
 	        response.setContentType("application/octet-stream");
 			response.setHeader( "Content-Disposition", "attachment; filename=\"action_log_report_" + df.format(today) +".xls\"" );
+
+	        // Stream
+			try {
+	        	wb.write(op);
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+	        	op.flush();
+	        	op.close();
+				wb = null;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbResources.close();
+		}
+	}
+
+	private void downloadSearchReelsExcel(HttpServletRequest request, HttpServletResponse response, String jobCode) {
+		Date today = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("MMddyyyy");
+		DbResources dbResources = new DbResources();
+		JspFactory factory = JspFactory.getDefaultFactory();
+		PageContext pageContext = factory.getPageContext(this, request, response, null, true, 0, true);
+		HttpSession session = request.getSession();
+		Reel content = new Reel();
+		if(session!=null) {
+			if(session.getAttribute("reels_search")!=null) {
+				content = (Reel)session.getAttribute("reels_search");
+			}
+		}
+		SearchReelsExcelWriter writer = new SearchReelsExcelWriter(pageContext, dbResources);
+
+		try {
+			HSSFWorkbook wb = writer.writeUserExcel(jobCode, content, getServletContext().getRealPath("/"));
+
+	        ServletOutputStream op = response.getOutputStream();
+	        ServletContext context  = getServletConfig().getServletContext();
+	        //String mimetype = context.getMimeType(filename);
+
+			// Set the Respnse
+	        response.setContentType("application/octet-stream");
+			response.setHeader( "Content-Disposition", "attachment; filename=\"search_reels_" + df.format(today) +".xls\"" );
 
 	        // Stream
 			try {

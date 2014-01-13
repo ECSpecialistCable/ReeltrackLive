@@ -194,6 +194,16 @@ String tempURL = "";
     <form:end />
     <admin:box_end />
 
+	<form:begin name="export_search_reels" action="../DownloadReportServlet" />
+	<form:row_begin />
+            <form:buttonset_begin align="left" padding="10"/>
+                <form:submit_inline button="submit" waiting="true" name="Export To Excel" action="test" />
+            <form:buttonset_end />
+        <form:row_end />
+		<form:hidden name="reportType" value="export_search_reels" />
+		<form:hidden name="job_code" value="<%= user.getJobCode() %>" />
+	<form:end />
+
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
         <admin:search_listing_pagination text="Reels Found" url="reels/search.jsp" 
