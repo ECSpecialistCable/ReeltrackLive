@@ -60,6 +60,9 @@ String tagFileName = writer.writeImage(content, pageToGet, basePath, content.get
 
 <% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getReelTagDirectory() + "/" + tagFileName; %>
 <img alt="reeltag image" src="<%= tempURL %>" />
+<script>
+	window.location='<%= tempURL %>';
+</script>
 
 </body>
 </html>
