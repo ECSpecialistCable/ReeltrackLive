@@ -84,7 +84,11 @@ String tempURL; //var for url expression
 	            <form:content_end />
         	<form:row_end />
 			<form:info label="Reel Type:" text="<%= content.getReelType() %>" />
-			<form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
+			<% if(canEdit) { %>
+				<form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
+			<% } else { %>
+				<form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
+			<% } %>
 			<% if(canEdit) { %>
 				<form:textfield label="Cable Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
 			<% } else { %>
@@ -96,7 +100,11 @@ String tempURL; //var for url expression
 				<form:info label="Customer P/N:" text="<%= content.getCustomerPN() %>" />
 			<% } %>
 			<form:info label="ECS P/N:" text="<%= content.getEcsPN() %>" />
-			<form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
+			<% if(canEdit) { %>
+				<form:textfield label="Manufacturer:" name="<%= Reel.MANUFACTURER_COLUMN %>" value="<%= content.getManufacturer() %>" />
+			<% } else { %>
+				<form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
+			<% } %>
 			<form:row_begin />
 	            <form:label name="" label="Has Markers:" />
 	            <form:content_begin />
