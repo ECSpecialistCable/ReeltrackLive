@@ -75,7 +75,7 @@ if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
 
 session.setAttribute("received_search",content);
 
-String column = Reel.REEL_TAG_COLUMN;
+String column = Reel.CR_ID_COLUMN;
 boolean ascending = true;
 int count = reelMgr.searchAllReceivedReelsCount(content, column, ascending);
 CompEntities contents = reelMgr.searchAllReceivedReels(content, column, ascending, howMany, skip);
