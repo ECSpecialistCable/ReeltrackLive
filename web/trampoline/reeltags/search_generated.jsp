@@ -25,7 +25,7 @@ RTUser user = (RTUser)userLoginMgr.getUser();
 
 Reel content = new Reel();
 content.setHasReelTagFile("y");
-CompEntities contents = reelMgr.searchReels(content, Reel.CREATED_COLUMN, true, 0, 0);
+CompEntities contents = reelMgr.searchReels(content, Reel.CR_ID_COLUMN, true, 0, 0);
 
 boolean dosearch = true;
 String tempURL = "";
