@@ -89,11 +89,11 @@ String tempURL; //var for url expression
 <admin:subtitle text="Cable Summary" />
 <admin:box_begin />
     <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
-        <form:info label="Total Ordered:" text="<%= ordered + "" %>" />
-        <form:info label="Total Received:" text="<%= recieved + "" %>" />
-        <form:info label="Total In Wharehouse:" text="<%= inWH + "" %>" />
-        <form:info label="Total Checked Out:" text="<%= checkedOut + "" %>" />
-        <form:info label="Est. Remaining On Site:" text="<%= remaining + "" %>" />
+		<form:info label="Total Ordered:" text="<%= Integer.toString(ordered) %>" />
+        <form:info label="Total Received:" text="<%= Integer.toString(recieved) %>" />
+        <form:info label="Total In Wharehouse:" text="<%= Integer.toString(inWH) %>" />
+        <form:info label="Total Checked Out:" text="<%= Integer.toString(checkedOut) %>" />
+        <form:info label="Est. Remaining On Site:" text="<%= Integer.toString(remaining) %>" />
     <form:end />
 <admin:box_end />
 
