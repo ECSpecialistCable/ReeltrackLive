@@ -147,7 +147,7 @@ public class InventorySummaryExcelReport {
 		//ep scheduled header
 		nextNum = 1;
 		cell = row.createCell((short) nextNum++);
-		cell.setCellValue("Ordered");
+		cell.setCellValue("Unrecieved");
 		cell.setCellStyle(styleHeader);
 
 		cell = row.createCell((short) nextNum++);
