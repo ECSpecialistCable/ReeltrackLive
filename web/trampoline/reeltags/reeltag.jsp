@@ -172,7 +172,7 @@ String logoURL;
 			<td class="header" style="text-align: left; width: 20%">CIRCUIT</td>
 			<td class="header" style="text-align: center; width: 20%">LENGTH</td>
 			<td class="header" style="text-align: center; width: 10%">BY</td>
-			<td class="header" style="text-align: center; width: 30%"><%= content.getCableDescription() %></td>
+			<td class="header" style="text-align: center; width: 30%"><%= content.getCableDescriptionEscaped() %></td>
 		</tr>
 
 		<% int total = 0; %>

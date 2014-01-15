@@ -384,6 +384,13 @@ public class Reel extends CompCMEntity {
 	public String getCableDescription() {
 		return this.getData().getString(CABLE_DESCRIPTION_COLUMN, "");
 	}
+
+	public String getCableDescriptionEscaped() {
+		if(this.getCableDescription().contains(" & ")) {
+			return (this.getCableDescription().replaceAll(" & ", " "));
+		}
+		return this.getCableDescription();
+	}
 	
 	public void setCableDescription(String name) {
 		this.getData().setString(CABLE_DESCRIPTION_COLUMN, name);
