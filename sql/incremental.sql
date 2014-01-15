@@ -299,3 +299,7 @@ alter table reels add is_steel_reel varchar(1) default 'n';
 
 alter table customers add issue_contact_email varchar(255);
 
+alter table cable_tech_data add column est_al_weight int default 0;
+alter table cable_tech_data add column est_cu_weight int default 0;
+
+

@@ -20,6 +20,24 @@ public class CableTechData extends CompCMEntity {
 	public static final String ECS_PN_COLUMN = "ECSPartNo";
 	public static final String DATA_SHEET_FILE_COLUMN = "data_sheet_file";
 	public static final String JOB_CODE_COLUMN = "job_code";
+	public static final String EST_AL_WEIGHT_COLUMN = "est_al_weight";
+	public static final String EST_CU_WEIGHT_COLUMN = "est_cu_weight";
+
+	public int getEstAlWeight() {
+		return this.getData().getInteger(EST_AL_WEIGHT_COLUMN, 0);
+	}
+	
+	public void setEstAlWeight(int id) {
+		this.getData().setInteger(EST_AL_WEIGHT_COLUMN, id);
+	}
+
+	public int getEstCuWeight() {
+		return this.getData().getInteger(EST_AL_WEIGHT_COLUMN, 0);
+	}
+	
+	public void setEstCuWeight(int id) {
+		this.getData().setInteger(EST_AL_WEIGHT_COLUMN, id);
+	}
 
 	public String getJobCode() {
 		return this.getData().getString(JOB_CODE_COLUMN, "");

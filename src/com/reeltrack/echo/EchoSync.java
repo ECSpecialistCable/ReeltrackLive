@@ -329,6 +329,8 @@ public class EchoSync extends CompManager {
 			techData.setInsulationThickness(entity.getInteger("Insulation_Thickness",new Integer("0")).intValue());
 			techData.setConductorGroundSize(entity.getString("Conductor_GroundSize",""));
 			techData.setConductorArea(entity.getInteger("Conductor_Area",new Integer("0")).intValue());
+			techData.setEstAlWeight(entity.getInteger("Estimated_AlWeight",new Integer("0")).intValue());
+			techData.setEstCuWeight(entity.getInteger("Estimated_CuWeight",new Integer("0")).intValue());
 			return techData;
 		} else {
 			return null;
