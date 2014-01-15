@@ -6,5 +6,13 @@
 
 <%@ attribute name="name" required="true" %>
 
-<button type="button" class="btn btn-primary btn-xs" onclick="document.getElementById('${name}').reset();">CLEAR</button> 
+<button type="button" class="btn btn-primary btn-xs"
+	onclick="
+	var clearForm = document.getElementById('${name}');
+	var inputs = clearForm.getElementsByTagName('input');
+	for (index = 0; index < inputs.length; ++index) {
+	   var input = inputs[index];
+	   input.value='';
+	} //document.getElementById('${name}').reset();"
+>CLEAR</button>
 
