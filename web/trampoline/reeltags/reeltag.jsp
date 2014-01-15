@@ -117,7 +117,7 @@ String logoURL;
 					<img alt="barcode" src="<%= tempURL %>" width="170" height="170" />
 			</td>
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 15px;">Mfg</td>
-			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 15px;"><b><%= "ABC"  %></b></td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 15px;"><b><%= content.getManufacturer()  %></b></td>
 		</tr>
 		<tr>
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/N</td>
