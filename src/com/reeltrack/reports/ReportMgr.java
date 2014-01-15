@@ -40,6 +40,7 @@ public class ReportMgr extends CompWebManager {
 		puller.setDistinct(true);
 		CompEntities reelsForPN = controller.pullCompEntities(puller, 0, 0);
 		LinkedHashMap<String, ArrayList<Integer>> toReturn = new LinkedHashMap<String, ArrayList<Integer>>();
+	//	System.out.println("reels for PN "+reelsForPN.howMany());
 		for(int i=0; i<reelsForPN.howMany();i++) {
 			Reel reel = (Reel)reelsForPN.get(i);
 			String currentPN = reel.getCustomerPN();
@@ -51,22 +52,29 @@ public class ReportMgr extends CompWebManager {
 			puller.addSearch(content);
 			puller.setSortBy(content.getTableName(), Reel.REEL_TAG_COLUMN, true);
 			CompEntities customerReels = controller.pullCompEntities(puller, 0, 0);
+//			System.out.println("Reel "+reel.getReelTag() + " : " + currentPN + " : " + customerReels.howMany());
 
 			int purchasedCount = 0, inInvCount = 0, checkedOutCount = 0, onCompReelCount = 0;
 			int noOfReelsInInv = 0, noOfReelsCheckedOut = 0;
 			for(int j=0; j<customerReels.howMany(); j++) {
 				Reel current = (Reel)customerReels.get(j);
+
 				if(current.getStatus().equals(Reel.STATUS_ORDERED)) {
-					purchasedCount+= reel.getOrderedQuantity();
+					purchasedCount+= current.getOrderedQuantity();
+				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOrderedQuantity());
 				} else if(current.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
-					inInvCount+= reel.getOnReelQuantity();
+					inInvCount+= current.getOnReelQuantity();
 					noOfReelsInInv++;
+				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOnReelQuantity());
 				} else if(current.getStatus().equals(Reel.STATUS_STAGED) || current.getStatus().equals(Reel.STATUS_CHECKED_OUT)) {
-					checkedOutCount+= reel.getOnReelQuantity();
+					checkedOutCount+= current.getOnReelQuantity();
 					noOfReelsCheckedOut++;
+				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOnReelQuantity());
 				} else if(current.getStatus().equals(Reel.STATUS_COMPLETE)) {
-					onCompReelCount+= reel.getOnReelQuantity();
+					onCompReelCount+= current.getOnReelQuantity();
+				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOnReelQuantity());
 				}
+				//System.out.println("current reel "+current.getReelTag() + purchasedCount + " " + inInvCount + " "+checkedOutCount + " " + onCompReelCount + " " + noOfReelsInInv + " " + noOfReelsCheckedOut);
 			}
 
 			ArrayList<Integer> values = new ArrayList<Integer>();
