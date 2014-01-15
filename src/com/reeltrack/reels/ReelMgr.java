@@ -446,7 +446,7 @@ public class ReelMgr extends CompWebManager {
 		CompEntityPuller puller = new CompEntityPuller(new CableTechData());
 		Reel reel = new Reel();
 		reel.setId(content.getId());
-		this.getReel(reel);
+		reel = this.getReel(reel);
 
 		CableTechData techData = new CableTechData();
 		techData.setJobCode(reel.getJobCode());
