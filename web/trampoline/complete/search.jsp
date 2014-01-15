@@ -125,7 +125,7 @@ String tempURL = "";
 
     <listing:begin />
         <listing:header_begin />
-            <listing:header_cell width="20" first="true" name="#" />
+            <listing:header_cell width="50" first="true" name="CRID #" />
             <listing:header_cell width="200" name="Reel Tag" />
             <listing:header_cell name="Cable Description" />
             <listing:header_cell width="40" name="Quantity" />
@@ -142,7 +142,7 @@ String tempURL = "";
         <admin:box_begin color="false" />
         <listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
         <listing:row_begin />
-            <listing:cell_begin  width="20"/>
+            <listing:cell_begin  width="50"/>
                 <%= content.getCrId() %>
             <listing:cell_end />
             <listing:cell_begin  width="200"/>

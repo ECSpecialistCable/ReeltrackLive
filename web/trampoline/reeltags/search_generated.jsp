@@ -43,7 +43,7 @@ String tempURL = "";
    
     <listing:begin />
         <listing:header_begin />
-            <listing:header_cell width="10" first="true" name="#" />
+            <listing:header_cell width="50" first="true" name="CRID #" />
             <listing:header_cell name="Reel Tag" />
             <listing:header_cell name="Cable Description" />
             <listing:header_cell name="" width="75"/>
