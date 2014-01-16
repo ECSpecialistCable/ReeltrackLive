@@ -73,7 +73,7 @@
 			<form:label name="" label="" />
 			<form:buttonset_begin align="left" padding="0"/>
 					<% String url = request.getContextPath() + "/reports/" + "daily_report.pdf"; %>
-					<a  href="<%= url %>"><%= "[Download]" %></a>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
 			<form:buttonset_end />
 		<form:row_end />
 	<% } %>
@@ -113,7 +113,7 @@
 					<% fileName+=".xls"; %>
 				<% } %>
 					<% String url = request.getContextPath() + "/reports/" + fileName; %>
-					<a  href="<%= url %>"><%= "[Download]" %></a>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
 			<form:buttonset_end />
 		<form:row_end />
 	<% } %>
@@ -155,7 +155,7 @@
 					<% fileName+=".xls"; %>
 				<% } %>
 					<% String url = request.getContextPath() + "/reports/" + fileName; %>
-					<a href="<%= url %>"><%= "[Download]" %></a>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
 			<form:buttonset_end />
 		<form:row_end />
 	<% } %>
@@ -181,7 +181,7 @@
 			<form:label name="" label="" />
 			<form:buttonset_begin align="left" padding="0"/>
 					<% String url = request.getContextPath() + "/reports/" + "period_report.pdf"; %>
-					<a  href="<%= url %>"><%= "[Download]" %></a>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
 			<form:buttonset_end />
 		<form:row_end />
 	<% } %>
@@ -206,7 +206,7 @@
 			<form:label name="" label="" />
 			<form:buttonset_begin align="left" padding="0"/>
 					<% String url = request.getContextPath() + "/reports/" + "steel_reel_report.pdf"; %>
-					<a  href="<%= url %>"><%= "[Download]" %></a>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
 			<form:buttonset_end />
 		<form:row_end />
 	<% } %>
@@ -231,7 +231,7 @@
 			<form:label name="" label="" />
 			<form:buttonset_begin align="left" padding="0"/>
 					<% String url = request.getContextPath() + "/reports/" + "action_log_report.xls"; %>
-					<a  href="<%= url %>"><%= "[Download]" %></a>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
 			<form:buttonset_end />
 		<form:row_end />
 	<% } %>
