@@ -155,7 +155,7 @@
 					<% fileName+=".xls"; %>
 				<% } %>
 					<% String url = request.getContextPath() + "/reports/" + fileName; %>
-					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+					<a href="<%= url %>"><%= "[Download]" %></a>
 			<form:buttonset_end />
 		<form:row_end />
 	<% } %>
