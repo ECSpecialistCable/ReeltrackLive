@@ -196,7 +196,7 @@
 <form:end />
 <admin:box_end />
 
-<admin:subtitle text="Steel Reel Report" />
+<%--<admin:subtitle text="Steel Reel Report" />
 <admin:box_begin />
 <form:begin name="steel_reel_report" action="reports/process.jsp" />
 	<form:date_picker label="Start Date:" name="steel_reel_report_start_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
@@ -220,7 +220,7 @@
 	<form:hidden name="job_code" value="<%= user.getJobCode() %>" />
 <form:end />
 <admin:box_end />
-
+--%>
 <admin:subtitle text="Action Log" />
 <admin:box_begin />
 <form:begin name="action_log_report" action="reports/process.jsp" />
