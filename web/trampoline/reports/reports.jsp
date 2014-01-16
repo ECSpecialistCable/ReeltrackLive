@@ -32,6 +32,32 @@
 	if(request.getParameter("inv_type")!=null) {
 		invReportType = request.getParameter("inv_type");
 	}
+
+	String dr = "";
+	if(request.getParameter("dr")!=null) {
+		dr = request.getParameter("dr");
+	}
+	String isr = "";
+	if(request.getParameter("isr")!=null) {
+		isr = request.getParameter("isr");
+	}
+	String ir = "";
+	if(request.getParameter("ir")!=null) {
+		ir = request.getParameter("ir");
+	}
+	String pr = "";
+	if(request.getParameter("pr")!=null) {
+		pr = request.getParameter("pr");
+	}
+	String sr = "";
+	if(request.getParameter("sr")!=null) {
+		sr = request.getParameter("sr");
+	}
+	String alr = "";
+	if(request.getParameter("alr")!=null) {
+		alr = request.getParameter("alr");
+	}
+	
 %>
 
 <% dbResources.close(); %>
@@ -40,12 +66,21 @@
 
 <admin:subtitle text="Daily Report" />
 <admin:box_begin />
-<form:begin name="daily_report" action="../DownloadReportServlet" />
+<form:begin name="daily_report" action="reports/process.jsp" />
 	<form:date_picker label="Report Day:" name="daily_report_day" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
-    <form:row_begin />
+	<%if(dr.equals("true")) { %>
+		<form:row_begin />
+			<form:label name="" label="" />
+			<form:buttonset_begin align="left" padding="0"/>
+					<% String url = request.getContextPath() + "/reports/" + "daily_report.pdf"; %>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+			<form:buttonset_end />
+		<form:row_end />
+	<% } %>
+	<form:row_begin />
         <form:label name="" label="" />
-        <form:buttonset_begin align="left" padding="0"/>
-            <form:submit_inline button="submit" waiting="false" name="search" action="test" />
+        <form:buttonset_begin align="left" padding="0"/>			
+            <form:submit_inline button="submit" waiting="false" name="search" action="daily_report" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="daily_report" />
@@ -66,11 +101,26 @@
         <form:content_end />
     <form:row_end />
 <form:end />
-<form:begin name="inventory_summary" action="../DownloadReportServlet" />
+<form:begin name="inventory_summary" action="reports/process.jsp" />
+	<%if(isr.equals("true")) { %>
+		<form:row_begin />
+			<form:label name="" label="" />
+			<form:buttonset_begin align="left" padding="0"/>
+			    <% String fileName = "inventory_summary_report"; %>
+				<% if(invSumReportType.equalsIgnoreCase("pdf")) { %>
+					<% fileName+=".pdf"; %>
+				<% } else if(invSumReportType.equalsIgnoreCase("Excel")) { %>
+					<% fileName+=".xls"; %>
+				<% } %>
+					<% String url = request.getContextPath() + "/reports/" + fileName; %>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+			<form:buttonset_end />
+		<form:row_end />
+	<% } %>
     <form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
-            <form:submit_inline button="submit" waiting="false" name="search" action="test" />
+            <form:submit_inline button="submit" waiting="false" name="search" action="inventory_summary_report" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="inventory_summary" />
@@ -93,11 +143,26 @@
     <form:row_end />
 <form:end />
 
-<form:begin name="inventory_report" action="../DownloadReportServlet" />
+<form:begin name="inventory_report" action="reports/process.jsp" />
+	<%if(ir.equals("true")) { %>
+		<form:row_begin />
+			<form:label name="" label="" />
+			<form:buttonset_begin align="left" padding="0"/>
+			    <% String fileName = "inventory_report"; %>
+				<% if(invReportType.equalsIgnoreCase("pdf")) { %>
+					<% fileName+=".pdf"; %>
+				<% } else if(invReportType.equalsIgnoreCase("Excel")) { %>
+					<% fileName+=".xls"; %>
+				<% } %>
+					<% String url = request.getContextPath() + "/reports/" + fileName; %>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+			<form:buttonset_end />
+		<form:row_end />
+	<% } %>
     <form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
-            <form:submit_inline button="submit" waiting="false" name="search" action="test" />
+            <form:submit_inline button="submit" waiting="false" name="search" action="inventory_report" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="inventory_report" />
@@ -108,13 +173,22 @@
 
 <admin:subtitle text="Period Report" />
 <admin:box_begin />
-<form:begin name="period_report" action="../DownloadReportServlet" />
+<form:begin name="period_report" action="reports/process.jsp" />
 	<form:date_picker label="Start Date:" name="period_report_start_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
 	<form:date_picker label="End Date:" name="period_report_end_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
-    <form:row_begin />
+    <%if(pr.equals("true")) { %>
+		<form:row_begin />
+			<form:label name="" label="" />
+			<form:buttonset_begin align="left" padding="0"/>
+					<% String url = request.getContextPath() + "/reports/" + "period_report.pdf"; %>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+			<form:buttonset_end />
+		<form:row_end />
+	<% } %>
+	<form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
-            <form:submit_inline button="submit" waiting="false" name="search" action="test" />
+            <form:submit_inline button="submit" waiting="false" name="search" action="period_report" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="period_report" />
@@ -124,13 +198,22 @@
 
 <admin:subtitle text="Steel Reel Report" />
 <admin:box_begin />
-<form:begin name="steel_reel_report" action="../DownloadReportServlet" />
+<form:begin name="steel_reel_report" action="reports/process.jsp" />
 	<form:date_picker label="Start Date:" name="steel_reel_report_start_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
 	<form:date_picker label="End Date:" name="steel_reel_report_end_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
-    <form:row_begin />
+    <%if(sr.equals("true")) { %>
+		<form:row_begin />
+			<form:label name="" label="" />
+			<form:buttonset_begin align="left" padding="0"/>
+					<% String url = request.getContextPath() + "/reports/" + "steel_reel_report.pdf"; %>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+			<form:buttonset_end />
+		<form:row_end />
+	<% } %>
+	<form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
-            <form:submit_inline button="submit" waiting="false" name="search" action="test" />
+            <form:submit_inline button="submit" waiting="false" name="search" action="steel_reel_report" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="steel_reel_report" />
@@ -140,13 +223,22 @@
 
 <admin:subtitle text="Action Log" />
 <admin:box_begin />
-<form:begin name="action_log_report" action="../DownloadReportServlet" />
+<form:begin name="action_log_report" action="reports/process.jsp" />
 	<form:date_picker label="Start Date:" name="action_log_report_start_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
 	<form:date_picker label="End Date:" name="action_log_report_end_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
-    <form:row_begin />
+    <%if(alr.equals("true")) { %>
+		<form:row_begin />
+			<form:label name="" label="" />
+			<form:buttonset_begin align="left" padding="0"/>
+					<% String url = request.getContextPath() + "/reports/" + "action_log_report.xls"; %>
+					<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+			<form:buttonset_end />
+		<form:row_end />
+	<% } %>
+	<form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
-            <form:submit_inline button="submit" waiting="false" name="search" action="test" />
+            <form:submit_inline button="submit" waiting="false" name="search" action="action_log_report" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="action_log_report" />
