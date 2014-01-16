@@ -24,11 +24,11 @@
 	RTUser user = (RTUser)userLoginMgr.getUser();
 	SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
-	String invSumReportType = "Pdf";
+	String invSumReportType = "PDF";
 	if(request.getParameter("inv_summary_type")!=null) {
 		invSumReportType = request.getParameter("inv_summary_type");
 	}
-	String invReportType = "Pdf";
+	String invReportType = "PDF";
 	if(request.getParameter("inv_type")!=null) {
 		invReportType = request.getParameter("inv_type");
 	}
@@ -95,7 +95,7 @@
         <form:label name="" label="Generate:" />
         <form:content_begin />
         <form:select_begin onchange="test" name="inv_summary_type" />
-            <form:option name="Pdf" value="Pdf" match="<%= invSumReportType %>" />
+            <form:option name="PDF" value="PDF" match="<%= invSumReportType %>" />
             <form:option name="Excel" value="Excel" match="<%= invSumReportType %>" />
         <form:select_end />
         <form:content_end />
@@ -136,7 +136,7 @@
         <form:label name="" label="Generate:" />
         <form:content_begin />
         <form:select_begin onchange="test" name="inv_type" />
-            <form:option name="Pdf" value="Pdf" match="<%= invReportType %>" />
+            <form:option name="PDF" value="PDF" match="<%= invReportType %>" />
             <form:option name="Excel" value="Excel" match="<%= invReportType %>" />
         <form:select_end />
         <form:content_end />
