@@ -9,6 +9,7 @@ public class Customer extends CompCMEntity {
 	public static final String PARAM = "customer_param";
 	public static final String NAME_COLUMN = "name";
 	public static final String ISSUE_CONTACT_EMAIL_COLUMN = "issue_contact_email";
+	public static final String SCANS_MUST_MATCH_COLUMN = "scans_must_match";
 
 	@Override
 	public String getTableName() {
@@ -28,7 +29,15 @@ public class Customer extends CompCMEntity {
 	public String getTitle() {
 		return this.getName();
 	}
+
+	public String getScansMustMatch() {
+		return this.getData().getString(SCANS_MUST_MATCH_COLUMN, "");
+	}
 	
+	public void setScansMustMatch(String name) {
+		this.getData().setString(SCANS_MUST_MATCH_COLUMN, name);
+	}
+
 	public String getName() {
 		return this.getData().getString(NAME_COLUMN, "");
 	}

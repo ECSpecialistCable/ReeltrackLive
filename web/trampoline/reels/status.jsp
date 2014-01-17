@@ -6,6 +6,7 @@
 <%@ page import="com.reeltrack.whlocations.*" %>
 <%@ page import="com.monumental.trampoline.component.*" %>
 <%@ page import="com.reeltrack.drivers.*" %>
+<%@ page import="com.reeltrack.customers.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
@@ -18,10 +19,12 @@
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 <jsp:useBean id="locationMgr" class="com.reeltrack.whlocations.WhLocationMgr" />
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr" />
+<jsp:useBean id="customerMgr" class="com.reeltrack.customers.CustomerMgr" />
 <jsp:useBean id="driverMgr" class="com.reeltrack.drivers.DriverMgr" scope="request"/>
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
 <% locationMgr.init(pageContext,dbResources); %>
+<% customerMgr.init(pageContext,dbResources); %>
 <% driverMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
@@ -40,6 +43,10 @@ if(request.getParameter(Reel.PARAM) != null) {
 Reel content = new Reel();
 content.setId(contid);
 content = (Reel)reelMgr.getReel(content);
+
+Customer customer = new Customer();
+customer.setId(user.getCustomerId());
+customer = customerMgr.getCustomer(customer);
 
 WhLocation location = new WhLocation();
 location.setCustomerId(user.getCustomerId());
@@ -171,39 +178,46 @@ String tempURL; //var for url expression
         <admin:box_end />
 <% } %>
 
+<%
+boolean showStageAndCheckout = true;
+if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
+    showStageAndCheckout = false;
+}
+%>
+<% if(showStageAndCheckout) { %>
+    <% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) { %>
+    <admin:subtitle text="Stage Reel" />
+    <admin:box_begin />
+    	<form:begin submit="true" name="stage" action="reels/process.jsp" />
+            <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+            <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
+            <form:row_begin />
+    		<form:label name="" label="" />
+    		<form:buttonset_begin align="left" padding="0"/>
+    			<form:submit_inline button="save" waiting="true" name="STAGE" action="mark_staged" />
+    		<form:buttonset_end />
+    		<form:row_end />
+        <form:end />
+    <admin:box_end />
+    <% } %>
 
-<% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) { %>
-<admin:subtitle text="Stage Reel" />
-<admin:box_begin />
-	<form:begin submit="true" name="stage" action="reels/process.jsp" />
-        <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
-        <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
-        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
-        <form:row_begin />
-		<form:label name="" label="" />
-		<form:buttonset_begin align="left" padding="0"/>
-			<form:submit_inline button="save" waiting="true" name="STAGE" action="mark_staged" />
-		<form:buttonset_end />
-		<form:row_end />
-    <form:end />
-<admin:box_end />
-<% } %>
-
-<% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) || content.getStatus().equals(Reel.STATUS_STAGED)) { %>
-<admin:subtitle text="Checkout Reel" />
-<admin:box_begin />
-	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
-        <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
-        <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
-        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
-        <form:row_begin />
-		<form:label name="" label="" />
-		<form:buttonset_begin align="left" padding="0"/>
-			<form:submit_inline button="save" waiting="true" name="CHECKOUT" action="mark_checkedout" />
-		<form:buttonset_end />
-		<form:row_end />
-    <form:end />
-<admin:box_end />
+    <% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) || content.getStatus().equals(Reel.STATUS_STAGED)) { %>
+    <admin:subtitle text="Checkout Reel" />
+    <admin:box_begin />
+    	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
+            <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+            <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
+            <form:row_begin />
+    		<form:label name="" label="" />
+    		<form:buttonset_begin align="left" padding="0"/>
+    			<form:submit_inline button="save" waiting="true" name="CHECKOUT" action="mark_checkedout" />
+    		<form:buttonset_end />
+    		<form:row_end />
+        <form:end />
+    <admin:box_end />
+    <% } %>
 <% } %>
 
 <% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) || content.getStatus().equals(Reel.STATUS_STAGED)) { %>

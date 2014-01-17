@@ -42,6 +42,7 @@ if(action.equals("update")) {
     content.setId(contid);
     content.setName(request.getParameter(Customer.NAME_COLUMN));
     content.setIssueContactEmail(request.getParameter(Customer.ISSUE_CONTACT_EMAIL_COLUMN));
+    content.setScansMustMatch(request.getParameter(Customer.SCANS_MUST_MATCH_COLUMN));
     content.setStatus(request.getParameter(Customer.STATUS_COLUMN));
     customerMgr.updateCustomer(content);
     redirect = request.getContextPath() + "/trampoline/" + "customers/edit.jsp?" + Customer.PARAM + "=" + contid ;

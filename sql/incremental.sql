@@ -302,4 +302,4 @@ alter table customers add issue_contact_email varchar(255);
 alter table cable_tech_data add column est_al_weight int default 0;
 alter table cable_tech_data add column est_cu_weight int default 0;
 
-
+alter table customers add scans_must_match varchar(1) default 'n';
