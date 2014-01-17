@@ -471,7 +471,22 @@ public class ReelMgr extends CompWebManager {
 		puller.addSearch(content);
 		return (Reel)controller.pullCompEntity(puller);
 	}
-	
+
+	public void clearReelTags() throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new Reel());
+		Reel toReset = new Reel();
+		toReset.setHasReelTagFile("y");
+		puller.addSearch(toReset);
+		CompEntities resetAll = controller.pullCompEntities(puller, 0, 0);
+		for(int i=0; i<resetAll.howMany(); i++) {
+			Reel current = (Reel)resetAll.get(i);
+			toReset = new Reel();
+			toReset.setId(current.getId());
+			toReset.setHasReelTagFile("n");
+			controller.update(toReset);
+		}
+	}
+
 	public CompEntities searchReels(Reel content, String sort_by, boolean asc, int howMany, int skip) throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());

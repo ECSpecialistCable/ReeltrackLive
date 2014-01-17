@@ -23,6 +23,10 @@
 <% 
 RTUser user = (RTUser)userLoginMgr.getUser();
 
+if(request.getParameter("submit_action")!=null && request.getParameter("submit_action").equals("clear_generated_tags")) {
+	reelMgr.clearReelTags();
+}
+
 Reel content = new Reel();
 content.setHasReelTagFile("y");
 CompEntities contents = reelMgr.searchReels(content, Reel.CR_ID_COLUMN, true, 0, 0);
@@ -38,6 +42,16 @@ String tempURL = "";
 
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
+	<admin:subtitle text="Clear Generated Reel Tags"/>
+	<admin:box_begin/>
+		<form:begin_selfsubmit name="clear_generated_tags" action="reeltags/search_generated.jsp" />
+			<form:row_begin/>
+				<form:buttonset_begin padding="0" align="right"/>
+                <form:submit_inline button="submit" waiting="true" name="clear" action="clear_generated_tags" />
+				<form:buttonset_end/>
+			<form:row_end/>
+		<form:end />
+	<admin:box_end />
 
     <admin:box_begin color="false" />
    
