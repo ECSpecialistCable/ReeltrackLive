@@ -82,9 +82,11 @@ String tempURL; //var for url expression
     <form:begin submit="false" name="nothing" action="#" />
 <% if(rtReel!=null) { %>
 	<form:info label="Reel Tag:" text="<%= rtReel.getReelTag() %>" />
+	<form:info label="CRID:" text="<%= Integer.toString(rtReel.getCrId()) %>" />
 <% } %>
 <% if(plReel!=null) { %>
 	<form:info label="Pick List:" text="<%= plReel.getReelTag() %>" />
+	<form:info label="CRID:" text="<%= Integer.toString(plReel.getCrId()) %>" />
 <% } %>
 <form:end />
 <admin:box_end />
