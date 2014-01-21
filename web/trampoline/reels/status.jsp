@@ -124,7 +124,7 @@ String tempURL; //var for url expression
 <% } %>
 
 <% if(content.getStatus().equals(Reel.STATUS_ORDERED) || content.getStatus().equals(Reel.STATUS_SHIPPED)) { %>
-<admin:subtitle text="Mark Reel as Shipped" />
+<admin:subtitle text="Mark Reel as Received" />
         <admin:box_begin />
             <form:begin submit="true" name="receive" action="reels/process.jsp" />
                 <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
@@ -205,7 +205,7 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
     <% } %>
 
     <% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) || content.getStatus().equals(Reel.STATUS_STAGED)) { %>
-    <admin:subtitle text="Checkout Reel" />
+    <admin:subtitle text="Check OUT Reel" />
     <admin:box_begin />
     	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
             <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
@@ -222,7 +222,7 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
     <% } %>
 <% } %>
 
-<% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) || content.getStatus().equals(Reel.STATUS_STAGED)) { %>
+<% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) { %>
 <admin:subtitle text="Mark Reel as Complete" />
 <admin:box_begin />
 	<form:begin submit="true" name="complete" action="reels/process.jsp" />
@@ -238,7 +238,7 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
 <% } %>
 
 <% if(content.getStatus().equals(Reel.STATUS_COMPLETE)) { %>
-<admin:subtitle text="Mark Reel as Complete" />
+<admin:subtitle text="Mark Reel as Scrapped" />
 <admin:box_begin />
 	<form:begin submit="true" name="scrapped" action="reels/process.jsp" />
         <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
@@ -253,7 +253,7 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
 <% } %>
 
 <% if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) { %>
-<admin:subtitle text="Checkout Reel" />
+<admin:subtitle text="Check IN Reel" />
 <admin:box_begin />
 	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
 		<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />   
