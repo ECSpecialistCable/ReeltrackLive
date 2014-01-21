@@ -2,7 +2,7 @@
 // Built against jQuery 1.4.x
 
 /* constants do not need to be namespaced. */
-var _DEBUG = true;
+var _DEBUG = false;
 
 //
 var __TRAMP_ROOT__					= "<%= request.getContextPath() %>/trampoline/";
