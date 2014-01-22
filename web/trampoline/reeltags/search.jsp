@@ -55,11 +55,13 @@ if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {
     content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL); 
 }
 
-if(request.getParameter(Reel.CR_ID_COLUMN) != null && !request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
-    content.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
-    content.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
-} else {
-	content.getData().removeValue(Reel.CR_ID_COLUMN);
+if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
+    if(request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
+        content.getData().removeValue(Reel.CR_ID_COLUMN);
+    } else {
+        content.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
+        content.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
+    }
 }
 
 session.setAttribute("reeltags_search",content);

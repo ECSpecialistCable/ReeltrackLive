@@ -52,10 +52,12 @@ if(session.getAttribute("checkout_search_circuit")!=null) {
     circuit = (ReelCircuit)session.getAttribute("pick_lists_search_circuit");
 }
 
-if(request.getParameter(PickList.ID_COLUMN) != null && !request.getParameter(PickList.ID_COLUMN).equals("")) {  
-    content.setId(Integer.parseInt(request.getParameter(PickList.ID_COLUMN)));
-} else {
-	content.getData().removeValue(PickList.ID_COLUMN);
+if(request.getParameter(PickList.ID_COLUMN) != null) {
+	if(!request.getParameter(PickList.ID_COLUMN).equals("")) {
+		content.setId(Integer.parseInt(request.getParameter(PickList.ID_COLUMN)));
+	} else {
+		content.getData().removeValue(PickList.ID_COLUMN);
+	}
 }
 
 if(request.getParameter(PickList.FOREMAN_COLUMN) != null) {  
@@ -81,11 +83,13 @@ if(request.getParameter(ReelCircuit.PARAM) != null) {
     circuit.setId(Integer.parseInt(request.getParameter(ReelCircuit.PARAM)));
 }
 
-if(request.getParameter(Reel.CR_ID_COLUMN) != null && !request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
-    reel.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
-    reel.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
-} else {
-	reel.getData().removeValue(Reel.CR_ID_COLUMN);
+if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
+    if(request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
+        reel.getData().removeValue(Reel.CR_ID_COLUMN);
+    } else {
+        reel.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
+        reel.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
+    }
 }
 
 session.setAttribute("checkout_search",content);
