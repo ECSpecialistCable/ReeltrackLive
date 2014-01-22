@@ -27,6 +27,14 @@ if(request.getParameter("submit_action")!=null && request.getParameter("submit_a
 	reelMgr.clearReelTags();
 }
 
+if(request.getParameter("submit_action")!=null && request.getParameter("submit_action").equals("clear_reel_tag")) {
+	int reelId = Integer.parseInt(request.getParameter(Reel.PARAM));
+	Reel toUpdate = new Reel();
+	toUpdate.setId(reelId);
+	toUpdate.setHasReelTagFile("n");
+	reelMgr.updateReel(toUpdate);
+}
+
 Reel content = new Reel();
 content.setHasReelTagFile("y");
 CompEntities contents = reelMgr.searchReels(content, Reel.CR_ID_COLUMN, true, 0, 0);
@@ -60,7 +68,7 @@ String tempURL = "";
             <listing:header_cell width="50" first="true" name="CRID #" />
             <listing:header_cell name="Reel Tag" />
             <listing:header_cell name="Cable Description" />
-            <listing:header_cell name="" width="75"/>
+            <listing:header_cell name="" width="120"/>
         <listing:header_end />
         <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
@@ -77,6 +85,8 @@ String tempURL = "";
             <listing:cell_begin />
                 <% tempURL = content.getReelTagDirectory() + "/" + content.getReelTagFile(); %>
                 <form:linkbutton url="<%= tempURL %>" name="PRINT" newtab="true" />
+                <% tempURL = "reeltags/search_generated.jsp?submit_action=clear_reel_tag&" +  Reel.PARAM + "=" + content.getId(); %>
+                <form:linkbutton url="<%= tempURL %>" name="CLEAR" />
             <listing:cell_end />
         <listing:row_end />
         <% } %>
