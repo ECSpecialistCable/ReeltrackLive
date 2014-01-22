@@ -71,15 +71,25 @@ if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
     content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ); 
 }
 
+if(request.getParameter(Reel.CR_ID_COLUMN) != null && !request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
+    content.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
+    content.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
+} else {
+	content.getData().removeValue(Reel.CR_ID_COLUMN);
+}
+
 session.setAttribute("shipping_search",content);
 
 String trackingNum = "";
 String packingNum = "";
+String cridNum = "";
 if(request.getParameter("action") != null) {  
     trackingNum = request.getParameter("trackingNum");
     session.setAttribute("trackingNum",trackingNum);
     packingNum = request.getParameter("packingNum");
-    session.setAttribute("packingNum",packingNum); 
+    session.setAttribute("packingNum",packingNum);
+	cridNum = request.getParameter("cridNum");
+    session.setAttribute("cridNum",cridNum);
 }
 if(session.getAttribute("trackingNum")!=null) {
     trackingNum = (String)session.getAttribute("trackingNum");
@@ -87,6 +97,10 @@ if(session.getAttribute("trackingNum")!=null) {
 if(session.getAttribute("packingNum")!=null) {
     packingNum = (String)session.getAttribute("packingNum");
 }
+if(session.getAttribute("cridNum")!=null) {
+    cridNum = (String)session.getAttribute("cridNum");
+}
+
 
 String column = Reel.REEL_TAG_COLUMN;
 boolean ascending = true;
@@ -105,7 +119,12 @@ String tempURL = "";
 <admin:subtitle text="Filter Reels" />
 <admin:box_begin />
 <form:begin_selfsubmit name="search" action="shipping/search.jsp" />
-    <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
+	<% if(content.getCrId()!=0) { %>
+		<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= content.getCrId() + "" %>" />
+	<% } else { %>
+		<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= "" %>" />
+	<% } %>
+	<form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
     <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
     <% tempURL = user.getCustomerName() + " PO:"; %>
     <form:textfield label="<%= tempURL %>" name="<%= Reel.CUSTOMER_PO_COLUMN %>" value="<%= content.getCustomerPO() %>" />
@@ -135,6 +154,11 @@ String tempURL = "";
 <admin:subtitle text="Mark Reels" />
 <admin:box_begin />
 <form:begin_selfsubmit name="search" action="shipping/search.jsp" />
+	<% if(!cridNum.equals("")) { %>
+		<form:textfield label="CRID #:" name="cridNum" value="<%= cridNum + "" %>" />
+	<% } else { %>
+		<form:textfield label="CRID #:" name="cridNum" value="<%= "" %>" />
+	<% } %>
     <form:textfield label="Tracking PRO #:" name="trackingNum" value="<%= trackingNum %>" />
     <form:textfield label="Packing List #:" name="packingNum" value="<%= packingNum %>" />
     <form:hidden name="action" value="save" />

@@ -72,6 +72,13 @@ if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
     content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ); 
 }
 
+if(request.getParameter(Reel.CR_ID_COLUMN) != null && !request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
+    content.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
+    content.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
+} else {
+	content.getData().removeValue(Reel.CR_ID_COLUMN);
+}
+
 session.setAttribute("receive_search",content);
 
 String column = Reel.REEL_TAG_COLUMN;
@@ -95,7 +102,12 @@ String tempURL = "";
 <admin:subtitle text="Filter Reels" />
 <admin:box_begin />
 <form:begin_selfsubmit name="search" action="receive/search.jsp" />
-    <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
+    <% if(content.getCrId()!=0) { %>
+		<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= content.getCrId() + "" %>" />
+	<% } else { %>
+		<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= "" %>" />
+	<% } %>
+	<form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
     <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
     <% tempURL = user.getCustomerName() + " PO:"; %>
     <form:textfield label="<%= tempURL %>" name="<%= Reel.CUSTOMER_PO_COLUMN %>" value="<%= content.getCustomerPO() %>" />

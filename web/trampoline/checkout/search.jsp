@@ -54,6 +54,8 @@ if(session.getAttribute("checkout_search_circuit")!=null) {
 
 if(request.getParameter(PickList.ID_COLUMN) != null && !request.getParameter(PickList.ID_COLUMN).equals("")) {  
     content.setId(Integer.parseInt(request.getParameter(PickList.ID_COLUMN)));
+} else {
+	content.getData().removeValue(PickList.ID_COLUMN);
 }
 
 if(request.getParameter(PickList.FOREMAN_COLUMN) != null) {  
@@ -77,6 +79,13 @@ if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {
 
 if(request.getParameter(ReelCircuit.PARAM) != null) {  
     circuit.setId(Integer.parseInt(request.getParameter(ReelCircuit.PARAM)));
+}
+
+if(request.getParameter(Reel.CR_ID_COLUMN) != null && !request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
+    reel.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
+    reel.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
+} else {
+	reel.getData().removeValue(Reel.CR_ID_COLUMN);
 }
 
 session.setAttribute("checkout_search",content);
@@ -110,7 +119,12 @@ String tempURL = "";
         }
         %>
         <form:textfield pixelwidth="40" label="ID:" name="<%= PickList.ID_COLUMN %>" value="<%= tempURL %>" />
-        <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= reel.getReelTag() %>" />
+        <% if(reel.getCrId()!=0) { %>
+			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= reel.getCrId() + "" %>" />
+		<% } else { %>
+			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= "" %>" />
+		<% } %>
+		<form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= reel.getReelTag() %>" />
         <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= reel.getCableDescription() %>" />
         <% tempURL = user.getCustomerName() + " P/N:"; %>
         <form:textfield label="<%= tempURL %>" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= reel.getCustomerPN() %>" />
