@@ -69,6 +69,16 @@ if(rtReel!=null && plReel!=null) {
 
 String tempURL; //var for url expression
 %>
+<%
+boolean canEdit = false;
+if(user.isUserType(RTUser.USER_TYPE_ECS)) {
+    canEdit = true;
+}
+//canEdit = false;
+
+String[] carrierList = reelMgr.getCarriers();
+%>
+
 <% dbResources.close(); %>
 
 <html:begin />
@@ -96,22 +106,29 @@ String tempURL; //var for url expression
 <admin:subtitle text="Mark Reel as Shipped" />
 <admin:box_begin />
 	<form:begin submit="true" name="stage" action="reels/process.jsp" />
+        <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
 		<form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
-        <form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
+        <% if(canEdit) { %>
+            <form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
+            <form:date_picker name="<%= Reel.SHIPPING_DATE_COLUMN %>" value="<%= content.getShippingDateString() %>" label="Shipped<br />Date:" />
+        <% } else { %>
+            <form:info label="Projected Shipping<br />Date:" text="<%= content.getProjectedShippingDateString() %>" />
+            <form:info label="Shipped<br />Date:" text="<%= content.getShippingDateString() %>" />
+        <% } %>
         <form:row_begin />
         <form:label name="" label="Carrier:" />
         <form:content_begin />
         <form:select_begin name="<%= Reel.CARRIER_COLUMN %>" />
             <form:option name="None" value="" match="<%= content.getCarrier() %>" />
-            <% String[] carrierList  = content.getCarrierList(); %>
+            <% //String[] carrierList  = content.getCarrierList(); %>
             <% for(int x=0; x<carrierList.length; x++) { %>
                 <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= content.getCarrier() %>" />
             <% } %>
         <form:select_end />
         <form:content_end />
         <form:row_end />
-        <form:textfield label="Tracking PRO #:" name="trackingNum" value="" />
-    	<form:textfield label="Packing List #:" name="packingNum" value="" />        
+        <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
+        <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />        
         <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
         <form:row_begin />
 		<form:label name="" label="" />
@@ -127,10 +144,18 @@ String tempURL; //var for url expression
 <admin:subtitle text="Mark Reel as Received" />
         <admin:box_begin />
             <form:begin submit="true" name="receive" action="reels/process.jsp" />
+                <form:info label="Shipped<br />Date:" text="<%= content.getShippingDateString() %>" />
                 <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
                 <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
                 <form:textfield pixelwidth="40" label="Received Qty:" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
                 <form:textfield pixelwidth="40" label="Bottom Ft:" name="<%= Reel.BOTTOM_FOOT_COLUMN %>" value="<%= new Integer(content.getBottomFoot()).toString() %>" />
+                <form:row_end />
+                <form:row_begin />
+                    <form:label name="" label="Bottom Foot Not Visible?:" />
+                    <form:content_begin />      
+                    <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />       
+                    <form:content_end />                
+                <form:row_end />
                 <form:textfield pixelwidth="40" label="Top Ft:" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
                 <form:textfield pixelwidth="40" label="Received lbs:" name="<%= Reel.RECEIVED_WEIGHT_COLUMN %>" value="<%= new Integer(content.getReceivedWeight()).toString() %>" />
                 <form:row_begin />
@@ -191,6 +216,7 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
     <admin:subtitle text="Stage Reel" />
     <admin:box_begin />
     	<form:begin submit="true" name="stage" action="reels/process.jsp" />
+            <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
             <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
             <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
@@ -208,6 +234,7 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
     <admin:subtitle text="Check OUT Reel" />
     <admin:box_begin />
     	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
+            <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
             <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
             <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
@@ -307,6 +334,12 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
 			<form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
 			<form:info label="Steel Reel Serial #:" text="<%= content.getSteelReelSerial() %>" />
 			<form:info label="Received On:" text="<%= content.getReceivedOnDateString() %>" />
+            <% if(content.hasBottomFootNotVisible()) { %>
+                <form:info label="Bottom Foot #:" text="Not Visible" />
+            <% } else { %>
+                <form:info label="Bottom Foot #:" text="<%= new Integer(content.getBottomFoot()).toString() %>" />
+            <% } %>
+            <form:info label="Top Foot #:" text="<%= new Integer(content.getTopFoot()).toString() %>" />
 			<form:info label="Times Checked OUT:" text="<%= new Integer(content.getTimesCheckedOut()).toString() %>" />
 			<form:info label="Times Checked IN:" text="<%= new Integer(content.getTimesCheckedIn()).toString() %>" />
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />

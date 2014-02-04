@@ -22,6 +22,24 @@ public class CableTechData extends CompCMEntity {
 	public static final String JOB_CODE_COLUMN = "job_code";
 	public static final String EST_AL_WEIGHT_COLUMN = "est_al_weight";
 	public static final String EST_CU_WEIGHT_COLUMN = "est_cu_weight";
+	public static final String CON_AL_WEIGHT_COLUMN = "con_al_weight";
+	public static final String CON_CU_WEIGHT_COLUMN = "con_cu_weight";
+
+	public int getConAlWeight() {
+		return this.getData().getInteger(CON_AL_WEIGHT_COLUMN, 0);
+	}
+	
+	public void setConAlWeight(int id) {
+		this.getData().setInteger(CON_AL_WEIGHT_COLUMN, id);
+	}
+
+	public int getConCuWeight() {
+		return this.getData().getInteger(CON_CU_WEIGHT_COLUMN, 0);
+	}
+	
+	public void setConCuWeight(int id) {
+		this.getData().setInteger(CON_CU_WEIGHT_COLUMN, id);
+	}
 
 	public int getEstAlWeight() {
 		return this.getData().getInteger(EST_AL_WEIGHT_COLUMN, 0);
@@ -32,11 +50,11 @@ public class CableTechData extends CompCMEntity {
 	}
 
 	public int getEstCuWeight() {
-		return this.getData().getInteger(EST_AL_WEIGHT_COLUMN, 0);
+		return this.getData().getInteger(EST_CU_WEIGHT_COLUMN, 0);
 	}
 	
 	public void setEstCuWeight(int id) {
-		this.getData().setInteger(EST_AL_WEIGHT_COLUMN, id);
+		this.getData().setInteger(EST_CU_WEIGHT_COLUMN, id);
 	}
 
 	public String getJobCode() {

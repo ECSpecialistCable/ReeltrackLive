@@ -124,9 +124,9 @@ String tempURL = "";
         %>
         <form:textfield pixelwidth="40" label="ID:" name="<%= PickList.ID_COLUMN %>" value="<%= tempURL %>" />
         <% if(reel.getCrId()!=0) { %>
-			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= reel.getCrId() + "" %>" />
+			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= new Integer(reel.getCrId()).toString() %>" />
 		<% } else { %>
-			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= "" %>" />
+			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="" />
 		<% } %>
 		<form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= reel.getReelTag() %>" />
         <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= reel.getCableDescription() %>" />

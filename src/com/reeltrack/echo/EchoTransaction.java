@@ -14,6 +14,7 @@ public class EchoTransaction extends CompCMEntity {
 	public static final String SYNCED_DATE_COLUMN = "synced_date";
 	public static final String ACTION_COLUMN = "action";
 	public static final String REEL_ID_COLUMN = "reel_id";
+	public static final String NOTES_COLUMN = "notes";
 
 	@Override
 	public String getTableName() {
@@ -89,4 +90,12 @@ public class EchoTransaction extends CompCMEntity {
     public void setReelId(int id) {
 		this.getData().setInteger(REEL_ID_COLUMN, new Integer(id));
     }
+
+	public String getNote() {
+		return this.getData().getString(NOTES_COLUMN, "");
+	}
+	
+	public void setNote(String name) {
+		this.getData().setString(NOTES_COLUMN, name);
+	}
 }

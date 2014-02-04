@@ -18,9 +18,13 @@ mailFrom=test@test.com
 
 databaseDriver=com.mysql.jdbc.Driver
 
-dbConnectionECHO=jdbc:mysql://127.0.0.1:3306/echo
-dbUserECHO=www
-dbPasswordECHO=sleep499
+dbConnectionECHO=jdbc:mysql://127.0.0.1:3306/ECSDataTables
+dbUserECHO=root
+dbPasswordECHO=6680cab1e
+
+dbConnectionTRANS=jdbc:mysql://127.0.0.1:3306/ReelTrack
+dbUserTRANS=root
+dbPasswordTRANS=6680cab1e
 
 dbConnectionRT=jdbc:mysql://209.20.80.230:3306/reeltrack
 dbUserRT=www

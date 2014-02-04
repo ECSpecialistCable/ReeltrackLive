@@ -101,6 +101,25 @@ public class ReelMgr extends CompWebManager {
 		}
 		return results;		
 	}
+
+	public String[] getCarriers() throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		Reel content = new Reel();
+		content.setJobCode(user.getJobCode());
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+		puller.setGroupBy(content.getTableName(), Reel.CARRIER_COLUMN, "carriers"); 
+		puller.setSortBy(content.getTableName(), Reel.CARRIER_COLUMN, true);
+		CompEntities manufacturers = controller.pullCompEntities(puller, 0, 0);
+		String[] results = new String[manufacturers.howMany()];
+		for (int x=0; x< manufacturers.howMany(); x++) {
+			Reel reel = (Reel)manufacturers.get(x);
+			results[x] = reel.getCarrier();
+		}
+		return results;		
+	}
 	
 	public String[] getManufacturers() throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
@@ -231,6 +250,36 @@ public class ReelMgr extends CompWebManager {
 		} else {
 			content.setStatus(Reel.STATUS_REFUSED);
 			this.addReelLog(Reel.STATUS_REFUSED, content, "Reel was refused by " + user.getName());
+
+			CompEntityPuller puller = new CompEntityPuller(new Customer());
+			Customer customer = new Customer();
+			customer.setId(user.getCustomerId());
+			puller.addSearch(customer);
+			customer = (Customer)controller.pullCompEntity(puller);
+
+			if(!customer.getIssueContactEmail().equals("")) {
+				puller = new CompEntityPuller(new Reel());
+				Reel reel = new Reel();
+				reel.setId(content.getId());
+				puller.addSearch(reel);
+				reel = (Reel)controller.pullCompEntity(puller);
+
+				CompProperties props = new CompProperties();
+				String mailHost = props.getProperty("mailHost");
+			    String mailFrom = customer.getIssueContactEmail();//props.getProperty("mailFrom");
+				
+				ArrayList emails = new ArrayList();
+				emails.add(customer.getIssueContactEmail());
+		        EmailSender emailer = new EmailSender();
+				try {
+					String subject = "Reel refused by " + customer.getName() + " for reel CRID#:" + reel.getCrId();
+					//String message = content.getDescription();
+					emailer.sendEmail(mailHost, emails, mailFrom, mailFrom, subject, subject, null,null);
+		        } catch(Exception e) {
+					System.out.println("Issue sending issue email." + e);
+				}
+			}
+
 		}
 		content.setUpdated(new Date());
 		controller.update(content);
@@ -274,6 +323,18 @@ public class ReelMgr extends CompWebManager {
         }
 	}
 
+	public void updateCheckedOutInNum(Reel reel, boolean isOut) throws Exception {
+		Reel newReel = new Reel();
+		newReel.setId(reel.getId());
+		newReel = this.getReel(newReel);
+		if(isOut) {
+			newReel.setTimesCheckedOut(newReel.getTimesCheckedOut() + 1);
+		} else {
+			newReel.setTimesCheckedIn(newReel.getTimesCheckedIn() + 1);
+		}
+		controller.update(newReel);
+	}
+
 	public void markReelCheckedOut(Reel content) throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
@@ -284,6 +345,7 @@ public class ReelMgr extends CompWebManager {
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateOnReelQuantity(content);
+		this.updateCheckedOutInNum(content,true);
 
 		Reel reel2 = new Reel();
 		reel2.setId(content.getId());
@@ -318,6 +380,7 @@ public class ReelMgr extends CompWebManager {
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateOnReelQuantity(content);
+		this.updateCheckedOutInNum(content,false);
 	}
 
 	public void markReelComplete(Reel content) throws Exception {
@@ -664,6 +727,52 @@ public class ReelMgr extends CompWebManager {
 		puller.addSearch(toSearch);
 		return controller.pullCompEntitiesCount(puller);
 	}
+
+	public int getCablesQuantityByStatus(Reel content, String status) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new Reel());
+		Reel toSearch = new Reel();
+		toSearch.setEcsPN(content.getEcsPN());
+		toSearch.setJobCode(content.getJobCode());
+		if(status.equals(Reel.STATUS_IN_WHAREHOUSE) || status.equals(Reel.STATUS_CHECKED_OUT)) {
+			toSearch.setStatus(status);
+		}
+		puller.addSearch(toSearch);
+		CompEntities reels = controller.pullCompEntities(puller,0,0);
+		int amount = 0;
+		for(int x=0; x<reels.howMany(); x++) {
+			Reel theReel = (Reel)reels.get(x);
+			if(status.equals(Reel.STATUS_ORDERED)) {
+				amount += theReel.getOrderedQuantity();
+			}
+			if(status.equals(Reel.STATUS_RECEIVED)) {
+				amount += theReel.getReceivedQuantity();
+			}
+			if(status.equals(Reel.STATUS_IN_WHAREHOUSE)) {
+				amount += theReel.getOnReelQuantity();
+			}
+			if(status.equals(Reel.STATUS_CHECKED_OUT)) {
+				amount += theReel.getOnReelQuantity();
+			}
+			if(status.equals("remaining")) {
+				if(theReel.getStatus().equals(Reel.STATUS_ORDERED) || theReel.getStatus().equals(Reel.STATUS_SHIPPED)) {
+					amount += theReel.getOrderedQuantity();
+				} else if(theReel.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) || theReel.getStatus().equals(Reel.STATUS_CHECKED_OUT)) {
+					amount += theReel.getOnReelQuantity();
+				}	
+			}
+		}
+
+		return amount;
+		//if(!status.equals("")) {
+		//	toSearch.setStatus(status);
+			//toSearch.setSearchOp(Reel.STATUS_COLUMN, Reel.EQ);
+		//}
+		
+		//toSearch.setSearchOp(Reel.ECS_PN_COLUMN, Reel.EQ);
+		
+		
+	}
+
 	/*** Reel Logs ***/
 	public int addReelLog(Reel content, String note) throws Exception {
 		ReelLog log = new ReelLog();
@@ -880,6 +989,10 @@ public class ReelMgr extends CompWebManager {
 			}
 		}
 
+		Reel reel = new Reel();
+		reel.setId(content.getReelId());
+		this.addReelLog(reel, "Issue: " + content.getDescription() + " logged by " + user.getName());
+
 		return controller.add(content);
 	}
 
@@ -904,6 +1017,15 @@ public class ReelMgr extends CompWebManager {
 
 		content.setIssueLog(issueLog);
 		controller.update(content);
+
+		if(content.getIsResolved().equals("y")) {
+			RTUserLoginMgr umgr = new RTUserLoginMgr();
+			umgr.init(this.getPageContext(), this.getDbResources());
+			RTUser user2 = (RTUser)umgr.getUser();
+			Reel reel = new Reel();
+			reel.setId(currIssue.getReelId());
+			this.addReelLog(reel, "Issue: " + currIssue.getDescription() + " resolved by " + user2.getName());
+		}
 	}
 
 	public CompEntities getUnresolvedReelIssues(String jobCode) throws Exception {

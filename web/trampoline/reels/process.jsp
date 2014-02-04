@@ -54,10 +54,13 @@ if(action.equals("mark_shipped")) {
     content.setId(contid);
     content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
     content.setCarrier(request.getParameter(Reel.CARRIER_COLUMN));
-    content.setTrackingPRO(request.getParameter("trackingNum"));
-    content.setPackingList(request.getParameter("packingNum"));
+    content.setTrackingPRO(request.getParameter(Reel.TRACKING_PRO_COLUMN));
+    content.setPackingList(request.getParameter(Reel.PACKING_LIST_COLUMN));
     if(request.getParameter(Reel.PROJECTED_SHIPPING_DATE_COLUMN)!=null && !request.getParameter(Reel.PROJECTED_SHIPPING_DATE_COLUMN).equals("")) {
         content.setProjectedShippingDateString(request.getParameter(Reel.PROJECTED_SHIPPING_DATE_COLUMN));
+    }
+    if(request.getParameter(Reel.SHIPPING_DATE_COLUMN)!=null && !request.getParameter(Reel.SHIPPING_DATE_COLUMN).equals("")) {
+        content.setShippingDateString(request.getParameter(Reel.SHIPPING_DATE_COLUMN));
     }
     reelMgr.markReelShipped(content);
     session.removeAttribute("RT");
@@ -93,6 +96,21 @@ if(action.equals("mark_received")) {
     content.setReceivingIssue(request.getParameter(Reel.RECEIVING_ISSUE_COLUMN));
     content.setReceivingNote(request.getParameter(Reel.RECEIVING_NOTE_COLUMN));
     content.setReceivingDisposition(request.getParameter(Reel.RECEIVING_DISPOSITION_COLUMN));
+
+    if(request.getParameter(Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN)!=null) {
+        content.setBottomFootNotVisible("y");
+    } else {
+        content.setBottomFootNotVisible("n");
+    }   
+
+    if(content.getBottomFoot()>0 && content.getTopFoot()>0) {
+        content.setHasReelMarkers("y");
+        if(content.getBottomFoot()>content.getTopFoot()) {
+            content.setReceivedQuantity(content.getBottomFoot()-content.getTopFoot());
+        } else {
+            content.setReceivedQuantity(content.getTopFoot()-content.getBottomFoot());
+        }
+    }
     reelMgr.markReelReceived(content);
     session.removeAttribute("RT");
     session.removeAttribute("PL");
@@ -195,6 +213,8 @@ if(action.equals("update_conductor")) {
     content.setId(Integer.parseInt(request.getParameter(CableTechData.PARAM)));
     content.setConductorGroundSize(request.getParameter(CableTechData.CONDUCTOR_GROUND_SIZE_COLUMN));
     content.setConductorArea(Integer.parseInt(request.getParameter(CableTechData.CONDUCTOR_AREA_COLUMN)));
+    content.setConAlWeight(Integer.parseInt(request.getParameter(CableTechData.CON_AL_WEIGHT_COLUMN)));
+    content.setConCuWeight(Integer.parseInt(request.getParameter(CableTechData.CON_CU_WEIGHT_COLUMN)));
     reelMgr.updateCableTechData(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/cable_data.jsp?" + Reel.PARAM + "=" + contid ;
 }
@@ -234,9 +254,13 @@ if(action.equals("update_overall")) {
 if(action.equals("update")) {
     Reel content = new Reel();
     content.setId(contid);
-    content.setStatus(request.getParameter(Reel.STATUS_COLUMN));
+    if(request.getParameter(Reel.STATUS_COLUMN)!=null) {
+        content.setStatus(request.getParameter(Reel.STATUS_COLUMN));
+    }
     content.setWharehouseLocation(request.getParameter(Reel.WHAREHOUSE_LOCATION_COLUMN));
-    content.setHasReelMarkers(request.getParameter(Reel.HAS_REEL_MARKERS_COLUMN));
+    if(request.getParameter(Reel.HAS_REEL_MARKERS_COLUMN)!=null) {
+        content.setHasReelMarkers(request.getParameter(Reel.HAS_REEL_MARKERS_COLUMN));
+    }
     if(request.getParameter(Reel.REEL_TAG_COLUMN)!=null) {
         content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
     }
@@ -249,6 +273,23 @@ if(action.equals("update")) {
     if(request.getParameter(Reel.MANUFACTURER_COLUMN)!=null) {
         content.setManufacturer(request.getParameter(Reel.MANUFACTURER_COLUMN));
     }
+    if(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)!=null) {
+        content.setBottomFoot(Integer.parseInt(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)));
+        if(request.getParameter(Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN)!=null) {
+            content.setBottomFootNotVisible("y");
+        } else {
+            content.setBottomFootNotVisible("n");
+        }
+    }
+    if(request.getParameter(Reel.TOP_FOOT_COLUMN)!=null) {
+        content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    }
+
+    if(content.getTopFoot()>0 || content.getBottomFoot()>0) {
+        content.setHasReelMarkers("y");
+    }
+    
+    content.setSteelReelSerial(request.getParameter(Reel.STEEL_REEL_SERIAL_COLUMN));
     reelMgr.updateReel(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/edit.jsp?" + Reel.PARAM + "=" + contid ;
 }
@@ -273,6 +314,9 @@ if(action.equals("update_shipping")) {
     if(request.getParameter(Reel.PROJECTED_SHIPPING_DATE_COLUMN)!=null && !request.getParameter(Reel.PROJECTED_SHIPPING_DATE_COLUMN).equals("")) {
         content.setProjectedShippingDateString(request.getParameter(Reel.PROJECTED_SHIPPING_DATE_COLUMN));
     }
+    if(request.getParameter(Reel.SHIPPING_DATE_COLUMN)!=null && !request.getParameter(Reel.SHIPPING_DATE_COLUMN).equals("")) {
+        content.setShippingDateString(request.getParameter(Reel.SHIPPING_DATE_COLUMN));
+    }
     reelMgr.updateReelShippingInfo(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/edit.jsp?" + Reel.PARAM + "=" + contid ;
 }
@@ -293,6 +337,15 @@ if(action.equals("update_quantity")) {
     //content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
     content.setReceivedQuantity(Integer.parseInt(request.getParameter(Reel.RECEIVED_QUANTITY_COLUMN)));
     //content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+     if(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)!=null) {
+        content.setBottomFoot(Integer.parseInt(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)));
+        if(request.getParameter(Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN)!=null) {
+            content.setBottomFootNotVisible("y");
+        } else {
+            content.setBottomFootNotVisible("n");
+        }
+    }   
+    
     reelMgr.updateReelQuantity(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
 }
@@ -350,6 +403,7 @@ if(action.equals("update_circuit")) {
     } else {
         content.setIsPulled("n");
     }
+    content.setLength(Integer.parseInt(request.getParameter(ReelCircuit.LENGTH_COLUMN)));
     reelMgr.updateReelCircuit(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/circuits.jsp?" + Reel.PARAM + "=" + contid ;
 }

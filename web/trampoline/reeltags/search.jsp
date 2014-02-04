@@ -83,9 +83,9 @@ String tempURL = "";
     <admin:box_begin />
     <form:begin_selfsubmit name="search" action="reeltags/search.jsp" />
 		<% if(content.getCrId()!=0) { %>
-			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= content.getCrId() + "" %>" />
+			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= new Integer(content.getCrId()).toString() %>" />
 		<% } else { %>
-			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= "" %>" />
+			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="" />
 		<% } %>
         <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
         <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />

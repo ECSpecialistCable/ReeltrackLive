@@ -27,6 +27,7 @@ public class Reel extends CompCMEntity {
 	public static final String TRACKING_PRO_COLUMN = "tracking_pro";
 	public static final String PACKING_LIST_COLUMN = "packing_list";
 	public static final String PROJECTED_SHIPPING_DATE_COLUMN = "projected_shipping_date";
+	public static final String SHIPPING_DATE_COLUMN = "shipping_date";
 	public static final String RECEIVING_ISSUE_COLUMN = "receiving_issue";
 	public static final String RECEIVING_NOTE_COLUMN = "receiving_note";
 	public static final String RECEIVING_DISPOSITION_COLUMN = "receiving_disposition";
@@ -52,6 +53,7 @@ public class Reel extends CompCMEntity {
 	public static final String INVOICE_NUM_COLUMN = "ECSInvoice";
 	public static final String INVOICE_DATE_COLUMN = "ECSInvoiceDate";
 	public static final String IS_STEEL_REEL_COLUMN = "is_steel_reel";
+	public static final String BOTTOM_FOOT_NOT_VISIBLE_COLUMN = "bottom_foot_not_visible";
 
 	public static final String PN_VOLT_COLUMN = "pn_volt";
 	public static final String PN_GAUGE_COLUMN = "pn_gauge";
@@ -520,6 +522,33 @@ public class Reel extends CompCMEntity {
        	}
     }
 
+	public Date getShippingDate() {
+        return (Date) this.getData().getValue(SHIPPING_DATE_COLUMN, null);
+    }
+
+    public void setShippingDate(Date toSet) {
+        this.getData().setTimestamp(SHIPPING_DATE_COLUMN, toSet);
+    }
+
+    public String getShippingDateString() {
+		if(this.getShippingDate() == null) {
+			return "";
+		} else {
+			SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        	return df.format(this.getShippingDate());
+		}
+    }
+
+	public void setShippingDateString(String toSet) {
+		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date date = df.parse(toSet);
+			this.setShippingDate(date);
+       	} catch (Exception e) {
+       		System.out.print(e.toString());
+       	}
+    }
+
 	public String getReceivingIssue() {
 		return this.getData().getString(RECEIVING_ISSUE_COLUMN, "");
 	}
@@ -691,6 +720,22 @@ public class Reel extends CompCMEntity {
 
 	public boolean hasReelMarkers() {
 		if(this.getHasReelMarkers().equals("y")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public String getBottomFootNotVisible() {
+		return this.getData().getString(BOTTOM_FOOT_NOT_VISIBLE_COLUMN, "");
+	}
+	
+	public void setBottomFootNotVisible(String name) {
+		this.getData().setString(BOTTOM_FOOT_NOT_VISIBLE_COLUMN, name);
+	}
+
+	public boolean hasBottomFootNotVisible() {
+		if(this.getBottomFootNotVisible().equals("y")) {
 			return true;
 		} else {
 			return false;

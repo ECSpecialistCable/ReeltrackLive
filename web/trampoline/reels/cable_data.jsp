@@ -44,11 +44,11 @@ content = (Reel)reelMgr.getReel(content);
 
 CableTechData techData = reelMgr.getCableTechData(content);
 
-int ordered = reelMgr.getCablesByStatus(content, Reel.STATUS_ORDERED);
-int recieved = reelMgr.getCablesByStatus(content, Reel.STATUS_RECEIVED);
-int inWH = reelMgr.getCablesByStatus(content, Reel.STATUS_IN_WHAREHOUSE);
-int checkedOut = reelMgr.getCablesByStatus(content, Reel.STATUS_CHECKED_OUT);
-int remaining = content.getOnReelQuantity();
+int ordered = reelMgr.getCablesQuantityByStatus(content, Reel.STATUS_ORDERED);
+int recieved = reelMgr.getCablesQuantityByStatus(content, Reel.STATUS_RECEIVED);
+int inWH = reelMgr.getCablesQuantityByStatus(content, Reel.STATUS_IN_WHAREHOUSE);
+int checkedOut = reelMgr.getCablesQuantityByStatus(content, Reel.STATUS_CHECKED_OUT);
+int remaining = reelMgr.getCablesQuantityByStatus(content, "remaining");
 String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
@@ -93,7 +93,7 @@ String tempURL; //var for url expression
         <form:info label="Total Received:" text="<%= Integer.toString(recieved) %>" />
         <form:info label="Total In Wharehouse:" text="<%= Integer.toString(inWH) %>" />
         <form:info label="Total Checked Out:" text="<%= Integer.toString(checkedOut) %>" />
-        <form:info label="Est. Remaining On Site:" text="<%= Integer.toString(remaining) %>" />
+        <form:info label="Est. Remaining:" text="<%= Integer.toString(remaining) %>" />
     <form:end />
 <admin:box_end />
 
@@ -102,6 +102,8 @@ String tempURL; //var for url expression
     <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
 		<form:textfield label="Area (cir mil):" pixelwidth="50" name="<%= CableTechData.CONDUCTOR_AREA_COLUMN %>" value="<%= new Integer(techData.getConductorArea()).toString() %>" />
 		<form:textfield label="Ground Size:" name="<%= CableTechData.CONDUCTOR_GROUND_SIZE_COLUMN %>" value="<%= techData.getConductorGroundSize() %>" />
+        <form:textfield label="Cu Weight/kft:" pixelwidth="50" name="<%= CableTechData.CON_CU_WEIGHT_COLUMN %>" value="<%= new Integer(techData.getConCuWeight()).toString() %>" />
+        <form:textfield label="Al Weight/kft:" pixelwidth="50" name="<%= CableTechData.CON_AL_WEIGHT_COLUMN %>" value="<%= new Integer(techData.getConAlWeight()).toString() %>" />
         <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
         <form:hidden name="<%= CableTechData.PARAM %>" value="<%= new Integer(techData.getId()).toString() %>" />			
 		<form:row_begin />

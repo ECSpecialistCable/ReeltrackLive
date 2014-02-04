@@ -303,3 +303,10 @@ alter table cable_tech_data add column est_al_weight int default 0;
 alter table cable_tech_data add column est_cu_weight int default 0;
 
 alter table customers add scans_must_match varchar(1) default 'n';
+
+/* 020114 */
+alter table reels add shipping_date datetime;
+alter table reels add bottom_foot_not_visible varchar(1) default 'n';
+alter table cable_tech_data add column con_al_weight int default 0;
+alter table cable_tech_data add column con_cu_weight int default 0;
+

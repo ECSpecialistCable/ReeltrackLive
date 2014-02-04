@@ -60,6 +60,7 @@ String tempURL; //var for url expression
 <admin:subtitle text="General Info" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
+    	<% if(canEdit) { %>
     		<form:row_begin />
 	            <form:label name="" label="Status:" />
 	            <form:content_begin />
@@ -71,6 +72,9 @@ String tempURL; //var for url expression
 	            <form:select_end />
 	            <form:content_end />
         	<form:row_end />
+        <% } else { %>
+        	<form:info label="Status:" text="<%= content.getStatus() %>" />
+        <% } %>
      		<form:row_begin />
 	            <form:label name="" label="Wharehouse<br />Location:" />
 	            <form:content_begin />
@@ -105,6 +109,7 @@ String tempURL; //var for url expression
 			<% } else { %>
 				<form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
 			<% } %>
+			<% if(canEdit) { %>
 			<form:row_begin />
 	            <form:label name="" label="Has Markers:" />
 	            <form:content_begin />
@@ -114,7 +119,27 @@ String tempURL; //var for url expression
 	            <form:select_end />
 	            <form:content_end />
         	<form:row_end />
-			<form:info label="Steel Reel Serial #:" text="<%= content.getSteelReelSerial() %>" />
+        	<% } else { %>
+        		<form:info label="Has Markers:" text="<%= content.getHasReelMarkers() %>" />
+        	<% } %>
+        	<% if(canEdit) { %>
+        		<form:row_begin />
+                    <form:label name="" label="Bottom Foot Not Visible?:" />
+                    <form:content_begin />      
+                    <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />       
+                    <form:content_end />                
+                <form:row_end />
+        		<form:textfield label="Bottom Foot #:" pixelwidth="40" name="<%= Reel.BOTTOM_FOOT_COLUMN %>" value="<%= new Integer(content.getBottomFoot()).toString() %>" />
+				<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+			<% } else { %>
+			    <% if(content.hasBottomFootNotVisible()) { %>
+	                <form:info label="Bottom Foot #:" text="Not Visible" />
+	            <% } else { %>
+	                <form:info label="Bottom Foot #:" text="<%= new Integer(content.getBottomFoot()).toString() %>" />
+	            <% } %>
+            	<form:info label="Top Foot #:" text="<%= new Integer(content.getTopFoot()).toString() %>" />
+			<% } %>
+			<form:textfield label="Steel Reel Serial #:" name="<%= Reel.STEEL_REEL_SERIAL_COLUMN %>" value="<%= content.getSteelReelSerial() %>" />
 			<form:info label="Received On:" text="<%= content.getReceivedOnDateString() %>" />
 			<form:info label="Times Checked OUT:" text="<%= new Integer(content.getTimesCheckedOut()).toString() %>" />
 			<form:info label="Times Checked IN:" text="<%= new Integer(content.getTimesCheckedIn()).toString() %>" />
@@ -146,6 +171,7 @@ String tempURL; //var for url expression
         	<form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
         	<form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
         	<form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
+        	<form:date_picker name="<%= Reel.SHIPPING_DATE_COLUMN %>" value="<%= content.getShippingDateString() %>" label="Shipped<br />Date:" />
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 			<form:row_begin />
 				<form:label name="" label="" />

@@ -17,9 +17,11 @@ import com.reeltrack.reels.*;
 public class EchoSync extends CompManager {
 	private CompProperties props;
 	Connection conECHO;
+	Connection conTRANS;
 	Connection conRT;
 	CompDbController controllerECHO = null;
 	CompDbController controllerRT = null;
+	CompDbController controllerTRANS = null;
 	
 	public EchoSync() {
 		try {
@@ -29,42 +31,72 @@ public class EchoSync extends CompManager {
 			this.controllerECHO = new CompDbController(conECHO);
 			conRT = DriverManager.getConnection(props.getProperty("dbConnectionRT"), props.getProperty("dbUserRT"), props.getProperty("dbPasswordRT"));
 			this.controllerRT = new CompDbController(conRT);
+			conTRANS = DriverManager.getConnection(props.getProperty("dbConnectionTRANS"), props.getProperty("dbUserTRANS"), props.getProperty("dbPasswordTRANS"));
+			this.controllerTRANS = new CompDbController(conTRANS);
 	    } catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public void pushReels() throws Exception {
-		System.out.println("Starting the reel push");
+		System.out.println("##### STARTING REEL PUSH: " + new Date().toString() + " #####");
+		String queryString = "";
+		DbProcessor processor = new DbProcessor(conTRANS);
+		// alter table echo_reel_transactions add column notes varchar(255);
+		//queryString = "alter table echo_reel_transactions modify synced_date datetime";
+		//processor.runUpdate(queryString);
+		queryString = "update echo_reel_transactions set reel_id=0 where synced_date='0000-00-00 00:00:00'";
+		processor.runUpdate(queryString);
+		queryString = "update echo_reel_transactions set synced_date=null where synced_date='0000-00-00 00:00:00'";
+		processor.runUpdate(queryString);
+		
 		CompEntityPuller puller = new CompEntityPuller(new EchoTransaction());
 		EchoTransaction echoTrans = new EchoTransaction();
 		echoTrans.setReelId(0);
 		puller.addSearch(echoTrans);
 		puller.setSortBy(echoTrans.getTableName(), EchoTransaction.ID_COLUMN, true);
-		CompEntities echoTranses = controllerECHO.pullCompEntities(puller, 0, 0);
-		System.out.println("Should add:" + echoTranses.howMany());
+		CompEntities echoTranses = controllerTRANS.pullCompEntities(puller, 0, 0);
+		System.out.println("Total transactions:" + echoTranses.howMany());
 		for(int x=0; x<echoTranses.howMany(); x++) {
 			echoTrans = (EchoTransaction)echoTranses.get(x);
 			if(echoTrans.getAction().equalsIgnoreCase("add")) {
-				System.out.println("trying to add...");
 				Reel reel = new Reel();
 				reel.setOrdNo(echoTrans.getOrdNo());
 				reel.setPORevision(echoTrans.getPORevision());
 				reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
 				reel.setReelSerial(echoTrans.getReelSerial());
-				boolean ok = this.fillReelAllocation(reel);
-				if(ok) {
-					this.fillCustomerOrderHdr(reel);
-					this.fillCustomerOrderDtl(reel);
-					this.fillManufacturer(reel);
-					this.fillCableTrac(reel);
-					this.fillDescription(reel);
-					CableTechData techData = this.getCableTech(reel);
-					reel.setCrId(this.searchReelsCount(reel)+1);
-					reel.setPnVolt(reel.getEcsPN().substring(0,2));
-					reel.setPnGauge(reel.getEcsPN().substring(4,7));
-					reel.setPnConductor(reel.getEcsPN().substring(7,9));
-					this.addReel(echoTrans,reel,techData);
+				System.out.println("Reel to ADD:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+				CompEntityPuller uPuller = new CompEntityPuller(reel);
+				uPuller.addSearch(reel);
+				reel = (Reel)controllerRT.pullCompEntity(uPuller);
+				if(reel.hasData() && reel.getId()!=0) {
+					echoTrans.setReelId(reel.getId());
+					echoTrans.setSyncedDateDate(new Date());
+					echoTrans.setNote("Reel already exists in ReelTrack");
+					this.updateTransaction(echoTrans);
+					System.out.println("REEL ALREADY EXISTS ON REELTRACK:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+				} else {
+					boolean ok = this.fillReelAllocation(reel);
+					if(ok) {
+						this.fillCustomerOrderHdr(reel);
+						this.fillCustomerOrderDtl(reel);
+						this.fillManufacturer(reel);
+						this.fillCableTrac(reel);
+						this.fillDescription(reel);
+						CableTechData techData = this.getCableTech(reel);
+						reel.setCrId(this.searchReelsCount(reel)+1);
+						reel.setPnVolt(reel.getEcsPN().substring(0,2));
+						reel.setPnGauge(reel.getEcsPN().substring(4,7));
+						reel.setPnConductor(reel.getEcsPN().substring(7,9));
+						this.addReel(echoTrans,reel,techData);
+						System.out.println("Added reel:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+					} else {
+						echoTrans.setReelId(-1);
+						echoTrans.setSyncedDateDate(new Date());
+						echoTrans.setNote("Reel not found in ECHO");
+						this.updateTransaction(echoTrans);
+						System.out.println("COULDN'T GET ECHO REEL:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+					}
 				}
 			} else if(echoTrans.getAction().equalsIgnoreCase("update")) {
 				Reel reel = new Reel();
@@ -72,6 +104,7 @@ public class EchoSync extends CompManager {
 				reel.setPORevision(echoTrans.getPORevision());
 				reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
 				reel.setReelSerial(echoTrans.getReelSerial());
+				System.out.println("Reel to UPDATE:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
 				CompEntityPuller uPuller = new CompEntityPuller(reel);
 				uPuller.addSearch(reel);
 				reel = (Reel)controllerRT.pullCompEntity(uPuller);
@@ -87,7 +120,20 @@ public class EchoSync extends CompManager {
 						reel.setPnGauge(reel.getEcsPN().substring(4,7));
 						reel.setPnConductor(reel.getEcsPN().substring(7,9));
 						this.updateReel(echoTrans,reel);
+						System.out.println("Updated reel:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+					} else {
+						echoTrans.setReelId(-1);
+						echoTrans.setSyncedDateDate(new Date());
+						echoTrans.setNote("Reel not found in ECHO");
+						this.updateTransaction(echoTrans);
+						System.out.println("COULDN'T GET ECHO REEL:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
 					}
+				} else {
+					echoTrans.setReelId(-1);
+					echoTrans.setSyncedDateDate(new Date());
+					echoTrans.setNote("Reel not found in ReelTrack");
+					this.updateTransaction(echoTrans);
+					System.out.println("COULDN'T GET REELTRACK REEL:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
 				}
 			} else if(echoTrans.getAction().equalsIgnoreCase("delete")) {
 				Reel reel = new Reel();
@@ -95,14 +141,23 @@ public class EchoSync extends CompManager {
 				reel.setPORevision(echoTrans.getPORevision());
 				reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
 				reel.setReelSerial(echoTrans.getReelSerial());
+				System.out.println("Reel to DELETE:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
 				CompEntityPuller uPuller = new CompEntityPuller(reel);
 				uPuller.addSearch(reel);
 				reel = (Reel)controllerRT.pullCompEntity(uPuller);
 				if(reel.hasData() && reel.getId()!=0) {
-					this.deleteReel(echoTrans,reel);
+//					this.deleteReel(echoTrans,reel);
+					System.out.println("Deleted Reel:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+				} else {
+					echoTrans.setReelId(-1);
+					echoTrans.setSyncedDateDate(new Date());
+					echoTrans.setNote("Reel not found in ReelTrack");
+					this.updateTransaction(echoTrans);
+					System.out.println("COULDN'T GET REELTRACK REEL:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
 				}
 			}
 		}
+		System.out.println("##### ENDING REEL PUSH: " + new Date().toString() + " #####\n\n\n");
 	}
 
 	public void pullCircuits() throws Exception {
@@ -156,9 +211,16 @@ public class EchoSync extends CompManager {
 		}
 	}
 
+	public void updateTransaction(EchoTransaction echoTrans) throws Exception {
+		controllerTRANS.update(echoTrans);
+	}
+
 	public void addReel(EchoTransaction echoTrans, Reel reel, CableTechData techData) throws Exception {
 		reel.setCreated(new Date());
 		reel.setStatus(Reel.STATUS_ORDERED);
+		if(reel.getShippedQuantity()>0) {
+			reel.setStatus(Reel.STATUS_SHIPPED);
+		}
 		int toReturn = controllerRT.add(reel);
 
 		CableTechData techData2 = new CableTechData();
@@ -175,7 +237,8 @@ public class EchoSync extends CompManager {
 
 		echoTrans.setSyncedDateDate(new Date());
 		echoTrans.setReelId(toReturn);
-		controllerECHO.update(echoTrans);
+		echoTrans.setNote("Reel Added");
+		controllerTRANS.update(echoTrans);
 	}
 
 	public void updateReel(EchoTransaction echoTrans, Reel reel) throws Exception {
@@ -185,7 +248,8 @@ public class EchoSync extends CompManager {
 
 		echoTrans.setSyncedDateDate(new Date());
 		echoTrans.setReelId(reel.getId());
-		controllerECHO.update(echoTrans);
+		echoTrans.setNote("Reel Updated");
+		controllerTRANS.update(echoTrans);
 	}
 
 	public void deleteReel(EchoTransaction echoTrans, Reel reel) throws Exception {
@@ -195,7 +259,8 @@ public class EchoSync extends CompManager {
 
 		echoTrans.setSyncedDateDate(new Date());
 		echoTrans.setReelId(reel.getId());
-		controllerECHO.update(echoTrans);
+		echoTrans.setNote("Reel Deleted");
+		controllerTRANS.update(echoTrans);
 	}
 
 	public int searchReelsCount(Reel content) throws Exception {
@@ -211,11 +276,12 @@ public class EchoSync extends CompManager {
 		String queryString = "select * from ReelAllocation where ordno='" + reel.getOrdNo() + "' and PORevision=" + reel.getPORevision() + " and absoluteitem=" + reel.getAbsoluteItem() + " and reelserial=" + reel.getReelSerial();
 		EntityList datalist = processor.getRows(queryString);
 		if(datalist.hasNext()) {
-			System.out.println("I got Reel Allocation");
+			System.out.println("--Allocation");
 			Entity entity = datalist.nextEntity();
 			reel.setReelTag(entity.getString("ReelTag",""));
 			reel.setOrderedQuantity(entity.getInteger("ReelQuantity",new Integer("0")).intValue());
 			reel.setShippedQuantity(entity.getInteger("ShipQuantity",new Integer("0")).intValue());
+			reel.setShippingDate(entity.getDate("ShipDate",null));
 			reel.setCarrier(entity.getString("Shipper",""));
 			reel.setTrackingPRO(entity.getString("ProNumber",""));
 			Boolean steel = (Boolean)entity.getValue("SteelReel",new Boolean(false));
@@ -226,6 +292,7 @@ public class EchoSync extends CompManager {
 			}
 			return true;
 		} else {
+			System.out.println("--NO Allocation");
 			return false;
 		}	
 	}
@@ -235,12 +302,13 @@ public class EchoSync extends CompManager {
 		String queryString = "select * from CustomerOrderHdr where ordno='" + reel.getOrdNo() + "' and PORevision=" + reel.getPORevision();
 		EntityList datalist = processor.getRows(queryString);
 		if(datalist.hasNext()) {
-			System.out.println("I got Customer Order Hdr");
+			System.out.println("--Order Header");
 			Entity entity = datalist.nextEntity();
 			reel.setJobCode(entity.getString("Job_ID",""));
 			reel.setCustomerPO(entity.getString("CustomerPoNo",""));
 			return true;
 		} else {
+			System.out.println("--NO Order Header");
 			return false;
 		}	
 	}
@@ -250,13 +318,14 @@ public class EchoSync extends CompManager {
 		String queryString = "select * from CustomerOrderDtl where ordno='" + reel.getOrdNo() + "' and PORevision=" + reel.getPORevision() + " and absoluteitem=" + reel.getAbsoluteItem();
 		EntityList datalist = processor.getRows(queryString);
 		if(datalist.hasNext()) {
-			System.out.println("I got Customer Order Dtl");
+			System.out.println("--Order Detail");
 			Entity entity = datalist.nextEntity();
 			reel.setCustomerPN(entity.getString("CustPartNo",""));
 			reel.setEcsPN(entity.getString("ECSPartNo",""));
 			reel.setProjectedShippingDate(entity.getDate("CurrentProjected",null));
 			return true;
 		} else {
+			System.out.println("--NO Order Detail");
 			return false;
 		}	
 	}
@@ -266,11 +335,12 @@ public class EchoSync extends CompManager {
 		String queryString = "select MaintainVendor.* from CustomerOrderHdr,MaintainVendor where CustomerOrderHdr.ordno='" + reel.getOrdNo() + "' and CustomerOrderHdr.PORevision=" + reel.getPORevision() + " and CustomerOrderHdr.VendorCode=MaintainVendor.VendorCode";
 		EntityList datalist = processor.getRows(queryString);
 		if(datalist.hasNext()) {
+			System.out.println("--Manufacturer");
 			Entity entity = datalist.nextEntity();
-			System.out.println("I got Manufacturer");
 			reel.setManufacturer(entity.getString("VendorName",""));
 			return true;
 		} else {
+			System.out.println("--NO Manufacturer");
 			return false;
 		}	
 	}
@@ -280,7 +350,7 @@ public class EchoSync extends CompManager {
 		String queryString = "select * from CableTrac where ECSOrder='" + reel.getOrdNo() + "' and PORevision=" + reel.getPORevision() + " and absoluteitem=" + reel.getAbsoluteItem() + " and reelserial=" + reel.getReelSerial();
 		EntityList datalist = processor.getRows(queryString);
 		if(datalist.hasNext()) {
-			System.out.println("I got Cable Trac");
+			System.out.println("--Cable Trac");
 			Entity entity = datalist.nextEntity();
 			reel.setCTRNumber(entity.getString("CTRNumber",""));
 			reel.setCTRDate(entity.getDate("CTRDate",null));
@@ -289,6 +359,7 @@ public class EchoSync extends CompManager {
 			reel.setInvoiceDate(entity.getDate("ECSInvoiceDate",null));
 			return true;
 		} else {
+			System.out.println("--NO Cable Trac");
 			return false;
 		}	
 	}
@@ -298,11 +369,12 @@ public class EchoSync extends CompManager {
 		String queryString = "select * from WireMaster where ECSPartNo='" + reel.getEcsPN() + "'";
 		EntityList datalist = processor.getRows(queryString);
 		if(datalist.hasNext()) {
-			System.out.println("I got description");
+			System.out.println("--Description");
 			Entity entity = datalist.nextEntity();
 			reel.setCableDescription(entity.getString("ShortDescription",""));
 			return true;
 		} else {
+			System.out.println("--NO Description");
 			return false;
 		}	
 	}
@@ -312,7 +384,7 @@ public class EchoSync extends CompManager {
 		String queryString = "select * from WireMaster where ECSPartNo='" + reel.getEcsPN() + "'";
 		EntityList datalist = processor.getRows(queryString);
 		if(datalist.hasNext()) {
-			System.out.println("I got Cable Tech");
+			System.out.println("--Cable Tech");
 			Entity entity = datalist.nextEntity();
 			CableTechData techData = new CableTechData();
 			techData.setEcsPN(entity.getString("ECSPartNo",""));
@@ -331,8 +403,11 @@ public class EchoSync extends CompManager {
 			techData.setConductorArea(entity.getInteger("Conductor_Area",new Integer("0")).intValue());
 			techData.setEstAlWeight(entity.getInteger("Estimated_AlWeight",new Integer("0")).intValue());
 			techData.setEstCuWeight(entity.getInteger("Estimated_CuWeight",new Integer("0")).intValue());
+			techData.setConAlWeight(entity.getInteger("Conductor_AlWeight",new Integer("0")).intValue());
+			techData.setConCuWeight(entity.getInteger("Conductor_CuWeight",new Integer("0")).intValue());
 			return techData;
 		} else {
+			System.out.println("--NO Cable Tech");
 			return null;
 		}	
 	}
@@ -342,6 +417,7 @@ public class EchoSync extends CompManager {
 	public void closeConnections() throws Exception {
 		conECHO.close();
 		conRT.close();
+		conTRANS.close();
 	}
 	
 	public static void main(String[] args) {
@@ -349,7 +425,7 @@ public class EchoSync extends CompManager {
 		//String directorToken = args[0];
 		try {
 			echoSync.pushReels();
-			echoSync.pullCircuits();
+			//echoSync.pullCircuits();
 			echoSync.closeConnections();
 		} catch(Exception e) {
 			e.printStackTrace();
