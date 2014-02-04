@@ -118,12 +118,12 @@ public class PickListMgr extends CompWebManager {
 			puller.addSearch(reel);
 			puller.addFKLink(reel, circuit, ReelCircuit.REEL_ID_COLUMN);
 			puller.addSearch(circuit);
-			puller.setSortBy(reel.getTableName(), Reel.ON_REEL_QUANTITY_COLUMN, false);
+			puller.setSortBy(reel.getTableName(), Reel.ON_REEL_QUANTITY_COLUMN, true);
 			toReturn = controller.pullCompEntities(puller, 25, 0);
 		} else {
 			CompEntityPuller puller = new CompEntityPuller(new Reel());
 			puller.addSearch(reel);
-			puller.setSortBy(reel.getTableName(), Reel.ON_REEL_QUANTITY_COLUMN, false);
+			puller.setSortBy(reel.getTableName(), Reel.ON_REEL_QUANTITY_COLUMN, true);
 			toReturn = controller.pullCompEntities(puller, 25, 0);
 		}
 
