@@ -422,6 +422,13 @@ public class Reel extends CompCMEntity {
 		this.getData().setString(ECS_PN_COLUMN, name);
 	}
 
+	public String getManufacturerEscaped() {
+		if(this.getManufacturer().contains(" & ")) {
+			return (this.getManufacturer().replaceAll(" & ", " "));
+		}
+		return this.getCableDescription();
+	}
+
 	public String getManufacturer() {
 		return this.getData().getString(MANUFACTURER_COLUMN, "");
 	}

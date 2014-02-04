@@ -54,7 +54,7 @@ CustomerJob job = new CustomerJob();
 job.setId(jobId);
 job = customerMgr.getCustomerJob(job);
 
-//user.setJobId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));
+user.setJobId(jobId);
 user.setJobCode(job.getCode());
 
 Reel rtReel = (Reel)session.getAttribute("RT");

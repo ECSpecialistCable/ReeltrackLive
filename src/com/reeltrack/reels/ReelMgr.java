@@ -1044,6 +1044,22 @@ public class ReelMgr extends CompWebManager {
 		return controller.pullCompEntities(puller, 0, 0);
 	}
 
+	public CompEntities getResolvedReelIssues(String jobCode) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new ReelIssue());
+		Reel reel = new Reel();
+		reel.setJobCode(jobCode);
+		puller.addSearch(reel);
+
+		ReelIssue issue = new ReelIssue();
+		issue.setIsResolved("y");
+		puller.addSearch(issue);
+
+		puller.addFKLink(reel, issue, ReelIssue.REEL_ID_COLUMN);
+
+		puller.setSortBy(issue.getTableName(), ReelIssue.CREATED_COLUMN, false);
+		return controller.pullCompEntities(puller, 0, 0);
+	}
+
 	public CompEntities getReelIssues(Reel content, boolean isResolved) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(new ReelIssue());
 		ReelIssue search = new ReelIssue();

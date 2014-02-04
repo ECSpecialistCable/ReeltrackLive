@@ -22,8 +22,8 @@
 RTUser user = (RTUser)userLoginMgr.getUser();
 
 Glossary content = new Glossary();
-content.setJobId(0);
-content.setSearchOp(Glossary.JOB_ID_COLUMN, Glossary.NOT_EQUAL);
+content.setJobId(user.getJobId());
+//content.setSearchOp(Glossary.JOB_ID_COLUMN, Glossary.NOT_EQUAL);
 CompEntities contents = glossaryMgr.searchGlossary(content, Glossary.NAME_COLUMN, true, 0, 0);
 dbResources.close();
 %>

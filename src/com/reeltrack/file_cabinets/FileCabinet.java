@@ -10,6 +10,7 @@ public class FileCabinet extends CompCMEntity {
 	public static final String TITLE_COLUMN = "title";
 	public static final String JOB_ID_COLUMN = "job_id";
 	public static final String FILE_NAME_COLUMN = "file_name";
+	public static final String CUSTOMER_ID_COLUMN = "customer_id";
 
 	@Override
 	public String getTableName() {
@@ -24,6 +25,14 @@ public class FileCabinet extends CompCMEntity {
 	public String getSeqTableName() {
 		return "file_cabinet_seq";
 	}
+
+	public int getCustomerId() {
+		return this.getData().getInteger(CUSTOMER_ID_COLUMN, new Integer(0));
+    }
+
+    public void setCustomerId(int id) {
+		this.getData().setInteger(CUSTOMER_ID_COLUMN, new Integer(id));
+    }
 
 	public String getFileName() {
 		return this.getData().getString(FILE_NAME_COLUMN, "");

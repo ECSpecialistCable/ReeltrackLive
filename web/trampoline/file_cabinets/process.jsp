@@ -52,7 +52,7 @@ if(request.getParameter(FileCabinet.PARAM) != null) {
 
 if(action.equals("create")) {
     content = new FileCabinet();
-    content.setJobId(0);
+    content.setCustomerId(0);
     content.setTitle(multipart.getParameter(FileCabinet.TITLE_COLUMN));
     content.setStatus(FileCabinet.STATUS_ACTIVE);
     File file = multipart.getFile(FileCabinet.FILE_NAME_COLUMN);
@@ -62,6 +62,20 @@ if(action.equals("create")) {
 
 	//redirect = request.getContextPath() + "/trampoline/" + "users/edit.jsp?" + RTUser.PARAM + "=" + contid;
     redirect = request.getContextPath() + "/trampoline/" + "file_cabinets/search.jsp";
+}
+
+if(action.equals("create_customer")) {
+    content = new FileCabinet();
+    content.setCustomerId(Integer.parseInt(multipart.getParameter(FileCabinet.CUSTOMER_ID_COLUMN)));
+    content.setTitle(multipart.getParameter(FileCabinet.TITLE_COLUMN));
+    content.setStatus(FileCabinet.STATUS_ACTIVE);
+    File file = multipart.getFile(FileCabinet.FILE_NAME_COLUMN);
+	if(file!=null && !content.getTitle().equals("")) {
+		int fileId = cabinetMgr.addFileCabinet(content, file, basePath);
+	}
+
+	//redirect = request.getContextPath() + "/trampoline/" + "users/edit.jsp?" + RTUser.PARAM + "=" + contid;
+    redirect = request.getContextPath() + "/trampoline/" + "file_cabinets/customer.jsp";
 }
 %>
 <% dbResources.close(); %>

@@ -25,7 +25,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 }
 
 FileCabinet content = new FileCabinet();
-content.setJobId(0);
+content.setCustomerId(0);
 CompEntities contents = cabinetMgr.searchFileCabinet(content, FileCabinet.TITLE_COLUMN, true, 0, 0);
 
 String tempUrl =""; //var for url expression

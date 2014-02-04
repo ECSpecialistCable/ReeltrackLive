@@ -71,5 +71,6 @@ String tempUrl; //var for url expression
     <form:end />
 <admin:box_end />
 
-<admin:set_tabset url="glossary/_tabset_manage.jsp" thispage="edit.jsp" content_id_for_tabset="<%= contid %>" params="<%= "isReelTrack=" + isReelTrack %>" />
+<% tempUrl = "isReelTrack=" + isReelTrack; %>
+<admin:set_tabset url="glossary/_tabset_manage.jsp" thispage="edit.jsp" content_id_for_tabset="<%= contid %>" params="<%= tempUrl %>" />
 <html:end />
