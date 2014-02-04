@@ -40,6 +40,10 @@ if(user_agent.contains("iPad")) {
 %>
 
 <% if(userLoginMgr.isLoggedIn()) { %>
+	<div>
+	<a href="common/includes/process_login.jsp?submit_action=change_job" style="border-top:1px solid black;">Select Job</a>
+	</div>
+
 	<% if(user.getCustomerId()!=0 && !user.getJobCode().equals("") && (user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_STANDARD) || user.isUserType(RTUser.USER_TYPE_INVENTORY))) { %>
 		<% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY)) { %>
 			<a class="module_bar_toggle" rel="common/interface/manage_reels">On-Site Reel Mgt</a>

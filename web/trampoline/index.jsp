@@ -179,6 +179,13 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
                  --%>  
             <% } else { %>				
 				<% String welcomeStr = "Welcome, " + user.getUsername(); %>
+				<% 
+				if(!user.getJobCode().equals("")) {
+					welcomeStr = welcomeStr + " of " + user.getJobCode() + " Project";
+				}
+				%>
+
+
            		<admin:welcome_tab text="<%= welcomeStr %>" action="common/includes/process_login.jsp?submit_action=logout"  valign="top" align="left" />                               
             <% } %>
             

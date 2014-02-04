@@ -75,6 +75,17 @@ if(rtReel!=null && rtReel.getJobCode().equals(job.getCode())) {
 %>
 <% } %>
 
+<% if(action.equals("change_job")) { %>
+<%
+session.removeAttribute("RT");
+session.removeAttribute("PL");  
+session.removeAttribute("LoggedInJobId");
+RTUser user = (RTUser)userLoginMgr.getUser();
+user.setJobId(0);
+user.setJobCode("");
+redirect = request.getContextPath() + "/trampoline/index.jsp";			
+%>
+<% } %>
 
 <% if(action.equals("logout")) { %>
 <%
