@@ -77,6 +77,16 @@ session.setAttribute("received_search",content);
 
 String column = Reel.CR_ID_COLUMN;
 boolean ascending = true;
+if(request.getParameter("column")!=null) {
+    column = request.getParameter("column");
+}
+if(request.getParameter("ascending")!=null) {
+    if(request.getParameter("ascending").equals("true")) {
+        ascending = true;
+    } else {
+        ascending = false;
+    }
+}
 int count = reelMgr.searchAllReceivedReelsCount(content, column, ascending);
 CompEntities contents = reelMgr.searchAllReceivedReels(content, column, ascending, howMany, skip);
 String[] manufacturers = reelMgr.getManufacturers();
@@ -140,10 +150,10 @@ String tempURL = "";
    
     <listing:begin />
         <listing:header_begin />
-            <listing:header_cell width="50" first="true" name="CRID #" />
-            <listing:header_cell name="Reel Tag" />
-            <listing:header_cell name="Cable Description" />
-            <listing:header_cell width="75" name="Status" />
+			<listing:header_cell width="55" first="true" name="CRID #" column="<%= Reel.CR_ID_COLUMN %>" ascending="<%= "" + ascending %>" match="<%= column %>" url="<%= "received/search.jsp" %>" />
+            <listing:header_cell name="Reel Tag" column="<%= Reel.REEL_TAG_COLUMN %>" ascending="<%= "" + ascending %>" match="<%= column %>" url="<%= "received/search.jsp" %>" />
+            <listing:header_cell name="Cable Description" column="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" ascending="<%= "" + ascending %>" match="<%= column %>" url="<%= "received/search.jsp" %>" />
+            <listing:header_cell width="75" name="Status" column="<%= Reel.STATUS_COLUMN %>" ascending="<%= "" + ascending %>" match="<%= column %>" url="<%= "received/search.jsp" %>" />
             <listing:header_cell width="40" name=""  />
         <listing:header_end />
         <% for(int i=0; i<contents.howMany(); i++) { %>
