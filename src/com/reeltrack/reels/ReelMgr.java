@@ -219,7 +219,7 @@ public class ReelMgr extends CompWebManager {
 			RTUserLoginMgr umgr = new RTUserLoginMgr();
 			umgr.init(this.getPageContext(), this.getDbResources());
 			RTUser user = (RTUser)umgr.getUser();
-			this.addReelLog(content, "Wharehouse location changed from " + currReel.getWharehouseLocation() + " to " + content.getWharehouseLocation() + " by " + user.getName());
+			this.addReelLog(content, "Warehouse location changed from " + currReel.getWharehouseLocation() + " to " + content.getWharehouseLocation() + " by " + user.getName());
 		}
 
 		content.setUpdated(new Date());

@@ -194,7 +194,7 @@ String tempURL = "";
                 <form:textfield pixelwidth="40" label="Bottom Ft:" name="<%= Reel.BOTTOM_FOOT_COLUMN %>" value="<%= new Integer(content.getBottomFoot()).toString() %>" />
                 <form:textfield pixelwidth="40" label="Top Ft:" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
                 <form:row_begin />
-                <form:label name="" label="Wharehouse<br />Location:" />
+                <form:label name="" label="Warehouse<br />Location:" />
                 <form:content_begin />
                 <form:select_begin name="<%= Reel.WHAREHOUSE_LOCATION_COLUMN %>" />
                     <form:option name="None" value="<%= WhLocation.LOCATION_NONE %>" match="<%= content.getWharehouseLocation() %>" />

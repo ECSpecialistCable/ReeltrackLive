@@ -159,7 +159,7 @@ String[] carrierList = reelMgr.getCarriers();
                 <form:textfield pixelwidth="40" label="Top Ft:" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
                 <form:textfield pixelwidth="40" label="Received lbs:" name="<%= Reel.RECEIVED_WEIGHT_COLUMN %>" value="<%= new Integer(content.getReceivedWeight()).toString() %>" />
                 <form:row_begin />
-	                <form:label name="" label="Wharehouse<br />Location:" />
+	                <form:label name="" label="Warehouse<br />Location:" />
 	                <form:content_begin />
 	                <form:select_begin name="<%= Reel.WHAREHOUSE_LOCATION_COLUMN %>" />
 	                    <form:option name="None" value="<%= WhLocation.LOCATION_NONE %>" match="<%= content.getWharehouseLocation() %>" />
@@ -325,7 +325,7 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
         	<form:info label="Status:" text="<%= content.getStatus() %>" />
-        	<form:info label="Wharehouse<br />Location:" text="<%= content.getWharehouseLocation() %>" />
+        	<form:info label="Warehouse<br />Location:" text="<%= content.getWharehouseLocation() %>" />
 			<form:info label="Reel Type:" text="<%= content.getReelType() %>" />
 			<form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
 			<form:info label="Cable Description:" text="<%= content.getCableDescription() %>" />

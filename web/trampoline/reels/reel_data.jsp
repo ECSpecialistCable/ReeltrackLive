@@ -5,6 +5,7 @@
 <%@ page import="com.reeltrack.reels.*" %>
 <%@ page import="com.monumental.trampoline.component.*" %>
 <%@ page import="com.monumental.trampoline.utilities.text.*" %>
+<%@ page import="java.net.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
@@ -86,7 +87,7 @@ String tempURL; //var for url expression
             <form:row_begin />
             <form:label label="Download CTR:"  />
             <form:content_begin />
-                    <% tempURL = request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getCTRFile(); %>
+                    <% tempURL = request.getContextPath() + content.getCompEntityDirectory() + "/" + URLEncoder.encode(content.getCTRFile()); %>
                     <admin:link external="true" text="[Download]" url="<%= tempURL %>" />      
                 <form:content_end />
             <form:row_end />

@@ -5,6 +5,7 @@
 <%@ page import="com.reeltrack.reels.*" %>
 <%@ page import="com.monumental.trampoline.component.*" %>
 <%@ page import="com.monumental.trampoline.utilities.text.*" %>
+<%@ page import="java.net.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
@@ -68,7 +69,7 @@ String tempURL; //var for url expression
             <form:row_begin />
             <form:label label="Download Data Sheet:"  />
             <form:content_begin />
-                    <% tempURL = request.getContextPath() + techData.getCompEntityDirectory() + "/" + techData.getDataSheetFile(); %>
+                    <% tempURL = request.getContextPath() + techData.getCompEntityDirectory() + "/" + URLEncoder.encode(techData.getDataSheetFile()); %>
                     <admin:link external="true" text="[Download]" url="<%= tempURL %>" />      
                 <form:content_end />
             <form:row_end />
@@ -91,7 +92,7 @@ String tempURL; //var for url expression
     <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
 		<form:info label="Total Ordered:" text="<%= Integer.toString(ordered) %>" />
         <form:info label="Total Received:" text="<%= Integer.toString(recieved) %>" />
-        <form:info label="Total In Wharehouse:" text="<%= Integer.toString(inWH) %>" />
+        <form:info label="Total In Warehouse:" text="<%= Integer.toString(inWH) %>" />
         <form:info label="Total Checked Out:" text="<%= Integer.toString(checkedOut) %>" />
         <form:info label="Est. Remaining:" text="<%= Integer.toString(remaining) %>" />
     <form:end />
