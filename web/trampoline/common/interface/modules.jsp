@@ -45,11 +45,11 @@ if(user_agent.contains("iPad")) {
 			<a class="module_bar_toggle" rel="common/interface/manage_reels">On-Site Reel Mgt</a>
 		<% } %>
 		<a class="module_bar_toggle" rel="common/interface/reel_inventory">Inventory Data</a>
-		<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_INVENTORY)) { %>
+		<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_INVENTORY) || user.isUserType(RTUser.USER_TYPE_STANDARD)) { %>
 			<a class="module_bar_toggle" rel="common/interface/configuration">Job Data</a>
-			<% //if(!isIpad) { %>
+			<% if(!user.isUserType(RTUser.USER_TYPE_STANDARD)) { %>
 				<a class="module_bar_toggle" rel="common/interface/reports">Reports</a>
-			<% //} %>
+			<% } %>
 		<% } %>
 	<% } %>
 	<% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
