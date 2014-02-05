@@ -44,6 +44,16 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
     		<form:textfield name="<%= Glossary.NAME_COLUMN %>" label="Name:" />
     		<form:textarea name="<%= Glossary.DESCRIPTION_COLUMN %>" rows="3" label="Description:" value="" />
 			<form:row_begin />
+				<form:label name="" label="Type:" />
+				<form:content_begin />
+					<form:select_begin name="<%= Glossary.GLOSSARY_TYPE_COLUMN %>" />
+						<% for(String type:Glossary.GLOSSARY_TYPES) { %>
+							<form:option name="<%= type %>" value="<%= type %>" />
+						<% } %>
+					<form:select_end />
+				<form:content_end />
+			<form:row_end />
+			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
 						<form:submit_inline button="save" waiting="true" name="save" action="create_job_glossary" />
@@ -60,6 +70,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             <listing:header_begin />
                 <listing:header_cell first="true" width="150" name="Name" />
                 <listing:header_cell name="Description" />
+                <listing:header_cell width="110" name="Type" />
                 <% if(canEdit) { %>
                 <listing:header_cell width="100" name="" />
                 <% } %>
@@ -72,6 +83,9 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
                 <listing:cell_end />
                 <listing:cell_begin />
                     <%= content.getDescription() %>
+                <listing:cell_end />
+				<listing:cell_begin />
+                    <%= content.getGlossaryType() %>
                 <listing:cell_end />
                 <% if(canEdit) { %>
                 <listing:cell_begin align="right"/>

@@ -56,6 +56,16 @@ String tempUrl; //var for url expression
 
 			<form:textfield name="<%= Glossary.NAME_COLUMN %>" label="Name:" value="<%= content.getName() %>" />
     		<form:textarea name="<%= Glossary.DESCRIPTION_COLUMN %>" rows="3" label="Description:" value="<%= content.getDescription() %>" />
+			<form:row_begin />
+				<form:label name="" label="Type:" />
+				<form:content_begin />
+					<form:select_begin name="<%= Glossary.GLOSSARY_TYPE_COLUMN %>" />
+						<% for(String type:Glossary.GLOSSARY_TYPES) { %>
+							<form:option name="<%= type %>" value="<%= type %>" match="<%= content.getGlossaryType() %>" />
+						<% } %>
+					<form:select_end />
+				<form:content_end />
+			<form:row_end />
 			<form:hidden name="<%= Glossary.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
