@@ -274,6 +274,7 @@ public class EchoSync extends CompManager {
 	public boolean fillReelAllocation(Reel reel) throws Exception {
 		DbProcessor processor = new DbProcessor(conECHO);
 		String queryString = "select * from ReelAllocation where ordno='" + reel.getOrdNo() + "' and PORevision=" + reel.getPORevision() + " and absoluteitem=" + reel.getAbsoluteItem() + " and reelserial=" + reel.getReelSerial();
+		System.out.println(queryString);
 		EntityList datalist = processor.getRows(queryString);
 		if(datalist.hasNext()) {
 			System.out.println("--Allocation");
