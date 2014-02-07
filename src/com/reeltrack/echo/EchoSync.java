@@ -68,9 +68,9 @@ public class EchoSync extends CompManager {
 				System.out.println("Reel to ADD:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
 				CompEntityPuller uPuller = new CompEntityPuller(reel);
 				uPuller.addSearch(reel);
-				reel = (Reel)controllerRT.pullCompEntity(uPuller);
-				if(reel.hasData() && reel.getId()!=0) {
-					echoTrans.setReelId(reel.getId());
+				Reel cloudReel = (Reel)controllerRT.pullCompEntity(uPuller);
+				if(cloudReel.hasData() && cloudReel.getId()!=0) {
+					echoTrans.setReelId(cloudReel.getId());
 					echoTrans.setSyncedDateDate(new Date());
 					echoTrans.setNote("Reel already exists in ReelTrack");
 					this.updateTransaction(echoTrans);

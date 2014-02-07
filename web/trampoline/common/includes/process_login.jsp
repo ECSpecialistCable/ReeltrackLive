@@ -56,6 +56,7 @@ job = customerMgr.getCustomerJob(job);
 
 user.setJobId(jobId);
 user.setJobCode(job.getCode());
+user.setJobName(job.getName());
 
 Reel rtReel = (Reel)session.getAttribute("RT");
 Reel plReel = (Reel)session.getAttribute("PL");
@@ -83,6 +84,7 @@ session.removeAttribute("LoggedInJobId");
 RTUser user = (RTUser)userLoginMgr.getUser();
 user.setJobId(0);
 user.setJobCode("");
+user.setJobName("");
 redirect = request.getContextPath() + "/trampoline/index.jsp";			
 %>
 <% } %>

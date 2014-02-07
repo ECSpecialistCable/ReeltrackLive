@@ -178,10 +178,10 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 	            </div>
                  --%>  
             <% } else { %>				
-				<% String welcomeStr = "Welcome, " + user.getUsername(); %>
+				<% String welcomeStr = "Welcome, " + user.getFname() + " " + user.getLname(); %>
 				<% 
 				if(!user.getJobCode().equals("")) {
-					welcomeStr = welcomeStr + " of " + user.getJobCode() + " Project";
+					welcomeStr = welcomeStr + " of " + user.getJobName() + " Project";
 				}
 				%>
 

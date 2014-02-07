@@ -202,7 +202,7 @@ String logoURL;
 							</tr>
 							<tr>
 								<td class="header" style="text-align: right;width: 40%">ECS PO #</td>
-								<td class="value" style="/*border:solid #003DB8 1px;*/text-align: left"><%= "" %></td>
+								<td class="value" style="/*border:solid #003DB8 1px;*/text-align: left"><%= content.getOrdNo() %></td>
 							</tr>
 							<tr>
 								<td colspan="2" style="/*border:solid #003DB8 1px;*/text-align: center;width: 75%;padding-top: 0px;padding-bottom: 0px;margin-bottom: 0px"><img alt="logo" src="<%= logoURL %>" width="130" height="40" />
