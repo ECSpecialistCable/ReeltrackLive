@@ -655,8 +655,8 @@ public class Reel extends CompCMEntity {
    				return this.getBottomFoot() - this.getTopFoot();
    			}
    		} else if(this.getReceivedWeight()!=0) {
-   			System.out.println("setting qnty by weight");
    			if(weight==0) weight=1;
+   			System.out.println("setting qnty by weight: " + (this.getReceivedWeight() - this.getCurrentWeight()) / weight);
 			return (this.getReceivedWeight() - this.getCurrentWeight()) / weight;
 		} else {
 			System.out.println("setting qnty by manual");
