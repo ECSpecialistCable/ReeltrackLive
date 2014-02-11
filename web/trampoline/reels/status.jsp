@@ -6,7 +6,9 @@
 <%@ page import="com.reeltrack.whlocations.*" %>
 <%@ page import="com.monumental.trampoline.component.*" %>
 <%@ page import="com.reeltrack.drivers.*" %>
+<%@ page import="com.reeltrack.foremans.*" %>
 <%@ page import="com.reeltrack.customers.*" %>
+<%@ page import="com.reeltrack.picklists.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
@@ -21,11 +23,15 @@
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr" />
 <jsp:useBean id="customerMgr" class="com.reeltrack.customers.CustomerMgr" />
 <jsp:useBean id="driverMgr" class="com.reeltrack.drivers.DriverMgr" scope="request"/>
+<jsp:useBean id="foremanMgr" class="com.reeltrack.foremans.ForemanMgr" scope="request"/>
+<jsp:useBean id="picklistMgr" class="com.reeltrack.picklists.PickListMgr" />
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
 <% locationMgr.init(pageContext,dbResources); %>
 <% customerMgr.init(pageContext,dbResources); %>
 <% driverMgr.init(pageContext,dbResources); %>
+<% foremanMgr.init(pageContext,dbResources); %>
+<% picklistMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
 // Get the id
@@ -55,6 +61,16 @@ CompEntities locations = locationMgr.searchWhLocation(location, WhLocation.NAME_
 Driver driver = new Driver();
 driver.setCustomerId(user.getCustomerId());
 CompEntities drivers = driverMgr.searchDriver(driver, Driver.NAME_COLUMN, true);
+
+Foreman foreman = new Foreman();
+foreman.setCustomerId(user.getCustomerId());
+CompEntities foremans = foremanMgr.searchForeman(foreman, Foreman.NAME_COLUMN, true);
+
+PickList picklist = new PickList();
+if(content.getPickListId()!=0) {
+    picklist.setId(content.getPickListId());
+    picklist = (PickList)picklistMgr.getPickList(picklist);
+}
 
 Reel rtReel = (Reel)session.getAttribute("RT");
 Reel plReel = (Reel)session.getAttribute("PL");
@@ -216,6 +232,37 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
     <admin:subtitle text="Stage Reel" />
     <admin:box_begin />
     	<form:begin submit="true" name="stage" action="reels/process.jsp" />
+            <% if(picklist.getId()==0) { %>
+                <form:info label="Pick List:" text="This reel is not assigned a Pick List" />
+            <% } else { %>
+                <form:info label="Pick List:" text="<%= new Integer(picklist.getId()).toString() %>" />
+                <form:row_begin />
+                    <form:label name="" label="Checked OUT to:" />
+                    <form:content_begin />
+                    <form:select_begin name="<%= PickList.FOREMAN_COLUMN %>" />
+                        <form:option name="None" value="" match="<%= picklist.getForeman() %>" />
+                        <% for(int f=0; f<foremans.howMany(); f++) { %>
+                            <% foreman = (Foreman)foremans.get(f); %>
+                            <form:option name="<%= foreman.getName() %>" value="<%= foreman.getName() %>" match="<%= picklist.getForeman() %>" />
+                        <% } %>
+                    <form:select_end />
+                    <form:content_end />
+                <form:row_end />
+                <form:row_begin />
+                    <form:label name="" label="Driver:" />
+                    <form:content_begin />
+                    <form:select_begin name="<%= PickList.DRIVER_COLUMN %>" />
+                        <form:option name="None" value="" match="<%= picklist.getDriver() %>" />
+                        <% for(int f=0; f<drivers.howMany(); f++) { %>
+                            <% driver = (Driver)drivers.get(f); %>
+                            <form:option name="<%= driver.getName() %>" value="<%= driver.getName() %>" match="<%= picklist.getDriver() %>" />
+                        <% } %>
+                    <form:select_end />
+                    <form:content_end />
+                <form:row_end />
+                <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
+            <% } %>
+            
             <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
             <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
             <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
@@ -234,6 +281,36 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
     <admin:subtitle text="Check OUT Reel" />
     <admin:box_begin />
     	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
+            <% if(picklist.getId()==0) { %>
+                <form:info label="Pick List:" text="This reel is not assigned a Pick List" />
+            <% } else { %>
+                <form:info label="Pick List:" text="<%= new Integer(picklist.getId()).toString() %>" />
+                <form:row_begin />
+                    <form:label name="" label="Checked OUT to:" />
+                    <form:content_begin />
+                    <form:select_begin name="<%= PickList.FOREMAN_COLUMN %>" />
+                        <form:option name="None" value="" match="<%= picklist.getForeman() %>" />
+                        <% for(int f=0; f<foremans.howMany(); f++) { %>
+                            <% foreman = (Foreman)foremans.get(f); %>
+                            <form:option name="<%= foreman.getName() %>" value="<%= foreman.getName() %>" match="<%= picklist.getForeman() %>" />
+                        <% } %>
+                    <form:select_end />
+                    <form:content_end />
+                <form:row_end />
+                <form:row_begin />
+                    <form:label name="" label="Driver:" />
+                    <form:content_begin />
+                    <form:select_begin name="<%= PickList.DRIVER_COLUMN %>" />
+                        <form:option name="None" value="" match="<%= picklist.getDriver() %>" />
+                        <% for(int f=0; f<drivers.howMany(); f++) { %>
+                            <% driver = (Driver)drivers.get(f); %>
+                            <form:option name="<%= driver.getName() %>" value="<%= driver.getName() %>" match="<%= picklist.getDriver() %>" />
+                        <% } %>
+                    <form:select_end />
+                    <form:content_end />
+                <form:row_end />
+                <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
+            <% } %>
             <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
             <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
             <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />

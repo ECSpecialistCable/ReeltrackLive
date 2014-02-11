@@ -8,6 +8,7 @@
 <%@ page import="java.io.*" %>
 <%@ page import="com.reeltrack.drivers.*" %>
 <%@ page import="java.util.Hashtable"%>
+<%@ page import="com.reeltrack.picklists.*" %>
 
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
@@ -15,7 +16,9 @@
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="securityMgr" class="com.reeltrack.users.RTUserMgr" scope="request"/>
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" scope="request"/>
+<jsp:useBean id="picklistMgr" class="com.reeltrack.picklists.PickListMgr" scope="request"/>
 <% securityMgr.init(dbResources); %>
+<% picklistMgr.init(pageContext,dbResources); %>
 <% reelMgr.init(pageContext,dbResources); %>
 <% CompProperties props = new CompProperties(); %>
 
@@ -125,6 +128,15 @@ if(action.equals("mark_staged")) {
     content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
     } catch(Exception e) {}
     reelMgr.markReelStaged(content);
+
+    if(request.getParameter(PickList.PARAM)!=null) {
+        PickList picklist = new PickList();
+        picklist.setId(Integer.parseInt(request.getParameter(PickList.PARAM)));
+        picklist.setDriver(request.getParameter(PickList.DRIVER_COLUMN));
+        picklist.setForeman(request.getParameter(PickList.FOREMAN_COLUMN));
+        picklistMgr.updatePickList(picklist);
+    }
+    
     session.removeAttribute("RT");
     session.removeAttribute("PL");
     redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
@@ -138,6 +150,15 @@ if(action.equals("mark_checkedout")) {
     content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
     } catch(Exception e) {}
     reelMgr.markReelCheckedOut(content);
+
+    if(request.getParameter(PickList.PARAM)!=null) {
+        PickList picklist = new PickList();
+        picklist.setId(Integer.parseInt(request.getParameter(PickList.PARAM)));
+        picklist.setDriver(request.getParameter(PickList.DRIVER_COLUMN));
+        picklist.setForeman(request.getParameter(PickList.FOREMAN_COLUMN));
+        picklistMgr.updatePickList(picklist);
+    }
+
     session.removeAttribute("RT");
     session.removeAttribute("PL");
     redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
