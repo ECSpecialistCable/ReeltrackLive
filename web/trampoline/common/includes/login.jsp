@@ -41,7 +41,13 @@ String tempUrl; //var for url expression
 <admin:box_end />
 <% } %>
 
-<% if(userLoginMgr.isLoggedIn() && user.getCustomerId()==0) { %>
+<% if(userLoginMgr.isLoggedIn() && user.getJobCode().equals("")) { %>
+<%
+CustomerJob custJob = new CustomerJob();
+custJob.setCustomerId(user.getCustomerId());
+CompEntities custJobs = customerMgr.getCustomerJobs(custJob);
+%>
+<% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
 <admin:subtitle text="Please Select a Customer" />
 <admin:box_begin />
 	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />
@@ -51,7 +57,7 @@ String tempUrl; //var for url expression
 				<form:select_begin name="<%= Customer.PARAM %>" label="customer" />
 					<% for(int i=0; i<customers.howMany(); i++) { %>
             		<% customer = (Customer)customers.get(i); %>
-					<form:option value="<%= new Integer(customer.getId()).toString() %>" name="<%= customer.getName() %>"/>
+					<form:option value="<%= new Integer(customer.getId()).toString() %>" match="<%= new Integer(user.getCustomerId()).toString() %>" name="<%= customer.getName() %>"/>
 					<% } %>
 				<form:select_end />
 			<form:content_end />
@@ -64,12 +70,10 @@ String tempUrl; //var for url expression
 		<form:row_end />
 	<form:end />
 <admin:box_end />
-<% } else if(userLoginMgr.isLoggedIn() && user.getJobCode().equals("")) { %>
-<%
-CustomerJob custJob = new CustomerJob();
-custJob.setCustomerId(user.getCustomerId());
-CompEntities custJobs = customerMgr.getCustomerJobs(custJob);
-%>
+<br />
+<% } %>
+
+<% if(user.getCustomerId()!=0) { %>
 <admin:subtitle text="Please Select a Job" />
 <admin:box_begin />
 	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />
@@ -93,13 +97,13 @@ CompEntities custJobs = customerMgr.getCustomerJobs(custJob);
 		<form:row_end />
 	<form:end />
 <admin:box_end />
+<% } %>
+
 <% } else if(userLoginMgr.isLoggedIn()) { %>
 <div style="text-align:center; position:absolute; top:108px; left:202px; width:801px;height:900px;background-color: #1c7a68;">
 <%--<h1 style="padding-top:20px; color:white; font-size:36px;font-weight:bold;">Welcome to ReelTrack</h1>--%>
 <img src="common/images/home-image.png" width="700">
 </div>
-
-
 <% } %>
 
 <html:end />
