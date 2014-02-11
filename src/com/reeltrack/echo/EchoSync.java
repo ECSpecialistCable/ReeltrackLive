@@ -74,7 +74,7 @@ public class EchoSync extends CompManager {
 					echoTrans.setSyncedDateDate(new Date());
 					echoTrans.setNote("Reel already exists in ReelTrack");
 					this.updateTransaction(echoTrans);
-					System.out.println("REEL ALREADY EXISTS ON REELTRACK:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+					System.out.println("REEL ALREADY EXISTS ON REELTRACK:" + cloudReel.getOrdNo() + "," + cloudReel.getPORevision() + "," + cloudReel.getAbsoluteItem() + "," + cloudReel.getReelSerial() + ",");
 				} else {
 					boolean ok = this.fillReelAllocation(reel);
 					if(ok) {
@@ -133,7 +133,7 @@ public class EchoSync extends CompManager {
 					echoTrans.setSyncedDateDate(new Date());
 					echoTrans.setNote("Reel not found in ReelTrack");
 					this.updateTransaction(echoTrans);
-					System.out.println("COULDN'T GET REELTRACK REEL:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+					System.out.println("COULDN'T GET REELTRACK REEL");
 				}
 			} else if(echoTrans.getAction().equalsIgnoreCase("delete")) {
 				Reel reel = new Reel();
@@ -153,7 +153,7 @@ public class EchoSync extends CompManager {
 					echoTrans.setSyncedDateDate(new Date());
 					echoTrans.setNote("Reel not found in ReelTrack");
 					this.updateTransaction(echoTrans);
-					System.out.println("COULDN'T GET REELTRACK REEL:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+					System.out.println("COULDN'T GET REELTRACK REEL");
 				}
 			}
 		}

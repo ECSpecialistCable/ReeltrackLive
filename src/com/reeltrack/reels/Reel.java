@@ -646,6 +646,7 @@ public class Reel extends CompCMEntity {
 
    	public int calcOnReelQuantity(int weight) {
    		if(this.hasReelMarkers()) {
+   			System.out.println("setting qnty by markers");
    			if(this.getTopFoot()==0) {
    				return 0;
    			} else if(this.getTopFoot() > this.getBottomFoot()) {
@@ -654,9 +655,11 @@ public class Reel extends CompCMEntity {
    				return this.getBottomFoot() - this.getTopFoot();
    			}
    		} else if(this.getReceivedWeight()!=0) {
+   			System.out.println("setting qnty by weight");
    			if(weight==0) weight=1;
 			return (this.getReceivedWeight() - this.getCurrentWeight()) / weight;
 		} else {
+			System.out.println("setting qnty by manual");
 			return this.getReceivedQuantity() - this.getCableUsedQuantity();
 		}
     }
