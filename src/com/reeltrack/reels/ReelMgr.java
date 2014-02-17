@@ -273,8 +273,10 @@ public class ReelMgr extends CompWebManager {
 		        EmailSender emailer = new EmailSender();
 				try {
 					String subject = "Reel refused by " + customer.getName() + " for reel CRID#:" + reel.getCrId();
+					String message = reel.getEcsPN() + " manufactured by " + reel.getManufacturer()  + " on ECS PO " + reel.getOrdNo() + " with reel tag " + reel.getReelTag();
+					message += "Customer Reel ID# " + reel.getCrId() + " - " + reel.getCableDescription() + " with reel tag " + reel.getReelTag() + " was refused by " + user.getFname() + " " + user.getLname() + " with " + customer.getName() + " on " + user.getJobName() + " Project - " + user.getJobCode();
 					//String message = content.getDescription();
-					emailer.sendEmail(mailHost, emails, mailFrom, mailFrom, subject, subject, null,null);
+					emailer.sendEmail(mailHost, emails, mailFrom, mailFrom, subject, message, null,null);
 		        } catch(Exception e) {
 					System.out.println("Issue sending issue email." + e);
 				}

@@ -57,6 +57,8 @@ job = customerMgr.getCustomerJob(job);
 user.setJobId(jobId);
 user.setJobCode(job.getCode());
 user.setJobName(job.getName());
+System.out.println("logging in " + user.getJobName());
+
 
 Reel rtReel = (Reel)session.getAttribute("RT");
 Reel plReel = (Reel)session.getAttribute("PL");

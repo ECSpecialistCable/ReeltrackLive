@@ -313,3 +313,4 @@ alter table file_cabinet add customer_id int default 0;
 
 /* 02/05/2014 */
 alter table glossary add column glossary_type varchar(255);
+alter table reel_circuits add act_length int default 0;

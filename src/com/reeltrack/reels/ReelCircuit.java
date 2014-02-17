@@ -6,6 +6,7 @@ public class ReelCircuit extends CompCMEntity {
 	public static final String PARAM = "reel_log_param";
 	public static final String REEL_ID_COLUMN = "reel_id";
 	public static final String LENGTH_COLUMN = "length";
+	public static final String ACT_LENGTH_COLUMN = "act_length";
 	public static final String NAME_COLUMN = "name";
 	public static final String IS_PULLED_COLUMN = "is_pulled";
 	public static final String IS_SYNCED_COLUMN = "is_synced";
@@ -43,6 +44,14 @@ public class ReelCircuit extends CompCMEntity {
 	
 	public void setLength(int id) {
 		this.getData().setInteger(LENGTH_COLUMN, id);
+	}
+
+	public int getActLength() {
+		return this.getData().getInteger(ACT_LENGTH_COLUMN, 0);
+	}
+	
+	public void setActLength(int id) {
+		this.getData().setInteger(ACT_LENGTH_COLUMN, id);
 	}
 
 	public String getName() {

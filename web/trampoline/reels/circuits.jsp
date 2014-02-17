@@ -65,7 +65,7 @@ int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
 <admin:subtitle text="Add Circuit" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
-    		<form:textfield label="Length:" pixelwidth="40" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="0" />
+    		<form:textfield label="Est. Length:" pixelwidth="40" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="0" />
     		<form:textfield label="Name:" name="<%= ReelCircuit.NAME_COLUMN %>" value="" />
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 			<form:row_begin />
@@ -113,8 +113,8 @@ int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
         <listing:header_begin />
             <listing:header_cell width="10" first="true" name="#" />
             <listing:header_cell name="Name" />
-            <%--<listing:header_cell width="75" name="Length" />--%>
-            <listing:header_cell width="125" name="Pulled" />
+            <listing:header_cell width="100" name="Est. Length" />
+            <listing:header_cell width="175" name="Mark Actual Length Pulled" />
             <listing:header_cell width="50" name=""  />
         <listing:header_end />
         <% for(int i=0; i<circuits.howMany(); i++) { %>
@@ -126,19 +126,26 @@ int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
             <listing:cell_begin />
                 <%= circuit.getName() %>
             <listing:cell_end />
-            <%--
             <listing:cell_begin />
-                <%= circuit.getLength() %>
+                <% tempURL = "z" + circuit.getId(); %>
+                <form:begin_inline name="<%= tempURL %>" action="reels/process.jsp" />
+                    <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="<%= new Integer(circuit.getLength()).toString() %>" />
+                    <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
+                    <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
+                    <%--<form:hidden name="submit_action" value="update_circuit" />--%>
+                    <form:submit_inline waiting="true" name="save" action="update_circuit" />
+                <form:end_inline />
             <listing:cell_end />
-            --%>
             <listing:cell_begin />
                 <% tempURL = "i" + circuit.getId(); %>
                 <form:begin_inline name="<%= tempURL %>" action="reels/process.jsp" />
-                    <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="<%= new Integer(circuit.getLength()).toString() %>" />
-                    <form:checkbox label="" name="<%= ReelCircuit.IS_PULLED_COLUMN %>" onclick="this.form.submit();" value="y" match="<%= circuit.getIsPulled() %>" />        
+                    <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.ACT_LENGTH_COLUMN %>" value="<%= new Integer(circuit.getActLength()).toString() %>" />
+                    <form:checkbox label="" name="<%= ReelCircuit.IS_PULLED_COLUMN %>" value="y" match="<%= circuit.getIsPulled() %>" />        
+                    <%-- onclick="this.form.submit();"  --%>
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
-                    <form:hidden name="submit_action" value="update_circuit" />
+                    <%--<form:hidden name="submit_action" value="update_circuit" />--%>
+                    <form:submit_inline waiting="true" name="save" action="update_circuit" />
                 <form:end_inline />
             <listing:cell_end />
             <listing:cell_begin align="right"/>

@@ -230,10 +230,10 @@ String tempURL = "";
    
     <listing:begin />
         <listing:header_begin />
-            <listing:header_cell width="55" first="true" name="CRID #" column="<%= Reel.CR_ID_COLUMN %>" ascending="<%= "" + ascending %>" match="<%= column %>" url="<%= "reels/search.jsp" %>" />
-            <listing:header_cell name="Reel Tag" column="<%= Reel.REEL_TAG_COLUMN %>" ascending="<%= "" + ascending %>" match="<%= column %>" url="<%= "reels/search.jsp" %>" />
-            <listing:header_cell name="Cable Description" column="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" ascending="<%= "" + ascending %>" match="<%= column %>" url="<%= "reels/search.jsp" %>" />
-            <listing:header_cell width="75" name="Status" column="<%= Reel.STATUS_COLUMN %>" ascending="<%= "" + ascending %>" match="<%= column %>" url="<%= "reels/search.jsp" %>" />
+            <listing:header_cell width="55" first="true" name="CRID #" column="<%= Reel.CR_ID_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="reels/search.jsp" />
+            <listing:header_cell name="Reel Tag" column="<%= Reel.REEL_TAG_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="reels/search.jsp" />
+            <listing:header_cell name="Cable Description" column="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="reels/search.jsp" />
+            <listing:header_cell width="75" name="Status" column="<%= Reel.STATUS_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="reels/search.jsp" />
             <listing:header_cell width="40" name=""  />
         <listing:header_end />
         <% for(int i=0; i<contents.howMany(); i++) { %>

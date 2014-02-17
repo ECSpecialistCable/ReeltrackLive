@@ -161,6 +161,7 @@ String[] carrierList = reelMgr.getCarriers();
         <admin:box_begin />
             <form:begin submit="true" name="receive" action="reels/process.jsp" />
                 <form:info label="Shipped<br />Date:" text="<%= content.getShippingDateString() %>" />
+                <form:info label="Shipped Qty:" text="<%= new Integer(content.getShippedQuantity()).toString() %>" />
                 <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
                 <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
                 <form:textfield pixelwidth="40" label="Received Qty:" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
@@ -235,7 +236,7 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
             <% if(picklist.getId()==0) { %>
                 <form:info label="Pick List:" text="This reel is not assigned a Pick List" />
             <% } else { %>
-                <form:info label="Pick List:" text="<%= new Integer(picklist.getId()).toString() %>" />
+                <form:info label="Pick List:" text="<%= picklist.getName() %>" />
                 <form:row_begin />
                     <form:label name="" label="Checked OUT to:" />
                     <form:content_begin />
@@ -284,7 +285,7 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
             <% if(picklist.getId()==0) { %>
                 <form:info label="Pick List:" text="This reel is not assigned a Pick List" />
             <% } else { %>
-                <form:info label="Pick List:" text="<%= new Integer(picklist.getId()).toString() %>" />
+                <form:info label="Pick List:" text="<%= picklist.getName() %>" />
                 <form:row_begin />
                     <form:label name="" label="Checked OUT to:" />
                     <form:content_begin />

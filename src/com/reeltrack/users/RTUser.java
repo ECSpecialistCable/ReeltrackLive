@@ -61,7 +61,7 @@ public class RTUser extends User {
         return this.jobName;
     }
 
-    public void setJobName(String jobCode) {
+    public void setJobName(String jobName) {
         this.jobName = jobName;
     }
 

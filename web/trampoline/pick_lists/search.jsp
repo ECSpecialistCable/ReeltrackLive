@@ -165,6 +165,7 @@ String tempURL = "";
     <form:end />
 <admin:box_end />
 
+<admin:subtitle text="Key for Reels: On pick list / staged / checked OUT" />
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
         <%--

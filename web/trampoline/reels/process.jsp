@@ -83,9 +83,6 @@ if(action.equals("mark_received")) {
     content.setReceivedQuantity(Integer.parseInt(request.getParameter(Reel.RECEIVED_QUANTITY_COLUMN)));
     } catch(Exception e) {}
     try {
-    content.setBottomFoot(Integer.parseInt(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)));
-    } catch(Exception e) {}
-    try {
     content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     } catch(Exception e) {}
     try {
@@ -99,6 +96,10 @@ if(action.equals("mark_received")) {
     content.setReceivingIssue(request.getParameter(Reel.RECEIVING_ISSUE_COLUMN));
     content.setReceivingNote(request.getParameter(Reel.RECEIVING_NOTE_COLUMN));
     content.setReceivingDisposition(request.getParameter(Reel.RECEIVING_DISPOSITION_COLUMN));
+
+    try {
+    content.setBottomFoot(Integer.parseInt(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)));
+    } catch(Exception e) {}
 
     if(request.getParameter(Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN)!=null) {
         content.setBottomFootNotVisible("y");
@@ -294,6 +295,7 @@ if(action.equals("update")) {
     if(request.getParameter(Reel.MANUFACTURER_COLUMN)!=null) {
         content.setManufacturer(request.getParameter(Reel.MANUFACTURER_COLUMN));
     }
+
     if(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)!=null) {
         content.setBottomFoot(Integer.parseInt(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)));
         if(request.getParameter(Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN)!=null) {
@@ -301,7 +303,12 @@ if(action.equals("update")) {
         } else {
             content.setBottomFootNotVisible("n");
         }
+        if(content.getBottomFoot()>0) {
+            content.setHasReelMarkers("y");
+            content.setBottomFootNotVisible("n");
+        }
     }
+
     if(request.getParameter(Reel.TOP_FOOT_COLUMN)!=null) {
         content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     }
@@ -365,6 +372,10 @@ if(action.equals("update_quantity")) {
         } else {
             content.setBottomFootNotVisible("n");
         }
+        if(content.getBottomFoot()>0) {
+            content.setHasReelMarkers("y");
+            content.setBottomFootNotVisible("n");
+        }
     }   
     
     reelMgr.updateReelQuantity(content);
@@ -419,12 +430,17 @@ if(action.equals("add_circuit")) {
 if(action.equals("update_circuit")) {
     ReelCircuit content = new ReelCircuit();
     content.setId(Integer.parseInt(request.getParameter(ReelCircuit.PARAM)));
-    if(request.getParameter(ReelCircuit.IS_PULLED_COLUMN)!=null) {
-        content.setIsPulled("y");
-    } else {
-        content.setIsPulled("n");
+    if(request.getParameter(ReelCircuit.LENGTH_COLUMN)!=null) {
+        content.setLength(Integer.parseInt(request.getParameter(ReelCircuit.LENGTH_COLUMN)));
     }
-    content.setLength(Integer.parseInt(request.getParameter(ReelCircuit.LENGTH_COLUMN)));
+    if(request.getParameter(ReelCircuit.ACT_LENGTH_COLUMN)!=null) {
+        content.setActLength(Integer.parseInt(request.getParameter(ReelCircuit.ACT_LENGTH_COLUMN)));
+        if(request.getParameter(ReelCircuit.IS_PULLED_COLUMN)!=null) {
+            content.setIsPulled("y");
+        } else {
+            content.setIsPulled("n");
+        }
+    }
     reelMgr.updateReelCircuit(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/circuits.jsp?" + Reel.PARAM + "=" + contid ;
 }

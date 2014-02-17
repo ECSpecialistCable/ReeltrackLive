@@ -7,7 +7,7 @@
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 
 <% if (user!=null) { %>
-	<% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY) || !user.isUserType(RTUser.USER_TYPE_STANDARD)) { %>
+	<% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY) && !user.isUserType(RTUser.USER_TYPE_STANDARD)) { %>
 		<admin:ajax_load url="users2/search.jsp" label="Manage Users" />
 		<admin:ajax_load url="foremans/search.jsp" label="Manage Foremen" />
 		<admin:ajax_load url="drivers/search.jsp" label="Manage Drivers" />
