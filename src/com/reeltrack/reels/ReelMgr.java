@@ -683,7 +683,8 @@ public class ReelMgr extends CompWebManager {
 		puller = new CompEntityPuller(new Customer());
 		Customer toGet = new Customer();
 		toGet.setId(job.getCustomerId());
-		System.out.println("cust-id:" + job.getCustomerId());
+		puller.addSearch(toGet);
+		System.out.println("cust-id:" + toGet.getId());
 
 		toReturn = (Customer)controller.pullCompEntity(puller);
 		System.out.println("cust-name:" + toReturn.getName());
