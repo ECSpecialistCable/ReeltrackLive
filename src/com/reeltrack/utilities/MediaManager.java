@@ -584,5 +584,18 @@ public class MediaManager extends CompWebManager {
 		}
 	}
 
+	public void setPosition(ContentPositionable content) throws Exception {
+		int id = content.getId();
+		int fkId = content.getForeignKeyId();
+		int position = content.getPosition();
+
+        ContentPositionable current = content;
+		current.clearData();
+        current.setId(id);
+        current.setForeignKeyId(fkId);
+        current.setPosition(position);
+        controller.setCompEntityPosition(current);
+    }
+
 }
 	

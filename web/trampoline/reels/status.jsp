@@ -233,10 +233,9 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
     <admin:subtitle text="Stage Reel" />
     <admin:box_begin />
     	<form:begin submit="true" name="stage" action="reels/process.jsp" />
-            <% if(picklist.getId()==0) { %>
-                <form:info label="Pick List:" text="This reel is not assigned a Pick List" />
-            <% } else { %>
-                <form:info label="Pick List:" text="<%= picklist.getName() %>" />
+				<% if(picklist.getId()!=0) { %>
+					<form:info label="Pick List:" text="<%= picklist.getName() %>" />
+				<% } %>
                 <form:row_begin />
                     <form:label name="" label="Checked OUT to:" />
                     <form:content_begin />
@@ -262,7 +261,6 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
                     <form:content_end />
                 <form:row_end />
                 <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
-            <% } %>
             
             <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
             <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
@@ -282,10 +280,9 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
     <admin:subtitle text="Check OUT Reel" />
     <admin:box_begin />
     	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
-            <% if(picklist.getId()==0) { %>
-                <form:info label="Pick List:" text="This reel is not assigned a Pick List" />
-            <% } else { %>
-                <form:info label="Pick List:" text="<%= picklist.getName() %>" />
+				<% if(picklist.getId()!=0) { %>
+					<form:info label="Pick List:" text="<%= picklist.getName() %>" />
+				<% } %>
                 <form:row_begin />
                     <form:label name="" label="Checked OUT to:" />
                     <form:content_begin />
@@ -311,7 +308,6 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
                     <form:content_end />
                 <form:row_end />
                 <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
-            <% } %>
             <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
             <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
             <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />

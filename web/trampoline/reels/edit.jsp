@@ -23,8 +23,12 @@
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
 boolean canEdit = false;
+boolean canEditRT = false;
 if(user.isUserType(RTUser.USER_TYPE_ECS)) {
     canEdit = true;
+}
+if(user.isUserType(RTUser.USER_TYPE_MANAGEMENT)) {
+	canEditRT = true;
 }
 %>
 <%
@@ -88,7 +92,7 @@ String tempURL; //var for url expression
 	            <form:content_end />
         	<form:row_end />
 			<form:info label="Reel Type:" text="<%= content.getReelType() %>" />
-			<% if(canEdit) { %>
+			<% if(canEdit || canEditRT) { %>
 				<form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
 			<% } else { %>
 				<form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />

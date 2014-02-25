@@ -9,20 +9,24 @@
 <%@ page import="com.reeltrack.drivers.*" %>
 <%@ page import="java.util.Hashtable"%>
 <%@ page import="com.reeltrack.picklists.*" %>
+<%@ page import="com.reeltrack.customers.Customer"%>
 
-<%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
+<%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>"
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
 
+<jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr" />
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="securityMgr" class="com.reeltrack.users.RTUserMgr" scope="request"/>
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" scope="request"/>
 <jsp:useBean id="picklistMgr" class="com.reeltrack.picklists.PickListMgr" scope="request"/>
+<% userLoginMgr.init(pageContext); %>
 <% securityMgr.init(dbResources); %>
 <% picklistMgr.init(pageContext,dbResources); %>
 <% reelMgr.init(pageContext,dbResources); %>
 <% CompProperties props = new CompProperties(); %>
 
 <%
+RTUser user = (RTUser)userLoginMgr.getUser();
 MultipartRequest multipart = null; 
 String basePath = pageContext.getServletContext().getRealPath("/");
 String notifier = "";
@@ -74,6 +78,7 @@ if(action.equals("mark_shipped")) {
 if(action.equals("mark_received")) {
     Reel content = new Reel();
     content.setId(contid);
+	Reel reel = reelMgr.getReel(content);
     content.setTrackingPRO(request.getParameter(Reel.TRACKING_PRO_COLUMN));
     content.setPackingList(request.getParameter(Reel.PACKING_LIST_COLUMN));
     try {
@@ -96,6 +101,18 @@ if(action.equals("mark_received")) {
     content.setReceivingIssue(request.getParameter(Reel.RECEIVING_ISSUE_COLUMN));
     content.setReceivingNote(request.getParameter(Reel.RECEIVING_NOTE_COLUMN));
     content.setReceivingDisposition(request.getParameter(Reel.RECEIVING_DISPOSITION_COLUMN));
+
+	if(content.getReceivingDisposition().equalsIgnoreCase(Reel.RECEIVING_DISPOSITION_REFUSED)) {
+		Customer customer = reelMgr.getCustomerForReel(reel);
+		String issueLog = reel.getEcsPN() + " manufactured by " + reel.getManufacturer()  + " on ECS PO " + reel.getOrdNo() + " with reel tag " + reel.getReelTag();
+		issueLog += "Customer Reel ID# " + reel.getCrId() + " - " + reel.getCableDescription() + " with reel tag " + reel.getReelTag() + " was refused by " + user.getFname() + " " + user.getLname() + " with " + customer.getName() + " on " + user.getJobName() + " Project - " + user.getJobCode();
+
+		ReelIssue issue = new ReelIssue();
+		issue.setReelId(contid);
+		issue.setDescription(content.getReceivingNote());
+		issue.setIssueLog(issueLog);
+		reelMgr.addReelIssue(issue);
+	}
 
     try {
     content.setBottomFoot(Integer.parseInt(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)));
@@ -124,6 +141,7 @@ if(action.equals("mark_received")) {
 if(action.equals("mark_staged")) {
     Reel content = new Reel();
     content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+	Reel prevContent = reelMgr.getReel(content);
     content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     try {
     content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
@@ -132,10 +150,21 @@ if(action.equals("mark_staged")) {
 
     if(request.getParameter(PickList.PARAM)!=null) {
         PickList picklist = new PickList();
-        picklist.setId(Integer.parseInt(request.getParameter(PickList.PARAM)));
-        picklist.setDriver(request.getParameter(PickList.DRIVER_COLUMN));
-        picklist.setForeman(request.getParameter(PickList.FOREMAN_COLUMN));
-        picklistMgr.updatePickList(picklist);
+		int picklistId = Integer.parseInt(request.getParameter(PickList.PARAM));
+		picklist.setDriver(request.getParameter(PickList.DRIVER_COLUMN));
+		picklist.setForeman(request.getParameter(PickList.FOREMAN_COLUMN));
+		if(picklistId!=0) {
+			picklist.setId(picklistId);			
+			picklistMgr.updatePickList(picklist);
+		} else {
+			picklist.setName(prevContent.getReelTag());
+			picklistId = picklistMgr.addPickList(picklist);
+			content = new Reel();
+			content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+			content.setPickListId(picklistId);
+			picklistMgr.updateReelForPickList(content);
+		}
+
     }
     
     session.removeAttribute("RT");
@@ -146,6 +175,7 @@ if(action.equals("mark_staged")) {
 if(action.equals("mark_checkedout")) {
     Reel content = new Reel();
     content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+	Reel prevContent = reelMgr.getReel(content);
     content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     try {
     content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
@@ -154,10 +184,21 @@ if(action.equals("mark_checkedout")) {
 
     if(request.getParameter(PickList.PARAM)!=null) {
         PickList picklist = new PickList();
-        picklist.setId(Integer.parseInt(request.getParameter(PickList.PARAM)));
-        picklist.setDriver(request.getParameter(PickList.DRIVER_COLUMN));
-        picklist.setForeman(request.getParameter(PickList.FOREMAN_COLUMN));
-        picklistMgr.updatePickList(picklist);
+		int picklistId = Integer.parseInt(request.getParameter(PickList.PARAM));
+		picklist.setDriver(request.getParameter(PickList.DRIVER_COLUMN));
+		picklist.setForeman(request.getParameter(PickList.FOREMAN_COLUMN));
+		if(picklistId!=0) {
+			picklist.setId(picklistId);
+			picklistMgr.updatePickList(picklist);
+		} else {
+			picklist.setName(prevContent.getReelTag());
+			picklistId = picklistMgr.addPickList(picklist);
+			content = new Reel();
+			content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+			content.setPickListId(picklistId);
+			picklistMgr.updateReelForPickList(content);
+		}
+
     }
 
     session.removeAttribute("RT");
@@ -276,6 +317,7 @@ if(action.equals("update_overall")) {
 if(action.equals("update")) {
     Reel content = new Reel();
     content.setId(contid);
+	Reel prevContent = reelMgr.getReel(content);
     if(request.getParameter(Reel.STATUS_COLUMN)!=null) {
         content.setStatus(request.getParameter(Reel.STATUS_COLUMN));
     }
@@ -284,7 +326,11 @@ if(action.equals("update")) {
         content.setHasReelMarkers(request.getParameter(Reel.HAS_REEL_MARKERS_COLUMN));
     }
     if(request.getParameter(Reel.REEL_TAG_COLUMN)!=null) {
-        content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
+        String newRT = request.getParameter(Reel.REEL_TAG_COLUMN);
+		if(!prevContent.getReelTag().equalsIgnoreCase(newRT)) {
+			reelMgr.addReelLog(prevContent, user.getName() + " changed the reeltag from " + prevContent.getReelTag() + " to " + newRT);
+		}
+		content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
     }
     if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN)!=null) {
         content.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));

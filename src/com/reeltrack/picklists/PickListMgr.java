@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import javax.servlet.jsp.PageContext;
 import com.reeltrack.users.*;
 import com.reeltrack.reels.*;
+import com.reeltrack.utilities.MediaManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -19,10 +20,14 @@ import net.glxn.qrgen.image.ImageType;
 
 public class PickListMgr extends CompWebManager {
 	CompDbController controller;
+	MediaManager mediaManager = null;
 	
 	public void init(PageContext pageContext, DbResources resources) {
 		super.init(pageContext, resources);
 		this.controller = this.newCompController();
+
+		mediaManager = new MediaManager();
+		mediaManager.init(pageContext, resources);
 	}
 	
 	public int addPickList(PickList content) throws Exception {
@@ -45,6 +50,34 @@ public class PickListMgr extends CompWebManager {
 	public void updateReelForPickList(Reel content) throws Exception {
 		content.setUpdated(new Date());
 		controller.update(content);
+		if(content.getPickListId()!=0) {
+			this.setPosition(content);
+		}
+
+	}
+
+	public void updateReelForPickList(Reel content, Reel toRemove) throws Exception {
+		content.setUpdated(new Date());
+		controller.update(content);
+		this.setPositionOnDelete(toRemove);
+	}
+	
+	public void setPosition(Reel content) throws Exception {
+        mediaManager.setPosition(content);
+    }
+
+	private void setPositionOnDelete(Reel removed) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new Reel());
+		Reel temp = new Reel();
+		temp.setPickListId(removed.getPickListId());
+		puller.addSearch(temp);
+		puller.setSortBy(new Reel().getTableName(), Reel.POSITION_COLUMN, true);
+		CompEntities allReels = controller.pullCompEntities(puller, 0, 0);
+		if(allReels.howMany() > 0) {
+			Reel first = (Reel)allReels.get(0);
+			first.setPosition(1);
+			this.setPosition(first);
+		}
 	}
 	
 	public PickList getPickList(PickList content) throws Exception {

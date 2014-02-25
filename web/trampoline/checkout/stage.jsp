@@ -52,6 +52,7 @@ CompEntities drivers = driverMgr.searchDriver(driver, Driver.NAME_COLUMN, true);
 
 CompEntities circuits = picklistMgr.getReelCircuits();
 CompEntities pickReels = picklistMgr.getReelsOnPickList(content);
+pickReels.sortByMethodName("getPosition", true);
 
 String tempURL; //var for url expression
 %>

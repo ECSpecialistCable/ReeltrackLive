@@ -8,6 +8,8 @@ import javax.servlet.*;
 import com.monumental.trampoline.datasources.*;
 import com.reeltrack.reels.Reel;
 import com.reeltrack.reels.SearchReelsExcelWriter;
+import com.reeltrack.users.RTUser;
+import com.reeltrack.whlocations.WhLocationExcelWriter;
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,6 +54,9 @@ public class DownloadReportServlet extends HttpServlet {
 
 		} else if (reportType != null && reportType.equals("export_search_reels")) {
 			this.downloadSearchReelsExcel(request, response, request.getParameter("job_code"));
+
+		} else if (reportType != null && reportType.equals("export_whlocation")) {
+			this.downloadWhLocationsExcel(request, response, request.getParameter(RTUser.CUSTOMER_ID_COLUMN));
 
 		}
 	}
@@ -370,6 +375,43 @@ public class DownloadReportServlet extends HttpServlet {
 			// Set the Respnse
 	        response.setContentType("application/octet-stream");
 			response.setHeader( "Content-Disposition", "attachment; filename=\"search_reels_" + df.format(today) +".xls\"" );
+
+	        // Stream
+			try {
+	        	wb.write(op);
+			} catch(Exception e) {
+				e.printStackTrace();
+			} finally {
+	        	op.flush();
+	        	op.close();
+				wb = null;
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			dbResources.close();
+		}
+	}
+
+	private void downloadWhLocationsExcel(HttpServletRequest request, HttpServletResponse response, String customerId) {
+		Date today = new Date();
+		SimpleDateFormat df = new SimpleDateFormat("MMddyyyy");
+		DbResources dbResources = new DbResources();
+		JspFactory factory = JspFactory.getDefaultFactory();
+		PageContext pageContext = factory.getPageContext(this, request, response, null, true, 0, true);
+		
+		WhLocationExcelWriter writer = new WhLocationExcelWriter(pageContext, dbResources);
+
+		try {
+			HSSFWorkbook wb = writer.writeLocations(customerId);
+
+	        ServletOutputStream op = response.getOutputStream();
+	        ServletContext context  = getServletConfig().getServletContext();
+	        //String mimetype = context.getMimeType(filename);
+
+			// Set the Respnse
+	        response.setContentType("application/octet-stream");
+			response.setHeader( "Content-Disposition", "attachment; filename=\"wh_locations_" + df.format(today) +".xls\"" );
 
 	        // Stream
 			try {

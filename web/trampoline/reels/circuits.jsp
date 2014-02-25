@@ -58,6 +58,10 @@ int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
 <admin:title text="<%= tempURL %>" />
 <notifier:show_message />
 
+<% if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) { %>
+    <h2 style="color:red;">Reel is currently checked out. Quantity on reel cannot be verified until reel is returned to warehouse.</h2>
+<% } %>
+
 <% if(remainingQty<0) { %>
     <h2 style="color:red;">ALERT: REEL SHOWS NEGATIVE QUANTITY</h2>
 <% } %>

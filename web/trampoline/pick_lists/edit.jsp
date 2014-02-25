@@ -95,6 +95,7 @@ session.setAttribute("pick_lists_edit_circuit",circuit);
 CompEntities reels = picklistMgr.searchReelsForPickList(reel, circuit);
 
 CompEntities pickReels = picklistMgr.getReelsOnPickList(content);
+pickReels.sortByMethodName("getPosition", true);
 
 String tempURL; //var for url expression
 %>
@@ -136,8 +137,9 @@ String tempURL; //var for url expression
 	<admin:box_begin color="false" />
 	<listing:begin />
 	    <listing:header_begin />
-	    	<listing:header_cell first="true" width="45" name="CRID #"  />
-	        <listing:header_cell name="Reel Tag / Desc." />
+			<listing:header_cell first="true" name="#" width="70" />
+	    	<listing:header_cell width="45" name="CRID #"  />
+			<listing:header_cell name="Reel Tag / Desc." />
 	        <listing:header_cell width="100" name="Cust P/N" />
 	        <listing:header_cell width="100" name="Type" />
 	        <listing:header_cell width="40" name="Qty" />
@@ -147,6 +149,18 @@ String tempURL; //var for url expression
 	    <% for(int i=0; i<pickReels.howMany(); i++) { %>
 	    <% Reel reel3 = (Reel)pickReels.get(i); %>
 	    <listing:row_begin row="<%= new Integer(i).toString() %>" />
+			<listing:cell_begin width="50"/>
+				<form:begin_inline name="<%= i + "_update" %>" action="pick_lists/process.jsp" />
+					<form:select_begin name="<%= Reel.POSITION_COLUMN %>" onchange="test" />
+					<% for(int pos=0;pos<pickReels.howMany(); pos++) { %>
+						<form:option value="<%= new Integer(pos+1).toString() %>" name="<%= new Integer(pos+1).toString() %>" match="<%= new Integer(reel3.getPosition()).toString() %>" />
+					<% } %>
+					<form:select_end />
+					<form:hidden name="submit_action" value="update_reel_position" />
+					<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(reel3.getId()).toString() %>" />
+					<form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
+				<form:end_inline />
+			<listing:cell_end />
 	    	<listing:cell_begin />
 	            <%= reel3.getCrId() %>
 	        <listing:cell_end />
@@ -229,7 +243,7 @@ String tempURL; //var for url expression
 	    <listing:header_end />
 	    <% for(int i=0; i<reels.howMany(); i++) { %>
 	    <% Reel reel2 = (Reel)reels.get(i); %>
-	    <listing:row_begin row="<%= new Integer(i).toString() %>" />
+	    <listing:row_begin row="<%= new Integer(i).toString() %>" />			
 	    	<listing:cell_begin />
 	            <%= reel2.getCrId() %>
 	        <listing:cell_end />

@@ -12,8 +12,10 @@
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="securityMgr" class="com.reeltrack.users.RTUserMgr" scope="request"/>
 <jsp:useBean id="picklistMgr" class="com.reeltrack.picklists.PickListMgr" scope="request"/>
+<jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" scope="request"/>
 <% securityMgr.init(dbResources); %>
 <% picklistMgr.init(pageContext,dbResources); %>
+<% reelMgr.init(pageContext,dbResources); %>
 <% CompProperties props = new CompProperties(); %>
 
 <% 
@@ -67,9 +69,21 @@ if(action.equals("add_reel")) {
 if(action.equals("delete_reel")) {
     Reel content = new Reel();
     content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+	Reel toRemove = reelMgr.getReel(content);
     content.setPickListId(0);
-    picklistMgr.updateReelForPickList(content);
+    picklistMgr.updateReelForPickList(content, toRemove);
     redirect = request.getContextPath() + "/trampoline/" + "pick_lists/edit.jsp?" + PickList.PARAM + "=" + contid ;
+}
+
+if(action.equals("update_reel_position")) {
+	Reel reel = new Reel();
+	reel.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+	reel.setForeignKeyId(Integer.parseInt(request.getParameter(PickList.PARAM)));
+	reel.setPosition(Integer.parseInt(request.getParameter(Reel.POSITION_COLUMN )));
+
+	picklistMgr.setPosition(reel);
+
+	redirect = request.getContextPath() + "/trampoline/" + "pick_lists/edit.jsp?" + PickList.PARAM + "=" + contid ;
 }
 
 /*

@@ -54,6 +54,16 @@ String tempUrl =""; //var for url expression
     <form:end />
 <admin:box_end />
 
+<form:begin name="export_whlocation" action="../DownloadReportServlet" />
+	<form:row_begin />
+            <form:buttonset_begin align="left" padding="10"/>
+                <form:submit_inline button="submit" waiting="true" name="Export To Excel" action="test" />
+            <form:buttonset_end />
+        <form:row_end />
+		<form:hidden name="reportType" value="export_whlocation" />
+		<form:hidden name="<%= RTUser.CUSTOMER_ID_COLUMN %>" value="<%= user.getCustomerId() %>" />
+	<form:end />
+
 <% if(contents.howMany() > 0) { %>
     <admin:subtitle text="Warehouse Locations" />
     <admin:box_begin color="false" />

@@ -5,8 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.*;
+import com.monumental.trampoline.component.Positionable;
+import com.reeltrack.utilities.ContentPositionable;
 
-public class Reel extends CompCMEntity {
+public class Reel extends ContentPositionable implements Positionable {
 	public static final String PARAM = "reel_param";
 	public static final String CR_ID_COLUMN = "cr_id";
 	public static final String JOB_ID_COLUMN = "job_id";
@@ -116,6 +118,30 @@ public class Reel extends CompCMEntity {
 	public String getTitle() {
 		return this.getReelTag();
 	}
+
+	public int getPosition() {
+        return this.getData().getInteger(POSITION_COLUMN, new Integer(0));
+    }
+
+    public void setPosition(int i) {
+        this.getData().setInteger(POSITION_COLUMN, new Integer(i));
+    }
+
+    public void setForeignKeyId(int fkID) {
+        this.setPickListId(fkID);
+    }
+
+    public int getForeignKeyId() {
+        return this.getPickListId();
+    }
+
+	public int getId() {
+        return this.getData().getInteger(ID_COLUMN, new Integer(0));
+    }
+
+    public void setId(int id) {
+        this.getData().setInteger(ID_COLUMN, new Integer(id));
+    }
 
 	public int getEstimatedOnReelQty() {
 		int quantity = 0;
@@ -828,5 +854,5 @@ public class Reel extends CompCMEntity {
 		} else {
 			return "";
 		}
-	}
+	}	
 }
