@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.servlet.jsp.PageContext;
 import com.reeltrack.users.RTUser;
+import java.io.File;
 
 public class CustomerMgr extends CompWebManager {
 	CompDbController controller;
@@ -71,6 +72,13 @@ public class CustomerMgr extends CompWebManager {
 	}
 	
 	public void updateCustomerJob(CustomerJob content) throws Exception {
+		controller.update(content);
+	}
+
+	public void updateCustomerJob(CustomerJob content, File file, String basePath) throws Exception {
+		content.setUpdated(new Date());
+		this.controller.saveFileToCompEntityDirectory(file, basePath, content, false);
+		content.setBOMPdf(file.getName());
 		controller.update(content);
 	}
 

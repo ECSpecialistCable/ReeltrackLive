@@ -24,6 +24,7 @@ public class CableTechData extends CompCMEntity {
 	public static final String EST_CU_WEIGHT_COLUMN = "est_cu_weight";
 	public static final String CON_AL_WEIGHT_COLUMN = "con_al_weight";
 	public static final String CON_CU_WEIGHT_COLUMN = "con_cu_weight";
+	public static final String USAGE_TRACKING_COLUMN = "usage_tracking";
 
 	public int getConAlWeight() {
 		return this.getData().getInteger(CON_AL_WEIGHT_COLUMN, 0);
@@ -183,6 +184,14 @@ public class CableTechData extends CompCMEntity {
 	
 	public void setConductorArea(int id) {
 		this.getData().setInteger(CONDUCTOR_AREA_COLUMN, id);
+	}
+
+	public String getUsageTracking() {
+		return this.getData().getString(USAGE_TRACKING_COLUMN, "");
+	}
+
+	public void setUsageTracking(String name) {
+		this.getData().setString(USAGE_TRACKING_COLUMN, name);
 	}
 
 	@Override

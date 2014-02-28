@@ -16,4 +16,5 @@
 	<% } %>
 		<admin:ajax_load url="glossary/reeltrack_glossary.jsp" label="View Glossary" />
 		<admin:ajax_load url="file_cabinets/search.jsp" label="File Cabinet" />
+		<admin:ajax_load url="bill_of_materials/search.jsp" label="Bill of Materials" />
 <% } %>

@@ -100,6 +100,9 @@ public class Reel extends ContentPositionable implements Positionable {
 
 	private int temp_pull_amount = 0;
 
+	private int reelsCountBOM = 0;
+	private int reelsOrderedBOM = 0;
+
 	@Override
 	public String getTableName() {
 		return "reels";
@@ -854,5 +857,21 @@ public class Reel extends ContentPositionable implements Positionable {
 		} else {
 			return "";
 		}
-	}	
+	}
+
+	public void setReelsCountForBOM(int count) {
+		this.reelsCountBOM = count;
+	}
+
+	public int getReelsCountForBOM() {
+		return this.reelsCountBOM;
+	}
+
+	public void setReelsOrderedForBOM(int count) {
+		this.reelsOrderedBOM = count;
+	}
+
+	public int getReelsOrderedForBOM() {
+		return this.reelsOrderedBOM;
+	}
 }

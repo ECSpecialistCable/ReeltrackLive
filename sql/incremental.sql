@@ -317,3 +317,7 @@ alter table reel_circuits add act_length int default 0;
 
 /* 02/25/2014 */
 alter table reels add pos int default 0;
+
+/* 02/28/2014 */
+alter table customer_jobs add bom_pdf varchar(255);
+alter table cable_tech_data add usage_tracking varchar(255);

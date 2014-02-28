@@ -691,6 +691,28 @@ public class ReelMgr extends CompWebManager {
 		return toReturn;
 	}
 
+	public CompEntities getReelsDataForBOM(String jobCode) throws Exception {
+		CompProperties props = new CompProperties();
+		DbProcessor processor = new DbProcessor(resources.getConnection(props.getDatabase(this.getConfiguration())));
+		String queryString = "select distinct *, count(reels.id) as reels_count, sum(ordered_quantity) as total_ordered from reels where job_code='" + jobCode + "' group by customer_pn;";
+		EntityList datalist = processor.getRows(queryString);
+
+		CompEntities toReturn = new CompEntities();
+		while(datalist.hasNext()) {
+			Entity entity = datalist.nextEntity();
+			Reel centity = new Reel();
+			centity.setData(entity);
+            centity.setReelsCountForBOM(Integer.parseInt(entity.getEntityValue("reels_count").getColumnValue().toString()));
+            centity.setReelsOrderedForBOM(Integer.parseInt(entity.getEntityValue("total_ordered").getColumnValue().toString()));
+
+			CableTechData techData = this.getCableTechData(centity);
+			centity.setCompEntity(CableTechData.PARAM, techData);
+			toReturn.add(centity);
+		}
+		
+		return toReturn;
+	}
+
 	public void cleanReel(Reel content, String realRootContextPath) throws Exception {
 		CompEntities allLogs = this.getReelLogs(content);
 		for(int i=0; i < allLogs.howMany(); ++i) {

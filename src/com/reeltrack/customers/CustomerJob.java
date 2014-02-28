@@ -8,6 +8,7 @@ public class CustomerJob extends CompCMEntity {
 	public static final String CODE_COLUMN = "code";
 	public static final String CUSTOMER_ID_COLUMN = "customer_id";
 	public static final String AUTO_PRINT_REEL_TAG_COLUMN = "auto_print_reel_tags";
+	public static final String BOM_PDF_COLUMN = "bom_pdf";
 
 	@Override
 	public String getTableName() {
@@ -66,5 +67,13 @@ public class CustomerJob extends CompCMEntity {
 			toReturn = true;	
 		}
 		return toReturn;
+	}
+
+	public String getBOMPdf() {
+		return this.getData().getString(BOM_PDF_COLUMN, "");
+	}
+
+	public void setBOMPdf(String note) {
+		this.getData().setString(BOM_PDF_COLUMN, note);
 	}
 }
