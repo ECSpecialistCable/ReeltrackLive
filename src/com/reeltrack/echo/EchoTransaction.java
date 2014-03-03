@@ -15,6 +15,7 @@ public class EchoTransaction extends CompCMEntity {
 	public static final String ACTION_COLUMN = "action";
 	public static final String REEL_ID_COLUMN = "reel_id";
 	public static final String NOTES_COLUMN = "notes";
+	public static final String UNIQUE_ID_COLUMN = "UniqueID";
 
 	@Override
 	public String getTableName() {
@@ -34,6 +35,14 @@ public class EchoTransaction extends CompCMEntity {
 	public String getTitle() {
 		return "";
 	}
+
+   	public int getUniqueId() {
+		return this.getData().getInteger(UNIQUE_ID_COLUMN, new Integer(0));
+    }
+
+    public void setUniqueId(int id) {
+		this.getData().setInteger(UNIQUE_ID_COLUMN, new Integer(id));
+    }
 
 	public String getAction() {
 		return this.getData().getString(ACTION_COLUMN, "");

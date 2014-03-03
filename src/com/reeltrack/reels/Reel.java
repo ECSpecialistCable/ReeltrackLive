@@ -56,6 +56,7 @@ public class Reel extends ContentPositionable implements Positionable {
 	public static final String INVOICE_DATE_COLUMN = "ECSInvoiceDate";
 	public static final String IS_STEEL_REEL_COLUMN = "is_steel_reel";
 	public static final String BOTTOM_FOOT_NOT_VISIBLE_COLUMN = "bottom_foot_not_visible";
+	public static final String UNIQUE_ID_COLUMN = "UniqueID";
 
 	public static final String PN_VOLT_COLUMN = "pn_volt";
 	public static final String PN_GAUGE_COLUMN = "pn_gauge";
@@ -691,6 +692,14 @@ public class Reel extends ContentPositionable implements Positionable {
 			System.out.println("setting qnty by manual");
 			return this.getReceivedQuantity() - this.getCableUsedQuantity();
 		}
+    }
+
+   	public int getUniqueId() {
+		return this.getData().getInteger(UNIQUE_ID_COLUMN, new Integer(0));
+    }
+
+    public void setUniqueId(int id) {
+		this.getData().setInteger(UNIQUE_ID_COLUMN, new Integer(id));
     }
 
    	public int getOnReelQuantity() {

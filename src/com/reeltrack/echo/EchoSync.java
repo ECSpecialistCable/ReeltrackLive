@@ -61,11 +61,8 @@ public class EchoSync extends CompManager {
 			echoTrans = (EchoTransaction)echoTranses.get(x);
 			if(echoTrans.getAction().equalsIgnoreCase("add")) {
 				Reel reel = new Reel();
-				reel.setOrdNo(echoTrans.getOrdNo());
-				reel.setPORevision(echoTrans.getPORevision());
-				reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
-				reel.setReelSerial(echoTrans.getReelSerial());
-				System.out.println("Reel to ADD:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+				reel.setUniqueId(echoTrans.getUniqueId());
+				System.out.println("Reel to ADD:" + reel.getUniqueId());
 				CompEntityPuller uPuller = new CompEntityPuller(reel);
 				uPuller.addSearch(reel);
 				Reel cloudReel = (Reel)controllerRT.pullCompEntity(uPuller);
@@ -74,8 +71,12 @@ public class EchoSync extends CompManager {
 					echoTrans.setSyncedDateDate(new Date());
 					echoTrans.setNote("Reel already exists in ReelTrack");
 					this.updateTransaction(echoTrans);
-					System.out.println("REEL ALREADY EXISTS ON REELTRACK:" + cloudReel.getOrdNo() + "," + cloudReel.getPORevision() + "," + cloudReel.getAbsoluteItem() + "," + cloudReel.getReelSerial() + ",");
+					System.out.println("REEL ALREADY EXISTS ON REELTRACK:" + cloudReel.getUniqueId());
 				} else {
+					reel.setOrdNo(echoTrans.getOrdNo());
+					reel.setPORevision(echoTrans.getPORevision());
+					reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
+					reel.setReelSerial(echoTrans.getReelSerial());
 					boolean ok = this.fillReelAllocation(reel);
 					if(ok) {
 						this.fillCustomerOrderHdr(reel);
@@ -89,26 +90,39 @@ public class EchoSync extends CompManager {
 						reel.setPnGauge(reel.getEcsPN().substring(4,7));
 						reel.setPnConductor(reel.getEcsPN().substring(7,9));
 						this.addReel(echoTrans,reel,techData);
-						System.out.println("Added reel:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+						System.out.println("Added reel:" + reel.getUniqueId());
 					} else {
 						echoTrans.setReelId(-1);
 						echoTrans.setSyncedDateDate(new Date());
 						echoTrans.setNote("Reel not found in ECHO");
 						this.updateTransaction(echoTrans);
-						System.out.println("COULDN'T GET ECHO REEL:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+						System.out.println("COULDN'T GET ECHO REEL:" + reel.getUniqueId());
 					}
 				}
 			} else if(echoTrans.getAction().equalsIgnoreCase("update")) {
 				Reel reel = new Reel();
-				reel.setOrdNo(echoTrans.getOrdNo());
-				reel.setPORevision(echoTrans.getPORevision());
-				reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
-				reel.setReelSerial(echoTrans.getReelSerial());
-				System.out.println("Reel to UPDATE:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+				reel.setUniqueId(echoTrans.getUniqueId());
+				System.out.println("Reel to UPDATE:" + reel.getUniqueId());
 				CompEntityPuller uPuller = new CompEntityPuller(reel);
 				uPuller.addSearch(reel);
 				reel = (Reel)controllerRT.pullCompEntity(uPuller);
+				if(!reel.hasData() || reel.getId()==0) {
+					System.out.println("Reel to UPDATE (no unique id, trying by old method):" + reel.getUniqueId());
+					reel = new Reel();
+					reel.setOrdNo(echoTrans.getOrdNo());
+					reel.setPORevision(echoTrans.getPORevision());
+					reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
+					reel.setReelSerial(echoTrans.getReelSerial());
+					uPuller = new CompEntityPuller(reel);
+					uPuller.addSearch(reel);
+					reel = (Reel)controllerRT.pullCompEntity(uPuller);
+				}
 				if(reel.hasData() && reel.getId()!=0) {
+					reel.setUniqueId(echoTrans.getUniqueId());
+					reel.setOrdNo(echoTrans.getOrdNo());
+					reel.setPORevision(echoTrans.getPORevision());
+					reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
+					reel.setReelSerial(echoTrans.getReelSerial());
 					boolean ok = this.fillReelAllocation(reel);
 					if(ok) {
 						this.fillCustomerOrderHdr(reel);
@@ -120,13 +134,13 @@ public class EchoSync extends CompManager {
 						reel.setPnGauge(reel.getEcsPN().substring(4,7));
 						reel.setPnConductor(reel.getEcsPN().substring(7,9));
 						this.updateReel(echoTrans,reel);
-						System.out.println("Updated reel:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+						System.out.println("Updated reel:" + reel.getUniqueId());
 					} else {
 						echoTrans.setReelId(-1);
 						echoTrans.setSyncedDateDate(new Date());
 						echoTrans.setNote("Reel not found in ECHO");
 						this.updateTransaction(echoTrans);
-						System.out.println("COULDN'T GET ECHO REEL:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+						System.out.println("COULDN'T GET ECHO REEL:" + reel.getUniqueId());
 					}
 				} else {
 					echoTrans.setReelId(-1);
@@ -137,17 +151,14 @@ public class EchoSync extends CompManager {
 				}
 			} else if(echoTrans.getAction().equalsIgnoreCase("delete")) {
 				Reel reel = new Reel();
-				reel.setOrdNo(echoTrans.getOrdNo());
-				reel.setPORevision(echoTrans.getPORevision());
-				reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
-				reel.setReelSerial(echoTrans.getReelSerial());
-				System.out.println("Reel to DELETE:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+				reel.setUniqueId(echoTrans.getUniqueId());
+				System.out.println("Reel to DELETE:" + reel.getUniqueId());
 				CompEntityPuller uPuller = new CompEntityPuller(reel);
 				uPuller.addSearch(reel);
 				reel = (Reel)controllerRT.pullCompEntity(uPuller);
 				if(reel.hasData() && reel.getId()!=0) {
 //					this.deleteReel(echoTrans,reel);
-					System.out.println("Deleted Reel:" + reel.getOrdNo() + "," + reel.getPORevision() + "," + reel.getAbsoluteItem() + "," + reel.getReelSerial() + ",");
+					System.out.println("Deleted Reel:" + reel.getUniqueId());
 				} else {
 					echoTrans.setReelId(-1);
 					echoTrans.setSyncedDateDate(new Date());
@@ -273,7 +284,7 @@ public class EchoSync extends CompManager {
 
 	public boolean fillReelAllocation(Reel reel) throws Exception {
 		DbProcessor processor = new DbProcessor(conECHO);
-		String queryString = "select * from ReelAllocation where ordno='" + reel.getOrdNo() + "' and PORevision=" + reel.getPORevision() + " and absoluteitem=" + reel.getAbsoluteItem() + " and reelserial=" + reel.getReelSerial();
+		String queryString = "select * from ReelAllocation where UniqueID=" + reel.getUniqueId();
 		System.out.println(queryString);
 		EntityList datalist = processor.getRows(queryString);
 		if(datalist.hasNext()) {
@@ -348,7 +359,7 @@ public class EchoSync extends CompManager {
 
 	public boolean fillCableTrac(Reel reel) throws Exception {
 		DbProcessor processor = new DbProcessor(conECHO);
-		String queryString = "select * from CableTrac where ECSOrder='" + reel.getOrdNo() + "' and PORevision=" + reel.getPORevision() + " and absoluteitem=" + reel.getAbsoluteItem() + " and reelserial=" + reel.getReelSerial();
+		String queryString = "select * from CableTrac where UniqueID=" + reel.getUniqueId();
 		EntityList datalist = processor.getRows(queryString);
 		if(datalist.hasNext()) {
 			System.out.println("--Cable Trac");
