@@ -456,7 +456,7 @@ public class Reel extends ContentPositionable implements Positionable {
 		if(this.getManufacturer().contains(" & ")) {
 			return (this.getManufacturer().replaceAll(" & ", " "));
 		}
-		return this.getCableDescription();
+		return this.getManufacturer();
 	}
 
 	public String getManufacturer() {
