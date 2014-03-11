@@ -48,6 +48,8 @@ Reel content = new Reel();
 content.setId(contid);
 content = (Reel)reelMgr.getReel(content);
 
+CableTechData techData = reelMgr.getCableTechData(content);
+
 WhLocation location = new WhLocation();
 location.setCustomerId(user.getCustomerId());
 CompEntities locations = locationMgr.searchWhLocation(location, WhLocation.NAME_COLUMN, true);
@@ -113,6 +115,7 @@ String tempURL; //var for url expression
 			<% } else { %>
 				<form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
 			<% } %>
+			<%--
 			<% if(canEdit) { %>
 			<form:row_begin />
 	            <form:label name="" label="Has Markers:" />
@@ -126,22 +129,35 @@ String tempURL; //var for url expression
         	<% } else { %>
         		<form:info label="Has Markers:" text="<%= content.getHasReelMarkers() %>" />
         	<% } %>
+        	--%>
         	<% if(canEdit) { %>
+        		<%--
         		<form:row_begin />
                     <form:label name="" label="Bottom Foot Not Visible?:" />
                     <form:content_begin />      
                     <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />       
                     <form:content_end />                
                 <form:row_end />
+                --%>
+                <%--
         		<form:textfield label="Bottom Foot #:" pixelwidth="40" name="<%= Reel.BOTTOM_FOOT_COLUMN %>" value="<%= new Integer(content.getBottomFoot()).toString() %>" />
+				--%>
+				<% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+				<form:textfield label="Orig Top Foot #:" pixelwidth="40" name="<%= Reel.ORIG_TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
 				<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+				<% } %>
 			<% } else { %>
+				<%--
 			    <% if(content.hasBottomFootNotVisible()) { %>
 	                <form:info label="Bottom Foot #:" text="Not Visible" />
 	            <% } else { %>
 	                <form:info label="Bottom Foot #:" text="<%= new Integer(content.getBottomFoot()).toString() %>" />
 	            <% } %>
+	            --%>
+	            <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+	            <form:info label="Orig Top Foot #:" text="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
             	<form:info label="Top Foot #:" text="<%= new Integer(content.getTopFoot()).toString() %>" />
+            	<% } %>
 			<% } %>
 			<form:textfield label="Steel Reel Serial #:" name="<%= Reel.STEEL_REEL_SERIAL_COLUMN %>" value="<%= content.getSteelReelSerial() %>" />
 			<form:info label="Received On:" text="<%= content.getReceivedOnDateString() %>" />

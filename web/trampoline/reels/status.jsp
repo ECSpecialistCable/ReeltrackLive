@@ -50,6 +50,8 @@ Reel content = new Reel();
 content.setId(contid);
 content = (Reel)reelMgr.getReel(content);
 
+CableTechData techData = reelMgr.getCableTechData(content);
+
 Customer customer = new Customer();
 customer.setId(user.getCustomerId());
 customer = customerMgr.getCustomer(customer);
@@ -165,6 +167,7 @@ String[] carrierList = reelMgr.getCarriers();
                 <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
                 <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
                 <form:textfield pixelwidth="40" label="Received Qty:" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
+                <%--
                 <form:textfield pixelwidth="40" label="Bottom Ft:" name="<%= Reel.BOTTOM_FOOT_COLUMN %>" value="<%= new Integer(content.getBottomFoot()).toString() %>" />
                 <form:row_end />
                 <form:row_begin />
@@ -173,8 +176,16 @@ String[] carrierList = reelMgr.getCarriers();
                     <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />       
                     <form:content_end />                
                 <form:row_end />
-                <form:textfield pixelwidth="40" label="Top Ft:" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
-                <form:textfield pixelwidth="40" label="Received lbs:" name="<%= Reel.RECEIVED_WEIGHT_COLUMN %>" value="<%= new Integer(content.getReceivedWeight()).toString() %>" />
+                --%>
+
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                    <form:textfield pixelwidth="40" label="Orig Top Ft:" name="<%= Reel.ORIG_TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                <% } %>
+
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+                    <form:textfield pixelwidth="40" label="Received lbs:" name="<%= Reel.RECEIVED_WEIGHT_COLUMN %>" value="<%= new Integer(content.getReceivedWeight()).toString() %>" />
+                <% } %>
+
                 <form:row_begin />
 	                <form:label name="" label="Warehouse<br />Location:" />
 	                <form:content_begin />
@@ -263,8 +274,12 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
                 <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
             
             <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
-            <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
-            <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+            <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+            <% } %>
+            <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+                <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+            <% } %>
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
             <form:row_begin />
     		<form:label name="" label="" />
@@ -309,8 +324,14 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
                 <form:row_end />
                 <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
             <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
-            <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
-            <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+            
+            <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+            <% } %>
+            <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+                <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+            <% } %>
+
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
             <form:row_begin />
     		<form:label name="" label="" />
@@ -357,8 +378,12 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
 <admin:subtitle text="Check IN Reel" />
 <admin:box_begin />
 	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
-		<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />   
-        <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+		<% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+            <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+        <% } %>
+        <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+            <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+        <% } %>
         <form:row_begin />
         <form:label name="" label="Warehouse<br />Location:" />
         <form:content_begin />
@@ -408,12 +433,34 @@ if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
 			<form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
 			<form:info label="Steel Reel Serial #:" text="<%= content.getSteelReelSerial() %>" />
 			<form:info label="Received On:" text="<%= content.getReceivedOnDateString() %>" />
+            <%--
             <% if(content.hasBottomFootNotVisible()) { %>
                 <form:info label="Bottom Foot #:" text="Not Visible" />
             <% } else { %>
                 <form:info label="Bottom Foot #:" text="<%= new Integer(content.getBottomFoot()).toString() %>" />
             <% } %>
-            <form:info label="Top Foot #:" text="<%= new Integer(content.getTopFoot()).toString() %>" />
+            --%>
+
+            <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                <%--
+                <form:textfield pixelwidth="40" label="Bottom Ft:" name="<%= Reel.BOTTOM_FOOT_COLUMN %>" value="<%= new Integer(content.getBottomFoot()).toString() %>" />
+                <form:row_begin />
+                    <form:label name="" label="Bottom Foot Not Visible?:" />
+                    <form:content_begin />      
+                    <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />       
+                    <form:content_end />                
+                <form:row_end />
+                --%>
+                <form:info label="Orig Top Foot #:" text="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                <form:info label="Top Foot #:" text="<%= new Integer(content.getTopFoot()).toString() %>" />
+            <% } else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+                <form:info label="Received lbs:" text="<%= new Integer(content.getReceivedWeight()).toString() %>" />
+                <form:info label="Current lbs:" text="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+            <% } else if(techData.getUsageTracking().equals(CableTechData.USAGE_QUANTITY_PULLED)) { %>
+                <form:info label="Cable Used Qty:" text="<%= new Integer(content.getCableUsedQuantity()).toString() %>" />
+            <% } %>
+            <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
+            
 			<form:info label="Times Checked OUT:" text="<%= new Integer(content.getTimesCheckedOut()).toString() %>" />
 			<form:info label="Times Checked IN:" text="<%= new Integer(content.getTimesCheckedIn()).toString() %>" />
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />

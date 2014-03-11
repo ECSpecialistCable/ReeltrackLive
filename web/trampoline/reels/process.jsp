@@ -88,10 +88,7 @@ if(action.equals("mark_received")) {
     content.setReceivedQuantity(Integer.parseInt(request.getParameter(Reel.RECEIVED_QUANTITY_COLUMN)));
     } catch(Exception e) {}
     try {
-    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
-    } catch(Exception e) {}
-    try {
-    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    content.setOrigTopFoot(Integer.parseInt(request.getParameter(Reel.ORIG_TOP_FOOT_COLUMN)));
     } catch(Exception e) {}
     try {
     content.setReceivedWeight(Integer.parseInt(request.getParameter(Reel.RECEIVED_WEIGHT_COLUMN)));
@@ -114,6 +111,7 @@ if(action.equals("mark_received")) {
 		reelMgr.addReelIssue(issue);
 	}
 
+    /*
     try {
     content.setBottomFoot(Integer.parseInt(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)));
     } catch(Exception e) {}
@@ -132,6 +130,8 @@ if(action.equals("mark_received")) {
             content.setReceivedQuantity(content.getTopFoot()-content.getBottomFoot());
         }
     }
+    */
+
     reelMgr.markReelReceived(content);
     session.removeAttribute("RT");
     session.removeAttribute("PL");
@@ -142,9 +142,11 @@ if(action.equals("mark_staged")) {
     Reel content = new Reel();
     content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
 	Reel prevContent = reelMgr.getReel(content);
-    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     try {
-    content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
+        content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
+        content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
     } catch(Exception e) {}
     reelMgr.markReelStaged(content);
 
@@ -176,9 +178,11 @@ if(action.equals("mark_checkedout")) {
     Reel content = new Reel();
     content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
 	Reel prevContent = reelMgr.getReel(content);
-    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     try {
-    content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
+        content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
+        content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
     } catch(Exception e) {}
     reelMgr.markReelCheckedOut(content);
 
@@ -209,9 +213,11 @@ if(action.equals("mark_checkedout")) {
 if(action.equals("mark_checkedin")) {
     Reel content = new Reel();
     content.setId(contid);
-    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     try {
-    content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
+        content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
+        content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
     } catch(Exception e) {}
     content.setWharehouseLocation(request.getParameter(Reel.WHAREHOUSE_LOCATION_COLUMN));
     String driver = request.getParameter(Driver.PARAM);
@@ -342,6 +348,7 @@ if(action.equals("update")) {
         content.setManufacturer(request.getParameter(Reel.MANUFACTURER_COLUMN));
     }
 
+    /*
     if(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)!=null) {
         content.setBottomFoot(Integer.parseInt(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)));
         if(request.getParameter(Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN)!=null) {
@@ -354,15 +361,20 @@ if(action.equals("update")) {
             content.setBottomFootNotVisible("n");
         }
     }
+    */
+    if(request.getParameter(Reel.ORIG_TOP_FOOT_COLUMN)!=null) {
+        content.setOrigTopFoot(Integer.parseInt(request.getParameter(Reel.ORIG_TOP_FOOT_COLUMN)));
+    }
 
     if(request.getParameter(Reel.TOP_FOOT_COLUMN)!=null) {
         content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     }
 
+    /*
     if(content.getTopFoot()>0 || content.getBottomFoot()>0) {
         content.setHasReelMarkers("y");
     }
-    
+    */
     content.setSteelReelSerial(request.getParameter(Reel.STEEL_REEL_SERIAL_COLUMN));
     reelMgr.updateReel(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/edit.jsp?" + Reel.PARAM + "=" + contid ;

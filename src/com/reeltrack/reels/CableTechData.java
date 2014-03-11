@@ -26,6 +26,10 @@ public class CableTechData extends CompCMEntity {
 	public static final String CON_CU_WEIGHT_COLUMN = "con_cu_weight";
 	public static final String USAGE_TRACKING_COLUMN = "usage_tracking";
 
+	public static final String USAGE_FOOT_MARKERS = "foot markers";
+	public static final String USAGE_WEIGHT = "weight";
+	public static final String USAGE_QUANTITY_PULLED = "quantity pulled";
+
 	public int getConAlWeight() {
 		return this.getData().getInteger(CON_AL_WEIGHT_COLUMN, 0);
 	}

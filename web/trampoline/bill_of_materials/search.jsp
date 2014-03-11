@@ -55,11 +55,11 @@ String tempUrl =""; //var for url expression
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell width="80" first="true" name="Cust P/n" />
-                <listing:header_cell width="250" name="Description" />
-                <listing:header_cell width="20" name="#Reels" />
-                <listing:header_cell width="90" name="Ordered Qty" />
+                <listing:header_cell width="100" name="Description" />
+                <listing:header_cell width="100" name="Reels" />
+                <listing:header_cell width="100" name="Qty" />
                 <listing:header_cell width="100" name="Usage Tracking" />
-                <listing:header_cell colspan="2" name="Data Sheet" />
+                <listing:header_cell width="100" colspan="2" name="Data Sheet" />
             <listing:header_end />
             <% for(int i=0; i<contents.howMany(); i++) { %>
             <% Reel content = (Reel)contents.get(i); %>
@@ -85,9 +85,9 @@ String tempUrl =""; //var for url expression
 							<form:select_begin name="<%= CableTechData.USAGE_TRACKING_COLUMN %>" />
 						<% } %>
 							<form:option name="" value="" match="<%= techData.getUsageTracking() %>" />
-							<form:option name="foot markers" value="foot markers" match="<%= techData.getUsageTracking() %>" />
-							<form:option name="weight" value="weight" match="<%= techData.getUsageTracking() %>" />
-							<form:option name="quantity pulled" value="quantity pulled" match="<%= techData.getUsageTracking() %>" />
+							<form:option name="foot markers" value="<%= CableTechData.USAGE_FOOT_MARKERS %>" match="<%= techData.getUsageTracking() %>" />
+							<form:option name="weight" value="<%= CableTechData.USAGE_WEIGHT %>" match="<%= techData.getUsageTracking() %>" />
+							<form:option name="quantity pulled" value="<%= CableTechData.USAGE_QUANTITY_PULLED %>" match="<%= techData.getUsageTracking() %>" />
 						<form:select_end />
 						<form:hidden name="<%= Reel.PARAM %>" value="<%= Integer.toString(content.getId()) %>" />
 						<form:hidden name="<%= CustomerJob.PARAM %>" value="<%= Integer.toString(user.getJobId()) %>" />

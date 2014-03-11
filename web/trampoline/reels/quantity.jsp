@@ -35,6 +35,8 @@ Reel content = new Reel();
 content.setId(contid);
 content = (Reel)reelMgr.getReel(content);
 
+CableTechData techData = reelMgr.getCableTechData(content);
+
 String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
@@ -50,22 +52,24 @@ String tempURL; //var for url expression
     		<form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
     		<form:info label="Shipped Qty:" text="<%= new Integer(content.getShippedQuantity()).toString() %>" />
     		<form:textfield label="Received Qty:" pixelwidth="40" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
-    		<% //if(content.isCalcType(Reel.CALC_TYPE_MARKER)) { %>
+    		<% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                <%--
                 <form:textfield pixelwidth="40" label="Bottom Ft:" name="<%= Reel.BOTTOM_FOOT_COLUMN %>" value="<%= new Integer(content.getBottomFoot()).toString() %>" />
-                <form:row_end />
                 <form:row_begin />
                     <form:label name="" label="Bottom Foot Not Visible?:" />
                     <form:content_begin />      
                     <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />       
                     <form:content_end />                
                 <form:row_end />
+                --%>
+                <form:info label="Orig Top Foot #:" text="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
                 <form:info label="Top Foot #:" text="<%= new Integer(content.getTopFoot()).toString() %>" />
-    		<% //} else if(content.isCalcType(Reel.CALC_TYPE_WEIGHT)) { %>
+    		<% } else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
                 <form:info label="Received lbs:" text="<%= new Integer(content.getReceivedWeight()).toString() %>" />
                 <form:info label="Current lbs:" text="<%= new Integer(content.getCurrentWeight()).toString() %>" />
-            <% //} else if(content.isCalcType(Reel.CALC_TYPE_LENGTH)) { %>
+            <% } else if(techData.getUsageTracking().equals(CableTechData.USAGE_QUANTITY_PULLED)) { %>
                 <form:info label="Cable Used Qty:" text="<%= new Integer(content.getCableUsedQuantity()).toString() %>" />
-            <% //} %>
+            <% } %>
     		<form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 			<form:row_begin />
@@ -77,7 +81,7 @@ String tempURL; //var for url expression
     <form:end />
 <admin:box_end />
 
-<% //if(content.isCalcType(Reel.CALC_TYPE_LENGTH)) { %>
+<% if(techData.getUsageTracking().equals(CableTechData.USAGE_QUANTITY_PULLED)) { %>
 <admin:subtitle text="Record Cable Used Quantity (Cable Pulled)" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
@@ -92,9 +96,9 @@ String tempURL; //var for url expression
 			<form:row_end />
     <form:end />
 <admin:box_end />
-<% //} %>
+<% } %>
 
-<% //if(content.isCalcType(Reel.CALC_TYPE_WEIGHT)) { %>
+<% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
 <admin:subtitle text="Record Current Cable Weight" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
@@ -108,9 +112,9 @@ String tempURL; //var for url expression
             <form:row_end />
     <form:end />
 <admin:box_end />
-<% //} %>
+<% } %>
 
-<% //if(content.isCalcType(Reel.CALC_TYPE_MARKER)) { %>
+<% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
 <admin:subtitle text="Record Current Top Marker" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
@@ -124,7 +128,7 @@ String tempURL; //var for url expression
             <form:row_end />
     <form:end />
 <admin:box_end />
-<% //} %>
+<% } %>
 
 <admin:set_tabset url="reels/_tabset_manage.jsp" thispage="quantity.jsp" content_id_for_tabset="<%= contid %>"/>
 <html:end />

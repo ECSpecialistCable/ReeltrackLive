@@ -38,6 +38,7 @@ public class Reel extends ContentPositionable implements Positionable {
 	public static final String RECEIVED_QUANTITY_COLUMN = "received_quantity";
 	public static final String BOTTOM_FOOT_COLUMN = "bottom_foot";
 	public static final String TOP_FOOT_COLUMN = "top_foot";
+	public static final String ORIG_TOP_FOOT_COLUMN = "orig_top_foot";
 	public static final String CABLE_USED_QUANTITY_COLUMN = "cable_used_quantity";
 	public static final String PICK_LIST_ID_COLUMN = "pick_list_id";
 	public static final String ON_REEL_QUANTITY_COLUMN = "on_reel_quantity";
@@ -666,6 +667,14 @@ public class Reel extends ContentPositionable implements Positionable {
 		this.getData().setInteger(TOP_FOOT_COLUMN, new Integer(id));
     }
 
+   	public int getOrigTopFoot() {
+		return this.getData().getInteger(ORIG_TOP_FOOT_COLUMN, new Integer(0));
+    }
+
+    public void setOrigTopFoot(int id) {
+		this.getData().setInteger(ORIG_TOP_FOOT_COLUMN, new Integer(id));
+    }
+
    	public int getCableUsedQuantity() {
 		return this.getData().getInteger(CABLE_USED_QUANTITY_COLUMN, new Integer(0));
     }
@@ -675,14 +684,14 @@ public class Reel extends ContentPositionable implements Positionable {
     }
 
    	public int calcOnReelQuantity(int weight) {
-   		if(this.hasReelMarkers()) {
+   		if(this.getOrigTopFoot()>0) {
    			System.out.println("setting qnty by markers");
    			if(this.getTopFoot()==0) {
-   				return 0;
-   			} else if(this.getTopFoot() > this.getBottomFoot()) {
-   				return this.getTopFoot() - this.getBottomFoot();
+   				return this.getReceivedQuantity();
+   			} else if(this.getTopFoot() > this.getOrigTopFoot()) {
+   				return this.getReceivedQuantity() - (this.getTopFoot() - this.getOrigTopFoot());
    			} else {
-   				return this.getBottomFoot() - this.getTopFoot();
+   				return this.getReceivedQuantity() - (this.getOrigTopFoot() - this.getTopFoot());
    			}
    		} else if(this.getReceivedWeight()!=0) {
    			if(weight==0) weight=1;
