@@ -143,11 +143,36 @@ public class EchoSync extends CompManager {
 						System.out.println("COULDN'T GET ECHO REEL:" + reel.getUniqueId());
 					}
 				} else {
-					echoTrans.setReelId(-1);
-					echoTrans.setSyncedDateDate(new Date());
-					echoTrans.setNote("Reel not found in ReelTrack");
-					this.updateTransaction(echoTrans);
-					System.out.println("COULDN'T GET REELTRACK REEL");
+					reel.setOrdNo(echoTrans.getOrdNo());
+					reel.setPORevision(echoTrans.getPORevision());
+					reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
+					reel.setReelSerial(echoTrans.getReelSerial());
+					boolean ok = this.fillReelAllocation(reel);
+					if(ok) {
+						this.fillCustomerOrderHdr(reel);
+						this.fillCustomerOrderDtl(reel);
+						this.fillManufacturer(reel);
+						this.fillCableTrac(reel);
+						this.fillDescription(reel);
+						CableTechData techData = this.getCableTech(reel);
+						reel.setCrId(this.searchReelsCount(reel)+1);
+						reel.setPnVolt(reel.getEcsPN().substring(0,2));
+						reel.setPnGauge(reel.getEcsPN().substring(4,7));
+						reel.setPnConductor(reel.getEcsPN().substring(7,9));
+						this.addReel(echoTrans,reel,techData);
+						System.out.println("Added reel:" + reel.getUniqueId());
+					} else {
+						echoTrans.setReelId(-1);
+						echoTrans.setSyncedDateDate(new Date());
+						echoTrans.setNote("Reel not found in ECHO");
+						this.updateTransaction(echoTrans);
+						System.out.println("COULDN'T GET ECHO REEL:" + reel.getUniqueId());
+					}
+					//echoTrans.setReelId(-1);
+					//echoTrans.setSyncedDateDate(new Date());
+					//echoTrans.setNote("Reel not found in ReelTrack");
+					//this.updateTransaction(echoTrans);
+					//System.out.println("COULDN'T GET REELTRACK REEL");
 				}
 			} else if(echoTrans.getAction().equalsIgnoreCase("delete")) {
 				Reel reel = new Reel();
@@ -157,7 +182,7 @@ public class EchoSync extends CompManager {
 				uPuller.addSearch(reel);
 				reel = (Reel)controllerRT.pullCompEntity(uPuller);
 				if(reel.hasData() && reel.getId()!=0) {
-//					this.deleteReel(echoTrans,reel);
+					this.deleteReel(echoTrans,reel);
 					System.out.println("Deleted Reel:" + reel.getUniqueId());
 				} else {
 					echoTrans.setReelId(-1);
