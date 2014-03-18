@@ -97,7 +97,6 @@ boolean dosearch = true;
 String tempURL = "";
 %>
 
-<% dbResources.close(); %>
 <html:begin />
 <admin:title text="Mark Reels as Received" />
 
@@ -158,6 +157,7 @@ String tempURL = "";
     <br />
     <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
+        <% CableTechData techData = reelMgr.getCableTechData(content); %>
         <% tempURL = new Integer(i+1).toString() + ". " + content.getReelTag() + " (" + content.getCableDescription() + ")"; %>
         <% String toggleTarget = "toggleReelrec" + content.getId(); %>
         <% String toggleID = "reelrec" + content.getId(); %>
@@ -181,66 +181,57 @@ String tempURL = "";
         
         <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
             <form:begin submit="true" name="<%= toggleForm %>" action="receive/process.jsp" />
-                <form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
-                <form:info label="Cable Description:" text="<%= content.getCableDescription() %>" />
-                <form:info label="Customer P/N:" text="<%= content.getCustomerPN() %>" />
-                <form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
-                <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
-                <form:info label="Steel Reel Serial #:" text="<%= content.getSteelReelSerial() %>" />
+                <form:info label="Shipped<br />Date:" text="<%= content.getShippingDateString() %>" />
+                <form:info label="Shipped Qty:" text="<%= new Integer(content.getShippedQuantity()).toString() %>" />
                 <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
                 <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
-                <form:info label="Shipped Qty:" text="<%= new Integer(content.getShippedQuantity()).toString() %>" />
                 <form:textfield pixelwidth="40" label="Received Qty:" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
-                <form:textfield pixelwidth="40" label="Bottom Ft:" name="<%= Reel.BOTTOM_FOOT_COLUMN %>" value="<%= new Integer(content.getBottomFoot()).toString() %>" />
-                <form:textfield pixelwidth="40" label="Top Ft:" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                    <form:textfield pixelwidth="40" label="Orig Top Ft:" name="<%= Reel.ORIG_TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                <% } %>
+
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+                    <form:textfield pixelwidth="40" label="Received lbs:" name="<%= Reel.RECEIVED_WEIGHT_COLUMN %>" value="<%= new Integer(content.getReceivedWeight()).toString() %>" />
+                <% } %>
+
                 <form:row_begin />
-                <form:label name="" label="Warehouse<br />Location:" />
-                <form:content_begin />
-                <form:select_begin name="<%= Reel.WHAREHOUSE_LOCATION_COLUMN %>" />
-                    <form:option name="None" value="<%= WhLocation.LOCATION_NONE %>" match="<%= content.getWharehouseLocation() %>" />
-                    <% for(int x=0; x<locations.howMany(); x++) { %>
-                        <% location = (WhLocation)locations.get(x); %>
-                        <form:option name="<%= location.getName() %>" value="<%= location.getName() %>" match="<%= content.getWharehouseLocation() %>" />
-                    <% } %>
-                <form:select_end />
-                <form:content_end />
+                    <form:label name="" label="Warehouse<br />Location:" />
+                    <form:content_begin />
+                    <form:select_begin name="<%= Reel.WHAREHOUSE_LOCATION_COLUMN %>" />
+                        <form:option name="None" value="<%= WhLocation.LOCATION_NONE %>" match="<%= content.getWharehouseLocation() %>" />
+                        <% for(int x=0; x<locations.howMany(); x++) { %>
+                            <% location = (WhLocation)locations.get(x); %>
+                            <form:option name="<%= location.getName() %>" value="<%= location.getName() %>" match="<%= content.getWharehouseLocation() %>" />
+                        <% } %>
+                    <form:select_end />
+                    <form:content_end />
                 <form:row_end />
                 <form:row_begin />
-                <form:label name="" label="Issue:" />
-                <form:content_begin />
-                <form:select_begin name="<%= Reel.RECEIVING_ISSUE_COLUMN %>" />
-                    <form:option name="None" value="" match="<%= content.getReceivingIssue() %>" />
-                    <% String[] issueList  = content.getReceivingIssueList(); %>
-                    <% for(int x=0; x<issueList.length; x++) { %>
-                        <form:option name="<%= issueList[x] %>" value="<%= issueList[x] %>" match="<%= content.getReceivingIssue() %>" />
-                    <% } %>
-                <form:select_end />
-                <form:content_end />
+                    <form:label name="" label="Issue:" />
+                    <form:content_begin />
+                    <form:select_begin name="<%= Reel.RECEIVING_ISSUE_COLUMN %>" />
+                        <form:option name="None" value="" match="<%= content.getReceivingIssue() %>" />
+                        <% String[] issueList  = content.getReceivingIssueList(); %>
+                        <% for(int x=0; x<issueList.length; x++) { %>
+                            <form:option name="<%= issueList[x] %>" value="<%= issueList[x] %>" match="<%= content.getReceivingIssue() %>" />
+                        <% } %>
+                    <form:select_end />
+                    <form:content_end />
                 <form:row_end />
                 <form:textarea name="<%= Reel.RECEIVING_NOTE_COLUMN %>" rows="5" label="Note:" value="<%= content.getReceivingNote() %>" />
                 <form:row_begin />
-                <form:label name="" label="Disposition:" />
-                <form:content_begin />
-                <form:select_begin name="<%= Reel.RECEIVING_DISPOSITION_COLUMN %>" />
-                    <% String[] dispList  = content.getDispositionList(); %>
-                    <% for(int x=0; x<dispList.length; x++) { %>
-                        <form:option name="<%= dispList[x] %>" value="<%= dispList[x] %>" match="<%= content.getReceivingDisposition() %>" />
-                    <% } %>
-                <form:select_end />
-                <form:content_end />
+                    <form:label name="" label="Disposition:" />
+                    <form:content_begin />
+                    <form:select_begin name="<%= Reel.RECEIVING_DISPOSITION_COLUMN %>" />
+                        <% String[] dispList  = content.getDispositionList(); %>
+                        <% for(int x=0; x<dispList.length; x++) { %>
+                            <form:option name="<%= dispList[x] %>" value="<%= dispList[x] %>" match="<%= content.getReceivingDisposition() %>" />
+                        <% } %>
+                    <form:select_end />
+                    <form:content_end />
                 <form:row_end />
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />        
-                <%--
-                <form:row_begin />
-                <form:label name="" label="" />
-                <form:buttonset_begin align="left" padding="0"/>
-                    <form:submit_inline waiting="true" name="Mark Received / Refused" action="mark_received" />
-                    &nbsp;&nbsp;
-                    <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
-                    <form:linkbutton url="<%= tempURL %>" name="EDIT REEL" />
-                <form:buttonset_end />
-                <form:row_end />
-                --%>
                 <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
@@ -337,4 +328,6 @@ String tempURL = "";
 --%>
 
 <admin:set_tabset url="receive/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />    
+<html:end />  
+
+<% dbResources.close(); %>  

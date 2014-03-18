@@ -20,6 +20,8 @@
 <jsp:useBean id="driverMgr" class="com.reeltrack.drivers.DriverMgr" scope="request"/>
 <jsp:useBean id="picklistMgr" class="com.reeltrack.picklists.PickListMgr" />
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr" />
+<jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
+<% reelMgr.init(pageContext,dbResources); %>
 <% userLoginMgr.init(pageContext); %>
 <% foremanMgr.init(pageContext,dbResources); %>
 <% driverMgr.init(pageContext,dbResources); %>
@@ -56,7 +58,6 @@ pickReels.sortByMethodName("getPosition", true);
 
 String tempURL; //var for url expression
 %>
-<% dbResources.close(); %>
 
 <html:begin />
 <admin:title text="<%= content.getTitle() %>" />
@@ -123,6 +124,7 @@ String tempURL; //var for url expression
 	    <br />
 	    <% for(int i=0; i<pickReels.howMany(); i++) { %>
 	    <% Reel reel3 = (Reel)pickReels.get(i); %>
+	    <% CableTechData techData = reelMgr.getCableTechData(reel3); %>
 	    <admin:box_begin color="false" />
 		<% String toggleTarget = "toggleReelstage" + reel3.getId(); %>
 	    <% String toggleID = "reelstage" + reel3.getId(); %>
@@ -161,7 +163,12 @@ String tempURL; //var for url expression
                 <form:info label="Manufacturer:" text="<%= reel3.getManufacturer() %>" />
                 <form:info label="Reel Type:" text="<%= reel3.getReelType() %>" />
                 <form:info label="Quantity:" text="<%= new Integer(reel3.getOnReelQuantity()).toString() %>" />
-                <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(reel3.getTopFoot()).toString() %>" />
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+	                <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(reel3.getTopFoot()).toString() %>" />
+	            <% } %>
+	            <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+	                <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(reel3.getCurrentWeight()).toString() %>" />
+	            <% } %>
                 <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(contid).toString() %>" />
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(reel3.getId()).toString() %>" />
                 <form:row_begin />
@@ -184,3 +191,4 @@ String tempURL; //var for url expression
 
 <admin:set_tabset url="checkout/_tabset_stage.jsp" thispage="stage.jsp" content_id_for_tabset="<%= contid %>"/>
 <html:end />
+<% dbResources.close(); %>

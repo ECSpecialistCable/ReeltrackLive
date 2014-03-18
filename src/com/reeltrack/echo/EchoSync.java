@@ -59,6 +59,7 @@ public class EchoSync extends CompManager {
 		System.out.println("Total transactions:" + echoTranses.howMany());
 		for(int x=0; x<echoTranses.howMany(); x++) {
 			echoTrans = (EchoTransaction)echoTranses.get(x);
+			if(echoTrans.getUniqueId()==0) continue;
 			if(echoTrans.getAction().equalsIgnoreCase("add")) {
 				Reel reel = new Reel();
 				reel.setUniqueId(echoTrans.getUniqueId());
@@ -105,36 +106,36 @@ public class EchoSync extends CompManager {
 				System.out.println("Reel to UPDATE:" + reel.getUniqueId());
 				CompEntityPuller uPuller = new CompEntityPuller(reel);
 				uPuller.addSearch(reel);
-				reel = (Reel)controllerRT.pullCompEntity(uPuller);
-				if(!reel.hasData() || reel.getId()==0) {
+				Reel cloudReel = (Reel)controllerRT.pullCompEntity(uPuller);
+				if(!cloudReel.hasData() || cloudReel.getId()==0) {
 					System.out.println("Reel to UPDATE (no unique id, trying by old method):" + reel.getUniqueId());
-					reel = new Reel();
-					reel.setOrdNo(echoTrans.getOrdNo());
-					reel.setPORevision(echoTrans.getPORevision());
-					reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
-					reel.setReelSerial(echoTrans.getReelSerial());
-					uPuller = new CompEntityPuller(reel);
-					uPuller.addSearch(reel);
-					reel = (Reel)controllerRT.pullCompEntity(uPuller);
+					cloudReel = new Reel();
+					cloudReel.setOrdNo(echoTrans.getOrdNo());
+					cloudReel.setPORevision(echoTrans.getPORevision());
+					cloudReel.setAbsoluteItem(echoTrans.getAbsoluteItem());
+					cloudReel.setReelSerial(echoTrans.getReelSerial());
+					uPuller = new CompEntityPuller(cloudReel);
+					uPuller.addSearch(cloudReel);
+					cloudReel = (Reel)controllerRT.pullCompEntity(uPuller);
 				}
-				if(reel.hasData() && reel.getId()!=0) {
-					reel.setUniqueId(echoTrans.getUniqueId());
-					reel.setOrdNo(echoTrans.getOrdNo());
-					reel.setPORevision(echoTrans.getPORevision());
-					reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
-					reel.setReelSerial(echoTrans.getReelSerial());
-					boolean ok = this.fillReelAllocation(reel);
+				if(cloudReel.hasData() && cloudReel.getId()!=0) {
+					cloudReel.setUniqueId(echoTrans.getUniqueId());
+					cloudReel.setOrdNo(echoTrans.getOrdNo());
+					cloudReel.setPORevision(echoTrans.getPORevision());
+					cloudReel.setAbsoluteItem(echoTrans.getAbsoluteItem());
+					cloudReel.setReelSerial(echoTrans.getReelSerial());
+					boolean ok = this.fillReelAllocation(cloudReel);
 					if(ok) {
-						this.fillCustomerOrderHdr(reel);
-						this.fillCustomerOrderDtl(reel);
-						this.fillManufacturer(reel);
-						this.fillCableTrac(reel);
-						this.fillDescription(reel);
-						reel.setPnVolt(reel.getEcsPN().substring(0,2));
-						reel.setPnGauge(reel.getEcsPN().substring(4,7));
-						reel.setPnConductor(reel.getEcsPN().substring(7,9));
-						this.updateReel(echoTrans,reel);
-						System.out.println("Updated reel:" + reel.getUniqueId());
+						this.fillCustomerOrderHdr(cloudReel);
+						this.fillCustomerOrderDtl(cloudReel);
+						this.fillManufacturer(cloudReel);
+						this.fillCableTrac(cloudReel);
+						this.fillDescription(cloudReel);
+						cloudReel.setPnVolt(cloudReel.getEcsPN().substring(0,2));
+						cloudReel.setPnGauge(cloudReel.getEcsPN().substring(4,7));
+						cloudReel.setPnConductor(cloudReel.getEcsPN().substring(7,9));
+						this.updateReel(echoTrans,cloudReel);
+						System.out.println("Updated reel:" + cloudReel.getUniqueId());
 					} else {
 						echoTrans.setReelId(-1);
 						echoTrans.setSyncedDateDate(new Date());

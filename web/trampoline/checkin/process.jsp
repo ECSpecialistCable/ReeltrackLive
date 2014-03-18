@@ -33,7 +33,12 @@ if(request.getParameter(Reel.PARAM) != null) {
 if(action.equals("mark_checkedin")) {
     Reel content = new Reel();
     content.setId(contid);
-    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    try {
+        content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
+        content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
+    } catch(Exception e) {}
     content.setWharehouseLocation(request.getParameter(Reel.WHAREHOUSE_LOCATION_COLUMN));
     String driver = request.getParameter(Driver.PARAM);
     reelMgr.markReelCheckedIn(content,driver);

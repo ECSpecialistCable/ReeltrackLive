@@ -150,7 +150,8 @@ String tempURL; //var for url expression
 	    <% Reel reel3 = (Reel)pickReels.get(i); %>
 	    <listing:row_begin row="<%= new Integer(i).toString() %>" />
 			<listing:cell_begin width="50"/>
-				<form:begin_inline name="<%= i + "_update" %>" action="pick_lists/process.jsp" />
+				<% tempURL = i + "_update"; %>
+				<form:begin_inline name="<%= tempURL %>" action="pick_lists/process.jsp" />
 					<form:select_begin name="<%= Reel.POSITION_COLUMN %>" onchange="test" />
 					<% for(int pos=0;pos<pickReels.howMany(); pos++) { %>
 						<form:option value="<%= new Integer(pos+1).toString() %>" name="<%= new Integer(pos+1).toString() %>" match="<%= new Integer(reel3.getPosition()).toString() %>" />

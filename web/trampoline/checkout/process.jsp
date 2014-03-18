@@ -45,7 +45,12 @@ if(action.equals("update_stage")) {
 if(action.equals("mark_staged")) {
     Reel content = new Reel();
     content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
-    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    try {
+        content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
+        content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
+    } catch(Exception e) {}
     reelMgr.markReelStaged(content);
     redirect = request.getContextPath() + "/trampoline/" + "checkout/stage.jsp?" + PickList.PARAM + "=" + contid ;
 }
@@ -53,7 +58,12 @@ if(action.equals("mark_staged")) {
 if(action.equals("mark_checkedout")) {
     Reel content = new Reel();
     content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
-    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    try {
+        content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
+        content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
+    } catch(Exception e) {}
     reelMgr.markReelCheckedOut(content);
     redirect = request.getContextPath() + "/trampoline/" + "checkout/checkout.jsp?" + PickList.PARAM + "=" + contid ;
 }

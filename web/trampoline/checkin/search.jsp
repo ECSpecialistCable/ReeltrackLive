@@ -97,7 +97,6 @@ boolean dosearch = true;
 String tempURL = "";
 %>
 
-<% dbResources.close(); %>
 <html:begin />
 <admin:title text="Check IN Reels" />
 
@@ -155,6 +154,7 @@ String tempURL = "";
     <br />
     <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
+        <% CableTechData techData = reelMgr.getCableTechData(content); %>
         <% tempURL = new Integer(i+1).toString() + ". " + content.getReelTag() + " (" + content.getCableDescription() + ")"; %>
         <% String toggleTarget = "toggleReelrec" + content.getId(); %>
         <% String toggleID = "reelrec" + content.getId(); %>
@@ -184,7 +184,12 @@ String tempURL = "";
                 <form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
                 <form:info label="Reel Type:" text="<%= content.getReelType() %>" />
                 <form:info label="Quantity:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
-                <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />   
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                    <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+                <% } %>
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+                    <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+                <% } %>  
                 <form:row_begin />
                 <form:label name="" label="Warehouse<br />Location:" />
                 <form:content_begin />
@@ -228,4 +233,5 @@ String tempURL = "";
 <% } %>
 
 <admin:set_tabset url="checkin/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />    
+<html:end />   
+<% dbResources.close(); %> 
