@@ -52,6 +52,15 @@ String tempURL; //var for url expression
 <admin:title text="<%= tempURL %>" />
 <notifier:show_message />
 
+<% if(canEdit) { %>
+<admin:subtitle text="Unique ID" />
+<admin:box_begin />
+    <form:begin submit="<%= new Boolean(false).toString() %>" name="edit" action="reels/process.jsp" />
+    <form:info label="Unique ID:" text="<%= new Integer(content.getUniqueId()).toString() %>" />    
+    <form:end />
+<admin:box_end />
+<% } %>
+
 <admin:subtitle text="ECS Invoice" />
 <admin:box_begin />
     <form:begin submit="<%= new Boolean(false).toString() %>" name="edit" action="reels/process.jsp" />
