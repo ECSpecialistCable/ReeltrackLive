@@ -539,6 +539,17 @@ if(action.equals("update_issue")) {
     reelMgr.updateReelIssue(issue);
     redirect = request.getContextPath() + "/trampoline/" + "reels/issues.jsp?" + Reel.PARAM + "=" + contid ;
 }
+
+if(action.equals("delete_reel")) {
+    Reel content = new Reel();
+    content.setId(contid);
+	Reel toRemove = reelMgr.getReel(content);
+    content.setPickListId(0);
+    picklistMgr.updateReelForPickList(content, toRemove);
+	reelMgr.deleteReel(content, basePath);
+
+    redirect = request.getContextPath() + "/trampoline/" + "reels/search.jsp";
+}
 %>
 <% dbResources.close(); %>
 <notifier:set_message text="<%= notifier %>" />		

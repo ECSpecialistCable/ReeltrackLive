@@ -104,6 +104,20 @@ String[] carrierList = reelMgr.getCarriers();
 <admin:title text="<%= tempURL %>" />
 <notifier:show_message />
 
+<% if(canEdit) { %>
+	<admin:box_begin />
+		<form:begin submit="true" name="delete_reel" action="reels/process.jsp" />
+	        <form:row_begin />
+				<form:label name="" label="Delete Reel:" />
+		        <form:content_begin />
+					<% tempURL = "reels/process.jsp?submit_action=delete_reel&" + Reel.PARAM + "=" + content.getId(); %>
+					<form:linkbutton warning="true" url="<%= tempURL %>" process="true" name="Delete" />
+	        <form:content_end />
+        <form:row_end />
+		<form:end />
+	<admin:box_end />
+<% } %>
+
 <% if(rtReel!=null || plReel!=null) { %>
 <admin:subtitle text="Scanned Reel" />
 <admin:box_begin />
