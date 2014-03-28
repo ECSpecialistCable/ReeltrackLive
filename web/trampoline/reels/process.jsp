@@ -550,6 +550,14 @@ if(action.equals("delete_reel")) {
 
     redirect = request.getContextPath() + "/trampoline/" + "reels/search.jsp";
 }
+
+if(action.equals("update_unique_id")) {
+	Reel content = new Reel();
+    content.setId(contid);
+	content.setUniqueId(Integer.parseInt(request.getParameter(Reel.UNIQUE_ID_COLUMN)));
+	reelMgr.updateReel(content);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/reel_data.jsp?" + Reel.PARAM + "=" + contid ;
+}
 %>
 <% dbResources.close(); %>
 <notifier:set_message text="<%= notifier %>" />		

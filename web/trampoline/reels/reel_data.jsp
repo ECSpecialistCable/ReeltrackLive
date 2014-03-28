@@ -56,7 +56,16 @@ String tempURL; //var for url expression
 <admin:subtitle text="Unique ID" />
 <admin:box_begin />
     <form:begin submit="<%= new Boolean(false).toString() %>" name="edit" action="reels/process.jsp" />
-    <form:info label="Unique ID:" text="<%= new Integer(content.getUniqueId()).toString() %>" />    
+		<form:textfield label="Unique ID:" name="<%= Reel.UNIQUE_ID_COLUMN %>" value="<%= new Integer(content.getUniqueId()).toString() %>" />
+		<form:row_begin />
+			<form:label name="" label="" />
+			<form:buttonset_begin align="left" padding="0"/>
+				<% if(canEdit) { %>
+				<form:submit_inline button="save" waiting="true" name="save" action="update_unique_id" />
+				<% } %>
+			<form:buttonset_end />
+		<form:row_end />
+        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
     <form:end />
 <admin:box_end />
 <% } %>
