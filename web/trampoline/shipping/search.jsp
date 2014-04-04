@@ -239,6 +239,7 @@ String tempURL = "";
                 <form:select_end />
                 <form:content_end />
                 <form:row_end />
+				<form:textfield label="Other Carrier:" name="other_carrier" />
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />        
                 <form:row_begin />
                 <form:label name="" label="" />

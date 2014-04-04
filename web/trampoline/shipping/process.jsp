@@ -34,6 +34,9 @@ if(action.equals("mark_shipped")) {
     content.setId(contid);
     content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
     content.setCarrier(request.getParameter(Reel.CARRIER_COLUMN));
+	if(!request.getParameter("other_carrier").equals("")) {
+		content.setCarrier(request.getParameter("other_carrier"));
+	}
     if(session.getAttribute("trackingNum")!=null) {
         content.setTrackingPRO((String)session.getAttribute("trackingNum"));
     }
