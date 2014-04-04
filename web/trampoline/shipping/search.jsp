@@ -109,6 +109,7 @@ boolean ascending = true;
 int count = reelMgr.searchReelsCount(content, column, ascending);
 CompEntities contents = reelMgr.searchReels(content, column, ascending, howMany, skip);
 String[] manufacturers = reelMgr.getManufacturers();
+String[] carrierList = reelMgr.getCarriers();
 
 boolean dosearch = true;
 String tempURL = "";
@@ -231,7 +232,7 @@ String tempURL = "";
                 <form:content_begin />
                 <form:select_begin name="<%= Reel.CARRIER_COLUMN %>" />
                     <form:option name="None" value="" match="<%= content.getCarrier() %>" />
-                    <% String[] carrierList  = content.getCarrierList(); %>
+                    <% //String[] carrierList  = content.getCarrierList(); %>
                     <% for(int x=0; x<carrierList.length; x++) { %>
                         <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= content.getCarrier() %>" />
                     <% } %>

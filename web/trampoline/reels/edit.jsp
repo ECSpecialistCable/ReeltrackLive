@@ -54,6 +54,8 @@ WhLocation location = new WhLocation();
 location.setCustomerId(user.getCustomerId());
 CompEntities locations = locationMgr.searchWhLocation(location, WhLocation.NAME_COLUMN, true);
 
+String[] carrierList = reelMgr.getCarriers();
+
 String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
@@ -181,13 +183,14 @@ String tempURL; //var for url expression
 	            <form:content_begin />
 	            <form:select_begin name="<%= Reel.CARRIER_COLUMN %>" />
 	            	<form:option name="None" value="" match="<%= content.getCarrier() %>" />
-	                <% String[] carrierList  = content.getCarrierList(); %>
+	                <% //String[] carrierList  = content.getCarrierList(); %>
 	                <% for(int x=0; x<carrierList.length; x++) { %>
 	                    <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= content.getCarrier() %>" />
 	                <% } %>
 	            <form:select_end />
 	            <form:content_end />
         	<form:row_end />
+			<form:textfield label="Other Carrier:" name="other_carrier" />
         	<form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
         	<form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
         	<form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />

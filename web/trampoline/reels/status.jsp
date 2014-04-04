@@ -159,6 +159,7 @@ String[] carrierList = reelMgr.getCarriers();
         <form:select_end />
         <form:content_end />
         <form:row_end />
+        <form:textfield label="Other Carrier:" name="other_carrier" />
         <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
         <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />        
         <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
