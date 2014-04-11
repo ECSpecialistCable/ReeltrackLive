@@ -95,9 +95,11 @@ if(action.equals("upload_data_sheet")) {
 
 if(action.equals("update_customer_pn")) {
 	Reel reel = new Reel();
-	reel.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
 	reel.setCustomerPN(request.getParameter(Reel.CUSTOMER_PN_COLUMN));
-	reelMgr.updateReel(reel);
+	reel.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));
+	if(!reel.getCableDescription().equals("")) {
+		reelMgr.updateReelsForCustPN(reel);
+	}
     redirect = request.getContextPath() + "/trampoline/" + "bill_of_materials/cust_pn.jsp";
 }
 %>

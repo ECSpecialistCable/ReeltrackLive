@@ -32,7 +32,7 @@ content.setJobCode(user.getJobCode());
 content.setSearchOp(Reel.JOB_CODE_COLUMN, Reel.EQ);
 content.setCustomerPN("");
 content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.BLANK_OR_NULL_OK);
-CompEntities contents = reelMgr.searchReels(content, Reel.ECS_PN_COLUMN, true, 0, 0);
+CompEntities contents = reelMgr.getReelsWithoutCustPN(content, Reel.ECS_PN_COLUMN, true, 0, 0);
 
 String tempUrl =""; //var for url expression
 %>
@@ -50,24 +50,27 @@ String tempUrl =""; //var for url expression
             <listing:header_end />
             <% for(int i=0; i<contents.howMany(); i++) { %>
             <% content = (Reel)contents.get(i); %>
-            <listing:row_begin row="<%= new Integer(i).toString() %>" />
-                <listing:cell_begin />
-                    <%= content.getEcsPN() %>
-                <listing:cell_end />
-				<listing:cell_begin />
-                    <%= content.getCableDescription() %>
-                <listing:cell_end />				
-                <listing:cell_begin />
-					<form:begin_inline action="bill_of_materials/process.jsp" name="update_customer_pn" />
-					<form:textfield_inline label="" name="<%= Reel.CUSTOMER_PN_COLUMN %>" />
-					<% if(canEdit) { %>
-		                <form:submit_inline  button="save" waiting="true" name="save" action="update_customer_pn" />
-						<form:hidden name="<%= Reel.PARAM %>" value="<%= Integer.toString(content.getId()) %>" />
-						<form:hidden name="<%= CustomerJob.PARAM %>" value="<%= Integer.toString(user.getJobId()) %>" />
-					<% } %>
-					<form:end_inline />
-                <listing:cell_end />								
-            <listing:row_end />
+			<% if(!content.getCableDescription().equals("")) { %>
+				<listing:row_begin row="<%= new Integer(i).toString() %>" />
+					<listing:cell_begin />
+						<%= content.getEcsPN() %>
+					<listing:cell_end />
+					<listing:cell_begin />
+						<%= content.getCableDescription() %>
+					<listing:cell_end />
+					<listing:cell_begin />
+						<form:begin_inline action="bill_of_materials/process.jsp" name="update_customer_pn" />
+						<form:textfield_inline label="" name="<%= Reel.CUSTOMER_PN_COLUMN %>" />
+						<% if(canEdit) { %>
+							<form:submit_inline  button="save" waiting="true" name="save" action="update_customer_pn" />
+							<form:hidden name="<%= Reel.PARAM %>" value="<%= Integer.toString(content.getId()) %>" />
+							<form:hidden name="<%= CustomerJob.PARAM %>" value="<%= Integer.toString(user.getJobId()) %>" />
+							<form:hidden name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
+						<% } %>
+						<form:end_inline />
+					<listing:cell_end />
+				<listing:row_end />
+			<% } %>
             <% } %>
         <listing:end />
     <admin:box_end />

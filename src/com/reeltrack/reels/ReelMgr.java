@@ -228,6 +228,25 @@ public class ReelMgr extends CompWebManager {
 		this.updateOnReelQuantity(content);
 	}
 
+	public void updateReelsForCustPN(Reel content) throws Exception {
+		Reel toGet = new Reel();
+		toGet.setCableDescription(content.getCableDescription());
+		toGet.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.EQ);
+		CompEntities contents = this.searchReels(toGet, Reel.ID_COLUMN, true, 0, 0);
+		for(int i=0; i<contents.howMany();i++) {
+			Reel currReel = (Reel)contents.get(i);
+
+			Reel toUpdate = new Reel();
+			toUpdate.setId(currReel.getId());
+			toUpdate.setCustomerPN(content.getCustomerPN());
+			
+			toUpdate.setUpdated(new Date());
+			controller.update(toUpdate);
+
+			this.updateOnReelQuantity(toUpdate);
+		}
+	}
+
 	public void markReelShipped(Reel content) throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
@@ -711,6 +730,14 @@ public class ReelMgr extends CompWebManager {
 		}
 		
 		return toReturn;
+	}
+
+	public CompEntities getReelsWithoutCustPN(Reel content, String sort_by, boolean asc, int howMany, int skip) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+		puller.setSortBy(content.getTableName(), sort_by, asc);
+		puller.setGroupBy(new Reel().getTableName(), Reel.CABLE_DESCRIPTION_COLUMN, "reel_cable_description");
+		return controller.pullCompEntities(puller, howMany, skip);
 	}
 
 	public void cleanReel(Reel content, String realRootContextPath) throws Exception {
