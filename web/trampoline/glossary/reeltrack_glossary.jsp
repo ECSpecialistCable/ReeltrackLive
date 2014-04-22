@@ -33,6 +33,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 }
 %>
 
+
 <html:begin />
 <admin:title text="ReelTrack Glossary" />
 <% if(canEdit) { %>

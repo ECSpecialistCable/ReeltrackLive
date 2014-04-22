@@ -42,7 +42,7 @@ if(action.equals("update")) {
     content.setId(contid);
     content.setName(request.getParameter(Customer.NAME_COLUMN));
     content.setIssueContactEmail(request.getParameter(Customer.ISSUE_CONTACT_EMAIL_COLUMN));
-    content.setScansMustMatch(request.getParameter(Customer.SCANS_MUST_MATCH_COLUMN));
+    //content.setScansMustMatch(request.getParameter(Customer.SCANS_MUST_MATCH_COLUMN));
     content.setStatus(request.getParameter(Customer.STATUS_COLUMN));
     customerMgr.updateCustomer(content);
     redirect = request.getContextPath() + "/trampoline/" + "customers/edit.jsp?" + Customer.PARAM + "=" + contid ;
@@ -69,6 +69,7 @@ if(action.equals("update_customer_job")) {
     content.setId(Integer.parseInt(request.getParameter(CustomerJob.PARAM)));
     content.setName(request.getParameter(CustomerJob.NAME_COLUMN));
     content.setCode(request.getParameter(CustomerJob.CODE_COLUMN));
+    content.setScansMustMatch(request.getParameter(CustomerJob.SCANS_MUST_MATCH_COLUMN));
     content.setAutoPrintReelTags(request.getParameter(CustomerJob.AUTO_PRINT_REEL_TAG_COLUMN));
     customerMgr.updateCustomerJob(content);
     redirect = request.getContextPath() + "/trampoline/" + "customers/edit_job.jsp?" + CustomerJob.PARAM + "=" + content.getId();

@@ -40,7 +40,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <admin:box_begin />
      <form:begin_multipart submit="true" name="import_glossary" action="glossary/process.jsp" />
     		<form:file name="glossary_imported_file" label="File:" />
-			<form:hidden name="<%= Glossary.PARAM %>" value="<%= "0" %>" />
+			<form:hidden name="<%= Glossary.PARAM %>" value="0" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>

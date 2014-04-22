@@ -326,3 +326,6 @@ alter table customer_jobs add bom_pdf varchar(255);
 alter table cable_tech_data add usage_tracking varchar(255);
 
 alter table reels add orig_top_foot int default 0;
+
+/* 4/22/15*/
+alter table customer_jobs add scans_must_match varchar(1) default 'n';

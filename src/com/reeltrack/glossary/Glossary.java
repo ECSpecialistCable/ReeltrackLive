@@ -12,7 +12,7 @@ public class Glossary extends CompCMEntity {
 	public static final String DESCRIPTION_COLUMN = "description";
 	public static final String GLOSSARY_TYPE_COLUMN = "glossary_type";
 
-	public static final String[] GLOSSARY_TYPES = {"Check box", "Command Button", "Drop Down Menu", "Editable Field", "List", "Reel Status", "Report", "Scanable Document", "Tab", "Viewable field" };
+	public static final String[] GLOSSARY_TYPES = {"Check box", "Command Button", "Drop Down Menu", "Editable Field", "List", "Reel Status", "Report", "Cable Terms", "Tab", "Viewable field" };
 
 
 	@Override

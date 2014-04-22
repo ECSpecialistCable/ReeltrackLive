@@ -84,6 +84,7 @@ if(action.equals("mark_received")) {
 	Reel reel = reelMgr.getReel(content);
     content.setTrackingPRO(request.getParameter(Reel.TRACKING_PRO_COLUMN));
     content.setPackingList(request.getParameter(Reel.PACKING_LIST_COLUMN));
+    content.setSteelReelSerial(request.getParameter(Reel.STEEL_REEL_SERIAL_COLUMN));
     try {
     content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
     } catch(Exception e) {}

@@ -113,6 +113,11 @@ String[] carrierList = reelMgr.getCarriers();
 
 boolean dosearch = true;
 String tempURL = "";
+
+boolean canEdit = false;
+if(user.isUserType(RTUser.USER_TYPE_ECS)) {
+    canEdit = true;
+}
 %>
 
 <% dbResources.close(); %>
@@ -219,14 +224,15 @@ String tempURL = "";
 
         <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
             <form:begin submit="true" name="<%= toggleForm %>" action="shipping/process.jsp" />
-                <form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
-                <form:info label="Cable Description:" text="<%= content.getCableDescription() %>" />
-                <form:info label="Customer P/N:" text="<%= content.getCustomerPN() %>" />
-                <form:info label="Manufacturer:" text="<%= content.getManufacturer() %>" />
                 <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
-                <form:info label="Steel Reel Serial #:" text="<%= content.getSteelReelSerial() %>" />
                 <form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
-                <form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
+                <% if(canEdit) { %>
+                    <form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
+                    <form:date_picker name="<%= Reel.SHIPPING_DATE_COLUMN %>" value="<%= content.getShippingDateString() %>" label="Shipped<br />Date:" />
+                <% } else { %>
+                    <form:info label="Projected Shipping<br />Date:" text="<%= content.getProjectedShippingDateString() %>" />
+                    <form:info label="Shipped<br />Date:" text="<%= content.getShippingDateString() %>" />
+                <% } %>
                 <form:row_begin />
                 <form:label name="" label="Carrier:" />
                 <form:content_begin />
@@ -239,15 +245,14 @@ String tempURL = "";
                 <form:select_end />
                 <form:content_end />
                 <form:row_end />
-				<form:textfield label="Other Carrier:" name="other_carrier" />
-                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />        
+                <form:textfield label="Other Carrier:" name="other_carrier" />
+                <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
+                <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />        
+                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
                 <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
-                    <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
                     <form:submit_inline button="save" waiting="true" name="Mark Shipped" action="mark_shipped" />
-                    <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
-                    <form:linkbutton url="<%= tempURL %>" name="EDIT REEL" />
                 <form:buttonset_end />
                 <form:row_end />
             <form:end />

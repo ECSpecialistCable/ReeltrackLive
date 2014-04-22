@@ -696,7 +696,7 @@ public class Reel extends ContentPositionable implements Positionable {
    		} else if(this.getReceivedWeight()!=0) {
    			if(weight==0) weight=1;
    			System.out.println("setting qnty by weight: " + this.getReceivedWeight() + "-" + this.getCurrentWeight() + "/" +  weight);
-			return (this.getReceivedWeight() - this.getCurrentWeight()) * 1000 / weight;
+			return this.getCurrentWeight() * 1000 / weight;
 		} else {
 			System.out.println("setting qnty by manual");
 			return this.getReceivedQuantity() - this.getCableUsedQuantity();

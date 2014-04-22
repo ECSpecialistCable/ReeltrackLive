@@ -9,6 +9,7 @@ public class CustomerJob extends CompCMEntity {
 	public static final String CUSTOMER_ID_COLUMN = "customer_id";
 	public static final String AUTO_PRINT_REEL_TAG_COLUMN = "auto_print_reel_tags";
 	public static final String BOM_PDF_COLUMN = "bom_pdf";
+	public static final String SCANS_MUST_MATCH_COLUMN = "scans_must_match";
 
 	@Override
 	public String getTableName() {
@@ -75,5 +76,13 @@ public class CustomerJob extends CompCMEntity {
 
 	public void setBOMPdf(String note) {
 		this.getData().setString(BOM_PDF_COLUMN, note);
+	}
+
+	public String getScansMustMatch() {
+		return this.getData().getString(SCANS_MUST_MATCH_COLUMN, "");
+	}
+	
+	public void setScansMustMatch(String name) {
+		this.getData().setString(SCANS_MUST_MATCH_COLUMN, name);
 	}
 }

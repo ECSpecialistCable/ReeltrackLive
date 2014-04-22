@@ -56,6 +56,10 @@ Customer customer = new Customer();
 customer.setId(user.getCustomerId());
 customer = customerMgr.getCustomer(customer);
 
+CustomerJob job = new CustomerJob();
+job.setId(user.getJobId());
+job = customerMgr.getCustomerJob(job);
+
 WhLocation location = new WhLocation();
 location.setCustomerId(user.getCustomerId());
 CompEntities locations = locationMgr.searchWhLocation(location, WhLocation.NAME_COLUMN, true);
@@ -181,6 +185,7 @@ String[] carrierList = reelMgr.getCarriers();
                 <form:info label="Shipped Qty:" text="<%= new Integer(content.getShippedQuantity()).toString() %>" />
                 <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
                 <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
+                <form:textfield label="Steel Reel Serial #:" name="<%= Reel.STEEL_REEL_SERIAL_COLUMN %>" value="<%= content.getSteelReelSerial() %>" />
                 <form:textfield pixelwidth="40" label="Received Qty:" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
                 <%--
                 <form:textfield pixelwidth="40" label="Bottom Ft:" name="<%= Reel.BOTTOM_FOOT_COLUMN %>" value="<%= new Integer(content.getBottomFoot()).toString() %>" />
@@ -250,7 +255,7 @@ String[] carrierList = reelMgr.getCarriers();
 
 <%
 boolean showStageAndCheckout = true;
-if(customer.getScansMustMatch().equals("y") && !reelsMatch) {
+if(job.getScansMustMatch().equals("y") && !reelsMatch) {
     showStageAndCheckout = false;
 }
 %>

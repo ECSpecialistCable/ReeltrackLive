@@ -63,6 +63,14 @@ if(action.equals("create_reeltrack_glossary")) {
     redirect = request.getContextPath() + "/trampoline/" + "glossary/reeltrack_glossary.jsp";
 }
 
+/*
+if(action.equals("delete_reeltrack_glossary")) {
+    Glossary content = new Glossary();
+    content.setId(Integer.parseInt(request.getParameter(Glossary.PARAM)));
+    glossaryMgr.deleteGlossary(content, null);
+    redirect = request.getContextPath() + "/trampoline/" + "glossary/reeltrack_glossary.jsp";
+}
+*/
 
 if(action.equals("update_reeltrack_glossary")) {
     Glossary content = new Glossary();
@@ -100,6 +108,14 @@ if(action.equals("create_job_glossary")) {
     redirect = request.getContextPath() + "/trampoline/" + "glossary/job_glossary.jsp";
 }
 
+/*
+if(action.equals("delete_job_glossary")) {
+    Glossary content = new Glossary();
+    content.setId(Integer.parseInt(request.getParameter(Glossary.PARAM)));
+    glossaryMgr.deleteGlossary(content, null);
+    redirect = request.getContextPath() + "/trampoline/" + "glossary/job_glossary.jsp";
+}
+*/
 
 if(action.equals("update_job_glossary")) {
     int jobId = 0;

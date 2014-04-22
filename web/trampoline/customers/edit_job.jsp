@@ -52,6 +52,15 @@ String tempUrl; //var for url expression
 			<form:row_begin />
 			<form:textfield name="<%= CustomerJob.NAME_COLUMN %>" label="Name:" value="<%= content.getName() %>" />
 			<form:textfield name="<%= CustomerJob.CODE_COLUMN %>" label="Code:" value="<%= content.getCode() %>"/>
+            <form:row_begin />
+                <form:label name="" label="QR Codes Must Match:" />
+                <form:content_begin />
+                    <form:select_begin name="<%= CustomerJob.SCANS_MUST_MATCH_COLUMN %>" label="mustmatch" />
+                        <form:option match="<%= content.getScansMustMatch() %>" value="n" name="No"/>
+                        <form:option match="<%= content.getScansMustMatch() %>" value="y" name="Yes"/>
+                    <form:select_end />
+                <form:content_end />
+            <form:row_end />
 			<form:row_begin />
                 <form:label name="" label="Auto Print Reel Tags:" />
                 <form:content_begin />
