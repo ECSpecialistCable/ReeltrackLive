@@ -243,7 +243,7 @@ public class ReelMgr extends CompWebManager {
 			toUpdate.setUpdated(new Date());
 			controller.update(toUpdate);
 
-			this.updateOnReelQuantity(toUpdate);
+			//this.updateOnReelQuantity(toUpdate);
 		}
 	}
 
