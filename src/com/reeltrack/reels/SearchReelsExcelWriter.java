@@ -89,6 +89,11 @@ public class SearchReelsExcelWriter {
 		cell.setCellValue("Reel Tag");
 		cell.setCellStyle(styleHeader);
 
+		sheet.setColumnWidth(nextNum, 5000);
+		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("Unique ID");
+		cell.setCellStyle(styleHeader);
+
 		
 		rowNum++;
 		for (int i = 0; i < contents.howMany(); i++) {
@@ -97,9 +102,9 @@ public class SearchReelsExcelWriter {
 			nextNum=0;
 			row.createCell((short)nextNum++).setCellValue(current.getCustomerPN());
 			row.createCell((short)nextNum++).setCellValue(current.getCableDescription());
-			row.createCell((short)nextNum++).setCellValue(current.getCrId()+"");
+			row.createCell((short)nextNum++).setCellValue(new Integer(current.getCrId()).toString());
 			row.createCell((short)nextNum++).setCellValue(current.getReelTag());
-
+			row.createCell((short)nextNum++).setCellValue(new Integer(current.getUniqueId()).toString());
 		}		
 
 		return wb;
