@@ -265,7 +265,41 @@ public class ReelMgr extends CompWebManager {
 		if(content.getReceivingDisposition().equals(Reel.RECEIVING_DISPOSITION_ACCEPTED)) {
 			content.setStatus(Reel.STATUS_IN_WHAREHOUSE);
 			content.setReceivedOnDate(new Date());
-			this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName());
+			if(content.getReceivingIssue().equals(Reel.RECEIVING_ISSUE_DAMAGED)) {
+				this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName() + " but was marked as damaged");
+				CompEntityPuller puller = new CompEntityPuller(new Customer());
+				Customer customer = new Customer();
+				customer.setId(user.getCustomerId());
+				puller.addSearch(customer);
+				customer = (Customer)controller.pullCompEntity(puller);
+
+				if(!customer.getIssueContactEmail().equals("")) {
+					puller = new CompEntityPuller(new Reel());
+					Reel reel = new Reel();
+					reel.setId(content.getId());
+					puller.addSearch(reel);
+					reel = (Reel)controller.pullCompEntity(puller);
+
+					CompProperties props = new CompProperties();
+					String mailHost = props.getProperty("mailHost");
+				    String mailFrom = customer.getIssueContactEmail();//props.getProperty("mailFrom");
+					
+					ArrayList emails = new ArrayList();
+					emails.add(customer.getIssueContactEmail());
+			        EmailSender emailer = new EmailSender();
+					try {
+						String subject = "Reel mark damaged by " + customer.getName() + " for reel CRID#:" + reel.getCrId();
+						String message = reel.getEcsPN() + " manufactured by " + reel.getManufacturer()  + " on ECS PO " + reel.getOrdNo() + " with reel tag " + reel.getReelTag();
+						message += "Customer Reel ID# " + reel.getCrId() + " - " + reel.getCableDescription() + " with reel tag " + reel.getReelTag() + " was accepted and marked as damaged by " + user.getFname() + " " + user.getLname() + " with " + customer.getName() + " on " + user.getJobName() + " Project - " + user.getJobCode();
+						//String message = content.getDescription();
+						emailer.sendEmail(mailHost, emails, mailFrom, mailFrom, subject, message, null,null);
+			        } catch(Exception e) {
+						System.out.println("Issue sending issue email." + e);
+					}
+				}
+			} else {
+				this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName());
+			}
 		} else {
 			content.setStatus(Reel.STATUS_REFUSED);
 			this.addReelLog(Reel.STATUS_REFUSED, content, "Reel was refused by " + user.getName());
@@ -984,6 +1018,38 @@ public class ReelMgr extends CompWebManager {
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
 		content.setCreatedBy(user.getName());
+
+		CompEntityPuller puller = new CompEntityPuller(new Customer());
+		Customer customer = new Customer();
+		customer.setId(user.getCustomerId());
+		puller.addSearch(customer);
+		customer = (Customer)controller.pullCompEntity(puller);
+
+		if(!customer.getIssueContactEmail().equals("")) {
+			puller = new CompEntityPuller(new Reel());
+			Reel reel = new Reel();
+			reel.setId(content.getReelId());
+			puller.addSearch(reel);
+			reel = (Reel)controller.pullCompEntity(puller);
+
+			CompProperties props = new CompProperties();
+			String mailHost = props.getProperty("mailHost");
+		    String mailFrom = customer.getIssueContactEmail();//props.getProperty("mailFrom");
+			
+			ArrayList emails = new ArrayList();
+			emails.add(customer.getIssueContactEmail());
+	        EmailSender emailer = new EmailSender();
+			try {
+				String subject = "A note was added by " + customer.getName() + " for reel CRID#:" + reel.getCrId();
+				String message = "A note was added by " + user.getFname() + " " + user.getLname() + " with " + customer.getName() + " on " + user.getJobName() + " Project - " + user.getJobCode() + " for " + reel.getEcsPN() + " manufactured by " + reel.getManufacturer()  + " on ECS PO " + reel.getOrdNo() + " with reel tag " + reel.getReelTag();
+				message += "Customer Reel ID# " + reel.getCrId() + " - " + reel.getCableDescription() + " with reel tag " + reel.getReelTag();
+				//String message = content.getDescription();
+				emailer.sendEmail(mailHost, emails, mailFrom, mailFrom, subject, message, null,null);
+	        } catch(Exception e) {
+				System.out.println("Issue sending issue email." + e);
+			}
+		}
+
 		return controller.add(content);
 	}
 
@@ -1037,8 +1103,10 @@ public class ReelMgr extends CompWebManager {
 			emails.add(customer.getIssueContactEmail());
 	        EmailSender emailer = new EmailSender();
 			try {
-				String subject = "Issue reported by " + customer.getName() + " for reel CRID#:" + reel.getCrId();
-				String message = content.getDescription();
+				String subject = "An issue was added by " + customer.getName() + " for reel CRID#:" + reel.getCrId();
+				String message = "A " + content.getDescription() + " issue was added by " + user.getFname() + " " + user.getLname() + " with " + customer.getName() + " on " + user.getJobName() + " Project - " + user.getJobCode() + " for " + reel.getEcsPN() + " manufactured by " + reel.getManufacturer()  + " on ECS PO " + reel.getOrdNo() + " with reel tag " + reel.getReelTag();
+				message += "Customer Reel ID# " + reel.getCrId() + " - " + reel.getCableDescription() + " with reel tag " + reel.getReelTag();
+				//String message = content.getDescription();
 				emailer.sendEmail(mailHost, emails, mailFrom, mailFrom, subject, message, null,null);
 	        } catch(Exception e) {
 				System.out.println("Issue sending issue email." + e);
@@ -1081,6 +1149,37 @@ public class ReelMgr extends CompWebManager {
 			Reel reel = new Reel();
 			reel.setId(currIssue.getReelId());
 			this.addReelLog(reel, "Issue: " + currIssue.getDescription() + " resolved by " + user2.getName());
+
+			puller = new CompEntityPuller(new Customer());
+			Customer customer = new Customer();
+			customer.setId(user2.getCustomerId());
+			puller.addSearch(customer);
+			customer = (Customer)controller.pullCompEntity(puller);
+
+			if(!customer.getIssueContactEmail().equals("")) {
+				puller = new CompEntityPuller(new Reel());
+				reel = new Reel();
+				reel.setId(content.getReelId());
+				puller.addSearch(reel);
+				reel = (Reel)controller.pullCompEntity(puller);
+
+				CompProperties props = new CompProperties();
+				String mailHost = props.getProperty("mailHost");
+			    String mailFrom = customer.getIssueContactEmail();//props.getProperty("mailFrom");
+				
+				ArrayList emails = new ArrayList();
+				emails.add(customer.getIssueContactEmail());
+		        EmailSender emailer = new EmailSender();
+				try {
+				String subject = "An issue was resolved by " + customer.getName() + " for reel CRID#:" + reel.getCrId();
+				String message = "The " + content.getDescription() + " issue was resolved by " + user2.getFname() + " " + user2.getLname() + " with " + customer.getName() + " on " + user2.getJobName() + " Project - " + user2.getJobCode() + " for " + reel.getEcsPN() + " manufactured by " + reel.getManufacturer()  + " on ECS PO " + reel.getOrdNo() + " with reel tag " + reel.getReelTag();
+				message += "Customer Reel ID# " + reel.getCrId() + " - " + reel.getCableDescription() + " with reel tag " + reel.getReelTag();
+				//String message = content.getDescription();
+				emailer.sendEmail(mailHost, emails, mailFrom, mailFrom, subject, message, null,null);
+	        } catch(Exception e) {
+				System.out.println("Issue sending issue email." + e);
+			}
+			}
 		}
 	}
 

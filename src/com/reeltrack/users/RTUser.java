@@ -11,6 +11,7 @@ public class RTUser extends User {
     public static final String USER_TYPE_MANAGEMENT = "management";
     public static final String USER_TYPE_STANDARD = "standard";
     public static final String USER_TYPE_INVENTORY = "inventory";
+    public static final String USER_TYPE_CPE = "cpe";
 
     private int jobID = 0;
     private String jobCode = "";

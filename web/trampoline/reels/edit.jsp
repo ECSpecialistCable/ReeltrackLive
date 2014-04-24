@@ -111,6 +111,11 @@ String tempURL; //var for url expression
 			<% } else { %>
 				<form:info label="Customer P/N:" text="<%= content.getCustomerPN() %>" />
 			<% } %>
+			<%--
+			<% if(canEdit) { %>
+			<form:info label="ECS PO:" text="<%= content.getReceivedOnDateString() %>" />
+			<% } %>
+			--%>
 			<form:info label="ECS P/N:" text="<%= content.getEcsPN() %>" />
 			<% if(canEdit) { %>
 				<form:textfield label="Manufacturer:" name="<%= Reel.MANUFACTURER_COLUMN %>" value="<%= content.getManufacturer() %>" />
