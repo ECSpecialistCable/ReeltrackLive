@@ -13,6 +13,10 @@
 	for (index = 0; index < inputs.length; ++index) {
 	   var input = inputs[index];
 	   input.value='';
-	} //document.getElementById('${name}').reset();"
+	}
+	var selectTags = clearForm.getElementsByTagName('select');
+	for(var i = 0; i < selectTags.length; i++) {
+	  selectTags[i].selectedIndex=0;
+	}"
 >CLEAR</button>
 
