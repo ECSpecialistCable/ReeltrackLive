@@ -40,6 +40,11 @@ CompEntities issuesYes = reelMgr.getReelIssues(content,true);
 CompEntities issuesNo = reelMgr.getReelIssues(content,false);
 ReelIssue issue;
 
+boolean canSubmit = true;
+if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
+    canSubmit = false;
+}
+
 String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
@@ -49,6 +54,7 @@ String tempURL; //var for url expression
 <admin:title text="<%= tempURL %>" />
 <notifier:show_message />
 
+<% if(canSubmit) { %>
 <admin:subtitle text="Add Issue" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
@@ -63,6 +69,7 @@ String tempURL; //var for url expression
 			<form:row_end />
     <form:end />
 <admin:box_end />
+<% } %>
 
 <% if(issuesNo.howMany()==0 && issuesYes.howMany()==0) { %>
     <admin:subtitle text="There are no Issues" />
@@ -74,7 +81,7 @@ String tempURL; //var for url expression
     <% issue = (ReelIssue)issuesNo.get(x); %>
     <admin:box_begin />
     <% tempURL = "issueN" + x; %>
-    <form:begin submit="true" name="<%= tempURL %>" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
             <form:row_begin />
                 <form:label name="" label="Is Resolved?:" />
                 <form:content_begin />      
@@ -91,7 +98,9 @@ String tempURL; //var for url expression
             <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
+                <% if(canSubmit) { %>
                     <form:submit_inline button="save" waiting="true" name="save" action="update_issue" />
+                <% } %>
                 <form:buttonset_end />
             <form:row_end />
     <form:end />
@@ -105,7 +114,7 @@ String tempURL; //var for url expression
     <% issue = (ReelIssue)issuesYes.get(x); %>
     <admin:box_begin />
     <% tempURL = "issueY" + x; %>
-    <form:begin submit="true" name="<%= tempURL %>" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
             <form:row_begin />
                 <form:label name="" label="Is Resolved?:" />
                 <form:content_begin />      
@@ -122,7 +131,9 @@ String tempURL; //var for url expression
             <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
+                <% if(canSubmit) { %>
                     <form:submit_inline button="save" waiting="true" name="save" action="update_issue" />
+                <% } %>
                 <form:buttonset_end />
             <form:row_end />
     <form:end />

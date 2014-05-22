@@ -57,6 +57,11 @@ CompEntities locations = locationMgr.searchWhLocation(location, WhLocation.NAME_
 String[] carrierList = reelMgr.getCarriers();
 
 String tempURL; //var for url expression
+
+boolean canSubmit = true;
+if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
+	canSubmit = false;
+}
 %>
 <% dbResources.close(); %>
 
@@ -67,7 +72,7 @@ String tempURL; //var for url expression
 
 <admin:subtitle text="General Info" />
 <admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canSubmit).toString() %>" name="edit" action="reels/process.jsp" />
     	<% if(canEdit) { %>
     		<form:row_begin />
 	            <form:label name="" label="Status:" />
@@ -174,7 +179,9 @@ String tempURL; //var for url expression
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
+					<% if(canSubmit) { %>
 					<form:submit_inline button="save" waiting="true" name="save" action="update" />
+					<% } %>
 				<form:buttonset_end />
 			<form:row_end />
     <form:end />
@@ -182,7 +189,7 @@ String tempURL; //var for url expression
 
 <admin:subtitle text="Shipping Info" />
 <admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canSubmit).toString() %>" name="edit" action="reels/process.jsp" />
     		<form:row_begin />
 	            <form:label name="" label="Carrier:" />
 	            <form:content_begin />
@@ -204,7 +211,9 @@ String tempURL; //var for url expression
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
+				<% if(canSubmit) { %>
 					<form:submit_inline button="save" waiting="true" name="save" action="update_shipping" />
+				<% } %>
 				<form:buttonset_end />
 			<form:row_end />
     <form:end />
@@ -212,7 +221,7 @@ String tempURL; //var for url expression
 
 <admin:subtitle text="Receiving Info" />
 <admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canSubmit).toString() %>" name="edit" action="reels/process.jsp" />
     		<form:row_begin />
 	            <form:label name="" label="Issue:" />
 	            <form:content_begin />
@@ -242,7 +251,9 @@ String tempURL; //var for url expression
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
+				<% if(canSubmit) { %>
 					<form:submit_inline button="save" waiting="true" name="save" action="update_receiving" />
+				<% } %>
 				<form:buttonset_end />
 			<form:row_end />
     <form:end />

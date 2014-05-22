@@ -32,6 +32,7 @@ dbResources.close();
 					<form:select_begin name="<%= RTUser.USER_TYPE_COLUMN %>" label="usertype" />
 						<form:option value="<%= RTUser.USER_TYPE_MANAGEMENT %>" name="Management"/>
 						<form:option value="<%= RTUser.USER_TYPE_STANDARD %>" name="Standard"/>
+						<form:option value="<%= RTUser.USER_TYPE_INVENTORY %>" name="CableTrac"/>
 					<form:select_end />
 				<form:content_end />
 			<form:row_end />

@@ -29,12 +29,18 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 
 CompEntities contents = reelMgr.getReelsDataForBOM(user.getJobCode());
 
+boolean canSubmit = true;
+if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
+    canSubmit = false;
+}
+
 String tempUrl =""; //var for url expression
 %>
 <% dbResources.close(); %>
 <html:begin />
 <admin:title text="Bill of Materials" />
 
+<% if(canSubmit) { %>
 <admin:subtitle text="Uplaod File" />
 <admin:box_begin />
 	<form:begin_multipart submit="true" name="upload_bom_pdf" action="bill_of_materials/process.jsp" />
@@ -48,6 +54,7 @@ String tempUrl =""; //var for url expression
 			<form:hidden name="<%= CustomerJob.PARAM %>" value="<%= Integer.toString(user.getJobId()) %>" />
     <form:end />
 <admin:box_end />
+<% } %>
 
 <% if(contents.howMany() > 0) { %>
     <admin:subtitle text="Customer Part Numbers" />
@@ -78,7 +85,7 @@ String tempUrl =""; //var for url expression
                     <%= content.getReelsOrderedForBOM() %>
                 <listing:cell_end />
                 <listing:cell_begin />
-					<form:begin_inline action="bill_of_materials/process.jsp" name="update_usage_tracking" />
+					<form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" action="bill_of_materials/process.jsp" name="update_usage_tracking" />
 					   <% if(techData.getUsageTracking().equals("") || canEdit) { %>
 							<form:select_begin onchange="test" name="<%= CableTechData.USAGE_TRACKING_COLUMN %>" />
 						<% } else { %>
@@ -96,7 +103,7 @@ String tempUrl =""; //var for url expression
                 <listing:cell_end />
 				<listing:cell_begin />
 					<form:begin_multipart  action="bill_of_materials/process.jsp" name="upload_data_sheet" />
-						<% if(canEdit) { %>
+						<% if(canEdit && canSubmit) { %>
 							<form:file_inline urldescription="false" name="<%= CableTechData.DATA_SHEET_FILE_COLUMN %>" label="" />
 			                <form:submit_inline  button="save" waiting="true" name="save" action="upload_data_sheet" />
 						<% } %>						

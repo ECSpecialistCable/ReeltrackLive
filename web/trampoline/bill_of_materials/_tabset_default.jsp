@@ -9,6 +9,8 @@
 <% String label = user.getCustomerName() + " File Cabinet"; %>
 
 <admin:tab url="bill_of_materials/search.jsp" text="Bill of Materials" />
+<% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY)) { %>
 <admin:tab url="bill_of_materials/cust_pn.jsp" text="Customer P/Ns" />
+<% } %>
 
 <admin:set_moduleactions url="bill_of_materials/_moduleactions.jsp" />

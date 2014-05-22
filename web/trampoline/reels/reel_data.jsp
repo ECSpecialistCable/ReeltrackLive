@@ -74,9 +74,12 @@ String tempURL; //var for url expression
 <admin:box_begin />
     <form:begin submit="<%= new Boolean(false).toString() %>" name="edit" action="reels/process.jsp" />
         <% if(!canEdit) { %>
+            <form:info label="Customer PO:" text="<%= content.getCustomerPO() %>" />
             <form:info label="Invoice #:" text="<%= content.getInvoiceNum() %>" />
-            <form:info label="Invoice Date:" text="<%= content.getInvoiceDateString() %>" />
+            <form:info label="Invoice Date:" text="<%= content.getInvoiceDateString() %>" />       
         <% } else { %>
+            <form:info label="ECS PO:" text="<%= content.getOrdNo() %>" />
+            <form:textfield label="Customer PO:" name="<%= Reel.CUSTOMER_PO_COLUMN %>" value="<%= content.getCustomerPO() %>" />
             <form:textfield label="Invoice #:" name="<%= Reel.INVOICE_NUM_COLUMN %>" value="<%= content.getInvoiceNum() %>" />
             <form:date_picker start="01/01/2014" name="<%= Reel.INVOICE_DATE_COLUMN %>" value="<%= content.getInvoiceDateString() %>" label="Invoice Date:" />
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />

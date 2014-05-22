@@ -391,6 +391,7 @@ if(action.equals("update_reel_invoice")) {
     if(request.getParameter(Reel.INVOICE_DATE_COLUMN)!=null && !request.getParameter(Reel.INVOICE_DATE_COLUMN).equals("")) {
         content.setInvoiceDateString(request.getParameter(Reel.INVOICE_DATE_COLUMN));
     }
+    content.setCustomerPO(request.getParameter(Reel.CUSTOMER_PO_COLUMN));
     reelMgr.updateReel(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/reel_data.jsp?" + Reel.PARAM + "=" + contid ;
 }

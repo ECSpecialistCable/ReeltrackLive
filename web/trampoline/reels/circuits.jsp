@@ -51,6 +51,12 @@ for(int i=0; i<circuits.howMany(); i++) {
     }
 }
 int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
+
+boolean canSubmit = true;
+if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
+    canSubmit = false;
+}
+
 %>
 
 <html:begin />
@@ -66,6 +72,7 @@ int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
     <h2 style="color:red;">ALERT: REEL SHOWS NEGATIVE QUANTITY</h2>
 <% } %>
 
+<% if(canSubmit) { %>
 <admin:subtitle text="Add Circuit" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
@@ -94,6 +101,7 @@ int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
 			<form:row_end />
     <form:end />
 <admin:box_end />
+<% } %>
 
 <% if(circuits.howMany() > 0) { %>
     <%
@@ -132,29 +140,33 @@ int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
             <listing:cell_end />
             <listing:cell_begin />
                 <% tempURL = "z" + circuit.getId(); %>
-                <form:begin_inline name="<%= tempURL %>" action="reels/process.jsp" />
+                <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
                     <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="<%= new Integer(circuit.getLength()).toString() %>" />
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
+                    <% if(canSubmit) { %>
                     <form:submit_inline waiting="true" name="save" action="update_circuit" />
+                    <% } %>
                 <form:end_inline />
             <listing:cell_end />
             <listing:cell_begin />
                 <% tempURL = "i" + circuit.getId(); %>
-                <form:begin_inline name="<%= tempURL %>" action="reels/process.jsp" />
+                <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
                     <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.ACT_LENGTH_COLUMN %>" value="<%= new Integer(circuit.getActLength()).toString() %>" />
                     <form:checkbox label="" name="<%= ReelCircuit.IS_PULLED_COLUMN %>" value="y" match="<%= circuit.getIsPulled() %>" />        
                     <%-- onclick="this.form.submit();"  --%>
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
+                    <% if(canSubmit) { %>
                     <form:submit_inline waiting="true" name="save" action="update_circuit" />
+                    <% } %>
                 <form:end_inline />
             <listing:cell_end />
             <listing:cell_begin align="right"/>
                 <% tempURL = "reels/process.jsp?submit_action=delete_circuit&" + Reel.PARAM + "=" + content.getId() + "&" + ReelCircuit.PARAM + "=" + circuit.getId(); %>
-                <% if(!circuit.isPulled()) { %>
+                <% if(!circuit.isPulled() && canSubmit) { %>
                 <form:linkbutton warning="true" url="<%= tempURL %>" process="true" name="DELETE" />
                 <% } %>
             <listing:cell_end />

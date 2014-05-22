@@ -37,6 +37,11 @@ content = (Reel)reelMgr.getReel(content);
 
 CableTechData techData = reelMgr.getCableTechData(content);
 
+boolean canSubmit = true;
+if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
+    canSubmit = false;
+}
+
 String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
@@ -48,7 +53,7 @@ String tempURL; //var for url expression
 
 <admin:subtitle text="Edit Quantity" />
 <admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+    <form:begin submit="<% new Boolean(canSubmit).toString() %>" name="edit" action="reels/process.jsp" />
     		<form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
     		<form:info label="Shipped Qty:" text="<%= new Integer(content.getShippedQuantity()).toString() %>" />
     		<form:textfield label="Received Qty:" pixelwidth="40" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
@@ -75,59 +80,65 @@ String tempURL; //var for url expression
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
+                    <% if(canSubmit) { %>
 					<form:submit_inline button="save" waiting="true" name="save" action="update_quantity" />
+                    <% } %>
 				<form:buttonset_end />
 			<form:row_end />
     <form:end />
 <admin:box_end />
 
-<% if(techData.getUsageTracking().equals(CableTechData.USAGE_QUANTITY_PULLED)) { %>
-<admin:subtitle text="Record Cable Used Quantity (Cable Pulled)" />
-<admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
-    		<form:textfield label="Pulled Qty:" pixelwidth="40" name="pulled_quantity" value="0" />
-    		<%--<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />--%>
-			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
-			<form:row_begin />
-				<form:label name="" label="" />
-				<form:buttonset_begin align="left" padding="0"/>
-					<form:submit_inline button="save" waiting="true" name="save" action="record_pull" />
-				<form:buttonset_end />
-			<form:row_end />
-    <form:end />
-<admin:box_end />
-<% } %>
+<% if(canSubmit) { %>
 
-<% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
-<admin:subtitle text="Record Current Cable Weight" />
-<admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
-            <form:textfield label="Current lbs:" pixelwidth="40" name="current_weight" value="0" />
-            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />          
-            <form:row_begin />
-                <form:label name="" label="" />
-                <form:buttonset_begin align="left" padding="0"/>
-                    <form:submit_inline button="save" waiting="true" name="save" action="record_weight" />
-                <form:buttonset_end />
-            <form:row_end />
-    <form:end />
-<admin:box_end />
-<% } %>
+    <% if(techData.getUsageTracking().equals(CableTechData.USAGE_QUANTITY_PULLED)) { %>
+    <admin:subtitle text="Record Cable Used Quantity (Cable Pulled)" />
+    <admin:box_begin />
+        <form:begin submit="true" name="edit" action="reels/process.jsp" />
+        		<form:textfield label="Pulled Qty:" pixelwidth="40" name="pulled_quantity" value="0" />
+        		<%--<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />--%>
+    			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+    			<form:row_begin />
+    				<form:label name="" label="" />
+    				<form:buttonset_begin align="left" padding="0"/>
+    					<form:submit_inline button="save" waiting="true" name="save" action="record_pull" />
+    				<form:buttonset_end />
+    			<form:row_end />
+        <form:end />
+    <admin:box_end />
+    <% } %>
 
-<% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
-<admin:subtitle text="Record Current Top Marker" />
-<admin:box_begin />
-    <form:begin submit="true" name="edit" action="reels/process.jsp" />
-            <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />
-            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />          
-            <form:row_begin />
-                <form:label name="" label="" />
-                <form:buttonset_begin align="left" padding="0"/>
-                    <form:submit_inline button="save" waiting="true" name="save" action="record_top_marker" />
-                <form:buttonset_end />
-            <form:row_end />
-    <form:end />
-<admin:box_end />
+    <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+    <admin:subtitle text="Record Current Cable Weight" />
+    <admin:box_begin />
+        <form:begin submit="true" name="edit" action="reels/process.jsp" />
+                <form:textfield label="Current lbs:" pixelwidth="40" name="current_weight" value="0" />
+                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />          
+                <form:row_begin />
+                    <form:label name="" label="" />
+                    <form:buttonset_begin align="left" padding="0"/>
+                        <form:submit_inline button="save" waiting="true" name="save" action="record_weight" />
+                    <form:buttonset_end />
+                <form:row_end />
+        <form:end />
+    <admin:box_end />
+    <% } %>
+
+    <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+    <admin:subtitle text="Record Current Top Marker" />
+    <admin:box_begin />
+        <form:begin submit="true" name="edit" action="reels/process.jsp" />
+                <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />
+                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />          
+                <form:row_begin />
+                    <form:label name="" label="" />
+                    <form:buttonset_begin align="left" padding="0"/>
+                        <form:submit_inline button="save" waiting="true" name="save" action="record_top_marker" />
+                    <form:buttonset_end />
+                <form:row_end />
+        <form:end />
+    <admin:box_end />
+    <% } %>
+
 <% } %>
 
 <admin:set_tabset url="reels/_tabset_manage.jsp" thispage="quantity.jsp" content_id_for_tabset="<%= contid %>"/>

@@ -97,6 +97,10 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
     canEdit = true;
 }
 //canEdit = false;
+boolean isCableTrac = false;
+if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
+    isCableTrac = true;
+}
 
 String[] carrierList = reelMgr.getCarriers();
 %>
@@ -138,43 +142,49 @@ String[] carrierList = reelMgr.getCarriers();
 <admin:box_end />
 <% } %>
 
-<% if(content.getStatus().equals(Reel.STATUS_ORDERED)) { %>
-<admin:subtitle text="Mark Reel as Shipped" />
-<admin:box_begin />
-	<form:begin submit="true" name="stage" action="reels/process.jsp" />
-        <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
-		<form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
-        <% if(canEdit) { %>
-            <form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
-            <form:date_picker name="<%= Reel.SHIPPING_DATE_COLUMN %>" value="<%= content.getShippingDateString() %>" label="Shipped<br />Date:" />
-        <% } else { %>
-            <form:info label="Projected Shipping<br />Date:" text="<%= content.getProjectedShippingDateString() %>" />
-            <form:info label="Shipped<br />Date:" text="<%= content.getShippingDateString() %>" />
-        <% } %>
-        <form:row_begin />
-        <form:label name="" label="Carrier:" />
-        <form:content_begin />
-        <form:select_begin name="<%= Reel.CARRIER_COLUMN %>" />
-            <form:option name="None" value="" match="<%= content.getCarrier() %>" />
-            <% //String[] carrierList  = content.getCarrierList(); %>
-            <% for(int x=0; x<carrierList.length; x++) { %>
-                <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= content.getCarrier() %>" />
+<% if(isCableTrac && !content.getStatus().equals(Reel.STATUS_ORDERED) && !content.getStatus().equals(Reel.STATUS_SHIPPED)) { %>
+<h2 style="color:red;">Contact ECS to upgrade user status.</h2>
+<% } %>
+
+<% if(!isCableTrac) { %>
+    <% if(content.getStatus().equals(Reel.STATUS_ORDERED)) { %>
+    <admin:subtitle text="Mark Reel as Shipped" />
+    <admin:box_begin />
+    	<form:begin submit="true" name="stage" action="reels/process.jsp" />
+            <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
+    		<form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
+            <% if(canEdit) { %>
+                <form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
+                <form:date_picker name="<%= Reel.SHIPPING_DATE_COLUMN %>" value="<%= content.getShippingDateString() %>" label="Shipped<br />Date:" />
+            <% } else { %>
+                <form:info label="Projected Shipping<br />Date:" text="<%= content.getProjectedShippingDateString() %>" />
+                <form:info label="Shipped<br />Date:" text="<%= content.getShippingDateString() %>" />
             <% } %>
-        <form:select_end />
-        <form:content_end />
-        <form:row_end />
-        <form:textfield label="Other Carrier:" name="other_carrier" />
-        <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
-        <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />        
-        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
-        <form:row_begin />
-		<form:label name="" label="" />
-		<form:buttonset_begin align="left" padding="0"/>
-			<form:submit_inline button="save" waiting="true" name="Mark Shipped" action="mark_shipped" />
-		<form:buttonset_end />
-		<form:row_end />
-    <form:end />
-<admin:box_end />
+            <form:row_begin />
+            <form:label name="" label="Carrier:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Reel.CARRIER_COLUMN %>" />
+                <form:option name="None" value="" match="<%= content.getCarrier() %>" />
+                <% //String[] carrierList  = content.getCarrierList(); %>
+                <% for(int x=0; x<carrierList.length; x++) { %>
+                    <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= content.getCarrier() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+            <form:row_end />
+            <form:textfield label="Other Carrier:" name="other_carrier" />
+            <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
+            <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />        
+            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
+            <form:row_begin />
+    		<form:label name="" label="" />
+    		<form:buttonset_begin align="left" padding="0"/>
+    			<form:submit_inline button="save" waiting="true" name="Mark Shipped" action="mark_shipped" />
+    		<form:buttonset_end />
+    		<form:row_end />
+        <form:end />
+    <admin:box_end />
+    <% } %>
 <% } %>
 
 <% if(content.getStatus().equals(Reel.STATUS_ORDERED) || content.getStatus().equals(Reel.STATUS_SHIPPED)) { %>
@@ -259,186 +269,188 @@ if(job.getScansMustMatch().equals("y") && !reelsMatch) {
     showStageAndCheckout = false;
 }
 %>
-<% if(showStageAndCheckout) { %>
+
+<% if(!isCableTrac) { %>
+    <% if(showStageAndCheckout) { %>
+        <% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) { %>
+        <admin:subtitle text="Stage Reel" />
+        <admin:box_begin />
+        	<form:begin submit="true" name="stage" action="reels/process.jsp" />
+    				<% if(picklist.getId()!=0) { %>
+    					<form:info label="Pick List:" text="<%= picklist.getName() %>" />
+    				<% } %>
+                    <form:row_begin />
+                        <form:label name="" label="Checked OUT to:" />
+                        <form:content_begin />
+                        <form:select_begin name="<%= PickList.FOREMAN_COLUMN %>" />
+                            <form:option name="None" value="" match="<%= picklist.getForeman() %>" />
+                            <% for(int f=0; f<foremans.howMany(); f++) { %>
+                                <% foreman = (Foreman)foremans.get(f); %>
+                                <form:option name="<%= foreman.getName() %>" value="<%= foreman.getName() %>" match="<%= picklist.getForeman() %>" />
+                            <% } %>
+                        <form:select_end />
+                        <form:content_end />
+                    <form:row_end />
+                    <form:row_begin />
+                        <form:label name="" label="Driver:" />
+                        <form:content_begin />
+                        <form:select_begin name="<%= PickList.DRIVER_COLUMN %>" />
+                            <form:option name="None" value="" match="<%= picklist.getDriver() %>" />
+                            <% for(int f=0; f<drivers.howMany(); f++) { %>
+                                <% driver = (Driver)drivers.get(f); %>
+                                <form:option name="<%= driver.getName() %>" value="<%= driver.getName() %>" match="<%= picklist.getDriver() %>" />
+                            <% } %>
+                        <form:select_end />
+                        <form:content_end />
+                    <form:row_end />
+                    <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
+                
+                <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                    <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+                <% } %>
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+                    <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+                <% } %>
+                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
+                <form:row_begin />
+        		<form:label name="" label="" />
+        		<form:buttonset_begin align="left" padding="0"/>
+        			<form:submit_inline button="save" waiting="true" name="STAGE" action="mark_staged" />
+        		<form:buttonset_end />
+        		<form:row_end />
+            <form:end />
+        <admin:box_end />
+        <% } %>
+
+        <% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) || content.getStatus().equals(Reel.STATUS_STAGED)) { %>
+        <admin:subtitle text="Check OUT Reel" />
+        <admin:box_begin />
+        	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
+    				<% if(picklist.getId()!=0) { %>
+    					<form:info label="Pick List:" text="<%= picklist.getName() %>" />
+    				<% } %>
+                    <form:row_begin />
+                        <form:label name="" label="Checked OUT to:" />
+                        <form:content_begin />
+                        <form:select_begin name="<%= PickList.FOREMAN_COLUMN %>" />
+                            <form:option name="None" value="" match="<%= picklist.getForeman() %>" />
+                            <% for(int f=0; f<foremans.howMany(); f++) { %>
+                                <% foreman = (Foreman)foremans.get(f); %>
+                                <form:option name="<%= foreman.getName() %>" value="<%= foreman.getName() %>" match="<%= picklist.getForeman() %>" />
+                            <% } %>
+                        <form:select_end />
+                        <form:content_end />
+                    <form:row_end />
+                    <form:row_begin />
+                        <form:label name="" label="Driver:" />
+                        <form:content_begin />
+                        <form:select_begin name="<%= PickList.DRIVER_COLUMN %>" />
+                            <form:option name="None" value="" match="<%= picklist.getDriver() %>" />
+                            <% for(int f=0; f<drivers.howMany(); f++) { %>
+                                <% driver = (Driver)drivers.get(f); %>
+                                <form:option name="<%= driver.getName() %>" value="<%= driver.getName() %>" match="<%= picklist.getDriver() %>" />
+                            <% } %>
+                        <form:select_end />
+                        <form:content_end />
+                    <form:row_end />
+                    <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
+                <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
+                
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                    <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+                <% } %>
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+                    <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+                <% } %>
+
+                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
+                <form:row_begin />
+        		<form:label name="" label="" />
+        		<form:buttonset_begin align="left" padding="0"/>
+        			<form:submit_inline button="save" waiting="true" name="CHECKOUT" action="mark_checkedout" />
+        		<form:buttonset_end />
+        		<form:row_end />
+            <form:end />
+        <admin:box_end />
+        <% } %>
+    <% } %>
+
     <% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) { %>
-    <admin:subtitle text="Stage Reel" />
+    <admin:subtitle text="Mark Reel as Complete" />
     <admin:box_begin />
-    	<form:begin submit="true" name="stage" action="reels/process.jsp" />
-				<% if(picklist.getId()!=0) { %>
-					<form:info label="Pick List:" text="<%= picklist.getName() %>" />
-				<% } %>
-                <form:row_begin />
-                    <form:label name="" label="Checked OUT to:" />
-                    <form:content_begin />
-                    <form:select_begin name="<%= PickList.FOREMAN_COLUMN %>" />
-                        <form:option name="None" value="" match="<%= picklist.getForeman() %>" />
-                        <% for(int f=0; f<foremans.howMany(); f++) { %>
-                            <% foreman = (Foreman)foremans.get(f); %>
-                            <form:option name="<%= foreman.getName() %>" value="<%= foreman.getName() %>" match="<%= picklist.getForeman() %>" />
-                        <% } %>
-                    <form:select_end />
-                    <form:content_end />
-                <form:row_end />
-                <form:row_begin />
-                    <form:label name="" label="Driver:" />
-                    <form:content_begin />
-                    <form:select_begin name="<%= PickList.DRIVER_COLUMN %>" />
-                        <form:option name="None" value="" match="<%= picklist.getDriver() %>" />
-                        <% for(int f=0; f<drivers.howMany(); f++) { %>
-                            <% driver = (Driver)drivers.get(f); %>
-                            <form:option name="<%= driver.getName() %>" value="<%= driver.getName() %>" match="<%= picklist.getDriver() %>" />
-                        <% } %>
-                    <form:select_end />
-                    <form:content_end />
-                <form:row_end />
-                <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
-            
-            <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
-            <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
-                <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
-            <% } %>
-            <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
-                <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
-            <% } %>
+    	<form:begin submit="true" name="complete" action="reels/process.jsp" />
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
             <form:row_begin />
     		<form:label name="" label="" />
     		<form:buttonset_begin align="left" padding="0"/>
-    			<form:submit_inline button="save" waiting="true" name="STAGE" action="mark_staged" />
+    			<form:submit_inline button="save" waiting="true" name="Mark Complete" action="mark_complete" />
     		<form:buttonset_end />
     		<form:row_end />
         <form:end />
     <admin:box_end />
     <% } %>
 
-    <% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) || content.getStatus().equals(Reel.STATUS_STAGED)) { %>
-    <admin:subtitle text="Check OUT Reel" />
+    <% if(content.getStatus().equals(Reel.STATUS_COMPLETE)) { %>
+    <admin:subtitle text="Mark Reel as Scrapped" />
+    <admin:box_begin />
+    	<form:begin submit="true" name="scrapped" action="reels/process.jsp" />
+            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
+            <form:row_begin />
+    		<form:label name="" label="" />
+    		<form:buttonset_begin align="left" padding="0"/>
+    			<form:submit_inline button="save" waiting="true" name="Mark Scrapped" action="mark_scrapped" />
+    		<form:buttonset_end />
+    		<form:row_end />
+        <form:end />
+    <admin:box_end />
+    <% } %>
+
+    <% if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) { %>
+    <admin:subtitle text="Check IN Reel" />
     <admin:box_begin />
     	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
-				<% if(picklist.getId()!=0) { %>
-					<form:info label="Pick List:" text="<%= picklist.getName() %>" />
-				<% } %>
-                <form:row_begin />
-                    <form:label name="" label="Checked OUT to:" />
-                    <form:content_begin />
-                    <form:select_begin name="<%= PickList.FOREMAN_COLUMN %>" />
-                        <form:option name="None" value="" match="<%= picklist.getForeman() %>" />
-                        <% for(int f=0; f<foremans.howMany(); f++) { %>
-                            <% foreman = (Foreman)foremans.get(f); %>
-                            <form:option name="<%= foreman.getName() %>" value="<%= foreman.getName() %>" match="<%= picklist.getForeman() %>" />
-                        <% } %>
-                    <form:select_end />
-                    <form:content_end />
-                <form:row_end />
-                <form:row_begin />
-                    <form:label name="" label="Driver:" />
-                    <form:content_begin />
-                    <form:select_begin name="<%= PickList.DRIVER_COLUMN %>" />
-                        <form:option name="None" value="" match="<%= picklist.getDriver() %>" />
-                        <% for(int f=0; f<drivers.howMany(); f++) { %>
-                            <% driver = (Driver)drivers.get(f); %>
-                            <form:option name="<%= driver.getName() %>" value="<%= driver.getName() %>" match="<%= picklist.getDriver() %>" />
-                        <% } %>
-                    <form:select_end />
-                    <form:content_end />
-                <form:row_end />
-                <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
-            <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
-            
-            <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+    		<% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
                 <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
             <% } %>
             <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
                 <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
             <% } %>
-
+            <form:row_begin />
+            <form:label name="" label="Warehouse<br />Location:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Reel.WHAREHOUSE_LOCATION_COLUMN %>" />
+                <form:option name="None" value="<%= WhLocation.LOCATION_NONE %>" match="<%= content.getWharehouseLocation() %>" />
+                <% for(int x=0; x<locations.howMany(); x++) { %>
+                    <% location = (WhLocation)locations.get(x); %>
+                    <form:option name="<%= location.getName() %>" value="<%= location.getName() %>" match="<%= content.getWharehouseLocation() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+            <form:row_end />
+            <form:row_begin />
+            <form:label name="" label="Driver:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Driver.PARAM %>" />
+                <form:option name="None" value="None" />
+                <% for(int x=0; x<drivers.howMany(); x++) { %>
+                    <% driver = (Driver)drivers.get(x); %>
+                    <form:option name="<%= driver.getName() %>" value="<%= driver.getName() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+            <form:row_end />
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
             <form:row_begin />
     		<form:label name="" label="" />
     		<form:buttonset_begin align="left" padding="0"/>
-    			<form:submit_inline button="save" waiting="true" name="CHECKOUT" action="mark_checkedout" />
+    			<form:submit_inline button="save" waiting="true" name="Mark Checked IN" action="mark_checkedin" />
     		<form:buttonset_end />
     		<form:row_end />
         <form:end />
     <admin:box_end />
     <% } %>
 <% } %>
-
-<% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) { %>
-<admin:subtitle text="Mark Reel as Complete" />
-<admin:box_begin />
-	<form:begin submit="true" name="complete" action="reels/process.jsp" />
-        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
-        <form:row_begin />
-		<form:label name="" label="" />
-		<form:buttonset_begin align="left" padding="0"/>
-			<form:submit_inline button="save" waiting="true" name="Mark Complete" action="mark_complete" />
-		<form:buttonset_end />
-		<form:row_end />
-    <form:end />
-<admin:box_end />
-<% } %>
-
-<% if(content.getStatus().equals(Reel.STATUS_COMPLETE)) { %>
-<admin:subtitle text="Mark Reel as Scrapped" />
-<admin:box_begin />
-	<form:begin submit="true" name="scrapped" action="reels/process.jsp" />
-        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
-        <form:row_begin />
-		<form:label name="" label="" />
-		<form:buttonset_begin align="left" padding="0"/>
-			<form:submit_inline button="save" waiting="true" name="Mark Scrapped" action="mark_scrapped" />
-		<form:buttonset_end />
-		<form:row_end />
-    <form:end />
-<admin:box_end />
-<% } %>
-
-<% if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) { %>
-<admin:subtitle text="Check IN Reel" />
-<admin:box_begin />
-	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
-		<% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
-            <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
-        <% } %>
-        <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
-            <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
-        <% } %>
-        <form:row_begin />
-        <form:label name="" label="Warehouse<br />Location:" />
-        <form:content_begin />
-        <form:select_begin name="<%= Reel.WHAREHOUSE_LOCATION_COLUMN %>" />
-            <form:option name="None" value="<%= WhLocation.LOCATION_NONE %>" match="<%= content.getWharehouseLocation() %>" />
-            <% for(int x=0; x<locations.howMany(); x++) { %>
-                <% location = (WhLocation)locations.get(x); %>
-                <form:option name="<%= location.getName() %>" value="<%= location.getName() %>" match="<%= content.getWharehouseLocation() %>" />
-            <% } %>
-        <form:select_end />
-        <form:content_end />
-        <form:row_end />
-        <form:row_begin />
-        <form:label name="" label="Driver:" />
-        <form:content_begin />
-        <form:select_begin name="<%= Driver.PARAM %>" />
-            <form:option name="None" value="None" />
-            <% for(int x=0; x<drivers.howMany(); x++) { %>
-                <% driver = (Driver)drivers.get(x); %>
-                <form:option name="<%= driver.getName() %>" value="<%= driver.getName() %>" />
-            <% } %>
-        <form:select_end />
-        <form:content_end />
-        <form:row_end />
-        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
-        <form:row_begin />
-		<form:label name="" label="" />
-		<form:buttonset_begin align="left" padding="0"/>
-			<form:submit_inline button="save" waiting="true" name="Mark Checked IN" action="mark_checkedin" />
-		<form:buttonset_end />
-		<form:row_end />
-    <form:end />
-<admin:box_end />
-<% } %>
-
 
 <admin:subtitle text="General Info" />
 <admin:box_begin />
