@@ -98,6 +98,8 @@ String tempURL; //var for url expression
     <form:end />
 <admin:box_end />
 
+<h2 style="color:red;">The Cable Data below can only be edited by ECS users.</h2>
+
 <admin:subtitle text="Conductor / Ground" />
 <admin:box_begin />
     <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
