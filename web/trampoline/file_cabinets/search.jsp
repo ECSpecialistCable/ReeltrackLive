@@ -58,7 +58,7 @@ String tempUrl =""; //var for url expression
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Title" />
-                <listing:header_cell width="100" name="" />
+                <listing:header_cell width="140" name="" />
             <listing:header_end />
             <% for(int i=0; i<contents.howMany(); i++) { %>
             <% content = (FileCabinet)contents.get(i); %>
@@ -67,10 +67,12 @@ String tempUrl =""; //var for url expression
                     <%= content.getTitle() %>
                 <listing:cell_end />
                 <listing:cell_begin align="right"/>
-                <% tempUrl = "file_cabinets/process.jsp?submit_action=delete&" + FileCabinet.PARAM + "=" + content.getId(); %>
 				<% tempUrl = request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getFileName(); %>
 				<admin:link external="true" text="[Download]" url="<%= tempUrl %>" />
-
+                <% if(canEdit) { %>
+                <% tempUrl = "file_cabinets/process.jsp?submit_action=delete&" + FileCabinet.PARAM + "=" + content.getId(); %>
+                <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
+                <% } %>
                 <listing:cell_end />
             <listing:row_end />
             <% } %>

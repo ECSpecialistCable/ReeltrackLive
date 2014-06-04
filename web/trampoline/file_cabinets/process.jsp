@@ -48,6 +48,7 @@ if(request.getParameter(FileCabinet.PARAM) != null) {
 		}
 	}
 }
+
 if(action.equals("create")) {
     content = new FileCabinet();
     content.setCustomerId(0);
@@ -76,6 +77,21 @@ if(action.equals("create_customer")) {
 	//redirect = request.getContextPath() + "/trampoline/" + "users/edit.jsp?" + RTUser.PARAM + "=" + contid;
     redirect = request.getContextPath() + "/trampoline/" + "file_cabinets/customer.jsp";
 }
+
+if(action.equals("delete")) {
+    content = new FileCabinet();
+    content.setId(Integer.parseInt(request.getParameter(FileCabinet.PARAM)));
+    cabinetMgr.deleteFileCabinet(content, basePath);
+    redirect = request.getContextPath() + "/trampoline/" + "file_cabinets/search.jsp";
+}
+
+if(action.equals("delete_customer")) {
+    content = new FileCabinet();
+    content.setId(Integer.parseInt(request.getParameter(FileCabinet.PARAM)));
+    cabinetMgr.deleteFileCabinet(content, basePath);
+    redirect = request.getContextPath() + "/trampoline/" + "file_cabinets/customer.jsp";
+}
+
 %>
 <% dbResources.close(); %>
 <notifier:set_message text="<%= notifier %>" />		
