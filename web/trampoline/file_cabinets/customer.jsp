@@ -26,6 +26,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MAN
 
 FileCabinet content = new FileCabinet();
 content.setCustomerId(user.getCustomerId());
+content.setJobId(user.getJobId());
 CompEntities contents = cabinetMgr.searchFileCabinet(content, FileCabinet.TITLE_COLUMN, true, 0, 0);
 
 String tempUrl =""; //var for url expression
@@ -42,7 +43,8 @@ String tempUrl =""; //var for url expression
 	<form:begin_multipart submit="true" name="create" action="file_cabinets/process.jsp" />
 		<form:textfield name="<%= FileCabinet.TITLE_COLUMN %>" label="Title:" />
 			<form:file label="File:" name="<%= FileCabinet.FILE_NAME_COLUMN %>" />
-            <form:hidden name="<%= FileCabinet.CUSTOMER_ID_COLUMN %>" value="<%= new Integer(user.getCustomerId()).toString() %>" />  
+            <form:hidden name="<%= FileCabinet.CUSTOMER_ID_COLUMN %>" value="<%= new Integer(user.getCustomerId()).toString() %>" /> 
+            <form:hidden name="<%= FileCabinet.JOB_ID_COLUMN %>" value="<%= new Integer(user.getJobId()).toString() %>" /> 
             <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
@@ -68,10 +70,10 @@ String tempUrl =""; //var for url expression
                     <%= content.getTitle() %>
                 <listing:cell_end />
                 <listing:cell_begin align="right"/>
-                <% tempUrl = "file_cabinets/process.jsp?submit_action=delete&" + FileCabinet.PARAM + "=" + content.getId(); %>
 				<% tempUrl = request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getFileName(); %>
-				<admin:link external="true" text="[Download]" url="<%= tempUrl %>" />
-
+                <form:linkbutton warning="true" url="<%= tempUrl %>" external="true" name="DOWNLOAD" />
+                <% tempUrl = "file_cabinets/process.jsp?submit_action=delete&" + FileCabinet.PARAM + "=" + content.getId(); %>
+                <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />
             <listing:row_end />
             <% } %>

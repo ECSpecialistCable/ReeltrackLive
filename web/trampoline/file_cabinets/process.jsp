@@ -48,8 +48,6 @@ if(request.getParameter(FileCabinet.PARAM) != null) {
 		}
 	}
 }
-
-
 if(action.equals("create")) {
     content = new FileCabinet();
     content.setCustomerId(0);
@@ -67,6 +65,7 @@ if(action.equals("create")) {
 if(action.equals("create_customer")) {
     content = new FileCabinet();
     content.setCustomerId(Integer.parseInt(multipart.getParameter(FileCabinet.CUSTOMER_ID_COLUMN)));
+    content.setJobId(Integer.parseInt(multipart.getParameter(FileCabinet.JOB_ID_COLUMN)));
     content.setTitle(multipart.getParameter(FileCabinet.TITLE_COLUMN));
     content.setStatus(FileCabinet.STATUS_ACTIVE);
     File file = multipart.getFile(FileCabinet.FILE_NAME_COLUMN);
