@@ -71,8 +71,8 @@ String tempUrl; //var for url expression
 <% if(user.getCustomerId()!=0) { %>
 <%
 CompEntities custJobs = new CompEntities();
+CustomerJob custJob = new CustomerJob();
 if(user.isUserType(RTUser.USER_TYPE_ECS)) {
-	CustomerJob custJob = new CustomerJob();
 	custJob.setCustomerId(user.getCustomerId());
 	custJobs = customerMgr.getCustomerJobs(custJob);
 } else {
