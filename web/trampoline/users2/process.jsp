@@ -11,6 +11,8 @@
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="securityMgr" class="com.reeltrack.users.RTUserMgr" scope="request"/>
 <jsp:useBean id="customerMgr" class="com.reeltrack.customers.CustomerMgr" scope="request"/>
+<jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr" />
+<% userLoginMgr.init(pageContext); %>
 <% securityMgr.init(dbResources); %>
 <% customerMgr.init(pageContext,dbResources); %>
 <% CompProperties props = new CompProperties(); %>
@@ -42,6 +44,14 @@ if(action.equals("create")) {
     content.setStatus(RTUser.STATUS_ACTIVE);
     
     contid = securityMgr.addUser(content);
+    if(contid!=0) {
+        RTUser theUser = new RTUser();
+        theUser.setId(contid);
+        CustomerJob theJob = new CustomerJob();
+        RTUser loggedIn = (RTUser)userLoginMgr.getUser();
+        theJob.setId(loggedIn.getJobId());
+        customerMgr.linkJobToUser(theJob, theUser);
+    }
     //redirect = request.getContextPath() + "/trampoline/" + "users/edit.jsp?" + RTUser.PARAM + "=" + contid;
     redirect = request.getContextPath() + "/trampoline/" + "users2/search.jsp";
 }
