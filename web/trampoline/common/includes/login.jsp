@@ -42,11 +42,6 @@ String tempUrl; //var for url expression
 <% } %>
 
 <% if(userLoginMgr.isLoggedIn() && user.getJobCode().equals("")) { %>
-<%
-CustomerJob custJob = new CustomerJob();
-custJob.setCustomerId(user.getCustomerId());
-CompEntities custJobs = customerMgr.getCustomerJobs(custJob);
-%>
 <% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
 <admin:subtitle text="Please Select a Customer" />
 <admin:box_begin />
@@ -74,6 +69,16 @@ CompEntities custJobs = customerMgr.getCustomerJobs(custJob);
 <% } %>
 
 <% if(user.getCustomerId()!=0) { %>
+<%
+CompEntities custJobs = new CompEntities();
+if(user.isUserType(RTUser.USER_TYPE_ECS)) {
+	CustomerJob custJob = new CustomerJob();
+	custJob.setCustomerId(user.getCustomerId());
+	custJobs = customerMgr.getCustomerJobs(custJob);
+} else {
+	custJobs = customerMgr.getJobsAssignedToUser(user);
+}
+%>
 <admin:subtitle text="Please Select a Job" />
 <admin:box_begin />
 	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />
