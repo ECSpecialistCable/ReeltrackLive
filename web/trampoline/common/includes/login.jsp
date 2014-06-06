@@ -93,13 +93,15 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 					<% } %>
 				<form:select_end />
 			<form:content_end />
-		<form:row_end />		
+		<form:row_end />
+		<% if(custJobs.hoaMany()>0) { %>		
 		<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="right" padding="0"/>
 					<form:submit_inline button="login" waiting="true" name="login" action="job" />
 				<form:buttonset_end />
 		<form:row_end />
+		<% } %>
 	<form:end />
 <admin:box_end />
 <% } %>
