@@ -94,7 +94,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 				<form:select_end />
 			<form:content_end />
 		<form:row_end />
-		<% if(custJobs.hoaMany()>0) { %>		
+		<% if(custJobs.howMany()>0) { %>		
 		<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="right" padding="0"/>
