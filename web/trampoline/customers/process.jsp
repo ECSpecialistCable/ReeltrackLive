@@ -101,6 +101,7 @@ if(action.equals("update_user")) {
     RTUser content = new RTUser();
     content.setId(Integer.parseInt(request.getParameter(RTUser.PARAM)));
     content.setUserType(request.getParameter(RTUser.USER_TYPE_COLUMN));
+    content.setCanAddUser(request.getParameter(RTUser.CAN_ADD_USER_COLUMN));
     content.setFname(request.getParameter(RTUser.FIRSTNAME_COLUMN));
     content.setLname(request.getParameter(RTUser.LASTNAME_COLUMN));
     content.setEmail(request.getParameter(RTUser.EMAIL_COLUMN));

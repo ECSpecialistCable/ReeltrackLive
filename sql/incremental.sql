@@ -329,3 +329,7 @@ alter table reels add orig_top_foot int default 0;
 
 /* 4/22/15*/
 alter table customer_jobs add scans_must_match varchar(1) default 'n';
+
+/* june 11 */
+alter table users add column can_add_user varchar(1) default 'n';
+

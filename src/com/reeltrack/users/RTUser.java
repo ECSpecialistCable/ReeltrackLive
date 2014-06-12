@@ -5,6 +5,7 @@ import com.monumental.trampoline.security.*;
 public class RTUser extends User {
 
 	public static final String CUSTOMER_ID_COLUMN = "customer_id";
+    public static final String CAN_ADD_USER_COLUMN = "can_add_user";
 
 	// USER TYPE static strings
 	public static final String USER_TYPE_ECS = "ecs";
@@ -28,6 +29,14 @@ public class RTUser extends User {
 
     public String getTypeName() {
         return "ECS User";
+    }
+
+    public String getCanAddUser() {
+        return this.getData().getString(CAN_ADD_USER_COLUMN, "n");
+    }
+
+    public void setCanAddUser(String value) {
+        this.getData().setString(CAN_ADD_USER_COLUMN, value);
     }
 
 	public int getCustomerId() {

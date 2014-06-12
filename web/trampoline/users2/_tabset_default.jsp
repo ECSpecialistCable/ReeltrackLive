@@ -8,6 +8,8 @@
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 
 <admin:tab url="users2/search.jsp" text="users" />
-<admin:tab url="users2/create.jsp" text="add user" />
+<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.getCanAddUser().equals("y")) { %>
+	<admin:tab url="users2/create.jsp" text="add user" />
+<% } %>
 
 <admin:set_moduleactions url="users2/_moduleactions.jsp" />

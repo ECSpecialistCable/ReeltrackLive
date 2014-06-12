@@ -66,6 +66,19 @@ String tempUrl; //var for url expression
 					<form:select_end />
 				<form:content_end />
 			<form:row_end />
+			<% if(content.getUserType().equals(RTUser.USER_TYPE_MANAGEMENT)) { %>
+			<form:row_begin />
+				<form:label name="" label="Can Add User:" />
+				<form:content_begin />
+					<form:select_begin name="<%= RTUser.CAN_ADD_USER_COLUMN %>" label="useradd" />
+						<form:option match="<%= content.getCanAddUser() %>" value="n" name="No"/>
+						<form:option match="<%= content.getCanAddUser() %>" value="y" name="Yes"/>
+					<form:select_end />
+				<form:content_end />
+			<form:row_end />
+			<% } else { %>
+			<form:hidden name="<%= RTUser.CAN_ADD_USER_COLUMN %>" value="<%= content.getCanAddUser() %>" />
+			<% } %>
 			<form:textfield name="<%= RTUser.FIRSTNAME_COLUMN %>" label="first name:" value="<%= content.getFname() %>" />
 			<form:textfield name="<%= RTUser.LASTNAME_COLUMN %>" label="last name:" value="<%= content.getLname() %>"/>
 			<form:textfield name="<%= RTUser.EMAIL_COLUMN %>" label="email:" value="<%= content.getEmail() %>"/>
