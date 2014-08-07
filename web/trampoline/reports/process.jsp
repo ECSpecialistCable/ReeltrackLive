@@ -11,6 +11,7 @@
 <%@ page import= "org.apache.poi.hssf.util.*" %>
 <%@ page import="com.reeltrack.reports.ActionLogExcelReport"%>
 <%@ page import="com.reeltrack.reports.InventoryExcelReport"%>
+    <%@ page import="com.reeltrack.reports.CtrExcelReport"%>
 <%@ page import="com.reeltrack.reports.InventorySummaryExcelReport"%>
 <%@ page import="java.io.ByteArrayOutputStream"%>
 <%@ page import="com.reeltrack.reports.HtmlToPdfWriter"%>
@@ -141,6 +142,33 @@ if(action.equals("inventory_report")){
 		}
 
     	param = "?ir=true&inv_type=" + reportType;
+	} catch(Exception e) {
+		e.printStackTrace();
+    }
+
+	redirect = request.getContextPath() + "/trampoline/" + "reports/reports.jsp" + param;
+}
+
+if(action.equals("ctr_report")){
+    String param = "";
+	try {
+		//change functionality show we could download and view excel on ipad
+		String jobCode = request.getParameter("job_code");
+
+		String fileName = "ctr_report";
+		String saveFile = basePath + "/reports";
+		File file = new File(saveFile);
+		file.mkdirs();
+        CtrExcelReport writer = new CtrExcelReport(pageContext, dbResources);
+        HSSFWorkbook wb = writer.writeUserExcel(jobCode, basePath);
+        fileName += ".xls";
+        saveFile += "/" + fileName;
+        FileOutputStream fileOut = new FileOutputStream(saveFile);
+        wb.write(fileOut);
+        fileOut.flush();
+        fileOut.close();
+
+    	param = "?ctr=true";
 	} catch(Exception e) {
 		e.printStackTrace();
     }

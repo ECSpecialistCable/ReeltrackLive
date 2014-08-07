@@ -45,6 +45,10 @@
 	if(request.getParameter("ir")!=null) {
 		ir = request.getParameter("ir");
 	}
+	String ctr = "";
+	if(request.getParameter("ctr")!=null) {
+		ctr = request.getParameter("ctr");
+	}
 	String pr = "";
 	if(request.getParameter("pr")!=null) {
 		pr = request.getParameter("pr");
@@ -80,7 +84,7 @@
 	<form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>			
-            <form:submit_inline button="submit" waiting="false" name="search" action="daily_report" />
+            <form:submit_inline button="submit" waiting="false" name="submit" action="daily_report" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="daily_report" />
@@ -120,7 +124,7 @@
     <form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
-            <form:submit_inline button="submit" waiting="false" name="search" action="inventory_summary_report" />
+            <form:submit_inline button="submit" waiting="false" name="submit" action="inventory_summary_report" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="inventory_summary" />
@@ -162,7 +166,7 @@
     <form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
-            <form:submit_inline button="submit" waiting="false" name="search" action="inventory_report" />
+            <form:submit_inline button="submit" waiting="false" name="submit" action="inventory_report" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="inventory_report" />
@@ -170,6 +174,29 @@
 	<form:hidden name="whichReport" value="<%= invReportType %>" />
 <form:end />
 <admin:box_end />
+
+    <admin:subtitle text="CTR Report" />
+    <admin:box_begin />
+    <form:begin name="ctr_report" action="reports/process.jsp" />
+    <%if(ctr.equals("true")) { %>
+    <form:row_begin />
+    <form:label name="" label="" />
+    <form:buttonset_begin align="left" padding="0"/>
+    <% String url = request.getContextPath() + "/reports/ctr_report.xls"; %>
+    <a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+    <form:buttonset_end />
+    <form:row_end />
+    <% } %>
+    <form:row_begin />
+    <form:label name="" label="Generate:" />
+    <form:buttonset_begin align="left" padding="0"/>
+    <form:submit_inline button="submit" waiting="false" name="submit" action="ctr_report" />
+    <form:buttonset_end />
+    <form:row_end />
+    <form:hidden name="reportType" value="ctr_report" />
+    <form:hidden name="job_code" value="<%= user.getJobCode() %>" />
+    <form:end />
+    <admin:box_end />
 
 <admin:subtitle text="Period Report" />
 <admin:box_begin />
@@ -188,7 +215,7 @@
 	<form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
-            <form:submit_inline button="submit" waiting="false" name="search" action="period_report" />
+            <form:submit_inline button="submit" waiting="false" name="submit" action="period_report" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="period_report" />
@@ -238,7 +265,7 @@
 	<form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
-            <form:submit_inline button="submit" waiting="false" name="search" action="action_log_report" />
+            <form:submit_inline button="submit" waiting="false" name="submit" action="action_log_report" />
         <form:buttonset_end />
     <form:row_end />
 	<form:hidden name="reportType" value="action_log_report" />
