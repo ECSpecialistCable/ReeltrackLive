@@ -116,7 +116,7 @@ public class InventorySummaryExcelReport {
 		
 		
 		nextNum=0;
-		row = sheet.createRow((short) rowNum++);
+		row = sheet.createRow((short) rowNum);
 		cell = row.createCell((short) nextNum+1);
 		cell.setCellValue("Total Quantity");
 		cell.setCellStyle(styleHeader);
