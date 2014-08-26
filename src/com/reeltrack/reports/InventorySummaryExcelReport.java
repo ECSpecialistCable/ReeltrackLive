@@ -129,7 +129,7 @@ public class InventorySummaryExcelReport {
 		addr = new CellRangeAddress(rowNum, rowNum, nextNum+5, nextNum+6);
 		sheet.addMergedRegion(addr);
 		
-
+		rowNum++;
 		nextNum=0;
 		row = sheet.createRow((short) rowNum++);
 		cell = row.createCell((short) nextNum++);
