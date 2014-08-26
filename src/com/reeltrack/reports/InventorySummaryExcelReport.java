@@ -126,7 +126,7 @@ public class InventorySummaryExcelReport {
 		cell = row.createCell((short) nextNum+5);
 		cell.setCellValue("Number of Reels");
 		cell.setCellStyle(styleHeader);
-		addr = new CellRangeAddress(rowNum-1, rowNum-1, nextNum+5, nextNum+6);
+		addr = new CellRangeAddress(rowNum, rowNum, nextNum+5, nextNum+6);
 		sheet.addMergedRegion(addr);
 		
 
