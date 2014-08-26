@@ -126,7 +126,7 @@ public class InventorySummaryExcelReport {
 
 		nextNum=0;
 		row = sheet.createRow((short) rowNum++);
-		cell = row.createCell((short) nextNum);
+		cell = row.createCell((short) nextNum++);
 		sheet.setColumnWidth(nextNum, 10000);
 		cell.setCellValue("Cust P/N");
 		cell.setCellStyle(styleHeader);
