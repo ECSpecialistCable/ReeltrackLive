@@ -113,7 +113,8 @@ public class InventorySummaryExcelReport {
 		sheet.addMergedRegion(addr);
 
 		rowNum++; rowNum++;rowNum++;
-		nextNum=0;
+		
+		/*
 		row = sheet.createRow((short) rowNum++);
 		row.setHeightInPoints(15);
 		cell = row.createCell((short) nextNum);
@@ -121,31 +122,36 @@ public class InventorySummaryExcelReport {
 		cell.setCellStyle(styleHeader);
 		addr = new CellRangeAddress(rowNum-1, rowNum, nextNum, nextNum);
 		sheet.addMergedRegion(addr);
+		*/
 
-
+		nextNum=0;
+		row = sheet.createRow((short) rowNum++);
 		cell = row.createCell((short) nextNum);
 		sheet.setColumnWidth(nextNum, 10000);
 		cell.setCellValue("Cust P/N");
 		cell.setCellStyle(styleHeader);
 
+		/*
 		nextNum++;
 		cell = row.createCell((short) nextNum);
 		cell.setCellValue("Total Quantity");
 		cell.setCellStyle(styleHeader);
 		addr = new CellRangeAddress(rowNum-1, rowNum-1, nextNum, nextNum+4);
 		sheet.addMergedRegion(addr);
-
+		*/
+		/*
 		nextNum=nextNum+4;
 		cell = row.createCell((short) nextNum);
 		cell.setCellValue("Number of Reels");
 		cell.setCellStyle(styleHeader);
 		addr = new CellRangeAddress(rowNum-1, rowNum-1, nextNum, nextNum+1);
 		sheet.addMergedRegion(addr);
+		*/
 
-		row = sheet.createRow((short) rowNum++);
-		row.setHeightInPoints(45);
+		//row = sheet.createRow((short) rowNum++);
+		//row.setHeightInPoints(45);
 		//ep scheduled header
-		nextNum = 1;
+		//nextNum = 1;
 		cell = row.createCell((short) nextNum++);
 		cell.setCellValue("Unreceived");
 		cell.setCellStyle(styleHeader);
