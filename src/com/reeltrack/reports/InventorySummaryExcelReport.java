@@ -184,7 +184,7 @@ public class InventorySummaryExcelReport {
 			row.createCell((short)nextNum++).setCellValue(customerPN);
 			for (int k = 0; k < values.size(); k++) {
 				row.createCell((short)nextNum++).setCellValue(values.get(k));
-				sheet.setColumnWidth(nextNum-1, 3000);
+				sheet.setColumnWidth(nextNum-1, 2500);
 			}
 		}
 
