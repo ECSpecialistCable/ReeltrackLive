@@ -114,15 +114,21 @@ public class InventorySummaryExcelReport {
 
 		rowNum++; rowNum++;rowNum++;
 		
-		/*
+		
+		nextNum=0;
 		row = sheet.createRow((short) rowNum++);
-		row.setHeightInPoints(15);
-		cell = row.createCell((short) nextNum);
+		cell = row.createCell((short) nextNum+1);
 		cell.setCellValue("Total Quantity");
 		cell.setCellStyle(styleHeader);
-		addr = new CellRangeAddress(rowNum-1, rowNum, nextNum, nextNum);
+		addr = new CellRangeAddress(rowNum, rowNum, nextNum+1, nextNum+4);
 		sheet.addMergedRegion(addr);
-		*/
+
+		cell = row.createCell((short) nextNum+5);
+		cell.setCellValue("Number of Reels");
+		cell.setCellStyle(styleHeader);
+		addr = new CellRangeAddress(rowNum-1, rowNum-1, nextNum+5, nextNum+6);
+		sheet.addMergedRegion(addr);
+		
 
 		nextNum=0;
 		row = sheet.createRow((short) rowNum++);
