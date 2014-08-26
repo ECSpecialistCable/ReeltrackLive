@@ -180,7 +180,7 @@ public class InventorySummaryExcelReport {
 			ArrayList<Integer> values = contents.get(customerPN);
 			row = sheet.createRow((short) rowNum++);
 			nextNum=0;
-			sheet.setColumnWidth(nextNum++, 5000);
+			sheet.setColumnWidth(1, 5000);
 			row.createCell((short)nextNum++).setCellValue(customerPN);
 			for (int k = 0; k < values.size(); k++) {
 				row.createCell((short)nextNum++).setCellValue(values.get(k));
