@@ -105,11 +105,11 @@ public class InventorySummaryExcelReport {
 		rowNum++;
 		row = sheet.createRow((short) rowNum);
 		nextNum=5;
-		row.setHeightInPoints(15);
+		row.setHeightInPoints(30);
 		cell = row.createCell((short) nextNum);
 		cell.setCellValue("Inventory Summary \n"+custJob.getName() + " (" + custJob.getCode() + ")");
 		cell.setCellStyle(styleBoldRight);
-		addr = new CellRangeAddress(rowNum, rowNum+1, nextNum, nextNum+1);
+		addr = new CellRangeAddress(rowNum, rowNum+1, nextNum, nextNum+2);
 		sheet.addMergedRegion(addr);
 
 		rowNum++; rowNum++;rowNum++;
@@ -193,7 +193,7 @@ public class InventorySummaryExcelReport {
 		styleBold.setFont(boldFont);
 		
 		styleHeader = wb.createCellStyle();
-		styleHeader.setFillForegroundColor(new HSSFColor.GREY_50_PERCENT().getIndex());
+		styleHeader.setFillForegroundColor(new HSSFColor.GREY_25_PERCENT().getIndex());
 		styleHeader.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		styleHeader.setFont(boldFont);
 		styleHeader.setAlignment(HSSFCellStyle.ALIGN_CENTER);

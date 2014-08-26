@@ -180,7 +180,7 @@ public class ActionLogExcelReport {
 		styleBold.setFont(boldFont);
 		
 		styleHeader = wb.createCellStyle();
-		styleHeader.setFillForegroundColor(new HSSFColor.GREY_50_PERCENT().getIndex());
+		styleHeader.setFillForegroundColor(new HSSFColor.GREY_25_PERCENT().getIndex());
 		styleHeader.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		styleHeader.setFont(boldFont);
 		styleHeader.setAlignment(HSSFCellStyle.ALIGN_CENTER);
