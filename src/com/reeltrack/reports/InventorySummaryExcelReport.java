@@ -127,7 +127,7 @@ public class InventorySummaryExcelReport {
 		nextNum=0;
 		row = sheet.createRow((short) rowNum++);
 		cell = row.createCell((short) nextNum++);
-		//sheet.setColumnWidth(nextNum++, 10000);
+		sheet.setColumnWidth(nextNum, 10000);
 		cell.setCellValue("Cust P/N");
 		cell.setCellStyle(styleHeader);
 
@@ -180,7 +180,7 @@ public class InventorySummaryExcelReport {
 			ArrayList<Integer> values = contents.get(customerPN);
 			row = sheet.createRow((short) rowNum++);
 			nextNum=0;
-			sheet.setColumnWidth(1, 5000);
+			//sheet.setColumnWidth(0, 5000);
 			row.createCell((short)nextNum++).setCellValue(customerPN);
 			for (int k = 0; k < values.size(); k++) {
 				row.createCell((short)nextNum++).setCellValue(values.get(k));
