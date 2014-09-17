@@ -206,7 +206,7 @@ public class ReelMgr extends CompWebManager {
 		controller.update(reel2);
 	}
 
-	public void updateReel(Reel content) throws Exception {
+	public void updateReel(Reel content, boolean addLog) throws Exception {
 		Reel currReel = new Reel();
 		currReel.setId(content.getId());
 		currReel = this.getReel(currReel);
@@ -214,20 +214,28 @@ public class ReelMgr extends CompWebManager {
 			RTUserLoginMgr umgr = new RTUserLoginMgr();
 			umgr.init(this.getPageContext(), this.getDbResources());
 			RTUser user = (RTUser)umgr.getUser();
+			if(addLog) {
 			this.addReelLog(content, "Status changed from " + currReel.getStatus() + " to " + content.getStatus() + " by " + user.getName());
+			}
 		}
 
 		if(!currReel.getWharehouseLocation().equals(content.getWharehouseLocation())) {
 			RTUserLoginMgr umgr = new RTUserLoginMgr();
 			umgr.init(this.getPageContext(), this.getDbResources());
 			RTUser user = (RTUser)umgr.getUser();
+			if(addLog) {
 			this.addReelLog(content, "Warehouse location changed from " + currReel.getWharehouseLocation() + " to " + content.getWharehouseLocation() + " by " + user.getName());
+			}
 		}
 
 		content.setUpdated(new Date());
 		controller.update(content);
 
 		this.updateOnReelQuantity(content);
+	}
+
+	public void updateReel(Reel content) throws Exception {
+		this.updateReel(content,true);
 	}
 
 	public void updateReelsForCustPN(Reel content) throws Exception {
@@ -268,7 +276,7 @@ public class ReelMgr extends CompWebManager {
 			content.setStatus(Reel.STATUS_IN_WHAREHOUSE);
 			content.setReceivedOnDate(new Date());
 			if(content.getReceivingIssue().equals(Reel.RECEIVING_ISSUE_DAMAGED)) {
-				this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName() + " but was marked as damaged");
+				//this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName() + " but was marked as damaged");
 				CompEntityPuller puller = new CompEntityPuller(new Customer());
 				Customer customer = new Customer();
 				customer.setId(user.getCustomerId());
@@ -299,12 +307,19 @@ public class ReelMgr extends CompWebManager {
 						System.out.println("Issue sending issue email." + e);
 					}
 				}
+				content.setUpdated(new Date());
+				controller.update(content);
+				this.updateOnReelQuantity(content);
+				this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName() + " but was marked as damaged");
 			} else {
+				content.setUpdated(new Date());
+				controller.update(content);
+				this.updateOnReelQuantity(content);
 				this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName());
 			}
 		} else {
 			content.setStatus(Reel.STATUS_REFUSED);
-			this.addReelLog(Reel.STATUS_REFUSED, content, "Reel was refused by " + user.getName());
+			//this.addReelLog(Reel.STATUS_REFUSED, content, "Reel was refused by " + user.getName());
 
 			CompEntityPuller puller = new CompEntityPuller(new Customer());
 			Customer customer = new Customer();
@@ -336,11 +351,14 @@ public class ReelMgr extends CompWebManager {
 					System.out.println("Issue sending issue email." + e);
 				}
 			}
-
+			content.setUpdated(new Date());
+			controller.update(content);
+			this.updateOnReelQuantity(content);
+			this.addReelLog(Reel.STATUS_REFUSED, content, "Reel was refused by " + user.getName());
 		}
-		content.setUpdated(new Date());
-		controller.update(content);
-		this.updateOnReelQuantity(content);
+		//content.setUpdated(new Date());
+		//controller.update(content);
+		//this.updateOnReelQuantity(content);
 	}
 
 	public void markReelStaged(Reel content) throws Exception {
@@ -931,6 +949,12 @@ public class ReelMgr extends CompWebManager {
 		content.setCreated(new Date());
 		int toReturn = controller.add(content);
 		this.updateReelType(content);
+		Reel currReel = new Reel();
+		currReel.setId(content.getReelId());
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		this.addReelLog(currReel, "Circuit: " + content.getTitle() + " added by " + user.getName());
 		return toReturn;
 	}
 
@@ -963,7 +987,7 @@ public class ReelMgr extends CompWebManager {
 			}
 		}
 
-		this.updateReel(currReel);
+		this.updateReel(currReel,false);
 	}
 
 	public void updateReelCircuit(ReelCircuit content) throws Exception {
