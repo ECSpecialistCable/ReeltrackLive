@@ -261,7 +261,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		this.addReelLog(Reel.STATUS_SHIPPED, content, "Shipping info update to carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList() + " by " + user.getName());
+		this.addReelLog(Reel.STATUS_SHIPPED, content, user.getName() + " marked reel as Shipped with shipped quantity of " + content.getShippedQuantity() + ", carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList());
 		content.setStatus(Reel.STATUS_SHIPPED);
 		content.setUpdated(new Date());
 		controller.update(content);
@@ -315,7 +315,7 @@ public class ReelMgr extends CompWebManager {
 				content.setUpdated(new Date());
 				controller.update(content);
 				this.updateOnReelQuantity(content);
-				this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName());
+				this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName() + " with top foot marker =" + content.getOrigTopFoot() + ", received quantity=" + content.getReceivedQuantity() + ", and warehouse location as " + content.getWharehouseLocation());
 			}
 		} else {
 			content.setStatus(Reel.STATUS_REFUSED);
@@ -954,7 +954,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		this.addReelLog(currReel, "Circuit: " + content.getTitle() + " added by " + user.getName());
+		this.addReelLog(currReel, user.getName() + " assigned circuit \"" + content.getTitle() + "\" " + content.getLength() + "' long to reel.");
 		return toReturn;
 	}
 
@@ -1010,6 +1010,15 @@ public class ReelMgr extends CompWebManager {
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateReelType(content);
+
+		Reel reel = new Reel();
+		reel.setId(content.getReelId());
+		reel = this.getReel(reel);
+
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		this.addReelLog(reel, user.getName() + " updated circuit \"" + content.getTitle() + "\" to actual quantity pulled=" + content.getActLength() + "'.");
 	}
 	
 	public void fillReelCircuits(CompEntities reels) throws Exception {
