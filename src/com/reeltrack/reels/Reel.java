@@ -282,6 +282,16 @@ public class Reel extends ContentPositionable implements Positionable {
 		}
     }
 
+	public void setCTRDateString(String toSet) {
+		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date date = df.parse(toSet);
+			this.setCTRDate(date);
+       	} catch (Exception e) {
+       		System.out.print(e.toString());
+       	}
+    }
+
    	public Date getCTRSent() {
         return (Date) this.getData().getValue(CTR_SENT_COLUMN, null);
     }
@@ -297,6 +307,16 @@ public class Reel extends ContentPositionable implements Positionable {
 			SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         	return df.format(this.getCTRSent());
 		}
+    }
+
+   	public void getCTRSentString(String toSet) {
+		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Date date = df.parse(toSet);
+			this.setCTRSent(date);
+       	} catch (Exception e) {
+       		System.out.print(e.toString());
+       	}
     }
 
 	public String getOrdNo() {
