@@ -309,7 +309,7 @@ public class Reel extends ContentPositionable implements Positionable {
 		}
     }
 
-   	public void getCTRSentString(String toSet) {
+   	public void setCTRSentString(String toSet) {
 		SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         try {
             Date date = df.parse(toSet);
