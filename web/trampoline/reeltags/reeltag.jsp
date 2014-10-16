@@ -197,11 +197,11 @@ String logoURL;
 					<td style="text-align: center; width: 75%; padding: 0;width:160px;" rowspan="<%= "6" %>" align="center">
 						<table style="display:inline;width: 75%; text-align: center;border: none">
 							<tr>
-								<td class="header" style="text-align: right;width: 40%">ECS PART #</td>
-								<td class="value" style="/*border:solid #003DB8 1px;*/text-align: left;width: 35%"><%= content.getEcsPN() %></td>
+								<td class="header" style="text-align: right;width: 30%">ECS PART #</td>
+								<td class="value" style="/*border:solid #003DB8 1px;*/text-align: left;width: 45%"><%= content.getEcsPN() %></td>
 							</tr>
 							<tr>
-								<td class="header" style="text-align: right;width: 40%">ECS PO #</td>
+								<td class="header" style="text-align: right;width: 30%">ECS PO #</td>
 								<td class="value" style="/*border:solid #003DB8 1px;*/text-align: left"><%= content.getOrdNo() %></td>
 							</tr>
 							<tr>
