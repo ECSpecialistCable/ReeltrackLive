@@ -19,4 +19,5 @@
 	<% if(!user.isUserType(RTUser.USER_TYPE_CPE)) { %> 
 		<admin:ajax_load url="bill_of_materials/search.jsp" label="Bill of Materials" />
 	<% } %>
+		<admin:ajax_load url="import_circuits/search.jsp" label="Import Circuits" />
 <% } %>

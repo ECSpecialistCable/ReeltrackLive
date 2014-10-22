@@ -11,6 +11,8 @@ public class ReelCircuit extends CompCMEntity {
 	public static final String IS_PULLED_COLUMN = "is_pulled";
 	public static final String IS_SYNCED_COLUMN = "is_synced";
 
+	public String tmpReelTag = "";
+
 	@Override
 	public String getTableName() {
 		return "reel_circuits";

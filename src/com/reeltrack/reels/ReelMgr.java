@@ -26,6 +26,11 @@ import java.util.ArrayList;
  
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
+import org.apache.poi.xssf.usermodel.*;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.*;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.*;
 
 public class ReelMgr extends CompWebManager {
 	CompDbController controller;
@@ -1283,5 +1288,60 @@ public class ReelMgr extends CompWebManager {
 		controller.delete(null, content);
 	}	
 	/****************************/
+
+	public void importCircuitsFromExcel(String jobCode, File file, String basePath) throws Exception {
+
+		if(file != null) {
+            InputStream myxls = new FileInputStream(file.getAbsolutePath());
+			Workbook wb = WorkbookFactory.create(myxls);
+
+			Sheet sheet = wb.getSheetAt(0);//get first sheet, should only be one
+			CompEntities myDataToAdd = new CompEntities();
+			
+			//loop through the sheet
+			for(int i = 1; i <= sheet.getLastRowNum(); i++) {//i represents which row to start on, 0 assumes no header
+				try {
+					Row row = sheet.getRow(i);
+					ReelCircuit circuit = new ReelCircuit();
+					circuit.tmpReelTag = row.getCell(0).getStringCellValue(); //column a
+					circuit.setName(row.getCell(1).getStringCellValue());
+					double quant = row.getCell(2).getNumericCellValue();
+					circuit.setLength((int)quant);
+					myDataToAdd.add(circuit);
+				}catch(Exception e) {
+					e.printStackTrace(); System.out.println("exception for loop i "+ i + " for sheet "+ sheet.getSheetName());
+				}
+			}
+
+			for(int x=0; x<myDataToAdd.howMany(); x++) {
+				ReelCircuit circuit = (ReelCircuit)myDataToAdd.get(x);
+				if(circuit.tmpReelTag==null || circuit.tmpReelTag.equals("")) continue;
+
+				CompEntityPuller puller = new CompEntityPuller(new Reel());
+				Reel searchReel = new Reel();
+				searchReel.setReelTag(circuit.tmpReelTag);
+				searchReel.setJobCode(jobCode);
+				puller.addSearch(searchReel);
+				Reel reel = (Reel)controller.pullCompEntity(puller);
+				System.out.println("looking for reel:" + circuit.tmpReelTag);
+				if(reel.getId()!=0) {
+					System.out.println("found reel:" + reel.getCrId());
+					System.out.println("looking for circuit:" + circuit.getName());
+					CompEntityPuller puller2 = new CompEntityPuller(new ReelCircuit());
+					ReelCircuit searchCircuit = new ReelCircuit();
+					searchCircuit.setReelId(reel.getId());
+					searchCircuit.setName(circuit.getName());
+					puller2.addSearch(searchCircuit);
+					searchCircuit = (ReelCircuit)controller.pullCompEntity(puller2);
+					System.out.println("found circuit was:" + searchCircuit.getId());
+					if(searchCircuit.getId()==0) {
+						System.out.println("adding circuit");
+						circuit.setReelId(reel.getId());
+						controller.add(circuit);
+					} 
+				}
+			}
+		}
+	}
 
 }
