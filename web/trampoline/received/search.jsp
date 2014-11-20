@@ -53,6 +53,16 @@ if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
     content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL); 
 }
 
+if(request.getParameter(Reel.PACKING_LIST_COLUMN) != null) {  
+    content.setPackingList(request.getParameter(Reel.PACKING_LIST_COLUMN));
+    content.setSearchOp(Reel.PACKING_LIST_COLUMN, Reel.TRUE_PARTIAL); 
+}
+
+if(request.getParameter(Reel.TRACKING_PRO_COLUMN) != null) {  
+    content.setTrackingPRO(request.getParameter(Reel.TRACKING_PRO_COLUMN));
+    content.setSearchOp(Reel.TRACKING_PRO_COLUMN, Reel.TRUE_PARTIAL); 
+}
+
 if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {  
     content.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));
     content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.WHOLE); 
@@ -108,6 +118,8 @@ String tempURL = "";
         %>
         <form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= tempURL %>" />
         <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
+        <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
+        <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
         <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
         <% tempURL = user.getCustomerName() + " PO:"; %>
         <form:textfield label="<%= tempURL %>" name="<%= Reel.CUSTOMER_PO_COLUMN %>" value="<%= content.getCustomerPO() %>" />
@@ -172,8 +184,8 @@ String tempURL = "";
                 <%= content.getStatus() %>
             <listing:cell_end />
             <listing:cell_begin align="right"/>
-                <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
-                <form:linkbutton url="<%= tempURL %>" name="EDIT" />
+                <% tempURL = "reels/status.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
+                <form:linkbutton url="<%= tempURL %>" name="REEL PAGE" />
             <listing:cell_end />
         <listing:row_end />
         <% } %>

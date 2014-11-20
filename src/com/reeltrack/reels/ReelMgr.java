@@ -826,6 +826,17 @@ public class ReelMgr extends CompWebManager {
 			this.deleteReelIssue(currIssue,realRootContextPath);
 		}
 	}
+
+	public void deleteUnpulledCircuits(Reel content) throws Exception {
+		CompEntities allCircuits = this.getReelCircuits(content);
+		for(int i=0; i < allCircuits.howMany(); ++i) {
+			ReelCircuit currCircuit = (ReelCircuit) allCircuits.get(i);
+			if(!currCircuit.isPulled()) {
+				this.deleteReelCircuit(currCircuit,null);
+			}
+		}
+	}
+
 	
 	public void deleteReel(Reel content, String realRootContextPath) throws Exception {
 		this.cleanReel(content, realRootContextPath);

@@ -73,6 +73,20 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
 <% } %>
 
 <% if(canSubmit) { %>
+<admin:subtitle text="Delete all Unpulled Circuits" />
+<admin:box_begin />
+    <form:begin submit="true" name="edit" action="reels/process.jsp" />
+            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />          
+            <form:row_begin />
+                <form:label name="" label="Delete Unpulled Circuits:" />
+                <form:buttonset_begin align="left" padding="0"/>
+                    <% tempURL = "reels/process.jsp?submit_action=delete_unpulled_circuits&" +  Reel.PARAM + "=" + content.getId(); %>
+                    <form:linkbutton url="<%= tempURL %>" name="DELETE" />
+                <form:buttonset_end />
+            <form:row_end />
+    <form:end />
+<admin:box_end />
+
 <admin:subtitle text="Add Circuit" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />

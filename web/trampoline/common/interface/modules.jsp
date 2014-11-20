@@ -48,7 +48,7 @@ if(user_agent.contains("iPad")) {
 		<% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY) && !user.isUserType(RTUser.USER_TYPE_CPE)) { %>
 			<a class="module_bar_toggle" rel="common/interface/manage_reels">On-Site Reel Mgt</a>
 		<% } %>
-		<a class="module_bar_toggle" rel="common/interface/reel_inventory">Inventory Data</a>
+		<a class="module_bar_toggle" rel="common/interface/reel_inventory">Search for Reels</a>
 		<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_CPE) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_INVENTORY) || user.isUserType(RTUser.USER_TYPE_STANDARD)) { %>
 			<a class="module_bar_toggle" rel="common/interface/configuration">Job Data</a>
 			<% if(!user.isUserType(RTUser.USER_TYPE_STANDARD)) { %>

@@ -138,7 +138,13 @@ String logoURL;
 			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getShippedQuantity()  %></b></td>
 
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">M.B.R.</td>
-			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= Double.toString(techData.getRadius())+"\""   %></b></td>
+			<%
+	        String mbr = "N/A";
+	        if(techData.getRadius()!=0) {
+	            mbr = Double.toString(techData.getRadius()) + "\"";
+	        }
+	        %>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= mbr %></b></td>
 		</tr>
 		<tr>
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Rec'd GWT</td>

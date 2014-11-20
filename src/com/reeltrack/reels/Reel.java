@@ -645,6 +645,9 @@ public class Reel extends ContentPositionable implements Positionable {
 
     public void setShippedQuantity(int id) {
 		this.getData().setInteger(SHIPPED_QUANTITY_COLUMN, new Integer(id));
+		if(this.getReceivedQuantity()==0) {
+			this.setReceivedQuantity(id);
+		}
     }
 
    	public int getReceivedQuantity() {

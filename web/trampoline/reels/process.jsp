@@ -317,7 +317,11 @@ if(action.equals("update_overall")) {
     content.setId(Integer.parseInt(request.getParameter(CableTechData.PARAM)));
     content.setOD(Double.parseDouble(request.getParameter(CableTechData.OD_COLUMN)));
     content.setWeight(Integer.parseInt(request.getParameter(CableTechData.WEIGHT_COLUMN)));
-    content.setRadius(Double.parseDouble(request.getParameter(CableTechData.RADIUS_COLUMN)));
+    if(!request.getParameter(CableTechData.RADIUS_COLUMN).equals("N/A")) {
+        try {
+        content.setRadius(Double.parseDouble(request.getParameter(CableTechData.RADIUS_COLUMN)));
+        } catch(Exception e) {}
+    }
     content.setXSection(Double.parseDouble(request.getParameter(CableTechData.XSECTION_COLUMN)));
     content.setPullTension(Integer.parseInt(request.getParameter(CableTechData.PULL_TENSION_COLUMN)));
     reelMgr.updateCableTechData(content);
@@ -515,6 +519,13 @@ if(action.equals("delete_circuit")) {
     ReelCircuit content = new ReelCircuit();
     content.setId(Integer.parseInt(request.getParameter(ReelCircuit.PARAM)));
     reelMgr.deleteReelCircuit(content,basePath);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/circuits.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("delete_unpulled_circuits")) {
+    Reel content = new Reel();
+    content.setId(contid);
+    reelMgr.deleteUnpulledCircuits(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/circuits.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
