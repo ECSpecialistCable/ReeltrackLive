@@ -14,10 +14,4 @@
 		<admin:ajax_load url="whlocations/search.jsp" label="Manage Warehouse Locations" />
 		<%--<admin:ajax_load url="settings/search.jsp" label="Settings" />--%>
 	<% } %>
-		<admin:ajax_load url="glossary/reeltrack_glossary.jsp" label="View Glossary" />
-		<admin:ajax_load url="file_cabinets/search.jsp" label="File Cabinet" />
-	<% if(!user.isUserType(RTUser.USER_TYPE_CPE)) { %> 
-		<admin:ajax_load url="bill_of_materials/search.jsp" label="Bill of Materials" />
-	<% } %>
-		<admin:ajax_load url="import_circuits/search.jsp" label="Import Circuits" />
 <% } %>
