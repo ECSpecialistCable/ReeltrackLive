@@ -60,8 +60,10 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
 %>
 
 <html:begin />
+<h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
 <% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
-<admin:title text="<%= tempURL %>" />
+<h1 style="padding-bottom:0px;"><%= tempURL %></h1>
+<p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
 <notifier:show_message />
 
 <% if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) { %>

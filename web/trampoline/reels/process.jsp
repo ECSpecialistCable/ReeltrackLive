@@ -102,43 +102,26 @@ if(action.equals("mark_received")) {
     content.setReceivingIssue(request.getParameter(Reel.RECEIVING_ISSUE_COLUMN));
     content.setReceivingNote(request.getParameter(Reel.RECEIVING_NOTE_COLUMN));
     content.setReceivingDisposition(request.getParameter(Reel.RECEIVING_DISPOSITION_COLUMN));
+    if(content.getReceivingDisposition().equalsIgnoreCase(Reel.RECEIVING_DISPOSITION_REFUSED) && request.getParameter("refused_check")==null) {
 
-	if(content.getReceivingDisposition().equalsIgnoreCase(Reel.RECEIVING_DISPOSITION_REFUSED)) {
-		Customer customer = reelMgr.getCustomerForReel(reel);
-		String issueLog = reel.getEcsPN() + " manufactured by " + reel.getManufacturer()  + " on ECS PO " + reel.getOrdNo() + " with reel tag " + reel.getReelTag();
-		issueLog += "Customer Reel ID# " + reel.getCrId() + " - " + reel.getCableDescription() + " with reel tag " + reel.getReelTag() + " was refused by " + user.getFname() + " " + user.getLname() + " with " + customer.getName() + " on " + user.getJobName() + " Project - " + user.getJobCode();
-
-		ReelIssue issue = new ReelIssue();
-		issue.setReelId(contid);
-		issue.setDescription(content.getReceivingNote());
-		issue.setIssueLog(issueLog);
-		reelMgr.addReelIssue(issue);
-	}
-
-    /*
-    try {
-    content.setBottomFoot(Integer.parseInt(request.getParameter(Reel.BOTTOM_FOOT_COLUMN)));
-    } catch(Exception e) {}
-
-    if(request.getParameter(Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN)!=null) {
-        content.setBottomFootNotVisible("y");
     } else {
-        content.setBottomFootNotVisible("n");
-    }   
+    	if(content.getReceivingDisposition().equalsIgnoreCase(Reel.RECEIVING_DISPOSITION_REFUSED)) {
+    		Customer customer = reelMgr.getCustomerForReel(reel);
+    		String issueLog = reel.getEcsPN() + " manufactured by " + reel.getManufacturer()  + " on ECS PO " + reel.getOrdNo() + " with reel tag " + reel.getReelTag();
+    		issueLog += "Customer Reel ID# " + reel.getCrId() + " - " + reel.getCableDescription() + " with reel tag " + reel.getReelTag() + " was refused by " + user.getFname() + " " + user.getLname() + " with " + customer.getName() + " on " + user.getJobName() + " Project - " + user.getJobCode();
 
-    if(content.getBottomFoot()>0 && content.getTopFoot()>0) {
-        content.setHasReelMarkers("y");
-        if(content.getBottomFoot()>content.getTopFoot()) {
-            content.setReceivedQuantity(content.getBottomFoot()-content.getTopFoot());
-        } else {
-            content.setReceivedQuantity(content.getTopFoot()-content.getBottomFoot());
-        }
+    		ReelIssue issue = new ReelIssue();
+    		issue.setReelId(contid);
+    		issue.setDescription(content.getReceivingNote());
+    		issue.setIssueLog(issueLog);
+    		reelMgr.addReelIssue(issue);
+    	}
+
+        reelMgr.markReelReceived(content);
+        session.removeAttribute("RT");
+        session.removeAttribute("PL");
     }
-    */
-
-    reelMgr.markReelReceived(content);
-    session.removeAttribute("RT");
-    session.removeAttribute("PL");
+    
     redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
@@ -273,11 +256,27 @@ if(action.equals("update_reel_data")) {
     redirect = request.getContextPath() + "/trampoline/" + "reels/reel_data.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
+if(action.equals("delete_ctr")) {
+    Reel content = new Reel();
+    content.setId(contid);
+    content.setCTRFile("");
+    reelMgr.updateReel(content);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/reel_data.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
 if(action.equals("update_datasheet")) {
     CableTechData content = new CableTechData();
     content.setId(Integer.parseInt(multipart.getParameter(CableTechData.PARAM)));
     File file = multipart.getFile(CableTechData.DATA_SHEET_FILE_COLUMN);
     reelMgr.updateCableTechData(content, basePath, file);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/cable_data.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("delete_datasheet")) {
+    CableTechData content = new CableTechData();
+    content.setId(Integer.parseInt(request.getParameter(CableTechData.PARAM)));
+    content.setDataSheetFile("");
+    reelMgr.updateCableTechData(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/cable_data.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
@@ -533,7 +532,12 @@ if(action.equals("add_note")) {
     ReelNote note = new ReelNote();
     note.setReelId(contid);
     note.setNote(request.getParameter(ReelNote.NOTE_COLUMN));
-    reelMgr.addReelNote(note);
+    boolean send_note = false;
+    if(request.getParameter("send_note")!=null) {
+        send_note = true;
+    }
+
+    reelMgr.addReelNote(note,send_note);
     redirect = request.getContextPath() + "/trampoline/" + "reels/notes.jsp?" + Reel.PARAM + "=" + contid ;
 }
 

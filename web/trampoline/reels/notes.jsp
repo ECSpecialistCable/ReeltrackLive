@@ -44,14 +44,22 @@ String tempURL; //var for url expression
 <% dbResources.close(); %>
 
 <html:begin />
+<h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
 <% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
-<admin:title text="<%= tempURL %>" />
+<h1 style="padding-bottom:0px;"><%= tempURL %></h1>
+<p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
 <notifier:show_message />
 
 <admin:subtitle text="Add Note" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
     		<form:textarea name="<%= ReelNote.NOTE_COLUMN %>" rows="5" label="Note:" value="" />
+            <form:row_begin />
+                <form:label name="" label="Notify ECS?:" />
+                <form:content_begin />      
+                    <form:checkbox label="Send a copy of this note to ECS?" name="send_note" value="y" />       
+                <form:content_end />                
+                <form:row_end />
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
 			<form:row_begin />
 				<form:label name="" label="" />

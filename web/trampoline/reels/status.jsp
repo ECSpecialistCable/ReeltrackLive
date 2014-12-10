@@ -108,8 +108,10 @@ String[] carrierList = reelMgr.getCarriers();
 <% dbResources.close(); %>
 
 <html:begin />
+<h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
 <% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
-<admin:title text="<%= tempURL %>" />
+<h1 style="padding-bottom:0px;"><%= tempURL %></h1>
+<p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
 <notifier:show_message />
 
 <% if(canEdit) { %>
@@ -251,6 +253,12 @@ String[] carrierList = reelMgr.getCarriers();
 	                    <% } %>
 	                <form:select_end />
 	                <form:content_end />
+                <form:row_end />
+                <form:row_begin />
+                <form:label name="" label="If Refused:" />
+                <form:content_begin />      
+                    <form:checkbox label="Are you certain you want to refuse delivery of this item?" name="refused_check" value="y" />       
+                <form:content_end />                
                 <form:row_end />
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />        
                 <form:row_begin />

@@ -55,8 +55,10 @@ String tempURL; //var for url expression
 <% dbResources.close(); %>
 
 <html:begin />
+<h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
 <% tempURL = content.getReelTag() + " : " + content.getCrId() + " : " + content.getCableDescription(); %>
-<admin:title text="<%= tempURL %>" />
+<h1 style="padding-bottom:0px;"><%= tempURL %></h1>
+<p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
 <notifier:show_message />
 
 <admin:subtitle text="Data Sheet" />
@@ -73,6 +75,15 @@ String tempURL; //var for url expression
                     <admin:link external="true" text="[Download]" url="<%= tempURL %>" />      
                 <form:content_end />
             <form:row_end />
+            <% if(canEdit) { %>
+            <form:row_begin />
+            <form:label label="Delete Data Sheet:"  />
+            <form:content_begin />
+                    <% String tempUrl = "reels/process.jsp?submit_action=delete_datasheet&" + Reel.PARAM + "=" + content.getId() + "&" + CableTechData.PARAM + "=" + techData.getId(); %>
+                    <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />    
+                <form:content_end />
+            <form:row_end />
+            <% } %>
         <% } %>
         <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />  
         <form:hidden name="<%= CableTechData.PARAM %>" value="<%= new Integer(techData.getId()).toString() %>" />           

@@ -196,7 +196,7 @@ String tempURL = "";
             <form:content_end />
         <form:row_end />
         <form:row_begin />
-            <form:label name="" label="Conductor:" />
+            <form:label name="" label="Conductor Count:" />
             <form:content_begin />
             <form:select_begin name="<%= Reel.PN_CONDUCTOR_COLUMN %>" />
                 <form:option name="Any" value="" match="<%= content.getPnConductor() %>" />
@@ -246,7 +246,7 @@ String tempURL = "";
             <listing:header_cell name="Reel Tag" column="<%= Reel.REEL_TAG_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="reels/search.jsp" />
             <listing:header_cell name="Cable Description" column="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="reels/search.jsp" />
             <listing:header_cell width="75" name="Status" column="<%= Reel.STATUS_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="reels/search.jsp" />
-            <listing:header_cell width="40" name=""  />
+            <listing:header_cell width="140" name=""  />
         <listing:header_end />
         <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
@@ -266,6 +266,8 @@ String tempURL = "";
             <listing:cell_begin align="right"/>
                 <% tempURL = "reels/status.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
                 <form:linkbutton url="<%= tempURL %>" name="REEL PAGE" />
+                <% tempURL = "reels/process.jsp?submit_action=delete_reel&" + Reel.PARAM + "=" + content.getId(); %>
+                <form:linkbutton warning="true" url="<%= tempURL %>" process="true" name="DELETE" />
             <listing:cell_end />
         <listing:row_end />
         <% } %>

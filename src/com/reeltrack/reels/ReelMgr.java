@@ -280,7 +280,7 @@ public class ReelMgr extends CompWebManager {
 		if(content.getReceivingDisposition().equals(Reel.RECEIVING_DISPOSITION_ACCEPTED)) {
 			content.setStatus(Reel.STATUS_IN_WHAREHOUSE);
 			content.setReceivedOnDate(new Date());
-			if(content.getReceivingIssue().equals(Reel.RECEIVING_ISSUE_DAMAGED)) {
+			if(!content.getReceivingIssue().equals(Reel.RECEIVING_ISSUE_NONE)) {
 				//this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName() + " but was marked as damaged");
 				CompEntityPuller puller = new CompEntityPuller(new Customer());
 				Customer customer = new Customer();
@@ -1065,7 +1065,7 @@ public class ReelMgr extends CompWebManager {
 	/****************************/
 
 	/*** Reel Notes ***/
-	public int addReelNote(ReelNote content) throws Exception {
+	public int addReelNote(ReelNote content, boolean send_note) throws Exception {
 		content.setCreated(new Date());
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
@@ -1078,7 +1078,7 @@ public class ReelMgr extends CompWebManager {
 		puller.addSearch(customer);
 		customer = (Customer)controller.pullCompEntity(puller);
 
-		if(!customer.getIssueContactEmail().equals("")) {
+		if(!customer.getIssueContactEmail().equals("") && send_note) {
 			puller = new CompEntityPuller(new Reel());
 			Reel reel = new Reel();
 			reel.setId(content.getReelId());

@@ -62,12 +62,26 @@ boolean canSubmit = true;
 if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
 	canSubmit = false;
 }
+
+boolean canSubmitSR = true;
+if(!canSubmit) {
+	canSubmitSR = false;
+} else {
+	if(!user.isUserType(RTUser.USER_TYPE_ECS)) {
+		canSubmitSR = false;
+		if(content.getStatus().equals(Reel.STATUS_ORDERED) || content.getStatus().equals(Reel.STATUS_SHIPPED)) {
+			canSubmitSR = true;
+		}
+	}
+}
 %>
 <% dbResources.close(); %>
 
 <html:begin />
+<h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
 <% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
-<admin:title text="<%= tempURL %>" />
+<h1 style="padding-bottom:0px;"><%= tempURL %></h1>
+<p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
 <notifier:show_message />
 
 <admin:subtitle text="General Info" />
@@ -189,7 +203,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
 
 <admin:subtitle text="Shipping Info" />
 <admin:box_begin />
-    <form:begin submit="<%= new Boolean(canSubmit).toString() %>" name="edit" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canSubmitSR).toString() %>" name="edit" action="reels/process.jsp" />
     		<form:row_begin />
 	            <form:label name="" label="Carrier:" />
 	            <form:content_begin />
@@ -211,7 +225,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
-				<% if(canSubmit) { %>
+				<% if(canSubmitSR) { %>
 					<form:submit_inline button="save" waiting="true" name="save" action="update_shipping" />
 				<% } %>
 				<form:buttonset_end />
@@ -221,7 +235,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
 
 <admin:subtitle text="Receiving Info" />
 <admin:box_begin />
-    <form:begin submit="<%= new Boolean(canSubmit).toString() %>" name="edit" action="reels/process.jsp" />
+    <form:begin submit="<%= new Boolean(canSubmitSR).toString() %>" name="edit" action="reels/process.jsp" />
     		<form:row_begin />
 	            <form:label name="" label="Issue:" />
 	            <form:content_begin />
@@ -251,7 +265,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
-				<% if(canSubmit) { %>
+				<% if(canSubmitSR) { %>
 					<form:submit_inline button="save" waiting="true" name="save" action="update_receiving" />
 				<% } %>
 				<form:buttonset_end />

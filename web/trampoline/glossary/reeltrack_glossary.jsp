@@ -91,6 +91,8 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
                 <listing:cell_begin align="right"/>
                     <% String tempUrl = "glossary/edit.jsp?" +  Glossary.PARAM + "=" + content.getId(); %>
                     <form:linkbutton url="<%= tempUrl %>" name="EDIT" />
+                    <% tempUrl = "glossary/process.jsp?submit_action=delete_reeltrack_glossary&" + Glossary.PARAM + "=" + content.getId(); %>
+                    <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />
                 <% } %>
             <listing:row_end />
