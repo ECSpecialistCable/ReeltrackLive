@@ -418,6 +418,20 @@ if(job.getScansMustMatch().equals("y") && !reelsMatch) {
     <admin:subtitle text="Check IN Reel" />
     <admin:box_begin />
     	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
+            <%
+            String foremanName = "None";
+            for(int f=0; f<foremans.howMany(); f++) {
+                foreman = (Foreman)foremans.get(f);
+                if(foreman.getName().equals(picklist.getForeman())) foremanName = foreman.getName();
+            }
+            String driverName = "None";
+            for(int f=0; f<drivers.howMany(); f++) {
+                driver = (Driver)drivers.get(f);;
+                if(driver.getName().equals(picklist.getDriver())) driverName = driver.getName();
+            }
+            %>
+            <form:info label="Foreman:" text="<%= foremanName %>" />
+            <form:info label="Driver:" text="<%= driverName %>" />
     		<% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
                 <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
             <% } %>
