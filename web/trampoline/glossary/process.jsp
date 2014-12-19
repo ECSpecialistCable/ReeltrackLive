@@ -49,6 +49,11 @@ if(request.getParameter(Glossary.PARAM) != null) {
     }
 }
 
+if(action.equals("import")) {	
+	File excel = multipart.getFile("excel_upload");
+	glossaryMgr.addJobGlossaryFromExcel(excel, basePath);
+    redirect = request.getContextPath() + "/trampoline/" + "glossary/job_glossary.jsp";
+}
 
 if(action.equals("create_reeltrack_glossary")) {
     Glossary content = new Glossary();

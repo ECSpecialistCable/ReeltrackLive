@@ -30,6 +30,27 @@ String tempUrl =""; //var for url expression
 <html:begin />
 <admin:title text="Drivers" />
 
+<admin:subtitle text="Import Drivers" />
+<admin:box_begin />
+	<form:begin_multipart name="import_drivers" action="drivers/process.jsp"/>
+	<form:hidden name="<%= Driver.CUSTOMER_ID_COLUMN %>" value="<%= new Integer(user.getCustomerId()).toString() %>" />
+	<form:file label="Excel File:" name="excel_upload" />
+	<form:row_begin/>
+		<form:label label="" name=""/>
+		<form:buttonset_begin padding="0" align="left"/>
+			<form:submit_inline name="SAVE" button="save" waiting="true" action="import"/>
+		<form:buttonset_end/>		
+	<form:row_end/>
+	
+	<form:row_begin/>
+	<form:label label="Excel Template:" name=""/>
+	<form:content_begin />
+		<a href="/excel_examples/driver_import.xlsx">Download</a>
+	<form:content_end />
+	<form:row_end/>
+	<form:end/>
+<admin:box_end/>
+
 <admin:subtitle text="Add Driver" />
 <admin:box_begin />
     <form:begin submit="true" name="create" action="drivers/process.jsp" />

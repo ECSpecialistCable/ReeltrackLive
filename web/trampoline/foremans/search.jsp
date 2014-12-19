@@ -30,6 +30,27 @@ String tempUrl =""; //var for url expression
 <html:begin />
 <admin:title text="Foremen" />
 
+<admin:subtitle text="Import Foremen" />
+<admin:box_begin />
+	<form:begin_multipart name="import_foremen" action="foremans/process.jsp"/>
+	<form:hidden name="<%= Foreman.CUSTOMER_ID_COLUMN %>" value="<%= new Integer(user.getCustomerId()).toString() %>" />
+	<form:file label="Excel File:" name="excel_upload" />
+	<form:row_begin/>
+		<form:label label="" name=""/>
+		<form:buttonset_begin padding="0" align="left"/>
+			<form:submit_inline name="SAVE" button="save" waiting="true" action="import"/>
+		<form:buttonset_end/>		
+	<form:row_end/>
+	
+	<form:row_begin/>
+	<form:label label="Excel Template:" name=""/>
+	<form:content_begin />
+		<a href="/excel_examples/foreman_import.xlsx">Download</a>
+	<form:content_end />
+	<form:row_end/>
+	<form:end/>
+<admin:box_end/>
+
 <admin:subtitle text="Add Foreman" />
 <admin:box_begin />
     <form:begin submit="true" name="create" action="foremans/process.jsp" />
