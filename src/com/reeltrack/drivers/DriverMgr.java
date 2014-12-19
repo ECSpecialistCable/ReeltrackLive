@@ -7,6 +7,13 @@ import java.util.GregorianCalendar;
 import javax.servlet.jsp.PageContext;
 import com.reeltrack.users.RTUser;
 
+import org.apache.poi.xssf.usermodel.*;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.*;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.*;
+import java.io.*;
+
 public class DriverMgr extends CompWebManager {
 	CompDbController controller;
 	
@@ -54,4 +61,39 @@ public class DriverMgr extends CompWebManager {
 		this.cleanDriver(content, realRootContextPath);
 		controller.delete(realRootContextPath, content);
 	}
+	
+	//Excel Importer for Matrix Items
+	public void addDriversFromExcel(int customerId, File file, String basePath) throws Exception {
+		if(file != null) {
+			InputStream myxls = new FileInputStream(file.getAbsolutePath());
+			Workbook wb = WorkbookFactory.create(myxls);
+
+			Sheet sheet = wb.getSheetAt(0);//get first sheet, should only be one
+			CompEntities myDataToAdd = new CompEntities();
+			
+			//loop through the sheet
+			for(int i = 1; i <= sheet.getLastRowNum(); i++) {//i represents which row to start on, 0 assumes no header
+				try {
+					Row row = sheet.getRow(i);
+					Driver item = new Driver();
+					item.setName(row.getCell(0).getStringCellValue());
+					item.setCustomerId(customerId); //column a
+				
+					if(!item.getName().equals("")) {//make sure token has a value or don't add
+						myDataToAdd.add(item);
+					}
+			
+				}catch(Exception e) {
+					e.printStackTrace(); System.out.println("exception for loop i "+ i + " for sheet "+ sheet.getSheetName());
+				}
+			}
+			//actually save newly formed compentities into the db
+			for(int i=0; i<myDataToAdd.howMany(); i++) {
+				Driver current = (Driver)myDataToAdd.get(i);
+				this.addDriver(current);
+			}
+			file.delete();
+		}
+	}
+
 }
