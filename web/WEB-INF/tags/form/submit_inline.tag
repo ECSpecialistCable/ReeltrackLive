@@ -9,6 +9,7 @@
 <%@ attribute name="button" required="false" %>
 <%@ attribute name="waiting" required="false" %>
 <%@ attribute name="cb_content" required="false"%>
+<%@ attribute name="warning" required="false" %>
 
 <input type="hidden" name="submit_action" value="${action}" />
 <!-- <input type="submit" value="[${fn:toUpperCase(name)}]" style="display: none;" /> -->
@@ -20,11 +21,18 @@
 <% if(button!=null) { %>
 <a href="#" onclick="javascript:return false;">
 		<% if(button=="login") { %> 
-			<button type="button" class="btn btn-primary btn-xs loginButton" onclick="this.innerHTML='.....';">${fn:toUpperCase(name)}</button>
+			<button type="button"	class="btn btn-primary btn-xs loginButton" onclick="this.innerHTML='.....';">${fn:toUpperCase(name)}</button>
 		<% } else { %> 
 			<%-- no longer using ajax_submitable_button --%>
 			<%-- class="${button}Button ajax_submitable_button" --%>
-			<button type="button" class="btn btn-primary btn-xs ajax_submitter" onclick="this.innerHTML='.....';">${fn:toUpperCase(name)}</button> 
+			<button type="button"
+			<% if(warning!=null && warning.equals("true")) { %>
+				class="btn btn-primary btn-xs warning_msg ajax_submitter"
+    			rel="Please confirm all values are correct."
+		    <% } else { %>
+					class="btn btn-primary btn-xs ajax_submitter"
+			<% } %>
+			onclick="this.innerHTML='.....';">${fn:toUpperCase(name)}</button> 
 		<% } %>
 </a>	    
 		

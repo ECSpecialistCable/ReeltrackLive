@@ -39,6 +39,13 @@ if(session.getAttribute("shipping_search")!=null) {
     content = (Reel)session.getAttribute("shipping_search");
 }
 
+if(request.getParameter("clear") != null) {
+    session.setAttribute("trackingNum","");
+    session.setAttribute("packingNum","");
+    session.setAttribute("carrierName","");
+    session.setAttribute("shippingDate","");
+}
+
 content.setStatus(Reel.STATUS_ORDERED);
 
 if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
@@ -84,14 +91,17 @@ session.setAttribute("shipping_search",content);
 
 String trackingNum = "";
 String packingNum = "";
-String cridNum = "";
+String carrierName = "";
+String shippingDate = "";
 if(request.getParameter("action") != null) {  
     trackingNum = request.getParameter("trackingNum");
     session.setAttribute("trackingNum",trackingNum);
     packingNum = request.getParameter("packingNum");
     session.setAttribute("packingNum",packingNum);
-	cridNum = request.getParameter("cridNum");
-    session.setAttribute("cridNum",cridNum);
+	carrierName = request.getParameter("carrierName");
+    session.setAttribute("carrierName",carrierName);
+    shippingDate = request.getParameter("shippingDate");
+    session.setAttribute("shippingDate",shippingDate);
 }
 if(session.getAttribute("trackingNum")!=null) {
     trackingNum = (String)session.getAttribute("trackingNum");
@@ -99,10 +109,12 @@ if(session.getAttribute("trackingNum")!=null) {
 if(session.getAttribute("packingNum")!=null) {
     packingNum = (String)session.getAttribute("packingNum");
 }
-if(session.getAttribute("cridNum")!=null) {
-    cridNum = (String)session.getAttribute("cridNum");
+if(session.getAttribute("carrierName")!=null) {
+    carrierName = (String)session.getAttribute("carrierName");
 }
-
+if(session.getAttribute("shippingDate")!=null) {
+    shippingDate = (String)session.getAttribute("shippingDate");
+}
 
 String column = Reel.REEL_TAG_COLUMN;
 boolean ascending = true;
@@ -169,6 +181,18 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 	<% } %>--%>
     <form:textfield label="Tracking PRO #:" name="trackingNum" value="<%= trackingNum %>" />
     <form:textfield label="Packing List #:" name="packingNum" value="<%= packingNum %>" />
+    <form:row_begin />
+        <form:label name="" label="Carrier:" />
+        <form:content_begin />
+        <form:select_begin name="carrierName" />
+            <form:option name="None" value="" match="<%= carrierName %>"/>
+            <% for(int x=0; x<carrierList.length; x++) { %>
+                <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= carrierName %>"/>
+            <% } %>
+        <form:select_end />
+        <form:content_end />
+    <form:row_end />
+    <form:date_picker name="shippingDate" value="<%= shippingDate %>" label="Shipped Date:" />
     <form:hidden name="action" value="save" />
     <form:row_begin />
         <form:label name="" label="" />
@@ -228,26 +252,30 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
                 <form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
                 <% if(canEdit) { %>
                     <form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
-                    <form:date_picker name="<%= Reel.SHIPPING_DATE_COLUMN %>" value="<%= content.getShippingDateString() %>" label="Shipped<br />Date:" />
+                    <% if(shippingDate.equals("")) shippingDate = content.getShippingDateString(); %>
+                    <form:date_picker name="<%= Reel.SHIPPING_DATE_COLUMN %>" value="<%= shippingDate %>" label="Shipped<br />Date:" />
                 <% } else { %>
                     <form:info label="Projected Shipping<br />Date:" text="<%= content.getProjectedShippingDateString() %>" />
                     <form:info label="Shipped<br />Date:" text="<%= content.getShippingDateString() %>" />
                 <% } %>
+                <% if(carrierName.equals("")) carrierName = content.getCarrier(); %>
                 <form:row_begin />
                 <form:label name="" label="Carrier:" />
                 <form:content_begin />
                 <form:select_begin name="<%= Reel.CARRIER_COLUMN %>" />
-                    <form:option name="None" value="" match="<%= content.getCarrier() %>" />
+                    <form:option name="None" value="" match="<%= carrierName %>" />
                     <% //String[] carrierList  = content.getCarrierList(); %>
                     <% for(int x=0; x<carrierList.length; x++) { %>
-                        <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= content.getCarrier() %>" />
+                        <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= carrierName %>" />
                     <% } %>
                 <form:select_end />
                 <form:content_end />
                 <form:row_end />
                 <form:textfield label="Other Carrier:" name="other_carrier" />
-                <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
-                <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />        
+                <% if(trackingNum.equals("")) trackingNum = content.getTrackingPRO(); %>
+                <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= trackingNum %>" />
+                <% if(packingNum.equals("")) packingNum = content.getPackingList(); %>          
+                <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= packingNum %>" />        
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
                 <form:row_begin />
                 <form:label name="" label="" />

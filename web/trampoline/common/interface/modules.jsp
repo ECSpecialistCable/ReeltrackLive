@@ -42,12 +42,16 @@ if(user_agent.contains("iPad")) {
 
 <% if(userLoginMgr.isLoggedIn()) { %>
 	<div>
-	<a href="common/includes/process_login.jsp?submit_action=change_job" style="border-top:1px solid black;">Select Job</a>
+	<a style="border-top:1px solid black;">SECTIONS</a>
 	</div>
+
+	<a href="common/includes/process_login.jsp?submit_action=change_job">Select Job</a>
+
 
 	<% if(user.getCustomerId()!=0 && !user.getJobCode().equals("") && (user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_CPE) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_STANDARD) || user.isUserType(RTUser.USER_TYPE_INVENTORY))) { %>
 		<% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY) && !user.isUserType(RTUser.USER_TYPE_CPE)) { %>
 			<a class="module_bar_toggle" rel="common/interface/manage_reels">Computer Operations</a>
+			<a class="module_bar_toggle" rel="common/interface/multiple_reels">Multiple Reels</a>
 		<% } %>
 		<a class="module_bar_toggle" rel="common/interface/reel_inventory">Search for Reels</a>
 		<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_CPE) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_INVENTORY) || user.isUserType(RTUser.USER_TYPE_STANDARD)) { %>
@@ -60,6 +64,6 @@ if(user_agent.contains("iPad")) {
 	<% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
 		<a class="module_bar_toggle" rel="common/interface/ecs_internal">ECS Internal</a>
 	<% } %>
-	<admin:ajax_load url="glossary/reeltrack_glossary.jsp" label="View Glossary" />
-	<admin:ajax_load url="file_cabinets/search.jsp" label="File Cabinet" />
+	<%--<admin:ajax_load url="glossary/reeltrack_glossary.jsp" label="View Glossary" />--%>
+	<admin:ajax_load url="file_cabinets/search.jsp" label="File Cabinet/Glossary" />
 <% } %>

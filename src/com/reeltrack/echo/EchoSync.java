@@ -305,7 +305,9 @@ public class EchoSync extends CompManager {
 		reel.setJobCode(content.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(reel);
 		puller.addSearch(reel);
-		return controllerRT.pullCompEntitiesCount(puller);
+		puller.setSortBy(new Reel().getTableName(),Reel.CR_ID_COLUMN,false);
+		reel = (Reel)controllerRT.pullCompEntity(puller);
+		return reel.getCrId();
 	}
 
 	public boolean fillReelAllocation(Reel reel) throws Exception {

@@ -160,6 +160,7 @@ var BEHAVIORS = function(){
 	            DEBUG(buttonLink.html());
 	            DEBUG("ajax_submitter : probably a linkbutton: " + the_FORM.attr('action'));
 
+	            /*
 				if($(obj).hasClass(__WARNING_MESSAGE__)){
 					var ans = confirm(obj.attr('rel'));
 					if(ans){
@@ -170,10 +171,20 @@ var BEHAVIORS = function(){
 				}else{
 					
 				}
-			
+				*/
+				
 	            buttonLink.click(function(){
 	                DEBUG("ajax_submitable_button:" + the_FORM.attr('action'));
-	                the_FORM.submit();
+	                if($(obj).hasClass(__WARNING_MESSAGE__)){
+	                	var ans = confirm(obj.attr('rel'));
+	                	if(ans){
+	                	the_FORM.submit();
+	                	} else {
+						
+						}
+					} else {
+						the_FORM.submit();
+					}
 	            });
 			}
 		},
