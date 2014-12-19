@@ -10,8 +10,9 @@
 <%@ page import= "org.apache.poi.hssf.usermodel.*" %>
 <%@ page import= "org.apache.poi.hssf.util.*" %>
 <%@ page import="com.reeltrack.reports.ActionLogExcelReport"%>
+<%@ page import="com.reeltrack.reports.CableDataDownloadExcelReport"%>
 <%@ page import="com.reeltrack.reports.InventoryExcelReport"%>
-    <%@ page import="com.reeltrack.reports.CtrExcelReport"%>
+<%@ page import="com.reeltrack.reports.CtrExcelReport"%>
 <%@ page import="com.reeltrack.reports.InventorySummaryExcelReport"%>
 <%@ page import="java.io.ByteArrayOutputStream"%>
 <%@ page import="com.reeltrack.reports.HtmlToPdfWriter"%>
@@ -259,6 +260,32 @@ if(action.equals("action_log_report")){
 		fileOut.close();
 
     	param = "?alr=true";
+	} catch(Exception e) {
+		e.printStackTrace();
+    }
+
+	redirect = request.getContextPath() + "/trampoline/" + "reports/reports.jsp" + param;
+}
+
+if(action.equals("cable_data_download")){
+    String param = "";
+	try {
+		//change functionality show we could download and view excel on ipad
+		String jobCode = request.getParameter("job_code");
+		String fileName = "cable_data_download";
+		String saveFile = basePath + "/reports";
+		File file = new File(saveFile);
+		file.mkdirs();
+        CableDataDownloadExcelReport writer = new CableDataDownloadExcelReport(pageContext, dbResources);
+        HSSFWorkbook wb = writer.writeExcel(jobCode, basePath);
+        fileName += ".xls";
+        saveFile += "/" + fileName;
+        FileOutputStream fileOut = new FileOutputStream(saveFile);
+        wb.write(fileOut);
+        fileOut.flush();
+        fileOut.close();
+
+    	param = "?cdd=true";
 	} catch(Exception e) {
 		e.printStackTrace();
     }

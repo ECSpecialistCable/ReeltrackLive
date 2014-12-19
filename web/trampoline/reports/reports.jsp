@@ -61,6 +61,10 @@
 	if(request.getParameter("alr")!=null) {
 		alr = request.getParameter("alr");
 	}
+	String cdd = "";
+	if(request.getParameter("cdd")!=null) {
+		cdd = request.getParameter("cdd");
+	}
 	
 %>
 
@@ -270,6 +274,29 @@
     <form:row_end />
 	<form:hidden name="reportType" value="action_log_report" />
 	<form:hidden name="job_code" value="<%= user.getJobCode() %>" />
+<form:end />
+<admin:box_end />
+
+<admin:subtitle text="Cable Data Download" />
+<admin:box_begin />
+<form:begin name="cdd_report" action="reports/process.jsp" />
+<%if(cdd.equals("true")) { %>
+<form:row_begin />
+<form:label name="" label="" />
+<form:buttonset_begin align="left" padding="0"/>
+<% String url = request.getContextPath() + "/reports/cable_data_download.xls"; %>
+<a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+<form:buttonset_end />
+<form:row_end />
+<% } %>
+<form:row_begin />
+<form:label name="" label="Generate:" />
+<form:buttonset_begin align="left" padding="0"/>
+<form:submit_inline button="submit" waiting="false" name="submit" action="cable_data_download" />
+<form:buttonset_end />
+<form:row_end />
+<form:hidden name="reportType" value="cable_data_download" />
+<form:hidden name="job_code" value="<%= user.getJobCode() %>" />
 <form:end />
 <admin:box_end />
 

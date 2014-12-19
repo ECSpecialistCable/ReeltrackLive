@@ -67,7 +67,8 @@ public class GlossaryMgr extends CompWebManager {
 				try {
 					Row row = sheet.getRow(i);
 					Glossary item = new Glossary();
-					item.setName(row.getCell(0).getStringCellValue());
+					item.setJobId(0);
+				    item.setName(row.getCell(0).getStringCellValue());
 					item.setDescription(row.getCell(1).getStringCellValue());
 					item.setGlossaryType(row.getCell(2).getStringCellValue());
 				
