@@ -273,10 +273,11 @@ String[] carrierList = reelMgr.getCarriers();
 
 <%
 boolean showStageAndCheckout = true;
-if(job.getScansMustMatch().equals("y") && !reelsMatch) {
+if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") && !reelsMatch) {
     showStageAndCheckout = false;
 }
 %>
+
 
 <% if(!isCableTrac) { %>
     <% if(showStageAndCheckout) { %>

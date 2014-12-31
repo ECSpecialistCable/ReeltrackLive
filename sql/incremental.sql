@@ -38,6 +38,7 @@ create table foremans (
 	PRIMARY KEY (id)
 );
 
+alter table cable_tech_data add qrc_tracking char(1) default 'n';
 create table whlocations (
 	id int(11) NOT NULL auto_increment,
 	created datetime,

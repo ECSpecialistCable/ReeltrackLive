@@ -103,6 +103,15 @@ if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {
     content.setSearchOp(Reel.PN_CONDUCTOR_COLUMN, Reel.EQ); 
 }
 
+String circuit_name_search = "";
+if(session.getAttribute("circuit_name_search")!=null) {
+    circuit_name_search = (String)session.getAttribute("circuit_name_search");
+}
+if(request.getParameter("circuit_name_search") != null) {  
+    circuit_name_search = request.getParameter("circuit_name_search");
+    session.setAttribute("circuit_name_search",circuit_name_search);
+}
+
 session.setAttribute("reels_search",content);
 
 String column = Reel.CR_ID_COLUMN;
@@ -117,8 +126,8 @@ if(request.getParameter("ascending")!=null) {
         ascending = false;
     }
 }
-int count = reelMgr.searchReelsCount(content, column, ascending);
-CompEntities contents = reelMgr.searchReels(content, column, ascending, howMany, skip);
+int count = reelMgr.searchReelsCount2(content, circuit_name_search, column, ascending);
+CompEntities contents = reelMgr.searchReels2(content, circuit_name_search, column, ascending, howMany, skip);
 String[] manufacturers = reelMgr.getManufacturers();
 String[] volts = reelMgr.getPnVolts();
 String[] gauges = reelMgr.getPnGauges();
@@ -206,6 +215,7 @@ String tempURL = "";
             <form:select_end />
             <form:content_end />
         <form:row_end />
+        <form:textfield label="Circuit Name:" name="circuit_name_search" value="<%= circuit_name_search %>" />
         <form:row_begin />
             <form:label name="" label="" />
             <form:buttonset_begin align="left" padding="0"/>

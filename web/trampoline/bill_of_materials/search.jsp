@@ -61,11 +61,12 @@ String tempUrl =""; //var for url expression
     <admin:box_begin color="false" />
         <listing:begin />
             <listing:header_begin />
-                <listing:header_cell width="80" first="true" name="Cust P/n" />
-                <listing:header_cell width="100" name="Description" />
-                <listing:header_cell width="100" name="Reels" />
-                <listing:header_cell width="100" name="Qty" />
+                <listing:header_cell first="true" name="Cust P/n" />
+                <listing:header_cell name="Description" />
+                <listing:header_cell width="50" name="Reels" />
+                <listing:header_cell width="50" name="Qty" />
                 <listing:header_cell width="100" name="Usage Tracking" />
+                <listing:header_cell width="50" name="QRC" />
                 <listing:header_cell width="100" colspan="2" name="Data Sheet" />
             <listing:header_end />
             <% for(int i=0; i<contents.howMany(); i++) { %>
@@ -100,6 +101,18 @@ String tempUrl =""; //var for url expression
 						<form:hidden name="<%= CustomerJob.PARAM %>" value="<%= Integer.toString(user.getJobId()) %>" />
 						<form:hidden name="submit_action" value="update_usage_tracking" />
 					<form:end_inline />
+                <listing:cell_end />
+                <listing:cell_begin />
+                    <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" action="bill_of_materials/process.jsp" name="update_qrc_tracking" />
+                       <% if(canEdit) { %>
+                            <form:checkbox onclick="test" label="" name="<%= CableTechData.QRC_TRACKING_COLUMN %>" value="y" match="<%= techData.getQRCTracking() %>" />
+                        <% } else { %>
+                            <form:checkbox label="" name="<%= CableTechData.QRC_TRACKING_COLUMN %>" value="y" match="<%= techData.getQRCTracking() %>" />
+                        <% } %>
+                        <form:hidden name="<%= Reel.PARAM %>" value="<%= Integer.toString(content.getId()) %>" />
+                        <form:hidden name="<%= CustomerJob.PARAM %>" value="<%= Integer.toString(user.getJobId()) %>" />
+                        <form:hidden name="submit_action" value="update_qrc_tracking" />
+                    <form:end_inline />
                 <listing:cell_end />
 				<listing:cell_begin />
 					<form:begin_multipart  action="bill_of_materials/process.jsp" name="upload_data_sheet" />

@@ -79,6 +79,23 @@ if(action.equals("update_usage_tracking")) {
     redirect = request.getContextPath() + "/trampoline/" + "bill_of_materials/search.jsp";
 }
 
+if(action.equals("update_qrc_tracking")) {
+	Reel reel = new Reel();
+	reel.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+	CableTechData techData = reelMgr.getCableTechData(reel);
+	
+	CableTechData toUpdate = new CableTechData();
+	toUpdate.setId(techData.getId());
+	if(request.getParameter(CableTechData.QRC_TRACKING_COLUMN)!=null) {
+		toUpdate.setQRCTracking("y");
+	} else {
+		toUpdate.setQRCTracking("n");
+	}
+	reelMgr.updateCableTechData(toUpdate);
+
+    redirect = request.getContextPath() + "/trampoline/" + "bill_of_materials/search.jsp";
+}
+
 if(action.equals("upload_data_sheet")) {
 	Reel reel = new Reel();
 	reel.setId(Integer.parseInt(multipart.getParameter(Reel.PARAM)));

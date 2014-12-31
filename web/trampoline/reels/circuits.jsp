@@ -104,6 +104,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
     <form:end />
 <admin:box_end />
 
+<%--
 <admin:subtitle text="Import Circuits" />
 <admin:box_begin />
     <form:begin_multipart submit="true" name="import_circuits" action="reels/process.jsp" />
@@ -117,6 +118,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
 			<form:row_end />
     <form:end />
 <admin:box_end />
+--%>
 <% } %>
 
 <% if(circuits.howMany() > 0) { %>

@@ -654,6 +654,42 @@ public class ReelMgr extends CompWebManager {
 		return controller.pullCompEntitiesCount(puller);
 	}
 
+	public CompEntities searchReels2(Reel content, String circuitName, String sort_by, boolean asc, int howMany, int skip) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		content.setJobCode(user.getJobCode());
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+		if(circuitName!=null && !circuitName.equals("")) {
+			ReelCircuit circuit = new ReelCircuit();
+			circuit.setName(circuitName);
+			circuit.setSearchOp(ReelCircuit.NAME_COLUMN,ReelCircuit.PARTIAL);
+			puller.addSearch(circuit);
+			puller.addFKLink(new Reel(), new ReelCircuit(), ReelCircuit.REEL_ID_COLUMN);
+		}
+		puller.setSortBy(content.getTableName(), sort_by, asc);
+		return controller.pullCompEntities(puller, howMany, skip);
+	}
+
+	public int searchReelsCount2(Reel content, String circuitName, String sort_by, boolean asc) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		content.setJobCode(user.getJobCode());
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+		if(circuitName!=null && !circuitName.equals("")) {
+			ReelCircuit circuit = new ReelCircuit();
+			circuit.setName(circuitName);
+			circuit.setSearchOp(ReelCircuit.NAME_COLUMN,ReelCircuit.PARTIAL);
+			puller.addSearch(circuit);
+			puller.addFKLink(new Reel(), new ReelCircuit(), ReelCircuit.REEL_ID_COLUMN);
+		}
+		puller.setSortBy(content.getTableName(), sort_by, asc);
+		return controller.pullCompEntitiesCount(puller);
+	}
+
 	public CompEntities searchOrderedAndShippedReels(Reel content, String sort_by, boolean asc, int howMany, int skip) throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());

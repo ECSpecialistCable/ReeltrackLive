@@ -38,6 +38,13 @@ String tempUrl =""; //var for url expression
                 <form:buttonset_end />
             <form:row_end />
     <form:end />
+    <form:row_begin/>
+    <form:label label="Excel Template:" name=""/>
+    <form:content_begin />
+        <a href="/excel_examples/circuits_import.xlsx">Download</a>
+    <form:content_end />
+    <form:row_end/>
+    <form:end/>
 <admin:box_end />
 
 <admin:set_tabset url="import_circuits/_tabset_default.jsp" thispage="search.jsp" />

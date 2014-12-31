@@ -25,6 +25,7 @@ public class CableTechData extends CompCMEntity {
 	public static final String CON_AL_WEIGHT_COLUMN = "con_al_weight";
 	public static final String CON_CU_WEIGHT_COLUMN = "con_cu_weight";
 	public static final String USAGE_TRACKING_COLUMN = "usage_tracking";
+	public static final String QRC_TRACKING_COLUMN = "qrc_tracking";
 
 	public static final String USAGE_FOOT_MARKERS = "foot markers";
 	public static final String USAGE_WEIGHT = "weight";
@@ -196,6 +197,14 @@ public class CableTechData extends CompCMEntity {
 
 	public void setUsageTracking(String name) {
 		this.getData().setString(USAGE_TRACKING_COLUMN, name);
+	}
+
+	public String getQRCTracking() {
+		return this.getData().getString(QRC_TRACKING_COLUMN, "");
+	}
+
+	public void setQRCTracking(String name) {
+		this.getData().setString(QRC_TRACKING_COLUMN, name);
 	}
 
 	@Override

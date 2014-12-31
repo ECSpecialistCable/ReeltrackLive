@@ -8,8 +8,8 @@
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 
 <admin:tab url="received/search.jsp" text="All" />
-<admin:tab url="received/no_location.jsp" text="No Location" />
-<admin:tab url="received/in_wharehouse.jsp" text="In Warehouse" />
+<admin:tab url="received/no_location.jsp" text="WH No Location" />
+<admin:tab url="received/in_wharehouse.jsp" text="WH w/Location" />
 <admin:tab url="received/staged.jsp" text="Staged" />
 <admin:tab url="received/checked_out.jsp" text="Checked Out" />
 <admin:tab url="received/complete.jsp" text="Complete" />
