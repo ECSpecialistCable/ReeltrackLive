@@ -22,6 +22,10 @@
 <% reelMgr.init(pageContext,dbResources); %>
 <% 
 RTUser user = (RTUser)userLoginMgr.getUser();
+boolean canDelete = false;
+if(user.isUserType(RTUser.USER_TYPE_ECS)) {
+    canDelete = true;
+}
 
 int howMany = 25;
 int pageNdx = 1;
@@ -277,7 +281,9 @@ String tempURL = "";
                 <% tempURL = "reels/status.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
                 <form:linkbutton url="<%= tempURL %>" name="REEL PAGE" />
                 <% tempURL = "reels/process.jsp?submit_action=delete_reel&" + Reel.PARAM + "=" + content.getId(); %>
-                <form:linkbutton warning="true" url="<%= tempURL %>" process="true" name="DELETE" />
+                <% if(canDelete) { %>
+                    <form:linkbutton warning="true" url="<%= tempURL %>" process="true" name="DELETE" />
+                <% } %>
             <listing:cell_end />
         <listing:row_end />
         <% } %>

@@ -236,11 +236,13 @@ String tempURL = "";
                 <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
+                    <% tempURL = "reeltags/reeltag_image.jsp?" + Reel.PARAM + "=" + content.getId(); %>
+                    <form:linkbutton url="<%= tempURL %>" name="GENERATE REEL TAG" newtab="true" />
                     <form:submit_inline button="save" waiting="true" name="Mark Received / Refused" action="mark_received" />
                     <% tempURL = "reels/edit.jsp?" +  Reel.PARAM + "=" + content.getId(); %>
                     <form:linkbutton url="<%= tempURL %>" name="EDIT REEL" />
-                    <% tempURL = "reeltags/reeltag_image.jsp?" + Reel.PARAM + "=" + content.getId(); %>
-                    <form:linkbutton url="<%= tempURL %>" name="GENERATE REEL TAG" newtab="true" />
+                    
+                    
                 <form:buttonset_end />
                 <form:row_end />
             <form:end />

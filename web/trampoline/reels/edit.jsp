@@ -64,6 +64,10 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
 }
 
 boolean canSubmitSR = true;
+if(!user.isUserType(RTUser.USER_TYPE_ECS)) {
+	canSubmitSR = false;
+}
+/*
 if(!canSubmit) {
 	canSubmitSR = false;
 } else {
@@ -74,6 +78,7 @@ if(!canSubmit) {
 		}
 	}
 }
+*/
 %>
 <% dbResources.close(); %>
 
