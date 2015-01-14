@@ -60,7 +60,6 @@ if(user_agent.contains("iPad")) {
 			<a class="module_bar_toggle" rel="common/interface/configuration">Job Set Up</a>
 		<% } %>
 		<a class="module_bar_toggle" rel="common/interface/reports">Reports</a>
-		<% } %>
 	<% } %>
 	<% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
 		<a class="module_bar_toggle" rel="common/interface/ecs_internal">ECS Internal</a>
