@@ -38,7 +38,6 @@ create table foremans (
 	PRIMARY KEY (id)
 );
 
-alter table cable_tech_data add qrc_tracking char(1) default 'n';
 create table whlocations (
 	id int(11) NOT NULL auto_increment,
 	created datetime,
@@ -334,3 +333,4 @@ alter table customer_jobs add scans_must_match varchar(1) default 'n';
 /* june 11 */
 alter table users add column can_add_user varchar(1) default 'n';
 
+alter table cable_tech_data add qrc_tracking char(1) default 'n';
