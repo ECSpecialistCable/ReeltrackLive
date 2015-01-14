@@ -23,11 +23,12 @@
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
 boolean canEdit = false;
-if(user.isUserType(RTUser.USER_TYPE_ECS)) {
+if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT)) {
     canEdit = true;
 }
 
 CompEntities contents = reelMgr.getReelsDataForBOM(user.getJobCode());
+
 
 boolean canSubmit = true;
 if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
@@ -116,7 +117,7 @@ String tempUrl =""; //var for url expression
                 <listing:cell_end />
 				<listing:cell_begin />
 					<form:begin_multipart  action="bill_of_materials/process.jsp" name="upload_data_sheet" />
-						<% if(canEdit && canSubmit) { %>
+						<% if(canEdit || canSubmit) { %>
 							<form:file_inline urldescription="false" name="<%= CableTechData.DATA_SHEET_FILE_COLUMN %>" label="" />
 			                <form:submit_inline  button="save" waiting="true" name="save" action="upload_data_sheet" />
 						<% } %>						

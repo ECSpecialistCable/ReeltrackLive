@@ -49,16 +49,17 @@ if(user_agent.contains("iPad")) {
 
 
 	<% if(user.getCustomerId()!=0 && !user.getJobCode().equals("") && (user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_CPE) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_STANDARD) || user.isUserType(RTUser.USER_TYPE_INVENTORY))) { %>
-		<% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY) && !user.isUserType(RTUser.USER_TYPE_CPE)) { %>
+		<% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY)) { %>
 			<a class="module_bar_toggle" rel="common/interface/manage_reels">Computer Operations</a>
+		<% } %>
+		<% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY)) { %>
 			<a class="module_bar_toggle" rel="common/interface/multiple_reels">Multiple Reels</a>
 		<% } %>
 		<a class="module_bar_toggle" rel="common/interface/reel_inventory">Search for Reels</a>
-		<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_CPE) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_INVENTORY) || user.isUserType(RTUser.USER_TYPE_STANDARD)) { %>
+		<% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT) || user.isUserType(RTUser.USER_TYPE_STANDARD)) { %>
 			<a class="module_bar_toggle" rel="common/interface/configuration">Job Set Up</a>
-			<% if(!user.isUserType(RTUser.USER_TYPE_STANDARD)) { %>
-				<a class="module_bar_toggle" rel="common/interface/reports">Reports</a>
-			<% } %>
+		<% } %>
+		<a class="module_bar_toggle" rel="common/interface/reports">Reports</a>
 		<% } %>
 	<% } %>
 	<% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>

@@ -57,8 +57,8 @@ String tempUrl;
                 <form:content_begin />
                     <form:select_begin name="<%= RTUser.USER_TYPE_COLUMN %>" label="usertype" />
                         <form:option value="<%= RTUser.USER_TYPE_MANAGEMENT %>" name="Management"/>
-                        <form:option value="<%= RTUser.USER_TYPE_STANDARD %>" name="Standard"/>
-                        <form:option value="<%= RTUser.USER_TYPE_INVENTORY %>" name="CableTrac"/>
+                        <form:option value="<%= RTUser.USER_TYPE_STANDARD %>" name="Warehouse"/>
+                        <form:option value="<%= RTUser.USER_TYPE_INVENTORY %>" name="Foreman"/>
                         <form:option value="<%= RTUser.USER_TYPE_CPE %>" name="Cable Procurement / Expediting"/>
                     <form:select_end />
                 <form:content_end />
