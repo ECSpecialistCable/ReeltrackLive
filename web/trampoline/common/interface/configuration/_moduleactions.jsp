@@ -16,5 +16,4 @@
 		<admin:ajax_load url="whlocations/search.jsp" label="Manage Warehouse Locations" />
 	<% } %>
 		<%--<admin:ajax_load url="settings/search.jsp" label="Settings" />--%>
-	<% } %>
 <% } %>
