@@ -8,9 +8,11 @@
 
 <% if (user!=null) { %>
         <admin:ajax_load url="shipping/search.jsp?clear=true" label="Mark as Shipped" />
-        <admin:ajax_load url="receive/search.jsp" label="Receive Reels" />       
-        <admin:ajax_load url="checkout/search.jsp" label="Check OUT Reels" />
-        <admin:ajax_load url="checkin/search.jsp" label="Check IN Reels" />
+        <admin:ajax_load url="receive/search.jsp" label="Receive Reels" />  
+       	<% if(!user.isUserType(RTUser.USER_TYPE_CPE)) { %>     
+        	<admin:ajax_load url="checkout/search.jsp" label="Check OUT Reels" />
+        	<admin:ajax_load url="checkin/search.jsp" label="Check IN Reels" />
+        <% } %>
         <admin:ajax_load url="complete/search.jsp" label="Mark as Complete" />
         <admin:ajax_load url="scrapped/search.jsp" label="Mark as Scrapped" />
 <% } %>

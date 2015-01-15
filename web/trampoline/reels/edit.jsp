@@ -198,7 +198,7 @@ if(!canSubmit) {
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
-					<% if(canEdit) { %>
+					<% if(canEdit || canSubmit) { %>
 					<form:submit_inline button="save" waiting="true" name="save" action="update" />
 					<% } %>
 				<form:buttonset_end />
