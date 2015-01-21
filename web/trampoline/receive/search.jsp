@@ -212,7 +212,7 @@ String tempURL = "";
                     <form:label name="" label="Issue:" />
                     <form:content_begin />
                     <form:select_begin name="<%= Reel.RECEIVING_ISSUE_COLUMN %>" />
-                        <form:option name="None" value="" match="<%= content.getReceivingIssue() %>" />
+                        <form:option name="None" value="<%= Reel.RECEIVING_ISSUE_NONE %>" match="<%= content.getReceivingIssue() %>" />
                         <% String[] issueList  = content.getReceivingIssueList(); %>
                         <% for(int x=0; x<issueList.length; x++) { %>
                             <form:option name="<%= issueList[x] %>" value="<%= issueList[x] %>" match="<%= content.getReceivingIssue() %>" />
