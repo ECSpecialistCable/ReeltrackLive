@@ -55,6 +55,7 @@ public class GlossaryImporter extends CompWebManager {
 						if(name.length()>0) {
 							Glossary content = new Glossary();
 							content.setJobId(0);
+							content.setIsVideo("n");
 							content.setName(name);
 							content.setDescription(desc);
 							content.setGlossaryType(type);

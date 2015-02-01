@@ -55,7 +55,12 @@ String tempUrl; //var for url expression
     <form:begin submit="true" name="edit" action="glossary/process.jsp" />
 
 			<form:textfield name="<%= Glossary.NAME_COLUMN %>" label="Name:" value="<%= content.getName() %>" />
-    		<form:textarea name="<%= Glossary.DESCRIPTION_COLUMN %>" rows="3" label="Description:" value="<%= content.getDescription() %>" />
+			<% if(content.getIsVideo().equals("y")) { %>
+			<form:textfield pixelwidth="300" name="<%= Glossary.VIDEO_URL_COLUMN %>" label="URL:" value="<%= content.getVideoURL() %>" />
+			<% } else { %>
+				<form:textarea name="<%= Glossary.DESCRIPTION_COLUMN %>" rows="3" label="Description:" value="<%= content.getDescription() %>" />
+			<% } %>
+			<% if(content.getIsVideo().equals("n")) { %>
 			<form:row_begin />
 				<form:label name="" label="Type:" />
 				<form:content_begin />
@@ -66,11 +71,14 @@ String tempUrl; //var for url expression
 					<form:select_end />
 				<form:content_end />
 			<form:row_end />
+			<% } %>
 			<form:hidden name="<%= Glossary.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
-					<% if(isReelTrack) { %>
+					<% if(content.getIsVideo().equals("y")) { %>
+						<form:submit_inline button="save" waiting="true" name="save" action="update_reeltrack_video" />
+					<% } else if(isReelTrack) { %>
 						<form:submit_inline button="save" waiting="true" name="save" action="update_reeltrack_glossary" />
 					<% } else { %>
 						<form:submit_inline button="save" waiting="true" name="save" action="update_job_glossary" />
@@ -82,5 +90,10 @@ String tempUrl; //var for url expression
 <admin:box_end />
 
 <% tempUrl = "isReelTrack=" + isReelTrack; %>
+<%
+if(content.getIsVideo().equals("y")) {
+	tempUrl = "isTraining=true";
+}
+%>
 <admin:set_tabset url="glossary/_tabset_manage.jsp" thispage="edit.jsp" content_id_for_tabset="<%= contid %>" params="<%= tempUrl %>" />
 <html:end />

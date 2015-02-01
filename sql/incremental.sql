@@ -334,3 +334,7 @@ alter table customer_jobs add scans_must_match varchar(1) default 'n';
 alter table users add column can_add_user varchar(1) default 'n';
 
 alter table cable_tech_data add qrc_tracking char(1) default 'n';
+
+/* feb 1 */
+alter table glossary add is_video char(1) default 'n';
+alter table glossary add video_url varchar(255);

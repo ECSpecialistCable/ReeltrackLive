@@ -11,6 +11,8 @@ public class Glossary extends CompCMEntity {
 	public static final String JOB_ID_COLUMN = "job_id";
 	public static final String DESCRIPTION_COLUMN = "description";
 	public static final String GLOSSARY_TYPE_COLUMN = "glossary_type";
+	public static final String IS_VIDEO_COLUMN = "is_video";
+	public static final String VIDEO_URL_COLUMN = "video_url";
 
 	public static final String[] GLOSSARY_TYPES = {"Check box", "Command Button", "Drop Down Menu", "Editable Field", "List", "Reel Status", "Report", "Cable Terms", "Tab", "Viewable field" };
 
@@ -32,6 +34,22 @@ public class Glossary extends CompCMEntity {
 	@Override
 	public String getTitle() {
 		return this.getName();
+	}
+
+	public String getVideoURL() {
+		return this.getData().getString(VIDEO_URL_COLUMN, "");
+	}
+	
+	public void setVideoURL(String name) {
+		this.getData().setString(VIDEO_URL_COLUMN, name);
+	}
+
+	public String getIsVideo() {
+		return this.getData().getString(IS_VIDEO_COLUMN, "");
+	}
+	
+	public void setIsVideo(String name) {
+		this.getData().setString(IS_VIDEO_COLUMN, name);
 	}
 
 	public String getDescription() {
