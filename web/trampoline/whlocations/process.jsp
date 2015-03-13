@@ -60,7 +60,7 @@ if(action.equals("import")) {
     WhLocation content = new WhLocation();
     content.setCustomerId(Integer.parseInt(multipart.getParameter(WhLocation.CUSTOMER_ID_COLUMN)));
     File file = multipart.getFile("location_file");
-    whlocationMgr.importLocations(content, file);
+    whlocationMgr.importLocations2(content, file);
     redirect = request.getContextPath() + "/trampoline/" + "whlocations/search.jsp";
 } 
 
