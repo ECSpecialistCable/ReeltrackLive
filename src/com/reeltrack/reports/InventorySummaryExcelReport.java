@@ -93,7 +93,7 @@ public class InventorySummaryExcelReport {
 			e.printStackTrace();
 		}
 
-		nextNum=6;
+		nextNum=8;
 		row = sheet.createRow((short) rowNum);
 		row.setHeightInPoints(15);
 		cell = row.createCell((short) nextNum);
@@ -104,7 +104,7 @@ public class InventorySummaryExcelReport {
 	
 		rowNum++;
 		row = sheet.createRow((short) rowNum);
-		nextNum=6;
+		nextNum=8;
 		row.setHeightInPoints(30);
 		cell = row.createCell((short) nextNum);
 		cell.setCellValue("Inventory Summary \n"+custJob.getName() + " (" + custJob.getCode() + ")");
@@ -126,7 +126,7 @@ public class InventorySummaryExcelReport {
 		cell = row.createCell((short) nextNum+7);
 		cell.setCellValue("Number of Reels");
 		cell.setCellStyle(styleHeader);
-		addr = new CellRangeAddress(rowNum, rowNum, nextNum+7, nextNum+8);
+		addr = new CellRangeAddress(rowNum, rowNum, nextNum+7, nextNum+10);
 		sheet.addMergedRegion(addr);
 		
 		rowNum++;
@@ -180,6 +180,14 @@ public class InventorySummaryExcelReport {
 
 		cell = row.createCell((short) nextNum++);
 		cell.setCellValue("On Complete Reels");
+		cell.setCellStyle(styleHeader);
+
+		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("Total Ordered");
+		cell.setCellStyle(styleHeader);
+
+		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("Total Received");
 		cell.setCellStyle(styleHeader);
 
 		cell = row.createCell((short) nextNum++);

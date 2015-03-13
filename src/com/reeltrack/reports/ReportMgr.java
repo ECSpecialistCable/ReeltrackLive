@@ -98,8 +98,8 @@ public class ReportMgr extends CompWebManager {
 			values.add(checkedOutCount);
 			values.add(onCompReelCount);
 			
-			//values.add(noOfReelsTotal);
-			//values.add(noOfReelsReceived);
+			values.add(noOfReelsTotal);
+			values.add(noOfReelsReceived);
 			values.add(noOfReelsInInv);
 			values.add(noOfReelsCheckedOut);
 
