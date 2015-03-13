@@ -102,7 +102,7 @@ String tempURL; //var for url expression
     <form:begin_multipart submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
         <form:info label="CTR #:" text="<%= content.getCTRNumber() %>" />
         <form:info label="CTR Date:" text="<%= content.getCTRDateString() %>" />
-        <form:info label="CTR Sent:" text="<%= content.getCTRSentString() %>" />
+        <form:info label="CTR Posted:" text="<%= content.getCTRSentString() %>" />
         <% if(canEdit) { %>
 		<form:file name="<%= Reel.CTR_FILE_COLUMN %>" label="CTR File:" />
         <% } %>

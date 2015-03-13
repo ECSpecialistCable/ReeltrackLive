@@ -96,7 +96,7 @@ public class WhLocationMgr extends CompWebManager {
 						line = row.getCell(0).getStringCellValue();
 					} catch(Exception e) {
 						int tmp = (int)row.getCell(0).getNumericCellValue();
-						line = Double.toString(tmp);
+						line = Integer.toString(tmp);
 					}
 					WhLocation search = new WhLocation();
 		 			search.setCustomerId(content.getCustomerId());

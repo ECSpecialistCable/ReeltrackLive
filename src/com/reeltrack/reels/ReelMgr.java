@@ -1351,7 +1351,14 @@ public class ReelMgr extends CompWebManager {
 					Row row = sheet.getRow(i);
 					ReelCircuit circuit = new ReelCircuit();
 					circuit.tmpReelTag = row.getCell(0).getStringCellValue(); //column a
-					circuit.setName(row.getCell(1).getStringCellValue());
+					String name = "blank";
+					try {
+						name = row.getCell(1).getStringCellValue();
+					} catch(Exception e) {
+						int tmp = (int)row.getCell(1).getNumericCellValue();
+						name = Integer.toString(tmp);
+					}
+					circuit.setName(name);
 					double quant = row.getCell(2).getNumericCellValue();
 					circuit.setLength((int)quant);
 					myDataToAdd.add(circuit);
