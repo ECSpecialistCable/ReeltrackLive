@@ -86,6 +86,7 @@ public class Reel extends ContentPositionable implements Positionable {
 	public static final String RECEIVING_ISSUE_DAMAGED = "damaged";
 	public static final String RECEIVING_ISSUE_INCORRECT_TOLERANCE = "incorrect tolerance";
 	public static final String RECEIVING_ISSUE_INCORRECT_REEL_MARK = "incorrect reel mark";
+	public static final String RECEIVING_ISSUE_OTHER = "Other";
 
 	public static final String MANUFACTURER_ONE = "Manufacturer One";
 	public static final String MANUFACTURER_TWO = "Manufacturer Two";
@@ -372,7 +373,7 @@ public class Reel extends ContentPositionable implements Positionable {
 	}
 
 	public String[] getReceivingIssueList() {
-		String[] statuses = {RECEIVING_ISSUE_DAMAGED,RECEIVING_ISSUE_INCORRECT_TOLERANCE,RECEIVING_ISSUE_INCORRECT_REEL_MARK};
+		String[] statuses = {RECEIVING_ISSUE_DAMAGED,RECEIVING_ISSUE_INCORRECT_TOLERANCE,RECEIVING_ISSUE_INCORRECT_REEL_MARK,RECEIVING_ISSUE_OTHER};
 		return statuses;
 	}
 
