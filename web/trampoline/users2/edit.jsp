@@ -62,6 +62,7 @@ String tempUrl; //var for url expression
 						<form:option match="<%= content.getUserType() %>" value="<%= RTUser.USER_TYPE_MANAGEMENT %>" name="Management"/>
 						<form:option match="<%= content.getUserType() %>" value="<%= RTUser.USER_TYPE_STANDARD %>" name="Warehouse"/>
 						<form:option match="<%= content.getUserType() %>" value="<%= RTUser.USER_TYPE_INVENTORY %>" name="Foreman"/>
+						<form:option match="<%= content.getUserType() %>" value="<%= RTUser.USER_TYPE_CPE %>" name="Cable Procurement / Expediting"/>
 					<form:select_end />
 				<form:content_end />
 			<form:row_end />

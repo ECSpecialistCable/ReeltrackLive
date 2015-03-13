@@ -33,6 +33,7 @@ dbResources.close();
 						<form:option value="<%= RTUser.USER_TYPE_MANAGEMENT %>" name="Management"/>
 						<form:option value="<%= RTUser.USER_TYPE_STANDARD %>" name="Warehouse"/>
 						<form:option value="<%= RTUser.USER_TYPE_INVENTORY %>" name="Foreman"/>
+						<form:option value="<%= RTUser.USER_TYPE_CPE %>" name="Cable Procurement / Expediting"/>
 					<form:select_end />
 				<form:content_end />
 			<form:row_end />
