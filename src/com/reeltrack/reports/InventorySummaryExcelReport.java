@@ -228,7 +228,7 @@ public class InventorySummaryExcelReport {
 		styleHeader.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		styleHeader.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
 		styleHeader.setWrapText(true);
-		/*styleHeader.setBorderBottom(CellStyle.BORDER_THIN);
+		styleHeader.setBorderBottom(CellStyle.BORDER_THIN);
     	styleHeader.setBottomBorderColor(new HSSFColor.BLACK().getIndex());
 		styleHeader.setBorderTop(CellStyle.BORDER_THIN);
     	styleHeader.setTopBorderColor(new HSSFColor.BLACK().getIndex());
@@ -236,7 +236,7 @@ public class InventorySummaryExcelReport {
     	styleHeader.setLeftBorderColor(new HSSFColor.BLACK().getIndex());
 		styleHeader.setBorderRight(CellStyle.BORDER_THIN);
     	styleHeader.setRightBorderColor(new HSSFColor.BLACK().getIndex());
-		*/
+		
 		styleBoldRight = wb.createCellStyle();
 		styleBoldRight.setFont(boldFont);
 		styleBoldRight.setAlignment(HSSFCellStyle.ALIGN_CENTER);
