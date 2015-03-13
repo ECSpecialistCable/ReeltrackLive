@@ -28,7 +28,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
     canEdit = true;
 }
 if(user.isUserType(RTUser.USER_TYPE_MANAGEMENT)) {
-	canEditRT = true;
+	canEditRT = false;
 }
 %>
 <%
