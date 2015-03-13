@@ -54,34 +54,52 @@ public class ReportMgr extends CompWebManager {
 			CompEntities customerReels = controller.pullCompEntities(puller, 0, 0);
 //			System.out.println("Reel "+reel.getReelTag() + " : " + currentPN + " : " + customerReels.howMany());
 
+			int orderedCount = 0, shippedCount = 0, receivedCount = 0;
 			int purchasedCount = 0, inInvCount = 0, checkedOutCount = 0, onCompReelCount = 0;
 			int noOfReelsInInv = 0, noOfReelsCheckedOut = 0;
+			int noOfReelsTotal = 0, noOfReelsReceived = 0;
 			for(int j=0; j<customerReels.howMany(); j++) {
 				Reel current = (Reel)customerReels.get(j);
 
-				if(current.getStatus().equals(Reel.STATUS_ORDERED)) {
-					purchasedCount+= current.getOrderedQuantity();
+				orderedCount += current.getOrderedQuantity();
+				receivedCount+= current.getReceivedQuantity();
+				noOfReelsTotal++;
 				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOrderedQuantity());
+				if(current.getStatus().equals(Reel.STATUS_SHIPPED)) {
+					shippedCount+= current.getShippedQuantity();
+				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOnReelQuantity());
 				} else if(current.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
 					inInvCount+= current.getOnReelQuantity();
 					noOfReelsInInv++;
+					noOfReelsReceived++;
 				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOnReelQuantity());
 				} else if(current.getStatus().equals(Reel.STATUS_STAGED) || current.getStatus().equals(Reel.STATUS_CHECKED_OUT)) {
 					checkedOutCount+= current.getOnReelQuantity();
 					noOfReelsCheckedOut++;
+					noOfReelsReceived++;
 				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOnReelQuantity());
 				} else if(current.getStatus().equals(Reel.STATUS_COMPLETE)) {
 					onCompReelCount+= current.getOnReelQuantity();
+					noOfReelsReceived++;
+				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOnReelQuantity());
+				} else if(current.getStatus().equals(Reel.STATUS_SCRAPPED)) {
+					noOfReelsReceived++;
 				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOnReelQuantity());
 				}
 				//System.out.println("current reel "+current.getReelTag() + purchasedCount + " " + inInvCount + " "+checkedOutCount + " " + onCompReelCount + " " + noOfReelsInInv + " " + noOfReelsCheckedOut);
 			}
 
 			ArrayList<Integer> values = new ArrayList<Integer>();
-			values.add(purchasedCount);
+			values.add(orderedCount);
+			values.add(shippedCount);
+			values.add(receivedCount);
+			//values.add(purchasedCount);
 			values.add(inInvCount);
 			values.add(checkedOutCount);
 			values.add(onCompReelCount);
+			
+			//values.add(noOfReelsTotal);
+			//values.add(noOfReelsReceived);
 			values.add(noOfReelsInInv);
 			values.add(noOfReelsCheckedOut);
 
