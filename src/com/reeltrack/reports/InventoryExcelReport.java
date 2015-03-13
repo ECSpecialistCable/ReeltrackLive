@@ -92,7 +92,7 @@ public class InventoryExcelReport {
 			e.printStackTrace();
 		}
 
-		nextNum=3;
+		nextNum=5;
 		row = sheet.createRow((short) rowNum);
 		row.setHeightInPoints(15);
 		cell = row.createCell((short) nextNum);
@@ -103,12 +103,12 @@ public class InventoryExcelReport {
 	
 		rowNum++;
 		row = sheet.createRow((short) rowNum);
-		nextNum=4;
+		nextNum=5;
 		row.setHeightInPoints(15);
 		cell = row.createCell((short) nextNum);
 		cell.setCellValue("Inventory Report \n"+custJob.getName() + " (" + custJob.getCode() + ")");
 		cell.setCellStyle(styleBoldRight);
-		addr = new CellRangeAddress(rowNum, rowNum+1, nextNum, nextNum+1);
+		addr = new CellRangeAddress(rowNum, rowNum+1, nextNum, nextNum+2);
 		sheet.addMergedRegion(addr);
 
 		rowNum++;rowNum++;rowNum++;
@@ -124,6 +124,16 @@ public class InventoryExcelReport {
 		sheet.setColumnWidth(nextNum, 3000);
 		cell = row.createCell((short) nextNum++);
 		cell.setCellValue("Status");
+		cell.setCellStyle(styleHeader);
+
+		sheet.setColumnWidth(nextNum, 3000);
+		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("Ordered Quantity");
+		cell.setCellStyle(styleHeader);
+
+		sheet.setColumnWidth(nextNum, 3000);
+		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("Received Quantity");
 		cell.setCellStyle(styleHeader);
 
 		sheet.setColumnWidth(nextNum, 3000);
@@ -158,7 +168,7 @@ public class InventoryExcelReport {
 				nextNum=0;
 				cell = row.createCell((short) nextNum++);
 				cell.setCellValue("Customer P/N - " + current.getCustomerPN());
-				addr = new CellRangeAddress(rowNum-1, rowNum-1, nextNum-1, nextNum+4);
+				addr = new CellRangeAddress(rowNum-1, rowNum-1, nextNum-1, nextNum+6);
 				sheet.addMergedRegion(addr);
 				cell.setCellStyle(styleHeader);				
 			}
@@ -167,6 +177,8 @@ public class InventoryExcelReport {
 			nextNum=0;
 			row.createCell((short)nextNum++).setCellValue(current.getReelTag());
 			row.createCell((short)nextNum++).setCellValue(current.getStatus());
+			row.createCell((short)nextNum++).setCellValue(current.getOrderedQuantity());
+			row.createCell((short)nextNum++).setCellValue(current.getReceivedQuantity());
 			row.createCell((short)nextNum++).setCellValue(current.getWharehouseLocation());
 			row.createCell((short)nextNum++).setCellValue(current.getOnReelQuantity());
 			row.createCell((short)nextNum++).setCellValue(current.getSteelReelSerial());
