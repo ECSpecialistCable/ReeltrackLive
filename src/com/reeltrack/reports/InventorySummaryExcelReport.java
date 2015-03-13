@@ -93,23 +93,23 @@ public class InventorySummaryExcelReport {
 			e.printStackTrace();
 		}
 
-		nextNum=8;
+		nextNum=6;
 		row = sheet.createRow((short) rowNum);
 		row.setHeightInPoints(15);
 		cell = row.createCell((short) nextNum);
 		cell.setCellValue(generatedDtFmt.format(new Date()));
 		cell.setCellStyle(styleBoldRight);
-		CellRangeAddress addr = new CellRangeAddress(rowNum, rowNum, nextNum, nextNum+2);
+		CellRangeAddress addr = new CellRangeAddress(rowNum, rowNum, nextNum, nextNum+4);
 		sheet.addMergedRegion(addr);
 	
 		rowNum++;
 		row = sheet.createRow((short) rowNum);
-		nextNum=8;
+		nextNum=6;
 		row.setHeightInPoints(30);
 		cell = row.createCell((short) nextNum);
 		cell.setCellValue("Inventory Summary \n"+custJob.getName() + " (" + custJob.getCode() + ")");
 		cell.setCellStyle(styleBoldRight);
-		addr = new CellRangeAddress(rowNum, rowNum+1, nextNum, nextNum+2);
+		addr = new CellRangeAddress(rowNum, rowNum+1, nextNum, nextNum+4);
 		sheet.addMergedRegion(addr);
 
 		rowNum++; rowNum++;rowNum++;
