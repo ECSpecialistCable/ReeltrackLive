@@ -54,7 +54,7 @@ public class ReportMgr extends CompWebManager {
 			CompEntities customerReels = controller.pullCompEntities(puller, 0, 0);
 //			System.out.println("Reel "+reel.getReelTag() + " : " + currentPN + " : " + customerReels.howMany());
 
-			int orderedCount = 0, shippedCount = 0, receivedCount = 0;
+			int orderedCount = 0, shippedCount = 0, onOrderCount = 0, receivedCount = 0;
 			int purchasedCount = 0, inInvCount = 0, checkedOutCount = 0, onCompReelCount = 0;
 			int noOfReelsInInv = 0, noOfReelsCheckedOut = 0;
 			int noOfReelsTotal = 0, noOfReelsReceived = 0;
@@ -65,8 +65,11 @@ public class ReportMgr extends CompWebManager {
 				receivedCount+= current.getReceivedQuantity();
 				noOfReelsTotal++;
 				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOrderedQuantity());
-				if(current.getStatus().equals(Reel.STATUS_SHIPPED)) {
+				if(current.getStatus().equals(Reel.STATUS_ORDERED)) {
+					onOrderCount++;
+				} else if(current.getStatus().equals(Reel.STATUS_SHIPPED)) {
 					shippedCount+= current.getShippedQuantity();
+					onOrderCount++;
 				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOnReelQuantity());
 				} else if(current.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
 					inInvCount+= current.getOnReelQuantity();
@@ -92,6 +95,7 @@ public class ReportMgr extends CompWebManager {
 			ArrayList<Integer> values = new ArrayList<Integer>();
 			values.add(orderedCount);
 			values.add(shippedCount);
+			values.add(onOrderCount);
 			values.add(receivedCount);
 			//values.add(purchasedCount);
 			values.add(inInvCount);

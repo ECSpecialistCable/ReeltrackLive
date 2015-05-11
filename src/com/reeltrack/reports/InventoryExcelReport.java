@@ -92,7 +92,7 @@ public class InventoryExcelReport {
 			e.printStackTrace();
 		}
 
-		nextNum=5;
+		nextNum=6;
 		row = sheet.createRow((short) rowNum);
 		row.setHeightInPoints(15);
 		cell = row.createCell((short) nextNum);
@@ -103,7 +103,7 @@ public class InventoryExcelReport {
 	
 		rowNum++;
 		row = sheet.createRow((short) rowNum);
-		nextNum=5;
+		nextNum=6;
 		row.setHeightInPoints(15);
 		cell = row.createCell((short) nextNum);
 		cell.setCellValue("Inventory Report \n"+custJob.getName() + " (" + custJob.getCode() + ")");
@@ -119,6 +119,11 @@ public class InventoryExcelReport {
 		sheet.setColumnWidth(nextNum, 9000);
 		cell = row.createCell((short) nextNum++);
 		cell.setCellValue("Reel Tag");
+		cell.setCellStyle(styleHeader);
+
+		sheet.setColumnWidth(nextNum, 3000);
+		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("CRID");
 		cell.setCellStyle(styleHeader);
 
 		sheet.setColumnWidth(nextNum, 3000);
@@ -168,7 +173,7 @@ public class InventoryExcelReport {
 				nextNum=0;
 				cell = row.createCell((short) nextNum++);
 				cell.setCellValue("Customer P/N - " + current.getCustomerPN());
-				addr = new CellRangeAddress(rowNum-1, rowNum-1, nextNum-1, nextNum+6);
+				addr = new CellRangeAddress(rowNum-1, rowNum-1, nextNum-1, nextNum+7);
 				sheet.addMergedRegion(addr);
 				cell.setCellStyle(styleHeader);				
 			}
@@ -176,6 +181,7 @@ public class InventoryExcelReport {
 			row = sheet.createRow((short) rowNum++);
 			nextNum=0;
 			row.createCell((short)nextNum++).setCellValue(current.getReelTag());
+			row.createCell((short)nextNum++).setCellValue(current.getCrId());
 			row.createCell((short)nextNum++).setCellValue(current.getStatus());
 			row.createCell((short)nextNum++).setCellValue(current.getOrderedQuantity());
 			row.createCell((short)nextNum++).setCellValue(current.getReceivedQuantity());

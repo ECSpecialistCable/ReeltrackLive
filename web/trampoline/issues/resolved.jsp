@@ -34,15 +34,30 @@ String tempUrl;
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell width="75" first="true" name="created" />
+                <listing:header_cell width="110" name="Reel Tag" />
+                <listing:header_cell width="30" name="CRID" />
+                <listing:header_cell width="80" name="Cust P/N" />
                 <listing:header_cell width="100" name="User Name" />
                 <listing:header_cell name="Description" />
-                <listing:header_cell width="75" name="" />
+                <listing:header_cell width="50" name="" />
             <listing:header_end />
             <% for(int i=0; i<contents.howMany(); i++) { %>
-            <% content = (ReelIssue)contents.get(i); %>
+            <%
+            content = (ReelIssue)contents.get(i);
+            Reel reel = (Reel)content.getCompEntity(Reel.PARAM);
+            %>
             <listing:row_begin row="<%= new Integer(i).toString() %>" />
                 <listing:cell_begin />
                     <%= content.getCreatedDateText() %>
+                <listing:cell_end />
+                <listing:cell_begin />
+                    <%= reel.getReelTag() %>
+                <listing:cell_end />
+                <listing:cell_begin />
+                    <%= reel.getCrId() %>
+                <listing:cell_end />
+                <listing:cell_begin />
+                    <%= reel.getCustomerPN() %>
                 <listing:cell_end />
                 <listing:cell_begin />
                     <%= content.getCreatedBy() %>

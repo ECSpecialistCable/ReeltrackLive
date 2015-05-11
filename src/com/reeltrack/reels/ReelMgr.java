@@ -1285,7 +1285,9 @@ public class ReelMgr extends CompWebManager {
 		puller.addFKLink(reel, issue, ReelIssue.REEL_ID_COLUMN);
 
 		puller.setSortBy(issue.getTableName(), ReelIssue.CREATED_COLUMN, false);
-		return controller.pullCompEntities(puller, 0, 0);
+		CompEntities toReturns = controller.pullCompEntities(puller, 0, 0);
+		this.fillReelIssuesWithReels(toReturns);
+		return toReturns;
 	}
 
 	public CompEntities getResolvedReelIssues(String jobCode) throws Exception {
@@ -1301,7 +1303,18 @@ public class ReelMgr extends CompWebManager {
 		puller.addFKLink(reel, issue, ReelIssue.REEL_ID_COLUMN);
 
 		puller.setSortBy(issue.getTableName(), ReelIssue.CREATED_COLUMN, false);
-		return controller.pullCompEntities(puller, 0, 0);
+		CompEntities toReturns =  controller.pullCompEntities(puller, 0, 0);
+		this.fillReelIssuesWithReels(toReturns);
+		return toReturns;
+	}
+
+	public void fillReelIssuesWithReels(CompEntities issues) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new Reel());
+		puller.addSearchByIds(issues);
+		puller.addLink(new ReelIssue(), ReelIssue.REEL_ID_COLUMN, new Reel(), Reel.ID_COLUMN);
+		puller.setLinkTo(new ReelIssue());
+		CompEntities reels = controller.pullCompEntities(puller,0,0);
+		controller.fillSingleWithPulled(issues, reels, Reel.PARAM);
 	}
 
 	public CompEntities getReelIssues(Reel content, boolean isResolved) throws Exception {
