@@ -7,7 +7,7 @@
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 
 <% if (user!=null) { %> 
-	<admin:ajax_load url="bill_of_materials/search.jsp" label="Set Quantity Tracking" />
+	<admin:ajax_load url="bill_of_materials/search.jsp" label="BOM / Qty Track / QRC Verify" />
 	<% if(!user.isUserType(RTUser.USER_TYPE_STANDARD) && !user.isUserType(RTUser.USER_TYPE_CPE)) { %>	
 		<admin:ajax_load url="import_circuits/search.jsp" label="Import Circuits" />
     <% } %>
