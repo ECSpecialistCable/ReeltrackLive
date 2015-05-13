@@ -372,7 +372,6 @@ public class ReelMgr extends CompWebManager {
 		RTUser user = (RTUser)umgr.getUser();
 		content.setStatus(Reel.STATUS_STAGED);
 		content.setWharehouseLocation(WhLocation.LOCATION_STAGED);
-		this.addReelLog(Reel.STATUS_STAGED, content, "Reel was staged by " + user.getName());
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateOnReelQuantity(content);
@@ -385,6 +384,7 @@ public class ReelMgr extends CompWebManager {
 			pickMgr.init(this.getPageContext(), this.getDbResources());
 			PickList pickList = new PickList();
 			pickList.setId(reel2.getPickListId());
+			pickList = pickMgr.getPickList(pickList);
 			CompEntities reels = pickMgr.getReelsOnPickList(pickList);
 			int staged = 0;
 			int checkedout = 0;
@@ -402,6 +402,10 @@ public class ReelMgr extends CompWebManager {
 	        if(!pickList.getStatus().equals("")) {
 	        	controller.update(pickList);
 	        }
+	        //"Reel was staged by " + user.getName()
+	        this.addReelLog(Reel.STATUS_STAGED, content, "Reel was staged by " + user.getName() + " for pick up by " + pickList.getDriver() + " for check out to " + pickList.getForeman() + ".");
+    	} else {
+    		this.addReelLog(Reel.STATUS_STAGED, content, "Reel was staged by " + user.getName());
     	}
 	}
 
@@ -423,7 +427,6 @@ public class ReelMgr extends CompWebManager {
 		RTUser user = (RTUser)umgr.getUser();
 		content.setStatus(Reel.STATUS_CHECKED_OUT);
 		content.setWharehouseLocation(WhLocation.LOCATION_NONE);
-		this.addReelLog(Reel.STATUS_CHECKED_OUT, content, "Reel was checked out by " + user.getName());
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateOnReelQuantity(content);
@@ -436,6 +439,7 @@ public class ReelMgr extends CompWebManager {
 		pickMgr.init(this.getPageContext(), this.getDbResources());
 		PickList pickList = new PickList();
 		pickList.setId(reel2.getPickListId());
+		pickList = pickMgr.getPickList(pickList);
 		CompEntities reels = pickMgr.getReelsOnPickList(pickList);
 		int staged = 0;
 		int checkedout = 0;
@@ -449,6 +453,8 @@ public class ReelMgr extends CompWebManager {
         if(!pickList.getStatus().equals("")) {
         	controller.update(pickList);
         }
+
+        this.addReelLog(Reel.STATUS_CHECKED_OUT, content, "Reel was checked out by " + user.getName() + " to " + pickList.getDriver() + " for installation by " + pickList.getForeman() + ".");
 	}
 
 

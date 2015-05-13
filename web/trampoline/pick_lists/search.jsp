@@ -160,6 +160,7 @@ String tempURL = "";
             <form:label name="" label="" />
             <form:buttonset_begin align="left" padding="0"/>
                 <form:submit_inline button="submit" waiting="true" name="search" action="test" />
+                <form:clearform_inline name="search"/>
             <form:buttonset_end />
         <form:row_end />
     <form:end />
