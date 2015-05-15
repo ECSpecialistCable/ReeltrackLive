@@ -61,15 +61,16 @@ public class ReportMgr extends CompWebManager {
 			for(int j=0; j<customerReels.howMany(); j++) {
 				Reel current = (Reel)customerReels.get(j);
 
-				orderedCount += current.getOrderedQuantity();
+				//orderedCount += current.getOrderedQuantity();
 				receivedCount+= current.getReceivedQuantity();
 				noOfReelsTotal++;
 				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOrderedQuantity());
 				if(current.getStatus().equals(Reel.STATUS_ORDERED)) {
-					onOrderCount++;
+					orderedCount += current.getOrderedQuantity();
+					onOrderCount += current.getOrderedQuantity();
 				} else if(current.getStatus().equals(Reel.STATUS_SHIPPED)) {
-					shippedCount+= current.getShippedQuantity();
-					onOrderCount++;
+					shippedCount += current.getShippedQuantity();
+					onOrderCount += current.getShippedQuantity();
 				//	System.out.println("---current reel "+current.getReelTag() + " " + current.getStatus() + " " + current.getOnReelQuantity());
 				} else if(current.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
 					inInvCount+= current.getOnReelQuantity();
