@@ -334,6 +334,9 @@ if(action.equals("update")) {
     if(request.getParameter(Reel.STATUS_COLUMN)!=null) {
         content.setStatus(request.getParameter(Reel.STATUS_COLUMN));
     }
+    if(request.getParameter(Reel.CR_ID_COLUMN)!=null) {
+        content.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
+    }
     content.setWharehouseLocation(request.getParameter(Reel.WHAREHOUSE_LOCATION_COLUMN));
     if(request.getParameter(Reel.HAS_REEL_MARKERS_COLUMN)!=null) {
         content.setHasReelMarkers(request.getParameter(Reel.HAS_REEL_MARKERS_COLUMN));

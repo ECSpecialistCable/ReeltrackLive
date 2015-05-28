@@ -107,6 +107,9 @@ if(!canSubmit) {
         <% } else { %>
         	<form:info label="Status:" text="<%= content.getStatus() %>" />
         <% } %>
+        <% if(canEdit) { %>
+        	<form:textfield label="CRID:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= Integer.toString(content.getCrId()) %>" />
+     	<% } %>
      		<form:row_begin />
 	            <form:label name="" label="Warehouse<br />Location:" />
 	            <form:content_begin />
