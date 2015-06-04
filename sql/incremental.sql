@@ -338,3 +338,9 @@ alter table cable_tech_data add qrc_tracking char(1) default 'n';
 /* feb 1 */
 alter table glossary add is_video char(1) default 'n';
 alter table glossary add video_url varchar(255);
+
+/* june 6th */
+alter table reels add vendor_code varchar(25);
+alter table reels add vendor_abbrev_name varchar(25);
+
+

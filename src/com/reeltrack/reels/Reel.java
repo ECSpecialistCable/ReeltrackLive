@@ -58,6 +58,8 @@ public class Reel extends ContentPositionable implements Positionable {
 	public static final String IS_STEEL_REEL_COLUMN = "is_steel_reel";
 	public static final String BOTTOM_FOOT_NOT_VISIBLE_COLUMN = "bottom_foot_not_visible";
 	public static final String UNIQUE_ID_COLUMN = "UniqueID";
+	public static final String VENDOR_CODE_COLUMN = "vendor_code";
+	public static final String VENDOR_ABBREV_NAME_COLUMN = "vendor_abbrev_name";
 
 	public static final String PN_VOLT_COLUMN = "pn_volt";
 	public static final String PN_GAUGE_COLUMN = "pn_gauge";
@@ -487,6 +489,22 @@ public class Reel extends ContentPositionable implements Positionable {
 	
 	public void setManufacturer(String name) {
 		this.getData().setString(MANUFACTURER_COLUMN, name);
+	}
+
+	public String getVendorCode() {
+		return this.getData().getString(VENDOR_CODE_COLUMN, "");
+	}
+	
+	public void setVendorCode(String name) {
+		this.getData().setString(VENDOR_CODE_COLUMN, name);
+	}
+
+	public String setVendorAbbrevName() {
+		return this.getData().getString(VENDOR_ABBREV_NAME_COLUMN, "");
+	}
+	
+	public void setVendorAbbrevName(String name) {
+		this.getData().setString(VENDOR_ABBREV_NAME_COLUMN, name);
 	}
 
 	public String getSteelReelSerial() {

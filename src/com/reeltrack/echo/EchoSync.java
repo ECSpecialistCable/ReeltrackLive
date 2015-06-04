@@ -378,6 +378,8 @@ public class EchoSync extends CompManager {
 			System.out.println("--Manufacturer");
 			Entity entity = datalist.nextEntity();
 			reel.setManufacturer(entity.getString("VendorName",""));
+			reel.setVendorCode(entity.getString("VendorCode",""));
+			reel.setVendorAbbrevName(entity.getString("AbbrevName",""));	
 			return true;
 		} else {
 			System.out.println("--NO Manufacturer");
