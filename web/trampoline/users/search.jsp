@@ -37,8 +37,9 @@ String tempUrl;
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Name" />
+                <listing:header_cell width="50" name="Code" />
                 <listing:header_cell width="100" name="Type" />
-                <listing:header_cell width="100" name="Status" />
+                <listing:header_cell width="75" name="Status" />
                 <listing:header_cell width="110" name="" />
             <listing:header_end />
             <% for(int i=0; i<contents.howMany(); i++) { %>
@@ -46,6 +47,9 @@ String tempUrl;
             <listing:row_begin row="<%= new Integer(i).toString() %>" />
                 <listing:cell_begin />
                     <%= content.getName() %>
+                <listing:cell_end />
+                <listing:cell_begin />
+                    <%= content.getVendorCode() %>
                 <listing:cell_end />
                 <listing:cell_begin />
                     <%= content.getUserType() %>
