@@ -20,6 +20,8 @@
 RTUser content = new RTUser();
 content.setUserType(RTUser.USER_TYPE_ECS);
 CompEntities contents = securityMgr.getUsers(content, false);
+content.setUserType(RTUser.USER_TYPE_VENDOR);
+contents.add(securityMgr.getUsers(content, false));
 contents.sortByMethodName("getLname",true);
 String tempUrl;
 %>	

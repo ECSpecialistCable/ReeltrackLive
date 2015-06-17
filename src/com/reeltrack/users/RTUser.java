@@ -6,9 +6,11 @@ public class RTUser extends User {
 
 	public static final String CUSTOMER_ID_COLUMN = "customer_id";
     public static final String CAN_ADD_USER_COLUMN = "can_add_user";
+    public static final String VENDOR_CODE_COLUMN = "vendor_code";
 
 	// USER TYPE static strings
 	public static final String USER_TYPE_ECS = "ecs";
+    public static final String USER_TYPE_VENDOR = "vendor";
     public static final String USER_TYPE_MANAGEMENT = "management";
     public static final String USER_TYPE_STANDARD = "standard";
     public static final String USER_TYPE_INVENTORY = "CableTrac";
@@ -29,6 +31,14 @@ public class RTUser extends User {
 
     public String getTypeName() {
         return "ECS User";
+    }
+
+    public String getVendorCode() {
+        return this.getData().getString(VENDOR_CODE_COLUMN, "");
+    }
+
+    public void setVendorCode(String value) {
+        this.getData().setString(VENDOR_CODE_COLUMN, value);
     }
 
     public String getCanAddUser() {

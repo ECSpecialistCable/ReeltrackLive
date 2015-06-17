@@ -48,9 +48,11 @@ content = (RTUser)securityMgr.getUser(content, true, false);
 				<form:content_begin />
 					<form:select_begin name="<%= RTUser.USER_TYPE_COLUMN %>" label="usertype" />
 						<form:option match="<%= content.getUserType() %>" value="<%= RTUser.USER_TYPE_ECS %>" name="ECS"/>
+						<form:option match="<%= content.getUserType() %>" value="<%= RTUser.USER_TYPE_VENDOR %>" name="Vendor"/>
 					<form:select_end />
 				<form:content_end />
 			<form:row_end />
+			<form:textfield name="<%= RTUser.VENDOR_CODE_COLUMN %>" label="Vendor Code:" value="<%= content.getVendorCode() %>" />
 			<form:textfield name="<%= RTUser.FIRSTNAME_COLUMN %>" label="first name:" value="<%= content.getFname() %>" />
 			<form:textfield name="<%= RTUser.LASTNAME_COLUMN %>" label="last name:" value="<%= content.getLname() %>"/>
 			<form:textfield name="<%= RTUser.EMAIL_COLUMN %>" label="email:" value="<%= content.getEmail() %>"/>

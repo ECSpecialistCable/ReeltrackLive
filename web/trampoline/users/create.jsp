@@ -31,6 +31,7 @@ dbResources.close();
 				<form:content_begin />
 					<form:select_begin name="<%= RTUser.USER_TYPE_COLUMN %>" label="usertype" />
 						<form:option value="<%= RTUser.USER_TYPE_ECS %>" name="ECS"/>
+						<form:option value="<%= RTUser.USER_TYPE_VENDOR %>" name="Vendor"/>
 					<form:select_end />
 				<form:content_end />
 			<form:row_end />

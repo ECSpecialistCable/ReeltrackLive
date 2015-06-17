@@ -48,6 +48,7 @@ if(action.equals("update")) {
     if(request.getParameter(RTUser.PARAM) != null) {
         contid = Integer.parseInt(request.getParameter(RTUser.PARAM));
         if(contid != 0) {
+            content.setVendorCode(request.getParameter(RTUser.VENDOR_CODE_COLUMN));
             content.setUserType(request.getParameter(RTUser.USER_TYPE_COLUMN));
             content.setFname(request.getParameter(RTUser.FIRSTNAME_COLUMN));
             content.setLname(request.getParameter(RTUser.LASTNAME_COLUMN));

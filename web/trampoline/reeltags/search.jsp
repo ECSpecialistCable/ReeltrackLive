@@ -74,6 +74,17 @@ if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
     }
 }
 
+//if vendor
+if(request.getParameter(Reel.ORDNO_COLUMN) != null) {  
+    content.setOrdNo(request.getParameter(Reel.ORDNO_COLUMN));
+    content.setSearchOp(Reel.ORDNO_COLUMN, Reel.PARTIAL); 
+}
+
+if(request.getParameter(RTUser.VENDOR_CODE_COLUMN) != null) {  
+    content.setVendorCode(request.getParameter(RTUser.VENDOR_CODE_COLUMN));
+}
+
+
 session.setAttribute("reeltags_search",content);
 
 String column = Reel.CR_ID_COLUMN;
@@ -92,17 +103,22 @@ String tempURL = "";
 <admin:subtitle text="Search" />
     <admin:box_begin />
     <form:begin_selfsubmit name="search" action="reeltags/search.jsp" />
-		<% if(content.getCrId()!=0) { %>
-			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= new Integer(content.getCrId()).toString() %>" />
-		<% } else { %>
-			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="" />
-		<% } %>
-        <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
-        <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
-        <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
-        <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
-        <% tempURL = user.getCustomerName() + " P/N:"; %>
-        <form:textfield label="<%= tempURL %>" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= content.getCustomerPN() %>" />
+        <% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
+            <form:textfield label="ECS PO#:" name="<%= Reel.ORDNO_COLUMN %>" value="<%= content.getOrdNo() %>" />
+            <form:hidden name="<%= RTUser.VENDOR_CODE_COLUMN %>" value="<%= user.getVendorCode() %>" />
+        <% } else { %>
+    		<% if(content.getCrId()!=0) { %>
+    			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= new Integer(content.getCrId()).toString() %>" />
+    		<% } else { %>
+    			<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="" />
+    		<% } %>
+            <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
+            <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
+            <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
+            <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
+            <% tempURL = user.getCustomerName() + " P/N:"; %>
+            <form:textfield label="<%= tempURL %>" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= content.getCustomerPN() %>" />
+        <% } %>
         <form:row_begin />
             <form:label name="" label="" />
             <form:buttonset_begin align="left" padding="0"/>

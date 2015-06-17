@@ -343,4 +343,4 @@ alter table glossary add video_url varchar(255);
 alter table reels add vendor_code varchar(25);
 alter table reels add vendor_abbrev_name varchar(25);
 
-
+alter table users add column vendor_code varchar(15);
