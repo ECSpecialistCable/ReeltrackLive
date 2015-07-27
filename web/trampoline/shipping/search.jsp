@@ -116,12 +116,41 @@ if(session.getAttribute("shippingDate")!=null) {
     shippingDate = (String)session.getAttribute("shippingDate");
 }
 
+//if vendor
+if(request.getParameter(Reel.ORDNO_COLUMN) != null) {  
+    content.setOrdNo(request.getParameter(Reel.ORDNO_COLUMN));
+    content.setSearchOp(Reel.ORDNO_COLUMN, Reel.PARTIAL); 
+}
+
+if(request.getParameter(Reel.PN_VOLT_COLUMN) != null) {  
+    content.setPnVolt(request.getParameter(Reel.PN_VOLT_COLUMN));
+    content.setSearchOp(Reel.PN_VOLT_COLUMN, Reel.EQ); 
+}
+
+if(request.getParameter(Reel.PN_GAUGE_COLUMN) != null) {  
+    content.setPnGauge(request.getParameter(Reel.PN_GAUGE_COLUMN));
+    content.setSearchOp(Reel.PN_GAUGE_COLUMN, Reel.EQ); 
+}
+
+if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {  
+    content.setPnConductor(request.getParameter(Reel.PN_CONDUCTOR_COLUMN));
+    content.setSearchOp(Reel.PN_CONDUCTOR_COLUMN, Reel.EQ); 
+}
+
+if(user.isUserType(RTUser.USER_TYPE_VENDOR)) {
+    //content.setVendorCode(user.getVendorCode());
+    content.setVendorCode("");
+}
+
 String column = Reel.REEL_TAG_COLUMN;
 boolean ascending = true;
 int count = reelMgr.searchReelsCount(content, column, ascending);
 CompEntities contents = reelMgr.searchReels(content, column, ascending, howMany, skip);
 String[] manufacturers = reelMgr.getManufacturers();
 String[] carrierList = reelMgr.getCarriers();
+String[] volts = reelMgr.getPnVolts();
+String[] gauges = reelMgr.getPnGauges();
+String[] conductors = reelMgr.getPnConductors();
 
 boolean dosearch = true;
 String tempURL = "";
@@ -139,6 +168,46 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <admin:subtitle text="Filter Reels" />
 <admin:box_begin />
 <form:begin_selfsubmit name="search" action="shipping/search.jsp" />
+<% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
+            <form:textfield label="ECS PO#:" name="<%= Reel.ORDNO_COLUMN %>" value="<%= content.getOrdNo() %>" />
+            <form:row_begin />
+            <form:label name="" label="Voltage:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Reel.PN_VOLT_COLUMN %>" />
+                <form:option name="Any" value="" match="<%= content.getPnVolt() %>" />
+                <% for(int x=0; x<volts.length; x++) { %>
+                    <% tempURL = volts[x] + " (" + Reel.convertPnVolt(volts[x]) + ")"; %>
+                    <form:option name="<%= tempURL %>" value="<%= volts[x] %>" match="<%= content.getPnVolt() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+            <form:row_end />
+            <form:row_begin />
+            <form:label name="" label="Gauge:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Reel.PN_GAUGE_COLUMN %>" />
+                <form:option name="Any" value="" match="<%= content.getPnGauge() %>" />
+                <% for(int x=0; x<gauges.length; x++) { %>
+                    <% tempURL = gauges[x] + " (" + Reel.convertPnGauge(gauges[x]) + ")"; %>
+                    <form:option name="<%= tempURL %>" value="<%= gauges[x] %>" match="<%= content.getPnGauge() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+            <form:row_end />
+            <form:row_begin />
+            <form:label name="" label="Conductor Count:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Reel.PN_CONDUCTOR_COLUMN %>" />
+                <form:option name="Any" value="" match="<%= content.getPnConductor() %>" />
+                <% for(int x=0; x<conductors.length; x++) { %>
+                    <form:option name="<%= conductors[x] %>" value="<%= conductors[x] %>" match="<%= content.getPnConductor() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+            <form:row_end />
+            <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
+            <form:hidden name="<%= RTUser.VENDOR_CODE_COLUMN %>" value="<%= user.getVendorCode() %>" />
+        <% } else { %>
 	<% if(content.getCrId()!=0) { %>
 		<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= new Integer(content.getCrId()).toString() %>" />
 	<% } else { %>
@@ -162,6 +231,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
         <form:select_end />
         <form:content_end />
     <form:row_end />
+    <% } %>
     <form:row_begin />
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
@@ -249,7 +319,14 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
         <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
             <form:begin submit="true" name="<%= toggleForm %>" action="shipping/process.jsp" />
                 <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
+                <form:hidden name="<%= Reel.ORDERED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
                 <form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
+                <form:row_begin />
+                <form:label name="" label="" />
+                <form:content_begin />      
+                    <form:checkbox label="Set Shipping Quantity to Ordered Quantity" name="ordered_to_shipping" value="y" />       
+                <form:content_end />                
+                <form:row_end />
                 <% if(canEdit) { %>
                     <form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
                     <% if(shippingDate.equals("")) shippingDate = content.getShippingDateString(); %>

@@ -32,7 +32,11 @@ if(request.getParameter(Reel.PARAM) != null) {
 if(action.equals("mark_shipped")) {
     Reel content = new Reel();
     content.setId(contid);
-    content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
+    if(request.getParameter("ordered_to_shipping")!=null) {
+        content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.ORDERED_QUANTITY_COLUMN)));
+    } else {
+        content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
+    }
     content.setCarrier(request.getParameter(Reel.CARRIER_COLUMN));
     if(!request.getParameter("other_carrier").equals("")) {
         content.setCarrier(request.getParameter("other_carrier"));
