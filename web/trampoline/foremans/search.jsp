@@ -77,7 +77,12 @@ String tempUrl =""; //var for url expression
             <% content = (Foreman)contents.get(i); %>
             <listing:row_begin row="<%= new Integer(i).toString() %>" />
                 <listing:cell_begin />
-                    <%= content.getName() %>
+                    <form:begin_inline action="foremans/process.jsp" name="update_foreman" />
+                        <form:textfield_inline label="" value="<%= content.getName() %>" name="<%= Foreman.NAME_COLUMN %>" />
+                        <% if(true) { %>
+                            <form:submit_inline  button="save" waiting="true" name="save" action="update_foreman" />
+                        <% } %>
+                    <form:end_inline />
                 <listing:cell_end />
                 <listing:cell_begin align="right"/>
                 <% tempUrl = "foremans/process.jsp?submit_action=delete&" + Foreman.PARAM + "=" + content.getId(); %>
