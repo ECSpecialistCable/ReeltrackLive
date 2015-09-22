@@ -46,10 +46,10 @@
 <admin:tab url="reels/log.jsp" text="Log" params="<%= paramstring %>"/>
 <admin:tab url="reels/reel_data.jsp" text="Reel Data" params="<%= paramstring %>"/>
 <% if(reel!=null && reel.getId()!=0) { %>
-	<admin:tab url="reels/status.jsp" text=">> Next CRID" params="<%= paramstring2 %>"/>
+	<admin:tab url="reels/status.jsp" text="> CRID" params="<%= paramstring2 %>"/>
 <% } %>
 <% if(reel2!=null && reel2.getId()!=0) { %>
-	<admin:tab url="reels/status.jsp" text=">> Last CRID" params="<%= paramstring3 %>"/>
+	<admin:tab url="reels/status.jsp" text=">> CRID" params="<%= paramstring3 %>"/>
 <% } %>
 
 
