@@ -78,7 +78,7 @@ String tempUrl =""; //var for url expression
             <listing:row_begin row="<%= new Integer(i).toString() %>" />
                 <listing:cell_begin />
                     <form:begin_inline action="foremans/process.jsp" name="update_foreman" />
-                        <form:textfield_inline label="" value="<%= content.getName() %>" name="<%= Foreman.NAME_COLUMN %>" />
+                        <form:textfield_inline pixelwidth="150" label="" value="<%= content.getName() %>" name="<%= Foreman.NAME_COLUMN %>" />
                         <% if(true) { %>
                             <form:submit_inline  button="save" waiting="true" name="save" action="update_foreman" />
                         <% } %>
