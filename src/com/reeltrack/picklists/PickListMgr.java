@@ -127,7 +127,7 @@ public class PickListMgr extends CompWebManager {
 		puller.addSearch(picklist2);
 		*/
 
-		if(!reel.getReelTag().equals("") || !reel.getCableDescription().equals("") || !reel.getCustomerPN().equals("")) {
+		if(reel.getCrId()!=0 || !reel.getReelTag().equals("") || !reel.getCableDescription().equals("") || !reel.getCustomerPN().equals("")) {
 			puller.addFKLink(content, reel, Reel.PICK_LIST_ID_COLUMN);
 			puller.addSearch(reel);	
 		} else if(circuit.getId()!=0) {
@@ -163,7 +163,7 @@ public class PickListMgr extends CompWebManager {
 		puller.addSearch(picklist2);
 		*/
 		
-		if(!reel.getReelTag().equals("") || !reel.getCableDescription().equals("") || !reel.getCustomerPN().equals("")) {
+		if(reel.getCrId()!=0 || !reel.getReelTag().equals("") || !reel.getCableDescription().equals("") || !reel.getCustomerPN().equals("")) {
 			puller.addFKLink(content, reel, Reel.PICK_LIST_ID_COLUMN);
 			puller.addSearch(reel);	
 		} else if(circuit.getId()!=0) {
