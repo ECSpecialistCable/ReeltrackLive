@@ -18,6 +18,10 @@
 <% foremanMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <% 
+boolean canEdit = false;
+if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT)) {
+    canEdit = true;
+}
 Foreman content = new Foreman();
 content.setCustomerId(user.getCustomerId());
 CompEntities contents = foremanMgr.searchForeman(content, Foreman.NAME_COLUMN, true);
@@ -77,11 +81,15 @@ String tempUrl =""; //var for url expression
             <% content = (Foreman)contents.get(i); %>
             <listing:row_begin row="<%= new Integer(i).toString() %>" />
                 <listing:cell_begin />
+                    <% if(canEdit) { %>
                     <form:begin_inline action="foremans/process.jsp" name="update_foreman" />
                         <form:textfield_inline pixelwidth="150" label="" value="<%= content.getName() %>" name="<%= Foreman.NAME_COLUMN %>" />
                         <form:hidden name="<%= Foreman.PARAM  %>" value="<%= new Integer(content.getId()).toString() %>" />
                         <form:submit_inline  button="save" waiting="true" name="save" action="update" />
                     <form:end_inline />
+                    <% } else { %>
+                        <%= content.getName() %>
+                    <% } %>
                 <listing:cell_end />
                 <listing:cell_begin align="right"/>
                 <% tempUrl = "foremans/process.jsp?submit_action=delete&" + Foreman.PARAM + "=" + content.getId(); %>
