@@ -244,5 +244,5 @@ String tempURL = "";
     <% } %>
 <% } %>
 
-<admin:set_tabset url="pick_lists/_tabset_default.jsp" thispage="search.jsp" />
+<admin:set_tabset url="pick_lists/_tabset_default.jsp" thispage="archive.jsp" />
 <html:end />    
