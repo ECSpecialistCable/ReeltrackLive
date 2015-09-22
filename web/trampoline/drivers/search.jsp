@@ -18,6 +18,11 @@
 <% driverMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <% 
+boolean canEdit = false;
+if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT)) {
+    canEdit = true;
+}
+
 Driver content = new Driver();
 content.setCustomerId(user.getCustomerId());
 CompEntities contents = driverMgr.searchDriver(content, Driver.NAME_COLUMN, true);
@@ -77,7 +82,15 @@ String tempUrl =""; //var for url expression
             <% content = (Driver)contents.get(i); %>
             <listing:row_begin row="<%= new Integer(i).toString() %>" />
                 <listing:cell_begin />
-                    <%= content.getName() %>
+                    <% if(canEdit) { %>
+                    <form:begin_inline action="drivers/process.jsp" name="update_driver" />
+                        <form:textfield_inline pixelwidth="150" label="" value="<%= content.getName() %>" name="<%= Driver.NAME_COLUMN %>" />
+                        <form:hidden name="<%= Driver.PARAM  %>" value="<%= new Integer(content.getId()).toString() %>" />
+                        <form:submit_inline  button="save" waiting="true" name="save" action="update" />
+                    <form:end_inline />
+                    <% } else { %>
+                        <%= content.getName() %>
+                    <% } %>
                 <listing:cell_end />
                 <listing:cell_begin align="right"/>
                 <% tempUrl = "drivers/process.jsp?submit_action=delete&" + Driver.PARAM + "=" + content.getId(); %>

@@ -63,6 +63,14 @@ if(action.equals("create")) {
     redirect = request.getContextPath() + "/trampoline/" + "drivers/search.jsp";
 }
 
+if(action.equals("update")) {
+    Driver content = new Driver();
+    content.setId(contid);
+    content.setName(request.getParameter(Driver.NAME_COLUMN));
+    driverMgr.updateDriver(content);
+    redirect = request.getContextPath() + "/trampoline/" + "drivers/search.jsp";
+}
+
 if(action.equals("delete")) {
     Driver content = new Driver();
     content.setId(contid);
