@@ -9,5 +9,5 @@
 
 <admin:tab url="pick_lists/search.jsp" text="Pick Lists" />
 <admin:tab url="pick_lists/create.jsp" text="Add Pick List" />
-
+<admin:tab url="pick_lists/archive.jsp" text="Pick Lists Archive" />
 <admin:set_moduleactions url="manage_reels/_moduleactions.jsp" />

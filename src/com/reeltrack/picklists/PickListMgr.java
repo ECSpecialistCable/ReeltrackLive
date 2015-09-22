@@ -120,6 +120,49 @@ public class PickListMgr extends CompWebManager {
 		picklist.setSearchOp(PickList.STATUS_COLUMN, PickList.NOT_EQUAL);
 		puller.addSearch(picklist);
 
+		/*
+		PickList picklist2 = new PickList();
+		picklist2.setStatus(PickList.STATUS_ARCHIVED);
+		picklist2.setSearchOp(PickList.STATUS_COLUMN, PickList.NOT_EQUAL);
+		puller.addSearch(picklist2);
+		*/
+
+		if(!reel.getReelTag().equals("") || !reel.getCableDescription().equals("") || !reel.getCustomerPN().equals("")) {
+			puller.addFKLink(content, reel, Reel.PICK_LIST_ID_COLUMN);
+			puller.addSearch(reel);	
+		} else if(circuit.getId()!=0) {
+			puller.addFKLink(content, reel, Reel.PICK_LIST_ID_COLUMN);
+			puller.addFKLink(reel, circuit, ReelCircuit.REEL_ID_COLUMN);
+			puller.addSearch(circuit);	
+		}
+
+		puller.setDistinct(true);
+		puller.setSortBy(content.getTableName(), PickList.NAME_COLUMN, true);
+		CompEntities picks = controller.pullCompEntities(puller, 0, 0);
+		this.fillPickListsWithReels(picks);
+		return picks;
+	}
+
+	public CompEntities getPickListsArchive(PickList content, Reel reel, ReelCircuit circuit) throws Exception {
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		content.setJobCode(user.getJobCode());
+
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+
+		PickList picklist = new PickList();
+		picklist.setStatus(PickList.STATUS_PICKED_UP);
+		puller.addSearch(picklist);
+
+		/*
+		PickList picklist2 = new PickList();
+		picklist2.setStatus(PickList.STATUS_ARCHIVED);
+		picklist2.setSearchOp(PickList.STATUS_COLUMN, PickList.NOT_EQUAL);
+		puller.addSearch(picklist2);
+		*/
+		
 		if(!reel.getReelTag().equals("") || !reel.getCableDescription().equals("") || !reel.getCustomerPN().equals("")) {
 			puller.addFKLink(content, reel, Reel.PICK_LIST_ID_COLUMN);
 			puller.addSearch(reel);	

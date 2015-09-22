@@ -18,6 +18,7 @@ public class PickList extends CompCMEntity {
 	public static final String STATUS_STAGED = "staged";
 	public static final String STATUS_PARTIAL_PICKED_UP = "partial picked up";
 	public static final String STATUS_PICKED_UP = "picked up";
+	public static final String STATUS_ARCHIVED = "archived";
 
 	@Override
 	public String getTableName() {
