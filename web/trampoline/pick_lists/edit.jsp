@@ -18,9 +18,11 @@
 <jsp:useBean id="foremanMgr" class="com.reeltrack.foremans.ForemanMgr" scope="request"/>
 <jsp:useBean id="picklistMgr" class="com.reeltrack.picklists.PickListMgr" />
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr" />
+<jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 <% userLoginMgr.init(pageContext); %>
 <% foremanMgr.init(pageContext,dbResources); %>
 <% picklistMgr.init(pageContext,dbResources); %>
+<% reelMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
 // Get the id
@@ -65,6 +67,22 @@ if(session.getAttribute("pick_lists_edit_circuit")!=null) {
     circuit = (ReelCircuit)session.getAttribute("pick_lists_edit_circuit");
 }
 
+
+if(request.getParameter(Reel.PN_VOLT_COLUMN) != null) {  
+    reel.setPnVolt(request.getParameter(Reel.PN_VOLT_COLUMN));
+    reel.setSearchOp(Reel.PN_VOLT_COLUMN, Reel.EQ); 
+}
+
+if(request.getParameter(Reel.PN_GAUGE_COLUMN) != null) {  
+    reel.setPnGauge(request.getParameter(Reel.PN_GAUGE_COLUMN));
+    reel.setSearchOp(Reel.PN_GAUGE_COLUMN, Reel.EQ); 
+}
+
+if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {  
+    reel.setPnConductor(request.getParameter(Reel.PN_CONDUCTOR_COLUMN));
+    reel.setSearchOp(Reel.PN_CONDUCTOR_COLUMN, Reel.EQ); 
+}
+
 if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
     reel.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
     reel.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL); 
@@ -96,6 +114,10 @@ CompEntities reels = picklistMgr.searchReelsForPickList(reel, circuit);
 
 CompEntities pickReels = picklistMgr.getReelsOnPickList(content);
 pickReels.sortByMethodName("getPosition", true);
+
+String[] volts = reelMgr.getPnVolts();
+String[] gauges = reelMgr.getPnGauges();
+String[] conductors = reelMgr.getPnConductors();
 
 String tempURL; //var for url expression
 %>
@@ -205,6 +227,41 @@ String tempURL; //var for url expression
                 <% for(int c=0; c<circuits.howMany(); c++) { %>
                     <% ReelCircuit tmpCircuit = (ReelCircuit)circuits.get(c); %>
                     <form:option name="<%= tmpCircuit.getName() %>" value="<%= new Integer(tmpCircuit.getId()).toString() %>" match="<%= new Integer(circuit.getId()).toString() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+        <form:row_end />
+        <form:row_begin />
+            <form:label name="" label="Voltage:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Reel.PN_VOLT_COLUMN %>" />
+                <form:option name="Any" value="" match="<%= content.getPnVolt() %>" />
+                <% for(int x=0; x<volts.length; x++) { %>
+                    <% tempURL = volts[x] + " (" + Reel.convertPnVolt(volts[x]) + ")"; %>
+                    <form:option name="<%= tempURL %>" value="<%= volts[x] %>" match="<%= content.getPnVolt() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+        <form:row_end />
+        <form:row_begin />
+            <form:label name="" label="Gauge:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Reel.PN_GAUGE_COLUMN %>" />
+                <form:option name="Any" value="" match="<%= content.getPnGauge() %>" />
+                <% for(int x=0; x<gauges.length; x++) { %>
+                    <% tempURL = gauges[x] + " (" + Reel.convertPnGauge(gauges[x]) + ")"; %>
+                    <form:option name="<%= tempURL %>" value="<%= gauges[x] %>" match="<%= content.getPnGauge() %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+        <form:row_end />
+        <form:row_begin />
+            <form:label name="" label="Conductor Count:" />
+            <form:content_begin />
+            <form:select_begin name="<%= Reel.PN_CONDUCTOR_COLUMN %>" />
+                <form:option name="Any" value="" match="<%= content.getPnConductor() %>" />
+                <% for(int x=0; x<conductors.length; x++) { %>
+                    <form:option name="<%= conductors[x] %>" value="<%= conductors[x] %>" match="<%= content.getPnConductor() %>" />
                 <% } %>
             <form:select_end />
             <form:content_end />
