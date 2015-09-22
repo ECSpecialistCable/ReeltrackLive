@@ -238,7 +238,7 @@ String tempURL; //var for url expression
                 <form:option name="Any" value="" match="<%= content.getPnVolt() %>" />
                 <% for(int x=0; x<volts.length; x++) { %>
                     <% tempURL = volts[x] + " (" + Reel.convertPnVolt(volts[x]) + ")"; %>
-                    <form:option name="<%= tempURL %>" value="<%= volts[x] %>" match="<%= content.getPnVolt() %>" />
+                    <form:option name="<%= tempURL %>" value="<%= volts[x] %>" match="<%= reel.getPnVolt() %>" />
                 <% } %>
             <form:select_end />
             <form:content_end />
@@ -250,7 +250,7 @@ String tempURL; //var for url expression
                 <form:option name="Any" value="" match="<%= content.getPnGauge() %>" />
                 <% for(int x=0; x<gauges.length; x++) { %>
                     <% tempURL = gauges[x] + " (" + Reel.convertPnGauge(gauges[x]) + ")"; %>
-                    <form:option name="<%= tempURL %>" value="<%= gauges[x] %>" match="<%= content.getPnGauge() %>" />
+                    <form:option name="<%= tempURL %>" value="<%= gauges[x] %>" match="<%= reel.getPnGauge() %>" />
                 <% } %>
             <form:select_end />
             <form:content_end />
@@ -261,7 +261,7 @@ String tempURL; //var for url expression
             <form:select_begin name="<%= Reel.PN_CONDUCTOR_COLUMN %>" />
                 <form:option name="Any" value="" match="<%= content.getPnConductor() %>" />
                 <% for(int x=0; x<conductors.length; x++) { %>
-                    <form:option name="<%= conductors[x] %>" value="<%= conductors[x] %>" match="<%= content.getPnConductor() %>" />
+                    <form:option name="<%= conductors[x] %>" value="<%= conductors[x] %>" match="<%= reel.getPnConductor() %>" />
                 <% } %>
             <form:select_end />
             <form:content_end />
