@@ -634,6 +634,25 @@ public class ReelMgr extends CompWebManager {
 		cridReel.setCrId(theReel.getCrId());
 		cridReel.setSearchOp(Reel.CR_ID_COLUMN,Reel.GT);
 		puller.addSearch(cridReel);
+		puller.setSortBy(cridReel.getTableName(), Reel.CR_ID_COLUMN, true);
+		CompEntities reels = controller.pullCompEntities(puller,1,0);
+		if(reels.howMany()>0) {
+			return (Reel)reels.get(0);
+		} else {
+			return null;
+		}
+	}
+
+	public Reel getReelByLastCrid(Reel content) throws Exception {
+		Reel theReel = new Reel();
+		theReel.setId(content.getId());
+		theReel = this.getReel(theReel);
+
+		CompEntityPuller puller = new CompEntityPuller(new Reel());
+		Reel cridReel = new Reel();
+		cridReel.setJobCode(theReel.getJobCode());
+		puller.addSearch(cridReel);
+		puller.setSortBy(cridReel.getTableName(), Reel.CR_ID_COLUMN, false);
 		CompEntities reels = controller.pullCompEntities(puller,1,0);
 		if(reels.howMany()>0) {
 			return (Reel)reels.get(0);

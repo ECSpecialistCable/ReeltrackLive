@@ -14,16 +14,23 @@
     String param = "content_id_for_tabset";    
     String paramstring = "";
     String paramstring2 = "";
-    Reel reel2 = null;
+    String paramstring3 = "";
 	if(request.getParameter(param) != null) {
 		paramstring = "?" + param + "=" + request.getParameter(param);
 	}
 
 	Reel reel = new Reel();
 	reel.setId(Integer.parseInt(request.getParameter(param)));
-	reel2 = reelMgr.getReelByNextCrid(reel);
-	if(reel2!=null) {
-		paramstring2 = "?" + param + "=" + reel2.getId();
+	reel = reelMgr.getReelByNextCrid(reel);
+	if(reel!=null && reel.getId()!=0) {
+		paramstring2 = "?" + param + "=" + reel.getId();
+	}
+
+	Reel reel2 = new Reel();
+	reel2.setId(Integer.parseInt(request.getParameter(param)));
+	reel2 = reelMgr.getReelByLastCrid(reel2);
+	if(reel2!=null && reel2.getId()!=0) {
+		paramstring3 = "?" + param + "=" + reel2.getId();
 	}	    
 %>
 <% dbResources.close(); %>
@@ -38,8 +45,11 @@
 <admin:tab url="reels/notes.jsp" text="Notes" params="<%= paramstring %>"/>
 <admin:tab url="reels/log.jsp" text="Log" params="<%= paramstring %>"/>
 <admin:tab url="reels/reel_data.jsp" text="Reel Data" params="<%= paramstring %>"/>
-<% if(reel2!=null) { %>
+<% if(reel!=null && reel.getId()!=0) { %>
 	<admin:tab url="reels/status.jsp" text=">> Next CRID" params="<%= paramstring2 %>"/>
+<% } %>
+<% if(reel2!=null && reel2.getId()!=0) { %>
+	<admin:tab url="reels/status.jsp" text=">> Last CRID" params="<%= paramstring3 %>"/>
 <% } %>
 
 
