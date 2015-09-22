@@ -64,6 +64,14 @@ if(action.equals("create")) {
     redirect = request.getContextPath() + "/trampoline/" + "foremans/search.jsp";
 }
 
+if(action.equals("update")) {
+    Foreman content = new Foreman();
+    content.setId(contid);
+    content.setName(request.getParameter(Foreman.NAME_COLUMN));
+    foremanMgr.updateForeman(content);
+    redirect = request.getContextPath() + "/trampoline/" + "foremans/search.jsp";
+}
+
 if(action.equals("delete")) {
     Foreman content = new Foreman();
     content.setId(contid);
