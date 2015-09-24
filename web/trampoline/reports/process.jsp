@@ -14,6 +14,7 @@
 <%@ page import="com.reeltrack.reports.InventoryExcelReport"%>
 <%@ page import="com.reeltrack.reports.CtrExcelReport"%>
 <%@ page import="com.reeltrack.reports.InventorySummaryExcelReport"%>
+<%@ page import="com.reeltrack.reports.CircuitReport"%>
 <%@ page import="java.io.ByteArrayOutputStream"%>
 <%@ page import="com.reeltrack.reports.HtmlToPdfWriter"%>
 <%@ page import="java.text.SimpleDateFormat"%>
@@ -143,6 +144,32 @@ if(action.equals("inventory_report")){
 		}
 
     	param = "?ir=true&inv_type=" + reportType;
+	} catch(Exception e) {
+		e.printStackTrace();
+    }
+
+	redirect = request.getContextPath() + "/trampoline/" + "reports/reports.jsp" + param;
+}
+
+
+if(action.equals("circuit_report")){
+    String param = "";
+	try {
+		String jobCode = request.getParameter("job_code");
+		String fileName = "circuit_report";
+		String saveFile = basePath + "/reports";
+		File file = new File(saveFile);
+		file.mkdirs();
+		CircuitReport writer = new CircuitReport(pageContext, dbResources);
+		HSSFWorkbook wb = writer.writeUserExcel(jobCode, basePath);
+		fileName += ".xls";
+		saveFile += "/" + fileName;
+		FileOutputStream fileOut = new FileOutputStream(saveFile);
+		wb.write(fileOut);
+		fileOut.flush();
+		fileOut.close();
+
+    	param = "?cir=true";
 	} catch(Exception e) {
 		e.printStackTrace();
     }

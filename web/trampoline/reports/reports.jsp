@@ -49,6 +49,12 @@
 	if(request.getParameter("ctr")!=null) {
 		ctr = request.getParameter("ctr");
 	}
+
+	String cir = "";
+	if(request.getParameter("cir")!=null) {
+		cir = request.getParameter("cir");
+	}
+
 	String pr = "";
 	if(request.getParameter("pr")!=null) {
 		pr = request.getParameter("pr");
@@ -178,6 +184,29 @@
 	<form:hidden name="whichReport" value="<%= invReportType %>" />
 <form:end />
 <admin:box_end />
+
+    <admin:subtitle text="Circuit Report" />
+    <admin:box_begin />
+    <form:begin name="circuit_report" action="reports/process.jsp" />
+    <%if(cir.equals("true")) { %>
+    <form:row_begin />
+    <form:label name="" label="" />
+    <form:buttonset_begin align="left" padding="0"/>
+    <% String url = request.getContextPath() + "/reports/circuit_report.xls"; %>
+    <a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+    <form:buttonset_end />
+    <form:row_end />
+    <% } %>
+    <form:row_begin />
+    <form:label name="" label="Generate:" />
+    <form:buttonset_begin align="left" padding="0"/>
+    <form:submit_inline button="submit" waiting="false" name="submit" action="circuit_report" />
+    <form:buttonset_end />
+    <form:row_end />
+    <form:hidden name="reportType" value="circuit_report" />
+    <form:hidden name="job_code" value="<%= user.getJobCode() %>" />
+    <form:end />
+    <admin:box_end />
 
     <admin:subtitle text="CTR Report" />
     <admin:box_begin />
