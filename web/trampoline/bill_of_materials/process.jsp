@@ -8,6 +8,14 @@
 <%@ page import="com.reeltrack.users.*" %>
 <%@ page import="com.reeltrack.customers.CustomerJob"%>
 <%@ page import="com.reeltrack.reels.Reel" %>
+<%@ page import="java.io.ByteArrayOutputStream"%>
+<%@ page import="com.reeltrack.reports.HtmlToPdfWriter"%>
+<%@ page import="com.eps.reports.*" %>
+<%@ page import="java.io.FileOutputStream" %>
+<%@ page import= "org.apache.poi.hssf.usermodel.*" %>
+<%@ page import= "org.apache.poi.hssf.util.*" %>
+<%@ page import="com.reeltrack.reports.BomReport"%>
+
 
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
@@ -54,6 +62,7 @@ if(request.getParameter(CustomerJob.PARAM) != null) {
 }
 
 
+/*
 if(action.equals("upload_bom_pdf")) {
     content = new CustomerJob();
     content.setId(contid);
@@ -65,6 +74,31 @@ if(action.equals("upload_bom_pdf")) {
 	//redirect = request.getContextPath() + "/trampoline/" + "users/edit.jsp?" + RTUser.PARAM + "=" + contid;
     redirect = request.getContextPath() + "/trampoline/" + "bill_of_materials/search.jsp";
 }
+*/
+if(action.equals("upload_bom_pdf")) {
+    String param = "";
+	try {
+		String jobCode = request.getParameter("job_code");
+		String fileName = "bill_of_materials_" + jobCode;
+		String saveFile = basePath + "/reports";
+		File file = new File(saveFile);
+		file.mkdirs();
+		BomReport writer = new BomReport(pageContext, dbResources);
+		HSSFWorkbook wb = writer.writeUserExcel(jobCode, basePath);
+		fileName += ".xls";
+		saveFile += "/" + fileName;
+		FileOutputStream fileOut = new FileOutputStream(saveFile);
+		wb.write(fileOut);
+		fileOut.flush();
+		fileOut.close();
+
+    	param = "?bom=" + fileName;
+	} catch(Exception e) {
+		e.printStackTrace();
+    }
+    redirect = request.getContextPath() + "/trampoline/" + "bill_of_materials/search.jsp" + param;
+}
+
 
 if(action.equals("update_usage_tracking")) {
 	Reel reel = new Reel();

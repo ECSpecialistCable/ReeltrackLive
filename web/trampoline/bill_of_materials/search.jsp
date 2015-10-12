@@ -34,6 +34,10 @@ boolean canSubmit = true;
 if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
     canSubmit = false;
 }
+String bomFile = null;
+if(request.getParameter("bom")!=null) {
+    bomFile = request.getParameter("bom");
+}
 
 String tempUrl =""; //var for url expression
 %>
@@ -59,14 +63,22 @@ String tempUrl =""; //var for url expression
 --%>
 <admin:subtitle text="Bill of Materials" />
 <admin:box_begin />
-    <form:begin_multipart submit="true" name="upload_bom_pdf" action="bill_of_materials/process.jsp" />
+    <form:begin submit="true" name="upload_bom_pdf" action="bill_of_materials/process.jsp" />
+            <% if(bomFile!=null) { %>
             <form:row_begin />
                 <form:label name="" label="BOM Download:" />
                 <form:buttonset_begin align="left" padding="0"/>
-                        <a href="">[Download]</a>
+                        <a href="/reports/<%= bomFile %>">[Download]</a>
                 <form:buttonset_end />
             <form:row_end />
-            <form:hidden name="<%= CustomerJob.PARAM %>" value="<%= Integer.toString(user.getJobId()) %>" />
+            <% } %>
+            <form:row_begin />
+                <form:label name="" label="Generate BOM:" />
+                <form:buttonset_begin align="left" padding="0"/>
+                        <form:submit_inline button="save" waiting="true" name="SUBMIT" action="upload_bom_pdf" />
+                <form:buttonset_end />
+            <form:row_end />
+            <form:hidden name="job_code" value="<%= user.getJobCode() %>" />
     <form:end />
 <admin:box_end />
 <% } %>
