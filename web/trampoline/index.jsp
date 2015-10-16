@@ -89,9 +89,8 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1" />
         <meta http-equiv="imagetoolbar" content="no" />
-        <title>
-            <jsp:include page="common/includes/title.jsp" />
-        </title>
+        <title>ReelTrack Development</title>
+        <link rel="icon" type="image/png" href="myicon.png">
         <!--<link rel="stylesheet" href="common/css/bootstrap.min.css" type="text/css" media="screen" charset="utf-8" />-->
         <link rel="stylesheet" href="common/css/structure.css" type="text/css" media="screen" charset="utf-8" />
         <link rel="stylesheet" href="common/css/style.css" type="text/css" media="screen" charset="utf-8" />
