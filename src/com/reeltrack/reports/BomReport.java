@@ -91,7 +91,7 @@ public class BomReport {
 			e.printStackTrace();
 		}
 
-		nextNum=1;
+		nextNum=3;
 		row = sheet.createRow((short) rowNum);
 		row.setHeightInPoints(15);
 		cell = row.createCell((short) nextNum);
@@ -102,7 +102,7 @@ public class BomReport {
 	
 		rowNum++;
 		row = sheet.createRow((short) rowNum);
-		nextNum=1;
+		nextNum=3;
 		row.setHeightInPoints(15);
 		cell = row.createCell((short) nextNum);
 		cell.setCellValue("Bill of Materials \n"+custJob.getName() + " (" + custJob.getCode() + ")");
@@ -134,15 +134,28 @@ public class BomReport {
 		cell = row.createCell((short) nextNum++);
 		cell.setCellValue("# Reels");
 		cell.setCellStyle(styleHeader);
+
+		sheet.setColumnWidth(nextNum, 6000);
+		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("Qty Tracking");
+		cell.setCellStyle(styleHeader);
+
+		sheet.setColumnWidth(nextNum, 6000);
+		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("QRC Verification");
+		cell.setCellStyle(styleHeader);
 		
 		for (int i = 0; i < reels.howMany(); i++) {
 			Reel current = (Reel) reels.get(i);
+			CableTechData techData = (CableTechData)current.getCompEntity(CableTechData.PARAM);
 			row = sheet.createRow((short) rowNum++);
 			nextNum=0;
 			row.createCell((short)nextNum++).setCellValue(current.getCustomerPN());
 			row.createCell((short)nextNum++).setCellValue(current.getCableDescription());
 			row.createCell((short)nextNum++).setCellValue(current.getReelsOrderedForBOM());
-			row.createCell((short)nextNum++).setCellValue(current.getReelsCountForBOM());
+			row.createCell((short)nextNum++).setCellValue(current.getReelsCountForBOM());			
+			row.createCell((short)nextNum++).setCellValue(techData.getUsageTracking());			
+			row.createCell((short)nextNum++).setCellValue(techData.getQRCTracking());
 		}		
 
 		return wb;
