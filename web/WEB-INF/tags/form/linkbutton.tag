@@ -27,7 +27,7 @@
     target="_submissionFrame"
     href="${url}">	    
 <% } else if(newtab!=null) { %>	
-	href="${url}" target="_new">
+	href="${url}" target="_blank">
 <% } else { %>	
 	href="${url}" class="ajax_loadable">
 <% } %>
