@@ -317,7 +317,9 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
         <admin:box_end />
 
         <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
-            <form:begin submit="true" name="<%= toggleForm %>" action="shipping/process.jsp" />
+            <%--<form:begin submit="true" name="<%= toggleForm %>" action="shipping/process.jsp" />--%>
+            <form class=" " title="" onsubmit="" action="shipping/process.jsp" target="_blank" method="post" name="<%= toggleForm %>" id="<%= toggleForm %>">
+            <table border="0" cellspacing="0" cellpadding="0">
                 <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
                 <form:hidden name="<%= Reel.ORDERED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
                 <form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />

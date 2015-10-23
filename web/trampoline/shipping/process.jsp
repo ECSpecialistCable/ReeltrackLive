@@ -50,7 +50,8 @@ if(action.equals("mark_shipped")) {
         content.setShippingDateString(request.getParameter(Reel.SHIPPING_DATE_COLUMN));
     }
     reelMgr.markReelShipped(content);
-    redirect = request.getContextPath() + "/trampoline/" + "shipping/search.jsp";
+    //redirect = request.getContextPath() + "/trampoline/" + "shipping/search.jsp";
+    redirect = "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "=" + content.getId();
 }
 %>
 <% dbResources.close(); %>
