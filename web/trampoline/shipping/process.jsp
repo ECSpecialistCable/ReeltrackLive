@@ -51,7 +51,7 @@ if(action.equals("mark_shipped")) {
     }
     reelMgr.markReelShipped(content);
     //redirect = request.getContextPath() + "/trampoline/" + "shipping/search.jsp";
-    redirect = "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "=" + content.getId();
+    redirect = "/trampoline/reeltags/reeltag_image.jsp?" + Reel.PARAM + "=" + content.getId();
 }
 %>
 <% dbResources.close(); %>
