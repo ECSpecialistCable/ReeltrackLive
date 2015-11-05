@@ -99,7 +99,7 @@ if(user.isUserType(RTUser.USER_TYPE_VENDOR)) {
     content.setVendorCode(user.getVendorCode());
 }
 
-content.setStatus(Reel.STATUS_ORDERED);
+content.setStatus(Reel.STATUS_SHIPPED);
 session.setAttribute("reeltags_search",content);
 
 String column = Reel.CR_ID_COLUMN;
@@ -228,7 +228,7 @@ String tempURL = "";
 			<listing:cell_begin align="right"/>
                 <% if(!content.hasReelTagFile()) { %>
                     <% tempURL = "reeltags/reeltag_image.jsp?" + Reel.PARAM + "=" + content.getId(); %>
-                    <form:linkbutton url="<%= tempURL %>" name="ADD to QUEUE" newtab="true" />
+                    <form:linkbutton url="<%= tempURL %>" name="PRINT REEL TAG" newtab="true" />
                 <% } %>
             <listing:cell_end />
 
