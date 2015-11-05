@@ -8,7 +8,7 @@
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 
 <% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
-	<admin:tab url="reeltags/search_ordered.jsp" text="Search" />
+	<admin:tab url="reeltags/search_ordered.jsp" text="Ordered" />
 	<admin:tab url="reeltags/search_shipped.jsp" text="Shipped" />
 	<admin:tab url="reeltags/search_generated.jsp" text="Generated" />
 <% } else { %>

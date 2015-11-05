@@ -250,7 +250,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 		<form:textfield label="CRID #:" name="cridNum" value="<%= "" %>" />
 	<% } %>--%>
     <form:textfield label="Tracking PRO #:" name="trackingNum" value="<%= trackingNum %>" />
-    <form:textfield label="Packing List #:" name="packingNum" value="<%= packingNum %>" />
+    <form:textfield label="BOL/PL #:" name="packingNum" value="<%= packingNum %>" />
     <form:row_begin />
         <form:label name="" label="Carrier:" />
         <form:content_begin />
