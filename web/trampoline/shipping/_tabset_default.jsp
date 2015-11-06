@@ -7,6 +7,10 @@
 <% userLoginMgr.init(pageContext); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 
-<admin:tab url="shipping/search.jsp" text="Mark As Shipped" />
-
+<% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
+	<admin:tab url="shipping/search.jsp" text="Mark As Shipped" />
+	<admin:tab url="shipping/edit.jsp" text="Edit" />
+<% } else { %>
+	<admin:tab url="shipping/search.jsp" text="Mark As Shipped" />
+<% } %>
 <admin:set_moduleactions url="manage_reels/_moduleactions.jsp" />
