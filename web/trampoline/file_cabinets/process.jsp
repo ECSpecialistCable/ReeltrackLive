@@ -78,6 +78,21 @@ if(action.equals("create_customer")) {
     redirect = request.getContextPath() + "/trampoline/" + "file_cabinets/customer.jsp";
 }
 
+if(action.equals("create_vendor")) {
+    content = new FileCabinet();
+    content.setCustomerId(Integer.parseInt(multipart.getParameter(FileCabinet.CUSTOMER_ID_COLUMN)));
+    content.setJobId(-1);
+    content.setTitle(multipart.getParameter(FileCabinet.TITLE_COLUMN));
+    content.setStatus(FileCabinet.STATUS_ACTIVE);
+    File file = multipart.getFile(FileCabinet.FILE_NAME_COLUMN);
+    if(file!=null && !content.getTitle().equals("")) {
+        int fileId = cabinetMgr.addFileCabinet(content, file, basePath);
+    }
+
+    //redirect = request.getContextPath() + "/trampoline/" + "users/edit.jsp?" + RTUser.PARAM + "=" + contid;
+    redirect = request.getContextPath() + "/trampoline/" + "file_cabinets/vendor.jsp";
+}
+
 if(action.equals("delete")) {
     content = new FileCabinet();
     content.setId(Integer.parseInt(request.getParameter(FileCabinet.PARAM)));
@@ -90,6 +105,13 @@ if(action.equals("delete_customer")) {
     content.setId(Integer.parseInt(request.getParameter(FileCabinet.PARAM)));
     cabinetMgr.deleteFileCabinet(content, basePath);
     redirect = request.getContextPath() + "/trampoline/" + "file_cabinets/customer.jsp";
+}
+
+if(action.equals("delete_vendor")) {
+    content = new FileCabinet();
+    content.setId(Integer.parseInt(request.getParameter(FileCabinet.PARAM)));
+    cabinetMgr.deleteFileCabinet(content, basePath);
+    redirect = request.getContextPath() + "/trampoline/" + "file_cabinets/vendor.jsp";
 }
 
 %>

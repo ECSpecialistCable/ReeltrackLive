@@ -9,7 +9,7 @@
 <% userLoginMgr.init(pageContext); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 
-<% 
+<%
 
 /************************************************************************************************
 TO SET THE MODULE MENU STYLE:
@@ -26,7 +26,7 @@ Put a 0 or a 1 in the "USE_STYLE" line above
 ************************************************************************************************/
 %>
 
-<!-- 
+<!--
 
 The rel attribute in each of the <a> tags refers to a folder containing a _moduleactions.jsp file.
 The permissions are dealt with in the file itself.
@@ -69,7 +69,9 @@ if(user_agent.contains("iPad")) {
 	<% if(!user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
 		<admin:ajax_load url="file_cabinets/search.jsp" label="File Cabinet/Glossary" />
 	<% } %>
-	<% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
+	<% if(user.isUserType(RTUser.USER_TYPE_VENDOR) || user.isUserType(RTUser.USER_TYPE_ECS)) { %>
 		<a class="module_bar_toggle" rel="common/interface/manage_reels">Computer Operations</a>
+		<admin:ajax_load url="glossary/vendor_videos.jsp" label="Training Videos" />
+		<admin:ajax_load url="file_cabinets/vendor.jsp" label="Printer Information" />
 	<% } %>
 <% } %>
