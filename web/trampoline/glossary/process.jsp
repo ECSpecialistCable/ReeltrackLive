@@ -82,6 +82,19 @@ if(action.equals("create_reeltrack_video")) {
     redirect = request.getContextPath() + "/trampoline/" + "glossary/reeltrack_videos.jsp";
 }
 
+if(action.equals("create_vendor_video")) {
+    Glossary content = new Glossary();
+    content.setJobId(-1);
+    content.setIsVideo("y");
+    content.setName(request.getParameter(Glossary.NAME_COLUMN));
+    content.setVideoURL(request.getParameter(Glossary.VIDEO_URL_COLUMN));
+    content.setStatus(Glossary.STATUS_ACTIVE);
+    
+    contid = glossaryMgr.addGlossary(content);
+    //redirect = request.getContextPath() + "/trampoline/" + "users/edit.jsp?" + RTUser.PARAM + "=" + contid;
+    redirect = request.getContextPath() + "/trampoline/" + "glossary/vendor_videos.jsp";
+}
+
 
 if(action.equals("delete_reeltrack_glossary")) {
     Glossary content = new Glossary();
@@ -95,6 +108,13 @@ if(action.equals("delete_reeltrack_video")) {
     content.setId(Integer.parseInt(request.getParameter(Glossary.PARAM)));
     glossaryMgr.deleteGlossary(content, null);
     redirect = request.getContextPath() + "/trampoline/" + "glossary/reeltrack_videos.jsp";
+}
+
+if(action.equals("delete_vendor_video")) {
+    Glossary content = new Glossary();
+    content.setId(Integer.parseInt(request.getParameter(Glossary.PARAM)));
+    glossaryMgr.deleteGlossary(content, null);
+    redirect = request.getContextPath() + "/trampoline/" + "glossary/vendor_videos.jsp";
 }
 
 
