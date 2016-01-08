@@ -70,7 +70,8 @@ if(user_agent.contains("iPad")) {
 		<admin:ajax_load url="file_cabinets/search.jsp" label="File Cabinet/Glossary" />
 	<% } %>
 	<% if(user.isUserType(RTUser.USER_TYPE_VENDOR) || user.isUserType(RTUser.USER_TYPE_ECS)) { %>
-		<a class="module_bar_toggle" rel="common/interface/manage_reels">Computer Operations</a>
+		<%--<a class="module_bar_toggle" rel="common/interface/manage_reels">Print Reel Tags</a>--%>
+		<admin:ajax_load url="shipping/search_vendor.jsp?clear=true" label="Print Reel Tags" />
 		<admin:ajax_load url="glossary/vendor_videos.jsp" label="Training Videos" />
 		<admin:ajax_load url="file_cabinets/vendor.jsp" label="Printer Information" />
 	<% } %>

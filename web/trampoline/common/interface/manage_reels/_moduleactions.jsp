@@ -19,6 +19,6 @@
 <% } %>
 
 <% if (user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
-    <admin:ajax_load url="shipping/search.jsp?clear=true" label="Mark as Shipped" />
+    <admin:ajax_load url="shipping/search_vendor.jsp?clear=true" label="Mark as Shipped" />
 	<admin:ajax_load url="reeltags/search_ordered.jsp" label="Generate Reel Tags" />    
 <% } %>

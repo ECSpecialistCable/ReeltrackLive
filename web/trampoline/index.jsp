@@ -133,7 +133,11 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 
 <!-- and finally, the admin.js -->
 <script src="common/js/admin.js?busted=<%= (new java.util.Date()).getTime() %>" type="text/javascript" charset="utf-8"></script>
-
+<script>
+	function openTag(reelID) {
+		var win = window.open('/trampoline/reeltags/reeltag_image.jsp?reel_param=' + reelID, '_blank');
+	}
+</script>
 <!--<script src="common/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>-->
 
     </head>

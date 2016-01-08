@@ -263,11 +263,17 @@ public class ReelMgr extends CompWebManager {
 	}
 
 	public void markReelShipped(Reel content) throws Exception {
+		this.markReelShipped(content,true);
+	}
+
+	public void markReelShipped(Reel content, boolean shipped) throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
 		this.addReelLog(Reel.STATUS_SHIPPED, content, user.getName() + " marked reel as Shipped with shipped quantity of " + content.getShippedQuantity() + ", carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList());
-		content.setStatus(Reel.STATUS_SHIPPED);
+		if(shipped) {
+			content.setStatus(Reel.STATUS_SHIPPED);
+		}
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateOnReelQuantity(content);

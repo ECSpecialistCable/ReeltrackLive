@@ -258,6 +258,8 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             <listing:header_cell width="50" first="true" name="CRID #" />
             <listing:header_cell width="200" name="Reel Tag" />
             <listing:header_cell name="Cable Description" />
+            <listing:header_cell width="75" name="ECS PO#" />
+            <listing:header_cell width="75" name="Status" />
         <listing:header_end />
     <listing:end />
     <br />
@@ -279,6 +281,12 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             <listing:cell_end />
             <listing:cell_begin />
                 <%= content.getCableDescription() %>
+            <listing:cell_end />
+            <listing:cell_begin width="75" />
+                <%= content.getOrdNo() %>
+            <listing:cell_end />
+            <listing:cell_begin width="75" />
+                <%= content.getStatus() %>
             <listing:cell_end />
         <listing:row_end />   
         <listing:end />
@@ -341,6 +349,9 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
     <admin:subtitle text="No Reels Found." />
 <% } %>
 <% } %>
-
+<% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
+<admin:set_tabset url="shipping/_tabset_default_vendor.jsp" thispage="edit.jsp" />
+<% } else { %>
 <admin:set_tabset url="shipping/_tabset_default.jsp" thispage="edit.jsp" />
+<% } %>
 <html:end />    
