@@ -69,11 +69,11 @@ String tempURL; //var for url expression
                     <form:content_end />                
                 <form:row_end />
                 --%>
-                <form:info label="Orig Top Foot #:" text="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
-                <form:info label="Top Foot #:" text="<%= new Integer(content.getTopFoot()).toString() %>" />
+                <form:info label="Orig Top Seq Mark #:" text="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                <form:info label="Seq Mark #:" text="<%= new Integer(content.getTopFoot()).toString() %>" />
     		<% } else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
-                <form:info label="Received lbs:" text="<%= new Integer(content.getReceivedWeight()).toString() %>" />
-                <form:info label="Current lbs:" text="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+                <form:info label="Reel GWT:" text="<%= new Integer(content.getReceivedWeight()).toString() %>" />
+                <form:info label="Current GWT:" text="<%= new Integer(content.getCurrentWeight()).toString() %>" />
             <% } else if(techData.getUsageTracking().equals(CableTechData.USAGE_QUANTITY_PULLED)) { %>
                 <form:info label="Cable Used Qty:" text="<%= new Integer(content.getCableUsedQuantity()).toString() %>" />
             <% } %>

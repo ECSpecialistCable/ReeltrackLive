@@ -161,7 +161,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 }
 %>
 
-<% dbResources.close(); %>
+
 <html:begin />
 <admin:title text="Edit Reel" />
 
@@ -241,6 +241,33 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <form:end />
 <admin:box_end />
 
+<admin:subtitle text="Shipping Data" />
+<admin:box_begin />
+<form:begin_selfsubmit name="search" action="shipping/edit.jsp" />
+    <form:textfield label="Tracking PRO #:" name="trackingNum" value="<%= trackingNum %>" />
+    <form:textfield label="BOL/PL #:" name="packingNum" value="<%= packingNum %>" />
+    <form:row_begin />
+        <form:label name="" label="Carrier:" />
+        <form:content_begin />
+        <form:select_begin name="carrierName" />
+            <form:option name="None" value="" match="<%= carrierName %>"/>
+            <% for(int x=0; x<carrierList.length; x++) { %>
+                <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= carrierName %>"/>
+            <% } %>
+        <form:select_end />
+        <form:content_end />
+    <form:row_end />
+    <form:date_picker name="shippingDate" value="<%= shippingDate %>" label="Shipped Date:" />
+    <form:hidden name="action" value="save" />
+    <form:row_begin />
+        <form:label name="" label="" />
+        <form:buttonset_begin align="left" padding="0"/>
+            <form:submit_inline button="submit" waiting="true" name="save" action="test" />
+        <form:buttonset_end />
+    <form:row_end />
+<form:end />
+<admin:box_end />
+
 <% if(dosearch) { %>
 <% if(contents.howMany() > 0) { %>
     <admin:search_listing_pagination text="Reels Found" url="shipping/search.jsp" 
@@ -265,6 +292,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
     <br />
     <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
+        <% CableTechData techData = reelMgr.getCableTechData(content); %>
         <% tempURL = new Integer(i+1).toString() + ". " + content.getReelTag() + " (" + content.getCableDescription() + ")"; %>
         <% String toggleTarget = "toggleReelship" + content.getId(); %>
         <% String toggleID = "reelship" + content.getId(); %>
@@ -300,6 +328,12 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             --%>
                 <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
                 <form:hidden name="<%= Reel.ORDERED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                    <form:textfield label="Top Seq Mark #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+                <% } %>
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+                    <form:textfield label="Current GWT:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+                <% } %>
                 <form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
                 <form:row_begin />
                 <form:label name="" label="" />
@@ -315,7 +349,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
                     <form:info label="Projected Shipping<br />Date:" text="<%= content.getProjectedShippingDateString() %>" />
                     <form:info label="Shipped<br />Date:" text="<%= content.getShippingDateString() %>" />
                 <% } %>
-                <% carrierName = content.getCarrier(); %>
+                <% if(carrierName.equals("")) carrierName = content.getCarrier(); %>
                 <form:row_begin />
                 <form:label name="" label="Carrier:" />
                 <form:content_begin />
@@ -329,9 +363,9 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
                 <form:content_end />
                 <form:row_end />
                 <form:textfield label="Other Carrier:" name="other_carrier" />
-                <% trackingNum = content.getTrackingPRO(); %>
+                <% if(trackingNum.equals("")) trackingNum = content.getTrackingPRO(); %>
                 <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= trackingNum %>" />
-                <% packingNum = content.getPackingList(); %>          
+                <% if(packingNum.equals("")) packingNum = content.getPackingList(); %>          
                 <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= packingNum %>" />        
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
                 <form:row_begin />
@@ -354,4 +388,6 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <% } else { %>
 <admin:set_tabset url="shipping/_tabset_default.jsp" thispage="edit.jsp" />
 <% } %>
-<html:end />    
+<html:end />  
+
+<% dbResources.close(); %>  

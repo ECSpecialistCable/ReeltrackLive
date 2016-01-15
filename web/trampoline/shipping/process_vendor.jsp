@@ -49,6 +49,12 @@ if(action.equals("edit_shipped")) {
     if(request.getParameter(Reel.SHIPPING_DATE_COLUMN)!=null && !request.getParameter(Reel.SHIPPING_DATE_COLUMN).equals("")) {
         content.setShippingDateString(request.getParameter(Reel.SHIPPING_DATE_COLUMN));
     }
+    try {
+        content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
+        content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
+    } catch(Exception e) {}
     reelMgr.updateReel(content);
     redirect = request.getContextPath() + "/trampoline/" + "shipping/edit.jsp";
     //redirect = "/trampoline/reeltags/reeltag_image.jsp?" + Reel.PARAM + "=" + content.getId();
@@ -75,6 +81,13 @@ if(action.equals("mark_shipped")) {
     if(request.getParameter(Reel.SHIPPING_DATE_COLUMN)!=null && !request.getParameter(Reel.SHIPPING_DATE_COLUMN).equals("")) {
         content.setShippingDateString(request.getParameter(Reel.SHIPPING_DATE_COLUMN));
     }
+    try {
+        content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
+        content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
+    } catch(Exception e) {}
+    
     boolean shipped = false;
     if(request.getParameter("shipped")!=null) {
         shipped = true;

@@ -161,7 +161,6 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 }
 %>
 
-<% dbResources.close(); %>
 <html:begin />
 <admin:title text="Mark Reels as Shipped" />
 
@@ -244,11 +243,6 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <admin:subtitle text="Shipping Data" />
 <admin:box_begin />
 <form:begin_selfsubmit name="search" action="shipping/search_vendor.jsp" />
-	<%--<% if(!cridNum.equals("")) { %>
-		<form:textfield label="CRID #:" name="cridNum" value="<%= cridNum + "" %>" />
-	<% } else { %>
-		<form:textfield label="CRID #:" name="cridNum" value="<%= "" %>" />
-	<% } %>--%>
     <form:textfield label="Tracking PRO #:" name="trackingNum" value="<%= trackingNum %>" />
     <form:textfield label="BOL/PL #:" name="packingNum" value="<%= packingNum %>" />
     <form:row_begin />
@@ -297,6 +291,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
     <br />
     <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
+        <% CableTechData techData = reelMgr.getCableTechData(content); %>
         <% tempURL = new Integer(i+1).toString() + ". " + content.getReelTag() + " (" + content.getCableDescription() + ")"; %>
         <% String toggleTarget = "toggleReelship" + content.getId(); %>
         <% String toggleID = "reelship" + content.getId(); %>
@@ -329,6 +324,12 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             <%--<form class=" " title="" onsubmit="" action="shipping/process_vendor.jsp" target="_blank" method="post" name="<%= toggleForm %>" id="<%= toggleForm %>">--%>
             <table border="0" cellspacing="0" cellpadding="0">
                 <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                    <form:textfield label="Top Seq Mark #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+                <% } %>
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+                    <form:textfield label="Current GWT:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+                <% } %>
                 <form:hidden name="<%= Reel.ORDERED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
                 <form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
                 <form:row_begin />
@@ -390,4 +391,6 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             openTag(<%= request.getParameter(Reel.PARAM) %>);
         </script>
 <% } %>
-<html:end />    
+<html:end />
+
+<% dbResources.close(); %>  

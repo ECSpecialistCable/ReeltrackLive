@@ -189,11 +189,11 @@ String tempURL = "";
                 <form:textfield pixelwidth="40" label="Received Qty:" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
 
                 <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
-                    <form:textfield pixelwidth="40" label="Orig Top Ft:" name="<%= Reel.ORIG_TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                    <form:textfield pixelwidth="40" label="Orig Top Seq Mark:" name="<%= Reel.ORIG_TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
                 <% } %>
 
                 <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
-                    <form:textfield pixelwidth="40" label="Received lbs:" name="<%= Reel.RECEIVED_WEIGHT_COLUMN %>" value="<%= new Integer(content.getReceivedWeight()).toString() %>" />
+                    <form:textfield pixelwidth="40" label="Reel GWT:" name="<%= Reel.RECEIVED_WEIGHT_COLUMN %>" value="<%= new Integer(content.getReceivedWeight()).toString() %>" />
                 <% } %>
 
                 <form:row_begin />
