@@ -99,6 +99,14 @@ if(action.equals("upload_bom_pdf")) {
     redirect = request.getContextPath() + "/trampoline/" + "bill_of_materials/search.jsp" + param;
 }
 
+if(action.equals("zip_datasheets")) {
+
+	String jobCode = request.getParameter("job_code");
+	String fileName = reelMgr.zipDataSheets(jobCode, basePath);
+	String param = "?dataSheets=" + fileName;
+    redirect = request.getContextPath() + "/trampoline/" + "bill_of_materials/search.jsp" + param;
+}
+
 
 if(action.equals("update_usage_tracking")) {
 	Reel reel = new Reel();

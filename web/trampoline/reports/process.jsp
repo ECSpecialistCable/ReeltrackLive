@@ -15,6 +15,7 @@
 <%@ page import="com.reeltrack.reports.CtrExcelReport"%>
 <%@ page import="com.reeltrack.reports.InventorySummaryExcelReport"%>
 <%@ page import="com.reeltrack.reports.CircuitReport"%>
+<%@ page import="com.reeltrack.reels.*"%>
 <%@ page import="java.io.ByteArrayOutputStream"%>
 <%@ page import="com.reeltrack.reports.HtmlToPdfWriter"%>
 <%@ page import="java.text.SimpleDateFormat"%>
@@ -24,8 +25,10 @@
 
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="userLoginMgr" class="com.monumental.trampoline.security.UserLoginMgr" />
+<jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 
 <% userLoginMgr.init(pageContext); %>
+<% reelMgr.init(pageContext,dbResources); %>
 <% CompProperties props = new CompProperties(); %>
 <%
 String basePath = pageContext.getServletContext().getRealPath("/");
@@ -201,6 +204,13 @@ if(action.equals("ctr_report")){
 		e.printStackTrace();
     }
 
+	redirect = request.getContextPath() + "/trampoline/" + "reports/reports.jsp" + param;
+}
+
+if(action.equals("zip_ctr")){
+	String jobCode = request.getParameter("job_code");
+	String fileName = reelMgr.zipCtrFiles(jobCode, basePath);
+	String param = "?zip_ctr=" + fileName;
 	redirect = request.getContextPath() + "/trampoline/" + "reports/reports.jsp" + param;
 }
 

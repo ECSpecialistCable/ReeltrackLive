@@ -10,13 +10,19 @@
 
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr" />
+<jsp:useBean id="securityMgr" class="com.reeltrack.users.RTUserMgr" scope="request"/>
 <jsp:useBean id="customerMgr" class="com.reeltrack.customers.CustomerMgr" scope="request"/>
 <% userLoginMgr.init(pageContext); %>
+<% securityMgr.init(dbResources); %>
 <% customerMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <% 
 Customer customer = new Customer();
 CompEntities customers = customerMgr.searchCustomer(customer, Customer.NAME_COLUMN, true);
+
+RTUser vendor = new RTUser();
+vendor.setUserType(RTUser.USER_TYPE_VENDOR);
+CompEntities vendors = securityMgr.getUsers(vendor, false);
 
 String tempUrl; //var for url expression
 %>
@@ -43,6 +49,31 @@ String tempUrl; //var for url expression
 
 <% if(userLoginMgr.isLoggedIn() && user.getJobCode().equals("")) { %>
 <% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
+<admin:subtitle text="Please Select a Vendor" />
+<admin:box_begin />
+	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />
+		<form:row_begin />
+			<form:label name="" label="Vendor:" />
+			<form:content_begin />
+				<form:select_begin name="<%= RTUser.PARAM %>" label="" />
+					<% for(int i=0; i<vendors.howMany(); i++) { %>
+            		<% vendor = (RTUser)vendors.get(i); %>
+            		<% String vendorName = vendor.getFname() + " " + vendor.getLname(); %>
+					<form:option value="<%= new Integer(vendor.getId()).toString() %>" name="<%= vendorName %>"/>
+					<% } %>
+				<form:select_end />
+			<form:content_end />
+		<form:row_end />		
+		<form:row_begin />
+				<form:label name="" label="" />
+				<form:buttonset_begin align="right" padding="0"/>
+					<form:submit_inline button="login" waiting="true" name="login" action="vendor" />
+				<form:buttonset_end />
+		<form:row_end />
+	<form:end />
+<admin:box_end />
+<br />
+
 <admin:subtitle text="Please Select a Customer" />
 <admin:box_begin />
 	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />

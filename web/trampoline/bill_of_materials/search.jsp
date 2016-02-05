@@ -38,6 +38,10 @@ String bomFile = null;
 if(request.getParameter("bom")!=null) {
     bomFile = request.getParameter("bom");
 }
+String dataSheets = null;
+if(request.getParameter("dataSheets")!=null) {
+    dataSheets = request.getParameter("dataSheets");
+}
 
 String tempUrl =""; //var for url expression
 %>
@@ -71,7 +75,7 @@ String tempUrl =""; //var for url expression
                         <a href="/reports/<%= bomFile %>">[Download]</a>
                 <form:buttonset_end />
             <form:row_end />
-            <% } %>
+            <% } else { %>
             <form:row_begin />
                 <form:label name="" label="Generate BOM:" />
                 <form:buttonset_begin align="left" padding="0"/>
@@ -79,6 +83,26 @@ String tempUrl =""; //var for url expression
                 <form:buttonset_end />
             <form:row_end />
             <form:hidden name="job_code" value="<%= user.getJobCode() %>" />
+            <% } %>
+    <form:end />
+
+    <form:begin submit="true" name="upload_bom_pdf" action="bill_of_materials/process.jsp" />
+            <% if(dataSheets!=null) { %>
+            <form:row_begin />
+                <form:label name="" label="Download Datasheets:" />
+                <form:buttonset_begin align="left" padding="0"/>
+                        <a href="/reports/<%= dataSheets %>">[Download]</a>
+                <form:buttonset_end />
+            <form:row_end />
+            <% } else { %>
+            <form:row_begin />
+                <form:label name="" label="Download Datasheets:" />
+                <form:buttonset_begin align="left" padding="0"/>
+                        <form:submit_inline button="save" waiting="true" name="SUBMIT" action="zip_datasheets" />
+                <form:buttonset_end />
+            <form:row_end />
+            <form:hidden name="job_code" value="<%= user.getJobCode() %>" />
+            <% } %>
     <form:end />
 <admin:box_end />
 <% } %>

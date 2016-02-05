@@ -23,6 +23,9 @@ import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
  
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
@@ -270,8 +273,13 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		this.addReelLog(Reel.STATUS_SHIPPED, content, user.getName() + " marked reel as Shipped with shipped quantity of " + content.getShippedQuantity() + ", carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList());
+		
 		if(shipped) {
+			if(user.getUserType().equals(RTUser.USER_TYPE_VENDOR)) {
+				this.addReelLog(Reel.STATUS_SHIPPED, content, "Vendor " + user.getName() + " marked reel as Shipped with shipped quantity of " + content.getShippedQuantity() + ", carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList());
+			} else {
+				this.addReelLog(Reel.STATUS_SHIPPED, content, user.getName() + " marked reel as Shipped with shipped quantity of " + content.getShippedQuantity() + ", carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList());
+			}
 			content.setStatus(Reel.STATUS_SHIPPED);
 		}
 		content.setUpdated(new Date());
@@ -897,6 +905,92 @@ public class ReelMgr extends CompWebManager {
 		}
 		
 		return toReturn;
+	}
+
+	public String zipDataSheets(String jobCode, String basePath) throws Exception {
+		CableTechData techData = new CableTechData();
+		CompEntityPuller puller = new CompEntityPuller(techData);
+		techData.setJobCode(jobCode);
+		puller.addSearch(techData);
+		CompEntities techs = controller.pullCompEntities(puller, 0, 0);
+
+		String zipFileName = "datasheets_" + jobCode + ".zip";
+		try {
+			File dir = new File(basePath + "/reports/");
+			dir.mkdirs();
+
+			FileOutputStream fos = new FileOutputStream(basePath + "/reports/" + zipFileName);
+			ZipOutputStream zos = new ZipOutputStream(fos);
+
+			for(int x=0;x<techs.howMany();x++) {
+				techData = (CableTechData)techs.get(x);
+				if(!techData.getDataSheetFile().equals("")) {
+					File dataSheet = new File(basePath + techData.getCompEntityDirectory() + "/" + techData.getDataSheetFile());
+					if(dataSheet.exists()) {
+						FileInputStream fis = new FileInputStream(dataSheet);
+						ZipEntry zipEntry = new ZipEntry(techData.getDataSheetFile());
+						zos.putNextEntry(zipEntry);
+						byte[] bytes = new byte[1024];
+						int length;
+						while ((length = fis.read(bytes)) >= 0) {
+							zos.write(bytes, 0, length);
+						}
+						zos.closeEntry();
+						fis.close();
+					}
+				}
+			}
+
+			zos.close();
+			fos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return zipFileName;
+	}
+
+	public String zipCtrFiles(String jobCode, String basePath) throws Exception {
+		Reel reel = new Reel();
+		CompEntityPuller puller = new CompEntityPuller(reel);
+		reel.setJobCode(jobCode);
+		puller.addSearch(reel);
+		CompEntities reels = controller.pullCompEntities(puller, 0, 0);
+
+		String zipFileName = "ctr_" + jobCode + ".zip";
+		try {
+			File dir = new File(basePath + "/reports/");
+			dir.mkdirs();
+
+			FileOutputStream fos = new FileOutputStream(basePath + "/reports/" + zipFileName);
+			ZipOutputStream zos = new ZipOutputStream(fos);
+
+			for(int x=0;x<reels.howMany();x++) {
+				reel = (Reel)reels.get(x);
+				if(!reel.getCTRFile().equals("")) {
+					File dataSheet = new File(basePath + reel.getCompEntityDirectory() + "/" + reel.getCTRFile());
+					if(dataSheet.exists()) {
+						FileInputStream fis = new FileInputStream(dataSheet);
+						ZipEntry zipEntry = new ZipEntry(reel.getCTRFile());
+						zos.putNextEntry(zipEntry);
+						byte[] bytes = new byte[1024];
+						int length;
+						while ((length = fis.read(bytes)) >= 0) {
+							zos.write(bytes, 0, length);
+						}
+						zos.closeEntry();
+						fis.close();
+					}
+				}
+			}
+
+			zos.close();
+			fos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return zipFileName;
 	}
 
 	public CompEntities getReelsWithoutCustPN(Reel content, String sort_by, boolean asc, int howMany, int skip) throws Exception {

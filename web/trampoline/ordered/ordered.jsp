@@ -85,6 +85,11 @@ if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
     content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ); 
 }
 
+if(request.getParameter(Reel.ORDNO_COLUMN) != null) {  
+    content.setOrdNo(request.getParameter(Reel.ORDNO_COLUMN));
+    content.setSearchOp(Reel.ORDNO_COLUMN, Reel.TRUE_PARTIAL); 
+}
+
 session.setAttribute("ordered_ordered",content);
 
 String column = Reel.CR_ID_COLUMN;
@@ -123,6 +128,7 @@ String tempURL = "";
         <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
         <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
         <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
+        <form:textfield label="ECS PO:" name="<%= Reel.ORDNO_COLUMN %>" value="<%= content.getOrdNo() %>" />
         <% tempURL = user.getCustomerName() + " PO:"; %>
         <form:textfield label="<%= tempURL %>" name="<%= Reel.CUSTOMER_PO_COLUMN %>" value="<%= content.getCustomerPO() %>" />
         <% tempURL = user.getCustomerName() + " P/N:"; %>

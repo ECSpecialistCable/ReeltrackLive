@@ -10,9 +10,11 @@
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr"/>
 <jsp:useBean id="customerMgr" class="com.reeltrack.customers.CustomerMgr"/>
+<jsp:useBean id="securityMgr" class="com.reeltrack.users.RTUserMgr" scope="request"/>
 
 <% CompProperties props = new CompProperties(); %>
 <% customerMgr.init(pageContext,dbResources); %>
+<% securityMgr.init(dbResources); %>
 
 <% 	 
 userLoginMgr.init(pageContext, dbResources);
@@ -28,6 +30,16 @@ if(request.getParameter("submit_action") != null) {
 <%  if(action.equals("login" )) { %>
 <%  
 userLoginMgr.login(request.getParameter(RTUser.USERNAME_COLUMN), request.getParameter(RTUser.PASSWORD_COLUMN));
+redirect = request.getContextPath() + "/trampoline/index.jsp";
+%>
+<% } %>
+
+<%  if(action.equals("vendor" )) { %>
+<%  
+RTUser vendor = new RTUser();
+vendor.setId(Integer.parseInt(request.getParameter(RTUser.PARAM)));
+vendor = (RTUser)securityMgr.getUser(vendor, true, false);
+userLoginMgr.login(vendor.getUsername(), vendor.getPassword());
 redirect = request.getContextPath() + "/trampoline/index.jsp";
 %>
 <% } %>

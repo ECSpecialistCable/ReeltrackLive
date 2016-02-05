@@ -50,6 +50,11 @@
 		ctr = request.getParameter("ctr");
 	}
 
+	String zip_ctr = "";
+	if(request.getParameter("zip_ctr")!=null) {
+		zip_ctr = request.getParameter("zip_ctr");
+	}
+
 	String cir = "";
 	if(request.getParameter("cir")!=null) {
 		cir = request.getParameter("cir");
@@ -230,6 +235,30 @@
     <form:hidden name="job_code" value="<%= user.getJobCode() %>" />
     <form:end />
     <admin:box_end />
+
+    <admin:subtitle text="CTR Files" />
+    <admin:box_begin />
+    <form:begin name="ctr_files" action="reports/process.jsp" />
+    <%if(!zip_ctr.equals("")) { %>
+	    <form:row_begin />
+	    <form:label name="" label="Download:" />
+	    <form:buttonset_begin align="left" padding="0"/>
+	    <% String url = request.getContextPath() + "/reports/" + zip_ctr; %>
+	    <a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+	    <form:buttonset_end />
+	    <form:row_end />
+    <% } else { %>
+	    <form:row_begin />
+	    <form:label name="" label="Generate:" />
+	    <form:buttonset_begin align="left" padding="0"/>
+	    <form:submit_inline button="submit" waiting="false" name="submit" action="zip_ctr" />
+	    <form:buttonset_end />
+	    <form:row_end />
+	    <form:hidden name="job_code" value="<%= user.getJobCode() %>" />
+    <% } %>
+    <form:end />
+    <admin:box_end />
+
 
 <admin:subtitle text="Period Report" />
 <admin:box_begin />

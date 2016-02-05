@@ -107,6 +107,11 @@ if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {
     content.setSearchOp(Reel.PN_CONDUCTOR_COLUMN, Reel.EQ); 
 }
 
+if(request.getParameter(Reel.ORDNO_COLUMN) != null) {  
+    content.setOrdNo(request.getParameter(Reel.ORDNO_COLUMN));
+    content.setSearchOp(Reel.ORDNO_COLUMN, Reel.TRUE_PARTIAL); 
+}
+
 String circuit_name_search = "";
 if(session.getAttribute("circuit_name_search")!=null) {
     circuit_name_search = (String)session.getAttribute("circuit_name_search");
@@ -169,6 +174,7 @@ String tempURL = "";
         <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
         <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
         <form:textfield label="Description:" name="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" value="<%= content.getCableDescription() %>" />
+        <form:textfield label="ECS PO:" name="<%= Reel.ORDNO_COLUMN %>" value="<%= content.getOrdNo() %>" />
         <% tempURL = user.getCustomerName() + " PO:"; %>
         <form:textfield label="<%= tempURL %>" name="<%= Reel.CUSTOMER_PO_COLUMN %>" value="<%= content.getCustomerPO() %>" />
         <% tempURL = user.getCustomerName() + " P/N:"; %>
