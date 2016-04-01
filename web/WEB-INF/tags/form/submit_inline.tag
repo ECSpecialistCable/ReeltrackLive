@@ -10,6 +10,7 @@
 <%@ attribute name="waiting" required="false" %>
 <%@ attribute name="cb_content" required="false"%>
 <%@ attribute name="warning" required="false" %>
+<%@ attribute name="message" required="false" %>
 
 <input type="hidden" name="submit_action" value="${action}" />
 <!-- <input type="submit" value="[${fn:toUpperCase(name)}]" style="display: none;" /> -->
@@ -28,7 +29,7 @@
 			<button type="button"
 			<% if(warning!=null && warning.equals("true")) { %>
 				class="btn btn-primary btn-xs warning_msg ajax_submitter"
-    			rel="Please confirm all values are correct."
+    			rel="${message}"
 		    <% } else { %>
 					class="btn btn-primary btn-xs ajax_submitter"
 			<% } %>

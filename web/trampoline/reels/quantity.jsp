@@ -43,6 +43,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
 }
 
 String tempURL; //var for url expression
+int weight = techData.getWeight();
 %>
 <% dbResources.close(); %>
 
@@ -102,7 +103,7 @@ String tempURL; //var for url expression
     			<form:row_begin />
     				<form:label name="" label="" />
     				<form:buttonset_begin align="left" padding="0"/>
-    					<form:submit_inline button="save" waiting="true" name="save" action="record_pull" />
+    					<form:submit_inline warning="true" message="Please confirm Pulled Qty is correct." button="save" waiting="true" name="save" action="record_pull" />
     				<form:buttonset_end />
     			<form:row_end />
         <form:end />
@@ -118,7 +119,7 @@ String tempURL; //var for url expression
                 <form:row_begin />
                     <form:label name="" label="" />
                     <form:buttonset_begin align="left" padding="0"/>
-                        <form:submit_inline button="save" waiting="true" name="save" action="record_weight" />
+                        <form:submit_inline warning="true" message="Please confirm Current Lbs is correct." button="save" waiting="true" name="save" action="record_weight" />
                     <form:buttonset_end />
                 <form:row_end />
         <form:end />
@@ -134,7 +135,7 @@ String tempURL; //var for url expression
                 <form:row_begin />
                     <form:label name="" label="" />
                     <form:buttonset_begin align="left" padding="0"/>
-                        <form:submit_inline button="save" waiting="true" name="save" action="record_top_marker" />
+                        <form:submit_inline warning="true" message="Please confirm Top Foot # is correct." button="save" waiting="true" name="save" action="record_top_marker" />
                     <form:buttonset_end />
                 <form:row_end />
         <form:end />
