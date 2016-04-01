@@ -109,7 +109,14 @@ String[] carrierList = reelMgr.getCarriers();
 
 <html:begin />
 <h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
-<% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
+<%
+tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus();
+if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
+    tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus() + " - " + content.getWharehouseLocation();
+} else if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) {
+    tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus() + " - " + picklist.getForeman();
+}
+%>
 <h1 style="padding-bottom:0px;"><%= tempURL %></h1>
 <p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
 <notifier:show_message />

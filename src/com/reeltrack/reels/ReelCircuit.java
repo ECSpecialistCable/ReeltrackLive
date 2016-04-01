@@ -10,6 +10,7 @@ public class ReelCircuit extends CompCMEntity {
 	public static final String NAME_COLUMN = "name";
 	public static final String IS_PULLED_COLUMN = "is_pulled";
 	public static final String IS_SYNCED_COLUMN = "is_synced";
+	public static final String MAX_TENSION_COLUMN = "max_tension";
 
 	public String tmpReelTag = "";
 
@@ -38,6 +39,14 @@ public class ReelCircuit extends CompCMEntity {
 	
 	public void setReelId(int id) {
 		this.getData().setInteger(REEL_ID_COLUMN, id);
+	}
+
+	public int getMaxTension() {
+		return this.getData().getInteger(MAX_TENSION_COLUMN, 0);
+	}
+	
+	public void setMaxTension(int id) {
+		this.getData().setInteger(MAX_TENSION_COLUMN, id);
 	}
 	
 	public int getLength() {

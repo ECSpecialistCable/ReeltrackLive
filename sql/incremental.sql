@@ -344,3 +344,6 @@ alter table reels add vendor_code varchar(25);
 alter table reels add vendor_abbrev_name varchar(25);
 
 alter table users add column vendor_code varchar(15);
+
+/* 2016 */
+alter table reel_circuits add max_tension int(11) default 0;

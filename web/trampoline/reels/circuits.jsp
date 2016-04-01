@@ -145,6 +145,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
             <listing:header_cell name="Name" />
             <listing:header_cell width="100" name="Est. Length" />
             <listing:header_cell width="175" name="Mark Actual Length Pulled" />
+            <listing:header_cell width="150" name="Max Tension When Pulled" />
             <listing:header_cell width="50" name=""  />
         <listing:header_end />
         <% for(int i=0; i<circuits.howMany(); i++) { %>
@@ -173,6 +174,19 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
                     <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.ACT_LENGTH_COLUMN %>" value="<%= new Integer(circuit.getActLength()).toString() %>" />
                     <form:checkbox label="" name="<%= ReelCircuit.IS_PULLED_COLUMN %>" value="y" match="<%= circuit.getIsPulled() %>" />        
+                    <%-- onclick="this.form.submit();"  --%>
+                    <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
+                    <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
+                    <%--<form:hidden name="submit_action" value="update_circuit" />--%>
+                    <% if(canSubmit) { %>
+                    <form:submit_inline waiting="true" name="save" action="update_circuit" />
+                    <% } %>
+                <form:end_inline />
+            <listing:cell_end />
+            <listing:cell_begin />
+                <% tempURL = "i" + circuit.getId(); %>
+                <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
+                    <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="<%= new Integer(circuit.getMaxTension()).toString() %>" />       
                     <%-- onclick="this.form.submit();"  --%>
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />

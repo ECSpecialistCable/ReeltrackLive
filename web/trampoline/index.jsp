@@ -184,7 +184,7 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 				<% String welcomeStr = "Welcome, " + user.getFname() + " " + user.getLname(); %>
 				<% 
 				if(!user.getJobName().equals("")) {
-					welcomeStr = welcomeStr + " of " + user.getJobName() + " Project";
+					welcomeStr = welcomeStr + " of " + user.getJobName() + " Project #" + user.getJobCode();
 				}
 				%>
 

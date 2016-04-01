@@ -135,7 +135,7 @@ if(action.equals("mark_staged")) {
     try {
         content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
     } catch(Exception e) {}
-    reelMgr.markReelStaged(content);
+    
 
     if(request.getParameter(PickList.PARAM)!=null) {
         PickList picklist = new PickList();
@@ -148,14 +148,15 @@ if(action.equals("mark_staged")) {
 		} else {
 			picklist.setName(prevContent.getReelTag());
 			picklistId = picklistMgr.addPickList(picklist);
-			content = new Reel();
-			content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
-			content.setPickListId(picklistId);
-			picklistMgr.updateReelForPickList(content);
+			Reel content2 = new Reel();
+			content2.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+			content2.setPickListId(picklistId);
+			picklistMgr.updateReelForPickList(content2);
 		}
 
     }
-    
+    reelMgr.markReelStaged(content);
+
     session.removeAttribute("RT");
     session.removeAttribute("PL");
     redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
@@ -171,7 +172,7 @@ if(action.equals("mark_checkedout")) {
     try {
         content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
     } catch(Exception e) {}
-    reelMgr.markReelCheckedOut(content);
+    
 
     if(request.getParameter(PickList.PARAM)!=null) {
         PickList picklist = new PickList();
@@ -184,13 +185,15 @@ if(action.equals("mark_checkedout")) {
 		} else {
 			picklist.setName(prevContent.getReelTag());
 			picklistId = picklistMgr.addPickList(picklist);
-			content = new Reel();
-			content.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
-			content.setPickListId(picklistId);
-			picklistMgr.updateReelForPickList(content);
+			Reel content2 = new Reel();
+			content2.setId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+			content2.setPickListId(picklistId);
+			picklistMgr.updateReelForPickList(content2);
 		}
 
     }
+
+    reelMgr.markReelCheckedOut(content);
 
     session.removeAttribute("RT");
     session.removeAttribute("PL");
@@ -504,6 +507,9 @@ if(action.equals("update_circuit")) {
     content.setId(Integer.parseInt(request.getParameter(ReelCircuit.PARAM)));
     if(request.getParameter(ReelCircuit.LENGTH_COLUMN)!=null) {
         content.setLength(Integer.parseInt(request.getParameter(ReelCircuit.LENGTH_COLUMN)));
+    }
+    if(request.getParameter(ReelCircuit.MAX_TENSION_COLUMN)!=null) {
+        content.setMaxTension(Integer.parseInt(request.getParameter(ReelCircuit.MAX_TENSION_COLUMN)));
     }
     if(request.getParameter(ReelCircuit.ACT_LENGTH_COLUMN)!=null) {
         content.setActLength(Integer.parseInt(request.getParameter(ReelCircuit.ACT_LENGTH_COLUMN)));

@@ -76,6 +76,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 		<div style="width:95%;">
 			<h4>Received Shipments on <%= df.format(new Date()) %></h4>
 			<table style="width:100%;align:center;" cellpadding="3px" cellspacing="0">
+				<th class="center">CRID #</th>
 				<th class="center">Manufacturer</th>
 				<th class="center">Reel Tag</th>
 				<th class="center">Customer PN</th>
@@ -92,6 +93,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 					<% } else { %>
 						<tr style="background: #cccccc">
 					<% } %>
+						<td class="center"><%= current.getCrId() %></td>
 						<td class="center"><%= current.getManufacturer() %></td>
 						<td class="center"><%= current.getReelTag() %></td>
 						<td class="center"><%= current.getCustomerPN() %></td>
@@ -108,6 +110,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 		<div style="width:95%;">
 			<h4>Reel Checked OUT on <%= df.format(new Date()) %></h4>
 			<table style="width:100%;align:center;" cellpadding="3px" cellspacing="0">
+				<th class="center">CRID #</th>
 				<th class="center">Reel Tag</th>
 				<th class="center">Customer P/N</th>
 				<th class="center">Description</th>
@@ -122,6 +125,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 					<% } else { %>
 						<tr style="background: #cccccc">
 					<% } %>
+						<td class="center"><%= current.getCrId() %></td>
 						<td class="center"><%= current.getReelTag() %></td>
 						<td class="center"><%= current.getCustomerPN() %></td>
 						<td class="center"><%= current.getCableDescription() %></td>
@@ -135,6 +139,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 		<div style="width:95%;">
 			<h4>Reel Checked IN on <%= df.format(new Date()) %></h4>
 			<table style="width:100%;align:center;" cellpadding="3px" cellspacing="0">
+				<th style="border-bottom: none" class="center">CRID #</th>
 				<th style="border-bottom: none" class="center">Reel Tag</th>
 				<th style="border-bottom: none" class="center">Customer P/N</th>
 				<th style="border-bottom: none" class="center">Description</th>
@@ -156,6 +161,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 					<% } else { %>
 						<tr style="background: #cccccc">
 					<% } %>
+						<td class="center"><%= current.getCrId() %></td>
 						<td class="center"><%= current.getReelTag() %></td>
 						<td class="center"><%= current.getCustomerPN() %></td>
 						<td class="center"><%= current.getCableDescription() %></td>

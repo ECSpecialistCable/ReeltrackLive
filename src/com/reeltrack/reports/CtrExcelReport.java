@@ -126,6 +126,11 @@ public class CtrExcelReport {
 
 		sheet.setColumnWidth(nextNum, 3000);
 		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("CRID");
+		cell.setCellStyle(styleHeader);
+
+		sheet.setColumnWidth(nextNum, 3000);
+		cell = row.createCell((short) nextNum++);
 		cell.setCellValue("Status");
 		cell.setCellStyle(styleHeader);
 
@@ -194,6 +199,7 @@ public class CtrExcelReport {
 			row = sheet.createRow((short) rowNum++);
 			nextNum=0;
 			row.createCell((short)nextNum++).setCellValue(current.getReelTag());
+			row.createCell((short)nextNum++).setCellValue(current.getCrId());
 			row.createCell((short)nextNum++).setCellValue(current.getStatus());
 			row.createCell((short)nextNum++).setCellValue(current.getWharehouseLocation());
 			row.createCell((short)nextNum++).setCellValue(current.getOnReelQuantity());

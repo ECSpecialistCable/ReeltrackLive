@@ -224,7 +224,7 @@ String tempURL = "";
             <listing:header_cell width="55" first="true" name="CRID #" column="<%= Reel.CR_ID_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="ordered/search.jsp" />
             <listing:header_cell name="Reel Tag" column="<%= Reel.REEL_TAG_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="ordered/search.jsp" />
             <listing:header_cell name="Cable Description" column="<%= Reel.CABLE_DESCRIPTION_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="ordered/search.jsp" />
-            <listing:header_cell width="100" name="Prj. Ship Date" column="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="ordered/search.jsp" />
+            <listing:header_cell width="100" name="(Prj) Ship Date" column="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="ordered/search.jsp" />
             <listing:header_cell width="75" name="Status" column="<%= Reel.STATUS_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="ordered/search.jsp" />
             <listing:header_cell width="40" name=""  />
         <listing:header_end />
@@ -241,7 +241,11 @@ String tempURL = "";
                 <%= content.getCableDescription() %>
             <listing:cell_end />
             <listing:cell_begin />
+                <% if(content.getStatus().equals(Reel.STATUS_SHIPPED)) { %>
+                <%= content.getShippingDateString() %>
+                <% } else { %>
                 <%= content.getProjectedShippingDateString() %>
+                <% } %>
             <listing:cell_end />
             <listing:cell_begin />
                 <%= content.getStatus() %>

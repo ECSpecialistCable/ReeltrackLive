@@ -100,6 +100,10 @@ if(request.getParameter("action") != null) {
     session.setAttribute("packingNum",packingNum);
 	carrierName = request.getParameter("carrierName");
     session.setAttribute("carrierName",carrierName);
+    if(!request.getParameter("other_carrier").equals("")) {
+        carrierName = request.getParameter("other_carrier");
+        session.setAttribute("carrierName",carrierName);
+    }
     shippingDate = request.getParameter("shippingDate");
     session.setAttribute("shippingDate",shippingDate);
 }
@@ -138,8 +142,8 @@ if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {
 }
 
 if(user.isUserType(RTUser.USER_TYPE_VENDOR)) {
-    content.setVendorCode(user.getVendorCode());
-    //content.setVendorCode("");
+    //content.setVendorCode(user.getVendorCode());
+    content.setVendorCode("");
 }
 
 String column = Reel.REEL_TAG_COLUMN;
@@ -249,13 +253,14 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
         <form:label name="" label="Carrier:" />
         <form:content_begin />
         <form:select_begin name="carrierName" />
-            <form:option name="None" value="" match="<%= carrierName %>"/>
+            <form:option name="<%= carrierName %>" value="<%= carrierName %>"/>
             <% for(int x=0; x<carrierList.length; x++) { %>
                 <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= carrierName %>"/>
             <% } %>
         <form:select_end />
         <form:content_end />
     <form:row_end />
+    <form:textfield label="Other Carrier:" name="other_carrier" />
     <form:date_picker name="shippingDate" value="<%= shippingDate %>" label="Shipped Date:" />
     <form:hidden name="action" value="save" />
     <form:row_begin />
@@ -331,11 +336,13 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
                     <form:textfield label="Current GWT:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
                 <% } %>
                 <form:hidden name="<%= Reel.ORDERED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
-                <form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
+                
                 <form:row_begin />
                 <form:label name="" label="" />
                 <form:content_begin />
-                    <form:checkbox label="Set Shipping Quantity to Ordered Quantity" name="ordered_to_shipping" value="y" />
+                    <form:textfield_inline pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
+                    or
+                    <form:checkbox label="Shipped Quantity equals Ordered Quantity" name="ordered_to_shipping" value="y" />
                 <form:content_end />
                 <form:row_end />
                 <% if(canEdit) { %>
@@ -351,7 +358,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
                 <form:label name="" label="Carrier:" />
                 <form:content_begin />
                 <form:select_begin name="<%= Reel.CARRIER_COLUMN %>" />
-                    <form:option name="None" value="" match="<%= carrierName %>" />
+                    <form:option name="<%= carrierName %>" value="<%= carrierName %>"/>
                     <% //String[] carrierList  = content.getCarrierList(); %>
                     <% for(int x=0; x<carrierList.length; x++) { %>
                         <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= carrierName %>" />
