@@ -971,7 +971,7 @@ public class ReelMgr extends CompWebManager {
 					File dataSheet = new File(basePath + reel.getCompEntityDirectory() + "/" + reel.getCTRFile());
 					if(dataSheet.exists()) {
 						FileInputStream fis = new FileInputStream(dataSheet);
-						ZipEntry zipEntry = new ZipEntry(reel.getCTRFile());
+						ZipEntry zipEntry = new ZipEntry(reel.getCTRFile().replaceAll(",","").replaceAll("#","").replaceAll("'",""));
 						zos.putNextEntry(zipEntry);
 						byte[] bytes = new byte[1024];
 						int length;
