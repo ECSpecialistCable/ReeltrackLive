@@ -928,7 +928,8 @@ public class ReelMgr extends CompWebManager {
 					File dataSheet = new File(basePath + techData.getCompEntityDirectory() + "/" + techData.getDataSheetFile());
 					if(dataSheet.exists()) {
 						FileInputStream fis = new FileInputStream(dataSheet);
-						ZipEntry zipEntry = new ZipEntry(techData.getDataSheetFile());
+						String filename = "datasheet" + (x+1) + "-" + techData.getDataSheetFile();
+						ZipEntry zipEntry = new ZipEntry(filename);
 						zos.putNextEntry(zipEntry);
 						byte[] bytes = new byte[1024];
 						int length;
@@ -972,7 +973,7 @@ public class ReelMgr extends CompWebManager {
 					File dataSheet = new File(basePath + reel.getCompEntityDirectory() + "/" + reel.getCTRFile());
 					if(dataSheet.exists()) {
 						FileInputStream fis = new FileInputStream(dataSheet);
-						String filename = reel.getCTRFile().replaceAll(",","").replaceAll("#","").replaceAll("'","");
+						String filename = "ctr" + (x+1) + "-" + reel.getCTRFile(); //.replaceAll(",","").replaceAll("#","").replaceAll("'","");
 						System.out.println("adding file:" + filename);
 
 						ZipEntry zipEntry = new ZipEntry(filename);
