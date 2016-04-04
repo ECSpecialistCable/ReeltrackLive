@@ -965,13 +965,17 @@ public class ReelMgr extends CompWebManager {
 			FileOutputStream fos = new FileOutputStream(basePath + "/reports/" + zipFileName);
 			ZipOutputStream zos = new ZipOutputStream(fos);
 
+			System.out.println("creating zip file:" + zipFileName);
 			for(int x=0;x<reels.howMany();x++) {
 				reel = (Reel)reels.get(x);
 				if(!reel.getCTRFile().equals("")) {
 					File dataSheet = new File(basePath + reel.getCompEntityDirectory() + "/" + reel.getCTRFile());
 					if(dataSheet.exists()) {
 						FileInputStream fis = new FileInputStream(dataSheet);
-						ZipEntry zipEntry = new ZipEntry(reel.getCTRFile().replaceAll(",","").replaceAll("#","").replaceAll("'",""));
+						String filename = reel.getCTRFile().replaceAll(",","").replaceAll("#","").replaceAll("'","");
+						System.out.println("adding file:" + filename);
+
+						ZipEntry zipEntry = new ZipEntry(filename);
 						zos.putNextEntry(zipEntry);
 						byte[] bytes = new byte[1024];
 						int length;
@@ -983,6 +987,7 @@ public class ReelMgr extends CompWebManager {
 					}
 				}
 			}
+			System.out.println("done adding files");
 
 			zos.close();
 			fos.close();
