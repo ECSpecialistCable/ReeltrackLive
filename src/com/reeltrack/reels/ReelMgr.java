@@ -973,7 +973,7 @@ public class ReelMgr extends CompWebManager {
 					File dataSheet = new File(basePath + reel.getCompEntityDirectory() + "/" + reel.getCTRFile());
 					if(dataSheet.exists()) {
 						FileInputStream fis = new FileInputStream(dataSheet);
-						String filename = "ctr" + (x+1) + "-" + reel.getCTRFile(); //.replaceAll(",","").replaceAll("#","").replaceAll("'","");
+						String filename = "CRID" + reel.getCrId() + "-" + reel.getCTRFile(); //.replaceAll(",","").replaceAll("#","").replaceAll("'","");
 						System.out.println("adding file:" + filename);
 
 						ZipEntry zipEntry = new ZipEntry(filename);
