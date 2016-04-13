@@ -142,8 +142,8 @@ if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {
 }
 
 if(user.isUserType(RTUser.USER_TYPE_VENDOR)) {
-    //content.setVendorCode(user.getVendorCode());
-    content.setVendorCode("");
+    content.setVendorCode(user.getVendorCode());
+    //content.setVendorCode("");
 }
 
 String column = Reel.REEL_TAG_COLUMN;
