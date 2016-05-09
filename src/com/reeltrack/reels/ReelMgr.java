@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.io.FileInputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
- 
+
 import net.glxn.qrgen.QRCode;
 import net.glxn.qrgen.image.ImageType;
 import org.apache.poi.xssf.usermodel.*;
@@ -38,7 +38,7 @@ import org.apache.poi.ss.util.*;
 public class ReelMgr extends CompWebManager {
 	CompDbController controller;
 	MediaManager mediaMgr;
-	
+
 	public void init(PageContext pageContext, DbResources resources) {
 		super.init(pageContext, resources);
 		this.controller = this.newCompController();
@@ -48,7 +48,7 @@ public class ReelMgr extends CompWebManager {
 
 	public void updateReelData(Reel content, String basePath, File file) throws Exception {
 		if(file!=null) {
-			content.setCTRFile(mediaMgr.addMedia(file, content, basePath));	
+			content.setCTRFile(mediaMgr.addMedia(file, content, basePath));
 		}
 		controller.update(content);
 	}
@@ -61,7 +61,7 @@ public class ReelMgr extends CompWebManager {
 		content.setJobCode(user.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
-		puller.setGroupBy(content.getTableName(), Reel.PN_VOLT_COLUMN, "volts"); 
+		puller.setGroupBy(content.getTableName(), Reel.PN_VOLT_COLUMN, "volts");
 		puller.setSortBy(content.getTableName(), Reel.PN_VOLT_COLUMN, true);
 		CompEntities volts = controller.pullCompEntities(puller, 0, 0);
 		String[] results = new String[volts.howMany()];
@@ -69,7 +69,7 @@ public class ReelMgr extends CompWebManager {
 			Reel reel = (Reel)volts.get(x);
 			results[x] = reel.getPnVolt();
 		}
-		return results;		
+		return results;
 	}
 
 	public String[] getPnGauges() throws Exception {
@@ -80,7 +80,7 @@ public class ReelMgr extends CompWebManager {
 		content.setJobCode(user.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
-		puller.setGroupBy(content.getTableName(), Reel.PN_GAUGE_COLUMN, "gauge"); 
+		puller.setGroupBy(content.getTableName(), Reel.PN_GAUGE_COLUMN, "gauge");
 		puller.setSortBy(content.getTableName(), Reel.PN_GAUGE_COLUMN, true);
 		CompEntities volts = controller.pullCompEntities(puller, 0, 0);
 		String[] results = new String[volts.howMany()];
@@ -88,7 +88,7 @@ public class ReelMgr extends CompWebManager {
 			Reel reel = (Reel)volts.get(x);
 			results[x] = reel.getPnGauge();
 		}
-		return results;		
+		return results;
 	}
 
 	public String[] getPnConductors() throws Exception {
@@ -99,7 +99,7 @@ public class ReelMgr extends CompWebManager {
 		content.setJobCode(user.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
-		puller.setGroupBy(content.getTableName(), Reel.PN_CONDUCTOR_COLUMN, "conductor"); 
+		puller.setGroupBy(content.getTableName(), Reel.PN_CONDUCTOR_COLUMN, "conductor");
 		puller.setSortBy(content.getTableName(), Reel.PN_CONDUCTOR_COLUMN, true);
 		CompEntities volts = controller.pullCompEntities(puller, 0, 0);
 		String[] results = new String[volts.howMany()];
@@ -107,7 +107,7 @@ public class ReelMgr extends CompWebManager {
 			Reel reel = (Reel)volts.get(x);
 			results[x] = reel.getPnConductor();
 		}
-		return results;		
+		return results;
 	}
 
 	public String[] getCarriers() throws Exception {
@@ -118,7 +118,7 @@ public class ReelMgr extends CompWebManager {
 		content.setJobCode(user.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
-		puller.setGroupBy(content.getTableName(), Reel.CARRIER_COLUMN, "carriers"); 
+		puller.setGroupBy(content.getTableName(), Reel.CARRIER_COLUMN, "carriers");
 		puller.setSortBy(content.getTableName(), Reel.CARRIER_COLUMN, true);
 		CompEntities manufacturers = controller.pullCompEntities(puller, 0, 0);
 		String[] results = new String[manufacturers.howMany()];
@@ -126,9 +126,9 @@ public class ReelMgr extends CompWebManager {
 			Reel reel = (Reel)manufacturers.get(x);
 			results[x] = reel.getCarrier();
 		}
-		return results;		
+		return results;
 	}
-	
+
 	public String[] getManufacturers() throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
@@ -137,7 +137,7 @@ public class ReelMgr extends CompWebManager {
 		content.setJobCode(user.getJobCode());
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
-		puller.setGroupBy(content.getTableName(), Reel.MANUFACTURER_COLUMN, "manufacturers"); 
+		puller.setGroupBy(content.getTableName(), Reel.MANUFACTURER_COLUMN, "manufacturers");
 		puller.setSortBy(content.getTableName(), Reel.MANUFACTURER_COLUMN, true);
 		CompEntities manufacturers = controller.pullCompEntities(puller, 0, 0);
 		String[] results = new String[manufacturers.howMany()];
@@ -145,22 +145,22 @@ public class ReelMgr extends CompWebManager {
 			Reel reel = (Reel)manufacturers.get(x);
 			results[x] = reel.getManufacturer();
 		}
-		return results;		
+		return results;
 	}
-	
+
     public void generateQrCode(Reel reel) throws Exception {
     	Reel theReel = new Reel();
     	theReel.setId(reel.getId());
     	CompEntityPuller puller = new CompEntityPuller(theReel);
 		puller.addSearch(theReel);
 		Reel pulledReel = (Reel)controller.pullCompEntity(puller);
-		
+
 		String domain = request.getServerName().toString();
 		//String qrcode = "RT:" + pulledReel.getCustomerPN() + ":" + pulledReel.getId() + ":" + pulledReel.getReelTag() + ":" + pulledReel.getReelSerial() + ":" + pulledReel.getCableDescription();
 		//String qrcode = "http://www.ecsreeltrack.com/trampoline/index.jsp?type=RT&id=" + pulledReel.getId() + "&job=" + pulledReel.getJobCode();
         String qrcode = "http://" + domain + "/trampoline/index.jsp?type=RT&id=" + pulledReel.getId() + "&job=" + pulledReel.getJobCode();
         ByteArrayOutputStream out = QRCode.from(qrcode).to(ImageType.PNG).withSize(500, 500).stream();
-        
+
         String baseDir = this.pageContext.getServletContext().getRealPath("/") + pulledReel.getCompEntityDirectory();
 	    File createDir = new File(baseDir);
 	    if(!createDir.exists()) {
@@ -169,7 +169,7 @@ public class ReelMgr extends CompWebManager {
 	    String fileName = "rt_qrcode_" + pulledReel.getId() + ".png";
 	    String filePath = baseDir + "/" + fileName;
         //System.out.println(filePath);
-        
+
         try {
             FileOutputStream fout = new FileOutputStream(new File(filePath));
             fout.write(out.toByteArray());
@@ -180,11 +180,11 @@ public class ReelMgr extends CompWebManager {
         } catch (IOException e) {
         	e.printStackTrace();
         }
-		
+
 		theReel.setRtQrCodeFile(fileName);
 		controller.update(theReel);
     }
-	
+
 	public int addReel(Reel content) throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
@@ -257,7 +257,7 @@ public class ReelMgr extends CompWebManager {
 			Reel toUpdate = new Reel();
 			toUpdate.setId(currReel.getId());
 			toUpdate.setCustomerPN(content.getCustomerPN());
-			
+
 			toUpdate.setUpdated(new Date());
 			controller.update(toUpdate);
 
@@ -273,7 +273,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		
+
 		if(shipped) {
 			if(user.getUserType().equals(RTUser.USER_TYPE_VENDOR)) {
 				this.addReelLog(Reel.STATUS_SHIPPED, content, "Vendor " + user.getName() + " marked reel as Shipped with shipped quantity of " + content.getShippedQuantity() + ", carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList());
@@ -312,7 +312,7 @@ public class ReelMgr extends CompWebManager {
 					CompProperties props = new CompProperties();
 					String mailHost = props.getProperty("mailHost");
 				    String mailFrom = customer.getIssueContactEmail();//props.getProperty("mailFrom");
-					
+
 					ArrayList emails = new ArrayList();
 					emails.add(customer.getIssueContactEmail());
 			        EmailSender emailer = new EmailSender();
@@ -356,7 +356,7 @@ public class ReelMgr extends CompWebManager {
 				CompProperties props = new CompProperties();
 				String mailHost = props.getProperty("mailHost");
 			    String mailFrom = customer.getIssueContactEmail();//props.getProperty("mailFrom");
-				
+
 				ArrayList emails = new ArrayList();
 				emails.add(customer.getIssueContactEmail());
 		        EmailSender emailer = new EmailSender();
@@ -478,11 +478,21 @@ public class ReelMgr extends CompWebManager {
 		RTUser user = (RTUser)umgr.getUser();
 		content.setStatus(Reel.STATUS_IN_WHAREHOUSE);
 		content.setPickListId(0);
-		this.addReelLog(Reel.STATUS_IN_WHAREHOUSE, content, "Reel was checked in by " + user.getName() + " from driver " + driverName + " with a new Top # of " + content.getTopFoot());
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateOnReelQuantity(content);
 		this.updateCheckedOutInNum(content,false);
+
+    Reel currReel = new Reel();
+		currReel.setId(content.getId());
+		currReel = this.getReel(currReel);
+
+    CableTechData techData = this.getCableTechData(currReel);
+    if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) {
+      this.addReelLog(Reel.STATUS_IN_WHAREHOUSE, content, "Reel was checked in by " + user.getName() + " from driver " + driverName + " with a new Top # of " + content.getTopFoot());
+    } else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) {
+      this.addReelLog(Reel.STATUS_IN_WHAREHOUSE, content, "Reel was weighed and checked in by " + user.getName() + ". Weight = " + currReel.getCurrentWeight() + ". Quantity used to date " + (currReel.getReceivedQuantity() - currReel.getOnReelQuantity()) + ". Updated quantity on reel = " + currReel.getOnReelQuantity() + ".");
+    }
 	}
 
 	public void markReelComplete(Reel content) throws Exception {
@@ -626,11 +636,11 @@ public class ReelMgr extends CompWebManager {
 
 	public void updateCableTechData(CableTechData content, String basePath, File file) throws Exception {
 		if(file!=null) {
-			content.setDataSheetFile(mediaMgr.addMedia(file, content, basePath));	
+			content.setDataSheetFile(mediaMgr.addMedia(file, content, basePath));
 		}
 		controller.update(content);
 	}
-	
+
 	public Reel getReel(Reel content) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
@@ -903,7 +913,7 @@ public class ReelMgr extends CompWebManager {
 			centity.setCompEntity(CableTechData.PARAM, techData);
 			toReturn.add(centity);
 		}
-		
+
 		return toReturn;
 	}
 
@@ -1043,7 +1053,7 @@ public class ReelMgr extends CompWebManager {
 		}
 	}
 
-	
+
 	public void deleteReel(Reel content, String realRootContextPath) throws Exception {
 		this.cleanReel(content, realRootContextPath);
 		controller.delete(realRootContextPath, content);
@@ -1092,7 +1102,7 @@ public class ReelMgr extends CompWebManager {
 					amount += theReel.getOrderedQuantity();
 				} else if(theReel.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) || theReel.getStatus().equals(Reel.STATUS_CHECKED_OUT)) {
 					amount += theReel.getOnReelQuantity();
-				}	
+				}
 			}
 		}
 
@@ -1101,10 +1111,10 @@ public class ReelMgr extends CompWebManager {
 		//	toSearch.setStatus(status);
 			//toSearch.setSearchOp(Reel.STATUS_COLUMN, Reel.EQ);
 		//}
-		
+
 		//toSearch.setSearchOp(Reel.ECS_PN_COLUMN, Reel.EQ);
-		
-		
+
+
 	}
 
 	/*** Reel Logs ***/
@@ -1159,16 +1169,29 @@ public class ReelMgr extends CompWebManager {
 
 	public void cleanReelLogs(ReelLog content, String realRootContextPath) throws Exception {
 	}
-		
+
 	public void deleteReelLog(ReelLog content, String realRootContextPath) throws Exception {
 		this.cleanReelLogs(content,realRootContextPath);
 		controller.delete(null, content);
-	}	
+	}
 	/****************************/
 
 	/*** Reel Circuits ***/
+  public void addReelCircuitPull(Reel content) throws Exception {
+    ReelCircuit circuit = new ReelCircuit();
+    circuit.setReelId(content.getId());
+		circuit.setCreated(new Date());
+    circuit.setKind("p");
+		int toReturn = controller.add(circuit);
+    circuit = new ReelCircuit();
+    circuit.setId(toReturn);
+    circuit.setActLength(content.getTempPullAmount());
+    this.updateReelCircuitPull(circuit);
+	}
+
 	public int addReelCircuit(ReelCircuit content) throws Exception {
 		content.setCreated(new Date());
+    content.setKind("c");
 		int toReturn = controller.add(content);
 		this.updateReelType(content);
 		Reel currReel = new Reel();
@@ -1190,6 +1213,7 @@ public class ReelMgr extends CompWebManager {
 			content.setReelId(reelId);
 			content.setLength(value);
 			content.setName(key);
+      content.setKind("c");
 			controller.add(content);
 			this.updateReelType(content);
 		}
@@ -1212,23 +1236,116 @@ public class ReelMgr extends CompWebManager {
 		this.updateReel(currReel,false);
 	}
 
-	public void updateReelCircuit(ReelCircuit content) throws Exception {
-		/*
-		ReelCircuit rc = new ReelCircuit();
-		rc.setId(content.getId());
-		CompEntityPuller puller = new CompEntityPuller(rc);
-		puller.addSearch(rc);
-		rc = (ReelCircuit)controller.pullCompEntity(puller);
+  public void updateReelCircuitPull(ReelCircuit content) throws Exception {
+    ReelCircuit rc = new ReelCircuit();
+    rc.setId(content.getId());
+    CompEntityPuller puller = new CompEntityPuller(rc);
+    puller.addSearch(rc);
+    rc = (ReelCircuit)controller.pullCompEntity(puller);
+
+    Reel currReel = new Reel();
+		currReel.setId(rc.getReelId());
+		currReel = this.getReel(currReel);
+
+    CableTechData techData = this.getCableTechData(currReel);
+
+    if(content.getActLength()!=0) {
+      if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) {
+        Reel reel = new Reel();
+  		  reel.setId(rc.getReelId());
+        reel.setTopFoot(content.getActLength());
+        this.updateReelTop(reel);
+
+        Reel currReel2 = new Reel();
+    		currReel2.setId(rc.getReelId());
+    		currReel2 = this.getReel(currReel2);
+
+        content.setActLength(currReel.getOnReelQuantity()-currReel2.getOnReelQuantity());
+      } else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) {
+        int weight = techData.getWeight();
+        Reel reel = new Reel();
+  		  reel.setId(rc.getReelId());
+        reel.setCurrentWeight(reel.getCurrentWeight() - (content.getActLength()/1000 * weight));
+        this.updateReelWeight(reel);
+
+        Reel currReel2 = new Reel();
+    		currReel2.setId(rc.getReelId());
+    		currReel2 = this.getReel(currReel2);
+
+        content.setActLength(rc.getActLength() + (currReel.getOnReelQuantity()-currReel2.getOnReelQuantity()));
+      } else {
+        Reel reel = new Reel();
+  		  reel.setId(rc.getReelId());
+        reel.setTempPullAmount(content.getActLength());
+        this.updateReelPull(reel);
+
+        content.setActLength(rc.getActLength() + content.getActLength());
+      }
+      content.setIsPulled("y");
+    }
+
+		content.setUpdated(new Date());
+		controller.update(content);
+		this.updateReelType(content);
 
 		Reel reel = new Reel();
-		reel.setId(rc.getReelId());
-		if(content.isPulled()) {
-			reel.setTempPullAmount(rc.getLength());
-		} else {
-			reel.setTempPullAmount(-rc.getLength());
-		}
-		this.updateReelPull(reel);
-		*/
+		reel.setId(content.getReelId());
+		reel = this.getReel(reel);
+
+		RTUserLoginMgr umgr = new RTUserLoginMgr();
+		umgr.init(this.getPageContext(), this.getDbResources());
+		RTUser user = (RTUser)umgr.getUser();
+		this.addReelLog(reel, user.getName() + " pulled quantity " + content.getActLength() + "'.");
+	}
+
+	public void updateReelCircuit(ReelCircuit content) throws Exception {
+    ReelCircuit rc = new ReelCircuit();
+    rc.setId(content.getId());
+    CompEntityPuller puller = new CompEntityPuller(rc);
+    puller.addSearch(rc);
+    rc = (ReelCircuit)controller.pullCompEntity(puller);
+
+    Reel currReel = new Reel();
+		currReel.setId(rc.getReelId());
+		currReel = this.getReel(currReel);
+
+    CableTechData techData = this.getCableTechData(currReel);
+
+    if(content.getActLength()!=0) {
+      if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) {
+        Reel reel = new Reel();
+  		  reel.setId(rc.getReelId());
+        reel.setTopFoot(content.getActLength());
+        this.updateReelTop(reel);
+
+        Reel currReel2 = new Reel();
+    		currReel2.setId(rc.getReelId());
+    		currReel2 = this.getReel(currReel2);
+
+        content.setActLength(currReel.getOnReelQuantity()-currReel2.getOnReelQuantity());
+      } else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) {
+        int weight = techData.getWeight();
+        Reel reel = new Reel();
+  		  reel.setId(rc.getReelId());
+        reel.setCurrentWeight(reel.getCurrentWeight() - (content.getActLength()/1000 * weight));
+        this.updateReelWeight(reel);
+
+        Reel currReel2 = new Reel();
+    		currReel2.setId(rc.getReelId());
+    		currReel2 = this.getReel(currReel2);
+
+        content.setActLength(rc.getActLength() + (currReel.getOnReelQuantity()-currReel2.getOnReelQuantity()));
+      } else {
+        Reel reel = new Reel();
+  		  reel.setId(rc.getReelId());
+        reel.setTempPullAmount(content.getActLength());
+        this.updateReelPull(reel);
+
+        content.setActLength(rc.getActLength() + content.getActLength());
+      }
+      content.setIsPulled("y");
+    }
+
 		content.setUpdated(new Date());
 		controller.update(content);
 		this.updateReelType(content);
@@ -1242,7 +1359,12 @@ public class ReelMgr extends CompWebManager {
 		RTUser user = (RTUser)umgr.getUser();
 		this.addReelLog(reel, user.getName() + " updated circuit \"" + content.getTitle() + "\" to actual quantity pulled=" + content.getActLength() + "'.");
 	}
-	
+
+  public void updateReelCircuitPosition(ReelCircuit content) throws Exception {
+    content.setKind("c");
+		controller.setCompEntityPosition(content);
+	}
+
 	public void fillReelCircuits(CompEntities reels) throws Exception {
 		for(int x=0; x<reels.howMany(); x++) {
 			Reel reel = (Reel)reels.get(x);
@@ -1255,19 +1377,30 @@ public class ReelMgr extends CompWebManager {
 		CompEntityPuller puller = new CompEntityPuller(new ReelCircuit());
 		ReelCircuit search = new ReelCircuit();
 		search.setReelId(content.getId());
+    search.setKind("c");
 		puller.addSearch(search);
-		puller.setSortBy(search.getTableName(), ReelCircuit.CREATED_COLUMN, false);
+		puller.setSortBy(search.getTableName(), ReelCircuit.POSITION_COLUMN, true);
 		return controller.pullCompEntities(puller, 0, 0);
 	}
 
+  public CompEntities getReelCircuitPulls(Reel content) throws Exception {
+    CompEntityPuller puller = new CompEntityPuller(new ReelCircuit());
+    ReelCircuit search = new ReelCircuit();
+    search.setReelId(content.getId());
+    search.setKind("p");
+    puller.addSearch(search);
+    puller.setSortBy(search.getTableName(), ReelCircuit.CREATED_COLUMN, true);
+    return controller.pullCompEntities(puller, 0, 0);
+  }
+
 	public void cleanReelCircuits(ReelCircuit content, String realRootContextPath) throws Exception {
 	}
-		
+
 	public void deleteReelCircuit(ReelCircuit content, String realRootContextPath) throws Exception {
 		this.cleanReelCircuits(content,realRootContextPath);
 		controller.delete(null, content);
 		this.updateReelType(content);
-	}	
+	}
 	/****************************/
 
 	/*** Reel Notes ***/
@@ -1294,7 +1427,7 @@ public class ReelMgr extends CompWebManager {
 			CompProperties props = new CompProperties();
 			String mailHost = props.getProperty("mailHost");
 		    String mailFrom = customer.getIssueContactEmail();//props.getProperty("mailFrom");
-			
+
 			ArrayList emails = new ArrayList();
 			emails.add(customer.getIssueContactEmail());
 	        EmailSender emailer = new EmailSender();
@@ -1323,11 +1456,11 @@ public class ReelMgr extends CompWebManager {
 
 	public void cleanReelNotes(ReelNote content, String realRootContextPath) throws Exception {
 	}
-		
+
 	public void deleteReelNote(ReelNote content, String realRootContextPath) throws Exception {
 		this.cleanReelNotes(content,realRootContextPath);
 		controller.delete(null, content);
-	}	
+	}
 	/****************************/
 
 	/*** Reel Issues ***/
@@ -1357,7 +1490,7 @@ public class ReelMgr extends CompWebManager {
 			CompProperties props = new CompProperties();
 			String mailHost = props.getProperty("mailHost");
 		    String mailFrom = customer.getIssueContactEmail();//props.getProperty("mailFrom");
-			
+
 			ArrayList emails = new ArrayList();
 			emails.add(customer.getIssueContactEmail());
 	        EmailSender emailer = new EmailSender();
@@ -1425,7 +1558,7 @@ public class ReelMgr extends CompWebManager {
 				CompProperties props = new CompProperties();
 				String mailHost = props.getProperty("mailHost");
 			    String mailFrom = customer.getIssueContactEmail();//props.getProperty("mailFrom");
-				
+
 				ArrayList emails = new ArrayList();
 				emails.add(customer.getIssueContactEmail());
 		        EmailSender emailer = new EmailSender();
@@ -1492,7 +1625,7 @@ public class ReelMgr extends CompWebManager {
 		ReelIssue search = new ReelIssue();
 		search.setReelId(content.getId());
 		if(isResolved) {
-			search.setIsResolved("y");	
+			search.setIsResolved("y");
 		} else {
 			search.setIsResolved("n");
 		}
@@ -1512,11 +1645,11 @@ public class ReelMgr extends CompWebManager {
 
 	public void cleanReelIssues(ReelIssue content, String realRootContextPath) throws Exception {
 	}
-		
+
 	public void deleteReelIssue(ReelIssue content, String realRootContextPath) throws Exception {
 		this.cleanReelIssues(content,realRootContextPath);
 		controller.delete(null, content);
-	}	
+	}
 	/****************************/
 
 	public void importCircuitsFromExcel(String jobCode, File file, String basePath) throws Exception {
@@ -1527,7 +1660,7 @@ public class ReelMgr extends CompWebManager {
 
 			Sheet sheet = wb.getSheetAt(0);//get first sheet, should only be one
 			CompEntities myDataToAdd = new CompEntities();
-			
+
 			//loop through the sheet
 			for(int i = 1; i <= sheet.getLastRowNum(); i++) {//i represents which row to start on, 0 assumes no header
 				try {
@@ -1575,7 +1708,7 @@ public class ReelMgr extends CompWebManager {
 						System.out.println("adding circuit");
 						circuit.setReelId(reel.getId());
 						controller.add(circuit);
-					} 
+					}
 				}
 			}
 		}

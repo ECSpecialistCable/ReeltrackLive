@@ -183,7 +183,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
             <form:row_end />
             <form:textfield label="Other Carrier:" name="other_carrier" />
             <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
-            <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />        
+            <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
             <form:row_begin />
     		<form:label name="" label="" />
@@ -211,9 +211,9 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
                 <form:row_end />
                 <form:row_begin />
                     <form:label name="" label="Bottom Foot Not Visible?:" />
-                    <form:content_begin />      
-                    <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />       
-                    <form:content_end />                
+                    <form:content_begin />
+                    <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />
+                    <form:content_end />
                 <form:row_end />
                 --%>
 
@@ -263,11 +263,11 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
                 <form:row_end />
                 <form:row_begin />
                 <form:label name="" label="If Refused:" />
-                <form:content_begin />      
-                    <form:checkbox label="Are you certain you want to refuse delivery of this item?" name="refused_check" value="y" />       
-                <form:content_end />                
+                <form:content_begin />
+                    <form:checkbox label="Are you certain you want to refuse delivery of this item?" name="refused_check" value="y" />
+                <form:content_end />
                 <form:row_end />
-                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />        
+                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
                 <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
@@ -320,7 +320,7 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
                         <form:content_end />
                     <form:row_end />
                     <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
-                
+
                 <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
                 <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
                     <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
@@ -372,7 +372,7 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
                     <form:row_end />
                     <form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(picklist.getId()).toString() %>" />
                 <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
-                
+
                 <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
                     <form:textfield label="Top Seq Mark #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
                 <% } %>
@@ -508,9 +508,9 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
                 <form:textfield pixelwidth="40" label="Bottom Ft:" name="<%= Reel.BOTTOM_FOOT_COLUMN %>" value="<%= new Integer(content.getBottomFoot()).toString() %>" />
                 <form:row_begin />
                     <form:label name="" label="Bottom Foot Not Visible?:" />
-                    <form:content_begin />      
-                    <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />       
-                    <form:content_end />                
+                    <form:content_begin />
+                    <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />
+                    <form:content_end />
                 <form:row_end />
                 --%>
                 <form:info label="Orig Top Seq Mark #:" text="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
@@ -522,7 +522,7 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
                 <form:info label="Cable Used Qty:" text="<%= new Integer(content.getCableUsedQuantity()).toString() %>" />
             <% } %>
             <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
-            
+
 			<form:info label="Times Checked OUT:" text="<%= new Integer(content.getTimesCheckedOut()).toString() %>" />
 			<form:info label="Times Checked IN:" text="<%= new Integer(content.getTimesCheckedIn()).toString() %>" />
 			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
@@ -534,8 +534,8 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
                 <form:buttonset_end />
             <form:row_end />
             <%-- if(!content.hasReelTagFile()) { --%>
-                
-            <%-- } --%>			
+
+            <%-- } --%>
     <form:end />
 <admin:box_end />
 

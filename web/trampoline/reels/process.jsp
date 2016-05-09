@@ -27,7 +27,7 @@
 
 <%
 RTUser user = (RTUser)userLoginMgr.getUser();
-MultipartRequest multipart = null; 
+MultipartRequest multipart = null;
 String basePath = pageContext.getServletContext().getRealPath("/");
 String notifier = "";
 String redirect = request.getHeader("referer");
@@ -97,7 +97,7 @@ if(action.equals("mark_received")) {
     try {
     content.setReceivedWeight(Integer.parseInt(request.getParameter(Reel.RECEIVED_WEIGHT_COLUMN)));
     } catch(Exception e) {}
-    
+
     content.setWharehouseLocation(request.getParameter(Reel.WHAREHOUSE_LOCATION_COLUMN));
     content.setReceivingIssue(request.getParameter(Reel.RECEIVING_ISSUE_COLUMN));
     content.setReceivingNote(request.getParameter(Reel.RECEIVING_NOTE_COLUMN));
@@ -121,7 +121,7 @@ if(action.equals("mark_received")) {
         session.removeAttribute("RT");
         session.removeAttribute("PL");
     }
-    
+
     redirect = request.getContextPath() + "/trampoline/" + "reels/status.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
@@ -135,7 +135,7 @@ if(action.equals("mark_staged")) {
     try {
         content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
     } catch(Exception e) {}
-    
+
 
     if(request.getParameter(PickList.PARAM)!=null) {
         PickList picklist = new PickList();
@@ -143,7 +143,7 @@ if(action.equals("mark_staged")) {
 		picklist.setDriver(request.getParameter(PickList.DRIVER_COLUMN));
 		picklist.setForeman(request.getParameter(PickList.FOREMAN_COLUMN));
 		if(picklistId!=0) {
-			picklist.setId(picklistId);			
+			picklist.setId(picklistId);
 			picklistMgr.updatePickList(picklist);
 		} else {
 			picklist.setName(prevContent.getReelTag());
@@ -172,7 +172,7 @@ if(action.equals("mark_checkedout")) {
     try {
         content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
     } catch(Exception e) {}
-    
+
 
     if(request.getParameter(PickList.PARAM)!=null) {
         PickList picklist = new PickList();
@@ -451,8 +451,8 @@ if(action.equals("update_quantity")) {
             content.setHasReelMarkers("y");
             content.setBottomFootNotVisible("n");
         }
-    }   
-    
+    }
+
     reelMgr.updateReelQuantity(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
 }
@@ -461,15 +461,28 @@ if(action.equals("record_pull")) {
     Reel content = new Reel();
     content.setId(contid);
     content.setTempPullAmount(Integer.parseInt(request.getParameter("pulled_quantity")));
-    reelMgr.updateReelPull(content);
+    //reelMgr.updateReelPull(content);
+    reelMgr.addReelCircuitPull(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
 if(action.equals("record_top_marker")) {
     Reel content = new Reel();
     content.setId(contid);
-    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
-    reelMgr.updateReelTop(content);
+    //content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    content.setTempPullAmount(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    //reelMgr.updateReelTop(content);
+    reelMgr.addReelCircuitPull(content);
+    redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("update_circuit_pull")) {
+    ReelCircuit content = new ReelCircuit();
+    content.setId(Integer.parseInt(request.getParameter(ReelCircuit.PARAM)));
+    if(request.getParameter(ReelCircuit.MAX_TENSION_COLUMN)!=null) {
+        content.setMaxTension(Integer.parseInt(request.getParameter(ReelCircuit.MAX_TENSION_COLUMN)));
+    }
+    reelMgr.updateReelCircuit(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
@@ -502,6 +515,15 @@ if(action.equals("add_circuit")) {
     redirect = request.getContextPath() + "/trampoline/" + "reels/circuits.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
+if(action.equals("update_circuit_order")) {
+	ReelCircuit content = new ReelCircuit();
+	content.setId(Integer.parseInt(request.getParameter(ReelCircuit.PARAM)));
+	content.setReelId(Integer.parseInt(request.getParameter(Reel.PARAM)));
+	content.setPosition(Integer.parseInt(request.getParameter(ReelCircuit.POSITION_COLUMN)));
+	reelMgr.updateReelCircuitPosition(content);
+	redirect = request.getContextPath() + "/trampoline/" + "reels/circuits.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
 if(action.equals("update_circuit")) {
     ReelCircuit content = new ReelCircuit();
     content.setId(Integer.parseInt(request.getParameter(ReelCircuit.PARAM)));
@@ -513,6 +535,8 @@ if(action.equals("update_circuit")) {
     }
     if(request.getParameter(ReelCircuit.ACT_LENGTH_COLUMN)!=null) {
         content.setActLength(Integer.parseInt(request.getParameter(ReelCircuit.ACT_LENGTH_COLUMN)));
+    }
+    if(request.getParameter("mark_pulled")!=null) {
         if(request.getParameter(ReelCircuit.IS_PULLED_COLUMN)!=null) {
             content.setIsPulled("y");
         } else {
@@ -520,6 +544,7 @@ if(action.equals("update_circuit")) {
         }
     }
     reelMgr.updateReelCircuit(content);
+
     redirect = request.getContextPath() + "/trampoline/" + "reels/circuits.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
@@ -592,5 +617,5 @@ if(action.equals("update_unique_id")) {
 }
 %>
 <% dbResources.close(); %>
-<notifier:set_message text="<%= notifier %>" />		
+<notifier:set_message text="<%= notifier %>" />
 <admin:ajax_redirect redirect="<%= redirect %>" />

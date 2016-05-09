@@ -35,6 +35,9 @@ Reel content = new Reel();
 content.setId(contid);
 content = (Reel)reelMgr.getReel(content);
 
+CompEntities circuits = reelMgr.getReelCircuitPulls(content);
+ReelCircuit circuit;
+
 CableTechData techData = reelMgr.getCableTechData(content);
 
 boolean canSubmit = true;
@@ -65,9 +68,9 @@ int weight = techData.getWeight();
                 <form:textfield pixelwidth="40" label="Bottom Ft:" name="<%= Reel.BOTTOM_FOOT_COLUMN %>" value="<%= new Integer(content.getBottomFoot()).toString() %>" />
                 <form:row_begin />
                     <form:label name="" label="Bottom Foot Not Visible?:" />
-                    <form:content_begin />      
-                    <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />       
-                    <form:content_end />                
+                    <form:content_begin />
+                    <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />
+                    <form:content_end />
                 <form:row_end />
                 --%>
                 <form:info label="Orig Top Seq Mark #:" text="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
@@ -79,7 +82,7 @@ int weight = techData.getWeight();
                 <form:info label="Cable Used Qty:" text="<%= new Integer(content.getCableUsedQuantity()).toString() %>" />
             <% } %>
     		<form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
-			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
@@ -99,7 +102,7 @@ int weight = techData.getWeight();
         <form:begin submit="true" name="edit" action="reels/process.jsp" />
         		<form:textfield label="Pulled Qty:" pixelwidth="40" name="pulled_quantity" value="0" />
         		<%--<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />--%>
-    			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+    			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
     			<form:row_begin />
     				<form:label name="" label="" />
     				<form:buttonset_begin align="left" padding="0"/>
@@ -109,13 +112,13 @@ int weight = techData.getWeight();
         <form:end />
     <admin:box_end />
     <% } %>
-
+<%--
     <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
     <admin:subtitle text="Record Current Cable Weight" />
     <admin:box_begin />
         <form:begin submit="true" name="edit" action="reels/process.jsp" />
                 <form:textfield label="Current lbs:" pixelwidth="40" name="current_weight" value="0" />
-                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />          
+                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
                 <form:row_begin />
                     <form:label name="" label="" />
                     <form:buttonset_begin align="left" padding="0"/>
@@ -125,13 +128,13 @@ int weight = techData.getWeight();
         <form:end />
     <admin:box_end />
     <% } %>
-
+--%>
     <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
     <admin:subtitle text="Record Current Top Marker" />
     <admin:box_begin />
         <form:begin submit="true" name="edit" action="reels/process.jsp" />
                 <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />
-                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />          
+                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
                 <form:row_begin />
                     <form:label name="" label="" />
                     <form:buttonset_begin align="left" padding="0"/>
@@ -142,6 +145,67 @@ int weight = techData.getWeight();
     <admin:box_end />
     <% } %>
 
+<% } %>
+
+<% if(circuits.howMany() > 0) { %>
+    <% tempURL = "Quantity on reel = " + content.getEstimatedOnReelQty(); %>
+    <admin:subtitle text="<%= tempURL %>" />
+    <admin:box_begin color="false" />
+        <listing:begin />
+        <listing:header_begin />
+            <listing:header_cell width="10" first="true" name="#" />
+            <listing:header_cell width="100" name="Qty Pulled" />
+            <listing:header_cell width="100" name="Mark Pulled" />
+            <listing:header_cell width="150" name="Max Tension During Pull" />
+            <listing:header_cell width="50" name=""  />
+        <listing:header_end />
+        <% for(int i=0; i<circuits.howMany(); i++) { %>
+        <% circuit = (ReelCircuit)circuits.get(i); %>
+        <listing:row_begin row="<%= new Integer(i).toString() %>" />
+            <listing:cell_begin />
+                <%= new Integer(i+1).toString() %>
+            <listing:cell_end />
+            <listing:cell_begin />
+                <%= new Integer(circuit.getActLength()).toString() %>
+            <listing:cell_end />
+            <listing:cell_begin />
+                <% tempURL = "i" + circuit.getId(); %>
+                <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
+                    <form:checkbox label="" name="<%= ReelCircuit.IS_PULLED_COLUMN %>" value="y" match="<%= circuit.getIsPulled() %>" />
+                    <%-- onclick="this.form.submit();"  --%>
+                    <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
+                    <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
+                    <form:hidden name="mark_pulled" value="yes" />
+                    <% if(canSubmit) { %>
+                    <%--<form:submit_inline waiting="true" name="save" action="update_circuit" />--%>
+                    <% } %>
+                <form:end_inline />
+            <listing:cell_end />
+            <listing:cell_begin />
+                <% tempURL = "i" + circuit.getId(); %>
+                <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
+                    <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="<%= new Integer(circuit.getMaxTension()).toString() %>" />
+                    <%-- onclick="this.form.submit();"  --%>
+                    <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
+                    <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
+                    <%--<form:hidden name="submit_action" value="update_circuit" />--%>
+                    <% if(canSubmit) { %>
+                    <form:submit_inline waiting="true" name="save" action="update_circuit_pull" />
+                    <% } %>
+                <form:end_inline />
+            <listing:cell_end />
+            <listing:cell_begin align="right"/>
+                <% tempURL = "reels/process.jsp?submit_action=delete_circuit&" + Reel.PARAM + "=" + content.getId() + "&" + ReelCircuit.PARAM + "=" + circuit.getId(); %>
+                <% if(!circuit.isPulled() && canSubmit) { %>
+                <form:linkbutton warning="true" url="<%= tempURL %>" process="true" name="DELETE" />
+                <% } %>
+            <listing:cell_end />
+        <listing:row_end />
+        <% } %>
+    <listing:end />
+    <admin:box_end />
+<% } else { %>
+    <admin:subtitle text="There are no Circuits." />
 <% } %>
 
 <admin:set_tabset url="reels/_tabset_manage.jsp" thispage="quantity.jsp" content_id_for_tabset="<%= contid %>"/>

@@ -347,3 +347,19 @@ alter table users add column vendor_code varchar(15);
 
 /* 2016 */
 alter table reel_circuits add max_tension int(11) default 0;
+
+create table reel_pulls (
+	id int(11) NOT NULL auto_increment,
+	created datetime,
+	updated datetime,
+	status varchar(25),
+	reel_id int default 0,
+	length int default 0,
+	is_pulled varchar(1) default 'n',
+	max_tension int(11) default 0,
+	is_synced varchar(1) default 'n',
+	PRIMARY KEY (id)
+);
+
+alter table reel_circuits add column pos int(11) default 0;
+alter table reel_circuits add column kind varchar(1) default 'c';

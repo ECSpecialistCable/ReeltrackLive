@@ -35,6 +35,8 @@ Reel content = new Reel();
 content.setId(contid);
 content = (Reel)reelMgr.getReel(content);
 
+CableTechData techData = reelMgr.getCableTechData(content);
+
 CompEntities circuits = reelMgr.getReelCircuits(content);
 ReelCircuit circuit;
 
@@ -42,12 +44,15 @@ String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
 
-<% 
+<%
 int circuitLengthsTotal = 0;
+int sumVariance = 0;
 for(int i=0; i<circuits.howMany(); i++) {
     circuit = (ReelCircuit)circuits.get(i);
     if(!circuit.isPulled()) {
         circuitLengthsTotal += circuit.getLength();
+    } else {
+        sumVariance += (circuit.getLength() - circuit.getActLength());
     }
 }
 int remainingQty = content.getEstimatedOnReelQty() - circuitLengthsTotal;
@@ -66,19 +71,19 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
 <p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
 <notifier:show_message />
 
-<% if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) { %>
-    <h2 style="color:red;">Reel is currently checked out. Quantity on reel cannot be verified until reel is returned to warehouse.</h2>
-<% } %>
-
 <% if(remainingQty<0) { %>
     <h2 style="color:red;">ALERT: REEL SHOWS NEGATIVE QUANTITY</h2>
+<% } %>
+
+<% if(remainingQty - sumVariance <= 10) { %>
+  <h2 style="color:red;">PULLED CIRUITS HAVE BEEN LONGER THAN PLANNED.<br />CHECK QUANTITY ON REEL BEFORE PROCEEDING WITH NEXT PULL.</h2><br />
 <% } %>
 
 <% if(canSubmit) { %>
 <admin:subtitle text="Delete all Unpulled Circuits" />
 <admin:box_begin />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
-            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />          
+            <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
             <form:row_begin />
                 <form:label name="" label="Delete Unpulled Circuits:" />
                 <form:buttonset_begin align="left" padding="0"/>
@@ -94,7 +99,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
     		<form:textfield label="Est. Length:" pixelwidth="40" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="0" />
     		<form:textfield label="Name:" name="<%= ReelCircuit.NAME_COLUMN %>" value="" />
-			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
@@ -137,6 +142,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
         tempURL = "There was " + remainingQty + "' remaining on this reel before it was marked as scrapped.";
     }
     %>
+    <% tempURL = "Quantity remaining on reel = " + content.getEstimatedOnReelQty() + "', Un-Pulled Circuits = " + circuitLengthsTotal + "', Unassigned cable = " + remainingQty + "'"; %>
     <admin:subtitle text="<%= tempURL %>" />
     <admin:box_begin color="false" />
         <listing:begin />
@@ -144,15 +150,33 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
             <listing:header_cell width="10" first="true" name="#" />
             <listing:header_cell name="Name" />
             <listing:header_cell width="100" name="Est. Length" />
-            <listing:header_cell width="175" name="Mark Actual Length Pulled" />
-            <listing:header_cell width="150" name="Max Tension When Pulled" />
+            <listing:header_cell width="100" name="Act. Length" />
+            <%
+            String header_title = "Update Qty Pulled";
+            if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) {
+              header_title = "Update Top Ft #";
+            }
+            %>
+            <listing:header_cell width="175" name="<%= header_title %>" />
+            <listing:header_cell width="100" name="Mark Pulled" />
+            <listing:header_cell width="150" name="Max Tension During Pull" />
             <listing:header_cell width="50" name=""  />
         <listing:header_end />
         <% for(int i=0; i<circuits.howMany(); i++) { %>
         <% circuit = (ReelCircuit)circuits.get(i); %>
         <listing:row_begin row="<%= new Integer(i).toString() %>" />
             <listing:cell_begin />
-                <%= new Integer(i+1).toString() %>
+                <% String orderForm = "order_" + i; %>
+                <form:begin_inline name="<%= orderForm %>" action="reels/process.jsp" />
+                <form:select_begin label="" name="<%= ReelCircuit.POSITION_COLUMN %>" onchange="submitInline(this.form);"/>
+                    <% for(int p=0; p<circuits.howMany();p++) { %>
+                    <form:option name="<%= new Integer(p+1).toString() %>" value="<%= new Integer(p+1).toString() %>" match="<%= new Integer(i+1).toString() %>" />
+                    <% } %>
+                <form:select_end />
+                <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
+                <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
+                <form:hidden name="submit_action" value="update_circuit_order" />
+                <form:end_inline />
             <listing:cell_end />
             <listing:cell_begin />
                 <%= circuit.getName() %>
@@ -170,11 +194,12 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
                 <form:end_inline />
             <listing:cell_end />
             <listing:cell_begin />
+                <%= new Integer(circuit.getActLength()).toString() %>
+            <listing:cell_end />
+            <listing:cell_begin />
                 <% tempURL = "i" + circuit.getId(); %>
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
-                    <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.ACT_LENGTH_COLUMN %>" value="<%= new Integer(circuit.getActLength()).toString() %>" />
-                    <form:checkbox label="" name="<%= ReelCircuit.IS_PULLED_COLUMN %>" value="y" match="<%= circuit.getIsPulled() %>" />        
-                    <%-- onclick="this.form.submit();"  --%>
+                    <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.ACT_LENGTH_COLUMN %>" value="0" />
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
@@ -186,7 +211,20 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
             <listing:cell_begin />
                 <% tempURL = "i" + circuit.getId(); %>
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
-                    <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="<%= new Integer(circuit.getMaxTension()).toString() %>" />       
+                    <form:checkbox label="" name="<%= ReelCircuit.IS_PULLED_COLUMN %>" value="y" match="<%= circuit.getIsPulled() %>" />
+                    <%-- onclick="this.form.submit();"  --%>
+                    <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
+                    <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
+                    <form:hidden name="mark_pulled" value="yes" />
+                    <% if(canSubmit) { %>
+                    <%--<form:submit_inline waiting="true" name="save" action="update_circuit" />--%>
+                    <% } %>
+                <form:end_inline />
+            <listing:cell_end />
+            <listing:cell_begin />
+                <% tempURL = "i" + circuit.getId(); %>
+                <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
+                    <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="<%= new Integer(circuit.getMaxTension()).toString() %>" />
                     <%-- onclick="this.form.submit();"  --%>
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />

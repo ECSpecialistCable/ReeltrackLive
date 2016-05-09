@@ -1,4 +1,4 @@
-<%@ page language="java" %>		
+<%@ page language="java" %>
 <%@ page import="com.reeltrack.users.*" %>
 <%@ page import="com.reeltrack.reels.*" %>
 
@@ -29,6 +29,8 @@ if(request.getParameter("job")!=null) {
     jobCode = request.getParameter("job");
 }
 
+boolean checkedout = false;
+boolean circuits = false;
 if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 	Reel content = new Reel();
 	content.setId(reelID);
@@ -38,6 +40,12 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 			Reel rtReel = new Reel();
 			rtReel.setId(reelID);
 			rtReel.setJobCode(jobCode);
+      if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) {
+        checkedout = true;
+        if(content.getReelType().equals(Reel.REEL_TYPE_CIRCUIT)) {
+          circuits = true;
+        }
+      }
 			session.setAttribute("RT",content);
 		}
 		if(tagType.equals("PL")) {
@@ -77,7 +85,7 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 				response.addCookie(iPadLoginUser);
 			}
 		  }
-	  }		
+	  }
 	}
 %>
 <% dbResources.close(); %>
@@ -99,17 +107,17 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 
         <!--[if IE]>
 			<link rel="stylesheet" href="common/css/ie.css" type="text/css" media="screen" charset="utf-8" />
-        <![endif]-->    
+        <![endif]-->
         <!--[if IE 7]>
 			<link rel="stylesheet" href="common/css/ie7.css" type="text/css" media="screen" charset="utf-8" />
-        <![endif]-->    
+        <![endif]-->
         <!--[if IE 6]>
 			<link rel="stylesheet" href="common/css/ie6.css" type="text/css" media="screen" charset="utf-8" />
-		<![endif]-->	
-        
+		<![endif]-->
+
         <link rel="stylesheet" href="common/css/client.css" type="text/css" media="screen" charset="utf-8" />
 
-        
+
 
 
 <!-- jquery first -->
@@ -126,7 +134,7 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 <script src="common/js/notification.js?busted=<%= (new java.util.Date()).getTime() %>" type="text/javascript" charset="utf-8"></script>
 
 <!-- then library modules -->
-		
+
 <script src="common/js/date_oldDATE_SAVE.js?busted=<%= (new java.util.Date()).getTime() %>" type="text/javascript" charset="utf-8"></script>
 <script src="common/js/jquery.datePicker.js?busted=<%= (new java.util.Date()).getTime() %>" type="text/javascript" charset="utf-8"></script>
 <script src="common/js/jquery.colorbox.js?busted=<%= (new java.util.Date()).getTime() %>" type="text/javascript" charset="utf-8"></script>
@@ -144,7 +152,7 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
     <body id="outer" class=" yui-skin-sam">
     <div id="wayout">
         <div id="container">
-            
+
             <div id="branding">
             </div>
             <div id="tabs_frame">
@@ -159,10 +167,10 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 
 				</div>
 			</div>
-            
+
             <% if(!userLoginMgr.isLoggedIn()) { %>
                 <%--
-            	<div id="login">                
+            	<div id="login">
 	                <form:begin_login name="login_form" action="common/includes/process_login.jsp" />
 		                <form:row_begin />
 			                <form:content_begin />
@@ -170,7 +178,7 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 								<form:textfield_inline name="<%= RTUser.USERNAME_COLUMN %>" pixelwidth="100" label="<%= RTUser.USERNAME_COLUMN %>" />
 				                &nbsp;
 								<form:label_inline name="<%= RTUser.PASSWORD_COLUMN %>" label="Password:" />
-				                <form:password_inline name="<%= RTUser.PASSWORD_COLUMN %>" pixelwidth="100" label="<%= RTUser.PASSWORD_COLUMN %>" />		
+				                <form:password_inline name="<%= RTUser.PASSWORD_COLUMN %>" pixelwidth="100" label="<%= RTUser.PASSWORD_COLUMN %>" />
 				                &nbsp;
 			                <form:content_end />
 							<form:buttonset_begin align="right" padding="0" />
@@ -179,21 +187,21 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 		                <form:row_end />
 	                <form:end />
 	            </div>
-                 --%>  
-            <% } else { %>				
+                 --%>
+            <% } else { %>
 				<% String welcomeStr = "Welcome, " + user.getFname() + " " + user.getLname(); %>
-				<% 
+				<%
 				if(!user.getJobName().equals("")) {
 					welcomeStr = welcomeStr + " of " + user.getJobName() + " Project #" + user.getJobCode();
 				}
 				%>
 
 
-           		<admin:welcome_tab text="<%= welcomeStr %>" action="common/includes/process_login.jsp?submit_action=logout"  valign="top" align="left" />                               
+           		<admin:welcome_tab text="<%= welcomeStr %>" action="common/includes/process_login.jsp?submit_action=logout"  valign="top" align="left" />
             <% } %>
-            
+
             <div id="modules">
-                <%--<c:if test="<%= userLoginMgr.isLoggedIn() %>">--%> 		
+                <%--<c:if test="<%= userLoginMgr.isLoggedIn() %>">--%>
                     <!-- @option: uncomment the elements above and below the jsp:include  -->
                     <!-- <form action="" method="get" id="moduleform">           -->
                     <!-- <select name="moduleselector" id="moduleselector">              -->
@@ -202,29 +210,38 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
                     <!-- </select> -->
                     <!-- </form> -->
                     <div id="moduleactions">
-                        <!-- this is populated by javascript when a module is selected -->			
-                        <!-- actions are dynamically pulled from <modulename>/moduleaction.html -->			
+                        <!-- this is populated by javascript when a module is selected -->
+                        <!-- actions are dynamically pulled from <modulename>/moduleaction.html -->
                     </div>
-                    
-                <%--</c:if>--%> 						
-                
+
+                <%--</c:if>--%>
+
             </div>
-            
-            
+
+
             <div id="main">
                 <!-- main content area is populated dynamically based on what moduleaction is clicked -->
                 <% if(reelID==0) { %>
                     <jsp:include page="common/includes/login.jsp" />
                 <% } else { %>
-                    <% String tempURL = "reels/status.jsp?" +  Reel.PARAM + "=" + reelID; %>
+                    <%
+                    String tempURL = "reels/status.jsp?" +  Reel.PARAM + "=" + reelID;
+                    if(checkedout) {
+                      if(circuits) {
+                        tempURL = "reels/circuits.jsp?" +  Reel.PARAM + "=" + reelID;
+                      } else {
+                        tempURL = "reels/quantity.jsp?" +  Reel.PARAM + "=" + reelID;
+                      }
+                    }
+                    %>
                     <script language="javascript">
                     CORE.loadPage("<%= tempURL %>");
                     </script>
                 <% } %>
 
             </div>
-            
-        </div>	
+
+        </div>
 		<div id="invisible" style="display: none;">
 		</div>
 		<br /><br />
