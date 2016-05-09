@@ -205,7 +205,7 @@ int weight = techData.getWeight();
     <listing:end />
     <admin:box_end />
 <% } else { %>
-    <admin:subtitle text="There are no Circuits." />
+    <admin:subtitle text="There are no Recorded Pulls." />
 <% } %>
 
 <admin:set_tabset url="reels/_tabset_manage.jsp" thispage="quantity.jsp" content_id_for_tabset="<%= contid %>"/>
