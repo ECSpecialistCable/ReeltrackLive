@@ -13,6 +13,7 @@ public class ReelCircuit extends CompCMEntity implements Positionable {
 	public static final String IS_SYNCED_COLUMN = "is_synced";
 	public static final String MAX_TENSION_COLUMN = "max_tension";
 	public static final String KIND_COLUMN = "kind";
+	public static final String MARKER_COLUMN = "marker";
 
 	public String tmpReelTag = "";
 	public int tmpReelTop = 0;
@@ -82,6 +83,14 @@ public class ReelCircuit extends CompCMEntity implements Positionable {
 
 	public void setActLength(int id) {
 		this.getData().setInteger(ACT_LENGTH_COLUMN, id);
+	}
+
+	public int getMarker() {
+		return this.getData().getInteger(MARKER_COLUMN, 0);
+	}
+
+	public void setMarker(int id) {
+		this.getData().setInteger(MARKER_COLUMN, id);
 	}
 
 	public String getName() {

@@ -155,7 +155,7 @@ int weight = techData.getWeight();
         <listing:header_begin />
             <listing:header_cell width="10" first="true" name="#" />
             <listing:header_cell width="100" name="Qty Pulled" />
-            <listing:header_cell width="100" name="Mark Pulled" />
+            <listing:header_cell width="150" name="Top Foot # after Pull" />
             <listing:header_cell width="150" name="Max Tension During Pull" />
             <listing:header_cell width="50" name=""  />
         <listing:header_end />
@@ -169,17 +169,9 @@ int weight = techData.getWeight();
                 <%= new Integer(circuit.getActLength()).toString() %>
             <listing:cell_end />
             <listing:cell_begin />
-                <% tempURL = "i" + circuit.getId(); %>
-                <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
-                    <form:checkbox label="" name="<%= ReelCircuit.IS_PULLED_COLUMN %>" value="y" match="<%= circuit.getIsPulled() %>" />
-                    <%-- onclick="this.form.submit();"  --%>
-                    <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
-                    <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
-                    <form:hidden name="mark_pulled" value="yes" />
-                    <% if(canSubmit) { %>
-                    <%--<form:submit_inline waiting="true" name="save" action="update_circuit" />--%>
-                    <% } %>
-                <form:end_inline />
+                <% if(circuit.getMarker()!=0) { %>
+                <%= new Integer(circuit.getMarker()).toString() %>
+                <% } %>
             <listing:cell_end />
             <listing:cell_begin />
                 <% tempURL = "i" + circuit.getId(); %>
