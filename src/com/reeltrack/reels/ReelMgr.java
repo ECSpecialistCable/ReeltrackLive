@@ -1295,7 +1295,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		this.addReelLog(reel, user.getName() + " pulled quantity " + content.getActLength() + "'.");
+		this.addReelLog(reel, user.getName() + " pulled quantity " + content.getActLength() + "' from circuit " + rc.getName());
 	}
 
 	public void updateReelCircuit(ReelCircuit content) throws Exception {

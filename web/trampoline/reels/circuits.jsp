@@ -188,7 +188,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
-                    <% if(canSubmit) { %>
+                    <% if(!circuit.isPulled() && canSubmit) { %>
                     <form:submit_inline waiting="true" name="save" action="update_circuit" />
                     <% } %>
                 <form:end_inline />
@@ -203,7 +203,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
-                    <% if(canSubmit) { %>
+                    <% if(!circuit.isPulled() && canSubmit) { %>
                     <form:submit_inline waiting="true" name="save" action="update_circuit" />
                     <% } %>
                 <form:end_inline />
