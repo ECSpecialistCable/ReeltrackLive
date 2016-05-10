@@ -149,17 +149,17 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
         <listing:header_begin />
             <listing:header_cell width="10" first="true" name="#" />
             <listing:header_cell name="Name" />
-            <listing:header_cell width="100" name="Est. Length" />
-            <listing:header_cell width="100" name="Act. Length" />
+            <listing:header_cell width="80" name="Est. Length" />
+            <listing:header_cell width="75" name="Act. Length" />
             <%
             String header_title = "Update Qty Pulled";
             if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) {
               header_title = "Update Top Ft #";
             }
             %>
-            <listing:header_cell width="175" name="<%= header_title %>" />
-            <listing:header_cell width="100" name="Mark Pulled" />
-            <listing:header_cell width="150" name="Max Tension During Pull" />
+            <listing:header_cell width="100" name="<%= header_title %>" />
+            <listing:header_cell width="40" name="Pulled" />
+            <listing:header_cell width="125" name="Max Tension During Pull" />
             <listing:header_cell width="50" name=""  />
         <listing:header_end />
         <% for(int i=0; i<circuits.howMany(); i++) { %>
