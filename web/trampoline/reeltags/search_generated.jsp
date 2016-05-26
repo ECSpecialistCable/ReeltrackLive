@@ -20,7 +20,7 @@
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
-<% 
+<%
 RTUser user = (RTUser)userLoginMgr.getUser();
 
 if(request.getParameter("submit_action")!=null && request.getParameter("submit_action").equals("clear_generated_tags")) {
@@ -33,6 +33,12 @@ if(request.getParameter("submit_action")!=null && request.getParameter("submit_a
 	toUpdate.setId(reelId);
 	toUpdate.setHasReelTagFile("n");
 	reelMgr.updateReel(toUpdate);
+}
+
+String zipfile = "";
+if(request.getParameter("submit_action")!=null && request.getParameter("submit_action").equals("zip")) {
+	String fileName = reelMgr.zipReeltags(user.getJobCode(), pageContext.getServletContext().getRealPath("/"));
+	zipfile = fileName;
 }
 
 Reel content = new Reel();
@@ -53,19 +59,27 @@ String tempURL = "";
 
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
-	<admin:subtitle text="Clear Generated Reel Tags"/>
+	<admin:subtitle text="Clear / Download Generated Reel Tags"/>
 	<admin:box_begin color="false"/>
 		<form:begin_selfsubmit name="clear_generated_tags" action="reeltags/search_generated.jsp" />
 			<form:row_begin/>
-				<form:buttonset_begin padding="0" align="right"/>
+				<form:buttonset_begin padding="0" align="left"/>
                 &nbsp;<form:submit_inline button="submit" waiting="true" name="clear" action="clear_generated_tags" />
+								<% tempURL = "reeltags/search_generated.jsp?submit_action=zip"; %>
+                <form:linkbutton url="<%= tempURL %>" name="DOWNLOAD" />
+								<%
+								if(!zipfile.equals("")) {
+									tempURL = "/reports/" + zipfile;
+								%>
+								&nbsp;
+								<a href="<%= tempURL %>" target="_new">Download Reeltags</a>
+								<% } %>
 				<form:buttonset_end/>
 			<form:row_end/>
 		<form:end />
 	<admin:box_end />
 
     <admin:box_begin color="false" />
-   
     <listing:begin />
         <listing:header_begin />
             <listing:header_cell width="50" first="true" name="CRID #" />
@@ -101,4 +115,4 @@ String tempURL = "";
 <% } %>
 
 <admin:set_tabset url="reeltags/_tabset_default.jsp" thispage="search_generated.jsp" />
-<html:end />    
+<html:end />

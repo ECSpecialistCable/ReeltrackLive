@@ -917,6 +917,55 @@ public class ReelMgr extends CompWebManager {
 		return toReturn;
 	}
 
+	public String zipReeltags(String jobCode, String basePath) throws Exception {
+		Reel reel = new Reel();
+		CompEntityPuller puller = new CompEntityPuller(reel);
+		reel.setJobCode(jobCode);
+		reel.setHasReelTagFile("y");
+		puller.addSearch(reel);
+		CompEntities reels = controller.pullCompEntities(puller, 0, 0);
+
+		String zipFileName = "reeltags_" + jobCode + ".zip";
+		try {
+			File dir = new File(basePath + "/reports/");
+			dir.mkdirs();
+
+			FileOutputStream fos = new FileOutputStream(basePath + "/reports/" + zipFileName);
+			ZipOutputStream zos = new ZipOutputStream(fos);
+
+			System.out.println("creating zip file:" + zipFileName);
+			for(int x=0;x<reels.howMany();x++) {
+				reel = (Reel)reels.get(x);
+				if(!reel.getCTRFile().equals("")) {
+					File dataSheet = new File(basePath + reel.getReelTagDirectory() + "/" + reel.getReelTagFile());
+					if(dataSheet.exists()) {
+						FileInputStream fis = new FileInputStream(dataSheet);
+						String filename = "CRID" + reel.getCrId() + "-" + reel.getReelTagFile(); //.replaceAll(",","").replaceAll("#","").replaceAll("'","");
+						System.out.println("adding file:" + filename);
+
+						ZipEntry zipEntry = new ZipEntry(filename);
+						zos.putNextEntry(zipEntry);
+						byte[] bytes = new byte[1024];
+						int length;
+						while ((length = fis.read(bytes)) >= 0) {
+							zos.write(bytes, 0, length);
+						}
+						zos.closeEntry();
+						fis.close();
+					}
+				}
+			}
+			System.out.println("done adding files");
+
+			zos.close();
+			fos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return zipFileName;
+	}
+
 	public String zipDataSheets(String jobCode, String basePath) throws Exception {
 		CableTechData techData = new CableTechData();
 		CompEntityPuller puller = new CompEntityPuller(techData);
