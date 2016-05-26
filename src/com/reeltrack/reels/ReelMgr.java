@@ -936,7 +936,7 @@ public class ReelMgr extends CompWebManager {
 			System.out.println("creating zip file:" + zipFileName);
 			for(int x=0;x<reels.howMany();x++) {
 				reel = (Reel)reels.get(x);
-				if(!reel.getCTRFile().equals("")) {
+				if(!reel.getReelTagFile().equals("")) {
 					File dataSheet = new File(basePath + reel.getReelTagDirectory() + "/" + reel.getReelTagFile());
 					if(dataSheet.exists()) {
 						FileInputStream fis = new FileInputStream(dataSheet);
