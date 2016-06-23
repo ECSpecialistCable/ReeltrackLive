@@ -183,15 +183,17 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
             <listing:cell_end />
             <listing:cell_begin />
                 <% tempURL = "z" + circuit.getId(); %>
+                <% if(!circuit.isPulled() && canSubmit) { %>
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
                     <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="<%= new Integer(circuit.getLength()).toString() %>" />
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
-                    <% if(!circuit.isPulled() && canSubmit) { %>
                     <form:submit_inline waiting="true" name="save" action="update_circuit" />
-                    <% } %>
                 <form:end_inline />
+                <% } else { %>
+                    <%= new Integer(circuit.getLength()).toString() %>
+                <% } %>
             <listing:cell_end />
             <listing:cell_begin />
                 <%= new Integer(circuit.getActLength()).toString() %>
@@ -218,15 +220,20 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
             <listing:cell_end />
             <listing:cell_begin />
                 <% tempURL = "i" + circuit.getId(); %>
+                <% if(!circuit.isPulled() && canSubmit) { %>
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
+                    
                     <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.ACT_LENGTH_COLUMN %>" value="0" />
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
-                    <% if(!circuit.isPulled() && canSubmit) { %>
+                    
                     <form:submit_inline waiting="true" name="save" action="update_circuit" />
-                    <% } %>
+                    
                 <form:end_inline />
+                <% } else { %>
+                Pulled
+                <% } %>
             <listing:cell_end />
             <listing:cell_begin />
                 <% tempURL = "i" + circuit.getId(); %>

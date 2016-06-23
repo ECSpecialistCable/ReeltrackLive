@@ -147,7 +147,7 @@ String logoURL;
 			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= mbr %></b></td>
 		</tr>
 		<tr>
-			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Rec'd GWT</td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><%--Rec'd GWT--%></td>
 			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
 
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Max Pull</td>
@@ -175,33 +175,47 @@ String logoURL;
 	</table>
 	<table style="margin: 0px; margin-top: -25px; padding-top: 20px; width:650px;margin-right: 10px; /*border: solid green 2px*/border:none">
 		<tr>
-			<td class="header" style="text-align: left; width: 20%">CIRCUIT</td>
-			<td class="header" style="text-align: center; width: 20%">LENGTH</td>
-			<td class="header" style="text-align: center; width: 10%">BY</td>
-			<td class="header" style="text-align: center; width: 30%"><%= content.getCableDescriptionEscaped() %></td>
+			<td class="header" style="text-align: left; width: 22%">CIRCUIT</td>
+			<td class="header" style="text-align: left; width: 8%">LENGTH</td>
+			<td class="header" style="text-align: left; width: 22%">CIRCUIT</td>
+			<td class="header" style="text-align: left; width: 8%">LENGTH</td>
+			<td class="header" style="text-align: left; width: 5%"></td>
+			<td class="header" style="text-align: center; width: 35%"><%= content.getCableDescriptionEscaped() %></td>
 		</tr>
 
 		<% int total = 0; %>
 
-		<% for (int c=0; c<circuits.howMany() || c<5; c++ ) { %>
+		<% for (int c=0; c<circuits.howMany() || c<10; c++ ) { %>
 			<% ReelCircuit circuit = new ReelCircuit(); %>
 			<% if(c<circuits.howMany()) { %>
 				<%  circuit = (ReelCircuit)circuits.get(c); %>
 				<% total += circuit.getLength(); %>
 			<% } %>
+			<% c++; %>
+			<% ReelCircuit circuit2 = new ReelCircuit(); %>
+			<% if(c<circuits.howMany()) { %>
+				<% circuit2 = (ReelCircuit)circuits.get(c); %>
+				<% total += circuit2.getLength(); %>
+			<% } %>
 			<tr>
 				<% String borderStyle = "border-bottom: dotted 1px black"; %>
-					<td class="value" style="height:14px;width: 25%;<%=borderStyle%>;padding-bottom:0px"><%= circuit.getName() %></td>
-				<% if(c<circuits.howMany()) { %>
-					<td class="value" style="height:14px;width: 20%;<%=borderStyle%>"><%= circuit.getLength() %></td>
+					<td class="value" style="height:14px;width: 22%;<%=borderStyle%>;padding-bottom:0px"><%= circuit.getName() %></td>
+				<% if(circuit.getId()!=0) { %>
+					<td class="value" style="height:14px;width: 8%;<%=borderStyle%>"><%= circuit.getLength() %></td>
 				<% } else { %>
-					<td class="value" style="height:14px;width: 20%;<%=borderStyle%>"></td>
+					<td class="value" style="height:14px;width: 8%;<%=borderStyle%>"></td>
 				<% } %>
-				<td class="value" style="height:1px;width: 10%;<%=borderStyle%>"></td>
-				<% if(c==0) { %>
+					<td class="value" style="height:14px;width: 22%;<%=borderStyle%>;padding-bottom:0px"><%= circuit2.getName() %></td>
+				<% if(circuit2.getId()!=0) { %>
+					<td class="value" style="height:14px;width: 8%;<%=borderStyle%>"><%= circuit2.getLength() %></td>
+				<% } else { %>
+					<td class="value" style="height:14px;width: 8%;<%=borderStyle%>"></td>
+				<% } %>
+				<td class="value" style="height:1px;width: 5%;"></td>
+				<% if(c==0 || c==1) { %>
 					<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo_reeltag.jpg"; %>
-					<td style="text-align: center; width: 75%; padding: 0;width:160px;" rowspan="<%= "6" %>" align="center">
-						<table style="display:inline;width: 75%; text-align: center;border: none">
+					<td style="text-align: center; width: 35%; padding: 0;width:160px;" rowspan="<%= "6" %>" align="center">
+						<table style="display:inline;width: 100%; text-align: center;border: none">
 							<tr>
 								<td class="header" style="text-align: right;width: 30%">ECS PART #</td>
 								<td class="value" style="/*border:solid #003DB8 1px;*/text-align: left;width: 45%"><%= content.getEcsPN() %></td>
