@@ -1370,7 +1370,7 @@ public class ReelMgr extends CompWebManager {
         Reel currReel2 = new Reel();
     		currReel2.setId(rc.getReelId());
     		currReel2 = this.getReel(currReel2);
-
+			content.setMarker(content.getActLength());
         content.setActLength(currReel.getOnReelQuantity()-currReel2.getOnReelQuantity());
       } else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) {
         int weight = techData.getWeight();
