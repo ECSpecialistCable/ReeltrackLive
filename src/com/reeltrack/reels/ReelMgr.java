@@ -1238,6 +1238,19 @@ public class ReelMgr extends CompWebManager {
     this.updateReelCircuitPull(circuit);
 	}
 
+	public void addReelCircuitPull(Reel content, String name) throws Exception {
+      ReelCircuit circuit = new ReelCircuit();
+      circuit.setReelId(content.getId());
+  		circuit.setCreated(new Date());
+      circuit.setKind("p");
+	  circuit.setName(name);
+  		int toReturn = controller.add(circuit);
+      circuit = new ReelCircuit();
+      circuit.setId(toReturn);
+      circuit.setActLength(content.getTempPullAmount());
+      this.updateReelCircuitPull(circuit);
+  	}
+
 	public int addReelCircuit(ReelCircuit content) throws Exception {
 		content.setCreated(new Date());
     content.setKind("c");
