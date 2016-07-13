@@ -6,16 +6,17 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.servlet.jsp.PageContext;
 import com.reeltrack.users.RTUser;
+import com.reeltrack.reels.Reel;
 import java.io.File;
 
 public class CustomerMgr extends CompWebManager {
 	CompDbController controller;
-	
+
 	public void init(PageContext pageContext, DbResources resources) {
 		super.init(pageContext, resources);
 		this.controller = this.newCompController();
 	}
-	
+
 	public int addCustomer(Customer content) throws Exception {
 		content.setCreated(new Date());
 		content.setStatus(Customer.STATUS_ACTIVE);
@@ -27,20 +28,20 @@ public class CustomerMgr extends CompWebManager {
 		content.setUpdated(new Date());
 		controller.update(content);
 	}
-	
+
 	public Customer getCustomer(Customer content) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
 		return (Customer)controller.pullCompEntity(puller);
 	}
-	
+
 	public CompEntities searchCustomer(Customer content, String sort_by, boolean asc) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
 		puller.setSortBy(content.getTableName(), sort_by, asc);
 		return controller.pullCompEntities(puller, 0, 0);
 	}
-	
+
 	public CompEntities searchCustomer(Customer content, String sort_by, boolean asc, int howMany, int skip) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
@@ -59,18 +60,18 @@ public class CustomerMgr extends CompWebManager {
 			this.deleteCustomerJob(customerJob, realRootContextPath);
 		}
 	}
-	
+
 	public void deleteCustomer(Customer content, String realRootContextPath) throws Exception {
 		this.cleanCustomer(content, realRootContextPath);
 		controller.delete(realRootContextPath, content);
 	}
-	
+
 	/*** Customer Jobs Section ***/
 	public int addCustomerJob(CustomerJob content) throws Exception {
 		content.setCreated(new Date());
 		return controller.add(content);
 	}
-	
+
 	public void updateCustomerJob(CustomerJob content) throws Exception {
 		controller.update(content);
 	}
@@ -88,13 +89,13 @@ public class CustomerMgr extends CompWebManager {
 		puller.setSortBy(content.getTableName(), CustomerJob.NAME_COLUMN, true);
 		return (CustomerJob)controller.pullCompEntity(puller);
 	}
-	
+
 	public CompEntities getCustomerJobs(CustomerJob content) throws Exception {
 		CompEntityPuller puller = new CompEntityPuller(content);
 		puller.addSearch(content);
 		return controller.pullCompEntities(puller, 0, 0);
 	}
-		
+
 	public void deleteCustomerJob(CustomerJob content, String realRootContextPath) throws Exception {
 		CustomerJobToRTUser cTu = new CustomerJobToRTUser();
         cTu.setCompEntityId(content.getId());
@@ -128,5 +129,17 @@ public class CustomerMgr extends CompWebManager {
         CompEntities jobs = controller.pullCompEntities(puller, 0, 0);
         return jobs;
     }
+
+	public CompEntities getCustomersByVendorCode(String code) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new Customer());
+		Reel reel = new Reel();
+		reel.setVendorCode(code);
+		puller.addSearch(reel);
+		puller.addLink(new Reel(), Reel.JOB_CODE_COLUMN, new CustomerJob(), CustomerJob.CODE_COLUMN);
+		puller.addLink(new CustomerJob(), CustomerJob.CUSTOMER_ID_COLUMN, new Customer(), Customer.ID_COLUMN);
+		puller.setSortBy(new Customer().getTableName(), Customer.NAME_COLUMN, true);
+		puller.setDistinct(true);
+		return controller.pullCompEntities(puller, 0, 0);
+	}
 
 }

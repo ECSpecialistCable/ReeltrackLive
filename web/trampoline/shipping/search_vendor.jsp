@@ -8,6 +8,7 @@
 <%@ page import="com.monumental.trampoline.security.*" %>
 <%@ page import="com.reeltrack.reels.*" %>
 <%@ page import="com.reeltrack.users.*" %>
+<%@ page import="com.reeltrack.customers.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
@@ -18,8 +19,10 @@
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr" />
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
+<jsp:useBean id="custMgr" class="com.reeltrack.customers.CustomerMgr" />
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
+<% custMgr.init(pageContext,dbResources); %>
 <%
 RTUser user = (RTUser)userLoginMgr.getUser();
 
@@ -44,9 +47,19 @@ if(request.getParameter("clear") != null) {
     session.setAttribute("packingNum","");
     session.setAttribute("carrierName","");
     session.setAttribute("shippingDate","");
+    session.setAttribute("customer_id","");
 }
 
 content.setStatus(Reel.STATUS_ORDERED);
+
+int customer_id = 0;
+if(session.getAttribute("shipping_customer_id")!=null) {
+    customer_id = ((Integer)session.getAttribute("shipping_customer_id")).intValue();
+}
+
+if(request.getParameter("customer_id") != null && !request.getParameter("customer_id").equals("")) {
+    customer_id = Integer.parseInt(request.getParameter("customer_id"));
+}
 
 if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
     content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
@@ -88,6 +101,7 @@ if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
 }
 
 session.setAttribute("shipping_search",content);
+session.setAttribute("shipping_customer_id",new Integer(customer_id));
 
 String trackingNum = "";
 String packingNum = "";
@@ -146,10 +160,12 @@ if(user.isUserType(RTUser.USER_TYPE_VENDOR)) {
     //content.setVendorCode("");
 }
 
+CompEntities customers = custMgr.getCustomersByVendorCode(user.getVendorCode());
+
 String column = Reel.REEL_TAG_COLUMN;
 boolean ascending = true;
-int count = reelMgr.searchReelsCount(content, column, ascending);
-CompEntities contents = reelMgr.searchReels(content, column, ascending, howMany, skip);
+int count = reelMgr.searchReelsVendorCount(content, customer_id, column, ascending);
+CompEntities contents = reelMgr.searchReelsVendor(content, customer_id, column, ascending, howMany, skip);
 String[] manufacturers = reelMgr.getManufacturers();
 String[] carrierList = reelMgr.getCarriers();
 String[] volts = reelMgr.getPnVolts();
@@ -172,6 +188,18 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <admin:box_begin />
 <form:begin_selfsubmit name="search" action="shipping/search_vendor.jsp" />
 <% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
+            <form:row_begin />
+            <form:label name="" label="Customer:" />
+            <form:content_begin />
+            <form:select_begin name="customer_id" />
+                <form:option name="Any" value="" match="customer_id" />
+                <% for(int x=0; x<customers.howMany(); x++) { %>
+                    <% Customer customer = (Customer)customers.get(x); %>
+                    <form:option name="<%= customer.getName() %>" value="<%= Integer.toString(customer.getId()) %>" match="<%= Integer.toString(customer_id) %>" />
+                <% } %>
+            <form:select_end />
+            <form:content_end />
+            <form:row_end />
             <form:textfield label="ECS PO#:" name="<%= Reel.ORDNO_COLUMN %>" value="<%= content.getOrdNo() %>" />
             <form:row_begin />
             <form:label name="" label="Voltage:" />
@@ -328,9 +356,15 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             <form:begin submit="true" name="<%= toggleForm %>" action="shipping/process_vendor.jsp" />
             <%--<form class=" " title="" onsubmit="" action="shipping/process_vendor.jsp" target="_blank" method="post" name="<%= toggleForm %>" id="<%= toggleForm %>">--%>
             <table border="0" cellspacing="0" cellpadding="0">
+                <% Customer customer = (Customer)content.getCompEntity(Customer.PARAM); %>
+                <% if(customer!=null) { %>
+                    <form:info label="Customer:" text="<%= customer.getName() %>" />
+                <% } else { %>
+                    <form:info label="Customer:" text="" />
+                <% } %>
                 <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
                 <form:hidden name="<%= Reel.ORDERED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
-                
+
                 <form:row_begin />
                 <form:label name="" label="Shipped Qty:" />
                 <form:content_begin />

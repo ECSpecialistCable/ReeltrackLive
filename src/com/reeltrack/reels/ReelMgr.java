@@ -778,6 +778,46 @@ public class ReelMgr extends CompWebManager {
 		return controller.pullCompEntitiesCount(puller);
 	}
 
+	public CompEntities searchReelsVendor(Reel content, int customerId, String sort_by, boolean asc, int howMany, int skip) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+		if(customerId!=0) {
+			puller.addLink(new Reel(), Reel.JOB_CODE_COLUMN, new CustomerJob(), CustomerJob.CODE_COLUMN);
+			puller.addLink(new CustomerJob(), CustomerJob.CUSTOMER_ID_COLUMN, new Customer(), Customer.ID_COLUMN);
+			Customer cust = new Customer();
+			cust.setId(customerId);
+			puller.addSearch(cust);
+		}
+		puller.setSortBy(content.getTableName(), sort_by, asc);
+		CompEntities reels = controller.pullCompEntities(puller, howMany, skip);
+		this.fillReelsWithCustomers(reels);
+		return reels;
+	}
+
+	public int searchReelsVendorCount(Reel content, int customerId, String sort_by, boolean asc) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(content);
+		puller.addSearch(content);
+		if(customerId!=0) {
+			puller.addLink(new Reel(), Reel.JOB_CODE_COLUMN, new CustomerJob(), CustomerJob.CODE_COLUMN);
+			puller.addLink(new CustomerJob(), CustomerJob.CUSTOMER_ID_COLUMN, new Customer(), Customer.ID_COLUMN);
+			Customer cust = new Customer();
+			cust.setId(customerId);
+			puller.addSearch(cust);
+		}
+		puller.setSortBy(content.getTableName(), sort_by, asc);
+		return controller.pullCompEntitiesCount(puller);
+	}
+
+	public void fillReelsWithCustomers(CompEntities reels) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new Customer());
+		puller.addSearchByIds(reels);
+		puller.addLink(new Reel(), Reel.JOB_CODE_COLUMN, new CustomerJob(), CustomerJob.CODE_COLUMN);
+		puller.addLink(new CustomerJob(), CustomerJob.CUSTOMER_ID_COLUMN, new Customer(), Customer.ID_COLUMN);
+		puller.setLinkTo(new Reel());
+		CompEntities customers = controller.pullCompEntities(puller,0,0);
+		controller.fillSingleWithPulled(reels, customers, Customer.PARAM);
+	}
+
 	public CompEntities searchOrderedAndShippedReels(Reel content, String sort_by, boolean asc, int howMany, int skip) throws Exception {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
