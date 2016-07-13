@@ -100,13 +100,14 @@ int weight = techData.getWeight();
     <admin:subtitle text="Record Cable Used Quantity (Cable Pulled)" />
     <admin:box_begin />
         <form:begin submit="true" name="edit" action="reels/process.jsp" />
+                <form:textfield label="Circuit Name:" name="<%= ReelCircuit.NAME_COLUMN %>" value="" />
         		<form:textfield label="Pulled Qty:" pixelwidth="40" name="pulled_quantity" value="0" />
         		<%--<form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />--%>
     			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
     			<form:row_begin />
     				<form:label name="" label="" />
     				<form:buttonset_begin align="left" padding="0"/>
-    					<form:submit_inline warning="true" message="Please confirm Pulled Qty is correct." button="save" waiting="true" name="save" action="record_pull" />
+    					<form:submit_inline warning="true" message="Please confirm quantity entered is correct.  Once entered, it cannot be changed." button="save" waiting="true" name="save" action="record_pull" />
     				<form:buttonset_end />
     			<form:row_end />
         <form:end />
@@ -130,9 +131,11 @@ int weight = techData.getWeight();
     <% } %>
 --%>
     <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+    <div style="color:red;text-align:center;">** Since ReelTrack recalculates the quantity remaining on the reel when a new Top Ft marker is entered,<br />you MUST enter the Top Ft marker after each pull.<br /><br /></div>
     <admin:subtitle text="Record Current Top Marker" />
     <admin:box_begin />
         <form:begin submit="true" name="edit" action="reels/process.jsp" />
+                <form:textfield label="Circuit Name:" name="<%= ReelCircuit.NAME_COLUMN %>" value="" />
                 <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
                 <form:row_begin />
@@ -154,6 +157,7 @@ int weight = techData.getWeight();
         <listing:begin />
         <listing:header_begin />
             <listing:header_cell width="10" first="true" name="#" />
+            <listing:header_cell name="Name" />
             <listing:header_cell width="100" name="Qty Pulled" />
             <listing:header_cell width="150" name="Top Foot # after Pull" />
             <listing:header_cell width="150" name="Max Tension During Pull" />
@@ -166,6 +170,9 @@ int weight = techData.getWeight();
                 <%= new Integer(i+1).toString() %>
             <listing:cell_end />
             <listing:cell_begin />
+                <%= circuit.getName() %>
+            <listing:cell_end />
+            <listing:cell_begin />
                 <%= new Integer(circuit.getActLength()).toString() %>
             <listing:cell_end />
             <listing:cell_begin />
@@ -175,16 +182,20 @@ int weight = techData.getWeight();
             <listing:cell_end />
             <listing:cell_begin />
                 <% tempURL = "i" + circuit.getId(); %>
+                <% if(canSubmit && circuit.getMaxTension()==0) { %>
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
                     <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="<%= new Integer(circuit.getMaxTension()).toString() %>" />
                     <%-- onclick="this.form.submit();"  --%>
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
-                    <% if(canSubmit) { %>
-                    <form:submit_inline waiting="true" name="save" action="update_circuit_pull" />
-                    <% } %>
+                    
+                    <form:submit_inline waiting="true" button="save" name="save" action="update_circuit_pull" />
+                    
                 <form:end_inline />
+                <% } else { %>
+                <%= circuit.getMaxTension() %>
+                <% } %>
             <listing:cell_end />
             <listing:cell_begin align="right"/>
                 <% tempURL = "reels/process.jsp?submit_action=delete_circuit&" + Reel.PARAM + "=" + content.getId() + "&" + ReelCircuit.PARAM + "=" + circuit.getId(); %>

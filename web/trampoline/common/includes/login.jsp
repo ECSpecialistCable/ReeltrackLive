@@ -28,10 +28,14 @@ String tempUrl; //var for url expression
 %>
 
 <html:begin />
+
+
 <admin:title text="" />
 
+
 <% if(!userLoginMgr.isLoggedIn()) { %>
-<admin:subtitle text="Please Log In" />
+<div style="padding-left:25px;padding-top:25px;position:absolute; top:108px; left:202px; width:776px;height:900px;background-color: #1c7f6b;">
+<h2 style="color:white;">Please Log In</h2>
 <admin:box_begin />
 	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />
 		<form:textfield name="<%= RTUser.USERNAME_COLUMN %>" label="<%= RTUser.USERNAME_COLUMN %>" />
@@ -45,11 +49,19 @@ String tempUrl; //var for url expression
 			<form:row_end />
 	<form:end />
 <admin:box_end />
+
+<div style="text-align:center; position:relative; left:-30px; width:801px;">
+<%--<h1 style="padding-top:20px; color:white; font-size:36px;font-weight:bold;">Welcome to ReelTrack</h1>--%>
+<img src="common/images/home-image2.png" width="700">
+</div>
+
+</div>
 <% } %>
 
 <% if(userLoginMgr.isLoggedIn() && user.getJobCode().equals("")) { %>
+<div style="padding-left:25px;padding-top:25px;position:absolute; top:108px; left:202px; width:776px;height:900px;background-color: #1c7f6b;">
 <% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
-<admin:subtitle text="Please Select a Vendor" />
+<h2 style="color:white;">Please Select a Vendor</h2>
 <admin:box_begin />
 	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />
 		<form:row_begin />
@@ -74,7 +86,7 @@ String tempUrl; //var for url expression
 <admin:box_end />
 <br />
 
-<admin:subtitle text="Please Select a Customer" />
+<h2 style="color:white;">Please Select a Customer</h2>
 <admin:box_begin />
 	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />
 		<form:row_begin />
@@ -110,7 +122,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 	custJobs = customerMgr.getJobsAssignedToUser(user);
 }
 %>
-<admin:subtitle text="Please Select a Job" />
+<h2 style="color:white;">Please Select a Job</h2>
 <admin:box_begin />
 	<form:begin_selfsubmit submit="true" name="create" action="common/includes/process_login.jsp" />
 		<form:row_begin />
@@ -137,11 +149,19 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <admin:box_end />
 <% } %>
 
-<% } else if(userLoginMgr.isLoggedIn()) { %>
-<div style="text-align:center; position:absolute; top:108px; left:202px; width:801px;height:900px;background-color: #1c7a68;">
+<div style="text-align:center; position:relative; left:-30px; width:801px;">
 <%--<h1 style="padding-top:20px; color:white; font-size:36px;font-weight:bold;">Welcome to ReelTrack</h1>--%>
-<img src="common/images/home-image.png" width="700">
+<img src="common/images/home-image2.png" width="700">
 </div>
+
+</div>
+
+
+<% } else if(userLoginMgr.isLoggedIn()) { %>
+	<div style="text-align:center; position:absolute; top:108px; left:202px; width:801px;height:900px;background-color: #1c7f6b;">
+	<%--<h1 style="padding-top:20px; color:white; font-size:36px;font-weight:bold;">Welcome to ReelTrack</h1>--%>
+	<img src="common/images/home-image2.png" width="700">
+	</div>
 <% } %>
 
 <html:end />

@@ -10,6 +10,7 @@
 <% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
 	<admin:tab url="shipping/search_vendor.jsp" text="Mark As Shipped" />
 	<admin:tab url="shipping/edit.jsp" text="Edit" />
+	<admin:tab url="shipping/search_generated.jsp" text="Generated Reel Tags" />
 <% } else { %>
 	<admin:tab url="shipping/search.jsp" text="Mark As Shipped" />
 <% } %>

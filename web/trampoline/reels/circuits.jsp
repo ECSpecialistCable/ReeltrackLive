@@ -142,6 +142,11 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
         tempURL = "There was " + remainingQty + "' remaining on this reel before it was marked as scrapped.";
     }
     %>
+
+    <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+    <div style="color:red;text-align:center;">** Since ReelTrack recalculates the quantity remaining on the reel when a new Top Ft marker is entered,<br />you MUST enter the Top Ft marker after each pull.<br /><br /></div>
+    <% } %>
+    
     <% tempURL = "Quantity remaining on reel = " + content.getEstimatedOnReelQty() + "', Un-Pulled Circuits = " + circuitLengthsTotal + "', Unassigned cable = " + remainingQty + "'"; %>
     <admin:subtitle text="<%= tempURL %>" />
     <admin:box_begin color="false" />
@@ -149,8 +154,8 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
         <listing:header_begin />
             <listing:header_cell width="10" first="true" name="#" />
             <listing:header_cell name="Name" />
-            <listing:header_cell width="80" name="Est. Length" />
-            <listing:header_cell width="75" name="Act. Length" />
+            <listing:header_cell width="90" name="Est. Length" />
+            <listing:header_cell width="30" name="Act. Length" />
             <listing:header_cell width="75" name="Top Foot #<br />after Pull" />
             <%
             String header_title = "Update Qty Pulled";
@@ -158,8 +163,8 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
               header_title = "Update Top Ft #";
             }
             %>
-            <listing:header_cell width="100" name="<%= header_title %>" />
-            <listing:header_cell width="80" name="Max Tension<br />During Pull" />
+            <listing:header_cell width="90" name="<%= header_title %>" />
+            <listing:header_cell width="90" name="Max Tension<br />During Pull" />
             <listing:header_cell width="50" name=""  />
         <listing:header_end />
         <% for(int i=0; i<circuits.howMany(); i++) { %>
@@ -189,7 +194,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
-                    <form:submit_inline waiting="true" name="save" action="update_circuit" />
+                    <form:submit_inline waiting="true" button="save" name="save" action="update_circuit" />
                 <form:end_inline />
                 <% } else { %>
                     <%= new Integer(circuit.getLength()).toString() %>
@@ -213,7 +218,7 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <form:hidden name="mark_pulled" value="yes" />
                     <% if(canSubmit) { %>
-                    <form:submit_inline waiting="true" name="save" action="update_circuit" />
+                    <form:submit_inline waiting="true" button="save" name="save" action="update_circuit" />
                     <% } %>
                 <form:end_inline />
                 --%>
@@ -227,9 +232,11 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
-                    
-                    <form:submit_inline waiting="true" name="save" action="update_circuit" />
-                    
+                    <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                    <form:submit_inline warning="true" message="Please confirm top foot marker entered is correct.  Once entered, it cannot be changed."  waiting="true" button="save" name="save" action="update_circuit" />
+                    <% } else { %>
+                    <form:submit_inline warning="true" message="Please confirm Pulled Qty is correct. Once entered, it cannot be changed."  waiting="true" button="save" name="save" action="update_circuit" />
+                    <% } %>
                 <form:end_inline />
                 <% } else { %>
                 Pulled
@@ -237,16 +244,20 @@ if(user.isUserType(RTUser.USER_TYPE_INVENTORY)) {
             <listing:cell_end />
             <listing:cell_begin />
                 <% tempURL = "i" + circuit.getId(); %>
+                <% if(canSubmit && circuit.getMaxTension()==0) { %>
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
                     <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="<%= new Integer(circuit.getMaxTension()).toString() %>" />
                     <%-- onclick="this.form.submit();"  --%>
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
-                    <% if(canSubmit) { %>
-                    <form:submit_inline waiting="true" name="save" action="update_circuit" />
-                    <% } %>
+    
+                    <form:submit_inline waiting="true" button="save" name="save" action="update_circuit" />
+                    
                 <form:end_inline />
+                <% } else { %>
+                <%= circuit.getMaxTension() %>
+                <% } %>
             <listing:cell_end />
             <listing:cell_begin align="right"/>
                 <% tempURL = "reels/process.jsp?submit_action=delete_circuit&" + Reel.PARAM + "=" + content.getId() + "&" + ReelCircuit.PARAM + "=" + circuit.getId(); %>

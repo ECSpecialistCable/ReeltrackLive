@@ -462,7 +462,7 @@ if(action.equals("record_pull")) {
     content.setId(contid);
     content.setTempPullAmount(Integer.parseInt(request.getParameter("pulled_quantity")));
     //reelMgr.updateReelPull(content);
-    reelMgr.addReelCircuitPull(content);
+    reelMgr.addReelCircuitPull(content,request.getParameter(ReelCircuit.NAME_COLUMN));
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
@@ -472,7 +472,7 @@ if(action.equals("record_top_marker")) {
     //content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     content.setTempPullAmount(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     //reelMgr.updateReelTop(content);
-    reelMgr.addReelCircuitPull(content);
+    reelMgr.addReelCircuitPull(content,request.getParameter(ReelCircuit.NAME_COLUMN));
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
 }
 

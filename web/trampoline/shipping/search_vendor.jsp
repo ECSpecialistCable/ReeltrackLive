@@ -329,22 +329,24 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             <%--<form class=" " title="" onsubmit="" action="shipping/process_vendor.jsp" target="_blank" method="post" name="<%= toggleForm %>" id="<%= toggleForm %>">--%>
             <table border="0" cellspacing="0" cellpadding="0">
                 <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
-                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
-                    <form:textfield label="Top Seq Mark #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
-                <% } %>
-                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
-                    <form:textfield label="Current GWT:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
-                <% } %>
                 <form:hidden name="<%= Reel.ORDERED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
                 
                 <form:row_begin />
-                <form:label name="" label="" />
+                <form:label name="" label="Shipped Qty:" />
                 <form:content_begin />
                     <form:textfield_inline pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
                     or
                     <form:checkbox label="Shipped Quantity equals Ordered Quantity" name="ordered_to_shipping" value="y" />
                 <form:content_end />
                 <form:row_end />
+
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
+                    <form:textfield label="Top Seq Mark #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+                <% } %>
+                <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
+                    <form:textfield label="Current GWT:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
+                <% } %>
+
                 <% if(canEdit) { %>
                     <form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
                     <% if(shippingDate.equals("")) shippingDate = content.getShippingDateString(); %>
