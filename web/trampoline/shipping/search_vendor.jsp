@@ -189,7 +189,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <form:begin_selfsubmit name="search" action="shipping/search_vendor.jsp" />
 <% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
             <form:row_begin />
-            <form:label name="" label="Customer:" />
+            <form:label name="" label="ECS Customer:" />
             <form:content_begin />
             <form:select_begin name="customer_id" />
                 <form:option name="Any" value="" match="customer_id" />
@@ -358,9 +358,9 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             <table border="0" cellspacing="0" cellpadding="0">
                 <% Customer customer = (Customer)content.getCompEntity(Customer.PARAM); %>
                 <% if(customer!=null) { %>
-                    <form:info label="Customer:" text="<%= customer.getName() %>" />
+                    <form:info label="ECS Customer:" text="<%= customer.getName() %>" />
                 <% } else { %>
-                    <form:info label="Customer:" text="" />
+                    <form:info label="ECS Customer:" text="" />
                 <% } %>
                 <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
                 <form:hidden name="<%= Reel.ORDERED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
@@ -389,6 +389,9 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
                     <form:info label="Projected Shipping<br />Date:" text="<%= content.getProjectedShippingDateString() %>" />
                     <form:info label="Shipped<br />Date:" text="<%= content.getShippingDateString() %>" />
                 <% } %>
+
+                <form:textfield label="Steel Reel Serial #:" name="<%= Reel.STEEL_REEL_SERIAL_COLUMN %>" value="<%= content.getSteelReelSerial() %>" />
+
                 <% if(carrierName.equals("")) carrierName = content.getCarrier(); %>
                 <form:row_begin />
                 <form:label name="" label="Carrier:" />

@@ -65,7 +65,7 @@ String tempURL = "";
 			<form:row_begin/>
 				<form:buttonset_begin padding="0" align="left"/>
                 &nbsp;<form:submit_inline button="submit" waiting="true" name="clear" action="clear_generated_tags" />
-								<% tempURL = "reeltags/search_generated.jsp?submit_action=zip"; %>
+								<% tempURL = "shipping/search_generated.jsp?submit_action=zip"; %>
                 <form:linkbutton url="<%= tempURL %>" name="DOWNLOAD" />
 								<%
 								if(!zipfile.equals("")) {

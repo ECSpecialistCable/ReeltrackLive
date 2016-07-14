@@ -15,7 +15,7 @@
 <% reelMgr.init(pageContext,dbResources); %>
 <% CompProperties props = new CompProperties(); %>
 
-<% 
+<%
 String basePath = pageContext.getServletContext().getRealPath("/");
 String notifier = "";
 String redirect = request.getHeader("referer");
@@ -37,6 +37,7 @@ if(action.equals("edit_shipped")) {
     } else {
         content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
     }
+    content.setSteelReelSerial(request.getParameter(Reel.STEEL_REEL_SERIAL_COLUMN));
     content.setCarrier(request.getParameter(Reel.CARRIER_COLUMN));
     if(!request.getParameter("other_carrier").equals("")) {
         content.setCarrier(request.getParameter("other_carrier"));
@@ -69,6 +70,7 @@ if(action.equals("mark_shipped")) {
     } else {
         content.setShippedQuantity(Integer.parseInt(request.getParameter(Reel.SHIPPED_QUANTITY_COLUMN)));
     }
+    content.setSteelReelSerial(request.getParameter(Reel.STEEL_REEL_SERIAL_COLUMN));
     content.setCarrier(request.getParameter(Reel.CARRIER_COLUMN));
     if(!request.getParameter("other_carrier").equals("")) {
         content.setCarrier(request.getParameter("other_carrier"));
@@ -87,7 +89,7 @@ if(action.equals("mark_shipped")) {
     try {
         content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
     } catch(Exception e) {}
-    
+
     boolean shipped = false;
     if(request.getParameter("shipped")!=null) {
         shipped = true;
@@ -98,5 +100,5 @@ if(action.equals("mark_shipped")) {
 }
 %>
 <% dbResources.close(); %>
-<notifier:set_message text="<%= notifier %>" />		
+<notifier:set_message text="<%= notifier %>" />
 <admin:ajax_redirect redirect="<%= redirect %>" />
