@@ -6,4 +6,6 @@
 <%@ attribute name="params" required="false" type="java.lang.Object"%>
 <%@ attribute name="thispage" required="true"%>
 
-<a id="tabset_for_page" href="${url}?content_id_for_tabset=${content_id_for_tabset}&parent_id_for_tabset=${parent_id_for_tabset}&${params}" style="visibility: hidden; display: none;">${thispage}</a>
+<script>
+loadTabset('${url}?content_id_for_tabset=${content_id_for_tabset}&parent_id_for_tabset=${parent_id_for_tabset}&${params}','${thispage}');
+</script>

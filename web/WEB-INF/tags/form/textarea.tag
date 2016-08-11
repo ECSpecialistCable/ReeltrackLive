@@ -15,8 +15,14 @@
 <%@ attribute name="required" required="false" %>
 <%@ attribute name="pixelwidth" required="false" %>
 
+<%@ attribute name="helpText" required="false" %>
 
-
-<form:fieldset name="${name}" label="${label}">
-    <form:textarea_inline name="${name}" cols="${cols}" rows="${rows}" value="${value}" htmleditor="${htmleditor}" required="${required}" pixelwidth="${pixelwidth}" />
-</form:fieldset>
+<div class="form-group">
+<label style="padding-right:0;color:#333333;" for="${name}" class="col-sm-3 control-label">${label}</label>
+<div class="col-sm-9">
+  <textarea class="form-control" name="${name}" id="${name}" rows="${rows}"><c:if test="${value != ''}">${value}</c:if></textarea>
+  <c:if test="${helpText != ''}">
+  <p class="help-block" style="margin-bottom:0;color:darkgray;">${helpText}</p>
+  </c:if>
+</div>
+</div>

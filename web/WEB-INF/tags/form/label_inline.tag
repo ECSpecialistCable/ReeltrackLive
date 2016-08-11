@@ -8,6 +8,6 @@
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table"%>
 
 
-<c:if test="${label != ''}">
-    <label for="${name}">${label}</label>
-</c:if>
+
+<label style="padding-right:0;color:#333333;" for="${name}" class="col-sm-3 control-label">${label}</label>
+

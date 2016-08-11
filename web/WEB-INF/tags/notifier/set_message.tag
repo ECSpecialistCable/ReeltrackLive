@@ -4,8 +4,4 @@
 <%@ attribute name="text" required="true" %>
 <%@ attribute name="color" required="false" %>
 
-<c:if test="${!empty text}">
-	<c:set var="flash" scope="session" value="${text}" />
-	<c:set var="flash_color" scope="session" value="${color}" />
-</c:if>
 	

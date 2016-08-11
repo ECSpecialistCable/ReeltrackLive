@@ -5,4 +5,4 @@
 
 </tr>
 </thead>
-<tbody>
+<tbody style="color:#333333;">

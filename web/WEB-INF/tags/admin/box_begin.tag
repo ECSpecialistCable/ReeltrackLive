@@ -10,29 +10,40 @@
 
 <%@ attribute name="cb_content" required="false"%>
 
-<% if(color!=null && color.equals("false")) { %>
-<div class="adminbox_container_white <% if(cssClass != null){ %>${cssClass} <% } %><% if(toggleRecipient != null){ %>${toggleRecipient} <% } %>" 
-	<% if(id != null){ %> id="${id}" <% } %> 
-	>
-    <img class="adminbox_top_white" 
-		<% if(cb_content == null){ %>
- src="common/images/blank.gif"
-		<% } else { %>
- src="../common/images/blank.gif"
-		<% } %>
- width="728" height="10" alt="" border="0" />
-    <div class="adminbox_white">
-    <% } else { %>
+<%@ attribute name="text" required="false"%>
+<%@ attribute name="name" required="false"%>
+<%@ attribute name="pages" required="false"%>
+<%@ attribute name="pageNum" required="false"%>
+<%@ attribute name="url" required="false"%>
+<%@ attribute name="open" required="false"%>
 
-<div class="adminbox_container <% if(cssClass != null){ %>${cssClass} <% } %><% if(toggleRecipient != null){ %>${toggleRecipient} <% } %>"
-	<% if(id != null){ %> id="${id}" <% } %>   
-	>
-    <img class="adminbox_top" 
-		<% if(cb_content == null){ %>
- src="common/images/blank.gif"
-		<% } else {  %>
- src="../common/images/blank.gif"
-		<% } %>
- width="728" height="10" alt="" border="0" />
-    <div class="adminbox">    
-    <% } %>
+<div class="panel panel-primary">
+  <div class="panel-heading blue_bg">
+    <h3 class="panel-title"><a onclick="saveCollapseState('${name}')" data-toggle="collapse" href="#${name}">${text}</a>
+    <% if(pages!=null && pageNum!=null) { %>
+    <% int howMany = Integer.parseInt(pages); %>
+    <% int selectedPage = Integer.parseInt(pageNum); %>
+		<ul class="pagination pagination-sm pull-right" style="margin-top:-6px; padding:0;">
+			<% for(int x=1; x<=howMany; x++) { %>
+
+				<% if(selectedPage==x) { %>
+					<% if(url.contains("?")) { %>
+						<li style="cursor: default;"><a href="javascript:loadTab('${url}&pageNum=<%= x %>');"><%= x %></a></li>
+					<% } else { %>
+						<li style="cursor: default;"><a href="javascript:loadTab('${url}?pageNum=<%= x %>');"><%= x %></a></li>
+					<% } %>
+				<% } else { %>
+					<% if(url.contains("?")) { %>
+						<li class="active" style="cursor: default;"><a href="javascript:loadTab('${url}&pageNum=<%= x %>');"><%= x %></a></li>
+					<% } else { %>
+						<li class="active" style="cursor: default;"><a href="javascript:loadTab('${url}?pageNum=<%= x %>');"><%= x %></a></li>
+					<% } %>
+
+				<% } %>
+	        <% } %>
+	    </ul>
+	    <div class="clearfix"></div>
+	<% } %>
+    </h3>
+  </div>
+  <div class="panel-collapse collapse <% if(open==null || !open.equals("false")) { %>in<% } %>" id="${name}">

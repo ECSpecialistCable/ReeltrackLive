@@ -8,17 +8,10 @@
 <%@ attribute name="value" required="false" %>
 <%@ attribute name="required" required="false" %>
 
-<input type="text" class="withborder" 
-    name="${name}" 
-    id="${name}" 
-    <c:if test="${value != ''}">
-        value="${value}" 
-    </c:if>     
-    <c:if test="${pixelwidth != ''}">
-        style="width: ${pixelwidth}px;"
-    </c:if>     
-    <c:if test="${required}">
-        required="${required}"
-    </c:if>	        
-    <c:forEach items="${attribs}" var="attrib"> ${attrib.key}="${attrib.value}"</c:forEach>
-/>	        
+<div class="input-group col-sm-12">
+	<input type="text" name="${name}" id="${name}" <c:if test="${value != ''}">value="${value}"</c:if> class="form-control" placeholder="">	        
+	<span class="input-group-btn">
+		<input style="background-color:#EEEEEE;color:#555555;" class="btn btn-default" type="submit" value="SAVE">
+	</span>
+</div>	
+

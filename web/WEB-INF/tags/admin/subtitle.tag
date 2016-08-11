@@ -11,25 +11,3 @@
 
 <%@ attribute name="lightboxLink" required="false" %>
 <%@ attribute name="url" required="false" %>
-
-
-
-<h2 class="${cssClass} <% if(toggleTarget!=null) {%> toggle_trigger <% if(toggleOpen != null && toggleOpen == "true"){ %> toggleIsOpen <% } else {%> toggleIsClosed <% } %> <% } %>"
-	
-	<% if(toggleTarget!=null){ %> 
-		rel=".${toggleTarget}"
-	<% } %> 
-	
-	<% if(id!=null) { %>
-	 	id="${id}"
-	<% } %> 
-	>
-	
-	<% if(lightboxLink != null && lightboxLink == "true"){ %>
-		<a href="${url}" class="lightbox_link" target="_blank">
-	<% } %>
-${text}
-	<% if(lightboxLink != null && lightboxLink == "true"){ %>
-	</a>
-	<% } %>
-</h2>

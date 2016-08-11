@@ -8,9 +8,16 @@
 <%@ attribute name="name" required="true" %>
 <%@ attribute name="action" required="true" %>
 <%@ attribute name="cssClass" required="false"%>
-
-<%--
-<form onsubmit="ADMIN.util.submit_self('${name}'); return false;" action="${action}" method="post" name="${name}" id="${name}" <c:forEach items="${attribs}" var="attrib"> ${attrib.key}="${attrib.value}"</c:forEach>>
---%>
-<form class="${cssClass} self_submit" action="${action}" method="post" name="${name}" id="${name}" <c:forEach items="${attribs}" var="attrib"> ${attrib.key}="${attrib.value}"</c:forEach>>
-
+<%@ attribute name="noTopPad" required="false" %>
+<%@ attribute name="noBotPad" required="false" %>
+<%
+String style = "";
+if(noTopPad!=null && !noTopPad.equals("")) {
+	style += "padding-top:0px;";
+}
+if(noBotPad!=null && !noBotPad.equals("")) {
+	style += "padding-bottom:0px;";
+}
+%>
+<div class="panel-body" style="<%= style %>">
+<form class="form-horizontal selfSubmitForm" role="form" id="${name}" name="${name}" action="${action}">

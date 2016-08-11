@@ -9,6 +9,8 @@
 <%@ attribute name="name" required="true" %>
 <%@ attribute name="action" required="true" %>
 <%@ attribute name="cssClass" required="false" %>
+<%@ attribute name="noTopPad" required="false" %>
+<%@ attribute name="noBotPad" required="false" %>
 
-<form:begin_selfsubmit_inline action="${action}" name="${name}" cssClass="${cssClass}" />
-    <table:begin />
+<form:begin_selfsubmit_inline action="${action}" name="${name}" cssClass="${cssClass}" noTopPad="${noTopPad}" noBotPad="${noBotPad}"/>
+

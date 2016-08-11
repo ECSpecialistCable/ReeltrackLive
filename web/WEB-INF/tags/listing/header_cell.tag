@@ -12,73 +12,32 @@
 <%@ attribute name="match" required="false" %>
 <%@ attribute name="width" required="false" %>
 <%@ attribute name="colspan" required="false" %>
-
 <%@ attribute name="cssClass" required="false" %>
-
 <%@ attribute name="toggleTarget" required="false" %>
 <%@ attribute name="toggleOpen" required="false" %>
-
 <%@ attribute name="id" required="false" %>
+<%@ attribute name="setWidth" required="false" %>
 
-<%
-boolean selected = false;
-if(column!=null && match!=null && column.equals(match)) {
-    selected = true;
-}
 
-boolean arrowAsc = true;
+<%if(url!=null){%>
+	<%boolean selected = false;%>
+	<%if(column!=null && match!=null && column.equals(match)) {%>
+		<%selected = true;%>
+	<%}%>
+	<%String operator = "?";%>
+	<%if(url.contains("?")) {%>
+		<%operator = "&";%>
+	<%}%>
 
-String style = "regular";
-if(first!=null && first.equals("true")) {
-    style = "first";
-}
-if(selected) {
-    style = style + "On";
-}
-if(ascending!=null) {
-    String start = "?";
-    if(url.indexOf("?")!=-1) {
-        start = "&";
-    }
-    if(selected) {
-        if(ascending.equals("true")) {
-            url = url + start + "column=" + column + "&ascending=false";
-        } else {
-            arrowAsc = false;
-            url = url + start + "column=" + column + "&ascending=true";
-        }
-    } else {
-        url = url + start + "column=" + column + "&ascending=true";
-    }
-}
-%>
-<td valign="top"
-	class="<%= align %> <%= style %> 
-	<% if(toggleTarget != null ) { %> 
- 		toggle_trigger
-		<% if(toggleOpen != null && toggleOpen == "true"){ %> toggleIsOpen <% } else {%> toggleIsClosed <% } %>
-	<% } %> 
-	<% if(cssClass!=null) { %> 
-		${cssClass} 
-	<% } %>" 
-	
-	
-	<% if(toggleTarget != null ) { %> 
-		rel=".${toggleTarget}"
-	<% } %>
-	
-	<%if(id != null){ %> id="${id}" <% } %>
-	
-	colspan="${colspan}" 
-	<% if(width!=null) { %> width="${width}"<% } %>    
-	
-    <% if(url!=null) { %>onclick="ADMIN.load.page('<%= url %>');"<% } %>>
-    <strong <% if(ascending!=null) { %>class="sorting"<% } %>>${name}</strong>
-    <% if(ascending!=null) { %>
-    <% if(arrowAsc) { %>
-    <img src="/trampoline/common/images/header_down.gif" width="9" height="8" border="0" align="right" class="header_arrow" />
-    <% } else { %>
-    <img src="/trampoline/common/images/header_up.gif" width="9" height="8" border="0" align="right" class="header_arrow" />
-    <% } %>
-    <% } %>    
-</td>
+	<%if(selected) {%>
+        <%if(ascending.equals("true")) {%>
+        	<th><i class="glyphicon glyphicon-sort-by-attributes"></i><a style="text-decoration:none;color:black;" href="javascript:loadTab('${url}<%= operator + "column=" + column + "&ascending=false" %>');"> ${name}</a></th>
+        <%} else {%>
+        	<th><i class="glyphicon glyphicon-sort-by-attributes-alt"></i><a style="text-decoration:none;color:black;" href="javascript:loadTab('${url}<%= operator + "column=" + column + "&ascending=true" %>');"> ${name}</a></th>
+        <%}%>
+    <%} else {%>
+        <th><a style="text-decoration:none;color:black;" href="javascript:loadTab('${url}<%= operator + "column=" + column + "&ascending=true" %>');">${name}</a></th>
+    <%}%>
+<%}else{%>
+	<th <% if(setWidth!=null) { %>style="width:${setWidth}px;"<% } %>>${name}</th>
+<%}%>

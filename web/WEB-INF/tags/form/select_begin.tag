@@ -8,8 +8,4 @@
 <%@ attribute name="name" required="true" %>
 <%@ attribute name="onchange" required="false" %>
 
-
-<%--
-<select id="${name}" name="${name}" <c:if test="${(!empty onchange)}">class="ajax_select_submitable"</c:if>>
---%>
-<select id="${name}" name="${name}" <c:if test="${(!empty onchange)}">class="ajax_submitter"</c:if>>
+<select class="form-control" id="${name}" name="${name}" <% if(onchange!=null) { %>onchange="${onchange}"<% } %>>

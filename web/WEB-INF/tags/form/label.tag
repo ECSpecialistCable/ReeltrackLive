@@ -9,6 +9,4 @@
 <%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
 
 
-<table:label_cell>
-    <form:label_inline name="${name}" label="${label}" />
-</table:label_cell>
+<form:label_inline name="${name}" label="${label}" />

@@ -3,5 +3,4 @@
 <%@ taglib prefix="table" tagdir="/WEB-INF/tags/table"%>
 <%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
 
-    <table:end />
 <form:end_inline />

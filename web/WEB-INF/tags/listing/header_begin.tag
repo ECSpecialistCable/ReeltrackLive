@@ -3,4 +3,4 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <thead>
-<tr class="listing_header">
+<tr style="color:#333333;">

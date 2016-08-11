@@ -13,14 +13,8 @@
 <%@ attribute name="toggleTarget" required="false" %>
 <%@ attribute name="toggleOpen" required="false" %>
 
-<td valign="top" align="${align}" style="${style}" 
-	class="<%if(cssClass != null){ %>${cssClass} <% } %>
-		<% if(toggleTarget != null ) { %>
-			toggle_trigger 
-			
-			<% if(toggleOpen != null && toggleOpen == "true"){ %> toggleIsOpen <% } else {%> toggleIsClosed <% } %>
-			
-		<% } %>"
-	
-	<%if(toggleTarget != null ){ %> rel=".${toggleTarget}" <% } %>
-	<% if(width!=null) { %> width="${width}"<% } %> <% if(onclick!=null) { %> onclick="${onclick}"<% } %> colspan="${colspan}">
+<% if(align!=null) { %>
+<td align="${align}" <% if(style!=null) {%> style="${style}" <% } %>>
+<% } else { %>
+<td <% if(style!=null) {%> style="${style}" <% } %>>
+<% } %>

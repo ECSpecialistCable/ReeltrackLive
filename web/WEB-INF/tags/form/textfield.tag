@@ -12,7 +12,15 @@
 
 <%@ attribute name="value" required="false" %>
 <%@ attribute name="required" required="false" %>
+<%@ attribute name="helpText" required="false" %>
+<%@ attribute name="placeholder" required="false" %>
 
-<form:fieldset name="${name}" label="${label}">
-    <form:textfield_inline size="${size}" name="${name}" id="${name}" value="${value}" required="${required}" pixelwidth="${pixelwidth}"/>
-</form:fieldset>
+<div class="form-group">
+<label style="padding-right:0;color:#333333;" for="${name}" class="col-sm-3 control-label">${label}</label>
+<div class="col-sm-9">
+  <input type="text" name="${name}" id="${name}" <c:if test="${value != ''}">value="<c:out value="${value}" />"</c:if> class="form-control" placeholder="${placeholder}">
+  <c:if test="${helpText != ''}">
+  <p class="help-block" style="margin-bottom:0;color:darkgray;">${helpText}</p>
+  </c:if>
+</div>
+</div>

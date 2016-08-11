@@ -11,9 +11,22 @@
 <%@ attribute name="start" required="false" %>
 <%@ attribute name="required" required="false" %>
 
-<tr>
-    <form:label name="${name}" label="${label}"/>
-    <td >
-       <input style="width:70px;" type="text" rel="${start}" id="${name}" name="${name}" value="${value}" class="input_date_picker" />
-	</td>
-</tr>
+
+<div class="form-group">
+	<label style="padding-right:0;color:#333333;" for="${name}" class="col-sm-3 control-label">${label}</label>
+	<div class="col-sm-9">
+	    <div class='input-group date' id='datetimepicker_${name}'>
+	    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+	        </span>
+	        <input type='text' class="form-control" name="${name}" id="${name}"/>        
+	    </div>
+	    <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker_${name}').datetimepicker({
+                	defaultDate: "${value}",
+					pickTime: false
+				});
+            });
+        </script>
+    </div>
+</div>

@@ -11,10 +11,19 @@
 <%@ attribute name="submit" required="false" %>
 <%@ attribute name="cssClass" required="false"%>
 <%@ attribute name="notify" required="false" %>
+<%@ attribute name="target" required="false" %>
+<%@ attribute name="noTopPad" required="false" %>
+<%@ attribute name="noBotPad" required="false" %>
 
-<% if(submit!=null) { %>
-    <form:begin_inline submit="${submit}" action="${action}" name="${name}" cssClass="${cssClass}" notify="${notify}" />
-<% } else { %>
-    <form:begin_inline action="${action}" name="${name}" cssClass="${cssClass}" notify="${notify}"/>
-<% } %>
-    <table:begin />
+<%
+String style = "";
+if(noTopPad!=null && !noTopPad.equals("")) {
+	style += "padding-top:0px;";
+}
+if(noBotPad!=null && !noBotPad.equals("")) {
+	style += "padding-bottom:0px;";
+}
+%>
+
+<div class="panel-body" style="<%= style %>">
+<form class="form-horizontal submitForm" <% if(target!=null) { %>target="${target}"<% } %> role="form" id="${name}" name="${name}" action="${action}">

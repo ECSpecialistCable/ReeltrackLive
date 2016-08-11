@@ -15,9 +15,41 @@
 <%@ attribute name="cssClass" required="false" %>
 
 
+<%--
 <table:row>
 	<form:label name="${name}" label="${label}"/>
 	<table:cell>
 	    <form:file_inline name="${name}" id="${name}" url="${url}" filename="${filename}" required="${required}" urldescription="${urldescription}" reloption="${reloption}" cssClass="${cssClass}"  />
 	</table:cell>
 </table:row>
+--%>
+
+<div class="form-group">
+<label style="padding-right:0;color:#333333;" for="${name}" class="col-sm-3 control-label">${label}</label>
+<div class="col-sm-9">
+  <input type="file" name="${name}" id="${name}">
+
+  <c:if test="${not empty filename}">
+        <p class="help-block" style="margin-bottom:0;color:darkgray;">
+        <c:choose>
+	    <c:when test="${not empty url}">
+	        <a target="_blank" href="<c:out value='${url}/${filename}'/>" rel="<c:out value='${reloption}'/>" class="<c:out value='${cssClass}'/>">
+            </c:when>
+            <c:otherwise>
+                <a target="_blank" href="<c:out value='${filename}'/>">
+            </c:otherwise>
+        </c:choose>        
+        <c:choose>
+	        <c:when test="${not empty urldescription}">
+	            ${urldescription}
+            </c:when>
+            <c:otherwise>
+                View existing file
+            </c:otherwise>
+        </c:choose>
+        </a>
+        </p>
+	</c:if>
+
+</div>
+</div>

@@ -11,10 +11,8 @@
 <%@ attribute name="submit" required="false" %>
 <%@ attribute name="cssClass" required="false"%>
 
-<% if(submit!=null) { %>
-    <form:begin_inline enctype="multipart/form-data" submit="${submit}" action="${action}" name="${name}" />
-<% } else { %>
-    <form:begin_inline enctype="multipart/form-data" action="${action}" name="${name}" />
-<% } %>
-    <table:begin />
+
+<div class="panel-body">
+<form class="form-horizontal submitMultipartForm" method="post" enctype="multipart/form-data" role="form" id="${name}" name="${name}" action="${action}">
+
         

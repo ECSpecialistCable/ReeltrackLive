@@ -9,4 +9,4 @@
 <%@ attribute name="cssClass" required="false"%>
 <%@ attribute name="notify" required="false"%>
 
-<form class="${cssClass} " <% if(notify!=null) { %>title="${notify}"<% } %> onsubmit="" action="${action}" target="_submissionFrame" method="post" name="${name}" id="${name}" <c:forEach items="${attribs}" var="attrib"> ${attrib.key}="${attrib.value}"</c:forEach>>
+<form class="form-horizontal submitForm" role="form" id="${name}" name="${name}" action="${action}">

@@ -10,17 +10,4 @@
 <%@ attribute name="cssClass" required="false"%>
 
 
-<%
-String rowtype = "even";
-
-if(row!=null) {
-    int rowInt = new Integer(row).intValue();
-    if(rowInt%2==0) {
-        rowtype = "even";
-    } else {
-        rowtype = "color";
-    }
-}
-%>
-
-<tr id="${id}" style="${style}" <%if(cssClass != null){ %> class="${cssClass} <%= rowtype %> listing_row" <% } else { %> class="<%= rowtype %> listing_row"<% } %>>
+<tr>
