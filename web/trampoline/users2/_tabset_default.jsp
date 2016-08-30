@@ -7,9 +7,9 @@
 <% userLoginMgr.init(pageContext); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 
-<admin:tab url="users2/search.jsp" text="users" />
+<admin:tab url="users2/search.jsp" text="Users" />
 <% if(user.isUserType(RTUser.USER_TYPE_ECS) || user.getCanAddUser().equals("y")) { %>
-	<admin:tab url="users2/create.jsp" text="add user" />
+	<admin:tab url="users2/create.jsp" text="Add User" />
 <% } %>
 
 <admin:set_moduleactions url="users2/_moduleactions.jsp" />

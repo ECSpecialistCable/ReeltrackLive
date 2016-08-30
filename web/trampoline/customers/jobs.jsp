@@ -46,15 +46,15 @@ String tempUrl; //var for url expression
 
 <html:begin />
 
-<admin:title text="<%= content.getTitle()%>" />
+<admin:title heaing="Customers" text="<%= content.getTitle()%>" />
 	<notifier:show_message />
 	<admin:subtitle text="Add Job" />
-	
-	<admin:box_begin />
+
+	<admin:box_begin text="Add Job" name="Add_Job" />
 		<form:begin name="add_note" action="customers/process.jsp" />
-			<form:textfield name="<%= CustomerJob.NAME_COLUMN %>" label="Name:" />        		
-			<form:textfield name="<%= CustomerJob.CODE_COLUMN %>" label="Job Code:" />        			
-			
+			<form:textfield name="<%= CustomerJob.NAME_COLUMN %>" label="Name:" />
+			<form:textfield name="<%= CustomerJob.CODE_COLUMN %>" label="Job Code:" />
+
 			<form:hidden name="<%= Customer.PARAM %>" value="<%= content.getId() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
@@ -64,10 +64,10 @@ String tempUrl; //var for url expression
 			<form:row_end />
 		<form:end />
 	<admin:box_end />
-	
+
 <% if(custJobs.howMany() > 0) { %>
     <admin:subtitle text="Jobs" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Jobs" name="Jobs" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Name" />
@@ -89,13 +89,13 @@ String tempUrl; //var for url expression
                 <% tempUrl = "customers/process.jsp?submit_action=delete_customer_job&" + Customer.PARAM + "=" + content.getId() + "&" + CustomerJob.PARAM + "=" + custJob.getId(); %>
                 <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />
-            <listing:row_end />	
+            <listing:row_end />
             <% } %>
         <listing:end />
     <admin:box_end />
 <% } else { %>
     <admin:subtitle text="There are no Jobs assigned to this Customer." />
 <% } %>
-		
+
 	<admin:set_tabset url="customers/_tabset_manage.jsp" thispage="jobs.jsp" content_id_for_tabset="<%= contid %>"/>
 <html:end />

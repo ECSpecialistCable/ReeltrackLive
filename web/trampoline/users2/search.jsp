@@ -16,22 +16,22 @@
 <% userLoginMgr.init(pageContext); %>
 <% securityMgr.init(dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
-<% 
+<%
 RTUser content = new RTUser();
 content.setCustomerId(user.getCustomerId());
 CompEntities contents = securityMgr.getUsers(content, false);
 contents.sortByMethodName("getLname",true);
 String tempUrl;
-%>	
+%>
 
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Users" />
+<admin:title heading="Users" text=""/>
 
 <% if(contents.howMany() > 0) { %>
     <admin:subtitle text="Current Users" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Current Users" name="Current_Users" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Name" />
@@ -57,7 +57,7 @@ String tempUrl;
                 <% tempUrl = "users2/process.jsp?submit_action=delete&" + RTUser.PARAM + "=" + content.getId(); %>
                 <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />
-            <listing:row_end />	
+            <listing:row_end />
             <% } %>
         <listing:end />
     <admin:box_end />
@@ -66,4 +66,4 @@ String tempUrl;
 <% } %>
 
 <admin:set_tabset url="users2/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />	
+<html:end />

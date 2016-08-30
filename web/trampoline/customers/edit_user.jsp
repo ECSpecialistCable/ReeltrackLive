@@ -48,11 +48,11 @@ String tempUrl; //var for url expression
 <% dbResources.close(); %>
 
 <html:begin />
-<admin:title text="<%= content.getName() %>" />
+<admin:title heading="Users" text="<%= content.getName() %>" />
 <notifier:show_message />
 
 <admin:subtitle text="Edit User" />
-<admin:box_begin />
+<admin:box_begin text="Edit User" name="Edit_User" />
     <form:begin submit="true" name="edit" action="customers/process.jsp" />
 
 			<form:row_begin />
@@ -93,7 +93,7 @@ String tempUrl; //var for url expression
 					<form:select_end />
 				<form:content_end />
 			<form:row_end />
-			<form:hidden name="<%= RTUser.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= RTUser.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
@@ -105,7 +105,7 @@ String tempUrl; //var for url expression
 <admin:box_end />
 
 <admin:subtitle text="Assign Job" />
-<admin:box_begin />
+<admin:box_begin text="Assign Job" name="Assign_Job" />
     <form:begin submit="true" name="edit" action="customers/process.jsp" />
 
 			<form:row_begin />
@@ -119,7 +119,7 @@ String tempUrl; //var for url expression
 					<form:select_end />
 				<form:content_end />
 			<form:row_end />
-			<form:hidden name="<%= RTUser.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= RTUser.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
@@ -132,7 +132,7 @@ String tempUrl; //var for url expression
 
 <% if(jobsAssigned.howMany() > 0) { %>
     <admin:subtitle text="Jobs Assigned" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Jobs Assigned" name="Jobs_Assigned" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Name" />
@@ -152,7 +152,7 @@ String tempUrl; //var for url expression
                 <% tempUrl = "customers/process.jsp?submit_action=unassign_job&" + RTUser.PARAM + "=" + content.getId() + "&" + CustomerJob.PARAM + "=" + theJob.getId(); %>
                 <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />
-            <listing:row_end />	
+            <listing:row_end />
             <% } %>
         <listing:end />
     <admin:box_end />

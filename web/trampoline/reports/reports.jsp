@@ -20,7 +20,7 @@
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
-<% 
+<%
 	RTUser user = (RTUser)userLoginMgr.getUser();
 	SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 
@@ -76,15 +76,15 @@
 	if(request.getParameter("cdd")!=null) {
 		cdd = request.getParameter("cdd");
 	}
-	
+
 %>
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Reports" />
+<admin:title heading="Reports" text="Generate"/>
 
 <admin:subtitle text="Daily Report" />
-<admin:box_begin />
+<admin:box_begin text="Daily Report" name="Daily_Report" />
 <form:begin name="daily_report" action="reports/process.jsp" />
 	<form:date_picker label="Report Day:" name="daily_report_day" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
 	<%if(dr.equals("true")) { %>
@@ -98,7 +98,7 @@
 	<% } %>
 	<form:row_begin />
         <form:label name="" label="" />
-        <form:buttonset_begin align="left" padding="0"/>			
+        <form:buttonset_begin align="left" padding="0"/>
             <form:submit_inline button="submit" waiting="false" name="submit" action="daily_report" />
         <form:buttonset_end />
     <form:row_end />
@@ -108,7 +108,7 @@
 <admin:box_end />
 
 <admin:subtitle text="Inventory Summary" />
-<admin:box_begin />
+<admin:box_begin text="Inventory Summary" name="Inventory_Summary" />
 <form:begin_selfsubmit name="inventory_summary_type" action="reports/reports.jsp" />
 	<form:row_begin />
         <form:label name="" label="Generate:" />
@@ -149,7 +149,7 @@
 <admin:box_end />
 
 <admin:subtitle text="Inventory Report" />
-<admin:box_begin />
+<admin:box_begin text="Inventory Report" name="Inventory_Report" />
 <form:begin_selfsubmit name="inventory_type" action="reports/reports.jsp" />
 	<form:row_begin />
         <form:label name="" label="Generate:" />
@@ -191,7 +191,7 @@
 <admin:box_end />
 
     <admin:subtitle text="Circuit Report" />
-    <admin:box_begin />
+    <admin:box_begin text="Circuit Report" name="Circuit_Report" />
     <form:begin name="circuit_report" action="reports/process.jsp" />
     <%if(cir.equals("true")) { %>
     <form:row_begin />
@@ -214,7 +214,7 @@
     <admin:box_end />
 
     <admin:subtitle text="CTR Report" />
-    <admin:box_begin />
+    <admin:box_begin text="CTR Report" name="CTR_Report" />
     <form:begin name="ctr_report" action="reports/process.jsp" />
     <%if(ctr.equals("true")) { %>
     <form:row_begin />
@@ -237,17 +237,17 @@
     <admin:box_end />
 
     <admin:subtitle text="CTR Files" />
-    <admin:box_begin />
+    <admin:box_begin text="CTR Files" name="CTR_Files" />
     <form:begin name="ctr_files" action="reports/process.jsp" />
     <%if(!zip_ctr.equals("")) { %>
 	    <form:row_begin />
-	    <form:label name="" label="Download:" />
+	    <form:label name="" label="" />
 	    <form:buttonset_begin align="left" padding="0"/>
 	    <% String url = request.getContextPath() + "/reports/" + zip_ctr; %>
 	    <a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
 	    <form:buttonset_end />
 	    <form:row_end />
-    <% } else { %>
+    <% } %>
 	    <form:row_begin />
 	    <form:label name="" label="Generate:" />
 	    <form:buttonset_begin align="left" padding="0"/>
@@ -255,13 +255,13 @@
 	    <form:buttonset_end />
 	    <form:row_end />
 	    <form:hidden name="job_code" value="<%= user.getJobCode() %>" />
-    <% } %>
+
     <form:end />
     <admin:box_end />
 
 
 <admin:subtitle text="Period Report" />
-<admin:box_begin />
+<admin:box_begin text="Period Report" name="Period_Report" />
 <form:begin name="period_report" action="reports/process.jsp" />
 	<form:date_picker label="Start Date:" name="period_report_start_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
 	<form:date_picker label="End Date:" name="period_report_end_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
@@ -311,7 +311,7 @@
 <admin:box_end />
 --%>
 <admin:subtitle text="Action Log" />
-<admin:box_begin />
+<admin:box_begin text="Action Log" name="Action_Log" />
 <form:begin name="action_log_report" action="reports/process.jsp" />
 	<form:date_picker label="Start Date:" name="action_log_report_start_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
 	<form:date_picker label="End Date:" name="action_log_report_end_date" required="true" value="<%= df.format(new Date()) %>" start="01/01/2012" />
@@ -336,7 +336,7 @@
 <admin:box_end />
 
 <admin:subtitle text="Cable Data Download" />
-<admin:box_begin />
+<admin:box_begin text="Cable Data Download" name="Cable_Data_Download" />
 <form:begin name="cdd_report" action="reports/process.jsp" />
 <%if(cdd.equals("true")) { %>
 <form:row_begin />
@@ -359,4 +359,4 @@
 <admin:box_end />
 
 <admin:set_tabset url="reports/_tabset_default.jsp" thispage="reports.jsp" />
-<html:end />    
+<html:end />

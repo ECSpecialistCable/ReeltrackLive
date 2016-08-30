@@ -63,7 +63,7 @@ String tempURL; //var for url expression
 <notifier:show_message />
 
 <admin:subtitle text="General Info" />
-<admin:box_begin />
+<admin:box_begin text="General Info" name="General_Info"/>
     <form:begin submit="true" name="edit" action="checkout/process.jsp" />
     		<form:row_begin />
 	            <form:label name="" label="Checked OUT to:" />
@@ -99,7 +99,7 @@ String tempURL; //var for url expression
 	            <form:select_end />
 	            <form:content_end />
         	<form:row_end />
-			<form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
@@ -110,21 +110,9 @@ String tempURL; //var for url expression
 <admin:box_end />
 
 <% if(pickReels.howMany() > 0) { %>
-	<admin:subtitle text="Reels" />
-		<listing:begin />
-	    <listing:header_begin />
-	        <listing:header_cell width="20" first="true" name="#" />
-	        <listing:header_cell width="200" name="Reel Tag" />
-	        <listing:header_cell name="Description" />
-	        <listing:header_cell width="100" name="Location" />
-	        <listing:header_cell width="75" name="Status" />    
-	    <listing:header_end />
-	    <listing:end />
-	    <br />
 	    <% for(int i=0; i<pickReels.howMany(); i++) { %>
 	    <% Reel reel3 = (Reel)pickReels.get(i); %>
 	    <% CableTechData techData = reelMgr.getCableTechData(reel3); %>
-	    <admin:box_begin color="false" />
 		<% String toggleTarget = "toggleReelco" + reel3.getId(); %>
 	    <% String toggleID = "reelco" + reel3.getId(); %>
 	    <% String toggleForm = "reelFormco" + reel3.getId(); %>
@@ -133,28 +121,13 @@ String tempURL; //var for url expression
 	    	row = "1";
 	    	}
 	    %>
-		<listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false" />
-	    <listing:row_begin row="<%= row %>"/>
-	    	<listing:cell_begin width="20" />
-	            <%= reel3.getCrId() %>
-	        <listing:cell_end />
-	        <listing:cell_begin width="200" />
-	            <%= reel3.getReelTag() %>
-	        <listing:cell_end />
-	        <listing:cell_begin />
-	            <%= reel3.getCableDescription() %>
-	        <listing:cell_end />
-	        <listing:cell_begin width="100" />
-	            <%= reel3.getWharehouseLocation() %>
-	        <listing:cell_end />
-	        <listing:cell_begin width="75" />
-	            <%= reel3.getStatus() %>
-	        <listing:cell_end />
-	    <listing:row_end />
-	    <listing:end />
-        <admin:box_end />
 
-        <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
+        <%
+        String reelName = reel3.getCrId() + " : " + reel3.getReelTag() + " : " + reel3.getCableDescription() + " (" + reel3.getWharehouseLocation() + " : " + reel3.getStatus() + ")";
+        String reelId = "reel" + reel3.getCrId();
+        %>
+
+        <admin:box_begin open="false" text="<%= reelName %>" name="<%= reelId %>"/>
             <form:begin submit="true" name="<%= toggleForm %>" action="checkout/process.jsp" />
             	<form:info label="Reel Tag:" text="<%= reel3.getReelTag() %>" />
                 <form:info label="Cable Description:" text="<%= reel3.getCableDescription() %>" />

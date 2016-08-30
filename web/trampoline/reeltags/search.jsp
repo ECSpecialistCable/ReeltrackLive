@@ -20,16 +20,22 @@
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
-<% 
+<%
 RTUser user = (RTUser)userLoginMgr.getUser();
 
 int howMany = 25;
-int pageNdx = 1;
-if(request.getParameter("pageIdx") != null) {
-    pageNdx = Integer.parseInt(request.getParameter("pageIdx"));
+int pageNum = 1;
+if(request.getParameter("pageNum") != null) {
+    pageNum = Integer.parseInt(request.getParameter("pageNum"));
+    session.setAttribute("reeltags/search.jsp", pageNum);
+} else {
+    if(session.getAttribute("reeltags/search.jsp") != null) {
+        pageNum = (Integer)session.getAttribute("reeltags/search.jsp");
+    }
 }
 
-int skip = (pageNdx-1) * howMany;
+int skip = (pageNum-1) * howMany;
+
 if(request.getParameter("skip") != null) {
     skip = Integer.parseInt(request.getParameter("skip"));
 }
@@ -39,30 +45,30 @@ if(session.getAttribute("reeltags_search")!=null) {
     content = (Reel)session.getAttribute("reeltags_search");
 }
 
-if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
+if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
     content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
-    content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.PACKING_LIST_COLUMN) != null) {  
+if(request.getParameter(Reel.PACKING_LIST_COLUMN) != null) {
     content.setPackingList(request.getParameter(Reel.PACKING_LIST_COLUMN));
-    content.setSearchOp(Reel.PACKING_LIST_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.PACKING_LIST_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.TRACKING_PRO_COLUMN) != null) {  
+if(request.getParameter(Reel.TRACKING_PRO_COLUMN) != null) {
     content.setTrackingPRO(request.getParameter(Reel.TRACKING_PRO_COLUMN));
-    content.setSearchOp(Reel.TRACKING_PRO_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.TRACKING_PRO_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {  
+if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {
     content.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));
-    content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL);
 }
 
 
-if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {  
+if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {
     content.setCustomerPN(request.getParameter(Reel.CUSTOMER_PN_COLUMN));
-    content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL); 
+    content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL);
 }
 
 if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
@@ -75,24 +81,24 @@ if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
 }
 
 //if vendor
-if(request.getParameter(Reel.ORDNO_COLUMN) != null) {  
+if(request.getParameter(Reel.ORDNO_COLUMN) != null) {
     content.setOrdNo(request.getParameter(Reel.ORDNO_COLUMN));
-    content.setSearchOp(Reel.ORDNO_COLUMN, Reel.PARTIAL); 
+    content.setSearchOp(Reel.ORDNO_COLUMN, Reel.PARTIAL);
 }
 
-if(request.getParameter(Reel.PN_VOLT_COLUMN) != null) {  
+if(request.getParameter(Reel.PN_VOLT_COLUMN) != null) {
     content.setPnVolt(request.getParameter(Reel.PN_VOLT_COLUMN));
-    content.setSearchOp(Reel.PN_VOLT_COLUMN, Reel.EQ); 
+    content.setSearchOp(Reel.PN_VOLT_COLUMN, Reel.EQ);
 }
 
-if(request.getParameter(Reel.PN_GAUGE_COLUMN) != null) {  
+if(request.getParameter(Reel.PN_GAUGE_COLUMN) != null) {
     content.setPnGauge(request.getParameter(Reel.PN_GAUGE_COLUMN));
-    content.setSearchOp(Reel.PN_GAUGE_COLUMN, Reel.EQ); 
+    content.setSearchOp(Reel.PN_GAUGE_COLUMN, Reel.EQ);
 }
 
-if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {  
+if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {
     content.setPnConductor(request.getParameter(Reel.PN_CONDUCTOR_COLUMN));
-    content.setSearchOp(Reel.PN_CONDUCTOR_COLUMN, Reel.EQ); 
+    content.setSearchOp(Reel.PN_CONDUCTOR_COLUMN, Reel.EQ);
 }
 
 if(user.isUserType(RTUser.USER_TYPE_VENDOR)) {
@@ -105,6 +111,7 @@ session.setAttribute("reeltags_search",content);
 String column = Reel.CR_ID_COLUMN;
 boolean ascending = true;
 int count = reelMgr.searchReelsCount(content, column, ascending);
+int pages = (int)Math.ceil((double)count / howMany);
 CompEntities contents = reelMgr.searchReels(content, column, ascending, howMany, skip);
 String[] volts = reelMgr.getPnVolts();
 String[] gauges = reelMgr.getPnGauges();
@@ -116,10 +123,10 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Generate Reel Tags" />
+<admin:title heading="Reel Tags" text="Generate"/>
 
 <admin:subtitle text="Search" />
-    <admin:box_begin />
+    <admin:box_begin text="Search" name="Search" open="false"/>
     <form:begin_selfsubmit name="search" action="reeltags/search.jsp" />
         <% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
             <form:textfield label="ECS PO#:" name="<%= Reel.ORDNO_COLUMN %>" value="<%= content.getOrdNo() %>" />
@@ -184,18 +191,9 @@ String tempURL = "";
 
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
-        <admin:search_listing_pagination text="Reels Found" url="reeltags/search.jsp" 
-                    pageIndex="<%= new Integer(pageNdx).toString() %>"
-                    column="<%= column %>"
-                    ascending="<%= new Boolean(ascending).toString() %>"
-                    howMany="<%= new Integer(howMany).toString() %>"
-                    skip="<%= new Integer(skip).toString() %>"      
-                    count="<%= new Integer(count).toString() %>"
-                    search_params=""
-                />
+    <admin:box_begin text="Reels" name="results" url="reeltags/search.jsp" pages="<%= Integer.toString(pages) %>" pageNum="<%= Integer.toString(pageNum) %>" />
 
-    <admin:box_begin color="false" />
-   
+
     <listing:begin />
         <listing:header_begin />
             <listing:header_cell width="50" first="true" name="CRID #" />
@@ -222,13 +220,13 @@ String tempURL = "";
             <%--
             <listing:cell_begin align="right"/>
                 <% tempURL = "reeltags/reeltag.jsp?" + Reel.PARAM + "=" + content.getId(); %>
-                <a href="<%= tempURL %>" target="_new">PRINT</a>				
+                <a href="<%= tempURL %>" target="_new">PRINT</a>
             <listing:cell_end />
             --%>
 			<listing:cell_begin align="right"/>
                 <% if(!content.hasReelTagFile()) { %>
                     <% tempURL = "reeltags/reeltag_image.jsp?" + Reel.PARAM + "=" + content.getId(); %>
-                    <form:linkbutton url="<%= tempURL %>" name="PRINT REEL TAG" newtab="true" />
+                    <form:linkbutton url="<%= tempURL %>" name="print" newtab="true" />
                 <% } %>
             <listing:cell_end />
 
@@ -242,4 +240,4 @@ String tempURL = "";
 <% } %>
 
 <admin:set_tabset url="reeltags/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />    
+<html:end />

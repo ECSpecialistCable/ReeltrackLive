@@ -54,13 +54,13 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Generated Reel Tags" />
+<admin:title heading="Reel Tags" text="Generated" />
 
 
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
 	<admin:subtitle text="Clear / Download Generated Reel Tags"/>
-	<admin:box_begin color="false"/>
+	<admin:box_begin text="Clear / Download Generated Reel Tags" name="download"/>
 		<form:begin_selfsubmit name="clear_generated_tags" action="shipping/search_generated.jsp" />
 			<form:row_begin/>
 				<form:buttonset_begin padding="0" align="left"/>
@@ -79,7 +79,7 @@ String tempURL = "";
 		<form:end />
 	<admin:box_end />
 
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Reel Tags" name="tags"/>
     <listing:begin />
         <listing:header_begin />
             <listing:header_cell width="50" first="true" name="CRID #" />

@@ -83,14 +83,20 @@ if(!canSubmit) {
 <% dbResources.close(); %>
 
 <html:begin />
+<%--
 <h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
 <% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
 <h1 style="padding-bottom:0px;"><%= tempURL %></h1>
 <p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
+--%>
+
 <notifier:show_message />
 
+<% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " +  content.getCableDescription(); %>
+<admin:title heading="Reel Page" text="<%= tempURL %>" />
+
 <admin:subtitle text="General Info" />
-<admin:box_begin />
+<admin:box_begin text="General Info" name="General_Info"/>
     <form:begin submit="<%= new Boolean(canSubmit).toString() %>" name="edit" action="reels/process.jsp" />
     	<% if(canEdit) { %>
     		<form:row_begin />
@@ -168,9 +174,9 @@ if(!canSubmit) {
         		<%--
         		<form:row_begin />
                     <form:label name="" label="Bottom Foot Not Visible?:" />
-                    <form:content_begin />      
-                    <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />       
-                    <form:content_end />                
+                    <form:content_begin />
+                    <form:checkbox label="" name="<%= Reel.BOTTOM_FOOT_NOT_VISIBLE_COLUMN %>" value="y" match="<%= content.getBottomFootNotVisible() %>" />
+                    <form:content_end />
                 <form:row_end />
                 --%>
                 <%--
@@ -197,7 +203,7 @@ if(!canSubmit) {
 			<form:info label="Received On:" text="<%= content.getReceivedOnDateString() %>" />
 			<form:info label="Times Checked OUT:" text="<%= new Integer(content.getTimesCheckedOut()).toString() %>" />
 			<form:info label="Times Checked IN:" text="<%= new Integer(content.getTimesCheckedIn()).toString() %>" />
-			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
@@ -210,7 +216,7 @@ if(!canSubmit) {
 <admin:box_end />
 
 <admin:subtitle text="Shipping Info" />
-<admin:box_begin />
+<admin:box_begin text="Shipping Info" name="Shipping_Info" />
     <form:begin submit="<%= new Boolean(canSubmitSR).toString() %>" name="edit" action="reels/process.jsp" />
     		<form:row_begin />
 	            <form:label name="" label="Carrier:" />
@@ -229,7 +235,7 @@ if(!canSubmit) {
         	<form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
         	<form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
         	<form:date_picker name="<%= Reel.SHIPPING_DATE_COLUMN %>" value="<%= content.getShippingDateString() %>" label="Shipped<br />Date:" />
-			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
@@ -242,7 +248,7 @@ if(!canSubmit) {
 <admin:box_end />
 
 <admin:subtitle text="Receiving Info" />
-<admin:box_begin />
+<admin:box_begin text="Receiving Info" name="Receiving_Info" />
     <form:begin submit="<%= new Boolean(canSubmitSR).toString() %>" name="edit" action="reels/process.jsp" />
     		<form:row_begin />
 	            <form:label name="" label="Issue:" />
@@ -269,7 +275,7 @@ if(!canSubmit) {
 	            <form:select_end />
 	            <form:content_end />
         	<form:row_end />
-        	<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+        	<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>

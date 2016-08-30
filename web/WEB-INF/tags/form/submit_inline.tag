@@ -12,5 +12,4 @@
 <%@ attribute name="cb_content" required="false"%>
 
 <input type="hidden" name="submit_action" value="${action}" />
-<button type="submit" class="btn btn-primary btn-sm" <% if(waiting!=null && waiting.equals("true")) { %>onclick="javascript:waitingSubmit(this);"<% } %>>${name}</button>
-
+<button type="submit" class="btn btn-primary btn-sm" <% if(waiting!=null && waiting.equals("true")) { %>onclick="javascript:waitingSubmit(this);"<% } %>><%=name.toUpperCase()%></button>

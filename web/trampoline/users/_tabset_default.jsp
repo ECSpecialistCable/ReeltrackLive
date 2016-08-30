@@ -7,7 +7,7 @@
 <% userLoginMgr.init(pageContext); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 
-<admin:tab url="users/search.jsp" text="users" />
-<admin:tab url="users/create.jsp" text="add user" />
+<admin:tab url="users/search.jsp" text="Users" />
+<admin:tab url="users/create.jsp" text="Add User" />
 
 <admin:set_moduleactions url="users/_moduleactions.jsp" />

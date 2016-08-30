@@ -14,6 +14,7 @@
 <%@ attribute name="target" required="false" %>
 <%@ attribute name="noTopPad" required="false" %>
 <%@ attribute name="noBotPad" required="false" %>
+<%@ attribute name="confirm" required="false"%>
 
 <%
 String style = "";
@@ -26,4 +27,4 @@ if(noBotPad!=null && !noBotPad.equals("")) {
 %>
 
 <div class="panel-body" style="<%= style %>">
-<form class="form-horizontal submitForm" <% if(target!=null) { %>target="${target}"<% } %> role="form" id="${name}" name="${name}" action="${action}">
+<form class="form-horizontal <% if(confirm!=null) { %>submitFormConfirm<% } else { %>submitForm<% } %>" message="${confirm}" <% if(target!=null) { %>target="${target}"<% } %> role="form" id="${name}" name="${name}" action="${action}">

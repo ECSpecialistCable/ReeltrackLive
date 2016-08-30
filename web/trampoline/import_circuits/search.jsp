@@ -24,20 +24,20 @@ String tempUrl =""; //var for url expression
 
 
 <html:begin />
-<admin:title text="Import Circuits" />
+<admin:title heading="Circuits" text="Import"/>
 
 <admin:subtitle text="Upload File" />
-<admin:box_begin />
+<admin:box_begin text="Upload File" name="Upload_File" />
 	<form:begin_multipart submit="true" name="create" action="import_circuits/process.jsp" />
 			<form:file label="File:" name="circuit_file" />
-            <form:hidden name="<%= Reel.JOB_CODE_COLUMN %>" value="<%= user.getJobCode()%>" /> 
+            <form:hidden name="<%= Reel.JOB_CODE_COLUMN %>" value="<%= user.getJobCode()%>" />
             <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
                         <form:submit_inline button="save" waiting="true" name="save" action="import" />
                 <form:buttonset_end />
             <form:row_end />
-    <form:end />
+
     <form:row_begin/>
     <form:label label="Excel Template:" name=""/>
     <form:content_begin />

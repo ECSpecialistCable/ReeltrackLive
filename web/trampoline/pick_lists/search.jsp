@@ -25,7 +25,7 @@
 <% userLoginMgr.init(pageContext); %>
 <% picklistMgr.init(pageContext,dbResources); %>
 <% foremanMgr.init(pageContext,dbResources); %>
-<% 
+<%
 RTUser user = (RTUser)userLoginMgr.getUser();
 
 int howMany = 25;
@@ -60,26 +60,26 @@ if(request.getParameter(PickList.ID_COLUMN) != null) {
 	}
 }
 
-if(request.getParameter(PickList.FOREMAN_COLUMN) != null) {  
-    content.setForeman(request.getParameter(PickList.FOREMAN_COLUMN)); 
+if(request.getParameter(PickList.FOREMAN_COLUMN) != null) {
+    content.setForeman(request.getParameter(PickList.FOREMAN_COLUMN));
 }
 
-if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
+if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
     reel.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
-    reel.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL); 
+    reel.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {  
+if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {
     reel.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));
-    reel.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL); 
+    reel.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {  
+if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {
     reel.setCustomerPN(request.getParameter(Reel.CUSTOMER_PN_COLUMN));
-    reel.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL); 
+    reel.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL);
 }
 
-if(request.getParameter(ReelCircuit.PARAM) != null) {  
+if(request.getParameter(ReelCircuit.PARAM) != null) {
     circuit.setId(Integer.parseInt(request.getParameter(ReelCircuit.PARAM)));
 }
 
@@ -110,12 +110,12 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Pick Lists" />
+<admin:title heading="Pick Lists" text=""/>
 
 <admin:subtitle text="Filter Pick Lists" />
-    <admin:box_begin />
+    <admin:box_begin text="Filter Pick Lists" name="Filter_Pick_Lists" open="false"/>
     <form:begin_selfsubmit name="search" action="pick_lists/search.jsp" />
-        <% 
+        <%
         if(content.getId()!=0) {
             tempURL = new Integer(content.getId()).toString();
         } else {
@@ -170,18 +170,18 @@ String tempURL = "";
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
         <%--
-        <admin:search_listing_pagination text="Pick Lists" url="reels/search.jsp" 
+        <admin:search_listing_pagination text="Pick Lists" url="reels/search.jsp"
                     pageIndex="<%= new Integer(pageNdx).toString() %>"
                     column="<%= column %>"
                     ascending="<%= new Boolean(ascending).toString() %>"
                     howMany="<%= new Integer(howMany).toString() %>"
-                    skip="<%= new Integer(skip).toString() %>"      
+                    skip="<%= new Integer(skip).toString() %>"
                     count="<%= new Integer(count).toString() %>"
                     search_params=""
                 />
         --%>
-    <admin:box_begin color="false" />
-   
+    <admin:box_begin text="Key for Reels: On pick list / staged / checked OUT" />
+
     <listing:begin />
         <listing:header_begin />
             <listing:header_cell width="75" first="true" name="Created" />
@@ -245,4 +245,4 @@ String tempURL = "";
 <% } %>
 
 <admin:set_tabset url="pick_lists/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />    
+<html:end />

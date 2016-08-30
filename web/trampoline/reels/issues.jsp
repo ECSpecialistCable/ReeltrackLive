@@ -50,19 +50,24 @@ String tempURL; //var for url expression
 <% dbResources.close(); %>
 
 <html:begin />
+<%--
 <h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
 <% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
 <h1 style="padding-bottom:0px;"><%= tempURL %></h1>
 <p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
+--%>
 <notifier:show_message />
+
+<% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " +  content.getCableDescription(); %>
+<admin:title heading="Reel Page" text="<%= tempURL %>" />
 
 <% if(canSubmit) { %>
 <admin:subtitle text="Add Issue" />
-<admin:box_begin />
+<admin:box_begin text="Add Issue" name="Add_Issue" />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
     		<form:textarea name="<%= ReelIssue.DESCRIPTION_COLUMN %>" rows="3" label="Brief Description:" value="" />
             <form:textarea name="<%= ReelIssue.ISSUE_LOG_COLUMN %>" rows="6" label="Issue Log:" value="" />
-			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
@@ -81,22 +86,17 @@ String tempURL; //var for url expression
     <admin:subtitle text="Unresolved Issues" />
     <% for(int x=0; x<issuesNo.howMany(); x++) { %>
     <% issue = (ReelIssue)issuesNo.get(x); %>
-    <admin:box_begin />
+    <admin:box_begin text="Unresolved Issues" name="Unresolved_Issues" />
     <% tempURL = "issueN" + x; %>
     <form:begin submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
-            <form:row_begin />
-                <form:label name="" label="Is Resolved?:" />
-                <form:content_begin />      
-                    <form:checkbox label="" name="<%= ReelIssue.IS_RESOLVED_COLUMN %>" value="y" match="<%= issue.getIsResolved() %>" />       
-                <form:content_end />                
-            <form:row_end />
+            <form:checkbox label="Is Resolved?:" name="<%= ReelIssue.IS_RESOLVED_COLUMN %>" value="y" match="<%= issue.getIsResolved() %>" />
             <form:info label="Created:" text="<%= issue.getCreatedDateText() %>" />
             <form:info label="By User:" text="<%= issue.getCreatedBy() %>" />
             <form:info label="Brief Description:" text="<%= issue.getDescription() %>" />
             <form:info label="Issue Log:" text="<%= TextParser.addBreakTags(issue.getIssueLog()) %>" />
             <form:textarea name="<%= ReelIssue.ISSUE_LOG_COLUMN %>" rows="6" label="Add to Issue Log:" value="" />
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
-            <form:hidden name="<%= ReelIssue.PARAM %>" value="<%= new Integer(issue.getId()).toString() %>" />           
+            <form:hidden name="<%= ReelIssue.PARAM %>" value="<%= new Integer(issue.getId()).toString() %>" />
             <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
@@ -114,22 +114,17 @@ String tempURL; //var for url expression
     <admin:subtitle text="Resolved Issues" />
     <% for(int x=0; x<issuesYes.howMany(); x++) { %>
     <% issue = (ReelIssue)issuesYes.get(x); %>
-    <admin:box_begin />
+    <admin:box_begin text="Resolved Issues" name="Resolved_Issues" />
     <% tempURL = "issueY" + x; %>
     <form:begin submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
-            <form:row_begin />
-                <form:label name="" label="Is Resolved?:" />
-                <form:content_begin />      
-                    <form:checkbox label="" name="<%= ReelIssue.IS_RESOLVED_COLUMN %>" value="y" match="<%= issue.getIsResolved() %>" />       
-                <form:content_end />                
-            <form:row_end />
+            <form:checkbox label="Is Resolved?:" name="<%= ReelIssue.IS_RESOLVED_COLUMN %>" value="y" match="<%= issue.getIsResolved() %>" />
             <form:info label="Created:" text="<%= issue.getCreatedDateText() %>" />
             <form:info label="By User:" text="<%= issue.getCreatedBy() %>" />
             <form:info label="Brief Description:" text="<%= issue.getDescription() %>" />
             <form:info label="Issue Log:" text="<%= TextParser.addBreakTags(issue.getIssueLog()) %>" />
             <form:textarea name="<%= ReelIssue.ISSUE_LOG_COLUMN %>" rows="6" label="Add to Issue Log:" value="" />
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
-            <form:hidden name="<%= ReelIssue.PARAM %>" value="<%= new Integer(issue.getId()).toString() %>" />           
+            <form:hidden name="<%= ReelIssue.PARAM %>" value="<%= new Integer(issue.getId()).toString() %>" />
             <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>

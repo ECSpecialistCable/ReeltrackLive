@@ -26,16 +26,22 @@
 <% reelMgr.init(pageContext,dbResources); %>
 <% locationMgr.init(pageContext,dbResources); %>
 <% driverMgr.init(pageContext,dbResources); %>
-<% 
+<%
 RTUser user = (RTUser)userLoginMgr.getUser();
 
 int howMany = 25;
-int pageNdx = 1;
-if(request.getParameter("pageIdx") != null) {
-    pageNdx = Integer.parseInt(request.getParameter("pageIdx"));
+int pageNum = 1;
+if(request.getParameter("pageNum") != null) {
+    pageNum = Integer.parseInt(request.getParameter("pageNum"));
+    session.setAttribute("shipping/search.jsp", pageNum);
+} else {
+    if(session.getAttribute("shipping/search.jsp") != null) {
+        pageNum = (Integer)session.getAttribute("shipping/search.jsp");
+    }
 }
 
-int skip = (pageNdx-1) * howMany;
+int skip = (pageNum-1) * howMany;
+
 if(request.getParameter("skip") != null) {
     skip = Integer.parseInt(request.getParameter("skip"));
 }
@@ -47,24 +53,24 @@ if(session.getAttribute("scrapped_search")!=null) {
 
 content.setStatus(Reel.STATUS_COMPLETE);
 
-if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
+if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
     content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
-    content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {  
+if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {
     content.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));
-    content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {  
+if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {
     content.setCustomerPN(request.getParameter(Reel.CUSTOMER_PN_COLUMN));
-    content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL); 
+    content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL);
 }
 
-if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {  
+if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
     content.setManufacturer(request.getParameter(Reel.MANUFACTURER_COLUMN));
-    content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ); 
+    content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ);
 }
 
 if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
@@ -81,6 +87,7 @@ session.setAttribute("scrapped_search",content);
 String column = Reel.REEL_TAG_COLUMN;
 boolean ascending = true;
 int count = reelMgr.searchReelsCount(content, column, ascending);
+int pages = (int)Math.ceil((double)count / howMany);
 CompEntities contents = reelMgr.searchReels(content, column, ascending, howMany, skip);
 String[] manufacturers = reelMgr.getManufacturers();
 
@@ -90,10 +97,10 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Mark Reels as Scrapped" />
+<admin:title heading="Reels" text="Mark as Scrapped" />
 
 <admin:subtitle text="Filter Reels" />
-<admin:box_begin />
+<admin:box_begin text="Filter Reels" name="Filter_Reels" open="false"/>
 <form:begin_selfsubmit name="search" action="scrapped/search.jsp" />
     <% if(content.getCrId()!=0) { %>
 		<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= new Integer(content.getCrId()).toString() %>" />
@@ -126,52 +133,20 @@ String tempURL = "";
 
 <% if(dosearch) { %>
 <% if(contents.howMany() > 0) { %>
-    <admin:search_listing_pagination text="Reels Found" url="scrapped/search.jsp" 
-                    pageIndex="<%= new Integer(pageNdx).toString() %>"
-                    column="<%= column %>"
-                    ascending="<%= new Boolean(ascending).toString() %>"
-                    howMany="<%= new Integer(howMany).toString() %>"
-                    skip="<%= new Integer(skip).toString() %>"      
-                    count="<%= new Integer(count).toString() %>"
-                    search_params=""
-                />
-
-    <listing:begin />
-        <listing:header_begin />
-            <listing:header_cell width="50" first="true" name="CRID #" />
-            <listing:header_cell width="200" name="Reel Tag" />
-            <listing:header_cell name="Cable Description" />
-            <listing:header_cell width="40" name="Quantity" />
-        <listing:header_end />
-    <listing:end />
-    <br />
+<admin:box_begin color="silver" text="Reels" name="results" url="scrapped/search.jsp" pages="<%= Integer.toString(pages) %>" pageNum="<%= Integer.toString(pageNum) %>" />
+<admin:box_end />
     <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
         <% tempURL = new Integer(i+1).toString() + ". " + content.getReelTag() + " (" + content.getCableDescription() + ")"; %>
         <% String toggleTarget = "toggleReelrec" + content.getId(); %>
         <% String toggleID = "reelrec" + content.getId(); %>
         <% String toggleForm = "reelFormrec" + content.getId(); %>
-               
-        <admin:box_begin color="false" />
-        <listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
-        <listing:row_begin />
-            <listing:cell_begin  width="50"/>
-                <%= content.getCrId() %>
-            <listing:cell_end />
-            <listing:cell_begin  width="200"/>
-                <%= content.getReelTag() %>
-            <listing:cell_end />
-            <listing:cell_begin />
-                <%= content.getCableDescription() %>
-            <listing:cell_end />
-            <listing:cell_begin  width="40"/>
-                <%= content.getOnReelQuantity() %>
-            <listing:cell_end />
-        <listing:row_end />   
-        <listing:end />
-        <admin:box_end /> 
-        
-        <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
+
+        <%
+        String reelName = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription();
+        String reelId = "reel" + content.getCrId();
+        %>
+        <admin:box_begin open="false" text="<%= reelName %>" name="<%= reelId %>"/>
             <form:begin submit="true" name="<%= toggleForm %>" action="scrapped/process.jsp" />
                 <form:info label="Reel Tag:" text="<%= content.getReelTag() %>" />
                 <form:info label="Cable Description:" text="<%= content.getCableDescription() %>" />
@@ -181,8 +156,8 @@ String tempURL = "";
                 <form:info label="Received Qty:" text="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
                 <form:info label="Current Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
                 <form:info label="Copper Weight:" text="" />
-                <form:info label="Warehouse<br />Location:" text="<%= content.getWharehouseLocation() %>" />  
-                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />        
+                <form:info label="Warehouse<br />Location:" text="<%= content.getWharehouseLocation() %>" />
+                <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
                 <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
@@ -193,7 +168,7 @@ String tempURL = "";
                 <form:row_end />
             <form:end />
         <admin:box_end />
-        
+
     <% } %>
 <% } else { %>
     <admin:subtitle text="No Reels Found." />
@@ -201,4 +176,4 @@ String tempURL = "";
 <% } %>
 
 <admin:set_tabset url="scrapped/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />    
+<html:end />

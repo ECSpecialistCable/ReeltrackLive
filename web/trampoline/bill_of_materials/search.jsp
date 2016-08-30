@@ -47,7 +47,7 @@ String tempUrl =""; //var for url expression
 %>
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Bill of Materials / Set Quantity Tracking / QRC Verification" />
+<admin:title heading="Bill of Materials / Set Quantity Tracking / QRC Verification" text="" />
 
 <% if(canSubmit) { %>
 <%--
@@ -66,7 +66,7 @@ String tempUrl =""; //var for url expression
 <admin:box_end />
 --%>
 <admin:subtitle text="Bill of Materials" />
-<admin:box_begin />
+<admin:box_begin text="Bill of Materials" name="Bill_of_Materials" />
     <form:begin submit="true" name="upload_bom_pdf" action="bill_of_materials/process.jsp" />
             <% if(bomFile!=null) { %>
             <form:row_begin />
@@ -109,16 +109,17 @@ String tempUrl =""; //var for url expression
 
 <% if(contents.howMany() > 0) { %>
     <admin:subtitle text="Customer Part Numbers" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Customer Part Numbers" name="Customer_Part_Numbers" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Cust P/n" />
                 <listing:header_cell name="Description" />
                 <listing:header_cell name="Qty Ordered" />
-                <listing:header_cell name="# Reels" />                
+                <listing:header_cell name="# Reels" />
                 <listing:header_cell name="Qty Tracking" />
                 <listing:header_cell name="QRC Verification" />
-                <listing:header_cell width="100" colspan="2" name="Data Sheet" />
+                <listing:header_cell width="100" name="Data Sheet" />
+                <listing:header_cell width="100" name="" />
             <listing:header_end />
             <% for(int i=0; i<contents.howMany(); i++) { %>
             <% Reel content = (Reel)contents.get(i); %>
@@ -139,7 +140,7 @@ String tempUrl =""; //var for url expression
                 <listing:cell_begin />
 					<form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" action="bill_of_materials/process.jsp" name="update_usage_tracking" />
 					   <% if(techData.getUsageTracking().equals("") || canEdit) { %>
-							<form:select_begin onchange="test" name="<%= CableTechData.USAGE_TRACKING_COLUMN %>" />
+							<form:select_begin onchange="submitInline(this.form);" name="<%= CableTechData.USAGE_TRACKING_COLUMN %>" />
 						<% } else { %>
 							<form:select_begin name="<%= CableTechData.USAGE_TRACKING_COLUMN %>" />
 						<% } %>
@@ -156,7 +157,7 @@ String tempUrl =""; //var for url expression
                 <listing:cell_begin />
                     <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" action="bill_of_materials/process.jsp" name="update_qrc_tracking" />
                        <% if(canEdit) { %>
-                            <form:checkbox onclick="test" label="" name="<%= CableTechData.QRC_TRACKING_COLUMN %>" value="y" match="<%= techData.getQRCTracking() %>" />
+                            <form:checkbox onchange="submitInline(this.form);" label="" name="<%= CableTechData.QRC_TRACKING_COLUMN %>" value="y" match="<%= techData.getQRCTracking() %>" />
                         <% } else { %>
                             <form:checkbox label="" name="<%= CableTechData.QRC_TRACKING_COLUMN %>" value="y" match="<%= techData.getQRCTracking() %>" />
                         <% } %>
@@ -166,22 +167,22 @@ String tempUrl =""; //var for url expression
                     <form:end_inline />
                 <listing:cell_end />
 				<listing:cell_begin />
-					<form:begin_multipart  action="bill_of_materials/process.jsp" name="upload_data_sheet" />
+					<form:begin_multipart_inline  action="bill_of_materials/process.jsp" name="upload_data_sheet" />
 						<% if(canEdit || canSubmit) { %>
 							<form:file_inline urldescription="false" name="<%= CableTechData.DATA_SHEET_FILE_COLUMN %>" label="" /><br />
 			                <form:submit_inline  button="save" waiting="true" name="save" action="upload_data_sheet" />
-						<% } %>						
+						<% } %>
 						<form:hidden name="<%= Reel.PARAM %>" value="<%= Integer.toString(content.getId()) %>" />
 						<form:hidden name="<%= CustomerJob.PARAM %>" value="<%= Integer.toString(user.getJobId()) %>" />
-					<form:end />					
+					<form:end />
 				<listing:cell_end />
 				<listing:cell_begin />
 					<% if(!techData.getDataSheetFile().equals("")) { %>
 						<% String tempURL = request.getContextPath() + techData.getCompEntityDirectory() + "/" + URLEncoder.encode(techData.getDataSheetFile()); %>
-						<admin:link external="true" text="[Download]" url="<%= tempURL %>" />
+						<form:linkbutton name="download" url="<%= tempURL %>" />
 					<% } %>
 				<listing:cell_end />
-				
+
             <listing:row_end />
             <% } %>
         <listing:end />

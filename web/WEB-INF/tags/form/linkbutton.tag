@@ -23,9 +23,9 @@
 	<% } %>
 <% } else if(name.equalsIgnoreCase("delete")) { %>
 	<%if(tooltip != null) { %>
-		<a data-toggle="tooltip" title="${tooltip}" style="padding-left:2px;" href="javascript:loadProcessWithWarning('${url}',this);"><span class="glyphicon glyphicon-remove" style="color:red;font-size:24px;"></span></a>
+		<a data-toggle="tooltip" title="${tooltip}" style="padding-left:2px;" href="javascript:loadProcessWithWarning('${url}',this,'Are you sure you want to Delete?');"><span class="glyphicon glyphicon-remove" style="color:red;font-size:24px;"></span></a>
 	<%} else { %>
-		<a style="padding-left:2px;" href="javascript:loadProcessWithWarning('${url}',this);"><span class="glyphicon glyphicon-remove" style="color:red;font-size:24px;"></span></a>
+		<a style="padding-left:2px;" href="javascript:loadProcessWithWarning('${url}',this,'Are you sure you want to Delete?');"><span class="glyphicon glyphicon-remove" style="color:red;font-size:24px;"></span></a>
 	<% } %>
 <% } else if(name.equalsIgnoreCase("evaluate")) { %>
 	<%if(tooltip != null) { %>
@@ -85,16 +85,24 @@
 	<%if(tooltip != null) { %>
 		<a data-toggle="tooltip" title="${tooltip}" style="padding-left:2px;cursor: pointer;" onclick="javascript:loadProcess('${url}');"><span class="glyphicon glyphicon-minus-sign" style="color:#016b8d;font-size:24px;"></span></a>
 	<%} else { %>
-		<a style="padding-left:2px;cursor: pointer;" onclick="javascript:loadProcess('${url}');"><span class="glyphicon glyphicon-minus-sign" style="color:#016b8d;font-size:24px;"></span></a>
+		<a style="padding-left:2px;padding-left:2px;cursor: pointer;" onclick="javascript:loadProcess('${url}');"><span class="glyphicon glyphicon-minus-sign" style="color:#016b8d;font-size:24px;"></span></a>
 	<% } %>
+<% } else if(name.equalsIgnoreCase("print")) { %>
+	<a style="padding-left:2px;cursor: pointer;" href="${url}" target="_blank"><span class="glyphicon glyphicon-print" style="color:#016b8d;font-size:24px;"></span></a>
+<% } else if(name.equalsIgnoreCase("refresh")) { %>
+	<a style="padding-left:2px;cursor: pointer;" onclick="javascript:loadTab('${url}');"><span class="glyphicon glyphicon-refresh" style="color:#016b8d;font-size:24px;"></span></a>
+<% } else if(name.equalsIgnoreCase("stage")) { %>
+	<a style="padding-left:2px;cursor: pointer;" onclick="javascript:loadTab('${url}');"><span class="glyphicon glyphicon-log-in" style="color:#016b8d;font-size:24px;"></span></a>
+<% } else if(name.equalsIgnoreCase("checkout")) { %>
+	<a style="padding-left:2px;cursor: pointer;" onclick="javascript:loadTab('${url}');"><span class="glyphicon glyphicon-new-window" style="color:#016b8d;font-size:24px;"></span></a>
 <% } else { %>
 	<% if(process!=null && warning!=null) { %>
-		<button class="btn btn-primary btn-sm" onclick="javascript:loadProcessWithWarning('${url}',this);">${name}</button>
+		<button type="button" class="btn btn-primary btn-sm" onclick="javascript:loadProcessWithWarning('${url}',this,'${warning}');">${name}</button>
 	<% } else if(process!=null) { %>
-		<button class="btn btn-primary btn-sm" onclick="javascript:loadProcess('${url}');">${name}</button>
+		<button type="button" class="btn btn-primary btn-sm" onclick="javascript:loadProcess('${url}');">${name}</button>
 	<% } else if(newtab!=null) { %>
 		<a class="btn btn-primary btn-sm" style="cursor: pointer;" href="${url}" target="_blank">${name}</a>
 	<% } else { %>
-		<button class="btn btn-primary btn-sm" onclick="javascript:loadTab('${url}');">${name}</button>
+		<button type="button" class="btn btn-primary btn-sm" onclick="javascript:loadTab('${url}');">${name}</button>
 	<% } %>
 <% } %>

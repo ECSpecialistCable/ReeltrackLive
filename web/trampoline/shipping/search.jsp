@@ -20,16 +20,22 @@
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
-<% 
+<%
 RTUser user = (RTUser)userLoginMgr.getUser();
 
-int howMany = 15;
-int pageNdx = 1;
-if(request.getParameter("pageIdx") != null) {
-    pageNdx = Integer.parseInt(request.getParameter("pageIdx"));
+int howMany = 25;
+int pageNum = 1;
+if(request.getParameter("pageNum") != null) {
+    pageNum = Integer.parseInt(request.getParameter("pageNum"));
+    session.setAttribute("shipping/search.jsp", pageNum);
+} else {
+    if(session.getAttribute("shipping/search.jsp") != null) {
+        pageNum = (Integer)session.getAttribute("shipping/search.jsp");
+    }
 }
 
-int skip = (pageNdx-1) * howMany;
+int skip = (pageNum-1) * howMany;
+
 if(request.getParameter("skip") != null) {
     skip = Integer.parseInt(request.getParameter("skip"));
 }
@@ -48,34 +54,34 @@ if(request.getParameter("clear") != null) {
 
 content.setStatus(Reel.STATUS_ORDERED);
 
-if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
+if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
     content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
-    content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {  
+if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {
     content.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));
-    content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.CUSTOMER_PO_COLUMN) != null) {  
+if(request.getParameter(Reel.CUSTOMER_PO_COLUMN) != null) {
     content.setCustomerPO(request.getParameter(Reel.CUSTOMER_PO_COLUMN));
-    content.setSearchOp(Reel.CUSTOMER_PO_COLUMN, Reel.PARTIAL); 
+    content.setSearchOp(Reel.CUSTOMER_PO_COLUMN, Reel.PARTIAL);
 }
 
-if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {  
+if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {
     content.setCustomerPN(request.getParameter(Reel.CUSTOMER_PN_COLUMN));
-    content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL); 
+    content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL);
 }
 
-if(request.getParameter(Reel.TRACKING_PRO_COLUMN) != null) {  
+if(request.getParameter(Reel.TRACKING_PRO_COLUMN) != null) {
     content.setTrackingPRO(request.getParameter(Reel.TRACKING_PRO_COLUMN));
-    content.setSearchOp(Reel.TRACKING_PRO_COLUMN, Reel.PARTIAL); 
+    content.setSearchOp(Reel.TRACKING_PRO_COLUMN, Reel.PARTIAL);
 }
 
-if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {  
+if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
     content.setManufacturer(request.getParameter(Reel.MANUFACTURER_COLUMN));
-    content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ); 
+    content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ);
 }
 
 if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
@@ -93,7 +99,7 @@ String trackingNum = "";
 String packingNum = "";
 String carrierName = "";
 String shippingDate = "";
-if(request.getParameter("action") != null) {  
+if(request.getParameter("action") != null) {
     trackingNum = request.getParameter("trackingNum");
     session.setAttribute("trackingNum",trackingNum);
     packingNum = request.getParameter("packingNum");
@@ -117,24 +123,24 @@ if(session.getAttribute("shippingDate")!=null) {
 }
 
 //if vendor
-if(request.getParameter(Reel.ORDNO_COLUMN) != null) {  
+if(request.getParameter(Reel.ORDNO_COLUMN) != null) {
     content.setOrdNo(request.getParameter(Reel.ORDNO_COLUMN));
-    content.setSearchOp(Reel.ORDNO_COLUMN, Reel.PARTIAL); 
+    content.setSearchOp(Reel.ORDNO_COLUMN, Reel.PARTIAL);
 }
 
-if(request.getParameter(Reel.PN_VOLT_COLUMN) != null) {  
+if(request.getParameter(Reel.PN_VOLT_COLUMN) != null) {
     content.setPnVolt(request.getParameter(Reel.PN_VOLT_COLUMN));
-    content.setSearchOp(Reel.PN_VOLT_COLUMN, Reel.EQ); 
+    content.setSearchOp(Reel.PN_VOLT_COLUMN, Reel.EQ);
 }
 
-if(request.getParameter(Reel.PN_GAUGE_COLUMN) != null) {  
+if(request.getParameter(Reel.PN_GAUGE_COLUMN) != null) {
     content.setPnGauge(request.getParameter(Reel.PN_GAUGE_COLUMN));
-    content.setSearchOp(Reel.PN_GAUGE_COLUMN, Reel.EQ); 
+    content.setSearchOp(Reel.PN_GAUGE_COLUMN, Reel.EQ);
 }
 
-if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {  
+if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {
     content.setPnConductor(request.getParameter(Reel.PN_CONDUCTOR_COLUMN));
-    content.setSearchOp(Reel.PN_CONDUCTOR_COLUMN, Reel.EQ); 
+    content.setSearchOp(Reel.PN_CONDUCTOR_COLUMN, Reel.EQ);
 }
 
 if(user.isUserType(RTUser.USER_TYPE_VENDOR)) {
@@ -145,6 +151,7 @@ if(user.isUserType(RTUser.USER_TYPE_VENDOR)) {
 String column = Reel.REEL_TAG_COLUMN;
 boolean ascending = true;
 int count = reelMgr.searchReelsCount(content, column, ascending);
+int pages = (int)Math.ceil((double)count / howMany);
 CompEntities contents = reelMgr.searchReels(content, column, ascending, howMany, skip);
 String[] manufacturers = reelMgr.getManufacturers();
 String[] carrierList = reelMgr.getCarriers();
@@ -163,10 +170,10 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Mark Reels as Shipped" />
+<admin:title heading="Reels" text="Mark as Shipped" />
 
 <admin:subtitle text="Filter Reels" />
-<admin:box_begin />
+<admin:box_begin text="Filter Reels" name="Filter_Reels" open="false"/>
 <form:begin_selfsubmit name="search" action="shipping/search.jsp" />
 <% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
             <form:textfield label="ECS PO#:" name="<%= Reel.ORDNO_COLUMN %>" value="<%= content.getOrdNo() %>" />
@@ -242,7 +249,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <admin:box_end />
 
 <admin:subtitle text="Mark Reels" />
-<admin:box_begin />
+<admin:box_begin text="Mark Reels" name="Mark_Reels" />
 <form:begin_selfsubmit name="search" action="shipping/search.jsp" />
 	<%--<% if(!cridNum.equals("")) { %>
 		<form:textfield label="CRID #:" name="cridNum" value="<%= cridNum + "" %>" />
@@ -275,31 +282,17 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 
 <% if(dosearch) { %>
 <% if(contents.howMany() > 0) { %>
-    <admin:search_listing_pagination text="Reels Found" url="shipping/search.jsp" 
-                    pageIndex="<%= new Integer(pageNdx).toString() %>"
-                    column="<%= column %>"
-                    ascending="<%= new Boolean(ascending).toString() %>"
-                    howMany="<%= new Integer(howMany).toString() %>"
-                    skip="<%= new Integer(skip).toString() %>"      
-                    count="<%= new Integer(count).toString() %>"
-                    search_params=""
-                />
 
-    <listing:begin />
-        <listing:header_begin />
-            <listing:header_cell width="50" first="true" name="CRID #" />
-            <listing:header_cell width="200" name="Reel Tag" />
-            <listing:header_cell name="Cable Description" />
-        <listing:header_end />
-    <listing:end />
-    <br />
+<admin:box_begin color="silver" text="Reels" name="results" url="shipping/search.jsp" pages="<%= Integer.toString(pages) %>" pageNum="<%= Integer.toString(pageNum) %>" />
+<admin:box_end />
     <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
         <% tempURL = new Integer(i+1).toString() + ". " + content.getReelTag() + " (" + content.getCableDescription() + ")"; %>
         <% String toggleTarget = "toggleReelship" + content.getId(); %>
         <% String toggleID = "reelship" + content.getId(); %>
         <% String toggleForm = "reelFormship" + content.getId(); %>
-        
+
+        <%--
         <admin:box_begin color="false" />
         <listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
         <listing:row_begin />
@@ -312,22 +305,27 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             <listing:cell_begin />
                 <%= content.getCableDescription() %>
             <listing:cell_end />
-        <listing:row_end />   
+        <listing:row_end />
         <listing:end />
         <admin:box_end />
-
-        <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
-            <%--<form:begin submit="true" name="<%= toggleForm %>" action="shipping/process.jsp" />--%>
-            <form class=" " title="" onsubmit="" action="shipping/process.jsp" target="_blank" method="post" name="<%= toggleForm %>" id="<%= toggleForm %>">
+        --%>
+        <%
+        String reelName = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription();
+        String reelId = "reel" + content.getCrId();
+        %>
+        <admin:box_begin open="false" text="<%= reelName %>" name="<%= reelId %>"/>
+            <form:begin submit="true" name="<%= toggleForm %>" action="shipping/process.jsp" />
+            <%--<form class=" " title="" onsubmit="" action="shipping/process.jsp" target="_blank" method="post" name="<%= toggleForm %>" id="<%= toggleForm %>">
             <table border="0" cellspacing="0" cellpadding="0">
+            --%>
                 <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
                 <form:hidden name="<%= Reel.ORDERED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
                 <form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
                 <form:row_begin />
                 <form:label name="" label="" />
-                <form:content_begin />      
-                    <form:checkbox label="Set Shipping Quantity to Ordered Quantity" name="ordered_to_shipping" value="y" />       
-                <form:content_end />                
+                <form:content_begin />
+                    <form:checkbox label="Set Shipping Quantity to Ordered Quantity" name="ordered_to_shipping" value="y" />
+                <form:content_end />
                 <form:row_end />
                 <% if(canEdit) { %>
                     <form:date_picker name="<%= Reel.PROJECTED_SHIPPING_DATE_COLUMN %>" value="<%= content.getProjectedShippingDateString() %>" label="Projected Shipping<br />Date:" />
@@ -353,8 +351,8 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
                 <form:textfield label="Other Carrier:" name="other_carrier" />
                 <% if(trackingNum.equals("")) trackingNum = content.getTrackingPRO(); %>
                 <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= trackingNum %>" />
-                <% if(packingNum.equals("")) packingNum = content.getPackingList(); %>          
-                <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= packingNum %>" />        
+                <% if(packingNum.equals("")) packingNum = content.getPackingList(); %>
+                <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= packingNum %>" />
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
                 <form:row_begin />
                 <form:label name="" label="" />
@@ -374,18 +372,18 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
 
-        <admin:search_listing_pagination text="Reels Found" url="ordered/search.jsp" 
+        <admin:search_listing_pagination text="Reels Found" url="ordered/search.jsp"
                     pageIndex="<%= new Integer(pageNdx).toString() %>"
                     column="<%= column %>"
                     ascending="<%= new Boolean(ascending).toString() %>"
                     howMany="<%= new Integer(howMany).toString() %>"
-                    skip="<%= new Integer(skip).toString() %>"      
+                    skip="<%= new Integer(skip).toString() %>"
                     count="<%= new Integer(count).toString() %>"
                     search_params=""
                 />
 
     <admin:box_begin color="false" />
-   
+
     <listing:begin />
         <listing:header_begin />
             <listing:header_cell width="10" first="true" name="#" />
@@ -449,4 +447,4 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 --%>
 
 <admin:set_tabset url="shipping/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />    
+<html:end />

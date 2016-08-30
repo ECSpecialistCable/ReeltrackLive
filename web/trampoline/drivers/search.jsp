@@ -17,7 +17,7 @@
 <% userLoginMgr.init(pageContext); %>
 <% driverMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
-<% 
+<%
 boolean canEdit = false;
 if(user.isUserType(RTUser.USER_TYPE_ECS) || user.isUserType(RTUser.USER_TYPE_MANAGEMENT)) {
     canEdit = true;
@@ -28,15 +28,15 @@ content.setCustomerId(user.getCustomerId());
 CompEntities contents = driverMgr.searchDriver(content, Driver.NAME_COLUMN, true);
 
 String tempUrl =""; //var for url expression
-%>	
+%>
 <% dbResources.close(); %>
 
 
 <html:begin />
-<admin:title text="Drivers" />
+<admin:title heading="Drivers" text=""/>
 
 <admin:subtitle text="Import Drivers" />
-<admin:box_begin />
+<admin:box_begin text="Import Drivers" name="Import_Drivers" />
 	<form:begin_multipart name="import_drivers" action="drivers/process.jsp"/>
 	<form:hidden name="<%= Driver.CUSTOMER_ID_COLUMN %>" value="<%= new Integer(user.getCustomerId()).toString() %>" />
 	<form:file label="Excel File:" name="excel_upload" />
@@ -44,9 +44,9 @@ String tempUrl =""; //var for url expression
 		<form:label label="" name=""/>
 		<form:buttonset_begin padding="0" align="left"/>
 			<form:submit_inline name="SAVE" button="save" waiting="true" action="import"/>
-		<form:buttonset_end/>		
+		<form:buttonset_end/>
 	<form:row_end/>
-	
+
 	<form:row_begin/>
 	<form:label label="Excel Template:" name=""/>
 	<form:content_begin />
@@ -57,7 +57,7 @@ String tempUrl =""; //var for url expression
 <admin:box_end/>
 
 <admin:subtitle text="Add Driver" />
-<admin:box_begin />
+<admin:box_begin text="Add Driver" name="Add_Driver" />
     <form:begin submit="true" name="create" action="drivers/process.jsp" />
             <form:textfield name="<%= Driver.NAME_COLUMN %>" label="name:" />
             <form:hidden name="<%= Driver.CUSTOMER_ID_COLUMN %>" value="<%= new Integer(user.getCustomerId()).toString() %>" />
@@ -72,7 +72,7 @@ String tempUrl =""; //var for url expression
 
 <% if(contents.howMany() > 0) { %>
     <admin:subtitle text="Drivers" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Drivers" name="Drivers" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Name" />
@@ -86,7 +86,8 @@ String tempUrl =""; //var for url expression
                     <form:begin_inline action="drivers/process.jsp" name="update_driver" />
                         <form:textfield_inline pixelwidth="150" label="" value="<%= content.getName() %>" name="<%= Driver.NAME_COLUMN %>" />
                         <form:hidden name="<%= Driver.PARAM  %>" value="<%= new Integer(content.getId()).toString() %>" />
-                        <form:submit_inline  button="save" waiting="true" name="save" action="update" />
+                        <form:hidden name="submit_action" value="update" />
+                        <%--<form:submit_inline  button="save" waiting="true" name="save" action="update" />--%>
                     <form:end_inline />
                     <% } else { %>
                         <%= content.getName() %>
@@ -96,7 +97,7 @@ String tempUrl =""; //var for url expression
                 <% tempUrl = "drivers/process.jsp?submit_action=delete&" + Driver.PARAM + "=" + content.getId(); %>
                 <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />
-            <listing:row_end />	
+            <listing:row_end />
             <% } %>
         <listing:end />
     <admin:box_end />
@@ -105,4 +106,4 @@ String tempUrl =""; //var for url expression
 <% } %>
 
 <admin:set_tabset url="drivers/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />	
+<html:end />

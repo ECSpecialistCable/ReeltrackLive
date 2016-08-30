@@ -26,13 +26,19 @@
 <%
 RTUser user = (RTUser)userLoginMgr.getUser();
 
-int howMany = 15;
-int pageNdx = 1;
-if(request.getParameter("pageIdx") != null) {
-    pageNdx = Integer.parseInt(request.getParameter("pageIdx"));
+int howMany = 25;
+int pageNum = 1;
+if(request.getParameter("pageNum") != null) {
+    pageNum = Integer.parseInt(request.getParameter("pageNum"));
+    session.setAttribute("shipping/search.jsp", pageNum);
+} else {
+    if(session.getAttribute("shipping/search.jsp") != null) {
+        pageNum = (Integer)session.getAttribute("shipping/search.jsp");
+    }
 }
 
-int skip = (pageNdx-1) * howMany;
+int skip = (pageNum-1) * howMany;
+
 if(request.getParameter("skip") != null) {
     skip = Integer.parseInt(request.getParameter("skip"));
 }
@@ -160,6 +166,7 @@ CompEntities customers = custMgr.getCustomersByVendorCode(user.getVendorCode());
 String column = Reel.REEL_TAG_COLUMN;
 boolean ascending = true;
 int count = reelMgr.searchReelsVendorCount(content, customer_id, column, ascending);
+int pages = (int)Math.ceil((double)count / howMany);
 CompEntities contents = reelMgr.searchReelsVendor(content, customer_id, column, ascending, howMany, skip);
 String[] manufacturers = reelMgr.getManufacturers();
 String[] carrierList = reelMgr.getCarriers();
@@ -178,10 +185,10 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 
 
 <html:begin />
-<admin:title text="Edit Reel" />
+<admin:title heading="Reels" text="Edit" />
 
 <admin:subtitle text="Filter Reels" />
-<admin:box_begin />
+<admin:box_begin text="Filter Reels" name="Filter" />
 <form:begin_selfsubmit name="search" action="shipping/edit.jsp" />
 <% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
             <form:row_begin />
@@ -269,7 +276,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <admin:box_end />
 
 <admin:subtitle text="Shipping Data" />
-<admin:box_begin />
+<admin:box_begin text="Shipping Data" name="Shipping_Data" />
 <form:begin_selfsubmit name="search" action="shipping/edit.jsp" />
     <form:textfield label="Tracking PRO #:" name="trackingNum" value="<%= trackingNum %>" />
     <form:textfield label="BOL/PL #:" name="packingNum" value="<%= packingNum %>" />
@@ -297,26 +304,8 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 
 <% if(dosearch) { %>
 <% if(contents.howMany() > 0) { %>
-    <admin:search_listing_pagination text="Reels Found" url="shipping/search.jsp"
-                    pageIndex="<%= new Integer(pageNdx).toString() %>"
-                    column="<%= column %>"
-                    ascending="<%= new Boolean(ascending).toString() %>"
-                    howMany="<%= new Integer(howMany).toString() %>"
-                    skip="<%= new Integer(skip).toString() %>"
-                    count="<%= new Integer(count).toString() %>"
-                    search_params=""
-                />
-
-    <listing:begin />
-        <listing:header_begin />
-            <listing:header_cell width="50" first="true" name="CRID #" />
-            <listing:header_cell width="200" name="Reel Tag" />
-            <listing:header_cell name="Cable Description" />
-            <listing:header_cell width="75" name="ECS PO#" />
-            <listing:header_cell width="75" name="Status" />
-        <listing:header_end />
-    <listing:end />
-    <br />
+<admin:box_begin text="Reels" name="results" url="shipping/edit.jsp" pages="<%= Integer.toString(pages) %>" pageNum="<%= Integer.toString(pageNum) %>" />
+<admin:box_end />
     <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
         <% CableTechData techData = reelMgr.getCableTechData(content); %>
@@ -325,29 +314,11 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
         <% String toggleID = "reelship" + content.getId(); %>
         <% String toggleForm = "reelFormship" + content.getId(); %>
 
-        <admin:box_begin color="false" />
-        <listing:begin id="<%= toggleID %>" toggleTarget="<%= toggleTarget %>" toggleOpen="false"/>
-        <listing:row_begin />
-            <listing:cell_begin  width="50"/>
-                <%= content.getCrId() %>
-            <listing:cell_end />
-            <listing:cell_begin  width="200"/>
-                <%= content.getReelTag() %>
-            <listing:cell_end />
-            <listing:cell_begin />
-                <%= content.getCableDescription() %>
-            <listing:cell_end />
-            <listing:cell_begin width="75" />
-                <%= content.getOrdNo() %>
-            <listing:cell_end />
-            <listing:cell_begin width="75" />
-                <%= content.getStatus() %>
-            <listing:cell_end />
-        <listing:row_end />
-        <listing:end />
-        <admin:box_end />
-
-        <admin:box_begin toggleRecipient="<%= toggleTarget %>"/>
+        <%
+        String reelName = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " (" + content.getOrdNo() + " : " + content.getStatus() + ")";
+        String reelId = "reel" + content.getCrId();
+        %>
+        <admin:box_begin open="false" text="<%= reelName %>" name="<%= reelId %>"/>
             <form:begin submit="true" name="<%= toggleForm %>" action="shipping/process.jsp" />
             <%--
             <form class=" " title="" onsubmit="" action="shipping/process.jsp" target="_blank" method="post" name="<%= toggleForm %>" id="<%= toggleForm %>">

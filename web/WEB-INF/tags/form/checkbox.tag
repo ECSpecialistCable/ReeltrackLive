@@ -18,11 +18,15 @@
     <div class="col-sm-9">
       <div class="checkbox">
         <label>
-          <input type="checkbox" name="${name}" id="${id}" value="${value}"> ${text}
+          <input type="checkbox" name="${name}" id="${id}" value="${value}" <% if(onchange!=null) { %>onchange="${onchange}"<% } %>
+              <% if((selected!=null && selected.equals("true")) || (match!=null && match.equals(value))) { %>
+               checked="checked"
+              <% } %>
+              > ${text}
           <p class="help-block" style="margin-bottom:0;color:darkgray;">${helpText}</p>
         </label>
       </div>
-      
+
     </div>
   </div>
 <% } else { %>

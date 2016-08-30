@@ -31,10 +31,10 @@ int howMany = 25;
 int pageNum = 1;
 if(request.getParameter("pageNum") != null) {
     pageNum = Integer.parseInt(request.getParameter("pageNum"));
-    session.setAttribute("projects/search.jsp", pageNum);
+    session.setAttribute("reels/search.jsp", pageNum);
 } else {
-    if(session.getAttribute("projects/search.jsp") != null) {
-        pageNum = (Integer)session.getAttribute("projects/search.jsp");
+    if(session.getAttribute("reels/search.jsp") != null) {
+        pageNum = (Integer)session.getAttribute("reels/search.jsp");
     }
 }
 
@@ -155,9 +155,9 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="All Reels" />
+<admin:title heading="Reels" text="Search All" />
 
-    <admin:box_begin text="Search Reels" />
+    <admin:box_begin name="search" text="Search Reels" open="false"/>
     <form:begin_selfsubmit name="search" action="reels/search.jsp" />
         <form:row_begin />
             <form:label name="" label="Status:" />
@@ -253,7 +253,7 @@ String tempURL = "";
 --%>
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
-    <admin:box_begin text="Projects" name="results" url="reels/search.jsp" pages="<%= Integer.toString(pages) %>" pageNum="<%= Integer.toString(pageNum) %>" />
+    <admin:box_begin text="Reels" name="results" url="reels/search.jsp" pages="<%= Integer.toString(pages) %>" pageNum="<%= Integer.toString(pageNum) %>" />
 
     <listing:begin />
         <listing:header_begin />

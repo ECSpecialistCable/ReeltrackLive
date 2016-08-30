@@ -41,15 +41,15 @@ custUser.setCustomerId(content.getId());
 CompEntities users = securityMgr.getUsers(custUser, false);
 users.sortByMethodName("getLname",true);
 String tempUrl;
-%>	
+%>
 
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Users" />
+<admin:title heading="Customers" text="<%= content.getTitle()%>" />
 
 <admin:subtitle text="Add User" />
-<admin:box_begin />
+<admin:box_begin text="Add User" name="Add_User" />
     <form:begin submit="true" name="create" action="customers/process.jsp" />
 
             <form:row_begin />
@@ -80,7 +80,7 @@ String tempUrl;
 
 <% if(users.howMany() > 0) { %>
     <admin:subtitle text="Users" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Users" name="Users" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Name" />
@@ -106,7 +106,7 @@ String tempUrl;
                 <% tempUrl = "customers/process.jsp?submit_action=delete_user&" + RTUser.PARAM + "=" + custUser.getId() + "&" + Customer.PARAM + "=" + content.getId(); %>
                 <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />
-            <listing:row_end />	
+            <listing:row_end />
             <% } %>
         <listing:end />
     <admin:box_end />
@@ -115,4 +115,4 @@ String tempUrl;
 <% } %>
 
 <admin:set_tabset url="customers/_tabset_manage.jsp" thispage="users.jsp" content_id_for_tabset="<%= contid %>"/>
-<html:end />	
+<html:end />

@@ -54,19 +54,19 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Generated Reel Tags" />
+<admin:title heading="Reel Tags" text="Generated"/>
 
 
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
 	<admin:subtitle text="Clear / Download Generated Reel Tags"/>
-	<admin:box_begin color="false"/>
+	<admin:box_begin text="Clear / Download Generated Reel Tags" name="Clear"/>
 		<form:begin_selfsubmit name="clear_generated_tags" action="reeltags/search_generated.jsp" />
 			<form:row_begin/>
 				<form:buttonset_begin padding="0" align="left"/>
                 &nbsp;<form:submit_inline button="submit" waiting="true" name="clear" action="clear_generated_tags" />
 								<% tempURL = "reeltags/search_generated.jsp?submit_action=zip"; %>
-                <form:linkbutton url="<%= tempURL %>" name="DOWNLOAD" />
+                <form:linkbutton url="<%= tempURL %>" name="DOWNLOAD REELTAGS" />
 								<%
 								if(!zipfile.equals("")) {
 									tempURL = "/reports/" + zipfile;
@@ -79,13 +79,13 @@ String tempURL = "";
 		<form:end />
 	<admin:box_end />
 
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Reel Tags" name="reel_tags"/>
     <listing:begin />
         <listing:header_begin />
             <listing:header_cell width="50" first="true" name="CRID #" />
             <listing:header_cell name="Reel Tag" />
             <listing:header_cell name="Cable Description" />
-            <listing:header_cell name="" width="120"/>
+            <listing:header_cell name="" />
         <listing:header_end />
         <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
@@ -99,11 +99,11 @@ String tempURL = "";
             <listing:cell_begin />
                 <%= content.getCableDescription() %>
             <listing:cell_end />
-            <listing:cell_begin />
+            <listing:cell_begin align="right"/>
                 <% tempURL = content.getReelTagDirectory() + "/" + content.getReelTagFile(); %>
                 <form:linkbutton url="<%= tempURL %>" name="PRINT" newtab="true" />
                 <% tempURL = "reeltags/search_generated.jsp?submit_action=clear_reel_tag&" +  Reel.PARAM + "=" + content.getId(); %>
-                <form:linkbutton url="<%= tempURL %>" name="CLEAR" />
+                <form:linkbutton url="<%= tempURL %>" name="delete" />
             <listing:cell_end />
         <listing:row_end />
         <% } %>

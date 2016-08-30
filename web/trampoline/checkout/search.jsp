@@ -25,16 +25,22 @@
 <% userLoginMgr.init(pageContext); %>
 <% picklistMgr.init(pageContext,dbResources); %>
 <% foremanMgr.init(pageContext,dbResources); %>
-<% 
+<%
 RTUser user = (RTUser)userLoginMgr.getUser();
 
 int howMany = 25;
-int pageNdx = 1;
-if(request.getParameter("pageIdx") != null) {
-    pageNdx = Integer.parseInt(request.getParameter("pageIdx"));
+int pageNum = 1;
+if(request.getParameter("pageNum") != null) {
+    pageNum = Integer.parseInt(request.getParameter("pageNum"));
+    session.setAttribute("checkout/search.jsp", pageNum);
+} else {
+    if(session.getAttribute("checkout/search.jsp") != null) {
+        pageNum = (Integer)session.getAttribute("checkout/search.jsp");
+    }
 }
 
-int skip = (pageNdx-1) * howMany;
+int skip = (pageNum-1) * howMany;
+
 if(request.getParameter("skip") != null) {
     skip = Integer.parseInt(request.getParameter("skip"));
 }
@@ -43,13 +49,13 @@ PickList content = new PickList();
 Reel reel = new Reel();
 ReelCircuit circuit = new ReelCircuit();
 if(session.getAttribute("checkout_search")!=null) {
-    content = (PickList)session.getAttribute("pick_lists_search");
+    content = (PickList)session.getAttribute("checkout_search");
 }
 if(session.getAttribute("checkout_search_reel")!=null) {
-    reel = (Reel)session.getAttribute("pick_lists_search_reel");
+    reel = (Reel)session.getAttribute("checkout_search_reel");
 }
 if(session.getAttribute("checkout_search_circuit")!=null) {
-    circuit = (ReelCircuit)session.getAttribute("pick_lists_search_circuit");
+    circuit = (ReelCircuit)session.getAttribute("checkout_search_circuit");
 }
 
 if(request.getParameter(PickList.ID_COLUMN) != null) {
@@ -60,26 +66,26 @@ if(request.getParameter(PickList.ID_COLUMN) != null) {
 	}
 }
 
-if(request.getParameter(PickList.FOREMAN_COLUMN) != null) {  
-    content.setForeman(request.getParameter(PickList.FOREMAN_COLUMN)); 
+if(request.getParameter(PickList.FOREMAN_COLUMN) != null) {
+    content.setForeman(request.getParameter(PickList.FOREMAN_COLUMN));
 }
 
-if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
+if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
     reel.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
-    reel.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL); 
+    reel.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {  
+if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {
     reel.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));
-    reel.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL); 
+    reel.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {  
+if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {
     reel.setCustomerPN(request.getParameter(Reel.CUSTOMER_PN_COLUMN));
-    reel.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL); 
+    reel.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL);
 }
 
-if(request.getParameter(ReelCircuit.PARAM) != null) {  
+if(request.getParameter(ReelCircuit.PARAM) != null) {
     circuit.setId(Integer.parseInt(request.getParameter(ReelCircuit.PARAM)));
 }
 
@@ -110,12 +116,12 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Pick Lists" />
+<admin:title heading="Pick Lists" text="" />
 
 <admin:subtitle text="Filter Pick Lists" />
-    <admin:box_begin />
+    <admin:box_begin text="Filter Pick Lists" name="Filter_Pick_Lists" open="false"/>
     <form:begin_selfsubmit name="search" action="checkout/search.jsp" />
-        <% 
+        <%
         if(content.getId()!=0) {
             tempURL = new Integer(content.getId()).toString();
         } else {
@@ -170,18 +176,18 @@ String tempURL = "";
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
         <%--
-        <admin:search_listing_pagination text="Pick Lists" url="reels/search.jsp" 
+        <admin:search_listing_pagination text="Pick Lists" url="reels/search.jsp"
                     pageIndex="<%= new Integer(pageNdx).toString() %>"
                     column="<%= column %>"
                     ascending="<%= new Boolean(ascending).toString() %>"
                     howMany="<%= new Integer(howMany).toString() %>"
-                    skip="<%= new Integer(skip).toString() %>"      
+                    skip="<%= new Integer(skip).toString() %>"
                     count="<%= new Integer(count).toString() %>"
                     search_params=""
                 />
         --%>
-    <admin:box_begin color="false" />
-   
+    <admin:box_begin text="Key for Reels: On pick list / staged / checked OUT" name="picklist_listing"/>
+
     <listing:begin />
         <listing:header_begin />
             <listing:header_cell width="75" first="true" name="Created" />
@@ -226,9 +232,9 @@ String tempURL = "";
             <listing:cell_end />
             <listing:cell_begin align="right"/>
                 <% tempURL = "checkout/stage.jsp?" +  PickList.PARAM + "=" + content.getId(); %>
-                <form:linkbutton url="<%= tempURL %>" name="STAGE" />
+                <form:linkbutton url="<%= tempURL %>" name="stage" />
                 <% tempURL = "checkout/checkout.jsp?" +  PickList.PARAM + "=" + content.getId(); %>
-                <form:linkbutton url="<%= tempURL %>" name="CHECKOUT" />
+                <form:linkbutton url="<%= tempURL %>" name="checkout" />
             <listing:cell_end />
         <listing:row_end />
         <% } %>
@@ -240,4 +246,4 @@ String tempURL = "";
 <% } %>
 
 <admin:set_tabset url="checkout/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />    
+<html:end />

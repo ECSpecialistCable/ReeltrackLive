@@ -38,10 +38,10 @@ String tempUrl =""; //var for url expression
 %>
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Customer Part Numbers" />
+<admin:title heading="Customer Part Numbers" text=""/>
 
 <% if(contents.howMany() > 0) { %>
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Customer Part Numbers" name="Customer_Part_Numbers" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell width="80" first="true" name="ECS P/N" />

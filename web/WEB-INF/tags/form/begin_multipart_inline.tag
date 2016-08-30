@@ -3,11 +3,12 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%@ taglib prefix="table" tagdir="/WEB-INF/tags/table"%>
+<%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
+
 <%@ attribute name="action" required="true" %>
 <%@ attribute name="name" required="true" %>
 <%@ attribute name="submit" required="false" %>
 <%@ attribute name="cssClass" required="false"%>
-<%@ attribute name="notify" required="false"%>
-<%@ attribute name="confirm" required="false"%>
 
-<form class="form-horizontal <% if(confirm!=null) { %>submitFormConfirm<% } else { %>submitForm<% } %>" message="${confirm}" role="form" id="${name}" name="${name}" action="${action}">
+<form class="form-horizontal submitMultipartForm" method="post" enctype="multipart/form-data" role="form" id="${name}" name="${name}" action="${action}">

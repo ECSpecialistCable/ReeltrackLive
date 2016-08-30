@@ -10,8 +10,8 @@
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 <% reelMgr.init(pageContext,dbResources); %>
 
-<%  
-    String param = "content_id_for_tabset";    
+<%
+    String param = "content_id_for_tabset";
     String paramstring = "";
     String paramstring2 = "";
     String paramstring3 = "";
@@ -41,28 +41,28 @@
 		paramstring4 = "?" + param + "=" + reel3.getId();
 	}
 
-		    
+
 %>
 <% dbResources.close(); %>
 
-<admin:tab url="reels/search.jsp" text="Search All" />
+<admin:tab url="reels/search.jsp" text="<span class='glyphicon glyphicon-search'></span>" />
 <admin:tab url="reels/cable_data.jsp" text="Cable Data" params="<%= paramstring %>"/>
-<admin:tab url="reels/status.jsp" text="status" params="<%= paramstring %>"/>
-<admin:tab url="reels/edit.jsp" text="edit" params="<%= paramstring %>"/>
-<admin:tab url="reels/quantity.jsp" text="quantity" params="<%= paramstring %>"/>
-<admin:tab url="reels/circuits.jsp" text="circuits" params="<%= paramstring %>"/>
+<admin:tab url="reels/status.jsp" text="Status" params="<%= paramstring %>"/>
+<admin:tab url="reels/edit.jsp" text="Edit" params="<%= paramstring %>"/>
+<admin:tab url="reels/quantity.jsp" text="Quantity" params="<%= paramstring %>"/>
+<admin:tab url="reels/circuits.jsp" text="Circuits" params="<%= paramstring %>"/>
 <admin:tab url="reels/issues.jsp" text="Issues" params="<%= paramstring %>"/>
 <admin:tab url="reels/notes.jsp" text="Notes" params="<%= paramstring %>"/>
 <admin:tab url="reels/log.jsp" text="Log" params="<%= paramstring %>"/>
 <admin:tab url="reels/reel_data.jsp" text="Reel Data" params="<%= paramstring %>"/>
 <% if(reel3!=null && reel3.getId()!=0) { %>
-	<admin:tab url="reels/status.jsp" text="<<" params="<%= paramstring4 %>"/>
+	<admin:tab url="reels/status.jsp" text="<span class='glyphicon glyphicon-backward'></span>" params="<%= paramstring4 %>"/>
 <% } %>
 <% if(reel!=null && reel.getId()!=0) { %>
-	<admin:tab url="reels/status.jsp" text=">>" params="<%= paramstring2 %>"/>
+	<admin:tab url="reels/status.jsp" text="<span class='glyphicon glyphicon-forward'></span>" params="<%= paramstring2 %>"/>
 <% } %>
 <% if(reel2!=null && reel2.getId()!=0) { %>
-	<admin:tab url="reels/status.jsp" text="LAST" params="<%= paramstring3 %>"/>
+	<admin:tab url="reels/status.jsp" text="<span class='glyphicon glyphicon-step-forward'></span>" params="<%= paramstring3 %>"/>
 <% } %>
 
 

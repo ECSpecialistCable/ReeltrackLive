@@ -42,11 +42,11 @@ String tempUrl; //var for url expression
 <% dbResources.close(); %>
 
 <html:begin />
-<admin:title text="<%= content.getName() %>" />
+<admin:title heading="Jobs" text="<%= content.getName() %>" />
 <notifier:show_message />
 
 <admin:subtitle text="Edit Job" />
-<admin:box_begin />
+<admin:box_begin text="Edit Job" name="Edit_Job" />
     <form:begin submit="true" name="edit" action="customers/process.jsp" />
 
 			<form:row_begin />
@@ -70,7 +70,7 @@ String tempUrl; //var for url expression
                     <form:select_end />
                 <form:content_end />
             <form:row_end />
-			<form:hidden name="<%= CustomerJob.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= CustomerJob.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>

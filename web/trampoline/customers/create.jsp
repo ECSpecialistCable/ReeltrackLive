@@ -21,10 +21,10 @@ dbResources.close();
 %>
 
 <html:begin />
-<admin:title text="Customers" />
+<admin:title heading="Customers" text="Add"/>
 
 <admin:subtitle text="Add Customer" />
-<admin:box_begin />
+<admin:box_begin text="Add Customer" name="Add_Customer" />
     <form:begin submit="true" name="create" action="customers/process.jsp" />
 			<form:textfield name="<%= Customer.NAME_COLUMN %>" label="name:" />
 			<form:row_begin />

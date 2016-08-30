@@ -5,6 +5,6 @@
 
 <h2 class="adminTitle">
 <% if(heading!=null && !heading.equals("")) { %>
-	<span style="color:rgb(189,173,172);">${heading}</span>
+	<span style="color:silver;">${heading}</span>
 <% } %>
 ${text}</h2>

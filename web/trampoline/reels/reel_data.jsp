@@ -48,15 +48,20 @@ String tempURL; //var for url expression
 <% dbResources.close(); %>
 
 <html:begin />
+<%--
 <h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
 <% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
 <h1 style="padding-bottom:0px;"><%= tempURL %></h1>
 <p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
+--%>
 <notifier:show_message />
+
+<% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " +  content.getCableDescription(); %>
+<admin:title heading="Reel Page" text="<%= tempURL %>" />
 
 <% if(canEdit) { %>
 <admin:subtitle text="Unique ID" />
-<admin:box_begin />
+<admin:box_begin text="Unique ID" name="Unique_ID" />
     <form:begin submit="<%= new Boolean(false).toString() %>" name="edit" action="reels/process.jsp" />
 		<form:textfield label="Unique ID:" name="<%= Reel.UNIQUE_ID_COLUMN %>" value="<%= new Integer(content.getUniqueId()).toString() %>" />
 		<form:row_begin />
@@ -73,12 +78,12 @@ String tempURL; //var for url expression
 <% } %>
 
 <admin:subtitle text="ECS Invoice" />
-<admin:box_begin />
+<admin:box_begin text="ECS Invoice" name="ECS_Invoice" />
     <form:begin submit="<%= new Boolean(false).toString() %>" name="edit" action="reels/process.jsp" />
         <% if(!canEdit) { %>
             <form:info label="Customer PO:" text="<%= content.getCustomerPO() %>" />
             <form:info label="Invoice #:" text="<%= content.getInvoiceNum() %>" />
-            <form:info label="Invoice Date:" text="<%= content.getInvoiceDateString() %>" />       
+            <form:info label="Invoice Date:" text="<%= content.getInvoiceDateString() %>" />
         <% } else { %>
             <form:info label="ECS PO:" text="<%= content.getOrdNo() %>" />
             <form:textfield label="Customer PO:" name="<%= Reel.CUSTOMER_PO_COLUMN %>" value="<%= content.getCustomerPO() %>" />
@@ -98,7 +103,7 @@ String tempURL; //var for url expression
 <admin:box_end />
 
 <admin:subtitle text="Reel Data" />
-<admin:box_begin />
+<admin:box_begin text="Reel Data" name="Reel_Data" />
     <form:begin_multipart submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
         <form:info label="CTR #:" text="<%= content.getCTRNumber() %>" />
         <form:info label="CTR Date:" text="<%= content.getCTRDateString() %>" />
@@ -111,7 +116,7 @@ String tempURL; //var for url expression
             <form:label label="Download CTR:"  />
             <form:content_begin />
                     <% tempURL = request.getContextPath() + content.getCompEntityDirectory() + "/" + URLEncoder.encode(content.getCTRFile()); %>
-                    <admin:link external="true" text="[Download]" url="<%= tempURL %>" />      
+                    <admin:link external="true" text="[Download]" url="<%= tempURL %>" />
                 <form:content_end />
             <form:row_end />
             <% if(canEdit) { %>
@@ -119,12 +124,12 @@ String tempURL; //var for url expression
             <form:label label="Delete CTR:"  />
             <form:content_begin />
                     <% String tempUrl = "reels/process.jsp?submit_action=delete_ctr&" + Reel.PARAM + "=" + content.getId(); %>
-                    <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />    
+                    <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <form:content_end />
             <form:row_end />
             <% } %>
         <% } %>
-		<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+		<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 		<form:row_begin />
 			<form:label name="" label="" />
 			<form:buttonset_begin align="left" padding="0"/>

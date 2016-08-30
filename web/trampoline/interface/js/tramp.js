@@ -95,8 +95,10 @@ function loadProcess(url,theButton) {
 	});
 }
 
+/*
 function loadProcessWithWarning(url,theButton) {
-	trampWarningAlert('Are you sure you want to delete this item?', function(result) {
+	//warningAlert = 'Are you sure you want to delete this item?';
+	trampWarningAlert(warningAlert, function(result) {
 		if (result) {
 		    $("#tabContent").load(url,function() {
 		 		bindForms();
@@ -106,8 +108,10 @@ function loadProcessWithWarning(url,theButton) {
 		}
 	});
 }
-
+*/
 function loadProcessWithWarning(url,theButton, warning) {
+	//warningAlert = warning;
+	//alert(warning);
 	trampWarningAlert(warning, function(result) {
 		if (result) {
 			$("#tabContent").load(url,function() {
@@ -172,6 +176,27 @@ function bindForms() {
 			myWindow.document.write(jqXHR.responseText);
 	  	});
 	  	return false;
+	});
+
+	$('.submitFormConfirm').bind('submit',function(e) {
+		var tempScrollTop = $(window).scrollTop();
+		e.preventDefault();
+		var form = this;
+		var message = $(this).attr("message");
+		trampWarningAlert(message,function(result) {
+			if(result) {
+				$.post($(form).attr("action"), $(form).serialize(), function(data) {
+			  		$("#tabContent").html(data);
+			  		$(window).scrollTop(tempScrollTop);
+			    	bindForms();
+				})
+			  	.fail(function( jqXHR, textStatus, errorThrown)  {
+			    	var myWindow = window.open("", "Error", "width=1024, height=768");
+					myWindow.document.write(jqXHR.responseText);
+			  	});
+			  	return false;
+			}
+		});
 	});
 
 	$('.submitMultipartForm').bind('submit',function(e) {
@@ -303,11 +328,20 @@ function trampInfoAlert(theCopy) {
     });
 }
 
-function trampWarningAlert(message, callback) {
+function trampConfirm(theCopy) {
+	BootstrapDialog.confirm({
+        type: BootstrapDialog.TYPE_INFO,
+        title: '<span class="glyphicon glyphicon-info-sign" style="color:white;font-size:24px;"></span>&nbsp;&nbsp;Info',
+        message: theCopy,
+    });
+}
+
+function trampWarningAlert(theCopy, callback) {
+	//alert(warningAlert);
     new BootstrapDialog({
     	type: BootstrapDialog.TYPE_WARNING,
         title: '<span class="glyphicon glyphicon-warning-sign" style="color:white;font-size:24px;"></span>&nbsp;&nbsp;Warning',
-        message: message,
+        message: theCopy,
         closable: false,
         data: {
             'callback': callback

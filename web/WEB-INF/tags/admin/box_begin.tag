@@ -17,8 +17,8 @@
 <%@ attribute name="url" required="false"%>
 <%@ attribute name="open" required="false"%>
 
-<div class="panel panel-primary">
-  <div class="panel-heading blue_bg">
+<div class="panel panel-primary" <% if(color!=null) { %>style="border-color:${color};"<% } %>>
+  <div class="panel-heading blue_bg" <% if(color!=null) { %>style="background-color:${color};border-color:${color};"<% } %>>
     <h3 class="panel-title"><a onclick="saveCollapseState('${name}')" data-toggle="collapse" href="#${name}">${text}</a>
     <% if(pages!=null && pageNum!=null) { %>
     <% int howMany = Integer.parseInt(pages); %>

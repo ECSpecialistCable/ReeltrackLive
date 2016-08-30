@@ -37,11 +37,11 @@ content = (Customer)customerMgr.getCustomer(content);
 <% dbResources.close(); %>
 
 <html:begin />
-<admin:title text="<%= content.getName() %>" />
+<admin:title heading="Customers" text="<%= content.getName() %>" />
 <notifier:show_message />
 
-<admin:subtitle text="Edit Customer" />
-<admin:box_begin />
+<admin:subtitle text="" />
+<admin:box_begin text="Edit Customer" name="Edit_Customer" />
     <form:begin submit="true" name="edit" action="customers/process.jsp" />
 
 			<form:textfield name="<%= Customer.NAME_COLUMN %>" label="Name:" value="<%= content.getName() %>" />
@@ -66,7 +66,7 @@ content = (Customer)customerMgr.getCustomer(content);
 					<form:select_end />
 				<form:content_end />
 			<form:row_end />
-			<form:hidden name="<%= Customer.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= Customer.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>

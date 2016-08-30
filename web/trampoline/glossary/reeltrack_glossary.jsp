@@ -36,10 +36,10 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 
 
 <html:begin />
-<admin:title text="ReelTrack Glossary" />
+<admin:title heading="Glossary" text="ReelTrack"/>
 <% if(canEdit) { %>
 <admin:subtitle text="Add ReelTrack Glossary" />
-<admin:box_begin />
+<admin:box_begin text="Add ReelTrack Glossary" name="Add"/>
     <form:begin submit="true" name="create_reeltrack_glossary" action="glossary/process.jsp" />
 
     		<form:textfield name="<%= Glossary.NAME_COLUMN %>" label="Name:" />
@@ -65,8 +65,8 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <% } %>
 
 <% if(contents.howMany() > 0) { %>
-    <admin:subtitle text="ReelTrack Glossary Found" />
-    <admin:box_begin color="false" />
+    <admin:subtitle text="Glossary" />
+    <admin:box_begin text="ReelTrack Glossary" name="ReelTrack_Glossary" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Name" width="150" />
@@ -78,7 +78,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             <listing:header_end />
             <% for(int i=0; i<contents.howMany(); i++) { %>
             <% content = (Glossary)contents.get(i); %>
-            <listing:row_begin row="<%= new Integer(i).toString() %>" />                
+            <listing:row_begin row="<%= new Integer(i).toString() %>" />
                 <listing:cell_begin />
                     <%= content.getName() %>
                 <listing:cell_end />

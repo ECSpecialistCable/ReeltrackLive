@@ -17,20 +17,20 @@
 <% userLoginMgr.init(pageContext); %>
 <% customerMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
-<% 
+<%
 Customer content = new Customer();
 CompEntities contents = customerMgr.searchCustomer(content, Customer.NAME_COLUMN, true);
 String tempUrl; //var for url expression
-%>	
+%>
 <% dbResources.close(); %>
 
 
 <html:begin />
-<admin:title text="Customers" />
+<admin:title heading="Customers" text=""/>
 
 <% if(contents.howMany() > 0) { %>
     <admin:subtitle text="Customers" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Customers" name="Customers" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Name" />
@@ -52,7 +52,7 @@ String tempUrl; //var for url expression
                 <% tempUrl = "customers/process.jsp?submit_action=delete&" + Customer.PARAM + "=" + content.getId(); %>
                 <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />
-            <listing:row_end />	
+            <listing:row_end />
             <% } %>
         <listing:end />
     <admin:box_end />
@@ -61,4 +61,4 @@ String tempUrl; //var for url expression
 <% } %>
 
 <admin:set_tabset url="customers/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />	
+<html:end />

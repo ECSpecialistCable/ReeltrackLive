@@ -36,11 +36,11 @@ content = (RTUser)securityMgr.getUser(content, true, false);
 <% dbResources.close(); %>
 
 <html:begin />
-<admin:title text="<%= content.getName() %>" />
+<admin:title heading="Users" text="<%= content.getName() %>" />
 <notifier:show_message />
 
 <admin:subtitle text="Edit User" />
-<admin:box_begin />
+<admin:box_begin text="Edit User" name="Edit_User" />
     <form:begin submit="true" name="edit" action="users/process.jsp" />
 
 			<form:row_begin />
@@ -67,7 +67,7 @@ content = (RTUser)securityMgr.getUser(content, true, false);
 					<form:select_end />
 				<form:content_end />
 			<form:row_end />
-			<form:hidden name="<%= RTUser.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= RTUser.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>

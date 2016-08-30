@@ -35,17 +35,17 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 %>
 
 <html:begin />
-<admin:title text="Job Glossary" />
+<admin:title heading="Glossary" text="Job"/>
 <% if(canEdit) { %>
 <admin:subtitle text="Import Job Glossary" />
-<admin:box_begin />
+<admin:box_begin text="Import Job Glossary" name="Import" />
 	<form:begin_multipart name="import_glossary" action="glossary/process.jsp"/>
 	<form:file label="Excel File:" name="excel_upload" />
 	<form:row_begin/>
 		<form:label label="" name=""/>
 		<form:buttonset_begin padding="0" align="left"/>
 			<form:submit_inline name="SAVE" button="save" waiting="true" action="import"/>
-		<form:buttonset_end/>		
+		<form:buttonset_end/>
 	<form:row_end/>
 
 	<form:row_begin/>
@@ -56,9 +56,9 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 	<form:row_end/>
 	<form:end/>
 <admin:box_end/>
-		
+
 <admin:subtitle text="Add Job Glossary" />
-<admin:box_begin />
+<admin:box_begin text="Add Job Glossary" name="Add" />
     <form:begin submit="true" name="create_job_glossary" action="glossary/process.jsp" />
 
     		<form:textfield name="<%= Glossary.NAME_COLUMN %>" label="Name:" />
@@ -85,7 +85,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 
 <% if(contents.howMany() > 0) { %>
     <admin:subtitle text="Job Glossary Found" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Job Glossary" name="Job_Glossary" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" width="150" name="Name" />
@@ -97,7 +97,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
             <listing:header_end />
             <% for(int i=0; i<contents.howMany(); i++) { %>
             <% content = (Glossary)contents.get(i); %>
-            <listing:row_begin row="<%= new Integer(i).toString() %>" />                
+            <listing:row_begin row="<%= new Integer(i).toString() %>" />
                 <listing:cell_begin />
                     <%= content.getName() %>
                 <listing:cell_end />

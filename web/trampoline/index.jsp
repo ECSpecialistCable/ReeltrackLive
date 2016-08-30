@@ -1,21 +1,102 @@
 <%@ page language="java" %>
+<%@ page import="com.reeltrack.users.*" %>
+<%@ page import="com.reeltrack.reels.*" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
+<%@ taglib prefix="html" tagdir="/WEB-INF/tags/html"%>
+<%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>
+<%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
+
+<jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
+<jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr"/>
+<jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
+<% userLoginMgr.init(pageContext, dbResources); %>
+<% reelMgr.init(pageContext,dbResources); %>
+
+<% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
-boolean useHTTPS = false;
-if(application.getInitParameter("protocol")!=null && application.getInitParameter("protocol").equalsIgnoreCase("https")) {
-    useHTTPS = true;
+int reelID = 0;
+if(request.getParameter("id")!=null) {
+    reelID = Integer.parseInt(request.getParameter("id"));
 }
+String tagType = "";
+if(request.getParameter("type")!=null) {
+    tagType = request.getParameter("type");
+}
+String jobCode = "";
+if(request.getParameter("job")!=null) {
+    jobCode = request.getParameter("job");
+}
+
+boolean checkedout = false;
+boolean circuits = false;
+if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
+	Reel content = new Reel();
+	content.setId(reelID);
+	content = (Reel)reelMgr.getReel(content);
+	if(jobCode.equals(content.getJobCode())) {
+		if(tagType.equals("RT")) {
+			Reel rtReel = new Reel();
+			rtReel.setId(reelID);
+			rtReel.setJobCode(jobCode);
+      if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) {
+        checkedout = true;
+        if(content.getReelType().equals(Reel.REEL_TYPE_CIRCUIT)) {
+          circuits = true;
+        }
+      }
+			session.setAttribute("RT",content);
+		}
+		if(tagType.equals("PL")) {
+			Reel plReel = new Reel();
+			plReel.setId(reelID);
+			plReel.setJobCode(jobCode);
+			session.setAttribute("PL",content);
+		}
+	} else {
+		reelID=0;
+	}
+}
+
+	boolean isIpad = false;
+	String user_agent = request.getHeader("user-agent");
+	if(user_agent.contains("iPad")) {
+		isIpad = true;
+		//session.setAttribute("ipad_user_id", user);
+		int userId = 0;
+		if(user!=null) {
+			userId = user.getId();
+		}
+
+	   Cookie cookie = null;
+	   Cookie[] cookies = null;
+	   // Get an array of Cookies associated with this domain
+	   cookies = request.getCookies();
+	   if( cookies != null ){
+		  for (int i = 0; i < cookies.length; i++){
+			 cookie = cookies[i];
+			 if((cookie.getName( )).compareTo("user_id") == 0 ){
+				cookie.setMaxAge(0); // delete cookie if its already there
+				cookie.setValue(String.valueOf(userId));
+				response.addCookie(cookie); // re add it with new user id
+			 } else {
+				 Cookie iPadLoginUser = new Cookie("user_id", String.valueOf(userId));
+				response.addCookie(iPadLoginUser);
+			}
+		  }
+	  }
+	}
 %>
+<% dbResources.close(); %>
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Kredible #Independence</title>
+  <title>ECS ReelTrack</title>
+  <link rel="icon" type="image/png" href="myicon.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <% if(useHTTPS) { %>
-   <script>
-       if (window.location.href.match('http:'))
-           window.location.href = window.location.href.replace('http', 'https')
-   </script>
-   <% } %>
+
   <!-- Bootstrap -->
   <link href="interface/css/bootstrap.css" rel="stylesheet">
   <link href="interface/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
@@ -345,8 +426,12 @@ if(application.getInitParameter("protocol")!=null && application.getInitParamete
     <script src="interface/js/bootstrap-datetimepicker.min.js"></script>
     <script src="interface/js/bootstrap-dialog.js"></script>
     <script src="interface/js/jquery.cookie.js"></script>
-	  <script src="interface/js/tramp.js"></script>
-
+	<script src="interface/js/tramp.js"></script>
+    <script>
+    	function openTag(reelID) {
+    		var win = window.open('/trampoline/reeltags/reeltag_image.jsp?reel_param=' + reelID, '_blank');
+    	}
+    </script>
     <script>
       loadLoginScreen();
     </script>

@@ -108,6 +108,7 @@ String[] carrierList = reelMgr.getCarriers();
 <% dbResources.close(); %>
 
 <html:begin />
+<%--
 <h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
 <%
 tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus();
@@ -119,10 +120,14 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
 %>
 <h1 style="padding-bottom:0px;"><%= tempURL %></h1>
 <p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
+--%>
 <notifier:show_message />
 
+<% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " +  content.getCableDescription(); %>
+<admin:title heading="Reel Page" text="<%= tempURL %>" />
+
 <% if(canEdit) { %>
-	<admin:box_begin />
+	<admin:box_begin text="Delete Reel" name="Delete_Reel" />
 		<form:begin submit="true" name="delete_reel" action="reels/process.jsp" />
 	        <form:row_begin />
 				<form:label name="" label="Delete Reel:" />
@@ -137,7 +142,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
 
 <% if(rtReel!=null || plReel!=null) { %>
 <admin:subtitle text="Scanned Reel" />
-<admin:box_begin />
+<admin:box_begin text="Scanned Reel" name="Scanned_Reel" />
     <form:begin submit="false" name="nothing" action="#" />
 <% if(rtReel!=null) { %>
 	<form:info label="Reel Tag:" text="<%= rtReel.getReelTag() %>" />
@@ -158,7 +163,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
 <% if(!isCableTrac) { %>
     <% if(content.getStatus().equals(Reel.STATUS_ORDERED)) { %>
     <admin:subtitle text="Mark Reel as Shipped" />
-    <admin:box_begin />
+    <admin:box_begin text="Mark Reel as Shipped" name="Mark_Reel_as_Shipped" />
     	<form:begin submit="true" name="stage" action="reels/process.jsp" />
             <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
     		<form:textfield pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
@@ -198,7 +203,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
 
 <% if(content.getStatus().equals(Reel.STATUS_ORDERED) || content.getStatus().equals(Reel.STATUS_SHIPPED)) { %>
 <admin:subtitle text="Mark Reel as Received" />
-        <admin:box_begin />
+        <admin:box_begin text="Mark Reel as Received" name="Mark_Reel_as_Received" />
             <form:begin submit="true" name="receive" action="reels/process.jsp" />
                 <form:info label="Shipped<br />Date:" text="<%= content.getShippingDateString() %>" />
                 <form:info label="Shipped Qty:" text="<%= new Integer(content.getShippedQuantity()).toString() %>" />
@@ -290,7 +295,7 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
     <% if(showStageAndCheckout) { %>
         <% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) { %>
         <admin:subtitle text="Stage Reel" />
-        <admin:box_begin />
+        <admin:box_begin text="Stage Reel" name="Stage_Reel" />
         	<form:begin submit="true" name="stage" action="reels/process.jsp" />
     				<% if(picklist.getId()!=0) { %>
     					<form:info label="Pick List:" text="<%= picklist.getName() %>" />
@@ -341,7 +346,7 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
 
         <% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE) || content.getStatus().equals(Reel.STATUS_STAGED)) { %>
         <admin:subtitle text="Check OUT Reel" />
-        <admin:box_begin />
+        <admin:box_begin text="Check OUT Reel" name="Check_OUT_Reel" />
         	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
     				<% if(picklist.getId()!=0) { %>
     					<form:info label="Pick List:" text="<%= picklist.getName() %>" />
@@ -394,7 +399,7 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
 
     <% if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) { %>
     <admin:subtitle text="Mark Reel as Complete" />
-    <admin:box_begin />
+    <admin:box_begin text="Mark Reel as Complete" name="Mark_Reel_as_Complete" />
     	<form:begin submit="true" name="complete" action="reels/process.jsp" />
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
             <form:row_begin />
@@ -409,7 +414,7 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
 
     <% if(content.getStatus().equals(Reel.STATUS_COMPLETE)) { %>
     <admin:subtitle text="Mark Reel as Scrapped" />
-    <admin:box_begin />
+    <admin:box_begin text="Mark Reel as Scrapped" name="Mark_Reel_as_Scrapped" />
     	<form:begin submit="true" name="scrapped" action="reels/process.jsp" />
             <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(content.getId()).toString() %>" />
             <form:row_begin />
@@ -424,7 +429,7 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
 
     <% if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) { %>
     <admin:subtitle text="Check IN Reel" />
-    <admin:box_begin />
+    <admin:box_begin text="Check IN Reel" name="Check_IN_Reel" />
     	<form:begin submit="true" name="checkout" action="reels/process.jsp" />
             <%
             String foremanName = "None";
@@ -483,7 +488,7 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
 <% } %>
 
 <admin:subtitle text="General Info" />
-<admin:box_begin />
+<admin:box_begin text="General Info" name="General_Info" />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
         	<form:info label="Status:" text="<%= content.getStatus() %>" />
         	<form:info label="Warehouse<br />Location:" text="<%= content.getWharehouseLocation() %>" />

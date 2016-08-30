@@ -21,10 +21,10 @@ dbResources.close();
 %>
 
 <html:begin />
-<admin:title text="Pick Lists" />
+<admin:title heading="Pick Lists" text="Add"/>
 
 <admin:subtitle text="Add Pick List" />
-<admin:box_begin />
+<admin:box_begin text="Add Pick List" name="Add_Pick_List" />
     <form:begin submit="true" name="create" action="pick_lists/process.jsp" />
 			<form:textfield name="<%= PickList.NAME_COLUMN %>" label="Name:" />
 			<form:row_begin />

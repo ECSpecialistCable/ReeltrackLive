@@ -17,20 +17,20 @@
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
-<% 
+<%
 ReelIssue content = new ReelIssue();
 CompEntities contents = reelMgr.getUnresolvedReelIssues(user.getJobCode());
 String tempUrl;
-%>	
+%>
 
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Unresolved Issues" />
+<admin:title heading="Issues" text="Unresolved" />
 
 <% if(contents.howMany() > 0) { %>
     <admin:subtitle text="Issues" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Issues" name="Issues" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell width="75" first="true" name="created" />
@@ -69,7 +69,7 @@ String tempUrl;
                 <% tempUrl = "reels/issues.jsp?" +  Reel.PARAM + "=" + content.getReelId(); %>
                 <form:linkbutton url="<%= tempUrl %>" name="EDIT" />
                 <listing:cell_end />
-            <listing:row_end />	
+            <listing:row_end />
             <% } %>
         <listing:end />
     <admin:box_end />
@@ -78,4 +78,4 @@ String tempUrl;
 <% } %>
 
 <admin:set_tabset url="issues/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />	
+<html:end />

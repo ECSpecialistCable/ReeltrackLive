@@ -44,18 +44,23 @@ String tempURL; //var for url expression
 <% dbResources.close(); %>
 
 <html:begin />
+<%--
 <h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
 <% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
 <h1 style="padding-bottom:0px;"><%= tempURL %></h1>
 <p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
+--%>
 <notifier:show_message />
+
+<% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " +  content.getCableDescription(); %>
+<admin:title heading="Reel Page" text="<%= tempURL %>" />
 
 <% if(logs.howMany() > 0) { %>
     <admin:subtitle text="All Log Entries" />
     <admin:box_begin color="false" />
         <listing:begin />
         <listing:header_begin />
-            <listing:header_cell width="75" first="true" name="Created" />
+            <listing:header_cell setWidth="150" first="true" name="Created" />
             <listing:header_cell width="100" name="By User" />
             <listing:header_cell width="75" name="Cur Qty" />
             <listing:header_cell width="75" name="Top #" />

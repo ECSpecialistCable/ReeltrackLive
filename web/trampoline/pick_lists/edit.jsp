@@ -68,32 +68,32 @@ if(session.getAttribute("pick_lists_edit_circuit")!=null) {
 }
 
 
-if(request.getParameter(Reel.PN_VOLT_COLUMN) != null) {  
+if(request.getParameter(Reel.PN_VOLT_COLUMN) != null) {
     reel.setPnVolt(request.getParameter(Reel.PN_VOLT_COLUMN));
-    reel.setSearchOp(Reel.PN_VOLT_COLUMN, Reel.EQ); 
+    reel.setSearchOp(Reel.PN_VOLT_COLUMN, Reel.EQ);
 }
 
-if(request.getParameter(Reel.PN_GAUGE_COLUMN) != null) {  
+if(request.getParameter(Reel.PN_GAUGE_COLUMN) != null) {
     reel.setPnGauge(request.getParameter(Reel.PN_GAUGE_COLUMN));
-    reel.setSearchOp(Reel.PN_GAUGE_COLUMN, Reel.EQ); 
+    reel.setSearchOp(Reel.PN_GAUGE_COLUMN, Reel.EQ);
 }
 
-if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {  
+if(request.getParameter(Reel.PN_CONDUCTOR_COLUMN) != null) {
     reel.setPnConductor(request.getParameter(Reel.PN_CONDUCTOR_COLUMN));
-    reel.setSearchOp(Reel.PN_CONDUCTOR_COLUMN, Reel.EQ); 
+    reel.setSearchOp(Reel.PN_CONDUCTOR_COLUMN, Reel.EQ);
 }
 
-if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
+if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
     reel.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
-    reel.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL); 
+    reel.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {  
+if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {
     reel.setCustomerPN(request.getParameter(Reel.CUSTOMER_PN_COLUMN));
-    reel.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL); 
+    reel.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL);
 }
 
-if(request.getParameter(Reel.ON_REEL_QUANTITY_COLUMN) != null) {  
+if(request.getParameter(Reel.ON_REEL_QUANTITY_COLUMN) != null) {
 	if(!request.getParameter(Reel.ON_REEL_QUANTITY_COLUMN).equals("")) {
     	reel.setOnReelQuantity(Integer.parseInt(request.getParameter(Reel.ON_REEL_QUANTITY_COLUMN)));
     	reel.setSearchOp(Reel.ON_REEL_QUANTITY_COLUMN, Reel.GTEQ);
@@ -103,7 +103,7 @@ if(request.getParameter(Reel.ON_REEL_QUANTITY_COLUMN) != null) {
     }
 }
 
-if(request.getParameter(ReelCircuit.PARAM) != null) {  
+if(request.getParameter(ReelCircuit.PARAM) != null) {
     circuit.setId(Integer.parseInt(request.getParameter(ReelCircuit.PARAM)));
 }
 
@@ -125,11 +125,11 @@ String tempURL; //var for url expression
 
 <% tempURL = "Picklist: " + content.getTitle(); %>
 <html:begin />
-<admin:title text="<%= tempURL %>" />
+<admin:title heading="Pick Lists" text="<%= content.getTitle() %>" />
 <notifier:show_message />
 
 <admin:subtitle text="General Info" />
-<admin:box_begin />
+<admin:box_begin text="General Info" name="General_Info" />
     <form:begin submit="true" name="edit" action="pick_lists/process.jsp" />
     		<form:textfield label="Picklist Name:" name="<%= PickList.NAME_COLUMN %>" value="<%= content.getName() %>" />
     		<form:row_begin />
@@ -144,7 +144,7 @@ String tempURL; //var for url expression
 	            <form:select_end />
 	            <form:content_end />
         	<form:row_end />
-			<form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(contid).toString() %>" />			
+			<form:hidden name="<%= PickList.PARAM %>" value="<%= new Integer(contid).toString() %>" />
 			<form:row_begin />
 				<form:label name="" label="" />
 				<form:buttonset_begin align="left" padding="0"/>
@@ -156,7 +156,7 @@ String tempURL; //var for url expression
 
 <% if(pickReels.howMany() > 0) { %>
 	<admin:subtitle text="Reels on Picklist" />
-	<admin:box_begin color="false" />
+	<admin:box_begin text="Reels on Picklist" name="Reels_on_Picklist" />
 	<listing:begin />
 	    <listing:header_begin />
 			<listing:header_cell first="true" name="#" width="70" />
@@ -215,9 +215,9 @@ String tempURL; //var for url expression
 	<admin:subtitle text="No Reels On Pick List." />
 <% } %>
 
-<br /> 
+<br />
 <admin:subtitle text="Search Reels to Add to Pick List" />
-    <admin:box_begin />
+    <admin:box_begin text="Search Reels to Add to Pick List" name="Search_Reels_to_Add" />
     <form:begin_selfsubmit name="search" action="pick_lists/edit.jsp" />
     	<form:row_begin />
             <form:label name="" label="Circuit:" />
@@ -268,7 +268,7 @@ String tempURL; //var for url expression
         <form:row_end />
     	<form:textfield label="Customer P/N:" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= reel.getCustomerPN() %>" />
         <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= reel.getReelTag() %>" />
-        <% 
+        <%
         if(reel.getOnReelQuantity()!=0) {
             tempURL = new Integer(reel.getOnReelQuantity()).toString();
         } else {
@@ -288,7 +288,7 @@ String tempURL; //var for url expression
 
 <% if(reels.howMany() > 0) { %>
 	<admin:subtitle text="Add Reel to Pick List" />
-	<admin:box_begin color="false" />
+	<admin:box_begin text="Add Reel to Pick List" name="Add_Reel_to_Pick_List" />
 	<listing:begin />
 	    <listing:header_begin />
 	    	<listing:header_cell first="true" width="45" name="CRID #"  />
@@ -301,7 +301,7 @@ String tempURL; //var for url expression
 	    <listing:header_end />
 	    <% for(int i=0; i<reels.howMany(); i++) { %>
 	    <% Reel reel2 = (Reel)reels.get(i); %>
-	    <listing:row_begin row="<%= new Integer(i).toString() %>" />			
+	    <listing:row_begin row="<%= new Integer(i).toString() %>" />
 	    	<listing:cell_begin />
 	            <%= reel2.getCrId() %>
 	        <listing:cell_end />

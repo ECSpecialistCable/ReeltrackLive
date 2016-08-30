@@ -20,10 +20,10 @@ dbResources.close();
 %>
 
 <html:begin />
-<admin:title text="Users" />
+<admin:title heading="Users" text="Add"/>
 
 <admin:subtitle text="Add User" />
-<admin:box_begin />
+<admin:box_begin text="Add User" name="Add_User"  />
     <form:begin submit="true" name="create" action="users/process.jsp" />
 
     		<form:row_begin />

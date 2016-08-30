@@ -41,12 +41,15 @@ if(action.equals("logout")) {
 %>
 <%  if(action.equals("vendor" )) { %>
 <%
+//userLoginMgr.logout();
 vendor = new RTUser();
 vendor.setId(Integer.parseInt(request.getParameter("vendor")));
 vendor = (RTUser)securityMgr.getUser(vendor, true, false);
 userLoginMgr.login(vendor.getUsername(), vendor.getPassword());
+user = (RTUser)userLoginMgr.getUser();
 %>
 <% } %>
+
 <%  if(action.equals("customer" )) { %>
 <%
 user.setCustomerId(Integer.parseInt(request.getParameter("customer")));
@@ -94,6 +97,7 @@ if(rtReel!=null && rtReel.getJobCode().equals(job.getCode())) {
 }
 %>
 <% } %>
+
 <% if(action.equals("change_job")) { %>
 <%
 session.removeAttribute("RT");
@@ -134,7 +138,7 @@ user.setJobName("");
     </div>
 <% } %>
 
-<% if(userLoginMgr.isLoggedIn() && user.getJobCode().equals("")) { %>
+<% if(userLoginMgr.isLoggedIn() && user.getJobCode().equals("") && !user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
     <% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
     <div class="panel panel-primary">
       <div class="panel-heading blue_bg">

@@ -81,17 +81,52 @@ RTUser user = (RTUser)userLoginMgr.getUser();
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Job Set Up <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="javascript:loadModule('projects/search.jsp');">Projects</a></li>
+            <% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY) && !user.isUserType(RTUser.USER_TYPE_STANDARD) && !user.isUserType(RTUser.USER_TYPE_CPE)) { %>
+                <li><a href="javascript:loadModule('users2/search.jsp');">Manage Users</a></li>
+                <li><a href="javascript:loadModule('foremans/search.jsp');">Manage Foremen</a></li>
+            <% } %>
+            <% if(!user.isUserType(RTUser.USER_TYPE_INVENTORY) && !user.isUserType(RTUser.USER_TYPE_CPE)) { %>
+                <li><a href="javascript:loadModule('drivers/search.jsp');">Manage Drivers</a></li>
+                <li><a href="javascript:loadModule('whlocations/search.jsp');">Manage Warehouse Locations</a></li>
+            <% } %>
             </ul>
           </li>
           <% } %>
+
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="javascript:loadModule('projects/search.jsp');">Projects</a></li>
+              <li><a href="javascript:loadModule('reports/reports.jsp');">Generate Reports</a></li>
             </ul>
           </li>
-      <% } %>
+    <% } %>
+          <li class="dropdown">
+            <% if(!user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Extras <b class="caret"></b></a>
+            <% } else { %>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vendor Portal <b class="caret"></b></a>
+            <% } %>
+            <ul class="dropdown-menu">
+            <% if(!user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
+                <li><a href="javascript:loadModule('file_cabinets/search.jsp');">File Cabinet/Glossary</a></li>
+      	     <% } %>
+      	    <% if(user.isUserType(RTUser.USER_TYPE_VENDOR) || user.isUserType(RTUser.USER_TYPE_ECS)) { %>
+                <li><a href="javascript:loadModule('shipping/search_vendor.jsp?clear=true');">Print Reel Tags</a></li>
+                <li><a href="javascript:loadModule('glossary/vendor_videos.jsp');">Training Videos</a></li>
+                <li><a href="javascript:loadModule('file_cabinets/vendor.jsp');">Printer Information</a></li>
+      	    <% } %>
+            </ul>
+          </li>
+    <% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">ECS Only <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="javascript:loadModule('customers/search.jsp');">Customers</a></li>
+              <li><a href="javascript:loadModule('users/search.jsp');">ECS Users</a></li>
+            </ul>
+          </li>
+    <% } %>
+
 <%--
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Microwork <b class="caret"></b></a>

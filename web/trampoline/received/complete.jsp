@@ -20,16 +20,22 @@
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
-<% 
+<%
 RTUser user = (RTUser)userLoginMgr.getUser();
 
 int howMany = 25;
-int pageNdx = 1;
-if(request.getParameter("pageIdx") != null) {
-    pageNdx = Integer.parseInt(request.getParameter("pageIdx"));
+int pageNum = 1;
+if(request.getParameter("pageNum") != null) {
+    pageNum = Integer.parseInt(request.getParameter("pageNum"));
+    session.setAttribute("received/complete.jsp", pageNum);
+} else {
+    if(session.getAttribute("received/complete.jsp") != null) {
+        pageNum = (Integer)session.getAttribute("received/complete.jsp");
+    }
 }
 
-int skip = (pageNdx-1) * howMany;
+int skip = (pageNum-1) * howMany;
+
 if(request.getParameter("skip") != null) {
     skip = Integer.parseInt(request.getParameter("skip"));
 }
@@ -44,50 +50,50 @@ content.setStatus(Reel.STATUS_COMPLETE);
 if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
     if(request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
         content.getData().removeValue(Reel.CR_ID_COLUMN);
-    } else {  
+    } else {
         content.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
         content.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
-    } 
+    }
 }
 
-if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {  
+if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
     content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
-    content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.PACKING_LIST_COLUMN) != null) {  
+if(request.getParameter(Reel.PACKING_LIST_COLUMN) != null) {
     content.setPackingList(request.getParameter(Reel.PACKING_LIST_COLUMN));
-    content.setSearchOp(Reel.PACKING_LIST_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.PACKING_LIST_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.TRACKING_PRO_COLUMN) != null) {  
+if(request.getParameter(Reel.TRACKING_PRO_COLUMN) != null) {
     content.setTrackingPRO(request.getParameter(Reel.TRACKING_PRO_COLUMN));
-    content.setSearchOp(Reel.TRACKING_PRO_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.TRACKING_PRO_COLUMN, Reel.TRUE_PARTIAL);
 }
 
-if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {  
+if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {
     content.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));
-    content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.WHOLE); 
+    content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.WHOLE);
 }
 
-if(request.getParameter(Reel.CUSTOMER_PO_COLUMN) != null) {  
+if(request.getParameter(Reel.CUSTOMER_PO_COLUMN) != null) {
     content.setCustomerPO(request.getParameter(Reel.CUSTOMER_PO_COLUMN));
-    content.setSearchOp(Reel.CUSTOMER_PO_COLUMN, Reel.PARTIAL); 
+    content.setSearchOp(Reel.CUSTOMER_PO_COLUMN, Reel.PARTIAL);
 }
 
-if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {  
+if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {
     content.setCustomerPN(request.getParameter(Reel.CUSTOMER_PN_COLUMN));
-    content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL); 
+    content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL);
 }
 
-if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {  
+if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
     content.setManufacturer(request.getParameter(Reel.MANUFACTURER_COLUMN));
-    content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ); 
+    content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ);
 }
 
-if(request.getParameter(Reel.ORDNO_COLUMN) != null) {  
+if(request.getParameter(Reel.ORDNO_COLUMN) != null) {
     content.setOrdNo(request.getParameter(Reel.ORDNO_COLUMN));
-    content.setSearchOp(Reel.ORDNO_COLUMN, Reel.TRUE_PARTIAL); 
+    content.setSearchOp(Reel.ORDNO_COLUMN, Reel.TRUE_PARTIAL);
 }
 
 session.setAttribute("received_complete",content);
@@ -105,6 +111,7 @@ if(request.getParameter("ascending")!=null) {
     }
 }
 int count = reelMgr.searchReelsCount(content, column, ascending);
+int pages = (int)Math.ceil((double)count / howMany);
 CompEntities contents = reelMgr.searchReels(content, column, ascending, howMany, skip);
 String[] manufacturers = reelMgr.getManufacturers();
 
@@ -114,10 +121,10 @@ String tempURL = "";
 
 <% dbResources.close(); %>
 <html:begin />
-<admin:title text="Reels Complete" />
+<admin:title heading="Reels" text="Complete" />
 
 <admin:subtitle text="Search" />
-    <admin:box_begin />
+    <admin:box_begin text="Search Reels"   name="Search" open="false"/>
     <form:begin_selfsubmit name="search" action="received/complete.jsp" />
         <%
         tempURL = "";
@@ -147,7 +154,7 @@ String tempURL = "";
         <form:row_begin />
             <form:label name="" label="" />
             <form:buttonset_begin align="left" padding="0"/>
-                <form:submit_inline button="submit" waiting="true" name="search" action="test" />
+                <form:submit_inline button="submit" waiting="true" name="SEARCH" action="test" />
                 <form:clearform_inline name="search"/>
             <form:buttonset_end />
         <form:row_end />
@@ -156,18 +163,9 @@ String tempURL = "";
 
 <% if(dosearch) { %>
     <% if(contents.howMany() > 0) { %>
-        <admin:search_listing_pagination text="Reels Found" url="received/complete.jsp" 
-                    pageIndex="<%= new Integer(pageNdx).toString() %>"
-                    column="<%= column %>"
-                    ascending="<%= new Boolean(ascending).toString() %>"
-                    howMany="<%= new Integer(howMany).toString() %>"
-                    skip="<%= new Integer(skip).toString() %>"      
-                    count="<%= new Integer(count).toString() %>"
-                    search_params=""
-                />
+    <admin:box_begin text="Reels" name="results" url="received/complete.jsp" pages="<%= Integer.toString(pages) %>" pageNum="<%= Integer.toString(pageNum) %>" />
 
-    <admin:box_begin color="false" />
-   
+
     <listing:begin />
         <listing:header_begin />
 			<listing:header_cell width="55" first="true" name="CRID #" column="<%= Reel.CR_ID_COLUMN %>" ascending="<%= new Boolean(ascending).toString() %>" match="<%= column %>" url="received/complete.jsp" />
@@ -205,4 +203,4 @@ String tempURL = "";
 <% } %>
 
 <admin:set_tabset url="received/_tabset_default.jsp" thispage="complete.jsp" />
-<html:end />    
+<html:end />

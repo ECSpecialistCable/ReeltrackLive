@@ -17,21 +17,21 @@
 <% userLoginMgr.init(pageContext); %>
 <% whlocationMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
-<% 
+<%
 WhLocation content = new WhLocation();
 content.setCustomerId(user.getCustomerId());
 CompEntities contents = whlocationMgr.searchWhLocation(content, WhLocation.NAME_COLUMN, true);
 
 String tempUrl =""; //var for url expression
-%>	
+%>
 <% dbResources.close(); %>
 
 
 <html:begin />
-<admin:title text="Warehouse Locations" />
+<admin:title heading="Warehouse Locations" text=""/>
 
 <admin:subtitle text="Import Warehouse Locations" />
-<admin:box_begin />
+<admin:box_begin text="Import Warehouse Locations" name="Import" />
     <form:begin_multipart name="create" action="whlocations/process.jsp" />
             <form:file name="location_file" label="File:" />
             <form:hidden name="<%= WhLocation.CUSTOMER_ID_COLUMN %>" value="<%= new Integer(user.getCustomerId()).toString() %>" />
@@ -51,7 +51,7 @@ String tempUrl =""; //var for url expression
 <admin:box_end />
 
 <admin:subtitle text="Add Warehouse Location" />
-<admin:box_begin />
+<admin:box_begin text="Add Warehouse Location" name="Add" />
     <form:begin submit="true" name="create" action="whlocations/process.jsp" />
             <form:textfield name="<%= WhLocation.NAME_COLUMN %>" label="name:" />
             <form:hidden name="<%= WhLocation.CUSTOMER_ID_COLUMN %>" value="<%= new Integer(user.getCustomerId()).toString() %>" />
@@ -76,7 +76,7 @@ String tempUrl =""; //var for url expression
 
 <% if(contents.howMany() > 0) { %>
     <admin:subtitle text="Warehouse Locations" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Warehouse Locations" name="Warehouse_Locations" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Name" />
@@ -92,7 +92,7 @@ String tempUrl =""; //var for url expression
                 <% tempUrl = "whlocations/process.jsp?submit_action=delete&" + WhLocation.PARAM + "=" + content.getId(); %>
                 <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
                 <listing:cell_end />
-            <listing:row_end />	
+            <listing:row_end />
             <% } %>
         <listing:end />
     <admin:box_end />
@@ -101,4 +101,4 @@ String tempUrl =""; //var for url expression
 <% } %>
 
 <admin:set_tabset url="whlocations/_tabset_default.jsp" thispage="search.jsp" />
-<html:end />	
+<html:end />

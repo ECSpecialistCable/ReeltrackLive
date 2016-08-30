@@ -35,16 +35,16 @@ String tempUrl =""; //var for url expression
 
 
 <html:begin />
-<admin:title text="File Cabinet" />
+<admin:title heading="File Cabinet" text=""/>
 
 <% if(canEdit) { %>
 <admin:subtitle text="Add File" />
-<admin:box_begin />
+<admin:box_begin text="Add File" name="Add_File" />
 	<form:begin_multipart submit="true" name="create" action="file_cabinets/process.jsp" />
 		<form:textfield name="<%= FileCabinet.TITLE_COLUMN %>" label="Title:" />
 			<form:file label="File:" name="<%= FileCabinet.FILE_NAME_COLUMN %>" />
-            <form:hidden name="<%= FileCabinet.CUSTOMER_ID_COLUMN %>" value="<%= new Integer(user.getCustomerId()).toString() %>" /> 
-            <form:hidden name="<%= FileCabinet.JOB_ID_COLUMN %>" value="<%= new Integer(user.getJobId()).toString() %>" /> 
+            <form:hidden name="<%= FileCabinet.CUSTOMER_ID_COLUMN %>" value="<%= new Integer(user.getCustomerId()).toString() %>" />
+            <form:hidden name="<%= FileCabinet.JOB_ID_COLUMN %>" value="<%= new Integer(user.getJobId()).toString() %>" />
             <form:row_begin />
                 <form:label name="" label="" />
                 <form:buttonset_begin align="left" padding="0"/>
@@ -57,7 +57,7 @@ String tempUrl =""; //var for url expression
 
 <% if(contents.howMany() > 0) { %>
     <admin:subtitle text="Files" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="Files" name="Files" />
         <listing:begin />
             <listing:header_begin />
                 <listing:header_cell first="true" name="Title" />
