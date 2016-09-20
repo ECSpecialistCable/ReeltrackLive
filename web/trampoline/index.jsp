@@ -426,14 +426,28 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
     <script src="interface/js/bootstrap-datetimepicker.min.js"></script>
     <script src="interface/js/bootstrap-dialog.js"></script>
     <script src="interface/js/jquery.cookie.js"></script>
-	<script src="interface/js/tramp.js"></script>
+    <script src="interface/js/tramp.js"></script>
     <script>
     	function openTag(reelID) {
     		var win = window.open('/trampoline/reeltags/reeltag_image.jsp?reel_param=' + reelID, '_blank');
     	}
     </script>
     <script>
+    <% if(reelID==0) { %>
       loadLoginScreen();
+    <% } else { %>
+      <%
+      String tempURL = "reels/status.jsp?" +  Reel.PARAM + "=" + reelID;
+      if(checkedout) {
+        if(circuits) {
+          tempURL = "reels/circuits.jsp?" +  Reel.PARAM + "=" + reelID;
+        } else {
+          tempURL = "reels/quantity.jsp?" +  Reel.PARAM + "=" + reelID;
+        }
+      }
+      %>
+      loadDirect('<%= tempURL %>');
+    <% } %>
     </script>
 
     </body>

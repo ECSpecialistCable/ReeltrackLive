@@ -156,9 +156,10 @@ public class ReelMgr extends CompWebManager {
 		Reel pulledReel = (Reel)controller.pullCompEntity(puller);
 
 		String domain = request.getServerName().toString();
+		int port = request.getServerPort();
 		//String qrcode = "RT:" + pulledReel.getCustomerPN() + ":" + pulledReel.getId() + ":" + pulledReel.getReelTag() + ":" + pulledReel.getReelSerial() + ":" + pulledReel.getCableDescription();
 		//String qrcode = "http://www.ecsreeltrack.com/trampoline/index.jsp?type=RT&id=" + pulledReel.getId() + "&job=" + pulledReel.getJobCode();
-        String qrcode = "http://" + domain + "/trampoline/index.jsp?type=RT&id=" + pulledReel.getId() + "&job=" + pulledReel.getJobCode();
+        String qrcode = "http://" + domain + ":" + port + "/trampoline/index.jsp?type=RT&id=" + pulledReel.getId() + "&job=" + pulledReel.getJobCode();
         ByteArrayOutputStream out = QRCode.from(qrcode).to(ImageType.PNG).withSize(500, 500).stream();
 
         String baseDir = this.pageContext.getServletContext().getRealPath("/") + pulledReel.getCompEntityDirectory();

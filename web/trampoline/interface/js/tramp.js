@@ -65,6 +65,22 @@ function loadLoginScreen() {
 	});
 }
 
+function loadDirect(url) {
+    $("#tabContent").load(url,function(response, status, xhr ) {
+    	if ( status == "error" ) {
+    		//var msg = "Sorry but there was an error: ";
+    		//$( "#tabContent" ).html( msg + xhr.status + " " + xhr.statusText );
+    		var myWindow = window.open("", "Error", "width=1024, height=768");
+			myWindow.document.write(response);
+  		} else {
+	 		bindForms();
+	 		loadNavigation();
+	 		loadFooter();
+	 	}
+	});
+	tabHistory.push(url);
+}
+
 function backButtonClicked() {
 	tabHistory.pop();
 	$("#tabContent").load(tabHistory[tabHistory.length-1],function() {
