@@ -118,9 +118,11 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
 
         <!-- HEADER ROW START -->
         <div class="row tramp_header">
-          <div class="col-md-12" style="padding:0px;">
+          <div id="headerContent" class="col-md-12" style="height:85px;background-image: url('interface/images/header1.png');padding:0px;width:100%;border-top-left-radius:5px;border-top-right-radius:5px;">
             <!-- class="img-rounded" -->
-            <img src="interface/images/header1.png" style="width:100%;border-top-left-radius:5px;border-top-right-radius:5px;"/>
+            <%--<img src="interface/images/header1.png" style="width:100%;border-top-left-radius:5px;border-top-right-radius:5px;"/>--%>
+
+
           </div>
         </div>
         <!-- HEADER ROW END -->

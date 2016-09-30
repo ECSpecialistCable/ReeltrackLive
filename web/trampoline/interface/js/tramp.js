@@ -10,6 +10,7 @@ function login() {
 	$("#tabContent").load("interface/login.jsp?action=login&username=" + username + "&password=" + password,function() {
 	 	loadNavigation();
 	 	loadFooter();
+		loadHeader(); 
 	});
 }
 
@@ -18,6 +19,7 @@ function changeJob() {
 	$("#tabContent").load("interface/login.jsp?action=change_job",function() {
 	 	loadNavigation();
 	 	//loadFooter();
+		 loadHeader();
 	});
 }
 
@@ -42,6 +44,7 @@ function selectJob() {
 	$("#tabContent").load("interface/login.jsp?action=job&job=" + job,function() {
 	 	loadNavigation();
 	 	//loadFooter();
+		 loadHeader();
 	});
 }
 
@@ -51,6 +54,13 @@ function logout() {
 	 	$("#tabsetContent").html('<li class="disabled"><a href="#home">&nbsp;</a></li>');
 	 	loadLoginScreen();
 	 	loadFooter();
+		loadHeader();
+	});
+}
+
+function loadHeader() {
+	$("#headerContent").load("interface/header.jsp",function() {
+
 	});
 }
 
@@ -70,6 +80,7 @@ function loadLoginScreen() {
 	$("#tabContent").load("interface/login.jsp",function() {
 	 	loadNavigation();
 	 	loadFooter();
+		loadHeader(); 
 	});
 }
 
@@ -84,6 +95,7 @@ function loadDirect(url) {
 	 		bindForms();
 	 		loadNavigation();
 	 		loadFooter();
+			loadHeader(); 
 	 	}
 	});
 	tabHistory.push(url);

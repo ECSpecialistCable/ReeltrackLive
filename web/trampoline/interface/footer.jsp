@@ -14,5 +14,5 @@ User user = userLoginMgr.getUser();
 <% dbResources.close(); %>
 
 <% if(user!=null && user.getId()!=0) { %>
-You are logged in as: <%= user.getFname() %> <%= user.getLname() %><a href="#" onclick="logout();" style="padding-left:10px;"><span class="glyphicon glyphicon-remove" style="color:red;"></span></a>
+<%-- You are logged in as: <%= user.getFname() %> <%= user.getLname() %><a href="#" onclick="logout();" style="padding-left:10px;"><span class="glyphicon glyphicon-remove" style="color:red;"></span></a>--%>
 <% } %>
