@@ -101,7 +101,7 @@ String tempURL = "";
             <listing:cell_end />
             <listing:cell_begin align="right"/>
                 <% tempURL = content.getReelTagDirectory() + "/" + content.getReelTagFile(); %>
-                <form:linkbutton url="<%= tempURL %>" name="PRINT" newtab="true" />
+                <form:linkbutton url="<%= tempURL %>" name="PRINT" newtab="true" tooltip="print reel tag"/>
                 <% tempURL = "reeltags/search_generated.jsp?submit_action=clear_reel_tag&" +  Reel.PARAM + "=" + content.getId(); %>
                 <form:linkbutton url="<%= tempURL %>" name="delete" />
             <listing:cell_end />

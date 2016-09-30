@@ -13,6 +13,14 @@ function login() {
 	});
 }
 
+function changeJob() {
+	var vendor = $('#vendor').val();
+	$("#tabContent").load("interface/login.jsp?action=change_job",function() {
+	 	loadNavigation();
+	 	//loadFooter();
+	});
+}
+
 function selectVendor() {
 	var vendor = $('#vendor').val();
 	$("#tabContent").load("interface/login.jsp?action=vendor&vendor=" + vendor,function() {

@@ -88,13 +88,25 @@
 		<a style="padding-left:2px;padding-left:2px;cursor: pointer;" onclick="javascript:loadProcess('${url}');"><span class="glyphicon glyphicon-minus-sign" style="color:#016b8d;font-size:24px;"></span></a>
 	<% } %>
 <% } else if(name.equalsIgnoreCase("print")) { %>
+	<%if(tooltip != null) { %>
+	<a data-toggle="tooltip" title="${tooltip}" style="padding-left:2px;cursor: pointer;" href="${url}" target="_blank"><span class="glyphicon glyphicon-print" style="color:#016b8d;font-size:24px;"></span></a>
+	<%} else { %>
 	<a style="padding-left:2px;cursor: pointer;" href="${url}" target="_blank"><span class="glyphicon glyphicon-print" style="color:#016b8d;font-size:24px;"></span></a>
+	<% } %>
 <% } else if(name.equalsIgnoreCase("refresh")) { %>
 	<a style="padding-left:2px;cursor: pointer;" onclick="javascript:loadTab('${url}');"><span class="glyphicon glyphicon-refresh" style="color:#016b8d;font-size:24px;"></span></a>
 <% } else if(name.equalsIgnoreCase("stage")) { %>
+	<%if(tooltip != null) { %>
+	<a data-toggle="tooltip" title="${tooltip}" style="padding-left:2px;cursor: pointer;" onclick="javascript:loadTab('${url}');"><span class="glyphicon glyphicon-log-in" style="color:#016b8d;font-size:24px;"></span></a>
+	<%} else { %>
 	<a style="padding-left:2px;cursor: pointer;" onclick="javascript:loadTab('${url}');"><span class="glyphicon glyphicon-log-in" style="color:#016b8d;font-size:24px;"></span></a>
+	<% } %>
 <% } else if(name.equalsIgnoreCase("checkout")) { %>
+	<%if(tooltip != null) { %>
+	<a data-toggle="tooltip" title="${tooltip}" style="padding-left:2px;cursor: pointer;" onclick="javascript:loadTab('${url}');"><span class="glyphicon glyphicon-new-window" style="color:#016b8d;font-size:24px;"></span></a>
+	<%} else { %>
 	<a style="padding-left:2px;cursor: pointer;" onclick="javascript:loadTab('${url}');"><span class="glyphicon glyphicon-new-window" style="color:#016b8d;font-size:24px;"></span></a>
+	<% } %>
 <% } else { %>
 	<% if(process!=null && warning!=null) { %>
 		<button type="button" class="btn btn-primary btn-sm" onclick="javascript:loadProcessWithWarning('${url}',this,'${warning}');">${name}</button>

@@ -226,7 +226,7 @@ String tempURL = "";
 			<listing:cell_begin align="right"/>
                 <% if(!content.hasReelTagFile()) { %>
                     <% tempURL = "reeltags/reeltag_image.jsp?" + Reel.PARAM + "=" + content.getId(); %>
-                    <form:linkbutton url="<%= tempURL %>" name="print" newtab="true" />
+                    <form:linkbutton url="<%= tempURL %>" name="print" newtab="true" tooltip="print reel tag"/>
                 <% } %>
             <listing:cell_end />
 

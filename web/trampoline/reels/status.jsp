@@ -127,7 +127,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
 <admin:title heading="Reel Page" text="<%= tempURL %>" />
 
 <% if(canEdit) { %>
-	<admin:box_begin text="Delete Reel" name="Delete_Reel" />
+	<admin:box_begin text="Delete Reel" name="Delete_Reel" open="false" />
 		<form:begin submit="true" name="delete_reel" action="reels/process.jsp" />
 	        <form:row_begin />
 				<form:label name="" label="Delete Reel:" />
@@ -488,7 +488,7 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
 <% } %>
 
 <admin:subtitle text="General Info" />
-<admin:box_begin text="General Info" name="General_Info" />
+<admin:box_begin text="General Info" name="General_Info" open="false" />
     <form:begin submit="true" name="edit" action="reels/process.jsp" />
         	<form:info label="Status:" text="<%= content.getStatus() %>" />
         	<form:info label="Warehouse<br />Location:" text="<%= content.getWharehouseLocation() %>" />

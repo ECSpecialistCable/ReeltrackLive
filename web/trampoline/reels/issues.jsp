@@ -114,7 +114,7 @@ String tempURL; //var for url expression
     <admin:subtitle text="Resolved Issues" />
     <% for(int x=0; x<issuesYes.howMany(); x++) { %>
     <% issue = (ReelIssue)issuesYes.get(x); %>
-    <admin:box_begin text="Resolved Issues" name="Resolved_Issues" />
+    <admin:box_begin text="Resolved Issues" name="Resolved_Issues" open="false" />
     <% tempURL = "issueY" + x; %>
     <form:begin submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
             <form:checkbox label="Is Resolved?:" name="<%= ReelIssue.IS_RESOLVED_COLUMN %>" value="y" match="<%= issue.getIsResolved() %>" />

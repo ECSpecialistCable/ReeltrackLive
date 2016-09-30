@@ -216,14 +216,14 @@ if(!canSubmit) {
 <admin:box_end />
 
 <admin:subtitle text="Shipping Info" />
-<admin:box_begin text="Shipping Info" name="Shipping_Info" />
+<admin:box_begin text="Shipping Info" name="Shipping_Info" open="false" />
     <form:begin submit="<%= new Boolean(canSubmitSR).toString() %>" name="edit" action="reels/process.jsp" />
     		<form:row_begin />
 	            <form:label name="" label="Carrier:" />
 	            <form:content_begin />
 	            <form:select_begin name="<%= Reel.CARRIER_COLUMN %>" />
 	            	<form:option name="None" value="" match="<%= content.getCarrier() %>" />
-	                <% //String[] carrierList  = content.getCarrierList(); %>
+	                <%--String[] carrierList  = content.getCarrierList(); --%>
 	                <% for(int x=0; x<carrierList.length; x++) { %>
 	                    <form:option name="<%= carrierList[x] %>" value="<%= carrierList[x] %>" match="<%= content.getCarrier() %>" />
 	                <% } %>
@@ -248,7 +248,7 @@ if(!canSubmit) {
 <admin:box_end />
 
 <admin:subtitle text="Receiving Info" />
-<admin:box_begin text="Receiving Info" name="Receiving_Info" />
+<admin:box_begin text="Receiving Info" name="Receiving_Info" open="false" />
     <form:begin submit="<%= new Boolean(canSubmitSR).toString() %>" name="edit" action="reels/process.jsp" />
     		<form:row_begin />
 	            <form:label name="" label="Issue:" />

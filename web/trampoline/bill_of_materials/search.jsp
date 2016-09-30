@@ -179,7 +179,7 @@ String tempUrl =""; //var for url expression
 				<listing:cell_begin />
 					<% if(!techData.getDataSheetFile().equals("")) { %>
 						<% String tempURL = request.getContextPath() + techData.getCompEntityDirectory() + "/" + URLEncoder.encode(techData.getDataSheetFile()); %>
-						<form:linkbutton name="download" url="<%= tempURL %>" />
+						<form:linkbutton name="download" url="<%= tempURL %>" tooltip="download data sheet"/>
 					<% } %>
 				<listing:cell_end />
 

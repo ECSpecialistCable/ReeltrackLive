@@ -232,9 +232,9 @@ String tempURL = "";
             <listing:cell_end />
             <listing:cell_begin align="right"/>
                 <% tempURL = "checkout/stage.jsp?" +  PickList.PARAM + "=" + content.getId(); %>
-                <form:linkbutton url="<%= tempURL %>" name="stage" />
+                <form:linkbutton url="<%= tempURL %>" name="stage" tooltip="stage picklist"/>
                 <% tempURL = "checkout/checkout.jsp?" +  PickList.PARAM + "=" + content.getId(); %>
-                <form:linkbutton url="<%= tempURL %>" name="checkout" />
+                <form:linkbutton url="<%= tempURL %>" name="checkout" tooltip="checkout picklist"/>
             <listing:cell_end />
         <listing:row_end />
         <% } %>

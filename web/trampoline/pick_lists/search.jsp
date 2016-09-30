@@ -233,7 +233,7 @@ String tempURL = "";
                 --%>
                 <% tempURL = "pick_lists/picklist.jsp?" + PickList.PARAM + "=" + content.getId(); %>
                 <%--<a href="<%= tempURL %>" target="_new">PRINT</a>--%>
-                <form:linkbutton url="<%= tempURL %>" name="PRINT" newtab="true" />
+                <form:linkbutton url="<%= tempURL %>" name="PRINT" newtab="true" tooltip="print pick list"/>
             <listing:cell_end />
         <listing:row_end />
         <% } %>
