@@ -8,6 +8,8 @@
 <%@ attribute name="external" required="false"%>
 <%@ attribute name="lightboxLink" required="false"%>
 
-<a href="javascript:loadTab('${url}');">
-    ${text}
-</a>
+<% if (external==null) { %>
+<a href="javascript:loadTab('${url}');">${text}</a>
+<% } else { %>
+<a href="${url}" target="_blank">${text}</a>
+<% } %>
