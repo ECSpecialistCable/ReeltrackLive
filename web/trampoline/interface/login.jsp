@@ -130,7 +130,7 @@ user.setJobName("");
           </div>
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
-              <button onclick="login();" class="btn btn-primary btn-sm">SIGN IN</button>
+              <button type="button" onclick="login();" class="btn btn-primary btn-sm">SIGN IN</button>
             </div>
           </div>
         </form>
@@ -160,7 +160,7 @@ user.setJobName("");
         </div>
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
-              <button onclick="selectVendor();" class="btn btn-primary btn-sm">SUBMIT</button>
+              <button type="button" onclick="selectVendor();" class="btn btn-primary btn-sm">SUBMIT</button>
             </div>
           </div>
         </form>
@@ -186,7 +186,7 @@ user.setJobName("");
             </div>
           <div class="form-group">
             <div class="col-sm-offset-3 col-sm-9">
-              <button onclick="selectCustomer();" class="btn btn-primary btn-sm">SUBMIT</button>
+              <button type="button" onclick="selectCustomer();" class="btn btn-primary btn-sm">SUBMIT</button>
             </div>
           </div>
         </form>
@@ -274,7 +274,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
         </div>
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">
-          <button onclick="selectJob();" class="btn btn-primary btn-sm">SIGN IN</button>
+          <button type="button" onclick="selectJob();" class="btn btn-primary btn-sm">SIGN IN</button>
         </div>
       </div>
     </form>
