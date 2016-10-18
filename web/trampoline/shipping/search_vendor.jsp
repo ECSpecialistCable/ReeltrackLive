@@ -327,7 +327,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
         <admin:box_begin open="false" text="<%= reelName %>" name="<%= reelId %>"/>
             <form:begin submit="true" name="<%= toggleForm %>" action="shipping/process_vendor.jsp" />
             <%--<form class=" " title="" onsubmit="" action="shipping/process_vendor.jsp" target="_blank" method="post" name="<%= toggleForm %>" id="<%= toggleForm %>">--%>
-            <table border="0" cellspacing="0" cellpadding="0">
+            <%--<table border="0" cellspacing="0" cellpadding="0">--%>
                 <% Customer customer = (Customer)content.getCompEntity(Customer.PARAM); %>
                 <% if(customer!=null) { %>
                     <form:info label="ECS Customer:" text="<%= customer.getName() %>" />
