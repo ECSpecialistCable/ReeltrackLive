@@ -21,10 +21,16 @@
   <div class="panel-heading blue_bg" <% if(color!=null) { %>style="background-color:${color};border-color:${color};"<% } %>>
     <h3 class="panel-title"><a onclick="saveCollapseState('${name}')" data-toggle="collapse" href="#${name}">${text}</a>
     <% if(pages!=null && pageNum!=null) { %>
-    <% int howMany = Integer.parseInt(pages); %>
-    <% int selectedPage = Integer.parseInt(pageNum); %>
+    <%
+	int howMany = Integer.parseInt(pages);
+	int selectedPage = Integer.parseInt(pageNum);
+	int start = selectedPage - 5;
+	if(start<1) start = 1;
+	int end = start + 10;
+	%>
+
 		<ul class="pagination pagination-sm pull-right" style="margin-top:-6px; padding:0;">
-			<% for(int x=1; x<=howMany; x++) { %>
+			<% for(int x=start; x<=howMany && x<=end; x++) { %>
 
 				<% if(selectedPage==x) { %>
 					<% if(url.contains("?")) { %>

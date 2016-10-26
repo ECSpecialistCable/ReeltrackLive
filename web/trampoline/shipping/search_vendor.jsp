@@ -30,10 +30,10 @@ int howMany = 25;
 int pageNum = 1;
 if(request.getParameter("pageNum") != null) {
     pageNum = Integer.parseInt(request.getParameter("pageNum"));
-    session.setAttribute("shipping/search.jsp", pageNum);
+    session.setAttribute("shipping/search_vendor.jsp", pageNum);
 } else {
-    if(session.getAttribute("shipping/search.jsp") != null) {
-        pageNum = (Integer)session.getAttribute("shipping/search.jsp");
+    if(session.getAttribute("shipping/search_vendor.jsp") != null) {
+        pageNum = (Integer)session.getAttribute("shipping/search_vendor.jsp");
     }
 }
 
@@ -44,8 +44,8 @@ if(request.getParameter("skip") != null) {
 }
 
 Reel content = new Reel();
-if(session.getAttribute("shipping_search")!=null) {
-    content = (Reel)session.getAttribute("shipping_search");
+if(session.getAttribute("shipping_search_vendor")!=null) {
+    content = (Reel)session.getAttribute("shipping_search_vendor");
 }
 
 if(request.getParameter("clear") != null) {
@@ -57,57 +57,6 @@ if(request.getParameter("clear") != null) {
 }
 
 content.setStatus(Reel.STATUS_ORDERED);
-
-int customer_id = 0;
-if(session.getAttribute("shipping_customer_id")!=null) {
-    customer_id = ((Integer)session.getAttribute("shipping_customer_id")).intValue();
-}
-
-if(request.getParameter("customer_id") != null && !request.getParameter("customer_id").equals("")) {
-    customer_id = Integer.parseInt(request.getParameter("customer_id"));
-}
-
-if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
-    content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
-    content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL);
-}
-
-if(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN) != null) {
-    content.setCableDescription(request.getParameter(Reel.CABLE_DESCRIPTION_COLUMN));
-    content.setSearchOp(Reel.CABLE_DESCRIPTION_COLUMN, Reel.TRUE_PARTIAL);
-}
-
-if(request.getParameter(Reel.CUSTOMER_PO_COLUMN) != null) {
-    content.setCustomerPO(request.getParameter(Reel.CUSTOMER_PO_COLUMN));
-    content.setSearchOp(Reel.CUSTOMER_PO_COLUMN, Reel.PARTIAL);
-}
-
-if(request.getParameter(Reel.CUSTOMER_PN_COLUMN) != null) {
-    content.setCustomerPN(request.getParameter(Reel.CUSTOMER_PN_COLUMN));
-    content.setSearchOp(Reel.CUSTOMER_PN_COLUMN, Reel.PARTIAL);
-}
-
-if(request.getParameter(Reel.TRACKING_PRO_COLUMN) != null) {
-    content.setTrackingPRO(request.getParameter(Reel.TRACKING_PRO_COLUMN));
-    content.setSearchOp(Reel.TRACKING_PRO_COLUMN, Reel.PARTIAL);
-}
-
-if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
-    content.setManufacturer(request.getParameter(Reel.MANUFACTURER_COLUMN));
-    content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ);
-}
-
-if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
-    if(request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
-        content.getData().removeValue(Reel.CR_ID_COLUMN);
-    } else {
-        content.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
-        content.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
-    }
-}
-
-session.setAttribute("shipping_search",content);
-session.setAttribute("shipping_customer_id",new Integer(customer_id));
 
 String trackingNum = "";
 String packingNum = "";
@@ -127,6 +76,7 @@ if(request.getParameter("action") != null) {
     shippingDate = request.getParameter("shippingDate");
     session.setAttribute("shippingDate",shippingDate);
 }
+
 if(session.getAttribute("trackingNum")!=null) {
     trackingNum = (String)session.getAttribute("trackingNum");
 }
@@ -141,6 +91,22 @@ if(session.getAttribute("shippingDate")!=null) {
 }
 
 //if vendor
+int customer_id = 0;
+
+if(session.getAttribute("shipping_customer_id")!=null) {
+    customer_id = ((Integer)session.getAttribute("shipping_customer_id")).intValue();
+}
+
+if(request.getParameter("customer_id") != null && !request.getParameter("customer_id").equals("")) {
+    customer_id = Integer.parseInt(request.getParameter("customer_id"));
+}
+
+
+if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
+    content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
+    content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL);
+}
+
 if(request.getParameter(Reel.ORDNO_COLUMN) != null) {
     content.setOrdNo(request.getParameter(Reel.ORDNO_COLUMN));
     content.setSearchOp(Reel.ORDNO_COLUMN, Reel.PARTIAL);
@@ -165,6 +131,8 @@ if(user.isUserType(RTUser.USER_TYPE_VENDOR)) {
     content.setVendorCode(user.getVendorCode());
     //content.setVendorCode("");
 }
+session.setAttribute("shipping_search",content);
+session.setAttribute("shipping_customer_id",new Integer(customer_id));
 
 CompEntities customers = custMgr.getCustomersByVendorCode(user.getVendorCode());
 
