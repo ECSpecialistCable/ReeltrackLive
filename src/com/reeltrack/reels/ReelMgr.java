@@ -630,6 +630,9 @@ public class ReelMgr extends CompWebManager {
 		puller.addSearch(techData);
 		techData = (CableTechData)controller.pullCompEntity(puller);
 		if(techData.getId()==0) {
+			techData = new CableTechData();
+			techData.setJobCode(reel.getJobCode());
+			techData.setEcsPN(reel.getEcsPN());
 			int id = controller.add(techData);
 			techData.setId(id);
 		}
