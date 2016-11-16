@@ -106,9 +106,11 @@ RTUser user = (RTUser)userLoginMgr.getUser();
             <% } else { %>
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Vendor Portal <b class="caret"></b></a>
             <% } %>
-            <ul class="dropdown-menu">  
-            <li><a onclick="changeJob();">Select Job</a></li>
-            <li class="divider"></li>
+            <ul class="dropdown-menu">
+            <% if(!user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>  
+              <li><a onclick="changeJob();">Select Job</a></li>
+              <li class="divider"></li>
+            <% } %>
             <% if(!user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
                 <li><a href="javascript:loadModule('file_cabinets/search.jsp');">File Cabinet/Glossary</a></li>
       	     <% } %>

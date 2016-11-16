@@ -102,7 +102,7 @@ String tempURL; //var for url expression
 <admin:box_end />
 
 <admin:subtitle text="Cable Summary" />
-<admin:box_begin text="Cable Summary" name="Cable_Summary" open="false" />
+<admin:box_begin text="Cable Summary" name="Cable_Summary" />
     <form:begin submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
 		<form:info label="Total Ordered:" text="<%= Integer.toString(ordered) %>" />
         <form:info label="Total Received:" text="<%= Integer.toString(recieved) %>" />

@@ -2,16 +2,18 @@
 
 <%@ page import="com.reeltrack.users.*" %>
 <%@ page import="com.reeltrack.reels.*" %>
-<%@ page import="com.reeltrack.customers.Customer"%>
+<%@ page import="com.reeltrack.customers.*"%>
 <%@ page import="com.monumental.trampoline.component.*" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
+<jsp:useBean id="custMgr" class="com.reeltrack.customers.CustomerMgr" />
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr" />
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
+<% custMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
 // Get the id
@@ -33,6 +35,9 @@ content = (Reel)reelMgr.getReel(content);
 CompEntities circuits = reelMgr.getReelCircuits(content);
 CableTechData techData = reelMgr.getCableTechData(content);
 Customer reelCustomer = reelMgr.getCustomerForReel(content);
+CustomerJob reelJob = new CustomerJob();
+reelJob.setCode(content.getJobCode());
+reelJob = custMgr.getCustomerJob(reelJob);
 
 SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy hh:mma");
 String dateString = df.format(new Date());
@@ -111,7 +116,9 @@ String logoURL;
 	
 	<table style="border:none;margin: 0px; margin-bottom: 0px;padding: 0px;">
 		<tr>
-			<td colspan="2" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 10px;"><%= reelCustomer.getName().toUpperCase() %></td>
+			<td colspan="2" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 10px;">
+				<%= reelCustomer.getName().toUpperCase() %>
+			</td>
 			<td rowspan="8" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top; margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px; text-align: center">
 					<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
 					<img alt="barcode" src="<%= tempURL %>" width="170" height="170" />
@@ -120,22 +127,22 @@ String logoURL;
 			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 15px;"><b><%= content.getManufacturerEscaped()  %></b></td>
 		</tr>
 		<tr>
-			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/N</td>
-			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPN()  %></b></td>
+			<td colspan="2" style="font-size:12px;/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><%= reelJob.getName() %></td>
+			<%--<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>--%>
 
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Weight / kft</td>
 			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= new Integer(techData.getWeight()).toString() + "lbs"   %></b></td>
 		</tr>
 		<tr>
-			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/O #</td>
-			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPO()  %></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/N</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPN() %></b></td>
 
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">O.D. (in)</td>
 			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= Double.toString(techData.getOD())+"\""   %></b></td>
 		</tr>
 		<tr>
-			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Shipped QTY</td>
-			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getShippedQuantity()  %></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/O #</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPO() %></b></td>
 
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">M.B.R.</td>
 			<%
@@ -147,8 +154,8 @@ String logoURL;
 			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= mbr %></b></td>
 		</tr>
 		<tr>
-			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><%--Rec'd GWT--%></td>
-			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
+			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Shipped QTY</td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getShippedQuantity() %></b></td>
 
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">Max Pull</td>
 			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= new Integer(techData.getPullTension()).toString() %></b></td>
@@ -229,7 +236,7 @@ String logoURL;
 								</td>
 							</tr>
 							<tr>
-								<td class="header" colspan="2" style="/*border:solid #003DB8 1px;*/text-align: left; width: 75%;padding: 0px;padding-left: 7px;">770.446.2222 www.ecscable.com</td>
+								<td class="header" colspan="2" style="/*border:solid #003DB8 1px;*/text-align: left; width: 75%;padding: 0px;padding-left: 7px;">770.446.2222 www.ecsreeltrack.com</td>
 							</tr>
 						</table>
 					</td>

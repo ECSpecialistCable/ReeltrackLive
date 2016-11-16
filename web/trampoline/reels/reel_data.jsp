@@ -59,6 +59,45 @@ String tempURL; //var for url expression
 <% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " +  content.getCableDescription(); %>
 <admin:title heading="Reel Page" text="<%= tempURL %>" />
 
+<admin:subtitle text="Reel Data" />
+<admin:box_begin text="Reel Data" name="Reel_Data" />
+    <form:begin_multipart submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
+        <form:info label="CTR #:" text="<%= content.getCTRNumber() %>" />
+        <form:info label="CTR Date:" text="<%= content.getCTRDateString() %>" />
+        <form:info label="CTR Posted:" text="<%= content.getCTRSentString() %>" />
+        <% if(canEdit) { %>
+		<form:file name="<%= Reel.CTR_FILE_COLUMN %>" label="CTR File:" />
+        <% } %>
+        <% if(content.getCTRFile() != null && !content.getCTRFile().equals("")) { %>
+            <form:row_begin />
+            <form:label label="Download CTR:"  />
+            <form:content_begin />
+                    <% tempURL = request.getContextPath() + content.getCompEntityDirectory() + "/" + URLEncoder.encode(content.getCTRFile()); %>
+                    <admin:link external="true" text="[Download]" url="<%= tempURL %>" />
+                <form:content_end />
+            <form:row_end />
+            <% if(canEdit) { %>
+            <form:row_begin />
+            <form:label label="Delete CTR:"  />
+            <form:content_begin />
+                    <% String tempUrl = "reels/process.jsp?submit_action=delete_ctr&" + Reel.PARAM + "=" + content.getId(); %>
+                    <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
+                <form:content_end />
+            <form:row_end />
+            <% } %>
+        <% } %>
+		<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
+		<form:row_begin />
+			<form:label name="" label="" />
+			<form:buttonset_begin align="left" padding="0"/>
+                <% if(canEdit) { %>
+				<form:submit_inline button="save" waiting="true" name="save" action="update_reel_data" />
+                <% } %>
+			<form:buttonset_end />
+		<form:row_end />
+    <form:end />
+<admin:box_end />
+
 <% if(canEdit) { %>
 <admin:subtitle text="Unique ID" />
 <admin:box_begin text="Unique ID" name="Unique_ID" />
@@ -101,46 +140,6 @@ String tempURL; //var for url expression
         <% } %>
     <form:end />
 <admin:box_end />
-
-<admin:subtitle text="Reel Data" />
-<admin:box_begin text="Reel Data" name="Reel_Data" />
-    <form:begin_multipart submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />
-        <form:info label="CTR #:" text="<%= content.getCTRNumber() %>" />
-        <form:info label="CTR Date:" text="<%= content.getCTRDateString() %>" />
-        <form:info label="CTR Posted:" text="<%= content.getCTRSentString() %>" />
-        <% if(canEdit) { %>
-		<form:file name="<%= Reel.CTR_FILE_COLUMN %>" label="CTR File:" />
-        <% } %>
-        <% if(content.getCTRFile() != null && !content.getCTRFile().equals("")) { %>
-            <form:row_begin />
-            <form:label label="Download CTR:"  />
-            <form:content_begin />
-                    <% tempURL = request.getContextPath() + content.getCompEntityDirectory() + "/" + URLEncoder.encode(content.getCTRFile()); %>
-                    <admin:link external="true" text="[Download]" url="<%= tempURL %>" />
-                <form:content_end />
-            <form:row_end />
-            <% if(canEdit) { %>
-            <form:row_begin />
-            <form:label label="Delete CTR:"  />
-            <form:content_begin />
-                    <% String tempUrl = "reels/process.jsp?submit_action=delete_ctr&" + Reel.PARAM + "=" + content.getId(); %>
-                    <form:linkbutton warning="true" url="<%= tempUrl %>" process="true" name="DELETE" />
-                <form:content_end />
-            <form:row_end />
-            <% } %>
-        <% } %>
-		<form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
-		<form:row_begin />
-			<form:label name="" label="" />
-			<form:buttonset_begin align="left" padding="0"/>
-                <% if(canEdit) { %>
-				<form:submit_inline button="save" waiting="true" name="save" action="update_reel_data" />
-                <% } %>
-			<form:buttonset_end />
-		<form:row_end />
-    <form:end />
-<admin:box_end />
-
 
 <admin:set_tabset url="reels/_tabset_manage.jsp" thispage="reel_data.jsp" content_id_for_tabset="<%= contid %>"/>
 <html:end />

@@ -305,14 +305,8 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
                 <form:info label="Ordered Qty:" text="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
                 <form:hidden name="<%= Reel.ORDERED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getOrderedQuantity()).toString() %>" />
 
-                <form:row_begin />
-                <form:label name="" label="Shipped Qty:" />
-                <form:content_begin />
-                    <form:textfield_inline pixelwidth="40" label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
-                    or
-                    <form:checkbox label="Shipped Quantity equals Ordered Quantity" name="ordered_to_shipping" value="y" />
-                <form:content_end />
-                <form:row_end />
+                <form:textfield label="Shipped Qty:" name="<%= Reel.SHIPPED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getShippedQuantity()).toString() %>" />
+                <form:checkbox text="Set Shipped Quantity equals Ordered Quantity" label="" name="ordered_to_shipping" value="y" />
 
                 <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
                     <form:textfield label="Top Seq Mark #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />

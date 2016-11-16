@@ -73,6 +73,11 @@ if(request.getParameter(Reel.TRACKING_PRO_COLUMN) != null) {
     content.setSearchOp(Reel.TRACKING_PRO_COLUMN, Reel.PARTIAL);
 }
 
+if(request.getParameter(Reel.PACKING_LIST_COLUMN) != null) {
+    content.setPackingList(request.getParameter(Reel.PACKING_LIST_COLUMN));
+    content.setSearchOp(Reel.PACKING_LIST_COLUMN, Reel.PARTIAL);
+}
+
 if(request.getParameter(Reel.MANUFACTURER_COLUMN) != null) {
     content.setManufacturer(request.getParameter(Reel.MANUFACTURER_COLUMN));
     content.setSearchOp(Reel.MANUFACTURER_COLUMN, Reel.EQ);
@@ -122,6 +127,7 @@ String tempURL = "";
     <% tempURL = user.getCustomerName() + " P/N:"; %>
     <form:textfield label="<%= tempURL %>" name="<%= Reel.CUSTOMER_PN_COLUMN %>" value="<%= content.getCustomerPN() %>" />
     <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />
+    <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />    
     <form:row_begin />
         <form:label name="" label="Manufacturer:" />
         <form:content_begin />

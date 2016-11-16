@@ -27,7 +27,7 @@ function selectVendor() {
 	var vendor = $('#vendor').val();
 	$("#tabContent").load("interface/login.jsp?action=vendor&vendor=" + vendor,function() {
 	 	loadNavigation();
-	 	//loadFooter();
+	 	loadHeader();
 	});
 }
 
