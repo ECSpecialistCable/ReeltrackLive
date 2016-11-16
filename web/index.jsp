@@ -1,1 +1,1 @@
-<% response.sendRedirect("http://reeltrack.monumental-i.com/trampoline/index.jsp"); %>
+<% response.sendRedirect("http://www.ecsreeltrack.com/trampoline/index.jsp"); %>

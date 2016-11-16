@@ -127,7 +127,7 @@ RTUser user = (RTUser)userLoginMgr.getUser();
             <ul class="dropdown-menu">
               <li><a href="javascript:loadModule('customers/search.jsp');">Customers</a></li>
               <li><a href="javascript:loadModule('users/search.jsp');">ECS Users</a></li>
-              <li><a href="javascript:loadModule('demo/demo.jsp');">Demo Reset</a></li>
+              <%--<li><a href="javascript:loadModule('demo/demo.jsp');">Demo Reset</a></li>--%>
             </ul>
           </li>
     <% } %>
