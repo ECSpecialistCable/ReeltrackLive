@@ -5,6 +5,7 @@
 <%@ page import="com.reeltrack.reels.*" %>
 <%@ page import="com.reeltrack.whlocations.*" %>
 <%@ page import="com.monumental.trampoline.component.*" %>
+<%@ page import="com.reeltrack.picklists.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
@@ -17,6 +18,8 @@
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 <jsp:useBean id="locationMgr" class="com.reeltrack.whlocations.WhLocationMgr" />
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr" />
+<jsp:useBean id="picklistMgr" class="com.reeltrack.picklists.PickListMgr" />
+<% picklistMgr.init(pageContext,dbResources); %>
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
 <% locationMgr.init(pageContext,dbResources); %>
@@ -79,20 +82,27 @@ if(!canSubmit) {
 	}
 }
 */
+PickList picklist = new PickList();
+if(content.getPickListId()!=0) {
+    picklist.setId(content.getPickListId());
+    picklist = (PickList)picklistMgr.getPickList(picklist);
+}
+
 %>
 <% dbResources.close(); %>
 
 <html:begin />
-<%--
-<h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
-<% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus(); %>
-<h1 style="padding-bottom:0px;"><%= tempURL %></h1>
-<p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
---%>
 
+<%
+tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus();
+if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
+    tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus() + " - " + content.getWharehouseLocation();
+} else if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) {
+    tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus() + " - " + picklist.getForeman();
+}
+%>
 <notifier:show_message />
 
-<% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " +  content.getCableDescription(); %>
 <admin:title heading="Reel Page" text="<%= tempURL %>" />
 
 <admin:subtitle text="General Info" />

@@ -5,6 +5,7 @@
 <%@ page import="com.reeltrack.reels.*" %>
 <%@ page import="com.monumental.trampoline.component.*" %>
 <%@ page import="com.monumental.trampoline.utilities.text.*" %>
+<%@ page import="com.reeltrack.picklists.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" tagdir="/WEB-INF/tags/form"%>
@@ -16,6 +17,8 @@
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
 <jsp:useBean id="userLoginMgr" class="com.reeltrack.users.RTUserLoginMgr" />
+<jsp:useBean id="picklistMgr" class="com.reeltrack.picklists.PickListMgr" />
+<% picklistMgr.init(pageContext,dbResources); %>
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
@@ -36,6 +39,12 @@ Reel content = new Reel();
 content.setId(contid);
 content = (Reel)reelMgr.getReel(content);
 
+PickList picklist = new PickList();
+if(content.getPickListId()!=0) {
+    picklist.setId(content.getPickListId());
+    picklist = (PickList)picklistMgr.getPickList(picklist);
+}
+
 CompEntities notes = reelMgr.getReelNotes(content);
 ReelNote note;
 
@@ -52,7 +61,15 @@ String tempURL; //var for url expression
 --%>
 <notifier:show_message />
 
-<% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " +  content.getCableDescription(); %>
+<%
+tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus();
+if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
+    tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus() + " - " + content.getWharehouseLocation();
+} else if(content.getStatus().equals(Reel.STATUS_CHECKED_OUT)) {
+    tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus() + " - " + picklist.getForeman();
+}
+%>
+
 <admin:title heading="Reel Page" text="<%= tempURL %>" />
 
 <admin:subtitle text="Add Note" />

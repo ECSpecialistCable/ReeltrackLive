@@ -67,6 +67,14 @@ if(session.getAttribute("pick_lists_edit_circuit")!=null) {
     circuit = (ReelCircuit)session.getAttribute("pick_lists_edit_circuit");
 }
 
+if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
+    if(request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
+        reel.getData().removeValue(Reel.CR_ID_COLUMN);
+    } else {
+        reel.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
+        reel.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
+    }
+}
 
 if(request.getParameter(Reel.PN_VOLT_COLUMN) != null) {
     reel.setPnVolt(request.getParameter(Reel.PN_VOLT_COLUMN));
@@ -219,7 +227,12 @@ String tempURL; //var for url expression
 <admin:subtitle text="Search Reels to Add to Pick List" />
     <admin:box_begin text="Search Reels to Add to Pick List" name="Search_Reels_to_Add" />
     <form:begin_selfsubmit name="search" action="pick_lists/edit.jsp" />
-    	<form:row_begin />
+		<%
+        tempURL = "";
+        if(reel.getCrId()!=0) tempURL = Integer.toString(reel.getCrId());
+        %>
+    	<form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= tempURL %>" />
+		<form:row_begin />
             <form:label name="" label="Circuit:" />
             <form:content_begin />
             <form:select_begin name="<%= ReelCircuit.PARAM %>" />

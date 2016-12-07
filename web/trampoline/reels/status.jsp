@@ -25,13 +25,13 @@
 <jsp:useBean id="driverMgr" class="com.reeltrack.drivers.DriverMgr" scope="request"/>
 <jsp:useBean id="foremanMgr" class="com.reeltrack.foremans.ForemanMgr" scope="request"/>
 <jsp:useBean id="picklistMgr" class="com.reeltrack.picklists.PickListMgr" />
+<% picklistMgr.init(pageContext,dbResources); %>
 <% userLoginMgr.init(pageContext); %>
 <% reelMgr.init(pageContext,dbResources); %>
 <% locationMgr.init(pageContext,dbResources); %>
 <% customerMgr.init(pageContext,dbResources); %>
 <% driverMgr.init(pageContext,dbResources); %>
 <% foremanMgr.init(pageContext,dbResources); %>
-<% picklistMgr.init(pageContext,dbResources); %>
 <% RTUser user = (RTUser)userLoginMgr.getUser(); %>
 <%
 // Get the id
@@ -110,6 +110,7 @@ String[] carrierList = reelMgr.getCarriers();
 <html:begin />
 <%--
 <h1 style="text-align:right;padding-right:50px;">Reel Page</h1>
+--%>
 <%
 tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus();
 if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
@@ -118,12 +119,15 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
     tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus() + " - " + picklist.getForeman();
 }
 %>
+<%--
 <h1 style="padding-bottom:0px;"><%= tempURL %></h1>
 <p style="padding-left:0px;padding-bottom:20px;">CRID : ReelTag : Cust P/N : Status</p>
 --%>
 <notifier:show_message />
 
-<% tempURL = content.getCrId() + " : " + content.getReelTag() + " : " +  content.getCableDescription(); %>
+<%
+//tempURL = content.getCrId() + " : " + content.getReelTag() + " : " +  content.getCableDescription();
+%>
 <admin:title heading="Reel Page" text="<%= tempURL %>" />
 
 <% if(canEdit) { %>
