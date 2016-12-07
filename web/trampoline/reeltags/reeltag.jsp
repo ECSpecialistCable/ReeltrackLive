@@ -117,7 +117,7 @@ String logoURL;
 	<table style="border:none;margin: 0px; margin-bottom: 0px;padding: 0px;">
 		<tr>
 			<td colspan="2" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 10px;">
-				<%= reelCustomer.getName().toUpperCase() %>
+				<%= reelCustomer.getName().toUpperCase().replace("&","&amp;") %>
 			</td>
 			<td rowspan="8" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top; margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px; text-align: center">
 					<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
@@ -175,7 +175,7 @@ String logoURL;
 			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b></b></td>
 		</tr>
 		<tr>
-			<td colspan="2" style="/*border:solid #003DB8 1px;*/border-top:solid 2px black;border-bottom: solid 2px black;width:20%;vertical-align: center;padding-bottom: 0px;padding-top: 0px;text-align: left;font-size: 16px;"><b><%= content.getReelTag() %></b></td>
+			<td colspan="2" style="/*border:solid #003DB8 1px;*/border-top:solid 2px black;border-bottom: solid 2px black;width:20%;vertical-align: center;padding-bottom: 0px;padding-top: 0px;text-align: left;font-size: 16px;"><b><%= content.getReelTag().replace("&","&amp;") %></b></td>
 			<td style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;text-align: right;">CRID#</td>
 			<td  style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: center;padding-bottom: 0px;padding-top: 0px;border-top:solid 2px black;border-bottom: solid 2px black;"><b><%= content.getCrId() %></b></td>
 		</tr>		
