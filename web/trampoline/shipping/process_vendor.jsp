@@ -52,6 +52,7 @@ if(action.equals("edit_shipped")) {
     }
     try {
         content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+        content.setOrigTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     } catch(Exception e) {}
     try {
         content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
@@ -85,6 +86,7 @@ if(action.equals("mark_shipped")) {
     }
     try {
         content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+        content.setOrigTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     } catch(Exception e) {}
     try {
         content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
