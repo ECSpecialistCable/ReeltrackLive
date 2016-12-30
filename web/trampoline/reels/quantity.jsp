@@ -94,8 +94,8 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
                     <form:content_end />
                 <form:row_end />
                 --%>
-                <form:info label="Orig Top Seq Mark #:" text="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
-                <form:info label="Seq Mark #:" text="<%= new Integer(content.getTopFoot()).toString() %>" />
+                <form:info label="Orig Top Ft Mark:" text="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                <form:info label="Current Top Ft Mark:" text="<%= new Integer(content.getTopFoot()).toString() %>" />
     		<% } else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
                 <form:info label="Reel GWT:" text="<%= new Integer(content.getReceivedWeight()).toString() %>" />
                 <form:info label="Current GWT:" text="<%= new Integer(content.getCurrentWeight()).toString() %>" />
