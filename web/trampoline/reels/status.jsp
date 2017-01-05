@@ -227,7 +227,12 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
                 --%>
 
                 <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
-                    <form:textfield pixelwidth="40" label="Orig Top Seq Mark:" name="<%= Reel.ORIG_TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                    <% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
+                        <form:textfield pixelwidth="40" label="Orig Top Ft Mark:" name="<%= Reel.ORIG_TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                    <% } else { %>
+                        <form:info label="Orig Top Ft Mark:" text="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                    <% } %>
+                    <form:textfield label="Current Top Ft Mark:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
                 <% } %>
 
                 <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
@@ -332,7 +337,7 @@ if(job.getScansMustMatch().equals("y") && techData.getQRCTracking().equals("y") 
 
                 <form:info label="On Reel Qty:" text="<%= new Integer(content.getOnReelQuantity()).toString() %>" />
                 <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
-                    <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
+                    <form:textfield label="Current Top Ft Mark:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
                 <% } %>
                 <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>
                     <form:textfield label="Current lbs:" pixelwidth="40" name="<%= Reel.CURRENT_WEIGHT_COLUMN %>" value="<%= new Integer(content.getCurrentWeight()).toString() %>" />
