@@ -156,9 +156,9 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
     <h4 style="color:red;">Since ReelTrack recalculates the quantity remaining on the reel when a new Top Ft marker is entered, you MUST enter the Top Ft marker after each pull.</h4>
     <admin:subtitle text="Record Current Top Ft Mark" />
     <admin:box_begin text="Record Current Top Ft Mark" name="Record_Current_Top_Marker" />
-        <form:begin confirm="Please confirm Top Foot # is correct." submit="true" name="edit" action="reels/process.jsp" />
+        <form:begin confirm="Please confirm Current Top Ft Mark is correct." submit="true" name="edit" action="reels/process.jsp" />
                 <form:textfield label="Circuit Name:" name="<%= ReelCircuit.NAME_COLUMN %>" value="" />
-                <form:textfield label="Top Foot #:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />
+                <form:textfield label="Current Top Ft Mark:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
                 <form:row_begin />
                     <form:label name="" label="" />
