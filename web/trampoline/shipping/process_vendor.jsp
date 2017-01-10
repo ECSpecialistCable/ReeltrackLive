@@ -85,8 +85,8 @@ if(action.equals("mark_shipped")) {
         content.setShippingDateString(request.getParameter(Reel.SHIPPING_DATE_COLUMN));
     }
     try {
-        content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
-        content.setOrigTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+        content.setTopFoot(Integer.parseInt(request.getParameter(Reel.ORIG_TOP_FOOT_COLUMN)));
+        content.setOrigTopFoot(Integer.parseInt(request.getParameter(Reel.ORIG_TOP_FOOT_COLUMN)));
     } catch(Exception e) {}
     try {
         content.setCurrentWeight(Integer.parseInt(request.getParameter(Reel.CURRENT_WEIGHT_COLUMN)));
