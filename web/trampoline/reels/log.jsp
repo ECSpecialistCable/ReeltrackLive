@@ -48,6 +48,11 @@ if(content.getPickListId()!=0) {
 CompEntities logs = reelMgr.getReelLogs(content);
 ReelLog log;
 
+String alr = "";
+if(request.getParameter("alr")!=null) {
+    alr = request.getParameter("alr");
+}
+
 String tempURL; //var for url expression
 %>
 <% dbResources.close(); %>
@@ -69,11 +74,34 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
     tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus() + " - " + picklist.getForeman();
 }
 %>
-<admin:title heading="Reel Page" text="<%= tempURL %>" />
+<admin:title heading="Reel Page" text="<span style='color:red;'>CRID: Reel Tag: Description: Status</span>" />
+<h2 class="adminTitle"><%= tempURL %></h2>
 
 <% if(logs.howMany() > 0) { %>
+    <admin:subtitle text="Action Log" />
+    <admin:box_begin text="Action Log" name="Action_Log" open="true" />
+    <form:begin name="action_log_report" action="reels/process.jsp" />
+        <%if(alr.equals("true")) { %>
+            <form:row_begin />
+                <form:label name="" label="" />
+                <form:buttonset_begin align="left" padding="0"/>
+                        <% String url = request.getContextPath() + "/reports/" + "action_log_report.xls"; %>
+                        <a target="_blank" href="<%= url %>"><%= "[Download]" %></a>
+                <form:buttonset_end />
+            <form:row_end />
+        <% } %>
+        <form:row_begin />
+            <form:label name="" label="" />
+            <form:buttonset_begin align="left" padding="0"/>
+                <form:submit_inline button="submit" waiting="false" name="submit" action="action_log_report" />
+            <form:buttonset_end />
+        <form:row_end />
+        <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
+    <form:end />
+    <admin:box_end />
+
     <admin:subtitle text="All Log Entries" />
-    <admin:box_begin color="false" />
+    <admin:box_begin text="All Log Entries" name="log-entries" color="false" />
         <listing:begin />
         <listing:header_begin />
             <listing:header_cell setWidth="150" first="true" name="Created" />

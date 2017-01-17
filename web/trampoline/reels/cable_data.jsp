@@ -79,7 +79,8 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
     tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus() + " - " + picklist.getForeman();
 }
 %>
-<admin:title heading="Reel Page" text="<%= tempURL %>" />
+<admin:title heading="Reel Page" text="<span style='color:red;'>CRID: Reel Tag: Description: Status</span>" />
+<h2 class="adminTitle"><%= tempURL %></h2>
 
 <admin:box_begin text="Data Sheet" name="Data_Sheet" open="false" />
     <form:begin_multipart submit="<%= new Boolean(canEdit).toString() %>" name="edit" action="reels/process.jsp" />

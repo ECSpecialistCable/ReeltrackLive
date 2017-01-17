@@ -10,6 +10,10 @@
 <%@ page import="java.util.Hashtable"%>
 <%@ page import="com.reeltrack.picklists.*" %>
 <%@ page import="com.reeltrack.customers.Customer"%>
+<%@ page import="java.io.FileOutputStream" %>
+<%@ page import= "org.apache.poi.hssf.usermodel.*" %>
+<%@ page import= "org.apache.poi.hssf.util.*" %>
+<%@ page import="com.reeltrack.reports.ActionLogExcelReport"%>
 
 <%@ taglib prefix="admin" tagdir="/WEB-INF/tags/admin"%>"
 <%@ taglib prefix="notifier" tagdir="/WEB-INF/tags/notifier"%>
@@ -465,7 +469,7 @@ if(action.equals("record_pull")) {
     content.setId(contid);
     content.setTempPullAmount(Integer.parseInt(request.getParameter("pulled_quantity")));
     //reelMgr.updateReelPull(content);
-    reelMgr.addReelCircuitPull(content,request.getParameter(ReelCircuit.NAME_COLUMN));
+    reelMgr.addReelCircuitPull(content,request.getParameter(ReelCircuit.NAME_COLUMN),0);
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
@@ -475,7 +479,7 @@ if(action.equals("record_top_marker")) {
     //content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     content.setTempPullAmount(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
     //reelMgr.updateReelTop(content);
-    reelMgr.addReelCircuitPull(content,request.getParameter(ReelCircuit.NAME_COLUMN));
+    reelMgr.addReelCircuitPull(content,request.getParameter(ReelCircuit.NAME_COLUMN),Integer.parseInt(request.getParameter(ReelCircuit.MAX_TENSION_COLUMN)));
     redirect = request.getContextPath() + "/trampoline/" + "reels/quantity.jsp?" + Reel.PARAM + "=" + contid ;
 }
 
@@ -617,6 +621,29 @@ if(action.equals("update_unique_id")) {
 	content.setUniqueId(Integer.parseInt(request.getParameter(Reel.UNIQUE_ID_COLUMN)));
 	reelMgr.updateReel(content);
     redirect = request.getContextPath() + "/trampoline/" + "reels/reel_data.jsp?" + Reel.PARAM + "=" + contid ;
+}
+
+if(action.equals("action_log_report")){
+    String param = "";
+	try {
+		ActionLogExcelReport writer = new ActionLogExcelReport(pageContext, dbResources);
+		HSSFWorkbook wb = writer.writeUserExcel(contid, basePath);
+		String fileName = "action_log_report.xls";
+		String saveFile = basePath + "/reports";
+		File file = new File(saveFile);
+		file.mkdirs();
+		saveFile += "/" + fileName;
+		FileOutputStream fileOut = new FileOutputStream(saveFile);
+		wb.write(fileOut);
+		fileOut.flush();
+		fileOut.close();
+
+    	param = "&alr=true";
+	} catch(Exception e) {
+		e.printStackTrace();
+    }
+
+	redirect = request.getContextPath() + "/trampoline/" + "reels/log.jsp?" + Reel.PARAM + "=" + contid  + param;
 }
 %>
 <% dbResources.close(); %>

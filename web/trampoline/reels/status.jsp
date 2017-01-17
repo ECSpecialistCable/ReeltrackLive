@@ -128,7 +128,8 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
 <%
 //tempURL = content.getCrId() + " : " + content.getReelTag() + " : " +  content.getCableDescription();
 %>
-<admin:title heading="Reel Page" text="<%= tempURL %>" />
+<admin:title heading="Reel Page" text="<span style='color:red;'>CRID: Reel Tag: Description: Status</span>" />
+<h2 class="adminTitle"><%= tempURL %></h2>
 
 <% if(canEdit) { %>
 	<admin:box_begin text="Delete Reel" name="Delete_Reel" open="false" />

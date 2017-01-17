@@ -76,7 +76,8 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
     tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus() + " - " + picklist.getForeman();
 }
 %>
-<admin:title heading="Reel Page" text="<%= tempURL %>" />
+<admin:title heading="Reel Page" text="<span style='color:red;'>CRID: Reel Tag: Description: Status</span>" />
+<h2 class="adminTitle"><%= tempURL %></h2>
 
 <admin:subtitle text="Edit Quantity" />
 <admin:box_begin text="Edit Quantity" name="Edit_Quantity" />
@@ -159,6 +160,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
         <form:begin confirm="Please confirm Current Top Ft Mark is correct." submit="true" name="edit" action="reels/process.jsp" />
                 <form:textfield label="Circuit Name:" name="<%= ReelCircuit.NAME_COLUMN %>" value="" />
                 <form:textfield label="Current Top Ft Mark:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="0" />
+                <form:textfield label="Max Tension During Pull:" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="0" />
                 <form:hidden name="<%= Reel.PARAM %>" value="<%= new Integer(contid).toString() %>" />
                 <form:row_begin />
                     <form:label name="" label="" />

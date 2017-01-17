@@ -91,7 +91,8 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
 }
 %>
 
-<admin:title heading="Reel Page" text="<%= tempURL %>" />
+<admin:title heading="Reel Page" text="<span style='color:red;'>CRID: Reel Tag: Description: Status</span>" />
+<h2 class="adminTitle"><%= tempURL %></h2>
 
 <% if(remainingQty<0) { %>
     <h4 style="color:red;">ALERT: REEL SHOWS NEGATIVE QUANTITY</h4>
@@ -212,7 +213,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
                 <% tempURL = "z" + circuit.getId(); %>
                 <% if(!circuit.isPulled() && canSubmit) { %>
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
-                    <form:textfield_inline minWidth="50" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="<%= new Integer(circuit.getLength()).toString() %>" />
+                    <form:textfield_inline minWidth="60" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="<%= new Integer(circuit.getLength()).toString() %>" />
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <form:hidden name="submit_action" value="update_circuit" />
@@ -256,7 +257,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
                 %>
                 <form:begin_inline confirm="<%= confirm %>" submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
 
-                    <form:textfield_inline minWidth="50" name="<%= ReelCircuit.ACT_LENGTH_COLUMN %>" value="0" />
+                    <form:textfield_inline minWidth="60" name="<%= ReelCircuit.ACT_LENGTH_COLUMN %>" value="0" />
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />
                     <%--<form:hidden name="submit_action" value="update_circuit" />--%>
@@ -278,7 +279,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
                 <% tempURL = "i" + circuit.getId(); %>
                 <% if(canSubmit && circuit.getMaxTension()==0) { %>
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
-                    <form:textfield_inline minWidth="50" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="<%= new Integer(circuit.getMaxTension()).toString() %>" />
+                    <form:textfield_inline minWidth="60" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="<%= new Integer(circuit.getMaxTension()).toString() %>" />
                     <%-- onclick="this.form.submit();"  --%>
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />

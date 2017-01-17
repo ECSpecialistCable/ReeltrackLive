@@ -73,7 +73,8 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
     tempURL = content.getCrId() + " : " + content.getReelTag() + " : " + content.getCableDescription() + " : " + content.getStatus() + " - " + picklist.getForeman();
 }
 %>
-<admin:title heading="Reel Page" text="<%= tempURL %>" />
+<admin:title heading="Reel Page" text="<span style='color:red;'>CRID: Reel Tag: Description: Status</span>" />
+<h2 class="adminTitle"><%= tempURL %></h2>
 
 <admin:subtitle text="Reel Data" />
 <admin:box_begin text="Reel Data" name="Reel_Data" />

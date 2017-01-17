@@ -70,7 +70,8 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
 }
 %>
 
-<admin:title heading="Reel Page" text="<%= tempURL %>" />
+<admin:title heading="Reel Page" text="<span style='color:red;'>CRID: Reel Tag: Description: Status</span>" />
+<h2 class="adminTitle"><%= tempURL %></h2>
 
 <admin:subtitle text="Add Note" />
 <admin:box_begin />
