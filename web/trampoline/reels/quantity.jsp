@@ -210,7 +210,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
                 <% tempURL = "i" + circuit.getId(); %>
                 <% if(canSubmit && circuit.getMaxTension()==0) { %>
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
-                    <form:textfield_inline pixelwidth="40" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="<%= new Integer(circuit.getMaxTension()).toString() %>" />
+                    <form:textfield_inline minWidth="70" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="<%= new Integer(circuit.getMaxTension()).toString() %>" />
                     <%-- onclick="this.form.submit();"  --%>
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
                     <form:hidden name="<%= ReelCircuit.PARAM %>" value="<%= circuit.getId() %>" />

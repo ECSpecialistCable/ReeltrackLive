@@ -339,7 +339,7 @@ public class ReelMgr extends CompWebManager {
 				content.setUpdated(new Date());
 				controller.update(content);
 				this.updateOnReelQuantity(content);
-				this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName() + " with top foot marker =" + content.getOrigTopFoot() + ", received quantity=" + content.getReceivedQuantity() + ", and warehouse location as " + content.getWharehouseLocation());
+				this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName() + " with top foot marker =" + content.getTopFoot() + ", received quantity=" + content.getReceivedQuantity() + ", and warehouse location as " + content.getWharehouseLocation());
 			}
 		} else {
 			content.setStatus(Reel.STATUS_REFUSED);
@@ -1295,17 +1295,17 @@ public class ReelMgr extends CompWebManager {
 	}
 
 	public void addReelCircuitPull(Reel content, String name, int max_tension) throws Exception {
-      ReelCircuit circuit = new ReelCircuit();
-      circuit.setReelId(content.getId());
-  		circuit.setCreated(new Date());
-      circuit.setKind("p");
-	  circuit.setName(name);
-	  circuit.setMaxTension(max_tension);
-  		int toReturn = controller.add(circuit);
-      circuit = new ReelCircuit();
-      circuit.setId(toReturn);
-      circuit.setActLength(content.getTempPullAmount());
-      this.updateReelCircuitPull(circuit);
+		ReelCircuit circuit = new ReelCircuit();
+		circuit.setReelId(content.getId());
+		circuit.setCreated(new Date());
+		circuit.setKind("p");
+		circuit.setName(name);
+		circuit.setMaxTension(max_tension);
+		int toReturn = controller.add(circuit);
+		//circuit = new ReelCircuit();
+		circuit.setId(toReturn);
+		circuit.setActLength(content.getTempPullAmount());
+		this.updateReelCircuitPull(circuit);
   	}
 
 	public int addReelCircuit(ReelCircuit content) throws Exception {
@@ -1407,14 +1407,15 @@ public class ReelMgr extends CompWebManager {
 		controller.update(content);
 		this.updateReelType(content);
 
-		Reel reel = new Reel();
-		reel.setId(content.getReelId());
-		reel = this.getReel(reel);
+		//Reel reel = new Reel();
+		//reel.setId(content.getReelId());
+		//reel = this.getReel(reel);
 
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		this.addReelLog(reel, user.getName() + " pulled quantity " + content.getActLength() + "' from circuit " + rc.getName());
+		this.addReelLog(currReel, content.getActLength() + " was pulled for Unassigned circuit " + rc.getName() + " by " + user.getName() + " and Max Pull Tension was " + content.getMaxTension());
+		//this.addReelLog(reel, user.getName() + " pulled quantity " + content.getActLength() + "' from circuit " + rc.getName());
 	}
 
 	public void updateReelCircuit(ReelCircuit content) throws Exception {
@@ -1456,7 +1457,7 @@ public class ReelMgr extends CompWebManager {
 		RTUserLoginMgr umgr = new RTUserLoginMgr();
 		umgr.init(this.getPageContext(), this.getDbResources());
 		RTUser user = (RTUser)umgr.getUser();
-		this.addReelLog(reel, content.getActLength() + " was pulled for circuit " + rc.getTitle() + ", Top # changed from " + currReel.getTopFoot() + "to " + reel.getTopFoot() + " by " + user.getName());
+		this.addReelLog(reel, content.getActLength() + " was pulled for pre-assigned circuit " + rc.getTitle() + " by " + user.getName());
 
       } else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) {
         int weight = techData.getWeight();

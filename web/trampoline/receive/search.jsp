@@ -175,7 +175,12 @@ String tempURL = "";
                 <form:textfield pixelwidth="40" label="Received Qty:" name="<%= Reel.RECEIVED_QUANTITY_COLUMN %>" value="<%= new Integer(content.getReceivedQuantity()).toString() %>" />
 
                 <% if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) { %>
-                    <form:textfield pixelwidth="40" label="Orig Top Seq Mark:" name="<%= Reel.ORIG_TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                    <% if(user.isUserType(RTUser.USER_TYPE_ECS)) { %>
+                        <form:textfield pixelwidth="40" label="Orig Top Ft Mark:" name="<%= Reel.ORIG_TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                    <% } else { %>
+                        <form:info label="Orig Top Ft Mark:" text="<%= new Integer(content.getOrigTopFoot()).toString() %>" />
+                    <% } %>
+                    <form:textfield label="Current Top Ft Mark:" pixelwidth="40" name="<%= Reel.TOP_FOOT_COLUMN %>" value="<%= new Integer(content.getTopFoot()).toString() %>" />
                 <% } %>
 
                 <% if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) { %>

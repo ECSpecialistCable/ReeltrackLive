@@ -50,6 +50,9 @@ if(action.equals("mark_received")) {
     content.setOrigTopFoot(Integer.parseInt(request.getParameter(Reel.ORIG_TOP_FOOT_COLUMN)));
     } catch(Exception e) {}
     try {
+    content.setTopFoot(Integer.parseInt(request.getParameter(Reel.TOP_FOOT_COLUMN)));
+    } catch(Exception e) {}
+    try {
     content.setReceivedWeight(Integer.parseInt(request.getParameter(Reel.RECEIVED_WEIGHT_COLUMN)));
     } catch(Exception e) {}
     
