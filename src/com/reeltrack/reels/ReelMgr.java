@@ -603,7 +603,7 @@ public class ReelMgr extends CompWebManager {
 			RTUserLoginMgr umgr = new RTUserLoginMgr();
 			umgr.init(this.getPageContext(), this.getDbResources());
 			RTUser user = (RTUser)umgr.getUser();
-			this.addReelLog(content, "Top # changed from " + currReel.getTopFoot() + " to " + content.getTopFoot() + " by " + user.getName());
+			//this.addReelLog(content, "Top # changed from " + currReel.getTopFoot() + " to " + content.getTopFoot() + " by " + user.getName());
 			content.setUpdated(new Date());
 			controller.update(content);
 		}
@@ -618,7 +618,7 @@ public class ReelMgr extends CompWebManager {
 			RTUserLoginMgr umgr = new RTUserLoginMgr();
 			umgr.init(this.getPageContext(), this.getDbResources());
 			RTUser user = (RTUser)umgr.getUser();
-			this.addReelLog(content, "Current weight changed from " + currReel.getCurrentWeight() + " to " + content.getCurrentWeight() + " by " + user.getName());
+			//this.addReelLog(content, "Current weight changed from " + currReel.getCurrentWeight() + " to " + content.getCurrentWeight() + " by " + user.getName());
 			content.setUpdated(new Date());
 			controller.update(content);
 		}
@@ -1355,53 +1355,72 @@ public class ReelMgr extends CompWebManager {
 		this.updateReel(currReel,false);
 	}
 
-  public void updateReelCircuitPull(ReelCircuit content) throws Exception {
-    ReelCircuit rc = new ReelCircuit();
-    rc.setId(content.getId());
-    CompEntityPuller puller = new CompEntityPuller(rc);
-    puller.addSearch(rc);
-    rc = (ReelCircuit)controller.pullCompEntity(puller);
+	public void updateReelCircuitPull(ReelCircuit content) throws Exception {
+		ReelCircuit rc = new ReelCircuit();
+		rc.setId(content.getId());
+		CompEntityPuller puller = new CompEntityPuller(rc);
+		puller.addSearch(rc);
+		rc = (ReelCircuit)controller.pullCompEntity(puller);
 
-    Reel currReel = new Reel();
+		Reel currReel = new Reel();
 		currReel.setId(rc.getReelId());
 		currReel = this.getReel(currReel);
 
-    CableTechData techData = this.getCableTechData(currReel);
+		CableTechData techData = this.getCableTechData(currReel);
 
-    if(content.getActLength()!=0) {
-      if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) {
-        Reel reel = new Reel();
-  		  reel.setId(rc.getReelId());
-        reel.setTopFoot(content.getActLength());
-        this.updateReelTop(reel);
+		if(content.getActLength()!=0) {
+			if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) {
+				Reel reel = new Reel();
+				reel.setId(rc.getReelId());
+				reel.setTopFoot(content.getActLength());
+				this.updateReelTop(reel);
 
-        Reel currReel2 = new Reel();
-    		currReel2.setId(rc.getReelId());
-    		currReel2 = this.getReel(currReel2);
-    	content.setMarker(content.getActLength());
-        content.setActLength(currReel.getOnReelQuantity()-currReel2.getOnReelQuantity());
-      } else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) {
-        int weight = techData.getWeight();
-        Reel reel = new Reel();
-  		  reel.setId(rc.getReelId());
-        reel.setCurrentWeight(reel.getCurrentWeight() - (content.getActLength()/1000 * weight));
-        this.updateReelWeight(reel);
+				Reel currReel2 = new Reel();
+				currReel2.setId(rc.getReelId());
+				currReel2 = this.getReel(currReel2);
+				content.setMarker(content.getActLength());
+				content.setActLength(currReel.getOnReelQuantity()-currReel2.getOnReelQuantity());
 
-        Reel currReel2 = new Reel();
-    		currReel2.setId(rc.getReelId());
-    		currReel2 = this.getReel(currReel2);
+				RTUserLoginMgr umgr = new RTUserLoginMgr();
+				umgr.init(this.getPageContext(), this.getDbResources());
+				RTUser user = (RTUser)umgr.getUser();
+				this.addReelLog(reel, content.getActLength() + " was pulled for pre-assigned circuit " + rc.getTitle() + " by " + user.getName() + ". Top # changed from " + currReel.getTopFoot() + " to " + currReel2.getTopFoot() + ".");
+			} else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) {
+				int weight = techData.getWeight();
+				Reel reel = new Reel();
+				reel.setId(rc.getReelId());
+				reel.setCurrentWeight(reel.getCurrentWeight() - (content.getActLength()/1000 * weight));
+				this.updateReelWeight(reel);
 
-        content.setActLength(rc.getActLength() + (currReel.getOnReelQuantity()-currReel2.getOnReelQuantity()));
-      } else {
-        Reel reel = new Reel();
-  		  reel.setId(rc.getReelId());
-        reel.setTempPullAmount(content.getActLength());
-        this.updateReelPull(reel);
+				Reel currReel2 = new Reel();
+				currReel2.setId(rc.getReelId());
+				currReel2 = this.getReel(currReel2);
+				content.setActLength(rc.getActLength() + (currReel.getOnReelQuantity()-currReel2.getOnReelQuantity()));
 
-        content.setActLength(rc.getActLength() + content.getActLength());
-      }
-      content.setIsPulled("y");
-    }
+				RTUserLoginMgr umgr = new RTUserLoginMgr();
+				umgr.init(this.getPageContext(), this.getDbResources());
+				RTUser user = (RTUser)umgr.getUser();
+				this.addReelLog(reel, content.getActLength() + " was pulled for pre-assigned circuit " + rc.getTitle() + " by " + user.getName() + ". Current weight changed from " + currReel.getCurrentWeight() + " to " + currReel2.getCurrentWeight() + ".");				
+			} else {
+				Reel reel = new Reel();
+				reel.setId(rc.getReelId());
+				reel.setTempPullAmount(content.getActLength());
+				this.updateReelPull(reel);
+
+				content.setActLength(rc.getActLength() + content.getActLength());
+
+				Reel currReel2 = new Reel();
+				currReel2.setId(rc.getReelId());
+				currReel2 = this.getReel(currReel2);
+
+				RTUserLoginMgr umgr = new RTUserLoginMgr();
+				umgr.init(this.getPageContext(), this.getDbResources());
+				RTUser user = (RTUser)umgr.getUser();
+				this.addReelLog(reel, content.getActLength() + " was pulled by " + user.getName() + ". The new on reel quantity is " + currReel2.getOnReelQuantity());
+
+			}
+			content.setIsPulled("y");
+		}
 
 		content.setUpdated(new Date());
 		controller.update(content);
@@ -1411,76 +1430,88 @@ public class ReelMgr extends CompWebManager {
 		//reel.setId(content.getReelId());
 		//reel = this.getReel(reel);
 
-		RTUserLoginMgr umgr = new RTUserLoginMgr();
-		umgr.init(this.getPageContext(), this.getDbResources());
-		RTUser user = (RTUser)umgr.getUser();
-		this.addReelLog(currReel, content.getActLength() + " was pulled for Unassigned circuit " + rc.getName() + " by " + user.getName() + " and Max Pull Tension was " + content.getMaxTension());
+		//RTUserLoginMgr umgr = new RTUserLoginMgr();
+		//umgr.init(this.getPageContext(), this.getDbResources());
+		//RTUser user = (RTUser)umgr.getUser();
+		//this.addReelLog(currReel, content.getActLength() + " was pulled for Unassigned circuit " + rc.getName() + " by " + user.getName() + " and Max Pull Tension was " + content.getMaxTension() + ". Top # changed from " + currReel.getTopFoot() + " to " + currReel2.getTopFoot() + ".");
 		//this.addReelLog(reel, user.getName() + " pulled quantity " + content.getActLength() + "' from circuit " + rc.getName());
 	}
 
 	public void updateReelCircuit(ReelCircuit content) throws Exception {
-    ReelCircuit rc = new ReelCircuit();
-    rc.setId(content.getId());
-    CompEntityPuller puller = new CompEntityPuller(rc);
-    puller.addSearch(rc);
-    rc = (ReelCircuit)controller.pullCompEntity(puller);
+		ReelCircuit rc = new ReelCircuit();
+		rc.setId(content.getId());
+		CompEntityPuller puller = new CompEntityPuller(rc);
+		puller.addSearch(rc);
+		rc = (ReelCircuit)controller.pullCompEntity(puller);
 
-	boolean sendlengthlog = false;
-	if(content.getLength()!=0) {
-		sendlengthlog = true;
-	}
+		boolean sendlengthlog = false;
+		if(content.getLength()!=0) {
+			sendlengthlog = true;
+		}
 
-	boolean sendtensionlog = false;
-	if(content.getMaxTension()!=0) {
-		sendtensionlog = true;
-	}
+		boolean sendtensionlog = false;
+		if(content.getMaxTension()!=0) {
+			sendtensionlog = true;
+		}
 
-    Reel currReel = new Reel();
+		Reel currReel = new Reel();
 		currReel.setId(rc.getReelId());
 		currReel = this.getReel(currReel);
 
-    CableTechData techData = this.getCableTechData(currReel);
+		CableTechData techData = this.getCableTechData(currReel);
 
-    if(content.getActLength()!=0) {
-      if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) {
-        Reel reel = new Reel();
-  		  reel.setId(rc.getReelId());
-        reel.setTopFoot(content.getActLength());
-        this.updateReelTop(reel);
+		if(content.getActLength()!=0) {
+			if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) {
+				Reel reel = new Reel();
+				reel.setId(rc.getReelId());
+				reel.setTopFoot(content.getActLength());
+				this.updateReelTop(reel);
 
-        Reel currReel2 = new Reel();
-    		currReel2.setId(rc.getReelId());
-    		currReel2 = this.getReel(currReel2);
-			content.setMarker(content.getActLength());
-        content.setActLength(currReel.getOnReelQuantity()-currReel2.getOnReelQuantity());
+				Reel currReel2 = new Reel();
+				currReel2.setId(rc.getReelId());
+				currReel2 = this.getReel(currReel2);
+				content.setMarker(content.getActLength());
+				content.setActLength(currReel.getOnReelQuantity()-currReel2.getOnReelQuantity());
 
-		RTUserLoginMgr umgr = new RTUserLoginMgr();
-		umgr.init(this.getPageContext(), this.getDbResources());
-		RTUser user = (RTUser)umgr.getUser();
-		this.addReelLog(reel, content.getActLength() + " was pulled for pre-assigned circuit " + rc.getTitle() + " by " + user.getName());
+				RTUserLoginMgr umgr = new RTUserLoginMgr();
+				umgr.init(this.getPageContext(), this.getDbResources());
+				RTUser user = (RTUser)umgr.getUser();
+				this.addReelLog(reel, content.getActLength() + " was pulled for pre-assigned circuit " + rc.getTitle() + " by " + user.getName() + ". Top # changed from " + currReel.getTopFoot() + " to " + currReel2.getTopFoot() + ".");
 
-      } else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) {
-        int weight = techData.getWeight();
-        Reel reel = new Reel();
-  		  reel.setId(rc.getReelId());
-        reel.setCurrentWeight(reel.getCurrentWeight() - (content.getActLength()/1000 * weight));
-        this.updateReelWeight(reel);
+			} else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) {
+				int weight = techData.getWeight();
+				Reel reel = new Reel();
+				reel.setId(rc.getReelId());
+				reel.setCurrentWeight(reel.getCurrentWeight() - (content.getActLength()/1000 * weight));
+				this.updateReelWeight(reel);
 
-        Reel currReel2 = new Reel();
-    		currReel2.setId(rc.getReelId());
-    		currReel2 = this.getReel(currReel2);
+				Reel currReel2 = new Reel();
+				currReel2.setId(rc.getReelId());
+				currReel2 = this.getReel(currReel2);
+				content.setActLength(rc.getActLength() + (currReel.getOnReelQuantity()-currReel2.getOnReelQuantity()));
 
-        content.setActLength(rc.getActLength() + (currReel.getOnReelQuantity()-currReel2.getOnReelQuantity()));
-      } else {
-        Reel reel = new Reel();
-  		  reel.setId(rc.getReelId());
-        reel.setTempPullAmount(content.getActLength());
-        this.updateReelPull(reel);
+				RTUserLoginMgr umgr = new RTUserLoginMgr();
+				umgr.init(this.getPageContext(), this.getDbResources());
+				RTUser user = (RTUser)umgr.getUser();
+				this.addReelLog(reel, content.getActLength() + " was pulled for pre-assigned circuit " + rc.getTitle() + " by " + user.getName() + ". Current weight changed from " + currReel.getCurrentWeight() + " to " + currReel2.getCurrentWeight() + ".");				
+			} else {
+				Reel reel = new Reel();
+				reel.setId(rc.getReelId());
+				reel.setTempPullAmount(content.getActLength());
+				this.updateReelPull(reel);
+				content.setActLength(rc.getActLength() + content.getActLength());
 
-        content.setActLength(rc.getActLength() + content.getActLength());
-      }
-      content.setIsPulled("y");
-    }
+				Reel currReel2 = new Reel();
+				currReel2.setId(rc.getReelId());
+				currReel2 = this.getReel(currReel2);
+
+				RTUserLoginMgr umgr = new RTUserLoginMgr();
+				umgr.init(this.getPageContext(), this.getDbResources());
+				RTUser user = (RTUser)umgr.getUser();
+				this.addReelLog(reel, content.getActLength() + " was pulled by " + user.getName() + ". The new on reel quantity is " + currReel2.getOnReelQuantity());
+			}
+			content.setIsPulled("y");
+		}
 
 		content.setUpdated(new Date());
 		controller.update(content);
