@@ -224,7 +224,14 @@ public class ReelMgr extends CompWebManager {
 			umgr.init(this.getPageContext(), this.getDbResources());
 			RTUser user = (RTUser)umgr.getUser();
 			if(addLog) {
-			this.addReelLog(content, "Status changed from " + currReel.getStatus() + " to " + content.getStatus() + " by " + user.getName());
+				String message = "Reel was updated by " + user.getName();
+				message += " the status changed from " + currReel.getStatus() + " to " + content.getStatus();
+				if(content.getIsSteelReel().equals("y")) {
+					message += ". The Steel Reel # is " + content.getSteelReelSerial() + ".";
+				} else {
+					message += ". The Steel Reel is on wooden reel.";
+				}
+				this.addReelLog(content, message);
 			}
 		}
 
@@ -370,7 +377,14 @@ public class ReelMgr extends CompWebManager {
 				content.setUpdated(new Date());
 				controller.update(content);
 				this.updateOnReelQuantity(content);
-				this.addReelLog(Reel.STATUS_RECEIVED, content, "Reel was received by " + user.getName() + " with top foot marker =" + content.getTopFoot() + ", received quantity=" + content.getReceivedQuantity() + ", and warehouse location as " + content.getWharehouseLocation());
+				String message = "Reel was received by " + user.getName() + " with top foot marker =" + content.getTopFoot();
+				message += ", received quantity=" + content.getReceivedQuantity() + ", and warehouse location as " + content.getWharehouseLocation();
+				if(content.getIsSteelReel().equals("y")) {
+					message += ". The Steel Reel # is " + content.getSteelReelSerial() + ".";
+				} else {
+					message += ". The Steel Reel is on wooden reel.";
+				}
+				this.addReelLog(Reel.STATUS_RECEIVED, content, message);
 			}
 		} else {
 			content.setStatus(Reel.STATUS_REFUSED);
@@ -453,6 +467,9 @@ public class ReelMgr extends CompWebManager {
 	        	controller.update(pickList);
 	        }
 	        //"Reel was staged by " + user.getName()
+			if(pickList.getForeman().equals("")) {
+				pickList.setForeman("(not entered)");
+			}
 	        this.addReelLog(Reel.STATUS_STAGED, content, "Reel was staged by " + user.getName() + " for pick up by " + pickList.getDriver() + " for check out to " + pickList.getForeman() + ".");
     	} else {
     		this.addReelLog(Reel.STATUS_STAGED, content, "Reel was staged by " + user.getName());
@@ -504,6 +521,9 @@ public class ReelMgr extends CompWebManager {
         	controller.update(pickList);
         }
 
+		if(pickList.getForeman().equals("")) {
+			pickList.setForeman("(not entered)");
+		}
         this.addReelLog(Reel.STATUS_CHECKED_OUT, content, "Reel was checked out by " + user.getName() + " to " + pickList.getDriver() + " for installation by " + pickList.getForeman() + ".");
 	}
 
@@ -1415,7 +1435,7 @@ public class ReelMgr extends CompWebManager {
 				RTUserLoginMgr umgr = new RTUserLoginMgr();
 				umgr.init(this.getPageContext(), this.getDbResources());
 				RTUser user = (RTUser)umgr.getUser();
-				this.addReelLog(reel, content.getActLength() + " was pulled for pre-assigned circuit " + rc.getTitle() + " by " + user.getName() + ". Top # changed from " + currReel.getTopFoot() + " to " + currReel2.getTopFoot() + ".");
+				this.addReelLog(reel, content.getActLength() + " was pulled for un-assigned circuit " + rc.getTitle() + " by " + user.getName() + ". Top # changed from " + currReel.getTopFoot() + " to " + currReel2.getTopFoot() + ".");
 			} else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) {
 				int weight = techData.getWeight();
 				Reel reel = new Reel();
@@ -1431,7 +1451,7 @@ public class ReelMgr extends CompWebManager {
 				RTUserLoginMgr umgr = new RTUserLoginMgr();
 				umgr.init(this.getPageContext(), this.getDbResources());
 				RTUser user = (RTUser)umgr.getUser();
-				this.addReelLog(reel, content.getActLength() + " was pulled for pre-assigned circuit " + rc.getTitle() + " by " + user.getName() + ". Current weight changed from " + currReel.getCurrentWeight() + " to " + currReel2.getCurrentWeight() + ".");				
+				this.addReelLog(reel, content.getActLength() + " was pulled for un-assigned circuit " + rc.getTitle() + " by " + user.getName() + ". Current weight changed from " + currReel.getCurrentWeight() + " to " + currReel2.getCurrentWeight() + ".");				
 			} else {
 				Reel reel = new Reel();
 				reel.setId(rc.getReelId());

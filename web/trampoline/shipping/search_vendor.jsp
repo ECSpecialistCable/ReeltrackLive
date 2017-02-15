@@ -101,6 +101,14 @@ if(request.getParameter("customer_id") != null && !request.getParameter("custome
     customer_id = Integer.parseInt(request.getParameter("customer_id"));
 }
 
+if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
+    if(request.getParameter(Reel.CR_ID_COLUMN).equals("")) {
+        content.getData().removeValue(Reel.CR_ID_COLUMN);
+    } else {
+        content.setCrId(Integer.parseInt(request.getParameter(Reel.CR_ID_COLUMN)));
+        content.setSearchOp(Reel.CR_ID_COLUMN, Reel.EQ);
+    }
+}
 
 if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
     content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
@@ -163,6 +171,11 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 <admin:box_begin text="Filter Reels" name="Filter" open="false"/>
 <form:begin_selfsubmit name="search" action="shipping/search_vendor.jsp" />
 <% if(user.isUserType(RTUser.USER_TYPE_VENDOR)) { %>
+            <% if(content.getCrId()!=0) { %>
+                <form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= new Integer(content.getCrId()).toString() %>" />
+            <% } else { %>
+                <form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="" />
+            <% } %>
             <form:row_begin />
             <form:label name="" label="ECS Customer:" />
             <form:content_begin />
@@ -242,6 +255,7 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
         <form:label name="" label="" />
         <form:buttonset_begin align="left" padding="0"/>
             <form:submit_inline button="submit" waiting="true" name="search" action="test" />
+            <form:clearform_inline name="search"/>
         <form:buttonset_end />
     <form:row_end />
 <form:end />
