@@ -278,10 +278,41 @@ public class ReelMgr extends CompWebManager {
 		if(shipped) {
 			if(user.getUserType().equals(RTUser.USER_TYPE_VENDOR)) {
 				this.addReelLog(Reel.STATUS_SHIPPED, content, "Vendor " + user.getName() + " marked reel as Shipped with shipped quantity of " + content.getShippedQuantity() + ", carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList());
+				if(content.getOrigTopFoot()==0) {
+					CompEntityPuller puller = new CompEntityPuller(new Reel());
+					Reel reel = new Reel();
+					reel.setId(content.getId());
+					puller.addSearch(reel);
+					reel = (Reel)controller.pullCompEntity(puller);
+
+					puller = new CompEntityPuller(new Customer());
+					Customer customer = new Customer();
+					customer.setId(user.getCustomerId());
+					puller.addSearch(customer);
+					customer = (Customer)controller.pullCompEntity(puller);
+
+					CompProperties props = new CompProperties();
+					String mailHost = props.getProperty("mailHost");
+					String mailFrom = customer.getIssueContactEmail();//props.getProperty("mailFrom");
+
+					ArrayList emails = new ArrayList();
+					emails.add(customer.getIssueContactEmail());
+					EmailSender emailer = new EmailSender();
+					try {
+						String subject = "ORGINIAL TOP FT ERROR with " + customer.getName() + " for reel CRID#:" + reel.getCrId();
+						String message = "ORGINIAL TOP FT ERROR with " + customer.getName() + " on " + user.getJobName() + " Project - " + user.getJobCode() + " for ECS Part #" + reel.getEcsPN() + " manufactured by " + reel.getManufacturer()  + " on ECS PO " + reel.getOrdNo() + " with reel tag " + reel.getReelTag() + " and is Customer Reel ID# " + reel.getCrId() + " - Part Number " + reel.getCableDescription();
+						emailer.sendEmail(mailHost, emails, mailFrom, mailFrom, subject, message, null,null);
+					} catch(Exception e) {
+						System.out.println("Issue sending issue email." + e);
+					}	
+				}
 			} else {
 				this.addReelLog(Reel.STATUS_SHIPPED, content, user.getName() + " marked reel as Shipped with shipped quantity of " + content.getShippedQuantity() + ", carrier " + content.getCarrier() + ", tracking #" + content.getTrackingPRO() + ", and packing list#" + content.getPackingList());
 			}
 			content.setStatus(Reel.STATUS_SHIPPED);
+
+			/*
+			*/
 		}
 		content.setUpdated(new Date());
 		controller.update(content);
