@@ -226,7 +226,7 @@ public class ReelMgr extends CompWebManager {
 			if(addLog) {
 				String message = "Reel was updated by " + user.getName();
 				message += " the status changed from " + currReel.getStatus() + " to " + content.getStatus();
-				if(content.getIsSteelReel().equals("y")) {
+				if(!content.getSteelReelSerial().equals("")) {
 					message += ". The Steel Reel # is " + content.getSteelReelSerial() + ".";
 				} else {
 					message += ". The Steel Reel is on wooden reel.";
@@ -379,7 +379,7 @@ public class ReelMgr extends CompWebManager {
 				this.updateOnReelQuantity(content);
 				String message = "Reel was received by " + user.getName() + " with top foot marker =" + content.getTopFoot();
 				message += ", received quantity=" + content.getReceivedQuantity() + ", and warehouse location as " + content.getWharehouseLocation();
-				if(content.getIsSteelReel().equals("y")) {
+				if(!content.getSteelReelSerial().equals("")) {
 					message += ". The Steel Reel # is " + content.getSteelReelSerial() + ".";
 				} else {
 					message += ". The Steel Reel is on wooden reel.";

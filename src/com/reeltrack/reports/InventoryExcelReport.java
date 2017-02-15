@@ -13,7 +13,7 @@ import javax.servlet.jsp.PageContext;
 
 import com.reeltrack.customers.CustomerJob;
 import com.reeltrack.customers.CustomerMgr;
-import com.reeltrack.reels.Reel;
+import com.reeltrack.reels.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.SimpleDateFormat;
@@ -27,6 +27,7 @@ public class InventoryExcelReport {
 	CustomerMgr customerMgr;
 	ReportMgr reportMgr;
 	UserLoginMgr umgr;
+	ReelMgr reelMgr;
 	CellStyle styleBold;
 	CellStyle styleBoldRight;
 	CellStyle styleHeader;
@@ -37,6 +38,9 @@ public class InventoryExcelReport {
 
 		reportMgr = new ReportMgr();
 		reportMgr.init(pageContext, resources);
+
+		reelMgr = new ReelMgr();
+		reelMgr.init(pageContext, resources);
 		
 		umgr = new UserLoginMgr();
 		umgr.init(pageContext, resources);
@@ -92,7 +96,7 @@ public class InventoryExcelReport {
 			e.printStackTrace();
 		}
 
-		nextNum=6;
+		nextNum=8;
 		row = sheet.createRow((short) rowNum);
 		row.setHeightInPoints(15);
 		cell = row.createCell((short) nextNum);
@@ -103,7 +107,7 @@ public class InventoryExcelReport {
 	
 		rowNum++;
 		row = sheet.createRow((short) rowNum);
-		nextNum=6;
+		nextNum=8;
 		row.setHeightInPoints(15);
 		cell = row.createCell((short) nextNum);
 		cell.setCellValue("Inventory Report \n"+custJob.getName() + " (" + custJob.getCode() + ")");
@@ -146,6 +150,17 @@ public class InventoryExcelReport {
 		cell.setCellValue("WH Location");
 		cell.setCellStyle(styleHeader);
 
+		//NEW FOOT MARKERS
+		sheet.setColumnWidth(nextNum, 3000);
+		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("Orig Top Ft Mark");
+		cell.setCellStyle(styleHeader);
+
+		sheet.setColumnWidth(nextNum, 3000);
+		cell = row.createCell((short) nextNum++);
+		cell.setCellValue("Current Top Ft Mark");
+		cell.setCellStyle(styleHeader);
+
 		sheet.setColumnWidth(nextNum, 3000);
 		cell = row.createCell((short) nextNum++);
 		cell.setCellValue("Current Qty");
@@ -173,10 +188,11 @@ public class InventoryExcelReport {
 				nextNum=0;
 				cell = row.createCell((short) nextNum++);
 				cell.setCellValue("Customer P/N - " + current.getCustomerPN());
-				addr = new CellRangeAddress(rowNum-1, rowNum-1, nextNum-1, nextNum+7);
+				addr = new CellRangeAddress(rowNum-1, rowNum-1, nextNum-1, nextNum+9);
 				sheet.addMergedRegion(addr);
 				cell.setCellStyle(styleHeader);				
 			}
+			CableTechData techData = reelMgr.getCableTechData(current);
 
 			row = sheet.createRow((short) rowNum++);
 			nextNum=0;
@@ -186,8 +202,25 @@ public class InventoryExcelReport {
 			row.createCell((short)nextNum++).setCellValue(current.getOrderedQuantity());
 			row.createCell((short)nextNum++).setCellValue(current.getReceivedQuantity());
 			row.createCell((short)nextNum++).setCellValue(current.getWharehouseLocation());
+			if(techData.getUsageTracking().equals(CableTechData.USAGE_FOOT_MARKERS)) {
+				row.createCell((short)nextNum++).setCellValue(current.getOrigTopFoot());
+				row.createCell((short)nextNum++).setCellValue(current.getTopFoot());
+			} else if(techData.getUsageTracking().equals(CableTechData.USAGE_WEIGHT)) {
+				row.createCell((short)nextNum++).setCellValue(current.getReceivedWeight());
+				row.createCell((short)nextNum++).setCellValue(current.getCurrentWeight());
+			} else if(techData.getUsageTracking().equals(CableTechData.USAGE_QUANTITY_PULLED)) {
+				row.createCell((short)nextNum++).setCellValue(current.getCableUsedQuantity());
+				row.createCell((short)nextNum++).setCellValue(current.getCableUsedQuantity());
+			} else {
+				row.createCell((short)nextNum++).setCellValue("");
+				row.createCell((short)nextNum++).setCellValue("");
+			}
 			row.createCell((short)nextNum++).setCellValue(current.getOnReelQuantity());
-			row.createCell((short)nextNum++).setCellValue(current.getSteelReelSerial());
+			if(!current.getSteelReelSerial().equals("")) {
+				row.createCell((short)nextNum++).setCellValue(current.getSteelReelSerial());
+			} else {
+				row.createCell((short)nextNum++).setCellValue("wooden reel");
+			}
 			row.createCell((short)nextNum++).setCellValue(current.getManufacturer());
 		}		
 
