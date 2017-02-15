@@ -6,7 +6,6 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="com.reeltrack.utilities.HtmlToImageWriter"%>
-<%@ page import="com.reeltrack.utilities.HTMLToPdfToImageWriter"%>
 
 <jsp:useBean id="dbResources" class="com.monumental.trampoline.datasources.DbResources" />
 <jsp:useBean id="reelMgr" class="com.reeltrack.reels.ReelMgr" />
