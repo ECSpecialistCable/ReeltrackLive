@@ -447,4 +447,9 @@ if(user.isUserType(RTUser.USER_TYPE_ECS)) {
 --%>
 
 <admin:set_tabset url="shipping/_tabset_default.jsp" thispage="search.jsp" />
+<% if(request.getParameter(Reel.PARAM) != null) { %>
+        <Script>
+            openTag(<%= request.getParameter(Reel.PARAM) %>);
+        </script>
+<% } %>
 <html:end />
