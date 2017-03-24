@@ -27,6 +27,16 @@ if(request.getParameter(Reel.PARAM) != null) {
     }
 }
 
+int tagNum = 1;
+if(request.getParameter("tagNum") != null) {
+    tagNum = Integer.parseInt(request.getParameter("tagNum"));
+}
+
+int tagTot = 1;
+if(request.getParameter("tagTot") != null) {
+    tagTot = Integer.parseInt(request.getParameter("tagTot"));
+}
+
 // Get the piece of content
 Reel content = new Reel();
 content.setId(contid);
@@ -113,7 +123,6 @@ String logoURL;
 	</style>
 </head>
 <body style="border:none; width: 650px !important;">
-	
 	<table style="border:none;margin: 0px; margin-bottom: 0px;padding: 0px;">
 		<tr>
 			<td colspan="2" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 10px;">
@@ -191,8 +200,8 @@ String logoURL;
 		</tr>
 
 		<% int total = 0; %>
-
-		<% for (int c=0; c<circuits.howMany() || c<10; c++ ) { %>
+		<% int startC = (tagNum - 1) * 10; %>
+		<% for (int c=startC; c<circuits.howMany() && c<tagNum*10; c++ ) { %>
 			<% ReelCircuit circuit = new ReelCircuit(); %>
 			<% if(c<circuits.howMany()) { %>
 				<%  circuit = (ReelCircuit)circuits.get(c); %>
@@ -206,20 +215,20 @@ String logoURL;
 			<% } %>
 			<tr>
 				<% String borderStyle = "border-bottom: dotted 1px black"; %>
-					<td class="value" style="height:14px;width: 22%;<%=borderStyle%>;padding-bottom:0px"><%= circuit.getName() %></td>
+					<td class="value" style="padding:0px; height:10px;width: 22%;<%=borderStyle%>;padding-bottom:0px"><%= circuit.getName() %></td>
 				<% if(circuit.getId()!=0) { %>
-					<td class="value" style="height:14px;width: 8%;<%=borderStyle%>"><%= circuit.getLength() %></td>
+					<td class="value" style="padding:0px;height:10px;width: 8%;<%=borderStyle%>"><%= circuit.getLength() %></td>
 				<% } else { %>
-					<td class="value" style="height:14px;width: 8%;<%=borderStyle%>"></td>
+					<td class="value" style="padding:0px;height:10px;width: 8%;<%=borderStyle%>"></td>
 				<% } %>
-					<td class="value" style="height:14px;width: 22%;<%=borderStyle%>;padding-bottom:0px"><%= circuit2.getName() %></td>
+					<td class="value" style="padding:0px;height:10px;width: 22%;<%=borderStyle%>;padding-bottom:0px"><%= circuit2.getName() %></td>
 				<% if(circuit2.getId()!=0) { %>
-					<td class="value" style="height:14px;width: 8%;<%=borderStyle%>"><%= circuit2.getLength() %></td>
+					<td class="value" style="padding:0px;height:10px;width: 8%;<%=borderStyle%>"><%= circuit2.getLength() %></td>
 				<% } else { %>
-					<td class="value" style="height:14px;width: 8%;<%=borderStyle%>"></td>
+					<td class="value" style="padding:0px;height:10px;width: 8%;<%=borderStyle%>"></td>
 				<% } %>
-				<td class="value" style="height:1px;width: 5%;"></td>
-				<% if(c==0 || c==1) { %>
+				<td class="value" style="padding:0px;height:1px;width: 5%;"></td>
+				<% if(c==0 || c==1 || c==10 || c==11 || c==20 || c==21) { %>
 					<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo_reeltag.jpg"; %>
 					<td style="text-align: center; width: 35%; padding: 0;width:160px;" rowspan="<%= "6" %>" align="center">
 						<table style="display:inline;width: 100%; text-align: center;border: none">
@@ -244,7 +253,7 @@ String logoURL;
 			</tr>
 		<% } %>
 		<tr>
-			<td class="header" colspan="3" style="text-align: center;">PRINTED <%= dateString %></td>
+			<td class="header" colspan="3" style="text-align: center;">TAG #<%= tagNum %> of <%= tagTot %> : PRINTED <%= dateString %></td>
 		</tr>
 	</table>
 	<%-- changed the code to above to tighten up the new design

@@ -45,7 +45,7 @@ int width= 630;
 int height= 330;
 HtmlToImageWriter writer = new HtmlToImageWriter();
 writer.init(pageContext, dbResources);
-String tagFileName = writer.writeImage(content, pageToGet, basePath, content.getReelTagDirectory() + "/", isRotate, width, height);
+String[] tagFileNames = writer.writeImage(content, pageToGet, basePath, content.getReelTagDirectory() + "/", isRotate, width, height);
 
 //HTMLToPdfToImageWriter writer = new HTMLToPdfToImageWriter(pageContext, dbResources);
 //writer.writeImage("http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId(),basePath, content.getCompEntityDirectory()+"/");
@@ -57,10 +57,19 @@ String tagFileName = writer.writeImage(content, pageToGet, basePath, content.get
 <head></head>
 <body>
 
-<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getReelTagDirectory() + "/" + tagFileName; %>
-<img alt="reeltag image" src="<%= tempURL %>" />
+<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getReelTagDirectory() + "/"; %>
+<!--<img alt="reeltag image" src="<%= tempURL %>" />-->
 <script>
-	window.location='<%= tempURL %>';
+	window.location='<%= tempURL %><%= tagFileNames[0] %>';
+    <% if(tagFileNames.length>1) { %>
+        window.open('<%= tempURL %><%= tagFileNames[1] %>', '_blank');
+    <% } %>
+    <% if(tagFileNames.length>2) { %>
+        window.open('<%= tempURL %><%= tagFileNames[2] %>', '_blank');
+    <% } %>
+    
+    //window.blur();
+    //window.focus();
 </script>
 
 </body>

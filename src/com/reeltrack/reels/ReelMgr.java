@@ -1621,7 +1621,7 @@ public class ReelMgr extends CompWebManager {
 		CompEntityPuller puller = new CompEntityPuller(new ReelCircuit());
 		ReelCircuit search = new ReelCircuit();
 		search.setReelId(content.getId());
-    search.setKind("c");
+    	search.setKind("c");
 		puller.addSearch(search);
 		puller.setSortBy(search.getTableName(), ReelCircuit.POSITION_COLUMN, true);
 		return controller.pullCompEntities(puller, 0, 0);

@@ -49,13 +49,40 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 
 public class HtmlToImageWriter extends CompWebManager {
+	CompDbController controller;
 
 	public void init(PageContext pageContext, DbResources resources) {
 		super.init(pageContext, resources);
+		this.controller = this.newCompController();
 	}
 
-	public String writeImage(Reel theReel, String pageToGet, String basePath, String contentUrl, boolean isRotate, int width, int height) throws Exception {
-		URL urlToGet = new URL(pageToGet);
+	public String[] writeImage(Reel theReel, String pageToGet, String basePath, String contentUrl, boolean isRotate, int width, int height) throws Exception {
+		CompEntityPuller puller = new CompEntityPuller(new ReelCircuit());
+		ReelCircuit search = new ReelCircuit();
+		search.setReelId(theReel.getId());
+    	search.setKind("c");
+		puller.addSearch(search);
+		puller.setSortBy(search.getTableName(), ReelCircuit.POSITION_COLUMN, true);
+		CompEntities circuits = controller.pullCompEntities(puller, 0, 0);
+		int tags = 1;
+		if(circuits.howMany()>10) tags = 2;
+		if(circuits.howMany()>20) tags = 3;
+		String[] toReturn = new String[tags];
+
+		String tag1 = this.writeImage(1,tags, theReel, pageToGet, basePath, contentUrl, isRotate, width, height);
+		toReturn[0] = tag1;
+		if(tags>1) {
+			String tag2 = this.writeImage(2,tags, theReel, pageToGet, basePath, contentUrl, isRotate, width, height);
+			toReturn[1] = tag2;
+		}
+		if(tags>2) {
+			String tag3 = this.writeImage(3,tags, theReel, pageToGet, basePath, contentUrl, isRotate, width, height);
+			toReturn[2] = tag3;
+		}
+		return toReturn;
+	}
+	public String writeImage(int tagNum, int tagTot, Reel theReel, String pageToGet, String basePath, String contentUrl, boolean isRotate, int width, int height) throws Exception {
+		URL urlToGet; // = new URL(pageToGet);
 
 		InputStream is = null;
 		BufferedReader br;
@@ -63,7 +90,7 @@ public class HtmlToImageWriter extends CompWebManager {
 
 		StringBuilder buf = new StringBuilder();
 		try {
-			urlToGet = new URL(pageToGet);
+			urlToGet = new URL(pageToGet + "&tagNum=" + tagNum + "&tagTot=" + tagTot);
 			is = urlToGet.openStream();  // throws an IOException
 			br = new BufferedReader(new InputStreamReader(is, "UTF8"));
 
@@ -111,7 +138,7 @@ public class HtmlToImageWriter extends CompWebManager {
 		renderer.layout(imageGraphics, new Dimension(width, height));
 		renderer.render(imageGraphics);
 
-		String tagFileName = theReel.getReelTag() + "_" + theReel.getCrId() + ".pdf";
+		String tagFileName = theReel.getReelTag() + "_" + theReel.getCrId() + "." + tagNum;
 		tagFileName = tagFileName.replace(" ", "_");
 		tagFileName = tagFileName.replace("#", "-");
 		tagFileName = tagFileName.replace("/", "-");
@@ -132,7 +159,7 @@ public class HtmlToImageWriter extends CompWebManager {
 
 		OutputStream os = new FileOutputStream(basePath + contentUrl + tagFileName);
 		ITextRenderer irenderer = new ITextRenderer();
-		irenderer.setDocument(pageToGet);
+		irenderer.setDocument(pageToGet + "&tagNum=" + tagNum + "&tagTot=" + tagTot);
 		irenderer.layout();
 		irenderer.createPDF(os);
 		os.close();
@@ -161,7 +188,14 @@ public class HtmlToImageWriter extends CompWebManager {
 		
 		//File fileToWrite = new File(basePath + contentUrl + tagFileName);
 		//ImageIO.write(image, "jpg", fileToWrite);
-		theReel.setReelTagFile(tagFileName);
+		if(tagNum==1) {
+			theReel.setReelTagFile(tagFileName);
+		} else if(tagNum==2) {
+			theReel.setReelTagFile2(tagFileName);
+		} else {
+			theReel.setReelTagFile3(tagFileName);
+		}
+		
 		theReel.setHasReelTagFile("y");
 		this.getCompController().update(theReel);
 		return tagFileName;

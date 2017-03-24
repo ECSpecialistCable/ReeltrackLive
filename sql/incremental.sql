@@ -364,3 +364,7 @@ create table reel_pulls (
 alter table reel_circuits add column pos int(11) default 0;
 alter table reel_circuits add column kind varchar(1) default 'c';
 alter table reel_circuits add column marker int(11) default 0;
+
+/* 3/24/17 */
+alter table reels add reel_tag_file2 varchar(50);
+alter table reels add reel_tag_file3 varchar(50);

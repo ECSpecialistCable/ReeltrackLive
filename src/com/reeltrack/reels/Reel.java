@@ -49,6 +49,8 @@ public class Reel extends ContentPositionable implements Positionable {
 	public static final String RT_QRCODE_FILE_COLUMN = "rt_qrcode_file";
 	public static final String PL_QRCODE_FILE_COLUMN = "pl_qrcode_file";
 	public static final String REEL_TAG_FILE_COLUMN = "reel_tag_file";
+	public static final String REEL_TAG_FILE2_COLUMN = "reel_tag_file2";
+	public static final String REEL_TAG_FILE3_COLUMN = "reel_tag_file3";
 	public static final String HAS_REEL_TAG_FILE_COLUMN = "has_reel_tag_file";
 	public static final String HAS_REEL_MARKERS_COLUMN = "has_reel_markers";
 	public static final String RECEIVED_WEIGHT_COLUMN = "received_weight";
@@ -798,6 +800,22 @@ public class Reel extends ContentPositionable implements Positionable {
 	
 	public void setReelTagFile(String name) {
 		this.getData().setString(REEL_TAG_FILE_COLUMN, name);
+	}
+
+	public String getReelTagFile2() {
+		return this.getData().getString(REEL_TAG_FILE2_COLUMN, "");
+	}
+	
+	public void setReelTagFile2(String name) {
+		this.getData().setString(REEL_TAG_FILE2_COLUMN, name);
+	}
+
+	public String getReelTagFile3() {
+		return this.getData().getString(REEL_TAG_FILE3_COLUMN, "");
+	}
+	
+	public void setReelTagFile3(String name) {
+		this.getData().setString(REEL_TAG_FILE3_COLUMN, name);
 	}
 
 	public String getHasReelTagFile() {
