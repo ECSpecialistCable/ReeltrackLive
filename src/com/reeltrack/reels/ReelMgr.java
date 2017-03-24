@@ -1061,6 +1061,42 @@ public class ReelMgr extends CompWebManager {
 						fis.close();
 					}
 				}
+				if(!reel.getReelTagFile2().equals("")) {
+					File dataSheet = new File(basePath + reel.getReelTagDirectory() + "/" + reel.getReelTagFile2());
+					if(dataSheet.exists()) {
+						FileInputStream fis = new FileInputStream(dataSheet);
+						String filename = "CRID" + reel.getCrId() + "-" + reel.getReelTagFile2(); //.replaceAll(",","").replaceAll("#","").replaceAll("'","");
+						System.out.println("adding file:" + filename);
+
+						ZipEntry zipEntry = new ZipEntry(filename);
+						zos.putNextEntry(zipEntry);
+						byte[] bytes = new byte[1024];
+						int length;
+						while ((length = fis.read(bytes)) >= 0) {
+							zos.write(bytes, 0, length);
+						}
+						zos.closeEntry();
+						fis.close();
+					}
+				}
+				if(!reel.getReelTagFile3().equals("")) {
+					File dataSheet = new File(basePath + reel.getReelTagDirectory() + "/" + reel.getReelTagFile3());
+					if(dataSheet.exists()) {
+						FileInputStream fis = new FileInputStream(dataSheet);
+						String filename = "CRID" + reel.getCrId() + "-" + reel.getReelTagFile3(); //.replaceAll(",","").replaceAll("#","").replaceAll("'","");
+						System.out.println("adding file:" + filename);
+
+						ZipEntry zipEntry = new ZipEntry(filename);
+						zos.putNextEntry(zipEntry);
+						byte[] bytes = new byte[1024];
+						int length;
+						while ((length = fis.read(bytes)) >= 0) {
+							zos.write(bytes, 0, length);
+						}
+						zos.closeEntry();
+						fis.close();
+					}
+				}
 			}
 			System.out.println("done adding files");
 
