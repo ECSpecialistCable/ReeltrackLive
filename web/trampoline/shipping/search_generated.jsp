@@ -86,6 +86,7 @@ String tempURL = "";
             <listing:header_cell name="Reel Tag" />
             <listing:header_cell name="Cable Description" />
             <listing:header_cell name="" width="120"/>
+            <listing:header_cell name="" width="80"/>
         <listing:header_end />
         <% for(int i=0; i<contents.howMany(); i++) { %>
         <% content = (Reel)contents.get(i); %>
@@ -99,9 +100,20 @@ String tempURL = "";
             <listing:cell_begin />
                 <%= content.getCableDescription() %>
             <listing:cell_end />
-            <listing:cell_begin />
+            <listing:cell_begin align="right"/>
                 <% tempURL = content.getReelTagDirectory() + "/" + content.getReelTagFile(); %>
-                <form:linkbutton url="<%= tempURL %>" name="PRINT" newtab="true" />
+                <form:linkbutton url="<%= tempURL %>" name="PRINT" newtab="true" tooltip="print reel tag 1" />
+                <% if(!content.getReelTagFile2().equals("")) { %>
+                    <% tempURL = content.getReelTagDirectory() + "/" + content.getReelTagFile2(); %>
+                    <form:linkbutton url="<%= tempURL %>" name="PRINT" newtab="true" tooltip="print reel tag 2"/>
+                <% } %>
+                <% if(!content.getReelTagFile3().equals("")) { %>
+                    <% tempURL = content.getReelTagDirectory() + "/" + content.getReelTagFile3(); %>
+                    <form:linkbutton url="<%= tempURL %>" name="PRINT" newtab="true" tooltip="print reel tag 3"/>
+                <% } %>
+               
+            <listing:cell_end />
+            <listing:cell_begin align="right"/>
                 <% tempURL = "shipping/search_generated.jsp?submit_action=clear_reel_tag&" +  Reel.PARAM + "=" + content.getId(); %>
                 <form:linkbutton url="<%= tempURL %>" name="CLEAR" />
             <listing:cell_end />
