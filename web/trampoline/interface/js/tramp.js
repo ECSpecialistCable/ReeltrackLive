@@ -176,7 +176,7 @@ function loadTab(url) {
 function loadTabset(url,page) {
     $("#tabsetContent").load(url,function() {
     	$( "li" ).each(function( index ) {
-    		console.log($(this).attr('id'));
+    		//console.log($(this).attr('id'));
   			if($(this).attr('id')!=null && $(this).attr('id').indexOf(page)!=-1) {
   				$(this).addClass('active');
   			}
