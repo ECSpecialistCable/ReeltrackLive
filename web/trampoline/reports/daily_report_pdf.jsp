@@ -74,7 +74,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 		</div>
 		
 		<div style="width:95%;">
-			<h4>Received Shipments on <%= df.format(new Date()) %></h4>
+			<h4>Received Shipments on <%= df.format(reportDay.getTime()) %></h4>
 			<table style="width:100%;align:center;" cellpadding="3px" cellspacing="0">
 				<th class="center">CRID #</th>
 				<th class="center">Manufacturer</th>
@@ -108,7 +108,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 		</div>		
 
 		<div style="width:95%;">
-			<h4>Reel Checked OUT on <%= df.format(new Date()) %></h4>
+			<h4>Reel Checked OUT on <%= df.format(reportDay.getTime()) %></h4>
 			<table style="width:100%;align:center;" cellpadding="3px" cellspacing="0">
 				<th class="center">CRID #</th>
 				<th class="center">Reel Tag</th>
@@ -138,7 +138,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 		</div>
 
 		<div style="width:95%;">
-			<h4>Reel Checked IN on <%= df.format(new Date()) %></h4>
+			<h4>Reel Checked IN on <%= df.format(reportDay.getTime()) %></h4>
 			<table style="width:100%;align:center;" cellpadding="3px" cellspacing="0">
 				<th style="border-bottom: none" class="center">CRID #</th>
 				<th style="border-bottom: none" class="center">Reel Tag</th>
