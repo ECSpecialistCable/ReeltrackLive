@@ -120,6 +120,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 				<% for(int i=0; i<checkedOutOnDate.howMany(); i++) { %>
 					<% Reel current = (Reel)checkedOutOnDate.get(i); %>
 					<% PickList pickList = (PickList)current.getCompEntity(PickList.PARAM); %>
+					<% ReelLog log = (ReelLog)current.getCompEntity(ReelLog.PARAM); %>
 					<% if (i % 2 != 0) {%>
 						<tr>
 					<% } else { %>
@@ -129,7 +130,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 						<td class="center"><%= current.getReelTag() %></td>
 						<td class="center"><%= current.getCustomerPN() %></td>
 						<td class="center"><%= current.getCableDescription() %></td>
-						<td class="center"><%= current.getTopFoot() %></td>
+						<td class="center"><%= log.getTopFoot() %></td>
 						<td class="center"><% if(pickList!=null) { %><%= pickList.getForeman() %> <% } else { %>N/A<% } %></td>
 					</tr>
 				<% } %>
@@ -155,6 +156,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 				</tr>
 				<% for(int i=0; i<checkedInOnDate.howMany(); i++) { %>
 					<% Reel current = (Reel)checkedInOnDate.get(i); %>
+					<% ReelLog log = (ReelLog)current.getCompEntity(ReelLog.PARAM); %>
 					<% CompEntities issues = current.getCompEntities(ReelIssue.PARAM); %>
 					<% if (i % 2 != 0) {%>
 						<tr>
@@ -165,7 +167,7 @@ SimpleDateFormat generatedDtFmt = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy");
 						<td class="center"><%= current.getReelTag() %></td>
 						<td class="center"><%= current.getCustomerPN() %></td>
 						<td class="center"><%= current.getCableDescription() %></td>
-						<td class="center"></td>
+						<td class="center"><%= log.getTopFoot() %></td>
 						<td class="center"><%= current.getOnReelQuantity() %></td>
 					</tr>
 					

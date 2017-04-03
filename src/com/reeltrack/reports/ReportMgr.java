@@ -230,6 +230,23 @@ public class ReportMgr extends CompWebManager {
 		puller.addSearch(log);
 
 		toReturn = controller.pullCompEntities(puller, 0, 0);
+
+		for(int x=0; x<toReturn.howMany(); x++) {
+			Reel tmp = (Reel)toReturn.get(x);
+			puller = new CompEntityPuller(new ReelLog());
+			log = new ReelLog();
+			log.setReelId(tmp.getId());
+			log.setCreated(reportOn.getTime());
+			log.setSearchOp(ReelLog.CREATED_COLUMN, ReelLog.DAYMONTHYEAR);
+			log.setStatus(status);
+			log.setSearchOp(ReelLog.STATUS_COLUMN, ReelLog.EQ);
+			puller.setSortBy(new ReelLog().getTableName(), ReelLog.CREATED_COLUMN, false);
+			puller.addSearch(log);
+			ReelLog tmp2 = (ReelLog)controller.pullCompEntity(puller);
+			tmp.setCompEntity(ReelLog.PARAM,tmp2);
+		}
+
+
 		return toReturn;
 	}
 
