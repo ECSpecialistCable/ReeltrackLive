@@ -151,7 +151,7 @@ String logoURL;
 		</tr>
 		<tr>
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">P/O #</td>
-			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPO() %></b></td>
+			<td class="value" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;"><b><%= content.getCustomerPO().replace("&","&amp;") %></b></td>
 
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 0px;">M.B.R.</td>
 			<%
