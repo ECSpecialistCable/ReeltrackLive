@@ -1,0 +1,31 @@
+28-Aug-2016 18:00:38.371 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+28-Aug-2016 18:00:38.372 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+28-Aug-2016 18:00:38.372 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+28-Aug-2016 18:00:38.372 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+28-Aug-2016 18:00:38.373 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.6
+28-Aug-2016 18:00:38.373 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+28-Aug-2016 18:00:38.373 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+28-Aug-2016 18:00:38.373 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+28-Aug-2016 18:00:38.373 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+28-Aug-2016 18:00:38.373 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tomkat/Development/TKK/ECS/tomcat
+28-Aug-2016 18:00:38.373 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tomkat/Development/TKK/ECS/tomcat
+28-Aug-2016 18:00:38.374 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tomkat/Development/TKK/ECS/tomcat/conf/logging.properties
+28-Aug-2016 18:00:38.374 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+28-Aug-2016 18:00:38.374 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tomkat/Development/TKK/ECS/tomcat/endorsed
+28-Aug-2016 18:00:38.374 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tomkat/Development/TKK/ECS/tomcat
+28-Aug-2016 18:00:38.374 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tomkat/Development/TKK/ECS/tomcat
+28-Aug-2016 18:00:38.374 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tomkat/Development/TKK/ECS/tomcat/temp
+28-Aug-2016 18:00:38.374 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tomkat/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+28-Aug-2016 18:00:38.547 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+28-Aug-2016 18:00:38.592 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+28-Aug-2016 18:00:38.595 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+28-Aug-2016 18:00:38.598 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+28-Aug-2016 18:00:38.598 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 685 ms
+28-Aug-2016 18:00:38.625 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+28-Aug-2016 18:00:38.625 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+28-Aug-2016 18:00:40.939 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+28-Aug-2016 18:00:40.939 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+28-Aug-2016 18:00:40.939 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+28-Aug-2016 18:00:41.516 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+28-Aug-2016 18:00:41.524 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+28-Aug-2016 18:00:41.525 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 2926 ms

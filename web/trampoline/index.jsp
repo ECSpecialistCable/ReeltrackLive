@@ -413,7 +413,7 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
         </div>
         <div class="row" style="border-bottom-left-radius:5px;border-bottom-right-radius:5px;color:#999999; background:#030623; height:50px;">
           <div class="col-md-12">
-            <p class="pull-left" style="margin-top:15px;">Copyright 2016 @ECS ReelTrack</p>
+            <p class="pull-left" style="margin-top:15px;">Copyright 2021 @ECS ReelTrack</p> 
             <p id="footerContent" class="pull-right" style="margin-top:15px;"></p>
           </div>
         </div>
@@ -453,4 +453,4 @@ if(reelID!=0 && !tagType.equals("") && !jobCode.equals("")) {
     </script>
 
     </body>
-    </html>
+    </html> 

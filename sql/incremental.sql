@@ -368,3 +368,6 @@ alter table reel_circuits add column marker int(11) default 0;
 /* 3/24/17 */
 alter table reels add reel_tag_file2 varchar(50);
 alter table reels add reel_tag_file3 varchar(50);
+
+/*03/12/18 */
+alter table reel_circuits modify column name varchar(50);

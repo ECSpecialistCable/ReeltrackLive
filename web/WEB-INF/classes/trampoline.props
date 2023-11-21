@@ -3,7 +3,7 @@ adminConfiguration=admin
 
 logDirectory=/Users/tomkat/Desktop
 debugLogOn=false
-sqlLogOn=true
+sqlLogOn=false
 
 live.database=jdbc/trampoline
 live.componentDirectory=/content
@@ -18,14 +18,19 @@ mailFrom=test@test.com
 
 databaseDriver=com.mysql.jdbc.Driver
 
-dbConnectionECHO=jdbc:mysql://127.0.0.1:3306/ECSDataTables
+dbConnectionECHO=jdbc:mysql://10.100.37.99:3306/ECSDataTables
 dbUserECHO=root
 dbPasswordECHO=6680cab1e
 
-dbConnectionTRANS=jdbc:mysql://127.0.0.1:3306/ReelTrack
+dbConnectionTRANS=jdbc:mysql://10.100.37.99:3306/ReelTrack
 dbUserTRANS=root
 dbPasswordTRANS=6680cab1e
 
-dbConnectionRT=jdbc:mysql://209.20.80.230:3306/reeltrack
+dbConnectionRT=jdbc:mysql://162.242.219.219:3306/reeltrack
 dbUserRT=www
 dbPasswordRT=sleep499
+
+dbConnectionAWS=jdbc:mysql://54.198.39.47:3306/reeltrack
+AWSUserRT=root
+AWSPassword=iaamBUQRsS9f
+

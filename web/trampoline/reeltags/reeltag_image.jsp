@@ -39,7 +39,7 @@ SimpleDateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 String dateString = df.format(new Date());
 
 String tempURL; //var for url expression
-String pageToGet = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId();
+String pageToGet = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/reeltags/reeltag.jsp?" + Reel.PARAM + "="+ content.getId();
 boolean isRotate = true;
 int width= 630;
 int height= 330;
@@ -57,7 +57,7 @@ String[] tagFileNames = writer.writeImage(content, pageToGet, basePath, content.
 <head></head>
 <body>
 
-<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getReelTagDirectory() + "/"; %>
+<% tempURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getReelTagDirectory() + "/"; %>
 <!--<img alt="reeltag image" src="<%= tempURL %>" />-->
 <script>
     <% if(tagFileNames.length>1) { %>

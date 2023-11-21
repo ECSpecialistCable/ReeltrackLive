@@ -265,8 +265,9 @@ public class PickListMgr extends CompWebManager {
 		//String qrcode = "PL:" + pulledReel.getCustomerPN() + ":" + pulledReel.getId() + ":" + pulledReel.getReelTag() + ":" + pulledReel.getReelSerial() + ":" + pulledReel.getCableDescription();
 		String domain = request.getServerName().toString();
 		int port = request.getServerPort();
+		String scheme = request.getScheme().toString();
 
-		String qrcode = "http://" + domain + ":" + port + "/trampoline/index.jsp?type=PL&id=" + pulledReel.getId() + "&job=" + pulledReel.getJobCode();
+		String qrcode = scheme + "://" + domain + ":" + port + "/trampoline/index.jsp?type=PL&id=" + pulledReel.getId() + "&job=" + pulledReel.getJobCode();
 		System.out.println(qrcode);
         ByteArrayOutputStream out = QRCode.from(qrcode).to(ImageType.PNG).withSize(500, 500).stream();
         

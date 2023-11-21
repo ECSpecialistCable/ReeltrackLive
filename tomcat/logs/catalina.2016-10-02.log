@@ -1,0 +1,2 @@
+02-Oct-2016 16:03:54.642 INFO [http-nio-8080-exec-1] org.apache.coyote.http11.AbstractHttp11Processor.process Error parsing HTTP request header
+ Note: further occurrences of HTTP header parsing errors will be logged at DEBUG level.

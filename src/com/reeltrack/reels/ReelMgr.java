@@ -157,9 +157,10 @@ public class ReelMgr extends CompWebManager {
 
 		String domain = request.getServerName().toString();
 		int port = request.getServerPort();
+		String scheme = request.getScheme().toString();
 		//String qrcode = "RT:" + pulledReel.getCustomerPN() + ":" + pulledReel.getId() + ":" + pulledReel.getReelTag() + ":" + pulledReel.getReelSerial() + ":" + pulledReel.getCableDescription();
 		//String qrcode = "http://www.ecsreeltrack.com/trampoline/index.jsp?type=RT&id=" + pulledReel.getId() + "&job=" + pulledReel.getJobCode();
-        String qrcode = "http://" + domain + ":" + port + "/trampoline/index.jsp?type=RT&id=" + pulledReel.getId() + "&job=" + pulledReel.getJobCode();
+        String qrcode = scheme + "://" + domain + ":" + port + "/trampoline/index.jsp?type=RT&id=" + pulledReel.getId() + "&job=" + pulledReel.getJobCode();
         ByteArrayOutputStream out = QRCode.from(qrcode).to(ImageType.PNG).withSize(500, 500).stream();
 
         String baseDir = this.pageContext.getServletContext().getRealPath("/") + pulledReel.getCompEntityDirectory();
@@ -1005,8 +1006,25 @@ public class ReelMgr extends CompWebManager {
 	public CompEntities getReelsDataForBOM(String jobCode) throws Exception {
 		CompProperties props = new CompProperties();
 		DbProcessor processor = new DbProcessor(resources.getConnection(props.getDatabase(this.getConfiguration())));
+		// String queryString = "SELECT created,    updated,    reels.status,    reels.name,    reel_tag,    cable_description,    customer_pn,    ecs_pn,    steel_reel_serial,    received_on,    times_checked_out,    times_checked_in,\n"+
+		// "carrier,    tracking_pro,    packing_list,    projected_shipping_date,    receiving_issue,    ordered_quantity,    shipped_quantity,    received_quantity,    bottom_foot,    top_foot,\n"+
+		// "cable_used_quantity,    job_id,    reel_type,    wharehouse_location,    receiving_disposition,    customer_po,    receiving_note,    pick_list_id,    on_reel_quantity,    OrdNo,\n"+
+		// "PORevision,    AbsoluteItem,    ReelSerial,    job_code,    ctr_number,    ctr_date,    ctr_sent,    manufacturer,    ctr_file,    data_sheet_file,    rt_qrcode_file,    pl_qrcode_file,\n"+
+		// "cr_id,    pn_volt,    pn_gauge,    pn_conductor,    reel_tag_file,    has_reel_tag_file,    received_weight,    current_weight,    has_reel_markers,    ECSInvoice,    ECSInvoiceDate,\n"+
+		// "is_steel_reel,    shipping_date,    bottom_foot_not_visible,    pos,    UniqueID,    orig_top_foot,    vendor_code,    vendor_abbrev_name,    reel_tag_file2,    reel_tag_file3,\n"+
+		// "count(id) as reels_count,\n"+
+		// "sum(ordered_quantity) as total_ordered \n"+
+		// "FROM reels  \n"+
+		// "WHERE job_code='" + jobCode + "'\n"+ 
+		// "GROUP BY  created,    updated,    reels.status,    reels.name,    reel_tag,    cable_description,    customer_pn,    ecs_pn,    steel_reel_serial,    received_on,    times_checked_out,    times_checked_in,\n"+
+		// "carrier,    tracking_pro,    packing_list,    projected_shipping_date,    receiving_issue,    ordered_quantity,    shipped_quantity,    received_quantity,    bottom_foot,    top_foot,\n"+
+		// "cable_used_quantity,    job_id,    reel_type,    wharehouse_location,    receiving_disposition,    customer_po,    receiving_note,    pick_list_id,    on_reel_quantity,    OrdNo,\n"+
+		// "PORevision,    AbsoluteItem,    ReelSerial,    job_code,    ctr_number,    ctr_date,    ctr_sent,    manufacturer,    ctr_file,    data_sheet_file,    rt_qrcode_file,    pl_qrcode_file,\n"+
+		// "cr_id,    pn_volt,    pn_gauge,    pn_conductor,    reel_tag_file,    has_reel_tag_file,    received_weight,    current_weight,    has_reel_markers,    ECSInvoice,    ECSInvoiceDate,\n"+
+		// "is_steel_reel,    shipping_date,    bottom_foot_not_visible,    pos,    UniqueID,    orig_top_foot,    vendor_code,    vendor_abbrev_name,    reel_tag_file2,    reel_tag_file3;";
 		String queryString = "select distinct *, count(reels.id) as reels_count, sum(ordered_quantity) as total_ordered from reels where job_code='" + jobCode + "' group by customer_pn;";
-		EntityList datalist = processor.getRows(queryString);
+		
+		EntityList datalist = processor.getRows(queryString);  
 
 		CompEntities toReturn = new CompEntities();
 		while(datalist.hasNext()) {

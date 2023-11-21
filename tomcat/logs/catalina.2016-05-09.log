@@ -1,0 +1,667 @@
+09-May-2016 09:50:16.516 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 09:50:16.518 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 09:50:16.518 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 09:50:16.518 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 09:50:16.518 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 09:50:16.518 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 09:50:16.518 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 09:50:16.519 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 09:50:16.519 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 09:50:16.519 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:50:16.519 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:50:16.519 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 09:50:16.520 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 09:50:16.520 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 09:50:16.520 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:50:16.520 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:50:16.520 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 09:50:16.520 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 09:50:16.691 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:50:16.732 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 09:50:16.734 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:50:16.738 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 09:50:16.738 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 714 ms
+09-May-2016 09:50:16.770 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 09:50:16.770 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 09:50:20.791 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 09:50:20.791 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 09:50:20.791 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 09:50:21.543 SEVERE [localhost-startStop-1] org.apache.catalina.core.StandardContext.startInternal Error filterStart
+09-May-2016 09:50:21.545 SEVERE [localhost-startStop-1] org.apache.catalina.core.StandardContext.startInternal Context [] startup failed due to previous errors
+09-May-2016 09:50:21.565 WARNING [localhost-startStop-1] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 09:50:21.566 WARNING [localhost-startStop-1] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 09:50:21.591 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:50:21.598 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:50:21.599 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 4860 ms
+09-May-2016 09:51:32.345 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 09:51:32.345 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:51:32.400 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:51:32.452 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 09:51:32.454 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:51:32.457 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:51:32.458 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:51:32.458 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:51:36.972 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 09:51:36.974 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 09:51:36.974 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 09:51:36.974 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 09:51:36.974 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 09:51:36.974 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 09:51:36.975 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 09:51:36.975 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 09:51:36.975 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 09:51:36.975 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:51:36.975 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:51:36.976 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 09:51:36.976 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 09:51:36.976 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 09:51:36.977 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:51:36.977 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:51:36.977 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 09:51:36.977 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 09:51:37.118 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:51:37.153 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 09:51:37.156 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:51:37.158 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 09:51:37.159 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 623 ms
+09-May-2016 09:51:37.180 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 09:51:37.180 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 09:51:40.636 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 09:51:40.637 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 09:51:40.637 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 09:51:42.641 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 09:51:42.723 WARNING [localhost-startStop-1] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services_links.LinksService.processLink(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 09:51:42.753 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:51:42.759 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:51:42.759 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5600 ms
+09-May-2016 09:54:53.345 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 09:54:53.346 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:54:53.400 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:54:53.451 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 09:54:53.486 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 09:54:53.486 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 09:54:53.492 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:54:53.494 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:54:53.495 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:54:53.495 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:54:56.462 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 09:54:56.464 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 09:54:56.464 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 09:54:56.464 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 09:54:56.464 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 09:54:56.465 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 09:54:56.465 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 09:54:56.465 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 09:54:56.465 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 09:54:56.465 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:54:56.465 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:54:56.466 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 09:54:56.466 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 09:54:56.466 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 09:54:56.466 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:54:56.467 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 09:54:56.467 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 09:54:56.467 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 09:54:56.596 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:54:56.629 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 09:54:56.631 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:54:56.634 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 09:54:56.634 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 593 ms
+09-May-2016 09:54:56.653 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 09:54:56.653 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 09:55:00.298 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 09:55:00.298 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 09:55:00.298 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 09:55:02.151 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 09:55:02.218 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services_links.LinksService.processLink(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 09:55:02.334 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 09:55:02.339 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 09:55:02.340 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5705 ms
+09-May-2016 10:04:17.472 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 10:04:17.472 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:04:17.525 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:04:17.581 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 10:04:17.612 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:04:17.613 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:04:17.617 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:04:17.619 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:04:17.620 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:04:17.621 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:04:26.351 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 10:04:26.353 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 10:04:26.353 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 10:04:26.353 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 10:04:26.353 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 10:04:26.353 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 10:04:26.353 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 10:04:26.353 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 10:04:26.353 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 10:04:26.353 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:04:26.354 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:04:26.354 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 10:04:26.354 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 10:04:26.354 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 10:04:26.355 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:04:26.355 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:04:26.355 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 10:04:26.355 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 10:04:26.481 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:04:26.516 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:04:26.518 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:04:26.522 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:04:26.522 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 600 ms
+09-May-2016 10:04:26.544 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 10:04:26.544 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 10:04:30.173 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 10:04:30.174 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 10:04:30.174 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 10:04:32.151 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:04:32.227 WARNING [localhost-startStop-1] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services_links.LinksService.processLink(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:04:32.244 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:04:32.250 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:04:32.251 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5728 ms
+09-May-2016 10:17:00.398 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 10:17:00.398 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:17:00.457 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:17:00.508 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 10:17:00.538 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:17:00.539 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:17:00.545 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:17:00.547 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:17:00.547 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:17:00.548 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:17:03.591 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 10:17:03.593 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 10:17:03.593 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 10:17:03.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 10:17:03.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 10:17:03.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 10:17:03.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 10:17:03.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 10:17:03.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 10:17:03.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:17:03.594 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:17:03.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 10:17:03.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 10:17:03.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 10:17:03.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:17:03.595 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:17:03.596 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 10:17:03.596 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 10:17:03.740 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:17:03.772 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:17:03.775 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:17:03.777 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:17:03.778 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 603 ms
+09-May-2016 10:17:03.798 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 10:17:03.798 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 10:17:07.237 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 10:17:07.237 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 10:17:07.238 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 10:17:09.366 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:17:09.433 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services_links.LinksService.processLink(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:17:09.448 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:17:09.454 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:17:09.455 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5676 ms
+09-May-2016 10:17:15.995 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 10:17:15.996 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:17:16.047 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:17:16.101 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 10:17:16.131 WARNING [localhost-startStop-1] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:17:16.132 WARNING [localhost-startStop-1] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:17:16.133 SEVERE [localhost-startStop-1] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@2a9337bc]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+09-May-2016 10:17:16.133 SEVERE [localhost-startStop-1] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@625aad4]) and a value of type [java.util.WeakHashMap] (value [{private org.jvnet.hk2.internal.DynamicConfigurationServiceImpl(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@48370275}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+09-May-2016 10:17:16.134 SEVERE [localhost-startStop-1] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@4f75574e]) and a value of type [java.util.WeakHashMap] (value [{public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7ce8a7cb, public org.glassfish.jersey.server.internal.inject.BeanParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@57b0c188, private javax.ws.rs.container.ResourceContext org.glassfish.jersey.server.model.internal.VoidVoidDispatcherProvider.resourceContext=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@27e455a1, private org.glassfish.jersey.server.model.internal.ResourceMethodDispatcherFactory org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.dispatcherProviderFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@42cea934, public org.glassfish.jersey.server.internal.inject.HeaderParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7ba18859, private org.glassfish.jersey.process.internal.RequestScope org.glassfish.jersey.server.ServerRuntime$Builder.requestScope=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2a4caa24, public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2f80ab91, public org.glassfish.jersey.message.internal.SourceProvider$SourceWriter(org.glassfish.hk2.api.Factory,org.glassfish.hk2.api.Factory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1830205c, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider.serviceLocator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6f248043, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.workers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@20f60a09, public org.glassfish.jersey.server.internal.RuntimeExecutorsBinder$BackgroundSchedulerFactory(org.glassfish.jersey.spi.RuntimeThreadProvider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@a00f1a5, public org.glassfish.jersey.server.internal.inject.FormParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@13ab0279, private javax.inject.Provider org.glassfish.jersey.server.internal.inject.AbstractContainerRequestValueFactory.request=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5846aed7, org.glassfish.jersey.server.internal.JerseyResourceContext(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@48704194, public org.glassfish.jersey.server.internal.inject.AsyncResponseValueFactoryProvider(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@45f00ce6, public org.glassfish.jersey.server.internal.inject.ParamConverters$AggregatedProvider(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@e8366eb, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@63de41fa, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.internal.inject.ParamInjectionResolver.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@29e8d0f4, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.internal.inject.BeanParamValueFactoryProvider.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6c3a7e13, private javax.ws.rs.core.Configuration org.glassfish.jersey.server.ServerRuntime$Builder.configuration=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@799bf941, private org.glassfish.jersey.server.spi.ExternalRequestScope org.glassfish.jersey.server.ServerRuntime$Builder.externalRequestScope=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@68dbb619, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7dbb486, private org.glassfish.jersey.spi.ExceptionMappers org.glassfish.jersey.server.ServerRuntime$Builder.exceptionMappers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@38ae8888, public org.glassfish.jersey.message.internal.SourceProvider$DomSourceReader(org.glassfish.hk2.api.Factory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1e592f2d, org.glassfish.jersey.server.model.internal.ResourceMethodDispatcherFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2b072981, org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.jaxb.internal.JaxbAutoDiscoverable.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7122c7e3, private javax.inject.Provider org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.containerRequestProvider=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3d84fb87, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6af38b5d, private javax.inject.Provider org.glassfish.jersey.jaxb.internal.DocumentProvider.dbf=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@782afca3, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1fd0319a, private javax.inject.Provider org.glassfish.jersey.jaxb.internal.DocumentProvider.tf=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@512b924, private org.glassfish.jersey.process.internal.RequestExecutorFactory org.glassfish.jersey.server.ServerRuntime$Builder.asyncExecutorFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@73cd73b8, public org.glassfish.jersey.server.internal.inject.WebTargetValueFactoryProvider(org.glassfish.hk2.api.ServiceLocator,javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5c2d5686, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@426fe078, public org.glassfish.jersey.message.internal.SourceProvider$SaxSourceReader(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5224aa88, private java.util.concurrent.ScheduledExecutorService org.glassfish.jersey.server.ServerRuntime$Builder.backgroundScheduler=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4a6c53c7, org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7cc3b56a, public org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorFactory(org.glassfish.jersey.server.internal.inject.ParamConverterFactory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4192e6aa, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@361564fa, public org.glassfish.jersey.jaxb.internal.JaxbStringReaderProvider$RootElementProvider(javax.inject.Provider,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1e4ffb94, public org.glassfish.jersey.server.internal.inject.DelegatedInjectionValueFactoryProvider(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7fc665d2, public org.glassfish.jersey.server.internal.inject.QueryParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@29377b36, public org.glassfish.jersey.internal.ExceptionMapperFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3498f85e, public org.glassfish.jersey.server.internal.inject.MatrixParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@55ea2602, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.mappers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@194e3198, public org.glassfish.jersey.server.internal.inject.PathParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@b32174c, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.resolvers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@781b547c, private org.jvnet.hk2.internal.DynamicConfigurationServiceImpl(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7cc5a74b, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.internal.inject.ContextInjectionResolver.serviceLocator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@146f8bba, public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@ffc660c, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2d667b3b, org.glassfish.jersey.internal.inject.JerseyClassAnalyzer(org.glassfish.hk2.api.ClassAnalyzer,org.glassfish.hk2.api.IterableProvider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7c486e23, org.glassfish.jersey.server.internal.inject.ParamConverterFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1492084b, public void org.glassfish.jersey.jaxb.internal.AbstractJaxbProvider.setConfiguration(javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7832d0d3, private javax.inject.Provider org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.validatorProvider=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6613d34d, org.glassfish.jersey.server.internal.inject.EntityParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@591590da, public org.glassfish.jersey.server.internal.process.ServerManagedAsyncExecutorFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5dc11be3, private org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.invocationHandlerProviderFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@331becc0, public org.glassfish.jersey.server.internal.inject.CookieParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4b6ad855, public org.glassfish.jersey.message.internal.MessageBodyFactory(org.glassfish.hk2.api.ServiceLocator,javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3e0c12a2, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6b470883, org.glassfish.jersey.server.internal.process.ReferencesInitializer(org.glassfish.hk2.api.ServiceLocator,javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7d694c7, private javax.ws.rs.core.Configuration org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.globalConfig=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1ae35c18, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.ServerRuntime$Builder.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4424c4e4, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1774dff3, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@24370176}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+09-May-2016 10:17:16.135 SEVERE [localhost-startStop-1] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@24349a74]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+09-May-2016 10:17:16.135 SEVERE [localhost-startStop-1] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@465579f2]) and a value of type [java.util.WeakHashMap] (value [{public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@776fbd8c, public org.glassfish.jersey.server.internal.inject.BeanParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6bcf2ea6, private javax.ws.rs.container.ResourceContext org.glassfish.jersey.server.model.internal.VoidVoidDispatcherProvider.resourceContext=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6ba8fe91, private org.glassfish.jersey.server.model.internal.ResourceMethodDispatcherFactory org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.dispatcherProviderFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6df90ff, public org.glassfish.jersey.server.internal.inject.HeaderParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@cd6ce75, private org.glassfish.jersey.process.internal.RequestScope org.glassfish.jersey.server.ServerRuntime$Builder.requestScope=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1e7e7b57, public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@328e427f, public org.glassfish.jersey.message.internal.SourceProvider$SourceWriter(org.glassfish.hk2.api.Factory,org.glassfish.hk2.api.Factory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@482c74b9, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider.serviceLocator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@72b3aeaf, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.workers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1f7ad76d, public org.glassfish.jersey.server.internal.RuntimeExecutorsBinder$BackgroundSchedulerFactory(org.glassfish.jersey.spi.RuntimeThreadProvider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5fa7e347, public org.glassfish.jersey.server.internal.inject.FormParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7485cdb6, private javax.inject.Provider org.glassfish.jersey.server.internal.inject.AbstractContainerRequestValueFactory.request=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1b2cd35f, org.glassfish.jersey.server.internal.JerseyResourceContext(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@52a4aee8, public org.glassfish.jersey.server.internal.inject.AsyncResponseValueFactoryProvider(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@32f9c220, public org.glassfish.jersey.server.internal.inject.ParamConverters$AggregatedProvider(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@684b41b4, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1580c1c9, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.internal.inject.ParamInjectionResolver.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6224ee7f, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.internal.inject.BeanParamValueFactoryProvider.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1eb0d8d9, private javax.ws.rs.core.Configuration org.glassfish.jersey.server.ServerRuntime$Builder.configuration=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2c446c5a, private org.glassfish.jersey.server.spi.ExternalRequestScope org.glassfish.jersey.server.ServerRuntime$Builder.externalRequestScope=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3f596e92, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7acb3810, private org.glassfish.jersey.spi.ExceptionMappers org.glassfish.jersey.server.ServerRuntime$Builder.exceptionMappers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@62a55180, public org.glassfish.jersey.message.internal.SourceProvider$DomSourceReader(org.glassfish.hk2.api.Factory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6d8cc732, org.glassfish.jersey.server.model.internal.ResourceMethodDispatcherFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@19d519ef, org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.jaxb.internal.JaxbAutoDiscoverable.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3afda97d, private javax.inject.Provider org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.containerRequestProvider=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@729cd6f3, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@79223ac5, private javax.inject.Provider org.glassfish.jersey.jaxb.internal.DocumentProvider.dbf=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@48894e6f, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1fe8a042, private javax.inject.Provider org.glassfish.jersey.jaxb.internal.DocumentProvider.tf=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@b57c602, private org.glassfish.jersey.process.internal.RequestExecutorFactory org.glassfish.jersey.server.ServerRuntime$Builder.asyncExecutorFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@63cb31bf, public org.glassfish.jersey.server.internal.inject.WebTargetValueFactoryProvider(org.glassfish.hk2.api.ServiceLocator,javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@61b3e19f, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3b03b75b, public org.glassfish.jersey.message.internal.SourceProvider$SaxSourceReader(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@e5101ef, private java.util.concurrent.ScheduledExecutorService org.glassfish.jersey.server.ServerRuntime$Builder.backgroundScheduler=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@34ad8f53, org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4aec3f40, public org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorFactory(org.glassfish.jersey.server.internal.inject.ParamConverterFactory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6c73e029, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6aabca31, public org.glassfish.jersey.jaxb.internal.JaxbStringReaderProvider$RootElementProvider(javax.inject.Provider,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@32a41720, public org.glassfish.jersey.server.internal.inject.DelegatedInjectionValueFactoryProvider(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1999380b, public org.glassfish.jersey.server.internal.inject.QueryParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6a18e1b9, public org.glassfish.jersey.internal.ExceptionMapperFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5e564489, public org.glassfish.jersey.server.internal.inject.MatrixParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4c594574, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.mappers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1cd07594, public org.glassfish.jersey.server.internal.inject.PathParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@31e85a9e, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.resolvers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5d763226, private org.jvnet.hk2.internal.DynamicConfigurationServiceImpl(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5b82ae19, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.internal.inject.ContextInjectionResolver.serviceLocator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@44e11c28, public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@372e9280, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5b257141, org.glassfish.jersey.internal.inject.JerseyClassAnalyzer(org.glassfish.hk2.api.ClassAnalyzer,org.glassfish.hk2.api.IterableProvider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1519fe5a, org.glassfish.jersey.server.internal.inject.ParamConverterFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@59d5a08d, public void org.glassfish.jersey.jaxb.internal.AbstractJaxbProvider.setConfiguration(javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1a2c93a5, private javax.inject.Provider org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.validatorProvider=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6a7356d8, org.glassfish.jersey.server.internal.inject.EntityParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@30429ee2, public org.glassfish.jersey.server.internal.process.ServerManagedAsyncExecutorFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@44e791af, private org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.invocationHandlerProviderFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3aa8832d, public org.glassfish.jersey.server.internal.inject.CookieParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4a9dd736, public org.glassfish.jersey.message.internal.MessageBodyFactory(org.glassfish.hk2.api.ServiceLocator,javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6e8cf509, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@161e7b9e, org.glassfish.jersey.server.internal.process.ReferencesInitializer(org.glassfish.hk2.api.ServiceLocator,javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@68d1339b, private javax.ws.rs.core.Configuration org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.globalConfig=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4cd16dd0, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.ServerRuntime$Builder.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@45fcedfe, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@205bbc54, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@41770e2f}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+09-May-2016 10:17:16.144 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:17:16.147 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:17:16.148 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:17:16.149 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:17:24.561 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 10:17:24.562 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 10:17:24.562 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 10:17:24.563 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 10:17:24.563 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 10:17:24.563 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 10:17:24.563 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 10:17:24.563 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 10:17:24.563 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 10:17:24.563 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:17:24.563 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:17:24.564 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 10:17:24.564 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 10:17:24.564 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 10:17:24.564 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:17:24.565 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:17:24.565 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 10:17:24.565 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 10:17:24.706 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:17:24.751 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:17:24.754 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:17:24.758 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:17:24.759 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 628 ms
+09-May-2016 10:17:24.785 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 10:17:24.785 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 10:17:28.300 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 10:17:28.300 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 10:17:28.300 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 10:17:30.273 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:17:30.347 WARNING [localhost-startStop-1] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services_links.LinksService.processLink(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:17:30.365 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:17:30.373 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:17:30.374 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5615 ms
+09-May-2016 10:19:43.107 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 10:19:43.108 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:19:43.162 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:19:43.214 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 10:19:43.252 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:19:43.252 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:19:43.258 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:19:43.263 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:19:43.264 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:19:43.265 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:19:44.817 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 10:19:44.818 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 10:19:44.819 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 10:19:44.819 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 10:19:44.819 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 10:19:44.819 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 10:19:44.819 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 10:19:44.819 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 10:19:44.819 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 10:19:44.819 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:19:44.820 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:19:44.820 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 10:19:44.820 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 10:19:44.821 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 10:19:44.821 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:19:44.821 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:19:44.821 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 10:19:44.821 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 10:19:44.967 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:19:45.008 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:19:45.011 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:19:45.014 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:19:45.014 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 636 ms
+09-May-2016 10:19:45.034 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 10:19:45.035 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 10:19:48.639 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 10:19:48.640 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 10:19:48.640 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 10:19:50.645 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:19:50.724 WARNING [localhost-startStop-1] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services_links.LinksService.processLink(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:19:50.740 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:19:50.745 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:19:50.746 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5731 ms
+09-May-2016 10:23:07.295 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 10:23:07.296 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:23:07.353 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:23:07.404 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 10:23:07.433 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:23:07.433 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:23:07.438 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:23:07.441 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:23:07.441 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:23:07.442 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:23:12.470 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 10:23:12.472 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 10:23:12.472 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 10:23:12.472 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 10:23:12.473 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 10:23:12.473 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 10:23:12.473 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 10:23:12.473 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 10:23:12.473 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 10:23:12.473 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:23:12.473 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:23:12.474 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 10:23:12.475 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 10:23:12.475 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 10:23:12.475 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:23:12.475 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:23:12.475 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 10:23:12.475 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 10:23:12.618 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:23:12.657 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:23:12.659 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:23:12.662 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:23:12.663 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 567 ms
+09-May-2016 10:23:12.685 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 10:23:12.685 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 10:23:12.694 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:23:12.699 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:23:12.702 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 38 ms
+09-May-2016 10:23:20.949 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 10:23:20.949 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:23:21.005 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:23:21.058 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 10:23:21.060 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:23:21.062 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:23:21.063 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:23:21.064 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:26:52.569 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 10:26:52.570 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 10:26:52.570 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 10:26:52.570 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 10:26:52.570 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 10:26:52.570 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 10:26:52.570 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 10:26:52.571 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 10:26:52.571 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 10:26:52.571 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:26:52.571 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:26:52.571 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 10:26:52.572 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 10:26:52.572 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 10:26:52.572 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:26:52.572 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:26:52.572 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 10:26:52.572 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 10:26:52.697 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:26:52.726 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:26:52.728 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:26:52.731 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:26:52.732 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 584 ms
+09-May-2016 10:26:52.749 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 10:26:52.750 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 10:26:56.166 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 10:26:56.167 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 10:26:56.168 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 10:26:58.160 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:26:58.229 WARNING [localhost-startStop-1] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services_links.LinksService.processLink(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:26:58.245 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:26:58.252 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:26:58.252 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5520 ms
+09-May-2016 10:28:50.077 INFO [http-nio-8080-exec-3] org.apache.coyote.http11.AbstractHttp11Processor.process Error parsing HTTP request header
+ Note: further occurrences of HTTP header parsing errors will be logged at DEBUG level.
+09-May-2016 10:29:03.264 INFO [http-nio-8080-exec-5] org.apache.coyote.http11.AbstractHttp11Processor.process Error parsing HTTP request header
+ Note: further occurrences of HTTP header parsing errors will be logged at DEBUG level.
+09-May-2016 10:29:11.237 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 10:29:11.238 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:29:11.295 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:29:11.348 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 10:29:11.382 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:29:11.383 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:29:11.389 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:29:11.391 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:29:11.392 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:29:11.393 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:29:13.897 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 10:29:13.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 10:29:13.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 10:29:13.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 10:29:13.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 10:29:13.899 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 10:29:13.900 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 10:29:13.900 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 10:29:13.900 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 10:29:13.900 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:29:13.900 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:29:13.901 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 10:29:13.901 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 10:29:13.901 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 10:29:13.901 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:29:13.901 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:29:13.902 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 10:29:13.902 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 10:29:14.062 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:29:14.097 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:29:14.100 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:29:14.104 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:29:14.104 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 626 ms
+09-May-2016 10:29:14.126 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 10:29:14.126 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 10:29:17.718 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 10:29:17.719 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 10:29:17.719 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 10:29:19.595 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:29:19.679 WARNING [localhost-startStop-1] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services_links.LinksService.processLink(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:29:19.799 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:29:19.806 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:29:19.807 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5703 ms
+09-May-2016 10:29:19.928 INFO [http-nio-8080-exec-1] org.apache.coyote.http11.AbstractHttp11Processor.process Error parsing HTTP request header
+ Note: further occurrences of HTTP header parsing errors will be logged at DEBUG level.
+09-May-2016 10:29:19.928 INFO [http-nio-8080-exec-2] org.apache.coyote.http11.AbstractHttp11Processor.process Error parsing HTTP request header
+ Note: further occurrences of HTTP header parsing errors will be logged at DEBUG level.
+09-May-2016 10:29:20.067 INFO [http-nio-8080-exec-4] org.apache.coyote.http11.AbstractHttp11Processor.process Error parsing HTTP request header
+ Note: further occurrences of HTTP header parsing errors will be logged at DEBUG level.
+09-May-2016 10:29:42.366 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 10:29:42.366 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:29:42.421 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:29:42.474 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 10:29:42.510 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:29:42.511 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:29:42.515 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:29:42.518 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:29:42.519 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:29:42.519 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:29:44.168 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 10:29:44.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 10:29:44.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 10:29:44.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 10:29:44.170 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 10:29:44.171 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 10:29:44.171 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 10:29:44.171 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 10:29:44.171 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 10:29:44.171 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:29:44.171 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:29:44.172 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 10:29:44.172 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 10:29:44.172 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 10:29:44.172 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:29:44.172 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:29:44.173 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 10:29:44.173 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 10:29:44.322 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:29:44.364 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:29:44.367 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:29:44.370 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:29:44.371 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 629 ms
+09-May-2016 10:29:44.395 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 10:29:44.395 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 10:29:47.957 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 10:29:47.957 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 10:29:47.957 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 10:29:49.878 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:29:49.952 WARNING [localhost-startStop-1] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services_links.LinksService.processLink(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:29:49.967 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:29:49.973 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:29:49.975 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5603 ms
+09-May-2016 10:53:38.328 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 10:53:38.329 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:53:38.383 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:53:38.434 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 10:53:38.463 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:53:38.463 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:53:38.468 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:53:38.507 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:53:38.608 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:53:38.609 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:53:40.679 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 10:53:40.681 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 10:53:40.681 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 10:53:40.681 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 10:53:40.681 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 10:53:40.682 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 10:53:40.682 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 10:53:40.682 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 10:53:40.682 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 10:53:40.682 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:53:40.682 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:53:40.683 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 10:53:40.683 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 10:53:40.683 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 10:53:40.683 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:53:40.683 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:53:40.683 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 10:53:40.684 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 10:53:40.822 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:53:40.860 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:53:40.863 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:53:40.866 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:53:40.867 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 612 ms
+09-May-2016 10:53:40.893 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 10:53:40.893 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 10:53:44.070 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 10:53:44.070 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 10:53:44.070 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 10:53:45.952 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:53:46.020 WARNING [localhost-startStop-1] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services_links.LinksService.processLink(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:53:46.039 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:53:46.045 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:53:46.046 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 5178 ms
+09-May-2016 10:53:53.109 INFO [http-nio-8080-exec-2] org.apache.coyote.http11.AbstractHttp11Processor.process Error parsing HTTP request header
+ Note: further occurrences of HTTP header parsing errors will be logged at DEBUG level.
+09-May-2016 10:54:16.218 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+09-May-2016 10:54:16.218 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:54:16.273 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:54:16.324 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+09-May-2016 10:54:16.362 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:54:16.362 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:54:16.366 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:54:16.368 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:54:16.369 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:54:16.370 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:54:18.152 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+09-May-2016 10:54:18.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+09-May-2016 10:54:18.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+09-May-2016 10:54:18.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+09-May-2016 10:54:18.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+09-May-2016 10:54:18.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+09-May-2016 10:54:18.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+09-May-2016 10:54:18.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+09-May-2016 10:54:18.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+09-May-2016 10:54:18.154 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:54:18.155 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:54:18.155 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+09-May-2016 10:54:18.155 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+09-May-2016 10:54:18.155 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+09-May-2016 10:54:18.156 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:54:18.156 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+09-May-2016 10:54:18.156 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+09-May-2016 10:54:18.156 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+09-May-2016 10:54:18.284 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:54:18.317 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:54:18.320 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:54:18.324 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+09-May-2016 10:54:18.324 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 572 ms
+09-May-2016 10:54:18.346 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+09-May-2016 10:54:18.346 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+09-May-2016 10:54:22.328 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+09-May-2016 10:54:22.328 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+09-May-2016 10:54:22.329 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+09-May-2016 10:54:24.357 WARNING [localhost-startStop-1] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:54:24.436 WARNING [localhost-startStop-1] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services_links.LinksService.processLink(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+09-May-2016 10:54:24.449 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+09-May-2016 10:54:24.457 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+09-May-2016 10:54:24.459 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 6134 ms
+09-May-2016 10:54:24.591 INFO [http-nio-8080-exec-1] org.apache.coyote.http11.AbstractHttp11Processor.process Error parsing HTTP request header
+ Note: further occurrences of HTTP header parsing errors will be logged at DEBUG level.
+09-May-2016 10:54:24.591 INFO [http-nio-8080-exec-2] org.apache.coyote.http11.AbstractHttp11Processor.process Error parsing HTTP request header
+ Note: further occurrences of HTTP header parsing errors will be logged at DEBUG level.
+09-May-2016 10:57:34.326 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] has started
+09-May-2016 10:57:34.378 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:57:34.378 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:57:37.442 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.startInternal Error filterStart
+09-May-2016 10:57:37.443 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.startInternal Context [] startup failed due to previous errors
+09-May-2016 10:57:37.450 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+09-May-2016 10:57:37.453 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] is completed

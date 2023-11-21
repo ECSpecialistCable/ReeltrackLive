@@ -1,0 +1,671 @@
+14-Mar-2016 11:51:16.072 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+14-Mar-2016 11:51:16.136 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 11:51:16.203 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 11:51:16.256 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+14-Mar-2016 11:51:16.282 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 11:51:16.293 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 11:51:16.297 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 11:51:16.302 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 11:51:19.919 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+14-Mar-2016 11:51:19.920 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+14-Mar-2016 11:51:19.920 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+14-Mar-2016 11:51:19.921 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Mar-2016 11:51:19.921 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+14-Mar-2016 11:51:19.921 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+14-Mar-2016 11:51:19.921 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+14-Mar-2016 11:51:19.921 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+14-Mar-2016 11:51:19.921 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+14-Mar-2016 11:51:19.921 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 11:51:19.921 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 11:51:19.922 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+14-Mar-2016 11:51:19.923 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Mar-2016 11:51:19.923 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+14-Mar-2016 11:51:19.923 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 11:51:19.923 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 11:51:19.923 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+14-Mar-2016 11:51:19.924 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+14-Mar-2016 11:51:20.177 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 11:51:20.222 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+14-Mar-2016 11:51:20.224 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 11:51:20.228 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+14-Mar-2016 11:51:20.229 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 930 ms
+14-Mar-2016 11:51:20.255 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+14-Mar-2016 11:51:20.256 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+14-Mar-2016 11:51:25.601 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+14-Mar-2016 11:51:25.602 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+14-Mar-2016 11:51:25.646 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+14-Mar-2016 11:51:28.563 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+14-Mar-2016 11:51:28.597 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 11:51:28.609 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 11:51:28.610 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 8381 ms
+14-Mar-2016 11:53:25.612 WARNING [http-nio-8080-exec-10] null.null The following warnings have been detected: WARNING: Unknown HK2 failure detected:
+MultiException stack 1 of 2
+java.lang.IllegalArgumentException: The Connection was null. Ugh!
+	at com.monumental.trampoline.datasources.DbProcessor.open(Unknown Source)
+	at com.monumental.trampoline.datasources.DbProcessor.<init>(Unknown Source)
+	at com.monumental.trampoline.component.CompDbBridge.<init>(Unknown Source)
+	at com.monumental.trampoline.component.CompDbController.newCompBridge(Unknown Source)
+	at com.monumental.trampoline.component.CompDbController.<init>(Unknown Source)
+	at com.monumental.trampoline.component.CompManager.newCompController(Unknown Source)
+	at com.monumental.trampoline.component.CompManager.init(Unknown Source)
+	at com.monumental.trampoline.component.CompManager.init(Unknown Source)
+	at com.kredible.services.MembersService.<init>(MembersService.java:39)
+	at sun.reflect.GeneratedConstructorAccessor34.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at org.glassfish.hk2.utilities.reflection.ReflectionHelper.makeMe(ReflectionHelper.java:1129)
+	at org.jvnet.hk2.internal.ClazzCreator.createMe(ClazzCreator.java:274)
+	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:368)
+	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:471)
+	at org.glassfish.jersey.process.internal.RequestScope.findOrCreate(RequestScope.java:162)
+	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2064)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.internalGetService(ServiceLocatorImpl.java:711)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.getService(ServiceLocatorImpl.java:653)
+	at org.glassfish.jersey.internal.inject.Injections.getOrCreate(Injections.java:169)
+	at org.glassfish.jersey.server.model.MethodHandler$ClassBasedMethodHandler.getInstance(MethodHandler.java:185)
+	at org.glassfish.jersey.server.internal.routing.PushMethodHandlerRouter.apply(PushMethodHandlerRouter.java:74)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:109)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:92)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:61)
+	at org.glassfish.jersey.process.internal.Stages.process(Stages.java:197)
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:297)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:288)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1110)
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:401)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:386)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:335)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:222)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.kredible.services.AuthenticationFilter.doFilter(AuthenticationFilter.java:32)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:208)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:274)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:219)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:142)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:537)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1085)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:658)
+	at org.apache.coyote.http11.Http11NioProtocol$Http11ConnectionHandler.process(Http11NioProtocol.java:222)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1556)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1513)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+MultiException stack 2 of 2
+java.lang.IllegalStateException: Unable to perform operation: create on com.kredible.services.MembersService
+	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:395)
+	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:471)
+	at org.glassfish.jersey.process.internal.RequestScope.findOrCreate(RequestScope.java:162)
+	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2064)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.internalGetService(ServiceLocatorImpl.java:711)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.getService(ServiceLocatorImpl.java:653)
+	at org.glassfish.jersey.internal.inject.Injections.getOrCreate(Injections.java:169)
+	at org.glassfish.jersey.server.model.MethodHandler$ClassBasedMethodHandler.getInstance(MethodHandler.java:185)
+	at org.glassfish.jersey.server.internal.routing.PushMethodHandlerRouter.apply(PushMethodHandlerRouter.java:74)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:109)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:92)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:61)
+	at org.glassfish.jersey.process.internal.Stages.process(Stages.java:197)
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:297)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:288)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1110)
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:401)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:386)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:335)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:222)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.kredible.services.AuthenticationFilter.doFilter(AuthenticationFilter.java:32)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:208)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:274)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:219)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:142)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:537)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1085)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:658)
+	at org.apache.coyote.http11.Http11NioProtocol$Http11ConnectionHandler.process(Http11NioProtocol.java:222)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1556)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1513)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+14-Mar-2016 12:03:04.868 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] has started
+14-Mar-2016 12:03:04.899 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+14-Mar-2016 12:03:04.901 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+14-Mar-2016 12:03:04.909 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@2f1740a0]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:04.909 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@2f1740a0]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:04.910 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@2f1740a0]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:04.910 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@2f1740a0]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:04.910 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@2f1740a0]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:04.910 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@2f1740a0]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:04.910 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@2f1740a0]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:04.911 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@3e329231]) and a value of type [java.util.WeakHashMap] (value [{protected org.glassfish.jersey.server.internal.process.ServerProcessingBinder$ContainerRequestFactory(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@74a86fb2}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:04.912 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@2f1740a0]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:04.912 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@3e329231]) and a value of type [java.util.WeakHashMap] (value [{javax.servlet.http.HttpServletRequest com.kredible.services.MembersService.hsr=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@39e5b264, javax.servlet.http.HttpServletResponse com.kredible.services.MembersService.hsp=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2c62e7b8, public org.glassfish.jersey.servlet.WebComponent$HttpServletResponseReferencingFactory(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@66b4b1f, public org.glassfish.jersey.servlet.WebComponent$HttpServletRequestReferencingFactory(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3189619f}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:04.912 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@2f1740a0]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:04.912 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@2f1740a0]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:03:09.794 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.startup.ContextConfig.processAnnotationsFile Unable to process file [/Users/tkk/Development/Kredible/tomcatPer/webapps/../../Personal/web/WEB-INF/classes/com/kredible/cfactors/CFDataSourceResult.class] for annotations
+ java.io.EOFException
+	at org.apache.tomcat.util.bcel.classfile.FastDataInputStream.readInt(FastDataInputStream.java:145)
+	at org.apache.tomcat.util.bcel.classfile.ClassParser.readID(ClassParser.java:200)
+	at org.apache.tomcat.util.bcel.classfile.ClassParser.parse(ClassParser.java:78)
+	at org.apache.catalina.startup.ContextConfig.processAnnotationsStream(ContextConfig.java:1994)
+	at org.apache.catalina.startup.ContextConfig.processAnnotationsFile(ContextConfig.java:1977)
+	at org.apache.catalina.startup.ContextConfig.processAnnotationsFile(ContextConfig.java:1971)
+	at org.apache.catalina.startup.ContextConfig.processAnnotationsFile(ContextConfig.java:1971)
+	at org.apache.catalina.startup.ContextConfig.processAnnotationsFile(ContextConfig.java:1971)
+	at org.apache.catalina.startup.ContextConfig.processAnnotationsFile(ContextConfig.java:1971)
+	at org.apache.catalina.startup.ContextConfig.processAnnotationsUrl(ContextConfig.java:1922)
+	at org.apache.catalina.startup.ContextConfig.processAnnotations(ContextConfig.java:1880)
+	at org.apache.catalina.startup.ContextConfig.webConfig(ContextConfig.java:1149)
+	at org.apache.catalina.startup.ContextConfig.configureStart(ContextConfig.java:771)
+	at org.apache.catalina.startup.ContextConfig.lifecycleEvent(ContextConfig.java:305)
+	at org.apache.catalina.util.LifecycleSupport.fireLifecycleEvent(LifecycleSupport.java:117)
+	at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:90)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5095)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.StandardContext.reload(StandardContext.java:3796)
+	at org.apache.catalina.loader.WebappLoader.backgroundProcess(WebappLoader.java:292)
+	at org.apache.catalina.core.StandardContext.backgroundProcess(StandardContext.java:5551)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1378)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1382)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1382)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1350)
+	at java.lang.Thread.run(Thread.java:745)
+
+14-Mar-2016 12:03:11.003 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.startInternal Error filterStart
+14-Mar-2016 12:03:11.003 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.startInternal Context [] startup failed due to previous errors
+14-Mar-2016 12:03:11.031 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+14-Mar-2016 12:03:11.034 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] is completed
+14-Mar-2016 12:04:25.086 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+14-Mar-2016 12:04:25.086 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 12:04:25.141 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 12:04:25.196 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+14-Mar-2016 12:04:25.198 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 12:04:25.202 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 12:04:25.203 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 12:04:25.205 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 12:04:28.697 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+14-Mar-2016 12:04:28.699 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+14-Mar-2016 12:04:28.700 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+14-Mar-2016 12:04:28.700 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Mar-2016 12:04:28.700 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+14-Mar-2016 12:04:28.700 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+14-Mar-2016 12:04:28.701 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+14-Mar-2016 12:04:28.701 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+14-Mar-2016 12:04:28.704 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+14-Mar-2016 12:04:28.706 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 12:04:28.707 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 12:04:28.708 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+14-Mar-2016 12:04:28.708 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Mar-2016 12:04:28.708 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+14-Mar-2016 12:04:28.708 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 12:04:28.709 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 12:04:28.709 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+14-Mar-2016 12:04:28.709 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+14-Mar-2016 12:04:28.911 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 12:04:28.948 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+14-Mar-2016 12:04:28.951 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 12:04:28.954 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+14-Mar-2016 12:04:28.955 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 854 ms
+14-Mar-2016 12:04:28.978 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+14-Mar-2016 12:04:28.978 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+14-Mar-2016 12:04:33.425 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+14-Mar-2016 12:04:33.425 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+14-Mar-2016 12:04:33.426 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+14-Mar-2016 12:04:35.756 WARNING [localhost-startStop-1] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+14-Mar-2016 12:04:35.932 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 12:04:35.938 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 12:04:35.939 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 6983 ms
+14-Mar-2016 12:12:42.268 WARNING [http-nio-8080-exec-7] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: WARNING: Unknown HK2 failure detected:
+MultiException stack 1 of 2
+java.lang.IllegalArgumentException: The Connection was null. Ugh!
+	at com.monumental.trampoline.datasources.DbProcessor.open(Unknown Source)
+	at com.monumental.trampoline.datasources.DbProcessor.<init>(Unknown Source)
+	at com.monumental.trampoline.component.CompDbBridge.<init>(Unknown Source)
+	at com.monumental.trampoline.component.CompDbController.newCompBridge(Unknown Source)
+	at com.monumental.trampoline.component.CompDbController.<init>(Unknown Source)
+	at com.monumental.trampoline.component.CompManager.newCompController(Unknown Source)
+	at com.monumental.trampoline.component.CompManager.init(Unknown Source)
+	at com.monumental.trampoline.component.CompManager.init(Unknown Source)
+	at com.kredible.services.MembersService.<init>(MembersService.java:39)
+	at sun.reflect.GeneratedConstructorAccessor34.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at org.glassfish.hk2.utilities.reflection.ReflectionHelper.makeMe(ReflectionHelper.java:1129)
+	at org.jvnet.hk2.internal.ClazzCreator.createMe(ClazzCreator.java:274)
+	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:368)
+	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:471)
+	at org.glassfish.jersey.process.internal.RequestScope.findOrCreate(RequestScope.java:162)
+	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2064)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.internalGetService(ServiceLocatorImpl.java:711)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.getService(ServiceLocatorImpl.java:653)
+	at org.glassfish.jersey.internal.inject.Injections.getOrCreate(Injections.java:169)
+	at org.glassfish.jersey.server.model.MethodHandler$ClassBasedMethodHandler.getInstance(MethodHandler.java:185)
+	at org.glassfish.jersey.server.internal.routing.PushMethodHandlerRouter.apply(PushMethodHandlerRouter.java:74)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:109)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:92)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:61)
+	at org.glassfish.jersey.process.internal.Stages.process(Stages.java:197)
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:297)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:288)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1110)
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:401)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:386)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:335)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:222)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.kredible.services.AuthenticationFilter.doFilter(AuthenticationFilter.java:32)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:208)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:274)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:219)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:142)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:537)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1085)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:658)
+	at org.apache.coyote.http11.Http11NioProtocol$Http11ConnectionHandler.process(Http11NioProtocol.java:222)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1556)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1513)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+MultiException stack 2 of 2
+java.lang.IllegalStateException: Unable to perform operation: create on com.kredible.services.MembersService
+	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:395)
+	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:471)
+	at org.glassfish.jersey.process.internal.RequestScope.findOrCreate(RequestScope.java:162)
+	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2064)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.internalGetService(ServiceLocatorImpl.java:711)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.getService(ServiceLocatorImpl.java:653)
+	at org.glassfish.jersey.internal.inject.Injections.getOrCreate(Injections.java:169)
+	at org.glassfish.jersey.server.model.MethodHandler$ClassBasedMethodHandler.getInstance(MethodHandler.java:185)
+	at org.glassfish.jersey.server.internal.routing.PushMethodHandlerRouter.apply(PushMethodHandlerRouter.java:74)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:109)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:92)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:61)
+	at org.glassfish.jersey.process.internal.Stages.process(Stages.java:197)
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:297)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:288)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1110)
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:401)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:386)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:335)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:222)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.kredible.services.AuthenticationFilter.doFilter(AuthenticationFilter.java:32)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:208)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:274)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:219)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:142)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:537)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1085)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:658)
+	at org.apache.coyote.http11.Http11NioProtocol$Http11ConnectionHandler.process(Http11NioProtocol.java:222)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1556)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1513)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+14-Mar-2016 12:13:23.193 WARNING [http-nio-8080-exec-1] null.null The following warnings have been detected: WARNING: Unknown HK2 failure detected:
+MultiException stack 1 of 2
+java.lang.IllegalArgumentException: The Connection was null. Ugh!
+	at com.monumental.trampoline.datasources.DbProcessor.open(Unknown Source)
+	at com.monumental.trampoline.datasources.DbProcessor.<init>(Unknown Source)
+	at com.monumental.trampoline.component.CompDbBridge.<init>(Unknown Source)
+	at com.monumental.trampoline.component.CompDbController.newCompBridge(Unknown Source)
+	at com.monumental.trampoline.component.CompDbController.<init>(Unknown Source)
+	at com.monumental.trampoline.component.CompManager.newCompController(Unknown Source)
+	at com.monumental.trampoline.component.CompManager.init(Unknown Source)
+	at com.monumental.trampoline.component.CompManager.init(Unknown Source)
+	at com.kredible.services.MembersService.<init>(MembersService.java:39)
+	at sun.reflect.GeneratedConstructorAccessor34.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:422)
+	at org.glassfish.hk2.utilities.reflection.ReflectionHelper.makeMe(ReflectionHelper.java:1129)
+	at org.jvnet.hk2.internal.ClazzCreator.createMe(ClazzCreator.java:274)
+	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:368)
+	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:471)
+	at org.glassfish.jersey.process.internal.RequestScope.findOrCreate(RequestScope.java:162)
+	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2064)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.internalGetService(ServiceLocatorImpl.java:711)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.getService(ServiceLocatorImpl.java:653)
+	at org.glassfish.jersey.internal.inject.Injections.getOrCreate(Injections.java:169)
+	at org.glassfish.jersey.server.model.MethodHandler$ClassBasedMethodHandler.getInstance(MethodHandler.java:185)
+	at org.glassfish.jersey.server.internal.routing.PushMethodHandlerRouter.apply(PushMethodHandlerRouter.java:74)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:109)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:92)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:61)
+	at org.glassfish.jersey.process.internal.Stages.process(Stages.java:197)
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:297)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:288)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1110)
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:401)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:386)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:335)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:222)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.kredible.services.AuthenticationFilter.doFilter(AuthenticationFilter.java:32)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:208)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:274)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:219)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:142)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:537)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1085)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:658)
+	at org.apache.coyote.http11.Http11NioProtocol$Http11ConnectionHandler.process(Http11NioProtocol.java:222)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1556)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1513)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+MultiException stack 2 of 2
+java.lang.IllegalStateException: Unable to perform operation: create on com.kredible.services.MembersService
+	at org.jvnet.hk2.internal.ClazzCreator.create(ClazzCreator.java:395)
+	at org.jvnet.hk2.internal.SystemDescriptor.create(SystemDescriptor.java:471)
+	at org.glassfish.jersey.process.internal.RequestScope.findOrCreate(RequestScope.java:162)
+	at org.jvnet.hk2.internal.Utilities.createService(Utilities.java:2064)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.internalGetService(ServiceLocatorImpl.java:711)
+	at org.jvnet.hk2.internal.ServiceLocatorImpl.getService(ServiceLocatorImpl.java:653)
+	at org.glassfish.jersey.internal.inject.Injections.getOrCreate(Injections.java:169)
+	at org.glassfish.jersey.server.model.MethodHandler$ClassBasedMethodHandler.getInstance(MethodHandler.java:185)
+	at org.glassfish.jersey.server.internal.routing.PushMethodHandlerRouter.apply(PushMethodHandlerRouter.java:74)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:109)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage._apply(RoutingStage.java:112)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:92)
+	at org.glassfish.jersey.server.internal.routing.RoutingStage.apply(RoutingStage.java:61)
+	at org.glassfish.jersey.process.internal.Stages.process(Stages.java:197)
+	at org.glassfish.jersey.server.ServerRuntime$2.run(ServerRuntime.java:297)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:271)
+	at org.glassfish.jersey.internal.Errors$1.call(Errors.java:267)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:315)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:297)
+	at org.glassfish.jersey.internal.Errors.process(Errors.java:267)
+	at org.glassfish.jersey.process.internal.RequestScope.runInScope(RequestScope.java:317)
+	at org.glassfish.jersey.server.ServerRuntime.process(ServerRuntime.java:288)
+	at org.glassfish.jersey.server.ApplicationHandler.handle(ApplicationHandler.java:1110)
+	at org.glassfish.jersey.servlet.WebComponent.service(WebComponent.java:401)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:386)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:335)
+	at org.glassfish.jersey.servlet.ServletContainer.service(ServletContainer.java:222)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:291)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:52)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.kredible.services.AuthenticationFilter.doFilter(AuthenticationFilter.java:32)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:208)
+	at com.thetransactioncompany.cors.CORSFilter.doFilter(CORSFilter.java:274)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:239)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:219)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:106)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:501)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:142)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:79)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:88)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:537)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1085)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:658)
+	at org.apache.coyote.http11.Http11NioProtocol$Http11ConnectionHandler.process(Http11NioProtocol.java:222)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1556)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.run(NioEndpoint.java:1513)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+
+
+14-Mar-2016 12:15:51.497 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] has started
+14-Mar-2016 12:15:51.517 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+14-Mar-2016 12:15:51.518 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+14-Mar-2016 12:15:51.519 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@41b6ff58]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:51.519 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@b699c8a]) and a value of type [java.util.WeakHashMap] (value [{javax.servlet.http.HttpServletResponse com.kredible.services.MembersService.hsp=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@844202b, public org.glassfish.jersey.servlet.WebComponent$HttpServletResponseReferencingFactory(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@42fb030}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:51.519 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@41b6ff58]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:51.519 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@41b6ff58]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:51.520 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@41b6ff58]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:51.520 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@41b6ff58]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:51.520 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@41b6ff58]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:51.521 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@41b6ff58]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:51.521 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@41b6ff58]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:51.521 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@41b6ff58]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:51.521 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@41b6ff58]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:51.521 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@b699c8a]) and a value of type [java.util.WeakHashMap] (value [{javax.servlet.http.HttpServletRequest com.kredible.services.MembersService.hsr=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7295d3d2, public org.glassfish.jersey.servlet.WebComponent$HttpServletRequestReferencingFactory(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@35df9cc6, protected org.glassfish.jersey.server.internal.process.ServerProcessingBinder$ContainerRequestFactory(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1c33b72e}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:15:56.721 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] null.null The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+14-Mar-2016 12:15:56.734 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] is completed
+14-Mar-2016 12:41:56.611 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] has started
+14-Mar-2016 12:41:56.632 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+14-Mar-2016 12:41:56.633 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@72eca2ce]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:41:56.633 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@61f7eae2]) and a value of type [java.util.WeakHashMap] (value [{private org.jvnet.hk2.internal.DynamicConfigurationServiceImpl(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4d09fc40}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:41:56.633 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@48080980]) and a value of type [java.util.WeakHashMap] (value [{public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5f65389d, public org.glassfish.jersey.server.internal.inject.BeanParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@19b6969, private javax.ws.rs.container.ResourceContext org.glassfish.jersey.server.model.internal.VoidVoidDispatcherProvider.resourceContext=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3727ee6, private org.glassfish.jersey.server.model.internal.ResourceMethodDispatcherFactory org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.dispatcherProviderFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@bbe3301, public org.glassfish.jersey.server.internal.inject.HeaderParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7d69533b, private org.glassfish.jersey.process.internal.RequestScope org.glassfish.jersey.server.ServerRuntime$Builder.requestScope=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2763bdde, public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3776729a, public org.glassfish.jersey.message.internal.SourceProvider$SourceWriter(org.glassfish.hk2.api.Factory,org.glassfish.hk2.api.Factory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4d2a794e, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider.serviceLocator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7a6d1b5b, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.workers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@40dad485, public org.glassfish.jersey.server.internal.RuntimeExecutorsBinder$BackgroundSchedulerFactory(org.glassfish.jersey.spi.RuntimeThreadProvider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@443c9ca6, public org.glassfish.jersey.server.internal.inject.FormParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5a427d66, private javax.inject.Provider org.glassfish.jersey.server.internal.inject.AbstractContainerRequestValueFactory.request=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@48e712b6, org.glassfish.jersey.server.internal.JerseyResourceContext(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5e0f89d3, public org.glassfish.jersey.server.internal.inject.AsyncResponseValueFactoryProvider(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7e76f718, public org.glassfish.jersey.server.internal.inject.ParamConverters$AggregatedProvider(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@37160cfd, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4794da0b, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.internal.inject.ParamInjectionResolver.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@65f7923b, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.internal.inject.BeanParamValueFactoryProvider.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2c7077aa, private javax.ws.rs.core.Configuration org.glassfish.jersey.server.ServerRuntime$Builder.configuration=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2b86f73d, private org.glassfish.jersey.server.spi.ExternalRequestScope org.glassfish.jersey.server.ServerRuntime$Builder.externalRequestScope=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4aa334c4, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@139c11e1, private org.glassfish.jersey.spi.ExceptionMappers org.glassfish.jersey.server.ServerRuntime$Builder.exceptionMappers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3c7ef91f, public org.glassfish.jersey.message.internal.SourceProvider$DomSourceReader(org.glassfish.hk2.api.Factory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@205ddeb2, org.glassfish.jersey.server.model.internal.ResourceMethodDispatcherFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@730bcb69, org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.jaxb.internal.JaxbAutoDiscoverable.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@ebcff0, private javax.inject.Provider org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.containerRequestProvider=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4b9668f3, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5f0877d, private javax.inject.Provider org.glassfish.jersey.jaxb.internal.DocumentProvider.dbf=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@288d4429, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@76c78a87, private javax.inject.Provider org.glassfish.jersey.jaxb.internal.DocumentProvider.tf=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@eeea55c, private org.glassfish.jersey.process.internal.RequestExecutorFactory org.glassfish.jersey.server.ServerRuntime$Builder.asyncExecutorFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@f241093, public org.glassfish.jersey.server.internal.inject.WebTargetValueFactoryProvider(org.glassfish.hk2.api.ServiceLocator,javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4d4aa152, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@79389ce, public org.glassfish.jersey.message.internal.SourceProvider$SaxSourceReader(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7cac0825, private java.util.concurrent.ScheduledExecutorService org.glassfish.jersey.server.ServerRuntime$Builder.backgroundScheduler=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@53a33fab, org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4bfb44bc, public org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorFactory(org.glassfish.jersey.server.internal.inject.ParamConverterFactory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@50bd69f4, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4cccbee6, public org.glassfish.jersey.jaxb.internal.JaxbStringReaderProvider$RootElementProvider(javax.inject.Provider,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6d88eb3, public org.glassfish.jersey.server.internal.inject.DelegatedInjectionValueFactoryProvider(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1797f470, public org.glassfish.jersey.server.internal.inject.QueryParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2c5eddbf, public org.glassfish.jersey.internal.ExceptionMapperFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@54c7d5c, public org.glassfish.jersey.server.internal.inject.MatrixParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4723d650, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.mappers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6f3f9eb0, public org.glassfish.jersey.server.internal.inject.PathParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@35d605cd, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.resolvers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@539638b6, private org.jvnet.hk2.internal.DynamicConfigurationServiceImpl(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@a5ee5c2, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.internal.inject.ContextInjectionResolver.serviceLocator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@19072027, public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1c7ab6a7, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7e4b7e16, org.glassfish.jersey.internal.inject.JerseyClassAnalyzer(org.glassfish.hk2.api.ClassAnalyzer,org.glassfish.hk2.api.IterableProvider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@346e4e8, org.glassfish.jersey.server.internal.inject.ParamConverterFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2360eabf, public void org.glassfish.jersey.jaxb.internal.AbstractJaxbProvider.setConfiguration(javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6ae6bffa, private javax.inject.Provider org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.validatorProvider=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4ff8d77e, org.glassfish.jersey.server.internal.inject.EntityParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7b2d1bcd, public org.glassfish.jersey.server.internal.process.ServerManagedAsyncExecutorFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5fbc2305, private org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.invocationHandlerProviderFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7a5e67, public org.glassfish.jersey.server.internal.inject.CookieParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@9b02a31, public org.glassfish.jersey.message.internal.MessageBodyFactory(org.glassfish.hk2.api.ServiceLocator,javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1ad0abb9, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@24ca17ed, org.glassfish.jersey.server.internal.process.ReferencesInitializer(org.glassfish.hk2.api.ServiceLocator,javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7611fc75, private javax.ws.rs.core.Configuration org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.globalConfig=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7e78b124, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.ServerRuntime$Builder.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@61ea4031, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@15eb569e, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6ce0e202}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 12:41:59.822 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.startInternal Error filterStart
+14-Mar-2016 12:41:59.822 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.startInternal Context [] startup failed due to previous errors
+14-Mar-2016 12:41:59.829 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+14-Mar-2016 12:41:59.831 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] is completed
+14-Mar-2016 13:42:35.485 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+14-Mar-2016 13:42:35.487 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 13:42:35.543 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 13:42:35.598 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+14-Mar-2016 13:42:35.600 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 13:42:35.603 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 13:42:35.604 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 13:42:35.605 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 13:42:39.071 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+14-Mar-2016 13:42:39.072 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+14-Mar-2016 13:42:39.072 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+14-Mar-2016 13:42:39.072 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+14-Mar-2016 13:42:39.072 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.2
+14-Mar-2016 13:42:39.072 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+14-Mar-2016 13:42:39.072 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+14-Mar-2016 13:42:39.072 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+14-Mar-2016 13:42:39.073 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+14-Mar-2016 13:42:39.073 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 13:42:39.073 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 13:42:39.073 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tkk/Development/Kredible/tomcatPer/conf/logging.properties
+14-Mar-2016 13:42:39.073 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+14-Mar-2016 13:42:39.073 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tkk/Development/Kredible/tomcatPer/endorsed
+14-Mar-2016 13:42:39.073 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 13:42:39.073 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tkk/Development/Kredible/tomcatPer
+14-Mar-2016 13:42:39.074 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tkk/Development/Kredible/tomcatPer/temp
+14-Mar-2016 13:42:39.074 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tkk/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+14-Mar-2016 13:42:39.259 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 13:42:39.318 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+14-Mar-2016 13:42:39.321 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 13:42:39.325 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+14-Mar-2016 13:42:39.325 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 788 ms
+14-Mar-2016 13:42:39.365 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+14-Mar-2016 13:42:39.365 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+14-Mar-2016 13:42:44.972 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+14-Mar-2016 13:42:44.972 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+14-Mar-2016 13:42:44.972 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+14-Mar-2016 13:42:47.301 WARNING [localhost-startStop-1] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+14-Mar-2016 13:42:47.492 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+14-Mar-2016 13:42:47.498 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+14-Mar-2016 13:42:47.499 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 8173 ms
+14-Mar-2016 13:56:51.329 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] has started
+14-Mar-2016 13:56:51.370 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+14-Mar-2016 13:56:51.371 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+14-Mar-2016 13:56:51.375 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@5404c0b1]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 13:56:51.376 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@1149381b]) and a value of type [java.util.WeakHashMap] (value [{protected org.glassfish.jersey.server.internal.process.ServerProcessingBinder$ContainerRequestFactory(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@353be038}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 13:56:51.376 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@5404c0b1]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 13:56:51.376 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@5404c0b1]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 13:56:51.376 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@5404c0b1]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 13:56:51.377 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@5404c0b1]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 13:56:51.377 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@5404c0b1]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 13:56:51.377 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@5404c0b1]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 13:56:51.377 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@1149381b]) and a value of type [java.util.WeakHashMap] (value [{javax.servlet.http.HttpServletRequest com.kredible.services.MembersService.hsr=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@72f704a2, javax.servlet.http.HttpServletResponse com.kredible.services.MembersService.hsp=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@845305, public org.glassfish.jersey.servlet.WebComponent$HttpServletResponseReferencingFactory(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@58552aee, public org.glassfish.jersey.servlet.WebComponent$HttpServletRequestReferencingFactory(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@32052bfc}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 13:56:59.972 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.glassfish.jersey.internal.Errors.logErrors The following warnings have been detected: HINT: A HTTP GET method, public void com.kredible.services.MembersService.getUrlAuthRedirect(java.lang.String) throws java.lang.Exception, returns a void type. It can be intentional and perfectly fine, but it is a little uncommon that GET method returns always "204 No Content".
+
+14-Mar-2016 13:57:00.040 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] is completed
+14-Mar-2016 14:28:41.635 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] has started
+14-Mar-2016 14:28:41.652 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+14-Mar-2016 14:28:41.652 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@7558938c]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 14:28:41.653 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@7b2bf346]) and a value of type [java.util.WeakHashMap] (value [{private org.jvnet.hk2.internal.DynamicConfigurationServiceImpl(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@70324239}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 14:28:41.653 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@7c0c90a]) and a value of type [java.util.WeakHashMap] (value [{public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@36b5fe8d, public org.glassfish.jersey.server.internal.inject.BeanParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@12a09ade, private javax.ws.rs.container.ResourceContext org.glassfish.jersey.server.model.internal.VoidVoidDispatcherProvider.resourceContext=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@70613139, private org.glassfish.jersey.server.model.internal.ResourceMethodDispatcherFactory org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.dispatcherProviderFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@71e83ea6, public org.glassfish.jersey.server.internal.inject.HeaderParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@68b0f780, private org.glassfish.jersey.process.internal.RequestScope org.glassfish.jersey.server.ServerRuntime$Builder.requestScope=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7ed0f622, public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7c1f838, public org.glassfish.jersey.message.internal.SourceProvider$SourceWriter(org.glassfish.hk2.api.Factory,org.glassfish.hk2.api.Factory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@376ceb68, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.model.internal.JavaResourceMethodDispatcherProvider.serviceLocator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@580f06f2, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.workers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@21179a37, public org.glassfish.jersey.server.internal.RuntimeExecutorsBinder$BackgroundSchedulerFactory(org.glassfish.jersey.spi.RuntimeThreadProvider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@291fb615, public org.glassfish.jersey.server.internal.inject.FormParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@79f83ff5, private javax.inject.Provider org.glassfish.jersey.server.internal.inject.AbstractContainerRequestValueFactory.request=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@59609eae, org.glassfish.jersey.server.internal.JerseyResourceContext(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@44bb6197, public org.glassfish.jersey.server.internal.inject.AsyncResponseValueFactoryProvider(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1040c80b, public org.glassfish.jersey.server.internal.inject.ParamConverters$AggregatedProvider(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@28ff4a61, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@75b7343e, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.internal.inject.ParamInjectionResolver.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6a1f44c6, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.internal.inject.BeanParamValueFactoryProvider.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7c89c91e, private javax.ws.rs.core.Configuration org.glassfish.jersey.server.ServerRuntime$Builder.configuration=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@2ef728ac, private org.glassfish.jersey.server.spi.ExternalRequestScope org.glassfish.jersey.server.ServerRuntime$Builder.externalRequestScope=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@62adef88, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7284be6f, private org.glassfish.jersey.spi.ExceptionMappers org.glassfish.jersey.server.ServerRuntime$Builder.exceptionMappers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@40775818, public org.glassfish.jersey.message.internal.SourceProvider$DomSourceReader(org.glassfish.hk2.api.Factory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@57d2baf2, org.glassfish.jersey.server.model.internal.ResourceMethodDispatcherFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5a8ede2f, org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.jaxb.internal.JaxbAutoDiscoverable.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@d2e64d7, private javax.inject.Provider org.glassfish.jersey.server.internal.JsonWithPaddingInterceptor.containerRequestProvider=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@77e35af2, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@35a46bd6, private javax.inject.Provider org.glassfish.jersey.jaxb.internal.DocumentProvider.dbf=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@19f7a4eb, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@670163de, private javax.inject.Provider org.glassfish.jersey.jaxb.internal.DocumentProvider.tf=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@ad89106, private org.glassfish.jersey.process.internal.RequestExecutorFactory org.glassfish.jersey.server.ServerRuntime$Builder.asyncExecutorFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1cb4a150, public org.glassfish.jersey.server.internal.inject.WebTargetValueFactoryProvider(org.glassfish.hk2.api.ServiceLocator,javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@38408ed1, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@54330594, public org.glassfish.jersey.message.internal.SourceProvider$SaxSourceReader(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1a2dfeb5, private java.util.concurrent.ScheduledExecutorService org.glassfish.jersey.server.ServerRuntime$Builder.backgroundScheduler=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@232a6281, org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1f204633, public org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorFactory(org.glassfish.jersey.server.internal.inject.ParamConverterFactory)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@53f3efe6, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@265e6b7b, public org.glassfish.jersey.jaxb.internal.JaxbStringReaderProvider$RootElementProvider(javax.inject.Provider,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@56903b5b, public org.glassfish.jersey.server.internal.inject.DelegatedInjectionValueFactoryProvider(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4b1cee64, public org.glassfish.jersey.server.internal.inject.QueryParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@75cb43e, public org.glassfish.jersey.internal.ExceptionMapperFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@528c121d, public org.glassfish.jersey.server.internal.inject.MatrixParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@591b1f4, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.mappers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@295210ec, public org.glassfish.jersey.server.internal.inject.PathParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4bcdbcbc, private javax.inject.Provider org.glassfish.jersey.internal.JaxrsProviders.resolvers=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@79e34322, private org.jvnet.hk2.internal.DynamicConfigurationServiceImpl(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@717553fb, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.internal.inject.ContextInjectionResolver.serviceLocator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@4899f849, public org.glassfish.jersey.jaxb.internal.XmlRootObjectJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@6e1785ba, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@d0e3109, org.glassfish.jersey.internal.inject.JerseyClassAnalyzer(org.glassfish.hk2.api.ClassAnalyzer,org.glassfish.hk2.api.IterableProvider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@563f51d8, org.glassfish.jersey.server.internal.inject.ParamConverterFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@51e3a0e6, public void org.glassfish.jersey.jaxb.internal.AbstractJaxbProvider.setConfiguration(javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@38bc535, private javax.inject.Provider org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.validatorProvider=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7f713a34, org.glassfish.jersey.server.internal.inject.EntityParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@53ec1593, public org.glassfish.jersey.server.internal.process.ServerManagedAsyncExecutorFactory(org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@1f446b98, private org.glassfish.jersey.server.model.internal.ResourceMethodInvocationHandlerFactory org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.invocationHandlerProviderFactory=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@42bba728, public org.glassfish.jersey.server.internal.inject.CookieParamValueFactoryProvider(org.glassfish.jersey.server.internal.inject.MultivaluedParameterExtractorProvider,org.glassfish.hk2.api.ServiceLocator)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@34ed95d1, public org.glassfish.jersey.message.internal.MessageBodyFactory(org.glassfish.hk2.api.ServiceLocator,javax.ws.rs.core.Configuration)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@79e4e52, public org.glassfish.jersey.jaxb.internal.XmlJaxbElementProvider$App(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@3bbaed92, org.glassfish.jersey.server.internal.process.ReferencesInitializer(org.glassfish.hk2.api.ServiceLocator,javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@24a79f2a, private javax.ws.rs.core.Configuration org.glassfish.jersey.server.model.ResourceMethodInvoker$Builder.globalConfig=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7c3cc572, private org.glassfish.hk2.api.ServiceLocator org.glassfish.jersey.server.ServerRuntime$Builder.locator=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@9a5e879, public org.glassfish.jersey.jaxb.internal.XmlRootElementJaxbProvider$Text(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@651f52a2, public org.glassfish.jersey.jaxb.internal.XmlCollectionJaxbProvider$General(org.glassfish.hk2.api.Factory,javax.ws.rs.ext.Providers)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@7d59dfe4}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 14:28:41.653 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@7558938c]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 14:28:41.655 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@7c0c90a]) and a value of type [java.util.WeakHashMap] (value [{javax.servlet.http.HttpServletRequest com.kredible.services.EngageService.hsr=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@67548268}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 14:28:41.656 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@7558938c]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 14:28:41.657 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$1] (value [org.jvnet.hk2.internal.PerLocatorUtilities$1@7558938c]) and a value of type [java.util.WeakHashMap] (value [{}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 14:28:41.657 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.checkThreadLocalMapForLeaks The web application [ROOT] created a ThreadLocal with key of type [org.jvnet.hk2.internal.PerLocatorUtilities$2] (value [org.jvnet.hk2.internal.PerLocatorUtilities$2@7c0c90a]) and a value of type [java.util.WeakHashMap] (value [{javax.servlet.http.HttpServletResponse com.kredible.services.MembersService.hsp=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@411458db, public org.glassfish.jersey.servlet.WebComponent$HttpServletRequestReferencingFactory(javax.inject.Provider)=org.jvnet.hk2.internal.SoftAnnotatedElementAnnotationInfo@5e819819}]) but failed to remove it when the web application was stopped. Threads are going to be renewed over time to try and avoid a probable memory leak.
+14-Mar-2016 14:28:44.410 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.startInternal Error filterStart
+14-Mar-2016 14:28:44.410 SEVERE [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.startInternal Context [] startup failed due to previous errors
+14-Mar-2016 14:28:44.418 WARNING [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+14-Mar-2016 14:28:44.419 INFO [ContainerBackgroundProcessor[StandardEngine[Catalina]]] org.apache.catalina.core.StandardContext.reload Reloading Context with name [] is completed

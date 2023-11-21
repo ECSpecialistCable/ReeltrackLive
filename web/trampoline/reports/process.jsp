@@ -50,7 +50,7 @@ if(action.equals("daily_report")){
 		String jobCode = request.getParameter("job_code");
 
 		HtmlToPdfWriter writer = new HtmlToPdfWriter(pageContext, dbResources);
-		String url = "http://" + request.getServerName() + ":" + request.getServerPort() + contextPath + "/trampoline/reports/daily_report_pdf.jsp?" + "daily_report_day=" + reportOn + "&job_code=" + jobCode;
+		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + contextPath + "/trampoline/reports/daily_report_pdf.jsp?" + "daily_report_day=" + reportOn + "&job_code=" + jobCode;
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		output = writer.writePdf(basePath, url);
 
@@ -85,7 +85,7 @@ if(action.equals("inventory_summary_report")){
 		file.mkdirs();
 		if(reportType.equalsIgnoreCase("Pdf")) {
 			HtmlToPdfWriter writer = new HtmlToPdfWriter(pageContext, dbResources);
-			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + contextPath + "/trampoline/reports/inventory_summary_report_pdf.jsp?job_code=" + jobCode;
+			String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + contextPath + "/trampoline/reports/inventory_summary_report_pdf.jsp?job_code=" + jobCode;
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			output = writer.writePdf(basePath, url);
 			fileName += ".pdf";
@@ -126,7 +126,7 @@ if(action.equals("inventory_report")){
 		file.mkdirs();
 		if(reportType.equalsIgnoreCase("Pdf")) {
 			HtmlToPdfWriter writer = new HtmlToPdfWriter(pageContext, dbResources);
-			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + contextPath + "/trampoline/reports/inventory_report_pdf.jsp?job_code="+jobCode;
+			String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + contextPath + "/trampoline/reports/inventory_report_pdf.jsp?job_code="+jobCode;
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			output = writer.writePdf(basePath, url);
 			fileName += ".pdf";
@@ -223,7 +223,7 @@ if(action.equals("period_report")){
 		String jobCode = request.getParameter("job_code");
 
 		HtmlToPdfWriter writer = new HtmlToPdfWriter(pageContext, dbResources);
-		String url = "http://" + request.getServerName() + ":" + request.getServerPort() + contextPath + "/trampoline/reports/period_report_pdf.jsp?" + "period_report_start_date=" + startDate + "&period_report_end_date=" + endDate + "&job_code=" + jobCode;
+		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + contextPath + "/trampoline/reports/period_report_pdf.jsp?" + "period_report_start_date=" + startDate + "&period_report_end_date=" + endDate + "&job_code=" + jobCode;
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		output = writer.writePdf(basePath, url);
 
@@ -254,7 +254,7 @@ if(action.equals("steel_reel_report")){
 		String jobCode = request.getParameter("job_code");
 
 		HtmlToPdfWriter writer = new HtmlToPdfWriter(pageContext, dbResources);
-		String url = "http://" + request.getServerName() + ":" + request.getServerPort() + contextPath + "/trampoline/reports/steel_reel_report_pdf.jsp?" + "steel_reel_report_start_date=" + startDate + "&steel_reel_report_end_date=" + endDate + "&job_code=" + jobCode;
+		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + contextPath + "/trampoline/reports/steel_reel_report_pdf.jsp?" + "steel_reel_report_start_date=" + startDate + "&steel_reel_report_end_date=" + endDate + "&job_code=" + jobCode;
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		output = writer.writePdf(basePath, url);
 

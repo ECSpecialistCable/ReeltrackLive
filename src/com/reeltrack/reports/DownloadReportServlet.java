@@ -72,7 +72,7 @@ public class DownloadReportServlet extends HttpServlet {
 		HtmlToPdfWriter writer = new HtmlToPdfWriter(pageContext, dbResources);
 		try {
 			String basePath = this.getServletContext().getRealPath("/");
-			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/daily_report_pdf.jsp?" + "daily_report_day=" + reportOn + "&job_code=" + jobCode;
+			String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/daily_report_pdf.jsp?" + "daily_report_day=" + reportOn + "&job_code=" + jobCode;
 
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			output = writer.writePdf(basePath, url);
@@ -110,7 +110,7 @@ public class DownloadReportServlet extends HttpServlet {
 		
 		try {
 			String basePath = this.getServletContext().getRealPath("/");
-			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/inventory_summary_report_pdf.jsp?job_code=" + jobCode;
+			String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/inventory_summary_report_pdf.jsp?job_code=" + jobCode;
 
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			output = writer.writePdf(basePath, url);
@@ -183,7 +183,7 @@ public class DownloadReportServlet extends HttpServlet {
 
 		try {
 			String basePath = this.getServletContext().getRealPath("/");
-			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/inventory_report_pdf.jsp?job_code="+jobCode;
+			String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/inventory_report_pdf.jsp?job_code="+jobCode;
 
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			output = writer.writePdf(basePath, url);
@@ -253,7 +253,7 @@ public class DownloadReportServlet extends HttpServlet {
 		HtmlToPdfWriter writer = new HtmlToPdfWriter(pageContext, dbResources);
 		try {
 			String basePath = this.getServletContext().getRealPath("/");
-			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/period_report_pdf.jsp?" + "period_report_start_date=" + startDate + "&period_report_end_date=" + endDate + "&job_code=" + jobCode;
+			String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/period_report_pdf.jsp?" + "period_report_start_date=" + startDate + "&period_report_end_date=" + endDate + "&job_code=" + jobCode;
 
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			output = writer.writePdf(basePath, url);
@@ -287,7 +287,7 @@ public class DownloadReportServlet extends HttpServlet {
 		HtmlToPdfWriter writer = new HtmlToPdfWriter(pageContext, dbResources);
 		try {
 			String basePath = this.getServletContext().getRealPath("/");
-			String url = "http://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/steel_reel_report_pdf.jsp?" + "steel_reel_report_start_date=" + startDate + "&steel_reel_report_end_date=" + endDate + "&job_code=" + jobCode;
+			String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + this.getServletContext().getContextPath() + "/trampoline/reports/steel_reel_report_pdf.jsp?" + "steel_reel_report_start_date=" + startDate + "&steel_reel_report_end_date=" + endDate + "&job_code=" + jobCode;
 
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 			output = writer.writePdf(basePath, url);

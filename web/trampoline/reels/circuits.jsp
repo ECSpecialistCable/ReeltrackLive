@@ -211,7 +211,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
             <listing:cell_end />
             <listing:cell_begin />
                 <% tempURL = "z" + circuit.getId(); %>
-                <% if(!circuit.isPulled() && canSubmit) { %>
+                <% if(!circuit.isPulled()) { %>
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
                     <form:textfield_inline minWidth="70" name="<%= ReelCircuit.LENGTH_COLUMN %>" value="<%= new Integer(circuit.getLength()).toString() %>" />
                     <form:hidden name="<%= Reel.PARAM %>" value="<%= content.getId() %>" />
@@ -277,7 +277,7 @@ if(content.getStatus().equals(Reel.STATUS_IN_WHAREHOUSE)) {
             <listing:cell_end />
             <listing:cell_begin/>
                 <% tempURL = "i" + circuit.getId(); %>
-                <% if(canSubmit && circuit.getMaxTension()==0) { %>
+                <% if(circuit.getMaxTension()==0) { %>
                 <form:begin_inline submit="<%= new Boolean(canSubmit).toString() %>" name="<%= tempURL %>" action="reels/process.jsp" />
                     <form:textfield_inline minWidth="70" name="<%= ReelCircuit.MAX_TENSION_COLUMN %>" value="<%= new Integer(circuit.getMaxTension()).toString() %>" />
                     <%-- onclick="this.form.submit();"  --%>

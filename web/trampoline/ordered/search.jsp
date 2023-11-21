@@ -54,6 +54,15 @@ if(request.getParameter(Reel.CR_ID_COLUMN) != null) {
     }
 }
 
+if(request.getParameter(Reel.UNIQUE_ID_COLUMN) != null) {
+    if(request.getParameter(Reel.UNIQUE_ID_COLUMN).equals("")) {
+        content.getData().removeValue(Reel.UNIQUE_ID_COLUMN);
+    } else {
+        content.setUniqueId(Integer.parseInt(request.getParameter(Reel.UNIQUE_ID_COLUMN)));
+        content.setSearchOp(Reel.UNIQUE_ID_COLUMN, Reel.EQ);
+    }
+}
+
 if(request.getParameter(Reel.REEL_TAG_COLUMN) != null) {
     content.setReelTag(request.getParameter(Reel.REEL_TAG_COLUMN));
     content.setSearchOp(Reel.REEL_TAG_COLUMN, Reel.TRUE_PARTIAL);
@@ -141,11 +150,10 @@ String tempURL = "";
 
     <admin:box_begin text="Search Reels"   name="Search" open="false"/>
     <form:begin_selfsubmit name="search" action="ordered/search.jsp" />
-        <%
-        tempURL = "";
-        if(content.getCrId()!=0) tempURL = new Integer(content.getCrId()).toString();
-        %>
+        <% if(content.getCrId()!=0) tempURL = new Integer(content.getCrId()).toString(); %>
         <form:textfield label="CRID #:" name="<%= Reel.CR_ID_COLUMN %>" value="<%= tempURL %>" />
+        <% if(content.getUniqueId()!=0) tempURL = new Integer(content.getUniqueId()).toString(); %>
+        <form:textfield label="Unique ID #:" name="<%= Reel.UNIQUE_ID_COLUMN %>" value="<%= tempURL %>" />
         <form:textfield label="Reel Tag:" name="<%= Reel.REEL_TAG_COLUMN %>" value="<%= content.getReelTag() %>" />
         <form:textfield label="Packing List #:" name="<%= Reel.PACKING_LIST_COLUMN %>" value="<%= content.getPackingList() %>" />
         <form:textfield label="Tracking PRO #:" name="<%= Reel.TRACKING_PRO_COLUMN %>" value="<%= content.getTrackingPRO() %>" />

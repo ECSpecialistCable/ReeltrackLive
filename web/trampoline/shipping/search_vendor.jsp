@@ -139,7 +139,7 @@ if(user.isUserType(RTUser.USER_TYPE_VENDOR)) {
     content.setVendorCode(user.getVendorCode());
     //content.setVendorCode("");
 }
-session.setAttribute("shipping_search",content);
+session.setAttribute("shipping_search_vendor",content);
 session.setAttribute("shipping_customer_id",new Integer(customer_id));
 
 CompEntities customers = custMgr.getCustomersByVendorCode(user.getVendorCode());

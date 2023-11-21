@@ -59,6 +59,7 @@ public class EchoSync extends CompManager {
 		System.out.println("Total transactions:" + echoTranses.howMany());
 		for(int x=0; x<echoTranses.howMany(); x++) {
 			echoTrans = (EchoTransaction)echoTranses.get(x);
+			System.out.println("REEL BEING PROCESSED:" + echoTrans.getUniqueId());
 			if(echoTrans.getUniqueId()==0) continue;
 			if(echoTrans.getAction().equalsIgnoreCase("add")) {
 				Reel reel = new Reel();
@@ -74,6 +75,7 @@ public class EchoSync extends CompManager {
 					this.updateTransaction(echoTrans);
 					System.out.println("REEL ALREADY EXISTS ON REELTRACK:" + cloudReel.getUniqueId());
 				} else {
+					System.out.println("REEL IS NEW TO REELTRACK:" + cloudReel.getUniqueId());
 					reel.setOrdNo(echoTrans.getOrdNo());
 					reel.setPORevision(echoTrans.getPORevision());
 					reel.setAbsoluteItem(echoTrans.getAbsoluteItem());
@@ -466,6 +468,7 @@ public class EchoSync extends CompManager {
 		EchoSync echoSync = new EchoSync();
 		//String directorToken = args[0];
 		try {
+			// System.out.println("HERE");
 			echoSync.pushReels();
 			//echoSync.pullCircuits();
 			echoSync.closeConnections();

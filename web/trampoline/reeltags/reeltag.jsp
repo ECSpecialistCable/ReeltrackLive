@@ -74,7 +74,7 @@ String logoURL;
 			font-family:arial,"Lucida Grande",Geneva,Arial,Verdana,sans-serif;
 			font-size: 12px;
 			vertical-align: top;
-			font-weight: bold;
+			/* font-weight: bold; */
 		}
 
 		.header {
@@ -129,7 +129,7 @@ String logoURL;
 				<%= reelCustomer.getName().toUpperCase().replace("&","&amp;") %>
 			</td>
 			<td rowspan="8" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top; margin-bottom: 0px; padding-bottom: 0px;padding-top: 0px; text-align: center">
-					<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
+					<% tempURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
 					<img alt="barcode" src="<%= tempURL %>" width="170" height="170" />
 			</td>
 			<td class="header" style="/*border:solid #003DB8 1px;*/width:20%;vertical-align: top;padding-bottom: 0px;padding-top: 15px;">Mfg</td>
@@ -201,7 +201,7 @@ String logoURL;
 
 		<% int total = 0; %>
 		<% int startC = (tagNum - 1) * 10; %>
-		<% for (int c=startC; c<circuits.howMany() && c<tagNum*10; c++ ) { %>
+		<% for (int c=startC; c<tagNum*10; c++ ) { %>
 			<% ReelCircuit circuit = new ReelCircuit(); %>
 			<% if(c<circuits.howMany()) { %>
 				<%  circuit = (ReelCircuit)circuits.get(c); %>
@@ -229,17 +229,21 @@ String logoURL;
 				<% } %>
 				<td class="value" style="padding:0px;height:1px;width: 5%;"></td>
 				<% if(c==0 || c==1 || c==10 || c==11 || c==20 || c==21) { %>
-					<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo_reeltag.jpg"; %>
-					<td style="text-align: center; width: 35%; padding: 0;width:160px;" rowspan="<%= "6" %>" align="center">
-						<table style="display:inline;width: 100%; text-align: center;border: none">
+					<% logoURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo_reeltag.jpg"; %>
+					<td style="text-align: center; width: 40%; padding: 0;width:160px;" rowspan="<%= "6" %>" align="center">
+						<table style="display:inline;width: 100%; text-align: center;border: none;border-spacing:0;">
 							<tr>
-								<td class="header" style="text-align: right;width: 30%">ECS PART #</td>
-								<td class="value" style="/*border:solid #003DB8 1px;*/text-align: left;width: 45%"><%= content.getEcsPN() %></td>
+								<!-- <td class="header" style="text-align: left;width: 50%">ECS PART #</td> -->
+								<td colspan="2" class="value" style="/*border:solid #003DB8 1px;*/text-align: left;">ECS PART # &nbsp;<span style="font-weight:bold;text-align: left"><%= content.getEcsPN() %></span></td>
 							</tr>
 							<tr>
-								<td class="header" style="text-align: right;width: 30%">ECS PO #</td>
+								<td class="value" style="text-align: left;width: 50%">ECS PO # <span style="font-weight:bold;text-align: left"><%= content.getOrdNo() %></span></td>
+								<td class="value" style="text-align: left;width: 50%">ECS UID <span style="font-weight:bold;text-align: left"><%= content.getUniqueId() %></span></td>
+							</tr>
+							<!-- <tr>
+								<td class="header" style="text-align: right;width: 40%">ECS UID</td>
 								<td class="value" style="/*border:solid #003DB8 1px;*/text-align: left"><%= content.getOrdNo() %></td>
-							</tr>
+							</tr> -->
 							<tr>
 								<td colspan="2" style="/*border:solid #003DB8 1px;*/text-align: center;width: 75%;padding-top: 0px;padding-bottom: 0px;margin-bottom: 0px"><img alt="logo" src="<%= logoURL %>" width="130" height="40" />
 								</td>
@@ -287,7 +291,7 @@ String logoURL;
 			</td>
 			<td style="vertical-align: top; margin-bottom: 0px; padding-bottom: 0px;padding-top: 2px;">
 				<table style="display:inline; width:10%;padding:0px;border: none;vertical-align: top;">
-					<% tempURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
+					<% tempURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + content.getCompEntityDirectory() + "/" + content.getRtQrCodeFile(); %>
 					<tr style="padding: 0px;">
 						<td style="padding: 0px;">
 							<img alt="barcode" src="<%= tempURL %>" width="180" height="180" />
@@ -359,7 +363,7 @@ String logoURL;
 				<% } %>
 				<td class="value" style="height:1px;width: 10%;<%=borderStyle%>"></td>
 				<% if(c==0) { %>
-					<% logoURL = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo_big.png"; %>
+					<% logoURL = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/trampoline/common/images/logo_big.png"; %>
 					<td style="text-align: center; width: 35%; padding: 0;width:160px;" rowspan="<%= "5" %>" align="center">
 						<table style="display:inline;width: 35%; text-align: center;border: none">
 							<tr>

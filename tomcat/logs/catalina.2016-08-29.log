@@ -1,0 +1,42 @@
+29-Aug-2016 09:07:00.784 INFO [Thread-6] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+29-Aug-2016 09:07:00.841 INFO [Thread-6] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["ajp-nio-8009"]
+29-Aug-2016 09:07:00.896 INFO [Thread-6] org.apache.catalina.core.StandardService.stopInternal Stopping service Catalina
+29-Aug-2016 09:07:00.918 WARNING [localhost-startStop-2] org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesThreads The web application [ROOT] appears to have started a thread named [Abandoned connection cleanup thread] but has failed to stop it. This is very likely to create a memory leak. Stack trace of thread:
+ java.lang.Object.wait(Native Method)
+ java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:143)
+ com.mysql.jdbc.AbandonedConnectionCleanupThread.run(AbandonedConnectionCleanupThread.java:43)
+29-Aug-2016 09:07:00.924 INFO [Thread-6] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+29-Aug-2016 09:07:00.926 INFO [Thread-6] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["ajp-nio-8009"]
+29-Aug-2016 09:07:00.927 INFO [Thread-6] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+29-Aug-2016 09:07:00.928 INFO [Thread-6] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["ajp-nio-8009"]
+29-Aug-2016 13:57:33.831 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version:        Apache Tomcat/8.0.15
+29-Aug-2016 13:57:33.832 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Nov 2 2014 19:25:20 UTC
+29-Aug-2016 13:57:33.832 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server number:         8.0.15.0
+29-Aug-2016 13:57:33.833 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+29-Aug-2016 13:57:33.833 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.11.6
+29-Aug-2016 13:57:33.833 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+29-Aug-2016 13:57:33.833 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JAVA_HOME:             /Library/Java/JavaVirtualMachines/jdk1.8.0_40.jdk/Contents/Home/jre
+29-Aug-2016 13:57:33.833 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_40-b27
+29-Aug-2016 13:57:33.833 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+29-Aug-2016 13:57:33.833 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/tomkat/Development/TKK/ECS/tomcat
+29-Aug-2016 13:57:33.833 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/tomkat/Development/TKK/ECS/tomcat
+29-Aug-2016 13:57:33.834 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/tomkat/Development/TKK/ECS/tomcat/conf/logging.properties
+29-Aug-2016 13:57:33.834 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+29-Aug-2016 13:57:33.834 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.endorsed.dirs=/Users/tomkat/Development/TKK/ECS/tomcat/endorsed
+29-Aug-2016 13:57:33.834 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/tomkat/Development/TKK/ECS/tomcat
+29-Aug-2016 13:57:33.834 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/tomkat/Development/TKK/ECS/tomcat
+29-Aug-2016 13:57:33.834 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/tomkat/Development/TKK/ECS/tomcat/temp
+29-Aug-2016 13:57:33.834 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /Users/tomkat/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.
+29-Aug-2016 13:57:33.951 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+29-Aug-2016 13:57:33.983 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+29-Aug-2016 13:57:33.985 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["ajp-nio-8009"]
+29-Aug-2016 13:57:33.988 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+29-Aug-2016 13:57:33.988 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 498 ms
+29-Aug-2016 13:57:34.007 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service Catalina
+29-Aug-2016 13:57:34.007 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet Engine: Apache Tomcat/8.0.15
+29-Aug-2016 13:57:36.096 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init initialSize is larger than maxActive, setting initialSize to: 5
+29-Aug-2016 13:57:36.096 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init minIdle is larger than maxActive, setting minIdle to: 5
+29-Aug-2016 13:57:36.096 WARNING [localhost-startStop-1] org.apache.tomcat.jdbc.pool.ConnectionPool.init maxIdle is smaller than minIdle, setting maxIdle to: 5
+29-Aug-2016 13:57:36.618 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+29-Aug-2016 13:57:36.622 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["ajp-nio-8009"]
+29-Aug-2016 13:57:36.623 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 2634 ms

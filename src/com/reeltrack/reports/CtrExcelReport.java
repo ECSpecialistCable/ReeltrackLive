@@ -166,7 +166,7 @@ public class CtrExcelReport {
 
         sheet.setColumnWidth(nextNum, 3000);
         cell = row.createCell((short) nextNum++);
-        cell.setCellValue("CTR Sent");
+        cell.setCellValue("CTR Posted");
         cell.setCellStyle(styleHeader);
 
         sheet.setColumnWidth(nextNum, 3000);
