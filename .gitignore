@@ -2,3 +2,7 @@ tomcat8
 web/WEB-INF/classes/com
 web/content
 web/reports
+.classpath
+.project
+.settings/
+src/main/
